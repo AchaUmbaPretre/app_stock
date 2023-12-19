@@ -8,13 +8,16 @@ import config from '../../config';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import FormCategorie from './formCategorie/FormCategorie';
+import Select from 'react-select';
 
 const Categories = () => {
     const navigate = useNavigate();
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [nomCategorie, setNomCategorie] = useState();
     const [getCategorie, setGetCategorie] = useState();
-    const [putCategorie, setPutCategorie] = useState()
+    const [putCategorie, setPutCategorie] = useState();
+    const [categorie, setCategorie] = useState([]);
+    const [famille, setFamille] = useState();
     const searchInput = useRef(null);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
@@ -27,6 +30,22 @@ const Categories = () => {
     const [searchValue, setSearchValue] = useState('');
     
 
+
+    const handleInputChange = (e) => {
+      const fieldName = e.target.name;
+      const fieldValue = e.target.value;
+    
+      let updatedValue = fieldValue;
+    
+      if (fieldName === "contact_email") {
+        updatedValue = fieldValue.toLowerCase();
+      } else if (Number.isNaN(Number(fieldValue))) {
+        updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+      }
+    
+    setCategorie((prev) => ({ ...prev, [fieldName]: updatedValue }));
+    };
+    console.log(categorie)
     const showModal = (id) => {
       setOpen(true);
       navigate(`/categories/${id}`);
@@ -121,7 +140,7 @@ const Categories = () => {
         e.preventDefault();
 
         try{
-          await axios.post(`${DOMAIN}/api/produit/categorie`, {nom_categorie : nomCategorie})
+          await axios.post(`${DOMAIN}/api/produit/categorie`, categorie)
           Swal.fire({
             title: 'Success',
             text: 'Categorie créé avec succès!',
@@ -165,6 +184,18 @@ const Categories = () => {
         };
         fetchData();
       }, [])
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
+            setFamille(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
     
     const handleDelete = async (id) => {
      try {
@@ -178,7 +209,6 @@ const Categories = () => {
     const filteredData = getCategorie?.filter((item) =>
     item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
     );
-
   return (
     <>
         <div className="categories">
@@ -192,7 +222,12 @@ const Categories = () => {
                 <div className="categorie-container-bottom">
                     <div className="categorie-container-left">
                         <h2 className="categorie-title">Ajouter une categorie</h2>
-                        <input type="text" name='nom_categorie' onChange={(e)=> setNomCategorie(e.target.value)} placeholder='Entrer une categorie...' className="categorie-input" />
+                        <input type="text" name='nom_categorie' onChange={handleInputChange} placeholder='Entrer une categorie...' className="categorie-input" />
+                        <Select
+                          name='matiere'
+                          options={famille?.map(item => ({ value: item.id_famille, label: item.nom }))}
+                          onChange={selectedOption => handleInputChange({ target: { name: 'id_famille', value: selectedOption.value } })}
+                        />
                         <button className="categorie-btn" onClick={handleClick}>Envoyer</button>
                     </div>
                     <div className="categorie-container-right">

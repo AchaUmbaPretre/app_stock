@@ -240,7 +240,7 @@ const columns = [
         </Tag>
       ),
     },
-    {
+/*     {
       title: "Date d'entrée",
       dataIndex: 'date_entree',
       key: 'date',
@@ -251,7 +251,7 @@ const columns = [
             {format(new Date(text), 'dd-MM-yyyy')}
           </span>
         ),
-    },
+    }, */
     {
       title: 'Action',
       key: 'action',

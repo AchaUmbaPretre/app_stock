@@ -1,0 +1,77 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@200;300;400;500;600;700;800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+3:wght@700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+.appContainer{
+    display: flex;
+    min-height: 100vh;
+}
+.appOutlet{
+    position: relative;
+    background: #f2f2f2;
+    flex: 8;
+    overflow: hidden;
+}
+.appOutlet{
+    padding: 20px;
+}
+
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .mission-icon{
+    color: rgb(5, 97, 5);
+    cursor: pointer;
+  }
+
+  .App {
+    font-family: sans-serif;
+    padding: 16px;
+  }
+
+  @media print {
+    .print-button {
+      display: none;
+    }
+  }
+  
+  .Crop-Controls {
+    margin-bottom: 10px;
+  }
+  .Crop-Controls > * {
+    margin-bottom: 3px;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+
+  ::-webkit-scrollbar{
+    width: .60rem;
+    background: linear-gradient(#253053,#253053d7) no-repeat;
+    z-index: -22;
+}
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(#253053,#253053d7) no-repeat;
+
+}
+::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(#253053,#253053d7) no-repeat;
+}

@@ -1,0 +1,25 @@
+.productSelects{
+    width: 100%;
+    padding: 0px 0px 20px 0;
+    .productSelects-container{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .product-input-select{
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .select-btn{
+            color: #fff;
+            background:rgb(1, 35, 138);
+            padding: 8px;
+            border-radius: 5px;
+            .select-search-btn{
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

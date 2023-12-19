@@ -1,0 +1,34 @@
+.formCategorie{
+    .formCategorie-wrapper{
+        .categorie-container-left{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .categorie-title{
+                font-size: 1.2rem;
+                color: #555;
+                font-weight: 300;
+            }
+            .categorie-input{
+                padding:10px;
+                border: 1px solid #d4d4d4;
+                border-radius: 5px;
+                margin: 8px 0;
+                outline: none;
+            }
+            .categorie-btn{
+                border: none;
+                padding:10px;
+                border-radius: 5px;
+                color: #fff;
+                background:rgba(1, 35, 138, 0.952);
+                cursor: pointer;
+                transition: .5s;
+                width: max-content;
+                &:hover{
+                    background: rgb(4, 55, 206);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.rowTotalDetail{
+    width: 100%;
+    .rowTotalDetail-wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        .rowTotalDetail-row{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            padding: 20px;
+            color: #fff;
+            cursor: pointer;
+            .rowTotalDetail-left{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .rowTotal-h2{
+                    font-size: 2.1rem;
+                }
+                .rowTotal-span{
+                    font-size: 1rem;
+                }
+            }
+            .rowTotalDetail-right{
+                .rowTotalIcon{
+                    font-size: 2.5rem;
+                }
+            }
+        }
+    }
+}

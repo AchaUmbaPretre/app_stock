@@ -1,0 +1,24 @@
+.rowProduit{
+    .rowProduit-wrapper{
+        .rowChart-title{
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            h3{
+                font-size: 1rem;
+                color: rgb(1, 35, 138);
+                font-weight: 400;
+            }
+        }
+        .rowChart-row-table{
+            .userList{
+                .userImg{
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

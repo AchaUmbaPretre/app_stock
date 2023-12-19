@@ -45,7 +45,6 @@ const Categories = () => {
     
     setCategorie((prev) => ({ ...prev, [fieldName]: updatedValue }));
     };
-    console.log(categorie)
     const showModal = (id) => {
       setOpen(true);
       navigate(`/categories/${id}`);
@@ -111,14 +110,19 @@ const Categories = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width: '8%' },
         {
-            title: 'Categorie',
-            dataIndex: 'nom_categorie',
-            key: 'categorie',
+          title: 'Famille',
+          dataIndex: 'nom',
+          key: 'categorie',
         },
         {
-            title: 'Action',
-            key: 'action',
-            width: '20%',
+          title: 'Categorie',
+          dataIndex: 'nom_categorie',
+          key: 'categorie',
+        },
+        {
+          title: 'Action',
+          key: 'action',
+          width: '20%',
             render: (text, record) => (
                 
               <Space size="middle">
@@ -133,7 +137,7 @@ const Categories = () => {
                 </Popconfirm>
               </Space>
             ),
-          },
+        },
       ];
 
       const handleClick = async (e) => {
@@ -224,7 +228,7 @@ const Categories = () => {
                         <h2 className="categorie-title">Ajouter une categorie</h2>
                         <input type="text" name='nom_categorie' onChange={handleInputChange} placeholder='Entrer une categorie...' className="categorie-input" />
                         <Select
-                          name='matiere'
+                          placeholder='Sélectionnez une famille'
                           options={famille?.map(item => ({ value: item.id_famille, label: item.nom }))}
                           onChange={selectedOption => handleInputChange({ target: { name: 'id_famille', value: selectedOption.value } })}
                         />

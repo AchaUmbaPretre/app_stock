@@ -17,6 +17,7 @@ const ProductForm = () => {
   const [couleur, setCouleur] = useState([]);
   const [getMatiere, setGetMatiere] = useState([]);
   const [getMarque, setGetMarque] = useState();
+  const [getCible, setGetCible] = useState([]);
   const navigate = useNavigate();
 
   const handleInputChange = async (e) => {
@@ -25,7 +26,7 @@ const ProductForm = () => {
   
     let updatedValue = fieldValue;
   
-    if (fieldName === "img") {
+    if (fieldName === "image") {
       const file = e.target.files[0];
       const reader = new FileReader();
   
@@ -108,6 +109,18 @@ const ProductForm = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
+        setGetCible(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -120,6 +133,7 @@ const ProductForm = () => {
         icon: 'success',
         confirmButtonText: 'OK',
       });
+      
       navigate('/products')
       window.location.reload();
 
@@ -152,63 +166,57 @@ const ProductForm = () => {
                 <div className="form-controle">
                   <label htmlFor="">Catégorie</label>
                   <Select
-                      name="categorie"
-                      options={getCategorie?.map(item => ({ value: item.id, label: item.nom_categorie }))}
-                      onChange={selectedOption => handleInputChange({ target: { name: 'categorie', value: selectedOption.value } })}
+                      name="id_categorie"
+                      options={getCategorie?.map(item => ({ value: item.id_categorie, label: item.nom_categorie }))}
+                      onChange={selectedOption => handleInputChange({ target: { name: 'id_categorie', value: selectedOption.value } })}
                     />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Couleur</label>
+                  <label htmlFor="">Marque</label>
                   <Select
-                    name="categorie"
-                    options={couleur?.map(item => ({ value: item.id, label: item.nom_couleur }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'couleur', value: selectedOption.value } })}
+                    name="id_marque"
+                    options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Matière</label>
                   <Select
+                    name='id_matiere'
+                    options={getMatiere?.map(item => ({ value: item.id_matiere, label: item.nom_matiere }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_matiere', value: selectedOption.value } })}
+                  />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Cible</label>
+                  <Select
                     name='matiere'
-                    options={getMatiere?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'matiere', value: selectedOption.value } })}
-                  />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Pointure</label>
-                  <input type="number" name='pointure' className="form-input" placeholder='ex: 40' onChange={handleInputChange}  />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Quantité</label>
-                  <input type="number" name='quantite_stock' className="form-input" placeholder='ex: 10' onChange={handleInputChange}  />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Emplacement</label>
-                  <Select
-                    name="emplacement"
-                    options={getData?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'emplacement', value: selectedOption.value } })}
-                  />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Marque</label>
-                  <Select
-                    name="marque"
-                    options={getMarque?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'marque', value: selectedOption.value } })}
+                    options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_cible', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Prix</label>
-                  <input type="number" name='prix' className="form-input" placeholder='ex: 100$' onChange={handleInputChange} />
+                  <input type="number" name='prix' placeholder='ex: 10$' className="form-input" onChange={handleInputChange}  />
                 </div>
-              </div>
-              <div className="form-controle-desc">
-                <label htmlFor="">Description</label>
-                <textarea name="description" id="" placeholder='Description.....' onChange={handleInputChange}></textarea>
+                <div className="form-controle">
+                  <label htmlFor="">Code variant</label>
+                  <input type="text" name='code_variante' placeholder='ex: P329' className="form-input" onChange={handleInputChange}  />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Date d'entrant</label>
+                  <input type="date" name='date_entrant'
+                 onChange={handleInputChange} className="form-input" />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Date de mis à jour</label>
+                  <input type="date" name='date_MisAjour'
+                   className="form-input" />
+                </div>
               </div>
               <div className="form-controleFile" onClick={() => document.getElementById('file-upload').click()}>
                 <label htmlFor="">Image du produit</label>
-                <input type="file" name='img' className="form-input" style={{display:"none"}} lable="Profil"
+                <input type="file" name='image' className="form-input" style={{display:"none"}} lable="Profil"
                   id='file-upload'
                   accept='.jpeg, .png, .jpg' onChange={handleInputChange} />
                 <div className="form-file">
@@ -216,9 +224,9 @@ const ProductForm = () => {
                   <span>Glissez et déposez un fichier à télécharger</span>
                 </div>
               </div>
-              { data.img &&
+              { data.image &&
               <div className='form-img'>
-                <img src={data.img} alt="" className='capture-img'/>
+                <img src={data.image} alt="" className='capture-img'/>
               </div>}
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Soumetre</button>

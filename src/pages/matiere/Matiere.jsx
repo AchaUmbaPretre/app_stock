@@ -76,7 +76,7 @@ const Matiere = () => {
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width: '8%' },
         {
             title: 'Matiere',
-            dataIndex: 'nom',
+            dataIndex: 'nom_matiere',
             key: 'nom',
             
         },
@@ -147,7 +147,7 @@ const Matiere = () => {
     };
 
     const filteredData = getMatiere?.filter((item) =>
-    item.nom.toLowerCase().includes(searchValue.toLowerCase())
+    item.nom_matiere.toLowerCase().includes(searchValue.toLowerCase())
     );
 
   return (

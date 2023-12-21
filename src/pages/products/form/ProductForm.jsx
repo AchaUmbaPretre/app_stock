@@ -215,13 +215,12 @@ const ProductForm = () => {
                 </div>
               </div>
               <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick}>Soumetre</button>
+                <button className="btn-submit" onClick={handleClick}>Soumettre</button>
                 <button className="btn-submit btn-annuler">Annuler</button>
               </div>
             </div>
           </div>
         </div>
-
     </>
   )
 }

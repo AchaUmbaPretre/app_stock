@@ -36,6 +36,7 @@ import RapportDachats from './pages/rapport/rapportDachat/RapportDachats';
 import LivreurEdit from './pages/livreur/livreurEdit/LivreurEdit';
 import ClientEdit from './pages/client/clientEdit/ClientEdit';
 import UtilisateurEdit from './pages/utilisateurs/utilisateurEdit/UtilisateurEdit';
+import VarianteProduit from './pages/varianteProduit/VarianteProduit';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -86,6 +87,10 @@ function App() {
         {
           path: '/productForm/:id',
           element: <FormProduitEdit />
+        },
+        {
+          path: '/varianteProduit',
+          element: <VarianteProduit />
         },
         {
           path: '/categories',

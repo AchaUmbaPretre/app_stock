@@ -35,7 +35,7 @@ const Sidebar = () => {
           </Link>
         </Item>
         <Item key="productForm">
-          <Link to="/variantProduit" className="sidebarLink">
+          <Link to="/varianteProduit" className="sidebarLink">
             variante produit
           </Link>
         </Item>

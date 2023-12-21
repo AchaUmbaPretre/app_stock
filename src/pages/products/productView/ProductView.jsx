@@ -133,10 +133,10 @@ const ProductView = () => {
                                 <div className="produit-view-control">
                                     <label htmlFor="">Couleur</label>
                                     <Select
-                                    name="id_couleur"
-                                    placeholder="sélectionnez une couleur"
-                                    options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
-                                    onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
+                                        name="id_couleur"
+                                        placeholder="sélectionnez une couleur"
+                                        options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
+                                        onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
                                     />
                                 </div>
                                 <div className="produit-view-control">

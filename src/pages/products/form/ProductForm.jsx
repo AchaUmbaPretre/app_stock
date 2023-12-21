@@ -133,7 +133,7 @@ const ProductForm = () => {
         icon: 'success',
         confirmButtonText: 'OK',
       });
-      
+
       navigate('/products')
       window.location.reload();
 
@@ -214,20 +214,6 @@ const ProductForm = () => {
                    className="form-input" />
                 </div>
               </div>
-              <div className="form-controleFile" onClick={() => document.getElementById('file-upload').click()}>
-                <label htmlFor="">Image du produit</label>
-                <input type="file" name='image' className="form-input" style={{display:"none"}} lable="Profil"
-                  id='file-upload'
-                  accept='.jpeg, .png, .jpg' onChange={handleInputChange} />
-                <div className="form-file">
-                  <CloudUploadOutlined className='cloud-icon' />
-                  <span>Glissez et déposez un fichier à télécharger</span>
-                </div>
-              </div>
-              { data.image &&
-              <div className='form-img'>
-                <img src={data.image} alt="" className='capture-img'/>
-              </div>}
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Soumetre</button>
                 <button className="btn-submit btn-annuler">Annuler</button>

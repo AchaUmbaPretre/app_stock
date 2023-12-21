@@ -19,6 +19,8 @@ const ProductForm = () => {
   const [getMarque, setGetMarque] = useState();
   const [getCible, setGetCible] = useState([]);
   const navigate = useNavigate();
+  const [dateEntrant, setDateEntrant] = useState(new Date().toISOString().split('T')[0]);
+  const [dateMiseAJour, setDateMiseAJour] = useState(new Date().toISOString().split('T')[0]);
 
   const handleInputChange = async (e) => {
     const fieldName = e.target.name;
@@ -27,24 +29,17 @@ const ProductForm = () => {
     let updatedValue = fieldValue;
   
     if (fieldName === "image") {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-  
-      reader.onload = () => {
-        const base64File = reader.result;
-        updatedValue = base64File;
-        setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-      };
-  
-      reader.onerror = (error) => {
-        console.error("Erreur de lecture du fichier :", error);
-      };
-  
-      reader.readAsDataURL(file);
+      // ...
     } else if (fieldName === "contact_email") {
       updatedValue = fieldValue.toLowerCase();
     } else if (Number.isNaN(Number(fieldValue))) {
       updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+    } else if (fieldName === "date_entrant") {
+      // Mettre à jour la valeur par défaut de "Date d'entrée" avec la valeur modifiée
+      setDateEntrant(fieldValue);
+    } else if (fieldName === "date_MisAjour") {
+      // Mettre à jour la valeur par défaut de "Date de mise à jour" avec la valeur modifiée
+      setDateMiseAJour(fieldValue);
     }
   
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
@@ -126,7 +121,7 @@ const ProductForm = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`${DOMAIN}/api/produit/produit`, data)
+      await axios.post(`${DOMAIN}/api/produit/produit`, {...data, date_entrant: dateEntrant, date_MisAjour: dateMiseAJour})
       Swal.fire({
         title: 'Success',
         text: 'Produit créé avec succès!',
@@ -197,20 +192,19 @@ const ProductForm = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Prix</label>
-                  <input type="number" name='prix' placeholder='ex: 10$' className="form-input" onChange={handleInputChange}  />
+                  <input type="number" name='prix' placeholder='ex: 10$' className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Code variant</label>
-                  <input type="text" name='code_variante' placeholder='ex: P329' className="form-input" onChange={handleInputChange}  />
+                  <input type="text" name='code_variante' placeholder='ex: P329' className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Date d'entrant</label>
-                  <input type="date" name='date_entrant'
-                 onChange={handleInputChange} className="form-input" />
+                  <input type="date" name='date_entrant' value={dateEntrant} onChange={handleInputChange} className="form-input" />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Date de mis à jour</label>
-                  <input type="date" name='date_MisAjour'
+                  <input type="date" name='date_MisAjour' value={dateMiseAJour} onChange={handleInputChange}
                    className="form-input" />
                 </div>
               </div>

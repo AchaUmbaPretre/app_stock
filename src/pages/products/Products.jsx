@@ -144,16 +144,6 @@ const Products = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'image',
-      dataIndex: 'image',
-      key: 'img',
-        render: (text, record) => (
-          <div className="userList">
-            <img src={record.image} alt="" className="userImg"  />
-          </div>
-          )
-    },
-    {
         title: 'Nom produit',
         dataIndex: 'nom_produit',
         key: 'nom_produit',

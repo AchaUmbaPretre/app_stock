@@ -124,8 +124,6 @@ const ProductView = () => {
         }
       }
 
-      console.log(data)
-
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
 
   return (
@@ -221,7 +219,7 @@ const ProductView = () => {
                     </div>
                     <div className="product-view-right">
                         <h2 className="product-h2">L'image</h2>
-                        <div className="product-img-row" onClick={() => document.getElementById('file-upload').click()}>
+                        <div className="product-img-row">
 {/*                             <Image
                                 className="product-img"
                                 width={200}
@@ -229,13 +227,34 @@ const ProductView = () => {
                                 src="error"
                                 fallback={getProduit?.img}
                             /> */}
-                            <input type="file" name='image' className="form-input" style={{display:"none"}} lable="Profil"
-                            id='file-upload'
-                            accept='.jpeg, .png, .jpg' onChange={handleInputChange}/>
-                            <div className="form-file">
-                                <CloudUploadOutlined className='cloud-icon' />
-                                <span>Glissez et déposez un fichier à télécharger</span>
+                            {data.image ? (
+                            <div>
+                                <Image
+                                    className="product-img"
+                                    width={200}
+                                    height={200}
+                                    src="error"
+                                    fallback={data?.image}
+                                />
                             </div>
+                            ) : (
+                                <div>
+                                <input
+                                type="file"
+                                name="image"
+                                className="form-input"
+                                style={{ display: "none" }}
+                                label="Profil"
+                                id="file-upload"
+                                accept=".jpeg, .png, .jpg"
+                                onChange={handleInputChange}
+                                />
+                                <div className="form-file" onClick={() => document.getElementById('file-upload').click()}>
+                                <CloudUploadOutlined className="cloud-icon" />
+                                <span>Glissez et déposez un fichier à télécharger</span>
+                                </div>
+                            </div>
+                            )}
                         </div>
                     </div>
                 </div>

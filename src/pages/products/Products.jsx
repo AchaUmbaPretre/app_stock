@@ -161,18 +161,18 @@ const columns = [
     },
     {
       title: 'Categorie',
-      dataIndex: 'id_categorie',
-      key: 'categorie',
+      dataIndex: 'nom_categorie',
+      key: 'nom_categorie',
     },
     {
       title: 'Marque',
-      dataIndex: 'id_marque',
-      key: 'id_marque',
+      dataIndex: 'nom_marque',
+      key: 'nom_marque',
     },
     {
       title: 'Matière',
-      dataIndex: 'id_matiere',
-      key: 'id_matiere',
+      dataIndex: 'nom_matiere',
+      key: 'nom_matiere',
     },
     {
       title: 'Prix',
@@ -211,17 +211,17 @@ const columns = [
                 
           <Space size="middle">
             <Popover title="Modifier" trigger="hover">
-              <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.produit_id)} />
+              <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id_produit)} />
             </Popover>
             <Popover title="Voir le détail" trigger="hover">
-              <Link to={`/productView/${record.produit_id}`}>
+              <Link to={`/productView/${record.id_produit}`}>
                 <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
               </Link>
             </Popover>
             <Popover title="Supprimer" trigger="hover">
               <Popconfirm
                 title="Êtes-vous sûr de vouloir supprimer?"
-                onConfirm={() => handleDelete(record.produit_id)}
+                onConfirm={() => handleDelete(record.id_produit)}
                 okText="Oui"
                 cancelText="Non"
               >

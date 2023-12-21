@@ -19,7 +19,7 @@ const ProductView = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/produitView/${id}`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/produit/${id}`);
             setGetProduit(data[0]);
           } catch (error) {
             console.log(error);
@@ -60,18 +60,6 @@ const ProductView = () => {
                                 <td>{getProduit?.nom_matiere}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Pointure</th>
-                                <td>{getProduit?.pointure}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Couleur</th>
-                                <td>{getProduit?.nom_couleur}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Quantité</th>
-                                <td>{getProduit?.quantite_stock}</td>
-                            </tr>
-                            <tr>
                                 <th scope="row">Prix</th>
                                 <td>{getProduit?.prix} $</td>
                             </tr>
@@ -80,22 +68,35 @@ const ProductView = () => {
                                 <td>{getProduit?.nom_marque}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Emplacement</th>
-                                <td>{getProduit?.nom_emplacement}</td>
-                            </tr>
-                            <tr>
                                 <th scope="row">Date d'entrée</th>
                                 <td>{formattedDatEntrant}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">Statut</th>
-                                <td>{getProduit?.statut}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Description</th>
-                                <td>{getProduit?.description}</td>
-                            </tr>
                         </table>
+                        <div className="product_view_form">
+                            <h2 className="product-h2">Ajoutez des informations</h2>
+                            <div className="product_view_wrapper">
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Taille</label>
+                                    <input type="number" className="produit_input" />
+                                </div>
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Couleur</label>
+                                    <input type="number" className="produit_input" />
+                                </div>
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Stock</label>
+                                    <input type="number" className="produit_input" />
+                                </div>
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Prix</label>
+                                    <input type="number" className="produit_input" />
+                                </div>
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Code Variant</label>
+                                    <input type="text" className="produit_input" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="product-view-right">
                         <h2 className="product-h2">L'image du produit {getProduit?.nom_produit}</h2>

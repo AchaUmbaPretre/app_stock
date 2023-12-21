@@ -115,6 +115,10 @@ const ProductView = () => {
                                 <td>{getProduit?.nom_marque}</td>
                             </tr>
                             <tr>
+                                <th scope="row">Cible</th>
+                                <td>{getProduit?.nom_cible}</td>
+                            </tr>
+                            <tr>
                                 <th scope="row">Famille</th>
                                 <td>{getProduit?.nom_famille}</td>
                             </tr>
@@ -149,7 +153,7 @@ const ProductView = () => {
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Code Variant</label>
-                                    <input type="text" className="produit_input" />
+                                    <input type="text" className="produit_input" placeholder='Entrez le code variant...' />
                                 </div>
                             </div>
                             <button className="produit_submit">Soumettre</button>

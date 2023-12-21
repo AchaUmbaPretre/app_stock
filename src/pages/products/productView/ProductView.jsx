@@ -16,6 +16,7 @@ const ProductView = () => {
     const [getProduit, setGetProduit] = useState([]);
     const [data, setData] = useState([]);
     const [getCouleur,setGetCouleur] = useState([]);
+    const [getPays,setGetPays] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -68,6 +69,18 @@ const ProductView = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
             setGetCouleur(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/pays`);
+            setGetPays(data);
           } catch (error) {
             console.log(error);
           }
@@ -130,6 +143,15 @@ const ProductView = () => {
                         <div className="product_view_form">
                             <h2 className="product-h2">Ajoutez des informations</h2>
                             <div className="product_view_wrapper">
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Pays</label>
+                                    <Select
+                                        name="id_pays"
+                                        placeholder="sélectionnez un pays"
+                                        options={getPays?.map(item => ({ value: item.id_pays, label: item.code_pays }))}
+                                        onChange={selectedOption => handleInputChange({ target: { name: 'id_pays', value: selectedOption.value } })}
+                                    />
+                                </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Taille</label>
                                     <input type="number" className="produit_input" />

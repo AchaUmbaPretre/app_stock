@@ -145,11 +145,11 @@ const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
       title: 'image',
-      dataIndex: 'img',
+      dataIndex: 'image',
       key: 'img',
         render: (text, record) => (
           <div className="userList">
-            <img src={record.img} alt="" className="userImg"  />
+            <img src={record.image} alt="" className="userImg"  />
           </div>
           )
     },
@@ -160,46 +160,19 @@ const columns = [
         ...getColumnSearchProps('nom_produit'),
     },
     {
-      title: 'Couleur',
-      dataIndex: 'nom_couleur',
-      key: 'nom_couleur',
-      width: '9%',
-      ...getColumnSearchProps('nom_couleur'),
-      render: (nom_couleur) => {
-        let color = '';
-    
-        switch (nom_couleur) {
-          case 'Noire':
-            color = 'black';
-            break;
-          case 'Marron':
-            color = 'brown';
-            break;
-          case 'Grise':
-            color = 'gray';
-            break;
-          case 'Blanc':
-            color = 'white';
-            break;
-            case 'Rouge':
-            color = 'red';
-            break;
-          default:
-            color = 'default';
-            break;
-        }
-    
-        return (
-          <Tag className={`custom-tag color-${color}`} style={{ borderColor: color }}>
-            <span className={`text-${color}`}>{nom_couleur}</span>
-          </Tag>
-        );
-      },
+      title: 'Categorie',
+      dataIndex: 'id_categorie',
+      key: 'categorie',
     },
     {
-      title: 'Categorie',
-      dataIndex: 'nom_categorie',
-      key: 'categorie',
+      title: 'Marque',
+      dataIndex: 'id_marque',
+      key: 'id_marque',
+    },
+    {
+      title: 'Matière',
+      dataIndex: 'id_matiere',
+      key: 'id_matiere',
     },
     {
       title: 'Prix',
@@ -220,38 +193,17 @@ const columns = [
       ),
     },
     {
-      title: 'Quantité',
-      dataIndex: 'quantite_stock',
-      key: 'quantite_stock',
-      sorter: (a, b) => a.quantite_stock - b.quantite_stock,
-      sortDirections: ['descend', 'ascend'],
-      render: (quantite_stock) => (
-        <Tag color={quantite_stock > 0 ? 'green' : 'red'}>{quantite_stock}</Tag>
-      ),
-    },
-    {
-      title: 'Statut',
-      dataIndex: 'statut',
-      key: 'statut',
-      render: (statut) => (
-        <Tag color={statut === 'Actif' ? 'green' : 'red'}>
-          {statut === 'Actif' ? <CheckCircleOutlined style={{paddingRight: "5px"}}/> : null}
-          {statut}
-        </Tag>
-      ),
-    },
-    {
       title: "Date d'entrée",
-      dataIndex: 'date_entree',
+      dataIndex: 'date_entrant',
       key: 'date',
-        sorter: (a, b) => a.date_entree - b.date_entree,
+        sorter: (a, b) => a.date_entrant - b.date_entrant,
       sortDirections: ['descend', 'ascend'],
         render: (text) => (
           <span>
             {format(new Date(text), 'dd-MM-yyyy')}
           </span>
         ),
-    },
+    }, 
     {
       title: 'Action',
       key: 'action',

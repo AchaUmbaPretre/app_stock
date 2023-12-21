@@ -34,6 +34,11 @@ const Sidebar = () => {
             Créer un nouveau produit
           </Link>
         </Item>
+        <Item key="productForm">
+          <Link to="/variantProduit" className="sidebarLink">
+            variante produit
+          </Link>
+        </Item>
         <Item key="categories">
           <Link to="/categories" className="sidebarLink">
             Categories

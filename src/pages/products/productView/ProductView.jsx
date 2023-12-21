@@ -12,9 +12,41 @@ import { Image } from 'antd';
 const ProductView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getProduit, setGetProduit] = useState([]);
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
+
+
+    const handleInputChange = async (e) => {
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+      
+        let updatedValue = fieldValue;
+      
+        if (fieldName === "image") {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+      
+          reader.onload = () => {
+            const base64File = reader.result;
+            updatedValue = base64File;
+            setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+          };
+      
+          reader.onerror = (error) => {
+            console.error("Erreur de lecture du fichier :", error);
+          };
+      
+          reader.readAsDataURL(file);
+        } else if (fieldName === "contact_email") {
+          updatedValue = fieldValue.toLowerCase();
+        } else if (Number.isNaN(Number(fieldValue))) {
+          updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+        }
+      
+        setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+      };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -100,15 +132,18 @@ const ProductView = () => {
                         </div>
                     </div>
                     <div className="product-view-right">
-                        <h2 className="product-h2">L'image du produit {getProduit?.nom_produit}</h2>
-                        <div className="product-img-row">
-                            <Image
+                        <h2 className="product-h2">L'image</h2>
+                        <div className="product-img-row" onClick={() => document.getElementById('file-upload').click()}>
+{/*                             <Image
                                 className="product-img"
                                 width={200}
                                 height={200}
                                 src="error"
                                 fallback={getProduit?.img}
-                            />
+                            /> */}
+                            <input type="file" name='image' className="form-input" style={{display:"none"}} lable="Profil"
+                            id='file-upload'
+                            accept='.jpeg, .png, .jpg' onChange={handleInputChange} />
                         </div>
                     </div>
                 </div>

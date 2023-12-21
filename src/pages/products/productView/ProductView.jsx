@@ -96,6 +96,7 @@ const ProductView = () => {
                                     <input type="text" className="produit_input" />
                                 </div>
                             </div>
+                            <button className="produit_submit">Soumettre</button>
                         </div>
                     </div>
                     <div className="product-view-right">

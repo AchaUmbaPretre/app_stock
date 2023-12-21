@@ -98,6 +98,18 @@
                             }
                         }
                     }
+                    .produit_submit{
+                        padding: 10px 15px;
+                        border: none;
+                        color: #fff;
+                        background:rgb(1, 35, 138);
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: .5s;
+                        &:hover{
+                            background:rgb(2, 55, 214);
+                        }
+                    }
                 }
             }
             .product-view-right{

@@ -3,12 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
-import Select from 'react-select';
-import { format } from 'date-fns'
 import moment from 'moment';
 import { Image } from 'antd';
-import { CloudUploadOutlined } from '@ant-design/icons';
-import Swal from 'sweetalert2'
 import config from '../../config'
 
 const VarianteProduit = () => {
@@ -86,61 +82,20 @@ const VarianteProduit = () => {
         fetchData();
       }, []);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/pays`);
-            setGetPays(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, []);
-
-      const handleClick = async (e) => {
-        e.preventDefault();
-    
-        try{
-          await axios.post(`${DOMAIN}/api/produit/varianteProduit`, {...data,id_produit: id, id_cible: idCible, id_famille: idFamille })
-          Swal.fire({
-            title: 'Success',
-            text: 'Produit créé avec succès!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-          
-          navigate('/products')
-          window.location.reload();
-    
-        }catch(err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        }
-      }
-
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
 
   return (
     <>
-        <div className="productView">
-            <div className="product-wrapper">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Detail du produit</h2>
+        <div className="varianteProduit">
+            <div className="varianteProduit-wrapper">
+                <div className="varianteProduit-container-top">
+                    <div className="varianteProduit-left">
+                        <h2 className="varianteProduit-h2">Detail du produit</h2>
                         <span>Voir les details</span>
                     </div>
                 </div>
-                <div className="product-bottom">
-                    <div className="product-view-left">
-                    </div>
-                    <div className="product-view-right">
-                        <h2 className="product-h2">L'image</h2>
-                    </div>
+                <div className="variant-container-bottom">
+                    aaaaaaa
                 </div>
             </div>
         </div>

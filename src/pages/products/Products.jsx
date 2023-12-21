@@ -251,8 +251,6 @@ const filteredData = getProduit?.filter((item) =>
   item.nom_couleur.toLowerCase().includes(searchValue.toLowerCase())
 );
 
-
-
   return (
     <>
         <div className="products">

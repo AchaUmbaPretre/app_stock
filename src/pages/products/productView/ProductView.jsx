@@ -10,6 +10,7 @@ import { format } from 'date-fns'
 import moment from 'moment';
 import { Image } from 'antd';
 import { CloudUploadOutlined } from '@ant-design/icons';
+import Swal from 'sweetalert2'
 
 const ProductView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -19,7 +20,9 @@ const ProductView = () => {
     const [getPays,setGetPays] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
+    const id = pathname.split('/')[2];
+    const [idCible,setIdcible] = useState();
+    const [idFamille, setIdFamille] = useState();
 
 
     const handleInputChange = async (e) => {
@@ -56,13 +59,21 @@ const ProductView = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/produit/${id}`);
-            setGetProduit(data[0]);
+            setGetProduit(data[0])
+
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
       }, [id]);
+
+      useEffect(()=>{
+        setIdcible(getProduit?.id_cible)
+        setIdFamille(getProduit?.id_famille)
+      },[getProduit?.id_cible])
+
+      console.log(idCible, idFamille)
 
       useEffect(() => {
         const fetchData = async () => {
@@ -87,6 +98,33 @@ const ProductView = () => {
         };
         fetchData();
       }, []);
+
+      const handleClick = async (e) => {
+        e.preventDefault();
+    
+        try{
+          await axios.post(`${DOMAIN}/api/produit/varianteProduit`, {...data,id_produit: id, id_cible: idCible, id_famille: idFamille })
+          Swal.fire({
+            title: 'Success',
+            text: 'Produit créé avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+          
+          navigate('/products')
+          window.location.reload();
+    
+        }catch(err) {
+          Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+        }
+      }
+
+      console.log(data)
 
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
 
@@ -154,7 +192,7 @@ const ProductView = () => {
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Taille</label>
-                                    <input type="number" className="produit_input" />
+                                    <input type="number" name='taille' className="produit_input" onChange={handleInputChange}/>
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Couleur</label>
@@ -167,18 +205,18 @@ const ProductView = () => {
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Stock</label>
-                                    <input type="number" className="produit_input" placeholder='Entrez la quantité du produit' />
+                                    <input type="number" name='stock' className="produit_input" placeholder='Entrez la quantité du produit' onChange={handleInputChange} />
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Prix</label>
-                                    <input type="number" value={getProduit?.prix} className="produit_input" />
+                                    <input type="number" name='prix' className="produit_input" onChange={handleInputChange} />
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Code Variant</label>
-                                    <input type="text" className="produit_input" placeholder='Entrez le code variant...' />
+                                    <input type="text" className="produit_input" name='code_variant' placeholder='Entrez le code variant...' onChange={handleInputChange} />
                                 </div>
                             </div>
-                            <button className="produit_submit">Soumettre</button>
+                            <button className="produit_submit" onClick={handleClick}>Soumettre</button>
                         </div>
                     </div>
                     <div className="product-view-right">

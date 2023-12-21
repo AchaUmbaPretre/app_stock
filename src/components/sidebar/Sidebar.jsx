@@ -78,33 +78,6 @@ const Sidebar = () => {
           </Link>
         </Item> */}
       </SubMenu>
-
-{/*       <SubMenu key="purchases" title={<span className="sidebarH3">Achats</span>} icon={<ShoppingCartOutlined style={{ fontSize: '20px', color: 'rgb(1, 35, 138)' }}/>}>
-        <Item key="purchasesOrders">
-          <Link to="/achats" className="sidebarLink">
-            Achats
-          </Link>
-        </Item>
-        <Item key="purchaseOrders">
-          <Link to="/bonDeCommande" className="sidebarLink">
-            Bon de commande
-          </Link>
-        </Item>
-        <Item key="purchaseReturns">
-          <Link to="/retourAchat" className="sidebarLink">
-            Retour d'achat
-          </Link>
-        </Item>
-      </SubMenu> */}
-
-{/*       <SubMenu key="finance" title={<span className="sidebarH3">Finances et comptes</span>} icon={<AttachMoney style={{ fontSize: '20px', color: 'rgb(1, 35, 138)' }}/>}>
-        <Item key="expenses">
-          <Link to="/frais" className="sidebarLink">
-            Frais
-          </Link>
-        </Item>
-      </SubMenu> */}
-
       <SubMenu key="clients" title={<span className="sidebarH3">Peuples</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="clients">
           <Link to="/clients" className="sidebarLink">

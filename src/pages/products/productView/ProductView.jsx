@@ -134,17 +134,18 @@ const ProductView = () => {
                                     <label htmlFor="">Couleur</label>
                                     <Select
                                     name="id_couleur"
+                                    placeholder="sélectionnez une couleur"
                                     options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
                                     onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
                                     />
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Stock</label>
-                                    <input type="number" className="produit_input" />
+                                    <input type="number" className="produit_input" placeholder='Entrez la quantité du produit' />
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Prix</label>
-                                    <input type="number" className="produit_input" />
+                                    <input type="number" value={getProduit?.prix} className="produit_input" />
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Code Variant</label>

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import config from '../../../config'
 import axios from 'axios'
 import { useEffect } from 'react'
+import Select from 'react-select';
 import { format } from 'date-fns'
 import moment from 'moment';
 import { Image } from 'antd';
@@ -14,6 +15,7 @@ const ProductView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getProduit, setGetProduit] = useState([]);
     const [data, setData] = useState([]);
+    const [getCouleur,setGetCouleur] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -61,6 +63,18 @@ const ProductView = () => {
         fetchData();
       }, [id]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
+            setGetCouleur(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
 
   return (
@@ -101,6 +115,10 @@ const ProductView = () => {
                                 <td>{getProduit?.nom_marque}</td>
                             </tr>
                             <tr>
+                                <th scope="row">Famille</th>
+                                <td>{getProduit?.nom_famille}</td>
+                            </tr>
+                            <tr>
                                 <th scope="row">Date d'entrée</th>
                                 <td>{formattedDatEntrant}</td>
                             </tr>
@@ -114,7 +132,11 @@ const ProductView = () => {
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Couleur</label>
-                                    <input type="number" className="produit_input" />
+                                    <Select
+                                    name="id_couleur"
+                                    options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
+                                    onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
+                                    />
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Stock</label>

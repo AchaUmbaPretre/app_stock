@@ -175,6 +175,11 @@ const columns = [
       key: 'nom_matiere',
     },
     {
+      title: 'Famille',
+      dataIndex: 'nom_famille',
+      key: 'nom_famille',
+    },
+    {
       title: 'Prix',
       dataIndex: 'prix',
       key: 'prix',

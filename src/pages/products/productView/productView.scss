@@ -99,6 +99,7 @@
                         }
                     }
                     .produit_submit{
+                        margin-top: 20px;
                         padding: 10px 15px;
                         border: none;
                         color: #fff;
@@ -114,7 +115,7 @@
             }
             .product-view-right{
                 flex: 2;
-                padding: 30px;
+                padding: 20px;
                 background: #fff;
                 -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
                 box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
@@ -138,8 +139,33 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: #e7e6e6;
+                    border: 1px dashed #c5c5c5;
+                    background: #f7f7f7;
                     border-radius: 3px;
+                    .form-file{
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        height:150px;
+                        gap: 10px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        &:focus{
+                            border: 1px solid rgba(36, 36, 250, 0.418);
+                        }
+                        .cloud-icon{
+                            color: rgba(14, 62, 204, 0.719);
+                            font-size: 2.8rem;
+                        }
+                        span{
+                            font-size: .8rem;
+                            color: #929292;
+                            letter-spacing: 1px;
+                            text-align: center;
+                        }
+                    }
                     .product-img{
                         height: 100%;
                         width: 100%;

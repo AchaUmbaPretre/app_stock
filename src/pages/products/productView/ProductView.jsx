@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import { format } from 'date-fns'
 import moment from 'moment';
 import { Image } from 'antd';
+import { CloudUploadOutlined } from '@ant-design/icons';
 
 const ProductView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -143,7 +144,11 @@ const ProductView = () => {
                             /> */}
                             <input type="file" name='image' className="form-input" style={{display:"none"}} lable="Profil"
                             id='file-upload'
-                            accept='.jpeg, .png, .jpg' onChange={handleInputChange} />
+                            accept='.jpeg, .png, .jpg' onChange={handleInputChange}/>
+                            <div className="form-file">
+                                <CloudUploadOutlined className='cloud-icon' />
+                                <span>Glissez et déposez un fichier à télécharger</span>
+                            </div>
                         </div>
                     </div>
                 </div>

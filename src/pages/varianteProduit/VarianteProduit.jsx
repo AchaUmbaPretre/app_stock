@@ -98,7 +98,7 @@ const VarianteProduit = () => {
                             name='id_famille'
                             className='variant-select'
                             options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
-                            onChange={(e)=>setFamille(e.target.value)}
+                            onChange={(selectedOption) => setFamille(selectedOption.value)}
                           />
                         </div>
                     </div>

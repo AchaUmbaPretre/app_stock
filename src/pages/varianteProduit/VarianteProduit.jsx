@@ -51,6 +51,19 @@ const VarianteProduit = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreCible/${cible}`);
+            setData(data)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [cible]);
+
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
             setGetFamille(data);
           } catch (error) {

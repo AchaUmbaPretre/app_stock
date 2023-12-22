@@ -1,5 +1,5 @@
 import './products.scss'
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
@@ -210,7 +210,7 @@ const columns = [
             </Popover>
             <Popover title="Voir le détail" trigger="hover">
               <Link to={`/productView/${record.id_produit}`}>
-                <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
               </Link>
             </Popover>
             <Popover title="Supprimer" trigger="hover">

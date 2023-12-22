@@ -37,6 +37,7 @@ import LivreurEdit from './pages/livreur/livreurEdit/LivreurEdit';
 import ClientEdit from './pages/client/clientEdit/ClientEdit';
 import UtilisateurEdit from './pages/utilisateurs/utilisateurEdit/UtilisateurEdit';
 import VarianteProduit from './pages/varianteProduit/VarianteProduit';
+import PageDetails from './pages/PageDetails/PageDetails';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -91,6 +92,10 @@ function App() {
         {
           path: '/varianteProduit',
           element: <VarianteProduit />
+        },
+        {
+          path: '/pageDetail/:id',
+          element: <PageDetails />
         },
         {
           path: '/categories',

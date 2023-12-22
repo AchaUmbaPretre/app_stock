@@ -6,8 +6,8 @@ import { useEffect } from 'react'
 import moment from 'moment';
 import { Image } from 'antd';
 import './varianteProduit.scss'
+import {FilterOutlined} from '@ant-design/icons';
 import config from '../../config'
-import { FilterOutlined } from '@mui/icons-material'
 
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -58,8 +58,11 @@ const VarianteProduit = () => {
                 <div className="variant-container-bottom">
                     <div className="variant_top">
                         <div className="variant-top-left">
-                        <FilterOutlined className='variant-icon'/>
-                          <span>filtrer</span>
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant'/>
+                            <span>filtrer</span>
+                          </div>
+                          
                         </div>
                     </div>
                     <div className="variant_top">

@@ -18,7 +18,7 @@ const VarianteProduit = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
-    const [famille, setFamille] = useState();
+    const [famille, setFamille] = useState(null);
 
     const handleInputChange = async (e) => {
       const fieldName = e.target.name;
@@ -39,15 +39,14 @@ const VarianteProduit = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltre/${1}`);
-            setGetProduit(data[0])
-
+            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltre/${famille}`);
+            setData(data)
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [id]);
+      }, [famille]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -73,10 +72,11 @@ const VarianteProduit = () => {
         fetchData();
       }, []);
 
+      console.log(data)
       
 
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
-
+      console.log(famille)
   return (
     <>
         <div className="varianteProduit">
@@ -103,7 +103,11 @@ const VarianteProduit = () => {
                         </div>
                     </div>
                     <div className="variant_top">
-                      
+                      <div className="variante-top-rows">
+                        <div className="variante-top-row">
+                          <img src="" alt="" className="variante-img" />
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>

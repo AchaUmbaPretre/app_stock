@@ -7,6 +7,7 @@ import moment from 'moment';
 import { Image } from 'antd';
 import './varianteProduit.scss'
 import config from '../../config'
+import { FilterOutlined } from '@mui/icons-material'
 
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -7,7 +7,7 @@ import Select from 'react-select';
 import moment from 'moment';
 import { Image } from 'antd';
 import './varianteProduit.scss'
-import {FilterOutlined} from '@ant-design/icons';
+import {FilterOutlined,ShoppingCartOutlined,SearchOutlined,HeartOutlined} from '@ant-design/icons';
 import config from '../../config'
 
 const VarianteProduit = () => {
@@ -105,35 +105,80 @@ const VarianteProduit = () => {
                     <div className="variant_bottom">
                       <div className="variante-top-rows">
                       {
-                        data?.map((dd)=>(
+                          data?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
+                          <div className="cercle"></div>
                           <img src={dd.image} alt="" className="variante-img" />
+                          <div className="info-products">
+                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
+                              <Link to={`/product/${dd.id}`}>
+                                <div className="icon-products"><SearchOutlined className='icon'/></div>
+                              </Link>
+                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
+                          </div>
                         </div>
                         ))}
+
                         {
-                        data?.map((dd)=>(
+                          data?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
+                          <div className="cercle"></div>
                           <img src={dd.image} alt="" className="variante-img" />
+                          <div className="info-products">
+                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
+                              <Link to={`/product/${dd.id}`}>
+                                <div className="icon-products"><SearchOutlined className='icon'/></div>
+                              </Link>
+                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
+                          </div>
                         </div>
                         ))}
+
                         {
-                        data?.map((dd)=>(
+                          data?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
+                          <div className="cercle"></div>
                           <img src={dd.image} alt="" className="variante-img" />
+                          <div className="info-products">
+                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
+                              <Link to={`/product/${dd.id}`}>
+                                <div className="icon-products"><SearchOutlined className='icon'/></div>
+                              </Link>
+                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
+                          </div>
                         </div>
                         ))}
+
                         {
-                        data?.map((dd)=>(
+                          data?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
+                          <div className="cercle"></div>
                           <img src={dd.image} alt="" className="variante-img" />
+                          <div className="info-products">
+                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
+                              <Link to={`/product/${dd.id}`}>
+                                <div className="icon-products"><SearchOutlined className='icon'/></div>
+                              </Link>
+                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
+                          </div>
                         </div>
                         ))}
+
                         {
-                        data?.map((dd)=>(
+                          data?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
+                          <div className="cercle"></div>
                           <img src={dd.image} alt="" className="variante-img" />
+                          <div className="info-products">
+                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
+                              <Link to={`/product/${dd.id}`}>
+                                <div className="icon-products"><SearchOutlined className='icon'/></div>
+                              </Link>
+                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
+                          </div>
                         </div>
                         ))}
+                        
                       </div>
                     </div>
                 </div>

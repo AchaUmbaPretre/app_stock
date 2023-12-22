@@ -109,18 +109,6 @@ const VarianteProduit = () => {
                             onChange={(selectedOption) => setFamille(selectedOption.value)}
                           />
                         </div>
-                        <div className="variant-top-left">
-                          <div className="variant-top-row">
-                            <FilterOutlined className='variant-icon'/>
-                            <span>filtrer par taille</span>
-                          </div>
-                          <Select
-                            name='id_famille'
-                            className='variant-select'
-                            options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
-                            onChange={(selectedOption) => setFamille(selectedOption.value)}
-                          />
-                        </div>
                     </div>
                     <div className="variant_bottom">
                       <div className="variante-top-rows">

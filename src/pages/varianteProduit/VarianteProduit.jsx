@@ -118,66 +118,6 @@ const VarianteProduit = () => {
                           </div>
                         </div>
                         ))}
-
-                        {
-                          data?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id}>
-                          <div className="cercle"></div>
-                          <img src={dd.image} alt="" className="variante-img" />
-                          <div className="info-products">
-                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/product/${dd.id}`}>
-                                <div className="icon-products"><SearchOutlined className='icon'/></div>
-                              </Link>
-                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
-                          </div>
-                        </div>
-                        ))}
-
-                        {
-                          data?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id}>
-                          <div className="cercle"></div>
-                          <img src={dd.image} alt="" className="variante-img" />
-                          <div className="info-products">
-                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/product/${dd.id}`}>
-                                <div className="icon-products"><SearchOutlined className='icon'/></div>
-                              </Link>
-                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
-                          </div>
-                        </div>
-                        ))}
-
-                        {
-                          data?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id}>
-                          <div className="cercle"></div>
-                          <img src={dd.image} alt="" className="variante-img" />
-                          <div className="info-products">
-                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/product/${dd.id}`}>
-                                <div className="icon-products"><SearchOutlined className='icon'/></div>
-                              </Link>
-                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
-                          </div>
-                        </div>
-                        ))}
-
-                        {
-                          data?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id}>
-                          <div className="cercle"></div>
-                          <img src={dd.image} alt="" className="variante-img" />
-                          <div className="info-products">
-                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/product/${dd.id}`}>
-                                <div className="icon-products"><SearchOutlined className='icon'/></div>
-                              </Link>
-                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
-                          </div>
-                        </div>
-                        ))}
                         
                       </div>
                     </div>

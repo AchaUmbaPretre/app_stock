@@ -38,6 +38,9 @@
                     align-items: center;
                     gap: 10px;
                     .variant-top-row{
+                        display: flex;
+                        align-items: center;
+                        gap: 3px;
                         .variant-icon{
                             font-size: 1rem;
                             color: #6d6c6c;
@@ -45,6 +48,7 @@
                         span{
                             font-size: 1rem;
                             color: #6d6c6c;
+                            font-weight: 300;
                         }
                     }
                     .variant-select{

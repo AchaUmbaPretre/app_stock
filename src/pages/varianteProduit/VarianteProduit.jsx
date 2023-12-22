@@ -16,10 +16,13 @@ const VarianteProduit = () => {
     const [data, setData] = useState([]);
     const [getFamille,setGetFamille] = useState([]);
     const [getMarque,setGetMarque] = useState([]);
+    const [getCible,setGetCible] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [famille, setFamille] = useState(null);
+    const [marque, setMarque] = useState(null);
+    const [cible, setCible] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,6 +35,18 @@ const VarianteProduit = () => {
         };
         fetchData();
       }, [famille]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`);
+            setData(data)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [marque]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -68,9 +83,19 @@ const VarianteProduit = () => {
         };
         fetchData();
       }, []);
-      
 
-      const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
+            setGetCible(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+      
   return (
     <>
         <div className="varianteProduit">
@@ -101,10 +126,10 @@ const VarianteProduit = () => {
                             <span>filtrer par marque</span>
                           </div>
                           <Select
-                            name='id_famille'
+                            name='id_marque'
                             className='variant-select'
                             options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
-                            onChange={(selectedOption) => setFamille(selectedOption.value)}
+                            onChange={(selectedOption) => setMarque(selectedOption.value)}
                           />
                         </div>
                         <div className="variant-top-left">
@@ -113,10 +138,10 @@ const VarianteProduit = () => {
                             <span>filtrer par cible</span>
                           </div>
                           <Select
-                            name='id_famille'
+                            name='id_cible'
                             className='variant-select'
-                            options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
-                            onChange={(selectedOption) => setFamille(selectedOption.value)}
+                            options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
+                            onChange={(selectedOption) => setCible(selectedOption.value)}
                           />
                         </div>
                     </div>

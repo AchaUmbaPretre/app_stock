@@ -35,7 +35,7 @@ const PageDetails = () => {
                 <div className="pageDetail-container">
                     <div className="pageDetail-left">
                         <img src={data?.image} alt="" className="pageDetail-img" />
-                        <div className="pageDetail-left-wrapper">
+                        <div className="pageDetail-left-wrapper" id='description'>
                             <h2>Description</h2>
                             <ul>
                                 <li><strong>Matière : </strong>{data?.nom_matiere}</li>
@@ -52,7 +52,7 @@ const PageDetails = () => {
                         <h2 className="pageDetail-h2">{data?.nom_produit}</h2>
                         <div className="pagedetailDescr">
                             <span>{data?.code_pays}</span>
-                            <a>En savoir plus</a>
+                            <a href='#description'>En savoir plus</a>
                         </div>
                         <div className="pageEtoile-row">
                             <Rate allowHalf defaultValue={2.5} />
@@ -64,9 +64,7 @@ const PageDetails = () => {
                                 <div className="pageDetail-images">
                                     <img src={data?.image} alt="" className="pageDetail-sous-image" />
                                     <select name="" id="" className='pageDetail-select'>
-                                        <option value="">Red</option>
-                                        <option value="">Bleu</option>
-                                        <option value="">Noir</option>
+                                        <option value="">{data?.description}</option>
                                     </select>
                                 </div>
                             </div>

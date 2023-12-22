@@ -83,8 +83,8 @@ const VarianteProduit = () => {
             <div className="varianteProduit-wrapper">
                 <div className="varianteProduit-container-top">
                     <div className="varianteProduit-left">
-                        <h2 className="varianteProduit-h2">Detail du produit</h2>
-                        <span>Voir les details</span>
+                        <h2 className="varianteProduit-h2">Les produits</h2>
+                        <span>Voir les images de produits</span>
                     </div>
                 </div>
                 <div className="variant-container-bottom">
@@ -111,7 +111,7 @@ const VarianteProduit = () => {
                           <img src={dd.image} alt="" className="variante-img" />
                           <div className="info-products">
                             <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/product/${dd.id}`}>
+                              <Link to={`/pageDetail/${dd.id}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
                             <div className="icon-products"><HeartOutlined className='icon1'/></div>

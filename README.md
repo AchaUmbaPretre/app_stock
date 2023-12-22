@@ -61,6 +61,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/m
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
+[![committers.top badge](https://user-badge.committers.top/congo_kinshasa/AchaUmbaPretre.svg)](https://user-badge.committers.top/congo_kinshasa/AchaUmbaPretre)
+
 ### Deployment
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)

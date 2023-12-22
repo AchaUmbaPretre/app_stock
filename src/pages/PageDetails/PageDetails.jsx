@@ -34,6 +34,16 @@ const PageDetails = () => {
                 <div className="pageDetail-container">
                     <div className="pageDetail-left">
                         <img src={data?.image} alt="" className="pageDetail-img" />
+                        <div className="pageDetail-left-wrapper">
+                            <h2>Description</h2>
+                            <ul>
+                                <li><strong>Matière : </strong>Cuir synthétique en microfibres</li>
+                                <li><strong>Marque : </strong>Polyester</li>
+                                <li><strong>Couleurs : </strong>6 au choix</li>
+                                <li><strong>Cible : </strong>Enfant</li>
+                            </ul>
+
+                        </div>
                     </div>
                     <div className="pageDetail-right">
                         <h2 className="pageDetail-h2">Sacs à main en cuir souple pour femmes</h2>

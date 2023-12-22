@@ -55,7 +55,15 @@ const VarianteProduit = () => {
                     </div>
                 </div>
                 <div className="variant-container-bottom">
-                    aaaaaaa
+                    <div className="variant_top">
+                        <div className="variant-top-left">
+                        <FilterOutlined className='variant-icon'/>
+                          <span>filtrer</span>
+                        </div>
+                    </div>
+                    <div className="variant_top">
+                      
+                    </div>
                 </div>
             </div>
         </div>

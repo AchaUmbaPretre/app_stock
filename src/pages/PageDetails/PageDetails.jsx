@@ -58,9 +58,11 @@ const PageDetails = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="pageDetail-rows-prix">
+                            
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 

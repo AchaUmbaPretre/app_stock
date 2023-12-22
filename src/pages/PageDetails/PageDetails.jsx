@@ -4,6 +4,7 @@ import config from '../../config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Rate } from 'antd';
+import moment from 'moment';
 
 const PageDetails = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -37,18 +38,20 @@ const PageDetails = () => {
                         <div className="pageDetail-left-wrapper">
                             <h2>Description</h2>
                             <ul>
-                                <li><strong>Matière : </strong>Cuir synthétique en microfibres</li>
-                                <li><strong>Marque : </strong>Polyester</li>
-                                <li><strong>Couleurs : </strong>6 au choix</li>
-                                <li><strong>Cible : </strong>Enfant</li>
+                                <li><strong>Matière : </strong>{data?.nom_matiere}</li>
+                                <li><strong>Marque : </strong>{data?.nom_marque}</li>
+                                <li><strong>Couleurs : </strong>{data?.description}</li>
+                                <li><strong>Cible : </strong>{data?.nom_cible}</li>
+                                <li><strong>Pays : </strong>{data?.code_pays}</li>
+                                <li><strong>Date d'entrée : </strong>{moment(data?.date_entrant).format('DD-MM-YYYY')}</li>
                             </ul>
 
                         </div>
                     </div>
                     <div className="pageDetail-right">
-                        <h2 className="pageDetail-h2">Sacs à main en cuir souple pour femmes</h2>
+                        <h2 className="pageDetail-h2">{data?.nom_produit}</h2>
                         <div className="pagedetailDescr">
-                            <span>Kaidifeiniroo</span>
+                            <span>{data?.code_pays}</span>
                             <a>En savoir plus</a>
                         </div>
                         <div className="pageEtoile-row">
@@ -70,8 +73,8 @@ const PageDetails = () => {
                         </div>
                         <div className="pageDetail-rows-prix">
                             <div className="pageDetail-row-prix">
-                                <h3>52,90 €</h3>
-                                <span>Il y a 5 articles en stock pour cette combinaison</span>
+                                <h3>{data?.prix} $</h3>
+                                <span>Il y a {data?.quantite} articles en stock pour cette combinaison</span>
                             </div>
                             <div className="pageDetail-row-Qt">
                                 <div className="pageDetail-rows-Qt">

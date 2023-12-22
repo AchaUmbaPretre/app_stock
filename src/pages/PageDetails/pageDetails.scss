@@ -2,21 +2,19 @@
     .pageDetail-wrapper{
         .pageDetail-container{
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
             background: #fff;
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-            padding: 20px;
+            padding: 30px;
             border-radius: 5px;
             .pageDetail-left{
                 flex: 1;
                 .pageDetail-left-wrapper{
                     padding: 30px 0;
                     h2{
-                        color: rgb(150, 150, 150);
-                        font-weight: bold;
+                        color: rgb(3, 3, 109);
+                        font-weight: bolder;
                         padding: 20px 0;
                     }
                     ul{
@@ -125,6 +123,7 @@
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
+                                    cursor: pointer;
                                 }
                             }
                         }

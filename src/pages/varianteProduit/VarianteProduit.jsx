@@ -62,7 +62,11 @@ const VarianteProduit = () => {
                             <FilterOutlined className='variant'/>
                             <span>filtrer</span>
                           </div>
-                          
+                          <Select
+                            name='id_matiere'
+                            options={getMatiere?.map(item => ({ value: item.id_matiere, label: item.nom_matiere }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_matiere', value: selectedOption.value } })}
+                          />
                         </div>
                     </div>
                     <div className="variant_top">

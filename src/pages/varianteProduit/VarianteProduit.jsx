@@ -18,6 +18,7 @@ const VarianteProduit = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
+    const [famille, setFamille] = useState();
 
     const handleInputChange = async (e) => {
       const fieldName = e.target.name;
@@ -38,7 +39,7 @@ const VarianteProduit = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/produit/${id}`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltre/${1}`);
             setGetProduit(data[0])
 
           } catch (error) {
@@ -53,6 +54,18 @@ const VarianteProduit = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
             setGetFamille(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteProduit`);
+            setData(data);
           } catch (error) {
             console.log(error);
           }
@@ -85,7 +98,7 @@ const VarianteProduit = () => {
                             name='id_famille'
                             className='variant-select'
                             options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
-                            onChange={selectedOption => handleInputChange({ target: { name: 'id_famille', value: selectedOption.value } })}
+                            onChange={(e)=>setFamille(e.target.value)}
                           />
                         </div>
                     </div>

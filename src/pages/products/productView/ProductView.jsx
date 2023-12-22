@@ -111,7 +111,7 @@ const ProductView = () => {
             confirmButtonText: 'OK',
           });
           
-          navigate('/products')
+          navigate('/varianteProduit')
           window.location.reload();
     
         }catch(err) {

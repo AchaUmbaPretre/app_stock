@@ -56,11 +56,10 @@
                 width: 100%;
                 margin-top: 40px;
                 .variante-top-rows{
-                    width: 100%;
-                    position: relative;
+                    padding: 20px;
                     display: flex;
-                    gap: 10px;
-                    flex-wrap:wrap;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
                     .variante-top-row{
                         flex: 1;
                         position: relative;

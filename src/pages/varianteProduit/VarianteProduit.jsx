@@ -15,6 +15,7 @@ const VarianteProduit = () => {
     const [getProduit, setGetProduit] = useState([]);
     const [data, setData] = useState([]);
     const [getFamille,setGetFamille] = useState([]);
+    const [getMarque,setGetMarque] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
@@ -56,11 +57,20 @@ const VarianteProduit = () => {
         fetchData();
       }, []);
 
-      console.log(data)
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
+            setGetMarque(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
       
 
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
-      console.log(famille)
   return (
     <>
         <div className="varianteProduit">
@@ -93,7 +103,7 @@ const VarianteProduit = () => {
                           <Select
                             name='id_famille'
                             className='variant-select'
-                            options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
+                            options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
                             onChange={(selectedOption) => setFamille(selectedOption.value)}
                           />
                         </div>

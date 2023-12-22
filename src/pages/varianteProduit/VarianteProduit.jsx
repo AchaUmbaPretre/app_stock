@@ -76,7 +76,43 @@ const VarianteProduit = () => {
                         <div className="variant-top-left">
                           <div className="variant-top-row">
                             <FilterOutlined className='variant-icon'/>
-                            <span>filtrer</span>
+                            <span>filtrer par famille</span>
+                          </div>
+                          <Select
+                            name='id_famille'
+                            className='variant-select'
+                            options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
+                            onChange={(selectedOption) => setFamille(selectedOption.value)}
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>filtrer par marque</span>
+                          </div>
+                          <Select
+                            name='id_famille'
+                            className='variant-select'
+                            options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
+                            onChange={(selectedOption) => setFamille(selectedOption.value)}
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>filtrer par cible</span>
+                          </div>
+                          <Select
+                            name='id_famille'
+                            className='variant-select'
+                            options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
+                            onChange={(selectedOption) => setFamille(selectedOption.value)}
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>filtrer par taille</span>
                           </div>
                           <Select
                             name='id_famille'

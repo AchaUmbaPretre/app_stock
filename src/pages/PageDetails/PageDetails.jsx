@@ -5,7 +5,10 @@ const PageDetails = () => {
     <>
         <div className="pageDetails">
             <div className="pageDetail-wrapper">
-                
+                <div className="pageDetail-container">
+                    
+                </div>
+
             </div>
         </div>
 

@@ -13,6 +13,7 @@ const PageDetails = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
+    const [quantity, setQuantity] = useState(1);
 
 
     useEffect(() => {
@@ -26,6 +27,12 @@ const PageDetails = () => {
         };
         fetchData();
       }, [id]);
+
+      const handleQuantity = (type) =>{
+
+        type === "inc" ? setQuantity(quantity + 1) 
+                      : quantity > 1 && setQuantity(quantity - 1)
+    }
 
 
   return (
@@ -76,10 +83,10 @@ const PageDetails = () => {
                             </div>
                             <div className="pageDetail-row-Qt">
                                 <div className="pageDetail-rows-Qt">
-                                    <span>10</span>
+                                    <span>{quantity}</span>
                                     <div className="rowQT">
-                                        <span>+</span>
-                                        <span>-</span>
+                                        <span onClick={()=>handleQuantity('inc')}>+</span>
+                                        <span onClick={()=>handleQuantity('dec')}>-</span>
                                     </div>
                                 </div>
                                 <button>Ajouter au panier</button>

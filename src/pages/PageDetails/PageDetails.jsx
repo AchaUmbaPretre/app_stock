@@ -59,7 +59,21 @@ const PageDetails = () => {
                             </div>
                         </div>
                         <div className="pageDetail-rows-prix">
-                            
+                            <div className="pageDetail-row-prix">
+                                <h3>52,90 €</h3>
+                                <span>Il y a 5 articles en stock pour cette combinaison</span>
+                            </div>
+                            <div className="pageDetail-row-Qt">
+                                <div className="pageDetail-rows-Qt">
+                                    <span>10</span>
+                                    <div className="rowQT">
+                                        <span>+</span>
+                                        <span>-</span>
+                                    </div>
+                                </div>
+                                <button>Ajouter au panier</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>

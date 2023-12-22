@@ -28,6 +28,29 @@
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             padding: 20px;
             border-radius: 5px;
+            .variant_top{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .variant-top-left{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    .variant-top-row{
+                        .variant-icon{
+                            font-size: 1rem;
+                            color: #6d6c6c;
+                        }
+                        span{
+                            font-size: 1rem;
+                            color: #6d6c6c;
+                        }
+                    }
+                    .variant-select{
+                        width: 150px;
+                    }
+                }
+            }
         }
     }
 }

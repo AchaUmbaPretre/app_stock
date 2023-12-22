@@ -102,11 +102,38 @@ const VarianteProduit = () => {
                           />
                         </div>
                     </div>
-                    <div className="variant_top">
+                    <div className="variant_bottom">
                       <div className="variante-top-rows">
-                        <div className="variante-top-row">
-                          <img src="" alt="" className="variante-img" />
+                      {
+                        data?.map((dd)=>(
+                        <div className="variante-top-row" key={dd.id}>
+                          <img src={dd.image} alt="" className="variante-img" />
                         </div>
+                        ))}
+                        {
+                        data?.map((dd)=>(
+                        <div className="variante-top-row" key={dd.id}>
+                          <img src={dd.image} alt="" className="variante-img" />
+                        </div>
+                        ))}
+                        {
+                        data?.map((dd)=>(
+                        <div className="variante-top-row" key={dd.id}>
+                          <img src={dd.image} alt="" className="variante-img" />
+                        </div>
+                        ))}
+                        {
+                        data?.map((dd)=>(
+                        <div className="variante-top-row" key={dd.id}>
+                          <img src={dd.image} alt="" className="variante-img" />
+                        </div>
+                        ))}
+                        {
+                        data?.map((dd)=>(
+                        <div className="variante-top-row" key={dd.id}>
+                          <img src={dd.image} alt="" className="variante-img" />
+                        </div>
+                        ))}
                       </div>
                     </div>
                 </div>

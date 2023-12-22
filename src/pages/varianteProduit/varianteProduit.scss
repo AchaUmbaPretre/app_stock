@@ -23,6 +23,7 @@
             }
         }
         .variant-container-bottom{
+            width: 100%;
             background: #fff;
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
@@ -48,6 +49,26 @@
                     }
                     .variant-select{
                         width: 150px;
+                    }
+                }
+            }
+            .variant_bottom{
+                width: 100%;
+                margin-top: 40px;
+                .variante-top-rows{
+                    width: 100%;
+                    position: relative;
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap:wrap;
+                    .variante-top-row{
+                        position: relative;
+                        flex: 1.5;
+                        width: 100%;
+                        background: red;
+                        .variante-img{
+                            width: 100%;
+                        }
                     }
                 }
             }

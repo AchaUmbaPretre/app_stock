@@ -76,7 +76,7 @@ const VarianteProduit = () => {
                         <div className="variant-top-left">
                           <div className="variant-top-row">
                             <FilterOutlined className='variant-icon'/>
-                            <span>filtrer par famille</span>
+                            <span>filtrer par categorie</span>
                           </div>
                           <Select
                             name='id_famille'

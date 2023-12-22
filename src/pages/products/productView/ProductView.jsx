@@ -220,13 +220,6 @@ const ProductView = () => {
                     <div className="product-view-right">
                         <h2 className="product-h2">L'image</h2>
                         <div className="product-img-row">
-{/*                             <Image
-                                className="product-img"
-                                width={200}
-                                height={200}
-                                src="error"
-                                fallback={getProduit?.img}
-                            /> */}
                             {data.image ? (
                             <div>
                                 <Image

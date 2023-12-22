@@ -20,22 +20,6 @@ const VarianteProduit = () => {
     const id = pathname.split('/')[2];
     const [famille, setFamille] = useState(null);
 
-    const handleInputChange = async (e) => {
-      const fieldName = e.target.name;
-      const fieldValue = e.target.value;
-    
-      let updatedValue = fieldValue;
-    
-      if (fieldName === "image") {
-        // ...
-      } else if (fieldName === "contact_email") {
-        updatedValue = fieldValue.toLowerCase();
-      } else if (Number.isNaN(Number(fieldValue))) {
-        updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-      } 
-      setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-    }
-
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -118,7 +102,6 @@ const VarianteProduit = () => {
                           </div>
                         </div>
                         ))}
-                        
                       </div>
                     </div>
                 </div>

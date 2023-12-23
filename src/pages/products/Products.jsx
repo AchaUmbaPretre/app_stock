@@ -28,12 +28,12 @@ const Products = () => {
         setSearchText(selectedKeys[0]);
         setSearchedColumn(dataIndex);
       };
-      const handleReset = (clearFilters) => {
+    const handleReset = (clearFilters) => {
         clearFilters();
         setSearchText('');
       };
     
-      const getColumnSearchProps = (dataIndex) => ({
+    const getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
           <div
             style={{

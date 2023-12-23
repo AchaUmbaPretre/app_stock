@@ -50,6 +50,7 @@ const PageDetails = () => {
                                 <li><strong>Couleurs : </strong>{data?.description}</li>
                                 <li><strong>Cible : </strong>{data?.nom_cible}</li>
                                 <li><strong>Pays : </strong>{data?.code_pays}</li>
+                                <li><strong>Taille : </strong>{data?.pointure}</li>
                                 <li><strong>Date d'entrée : </strong>{moment(data?.date_entrant).format('DD-MM-YYYY')}</li>
                             </ul>
 

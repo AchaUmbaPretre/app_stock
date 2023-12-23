@@ -139,12 +139,12 @@ const columns = [
           </div>
           )
     },
-    {
+/*     {
         title: 'Nom produit',
         dataIndex: 'nom_produit',
         key: 'nom_produit',
         ...getColumnSearchProps('nom_produit'),
-    },
+    }, */
     {
       title: 'Categorie',
       dataIndex: 'nom_categorie',
@@ -160,7 +160,7 @@ const columns = [
       dataIndex: 'description',
       key: 'description',
     },
-    {
+/*     {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
       key: 'quantite_vendue',
@@ -169,7 +169,7 @@ const columns = [
       render: (quantite_vendue) => (
         <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
       ),
-    },
+    }, */
     {
         title: 'Qté en stock',
         dataIndex: 'stock',

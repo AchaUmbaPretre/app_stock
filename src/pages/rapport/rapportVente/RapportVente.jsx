@@ -131,11 +131,11 @@ const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
       title: 'image',
-      dataIndex: 'img',
+      dataIndex: 'image',
       key: 'img',
         render: (text, record) => (
           <div className="userList">
-            <img src={record.img} alt="" className="userImg"  />
+            <img src={record.image} alt="" className="userImg"  />
           </div>
           )
     },
@@ -152,26 +152,13 @@ const columns = [
     },
     {
       title: 'Marque',
-      dataIndex: 'nom',
-      key: 'nom',
+      dataIndex: 'nom_marque',
+      key: 'nom_marque',
     },
     {
-      title: 'Montant vendu',
-      dataIndex: 'montant_total',
-      key: 'montant_total',
-      sorter: (a, b) => a.montant_total - b.montant_total,
-      sortDirections: ['descend', 'ascend'],
-      render: (montant_total) => (
-        <span>
-        <Tag color={'green'}>
-          {parseFloat(montant_total).toLocaleString('fr-FR', {
-            style: 'currency',
-            currency: 'USD',
-          })}
-        </Tag>
-        
-        </span>
-      ),
+      title: 'Couleur',
+      dataIndex: 'description',
+      key: 'description',
     },
     {
       title: 'Quantité vendue',
@@ -185,12 +172,12 @@ const columns = [
     },
     {
         title: 'Qté en stock',
-        dataIndex: 'quantite_restante',
-        key: 'quantite_restante',
-        sorter: (a, b) => a.quantite_restante - b.quantite_restante,
+        dataIndex: 'stock',
+        key: 'stock',
+        sorter: (a, b) => a.stock - b.stock,
         sortDirections: ['descend', 'ascend'],
-        render: (quantite_restante) => (
-          <Tag color={quantite_restante > 0 ? 'green' : 'red'}>{quantite_restante}</Tag>
+        render: (stock) => (
+          <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
         ),
       }
 ];
@@ -202,7 +189,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport`);
+      const { data } = await axios.get(`${DOMAIN}/api/inventaire`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -212,10 +199,10 @@ useEffect(() => {
   fetchData();
 }, []);
 
- const filteredData = getRapport?.filter((item) =>
+/*  const filteredData = getRapport?.filter((item) =>
 item.nom_produit.toLowerCase().includes(searchValue.toLowerCase()) ||
 item.nom.toLowerCase().includes(searchValue.toLowerCase())
-)
+) */
 
   return (
     <>
@@ -245,7 +232,7 @@ item.nom.toLowerCase().includes(searchValue.toLowerCase())
 {/*                    {open &&
                     <ProductSelects getProduits={setGetProduit}/> }  */}
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

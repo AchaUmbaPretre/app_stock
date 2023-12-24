@@ -1,5 +1,6 @@
 import './rapportVente.scss'
 import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm} from 'antd';
@@ -159,6 +160,39 @@ const columns = [
       title: 'Couleur',
       dataIndex: 'description',
       key: 'description',
+      render: (color) => {
+        let icon;
+        let iconColor;
+  
+        if (color === 'Rouge') {
+          icon = <CheckCircleOutlined />;
+          iconColor = 'red';
+        } else if (color === 'Noir') {
+          icon = <CheckCircleOutlined />;
+          iconColor = 'black';
+        } else if (color === 'Orange') {
+          icon = <CheckCircleOutlined />;
+          iconColor = 'orange';
+        } else if (color === 'Bleu') {
+          icon = <CheckCircleOutlined />;
+          iconColor = 'skyblue';
+        } else if (color === 'Chocolat') {
+          icon = <CheckCircleOutlined />;
+          iconColor = 'chocolate';
+        }
+  
+        return (
+          <span style={{ color: iconColor, display: 'flex', gap:'5px'}}>
+            {icon}
+            {color}
+          </span>
+        );
+      },
+    },
+    {
+      title: 'Taille',
+      dataIndex: 'pointure',
+      key: 'pointure',
     },
 /*     {
       title: 'Quantité vendue',
@@ -176,6 +210,7 @@ const columns = [
         key: 'stock',
         sorter: (a, b) => a.stock - b.stock,
         sortDirections: ['descend', 'ascend'],
+        width: "18%",
         render: (stock) => (
           <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
         ),
@@ -199,10 +234,10 @@ useEffect(() => {
   fetchData();
 }, []);
 
-/*  const filteredData = getRapport?.filter((item) =>
-item.nom_produit.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.nom.toLowerCase().includes(searchValue.toLowerCase())
-) */
+ const filteredData = getRapport?.filter((item) =>
+item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
+item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
+)
 
   return (
     <>
@@ -232,7 +267,7 @@ item.nom.toLowerCase().includes(searchValue.toLowerCase())
 {/*                    {open &&
                     <ProductSelects getProduits={setGetProduit}/> }  */}
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

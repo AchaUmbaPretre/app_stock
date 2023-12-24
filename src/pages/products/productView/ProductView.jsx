@@ -18,11 +18,14 @@ const ProductView = () => {
     const [data, setData] = useState([]);
     const [getCouleur,setGetCouleur] = useState([]);
     const [getPays,setGetPays] = useState([]);
+    const [getTaille,setGetTaille] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [idCible,setIdcible] = useState();
     const [idFamille, setIdFamille] = useState();
+    const [idPays, setIdPays] = useState([]);
+    const [idTaille, setIdTaille] = useState({});
 
 
     const handleInputChange = async (e) => {
@@ -31,7 +34,7 @@ const ProductView = () => {
       
         let updatedValue = fieldValue;
       
-        if (fieldName === "image") {
+        if (fieldName === "img") {
           const file = e.target.files[0];
           const reader = new FileReader();
       
@@ -49,10 +52,31 @@ const ProductView = () => {
         } else if (fieldName === "contact_email") {
           updatedValue = fieldValue.toLowerCase();
         } else if (Number.isNaN(Number(fieldValue))) {
-          updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+          if (typeof fieldValue === "string" && fieldValue.length > 0) {
+            updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+          }
         }
       
         setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+      };
+
+      const handleInputChange1= async (e) => {
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+      
+        let updatedValue = fieldValue;
+      
+        if (fieldName === "img") {
+          // ...
+        } else if (fieldName === "contact_email") {
+          updatedValue = fieldValue.toLowerCase();
+        } else if (Number.isNaN(Number(fieldValue))) {
+          if (typeof fieldValue === "string" && fieldValue.length > 0) {
+            updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+          }
+        }
+      
+        setIdTaille((prev) => ({ ...prev, [fieldName]: updatedValue }));
       };
 
     useEffect(() => {
@@ -71,9 +95,8 @@ const ProductView = () => {
       useEffect(()=>{
         setIdcible(getProduit?.id_cible)
         setIdFamille(getProduit?.id_famille)
-      },[getProduit?.id_cible])
-
-      console.log(idCible, idFamille)
+        setIdPays(data?.id_pays)
+      },[getProduit?.id_cible, data?.id_pays])
 
       useEffect(() => {
         const fetchData = async () => {
@@ -99,11 +122,26 @@ const ProductView = () => {
         fetchData();
       }, []);
 
-      const handleClick = async (e) => {
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/tailleOne/${idPays}`);
+            setGetTaille(data)
+
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [idPays]);
+
+/*       const handleClick = async (e) => {
         e.preventDefault();
     
         try{
-          await axios.post(`${DOMAIN}/api/produit/varianteProduit`, {...data,id_produit: id, id_cible: idCible, id_famille: idFamille })
+          { idTaille.map((dd)=>(
+             axios.post(`${DOMAIN}/api/produit/varianteProduit`, {...data,id_produit: id, id_cible: idCible,id_taille:dd, id_famille: idFamille })
+          ))}
           Swal.fire({
             title: 'Success',
             text: 'Produit créé avec succès!',
@@ -122,7 +160,51 @@ const ProductView = () => {
             confirmButtonText: 'OK',
           });
         }
-      }
+      } */
+
+
+      console.log(data)
+
+      const handleClick = (e) => {
+        e.preventDefault();
+      
+        if ((Array.isArray(idTaille.id_taille) && idTaille.id_taille.length > 0)) {
+          Promise.all(
+            idTaille.id_taille?.map((item) =>
+              axios.post(`${DOMAIN}/api/produit/varianteProduit`, {
+                ...data,
+                id_produit: id,
+                id_cible: idCible,
+                id_taille: item.value, // Utilisez item.value pour obtenir la valeur de la taille
+                id_famille: idFamille,
+              })
+            )
+          )
+            .then(() => {
+              Swal.fire({
+                title: 'Success',
+                text: 'Produit créé avec succès!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+              });
+      
+              navigate('/varianteProduit');
+              window.location.reload();
+            })
+            .catch((err) => {
+              Swal.fire({
+                title: 'Error',
+                text: err.message,
+                icon: 'error',
+                confirmButtonText: 'OK',
+              });
+            });
+        } else {
+          console.error('idTaille is not an array');
+        }
+      };
+
+      console.log(idTaille)
 
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
 
@@ -190,15 +272,22 @@ const ProductView = () => {
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Taille</label>
-                                    <input type="number" name='taille' className="produit_input" onChange={handleInputChange}/>
+                                    <Select
+                                      name="id_pays"
+                                      placeholder="Sélectionnez des tailles"
+                                      isMulti
+                                      options={getTaille?.map((item) => ({ value: item.id_taille, label: item.taille }))}
+                                      onChange={(selectedOptions) => handleInputChange1({ target: { name: 'id_taille', value: selectedOptions } })}
+                                    />
+                                    {/* <input type="number" name='taille' className="produit_input" onChange={handleInputChange}/> */}
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Couleur</label>
                                     <Select
-                                        name="id_couleur"
-                                        placeholder="sélectionnez une couleur"
-                                        options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
-                                        onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
+                                      name="id_couleur"
+                                      placeholder="sélectionnez une couleur"
+                                      options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
+                                      onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
                                     />
                                 </div>
                                 <div className="produit-view-control">
@@ -220,21 +309,21 @@ const ProductView = () => {
                     <div className="product-view-right">
                         <h2 className="product-h2">L'image</h2>
                         <div className="product-img-row">
-                            {data.image ? (
+                            {data.img ? (
                             <div>
                                 <Image
                                     className="product-img"
                                     width={200}
                                     height={200}
                                     src="error"
-                                    fallback={data?.image}
+                                    fallback={data?.img}
                                 />
                             </div>
                             ) : (
                                 <div>
                                 <input
                                 type="file"
-                                name="image"
+                                name="img"
                                 className="form-input"
                                 style={{ display: "none" }}
                                 label="Profil"

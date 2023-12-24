@@ -41,12 +41,13 @@ const PageDetails = () => {
             <div className="pageDetail-wrapper">
                 <div className="pageDetail-container">
                     <div className="pageDetail-left">
-                        <img src={data?.image} alt="" className="pageDetail-img" />
+                        <img src={data?.img} alt="" className="pageDetail-img" />
                         <div className="pageDetail-left-wrapper" id='description'>
                             <h2>Description</h2>
                             <ul>
                                 <li><strong>Matière : </strong>{data?.nom_matiere}</li>
                                 <li><strong>Marque : </strong>{data?.nom_marque}</li>
+                                <li><strong>Basket : </strong>{data?.nom_categorie}</li>
                                 <li><strong>Couleurs : </strong>{data?.description}</li>
                                 <li><strong>Cible : </strong>{data?.nom_cible}</li>
                                 <li><strong>Pays : </strong>{data?.code_pays}</li>
@@ -70,7 +71,7 @@ const PageDetails = () => {
                             <div className="pageDetail-rows-prix">
                                 <h3>Couleur</h3>
                                 <div className="pageDetail-images">
-                                    <img src={data?.image} alt="" className="pageDetail-sous-image" />
+                                    <img src={data?.img} alt="" className="pageDetail-sous-image" />
                                     <select name="" id="" className='pageDetail-select'>
                                         <option value="">{data?.description}</option>
                                     </select>
@@ -80,7 +81,7 @@ const PageDetails = () => {
                         <div className="pageDetail-rows-prix">
                             <div className="pageDetail-row-prix">
                                 <h3>{data?.prix} $</h3>
-                                <span>Il y a {data?.quantite} articles en stock pour cette combinaison</span>
+                                <span>Il y a {data?.stock} articles en stock pour cette combinaison</span>
                             </div>
                             <div className="pageDetail-row-Qt">
                                 <div className="pageDetail-rows-Qt">

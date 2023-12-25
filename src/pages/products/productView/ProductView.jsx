@@ -67,20 +67,7 @@ const ProductView = () => {
       
         setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
       };
-
-/*       const handleStockChange = (e) => {
-        setStockId((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-      }; */
       console.log(stockId)
-
-/*       const handleCheckboxChange = (id) => {
-        console.log(id)
-        if (selectedIds.includes(id)) {
-          setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
-        } else {
-          setSelectedIds([...selectedIds, id]);
-        }
-      }; */
 
 
       const handleCheckboxChange = (id) => {

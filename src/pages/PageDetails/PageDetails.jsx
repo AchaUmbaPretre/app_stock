@@ -114,6 +114,9 @@ const PageDetails = () => {
                                 </div>
                                 <button>Ajouter au panier</button>
                             </div>
+                            <div className="detail-inventaire">
+                                
+                            </div>
                         </div>
                     </div>))}
                 </div>

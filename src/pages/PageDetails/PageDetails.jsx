@@ -57,7 +57,8 @@ const PageDetails = () => {
             <div className="pageDetail-wrapper">
                 <div className="pageDetail-container">
                     <div className="pageDetail-left">
-                        <img src={data?.img} alt="" className="pageDetail-img" />
+                    { result?.map((dd)=>(
+                        <img src={dd?.img} alt="" className="pageDetail-img" />  ))}
                         <div className="pageDetail-left-wrapper" id='description'>
                             <h2>Description</h2>
                             { result?.map((dd)=>(
@@ -77,13 +78,13 @@ const PageDetails = () => {
                     </div>
                     { result?.map((dd)=>(
                     <div className="pageDetail-right">
-                        <h2 className="pageDetail-h2">{data?.nom_produit}</h2>
+                        <h2 className="pageDetail-h2">{dd?.nom_produit}</h2>
                         <div className="pagedetailDescr">
                             <span>{dd?.code_pays}</span>
                             <a href='#description'>En savoir plus</a>
                         </div>
                         <div className="pageEtoile-row">
-                            <Rate allowHalf defaultValue={2.5} />
+                            <Rate allowHalf defaultValue={3.5} />
                             <a href="">Voir le seul avis</a>
                         </div>
                         <div className="pageDetail-bottom">
@@ -112,7 +113,6 @@ const PageDetails = () => {
                                 </div>
                                 <button>Ajouter au panier</button>
                             </div>
-
                         </div>
                     </div>))}
                 </div>

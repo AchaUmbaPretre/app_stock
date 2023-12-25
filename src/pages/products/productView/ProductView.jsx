@@ -90,9 +90,6 @@ const ProductView = () => {
         setSelectedData(updatedData);
       };
 
-      console.log(data)
-      
-
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -313,16 +310,6 @@ const ProductView = () => {
                                         onChange={selectedOption => handleInputChange({ target: { name: 'id_pays', value: selectedOption.value } })}
                                     />
                                 </div>
-{/*                                 <div className="produit-view-control">
-                                    <label htmlFor="">Taille</label>
-                                    <Select
-                                      name="id_taille"
-                                      placeholder="Sélectionnez des tailles"
-                                      isMulti
-                                      options={getTaille?.map((item) => ({ value: item.id_taille, label: item.taille }))}
-                                      onChange={(selectedOptions) => handleInputChange1({ target: { name: 'id_taille', value: selectedOptions } })}
-                                    />
-                                </div> */}
                                 <div className="produit-view-control">
                                     <label htmlFor="">Couleur</label>
                                     <Select
@@ -332,10 +319,6 @@ const ProductView = () => {
                                       onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
                                     />
                                 </div>
-{/*                                 <div className="produit-view-control">
-                                    <label htmlFor="">Stock</label>
-                                    <input type="number" name='stock' className="produit_input" placeholder='Entrez la quantité du produit' onChange={handleInputChange} />
-                                </div> */}
                                 <div className="produit-view-control">
                                     <label htmlFor="">Prix</label>
                                     <input type="number" name='prix' className="produit_input" onChange={handleInputChange} />

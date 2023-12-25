@@ -167,7 +167,7 @@ const VarianteProduit = () => {
                           <img src={dd.img} alt="" className="variante-img" />
                           <div className="info-products">
                             <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/pageDetail/${dd.id_varianteProduit}`}>
+                              <Link to={`/pageDetail/${dd.id_produit}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
                             <div className="icon-products"><HeartOutlined className='icon1'/></div>

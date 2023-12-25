@@ -67,7 +67,6 @@ const ProductView = () => {
       
         setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
       };
-      console.log(stockId)
 
 
       const handleCheckboxChange = (id) => {

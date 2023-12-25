@@ -30,9 +30,11 @@ const ProductView = () => {
     const [idTaille, setIdTaille] = useState({});
     const [selectedIds, setSelectedIds] = useState([]);
     const [pointureId, setPointureId] = useState([]);
+    const [stockId, setStockId] = useState('');
     const searchInput = React.useRef(null);
     const scroll = { x: 400 };
     const scrollY = { y: 200 };
+    const [selectedData, setSelectedData] = useState([]);
 
     const handleInputChange = async (e) => {
         const fieldName = e.target.name;
@@ -66,40 +68,44 @@ const ProductView = () => {
         setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
       };
 
-      const handleInputChange1= async (e) => {
-        const fieldName = e.target.name;
-        const fieldValue = e.target.value;
-      
-        let updatedValue = fieldValue;
-      
-        if (fieldName === "img") {
-          // ...
-        } else if (fieldName === "contact_email") {
-          updatedValue = fieldValue.toLowerCase();
-        } else if (Number.isNaN(Number(fieldValue))) {
-          if (typeof fieldValue === "string" && fieldValue.length > 0) {
-            updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-          }
-        }
-      
-        setIdTaille((prev) => ({ ...prev, [fieldName]: updatedValue }));
-      };
+/*       const handleStockChange = (e) => {
+        setStockId((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+      }; */
+      console.log(stockId)
 
-      const handleCheckboxChange = (id) => {
+/*       const handleCheckboxChange = (id) => {
+        console.log(id)
         if (selectedIds.includes(id)) {
           setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
         } else {
           setSelectedIds([...selectedIds, id]);
         }
+      }; */
+
+
+      const handleCheckboxChange = (id) => {
+        const selectedRecord = getTaille?.find((record) => record.id_taille === id);
+        if (selectedIds.includes(id)) {
+          setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
+          setSelectedData(selectedData.filter((record) => record.id !== id));
+        } else {
+          setSelectedIds([...selectedIds, id]);
+          setSelectedData([...selectedData, selectedRecord]);
+        }
       };
 
-      const handleTimeChange = (id, field, value) => {
-        setPointureId((prevData) =>
-          prevData.map((item) =>
-            item.id === id ? { ...item, [field]: value } : item
-          )
-        );
+      const handleStockChange = (e, id) => {
+        const updatedData = selectedData.map((record) => {
+          if (record.id_taille === id) {
+            return { ...record, stock: e.target.value };
+          }
+          return record;
+        });
+        setSelectedData(updatedData);
       };
+
+      console.log(data)
+      
 
     useEffect(() => {
         const fetchData = async () => {
@@ -157,18 +163,18 @@ const ProductView = () => {
         fetchData();
       }, [idPays]);
 
-      const horaireTable = [
+      const qTable = [
         {
           title: 'Pointure',
           dataIndex: 'taille',
           width: '25%',
-          render: (record) =>{
+          render: (record) => {
             return (
               <input
+                disabled
                 type="number"
                 className='input-timeBar'
                 value={record}
-                onChange={(e) => handleTimeChange(record.id, 'stock', e.target.value)}
               />
             );
           }
@@ -178,57 +184,58 @@ const ProductView = () => {
           dataIndex: 'stock',
           key: 'stock',
           width: '25%',
-          render: (text, record) =>{
+          render: (text, record) => {
+            const selectedRecord = selectedData.find((selectedRecord) => selectedRecord.id === record.id_taille);
             return (
               <input
                 type="number"
+                name='stock'
                 className='input-stock'
-                value={''}
-                onChange={(e) => handleTimeChange(record.id, 'stock', e.target.value)}
+                onChange={(e) => handleStockChange(e, record.id_taille)}
               />
             );
           }
         },
         {
           title: 'Sélectionner',
-          dataIndex: 'checkbox',
+          dataIndex: 'id_taille',
           width: '25%',
           render: (text, record) => {
-            const isChecked = selectedIds.includes(record.id);
+            const isChecked = selectedIds.includes(record.id_taille);
             return (
               <>
                 {isChecked ? (
                   <ToggleOnIcon
                     color="primary"
                     style={{ fontSize: '40px', cursor: 'pointer' }}
-                    onClick={() => handleCheckboxChange(record.id)}
+                    onClick={() => handleCheckboxChange(record.id_taille)}
                   />
                 ) : (
                   <ToggleOffIcon
                     color="disabled"
                     style={{ fontSize: '40px', cursor: 'pointer' }}
-                    onClick={() => handleCheckboxChange(record.id)}
+                    onClick={() => handleCheckboxChange(record.id_taille)}
                   />
                 )}
               </>
             );
           },
         },
-    
       ];
 
       const handleClick = (e) => {
         e.preventDefault();
       
-        if ((Array.isArray(idTaille.id_taille) && idTaille.id_taille.length > 0)) {
+        if ((Array.isArray(selectedData) && selectedData.length > 0)) {
           Promise.all(
-            idTaille.id_taille?.map((item) =>
+            selectedData?.map((item) =>
               axios.post(`${DOMAIN}/api/produit/varianteProduit`, {
                 ...data,
                 id_produit: id,
-                id_cible: idCible,
-                id_taille: item.value, // Utilisez item.value pour obtenir la valeur de la taille
-                id_famille: idFamille,
+                id_cible: item.id_cible,
+                id_taille: item.id_taille,
+                id_famille: item.id_famille,
+                stock: item.stock
               })
             )
           )
@@ -320,7 +327,7 @@ const ProductView = () => {
                                         onChange={selectedOption => handleInputChange({ target: { name: 'id_pays', value: selectedOption.value } })}
                                     />
                                 </div>
-                                <div className="produit-view-control">
+{/*                                 <div className="produit-view-control">
                                     <label htmlFor="">Taille</label>
                                     <Select
                                       name="id_taille"
@@ -329,8 +336,7 @@ const ProductView = () => {
                                       options={getTaille?.map((item) => ({ value: item.id_taille, label: item.taille }))}
                                       onChange={(selectedOptions) => handleInputChange1({ target: { name: 'id_taille', value: selectedOptions } })}
                                     />
-                                    {/* <input type="number" name='taille' className="produit_input" onChange={handleInputChange}/> */}
-                                </div>
+                                </div> */}
                                 <div className="produit-view-control">
                                     <label htmlFor="">Couleur</label>
                                     <Select
@@ -340,10 +346,10 @@ const ProductView = () => {
                                       onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
                                     />
                                 </div>
-                                <div className="produit-view-control">
+{/*                                 <div className="produit-view-control">
                                     <label htmlFor="">Stock</label>
                                     <input type="number" name='stock' className="produit_input" placeholder='Entrez la quantité du produit' onChange={handleInputChange} />
-                                </div>
+                                </div> */}
                                 <div className="produit-view-control">
                                     <label htmlFor="">Prix</label>
                                     <input type="number" name='prix' className="produit_input" onChange={handleInputChange} />
@@ -388,7 +394,7 @@ const ProductView = () => {
                             </div>
                             )}
                         </div>
-                        <Table columns={horaireTable} dataSource={getTaille} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
+                        <Table columns={qTable} dataSource={getTaille} className="presenceTable" scroll={scroll} pagination={{ pageSize: 6}}/>
                     </div>
                 </div>
             </div>

@@ -8,9 +8,11 @@ import { useEffect } from 'react'
 import Select from 'react-select';
 import { format } from 'date-fns'
 import moment from 'moment';
-import { Image } from 'antd';
+import { Image, Table } from 'antd';
 import { CloudUploadOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2'
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 
 const ProductView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -26,7 +28,11 @@ const ProductView = () => {
     const [idFamille, setIdFamille] = useState();
     const [idPays, setIdPays] = useState([]);
     const [idTaille, setIdTaille] = useState({});
-
+    const [selectedIds, setSelectedIds] = useState([]);
+    const [pointureId, setPointureId] = useState([]);
+    const searchInput = React.useRef(null);
+    const scroll = { x: 400 };
+    const scrollY = { y: 200 };
 
     const handleInputChange = async (e) => {
         const fieldName = e.target.name;
@@ -77,6 +83,22 @@ const ProductView = () => {
         }
       
         setIdTaille((prev) => ({ ...prev, [fieldName]: updatedValue }));
+      };
+
+      const handleCheckboxChange = (id) => {
+        if (selectedIds.includes(id)) {
+          setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
+        } else {
+          setSelectedIds([...selectedIds, id]);
+        }
+      };
+
+      const handleTimeChange = (id, field, value) => {
+        setPointureId((prevData) =>
+          prevData.map((item) =>
+            item.id === id ? { ...item, [field]: value } : item
+          )
+        );
       };
 
     useEffect(() => {
@@ -135,35 +157,65 @@ const ProductView = () => {
         fetchData();
       }, [idPays]);
 
-/*       const handleClick = async (e) => {
-        e.preventDefault();
+      const horaireTable = [
+        {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          width: '25%',
+          render: (record) =>{
+            return (
+              <input
+                type="number"
+                className='input-time'
+                value={record}
+                onChange={(e) => handleTimeChange(record.id, 'stock', e.target.value)}
+              />
+            );
+          }
+        },
+        {
+          title: 'Quantité',
+          dataIndex: 'stock',
+          key: 'stock',
+          width: '25%',
+          render: (text, record) =>{
+            return (
+              <input
+                type="number"
+                className='input-time'
+                value={''}
+                onChange={(e) => handleTimeChange(record.id, 'stock', e.target.value)}
+              />
+            );
+          }
+        },
+        {
+          title: 'Sélectionner',
+          dataIndex: 'checkbox',
+          width: '25%',
+          render: (text, record) => {
+            const isChecked = selectedIds.includes(record.id);
+            return (
+              <>
+                {isChecked ? (
+                  <ToggleOnIcon
+                    color="primary"
+                    style={{ fontSize: '40px', cursor: 'pointer' }}
+                    onClick={() => handleCheckboxChange(record.id)}
+                  />
+                ) : (
+                  <ToggleOffIcon
+                    color="disabled"
+                    style={{ fontSize: '40px', cursor: 'pointer' }}
+                    onClick={() => handleCheckboxChange(record.id)}
+                  />
+                )}
+              </>
+            );
+          },
+        },
     
-        try{
-          { idTaille.map((dd)=>(
-             axios.post(`${DOMAIN}/api/produit/varianteProduit`, {...data,id_produit: id, id_cible: idCible,id_taille:dd, id_famille: idFamille })
-          ))}
-          Swal.fire({
-            title: 'Success',
-            text: 'Produit créé avec succès!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-          
-          navigate('/varianteProduit')
-          window.location.reload();
-    
-        }catch(err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        }
-      } */
-
-
-      console.log(data)
+      ];
 
       const handleClick = (e) => {
         e.preventDefault();
@@ -273,7 +325,7 @@ const ProductView = () => {
                                 <div className="produit-view-control">
                                     <label htmlFor="">Taille</label>
                                     <Select
-                                      name="id_pays"
+                                      name="id_taille"
                                       placeholder="Sélectionnez des tailles"
                                       isMulti
                                       options={getTaille?.map((item) => ({ value: item.id_taille, label: item.taille }))}
@@ -338,6 +390,7 @@ const ProductView = () => {
                             </div>
                             )}
                         </div>
+                        <Table columns={horaireTable} dataSource={getTaille} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
                     </div>
                 </div>
             </div>

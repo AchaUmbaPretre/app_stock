@@ -115,7 +115,17 @@ const PageDetails = () => {
                                 <button>Ajouter au panier</button>
                             </div>
                             <div className="detail-inventaire">
-                                
+                                <h2 className="detail-h2">INVENTAIRE</h2>
+                                <table>
+                                    <tr>
+                                        <th>Pointure EUR</th>
+                                        <th>Quantité</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Jean</td>
+                                        <td>Biche</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>))}

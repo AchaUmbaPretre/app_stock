@@ -196,6 +196,44 @@
 
                         }
                     }
+                    .detail-inventaire{
+                        .detail-h2{
+                            color: rgb(3, 3, 109);
+                            font-weight: bolder;
+                            padding: 20px 0;
+                        }
+                        table{
+                            width: 100%;
+                            border-collapse: collapse;
+                            border: 2px solid rgb(224, 224, 224);
+                            letter-spacing: 1px;
+                            font-size: 0.8rem;
+                            tr{
+                                &:nth-child(odd) {
+                                    background-color: #eeeeeecb;
+                                  }
+                                
+                                td,th{
+                                    border: 1px solid rgb(216, 216, 216);
+                                    padding: 15px;
+                                    td {
+                                        text-align: center;
+                                      }
+                                }
+                                th[scope='col'] {
+                                    background:rgba(1, 41, 160, 0.726);
+                                    color: #FFF;
+                                    font-weight: 600;
+                                  }
+                                  
+                                  th[scope='row'] {
+                                    color: #444444;
+                                    width: 30%;
+                                    font-weight: 500;
+                                  }
+                            }
+                        }
+                    }
                 }
             }
         }

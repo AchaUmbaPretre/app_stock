@@ -166,7 +166,7 @@ const ProductView = () => {
             return (
               <input
                 type="number"
-                className='input-time'
+                className='input-timeBar'
                 value={record}
                 onChange={(e) => handleTimeChange(record.id, 'stock', e.target.value)}
               />
@@ -182,7 +182,7 @@ const ProductView = () => {
             return (
               <input
                 type="number"
-                className='input-time'
+                className='input-stock'
                 value={''}
                 onChange={(e) => handleTimeChange(record.id, 'stock', e.target.value)}
               />
@@ -255,8 +255,6 @@ const ProductView = () => {
           console.error('idTaille is not an array');
         }
       };
-
-      console.log(idTaille)
 
       const formattedDatEntrant = moment(getProduit?.date_entree).format('DD-MM-YYYY');
 

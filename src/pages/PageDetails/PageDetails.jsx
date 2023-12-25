@@ -35,17 +35,20 @@ const PageDetails = () => {
     }
 
     const groupedData = data.reduce((acc, item) => {
-        const { id_produit,nom_produit, pointure,date_entrant,nom_marque,nom_categorie,nom_matiere,nom_cible,code_pays,description,prix,nom_famille,stock,img, ...rest } = item;
+        const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img, ...rest } = item;
       
         if (!acc[id_produit]) {
-          acc[id_produit] = { id_produit,nom_produit,pointure,date_entrant,nom_marque,nom_categorie,nom_matiere,nom_cible,code_pays,description,prix,nom_famille,stock,img, pointure: [] };
+          acc[id_produit] = { id_produit, nom_produit, pointure: [], date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img };
         }
       
         acc[id_produit].pointure.push(pointure);
       
         return acc;
       }, {});
-
+      
+      const pointures = Object.values(groupedData).map((item) => item.pointure);
+      const minPointure = Math.min(...pointures.flat());
+      const maxPointure = Math.max(...pointures.flat());
       const result = Object.values(groupedData);
     
 
@@ -65,10 +68,10 @@ const PageDetails = () => {
                                 <li><strong>Marque : </strong>{dd?.nom_marque}</li>
                                 <li><strong>Categorie : </strong>{dd?.nom_categorie}</li>
                                 <li><strong>Famille : </strong>{dd?.nom_famille}</li>
-                                <li><strong>Couleurs : </strong>{dd?.description}</li>
+                                <li><strong>Couleur : </strong><span className={`${dd?.description}`}></span><span>{dd?.description}</span></li>
                                 <li><strong>Cible : </strong>{dd?.nom_cible}</li>
-                                <li><strong>Pays : </strong>{dd?.code_pays}</li>
-                                <li><strong>Taille : </strong>{dd?.pointure.join(' à ')}</li>
+                                <li><strong>Code pays : </strong>{dd?.code_pays}</li>
+                                <li><strong><span>{dd?.nom_famille === 'Chaussure' ? 'Pointure': "Taille"}</span> : </strong>{`${minPointure} à ${maxPointure}`}</li>
                                 <li><strong>Date d'entrée : </strong>{moment(dd?.date_entrant).format('DD-MM-YYYY')}</li>
                             </ul> ))}
 

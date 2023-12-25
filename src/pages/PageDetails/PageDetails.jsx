@@ -35,10 +35,10 @@ const PageDetails = () => {
     }
 
     const groupedData = data.reduce((acc, item) => {
-        const { id_produit,nom_produit, pointure,date_entrant,nom_marque,nom_categorie,nom_matiere,nom_cible,code_pays,description,prix,nom_famille,img, ...rest } = item;
+        const { id_produit,nom_produit, pointure,date_entrant,nom_marque,nom_categorie,nom_matiere,nom_cible,code_pays,description,prix,nom_famille,stock,img, ...rest } = item;
       
         if (!acc[id_produit]) {
-          acc[id_produit] = { id_produit,nom_produit,pointure,date_entrant,nom_marque,nom_categorie,nom_matiere,nom_cible,code_pays,description,prix,nom_famille,img, pointure: [] };
+          acc[id_produit] = { id_produit,nom_produit,pointure,date_entrant,nom_marque,nom_categorie,nom_matiere,nom_cible,code_pays,description,prix,nom_famille,stock,img, pointure: [] };
         }
       
         acc[id_produit].pointure.push(pointure);
@@ -47,8 +47,6 @@ const PageDetails = () => {
       }, {});
 
       const result = Object.values(groupedData);
-
-      console.log(result)
     
 
   return (

@@ -197,7 +197,6 @@
                         }
                     }
                     .detail-inventaire{
-                        margin-top: 60px;
                         .detail-h2{
                             color: rgb(3, 3, 109);
                             font-weight: bolder;
@@ -217,21 +216,11 @@
                                 td,th{
                                     border: 1px solid rgb(216, 216, 216);
                                     padding: 15px;
+                                    text-align: center;
                                     td {
                                         text-align: center;
                                       }
                                 }
-                                th[scope='col'] {
-                                    background:rgba(1, 41, 160, 0.726);
-                                    color: #FFF;
-                                    font-weight: 600;
-                                  }
-                                  
-                                  th[scope='row'] {
-                                    color: #444444;
-                                    width: 30%;
-                                    font-weight: 500;
-                                  }
                             }
                         }
                     }

@@ -14,6 +14,8 @@ const PageDetails = () => {
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [quantity, setQuantity] = useState(1);
+    const [inventaire, setInventaire] = useState([]);
+    const [loading, setLoading] = useState([]);
 
 
     useEffect(() => {
@@ -27,6 +29,19 @@ const PageDetails = () => {
         };
         fetchData();
       }, [id]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/inventaire`);
+            setInventaire(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
 
       const handleQuantity = (type) =>{
 
@@ -89,42 +104,24 @@ const PageDetails = () => {
                             <a href="">Voir le seul avis</a>
                         </div>
                         <div className="pageDetail-bottom">
-                            <div className="pageDetail-rows-prix">
-                                <h3>Couleur</h3>
-                                <div className="pageDetail-images">
-                                    <img src={dd?.img} alt="" className="pageDetail-sous-image" />
-                                    <select name="" id="" className='pageDetail-select'>
-                                        <option value="">{dd?.description}</option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <div className="pageDetail-rows-prix">
                             <div className="pageDetail-row-prix">
-                                <h3>{dd?.prix} $</h3>
+                                <h3>Prix {dd?.prix} $</h3>
                                 <span>Il y a {dd?.stock} articles en stock pour cette combinaison</span>
-                            </div>
-                            <div className="pageDetail-row-Qt">
-                                <div className="pageDetail-rows-Qt">
-                                    <span>{quantity}</span>
-                                    <div className="rowQT">
-                                        <span onClick={()=>handleQuantity('inc')}>+</span>
-                                        <span onClick={()=>handleQuantity('dec')}>-</span>
-                                    </div>
-                                </div>
-                                <button>Ajouter au panier</button>
                             </div>
                             <div className="detail-inventaire">
                                 <h2 className="detail-h2">INVENTAIRE</h2>
                                 <table>
                                     <tr>
-                                        <th>Pointure EUR</th>
+                                        <th>Pointure {dd?.code_pays} </th>
                                         <th>Quantité</th>
                                     </tr>
+                                    {inventaire.map((dd)=>(
                                     <tr>
-                                        <td>Jean</td>
-                                        <td>Biche</td>
-                                    </tr>
+                                        <td>{dd.taille}</td>
+                                        <td>{dd.nombre_de_paires}</td>
+                                    </tr>))}
                                 </table>
                             </div>
                         </div>

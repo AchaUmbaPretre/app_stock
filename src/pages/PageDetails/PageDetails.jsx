@@ -16,6 +16,7 @@ const PageDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const [inventaire, setInventaire] = useState([]);
     const [loading, setLoading] = useState([]);
+    const [variante, setVariante] = useState([]);
 
 
     useEffect(() => {
@@ -30,10 +31,15 @@ const PageDetails = () => {
         fetchData();
       }, [id]);
 
+      useEffect(()=>{
+        setVariante(data[0]?.code_variant)
+      },[variante])
+
+console.log(variante)
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/inventaire`);
+            const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
             setInventaire(data);
             setLoading(false)
           } catch (error) {
@@ -41,7 +47,11 @@ const PageDetails = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [variante]);
+
+        const tailleMinObjet1 = inventaire[0].taille_min;
+        const dernierObjet = inventaire[inventaire.length - 1];
+        const tailleMaxDernierObjet = dernierObjet.taille_max;
 
       const handleQuantity = (type) =>{
 
@@ -86,7 +96,7 @@ const PageDetails = () => {
                                 <li><strong>Couleur : </strong><span className={`${dd?.description}`}></span><span>{dd?.description}</span></li>
                                 <li><strong>Cible : </strong>{dd?.nom_cible}</li>
                                 <li><strong>Code pays : </strong>{dd?.code_pays}</li>
-                                <li><strong><span>{dd?.nom_famille === 'Chaussure' ? 'Pointure': "Taille"}</span> : </strong>{`${minPointure} à ${maxPointure}`}</li>
+                                <li><strong><span>{dd?.nom_famille === 'Chaussure' ? 'Pointure': "Taille"}</span> : </strong>{`${tailleMinObjet1} à ${tailleMaxDernierObjet}`}</li>
                                 <li><strong>Date d'entrée : </strong>{moment(dd?.date_entrant).format('DD-MM-YYYY')}</li>
                             </ul> ))}
 

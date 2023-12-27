@@ -59,6 +59,11 @@ const Sidebar = () => {
             Marques
           </Link>
         </Item>
+        <Item key="type_mouvement">
+          <Link to="/type_mouvement" className="sidebarLink">
+            Type des mouvements
+          </Link>
+        </Item>
       </SubMenu>
 
       <SubMenu key="sales" title={<span className="sidebarH3">Ventes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>

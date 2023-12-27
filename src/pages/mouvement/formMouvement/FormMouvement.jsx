@@ -16,27 +16,28 @@ const FormMouvement = () => {
     const [client, setClient] = useState([]);
     const [livreur, setLivreur] = useState([]);
     const [produit, setProduit] = useState([]);
+    const [typeMouvement, setTypeMouvement] = useState([]);
 
     const handleInputChange = (e) => {
-      const fieldName = e.target.name;
-      const fieldValue = e.target.value;
-    
-      let updatedValue = fieldValue;
-    
-      if (fieldName === "contact_email") {
-        updatedValue = fieldValue.toLowerCase();
-      } else if (Number.isNaN(Number(fieldValue))) {
-        updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-      }
-    
-    setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-    };
-
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+      
+        let updatedValue = fieldValue;
+      
+        if (fieldName === "contact_email") {
+          updatedValue = fieldValue ? fieldValue.toLowerCase() : ""; // Vérification si fieldValue n'est pas undefined ou une chaîne vide
+        } else if (Number.isNaN(Number(fieldValue))) {
+          updatedValue = fieldValue && fieldValue.length > 0 ? fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1) : ""; // Vérification si fieldValue n'est pas undefined, une chaîne vide ou une chaîne de longueur 0
+        }
+      
+        setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+      };
+    console.log(data)
 
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/produit`);
+          const { data } = await axios.get(`${DOMAIN}/api/produit/varianteProduit`);
           setProduit(data);
           setLoading(false)
         } catch (error) {
@@ -49,7 +50,7 @@ const FormMouvement = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/peuple`);
+          const { data } = await axios.get(`${DOMAIN}/api/client`);
           setClient(data);
           setLoading(false)
         } catch (error) {
@@ -62,8 +63,8 @@ const FormMouvement = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/peuple/livreur`);
-          setLivreur(data);
+          const { data } = await axios.get(`${DOMAIN}/api/produit/typeMouvement`);
+          setTypeMouvement(data);
           setLoading(false)
         } catch (error) {
           console.log(error);
@@ -119,7 +120,7 @@ const FormMouvement = () => {
                   <label htmlFor="">Type de mouvement</label>
                   <Select
                     name='id_type_mouvement '
-                    options={livreur?.map(item => ({ value: item.id_type_mouvement , label: item.nom_type }))}
+                    options={typeMouvement?.map(item => ({ value: item.id_type_mouvement , label: item.type_mouvement }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_type_mouvement ', value: selectedOption.value } })}
                   />
                 </div>
@@ -127,7 +128,7 @@ const FormMouvement = () => {
                   <label htmlFor="">Produit</label>
                   <Select
                     name='id_varianteproduit '
-                    options={produit?.map(item => ({ value: item.id_varianteproduit , label: item.nom_produit }))}
+                    options={produit?.map(item => ({ value: item.id_varianteProduit, label: item.id_varianteProduit }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_varianteproduit ', value: selectedOption.value } })}
                   />
                 </div>

@@ -38,6 +38,7 @@ import ClientEdit from './pages/client/clientEdit/ClientEdit';
 import UtilisateurEdit from './pages/utilisateurs/utilisateurEdit/UtilisateurEdit';
 import VarianteProduit from './pages/varianteProduit/VarianteProduit';
 import PageDetails from './pages/PageDetails/PageDetails';
+import TypeMouvement from './pages/typeMouvement/TypeMouvement';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -128,6 +129,10 @@ function App() {
         {
           path: '/marque/:id',
           element: <Marque />
+        },
+        {
+          path: '/typeMouvement',
+          element: <TypeMouvement />
         },
         {
           path: '/ventes',

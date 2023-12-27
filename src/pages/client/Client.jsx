@@ -186,7 +186,7 @@ const Client = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/peuple`);
+            const { data } = await axios.get(`${DOMAIN}/api/client`);
             setGetClient(data);
             setLoading(false)
           } catch (error) {

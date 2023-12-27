@@ -31,7 +31,7 @@ const ClientForm = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`${DOMAIN}/api/peuple/client`, data)
+      await axios.post(`${DOMAIN}/api/client/client`, data)
       Swal.fire({
         title: 'Success',
         text: 'Client crée avec succès!',
@@ -54,7 +54,7 @@ const ClientForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/peuple/province`);
+        const { data } = await axios.get(`${DOMAIN}/api/client/province`);
         setProvince(data);
       } catch (error) {
         console.log(error);
@@ -81,7 +81,7 @@ const ClientForm = () => {
                 <div className="form-controle">
                   <label htmlFor="">Raison sociale</label>
                   <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} required>
-                    <option value="" disabled>Selectionnez une raison sociale</option>
+                    <option value="" disabled selected>Selectionnez une raison sociale</option>
                     <option value="Client VIP">client VIP</option>
                     <option value="Client Normal">client Normal</option>
                   </select>
@@ -97,9 +97,9 @@ const ClientForm = () => {
                 <div className="form-controle">
                   <label htmlFor="">Ville</label>
                   <Select
-                    name="ville"
-                    options={province?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'ville', value: selectedOption.value } })}
+                    name="id_province"
+                    options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">

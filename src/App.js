@@ -39,6 +39,8 @@ import UtilisateurEdit from './pages/utilisateurs/utilisateurEdit/UtilisateurEdi
 import VarianteProduit from './pages/varianteProduit/VarianteProduit';
 import PageDetails from './pages/PageDetails/PageDetails';
 import TypeMouvement from './pages/typeMouvement/TypeMouvement';
+import Mouvement from './pages/mouvement/Mouvement';
+import FormMouvement from './pages/mouvement/formMouvement/FormMouvement';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -133,6 +135,14 @@ function App() {
         {
           path: '/typeMouvement',
           element: <TypeMouvement />
+        },
+        {
+          path: '/mouvement',
+          element: <Mouvement />
+        },
+        {
+          path: '/mouvementForm',
+          element: <FormMouvement />
         },
         {
           path: '/ventes',

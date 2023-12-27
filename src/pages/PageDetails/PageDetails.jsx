@@ -35,7 +35,6 @@ const PageDetails = () => {
         setVariante(data[0]?.code_variant)
       },[variante])
 
-console.log(variante)
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -49,15 +48,9 @@ console.log(variante)
         fetchData();
       }, [variante]);
 
-        const tailleMinObjet1 = inventaire[0].taille_min;
+        const tailleMinObjet1 = inventaire[0]?.taille_min;
         const dernierObjet = inventaire[inventaire.length - 1];
-        const tailleMaxDernierObjet = dernierObjet.taille_max;
-
-      const handleQuantity = (type) =>{
-
-        type === "inc" ? setQuantity(quantity + 1) 
-                      : quantity > 1 && setQuantity(quantity - 1)
-    }
+        const tailleMaxDernierObjet = dernierObjet?.taille_max;
 
     const groupedData = data.reduce((acc, item) => {
         const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img, ...rest } = item;

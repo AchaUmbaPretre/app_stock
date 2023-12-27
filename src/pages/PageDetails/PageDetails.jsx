@@ -17,13 +17,15 @@ const PageDetails = () => {
     const [inventaire, setInventaire] = useState([]);
     const [loading, setLoading] = useState([]);
     const [variante, setVariante] = useState([]);
+    const [inventaireTotalOne, setInventaireTotalOne] = useState([]);
 
 
     useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${id}`);
-            setData(data)
+            setData(data);
+            setVariante(data[0]?.code_variant);
           } catch (error) {
             console.log(error);
           }
@@ -31,15 +33,24 @@ const PageDetails = () => {
         fetchData();
       }, [id]);
 
-      useEffect(()=>{
-        setVariante(data[0]?.code_variant)
-      },[variante])
-
       useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
             setInventaire(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [variante]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/inventaire/inventaireTotalOne/${variante}`);
+            setInventaireTotalOne(data[0].nombre_total_de_paires);
             setLoading(false)
           } catch (error) {
             console.log(error);
@@ -97,7 +108,7 @@ const PageDetails = () => {
                     </div>
                     { result?.map((dd)=>(
                     <div className="pageDetail-right">
-                        <h2 className="pageDetail-h2">{dd?.nom_produit}</h2>
+                        <h2 className="pageDetail-h2">{dd?.nom_famille}</h2>
                         <div className="pagedetailDescr">
                             <span>{dd?.code_pays}</span>
                             <a href='#description'>En savoir plus</a>
@@ -111,7 +122,7 @@ const PageDetails = () => {
                         <div className="pageDetail-rows-prix">
                             <div className="pageDetail-row-prix">
                                 <h3>Prix {dd?.prix} $</h3>
-                                <span>Il y a {dd?.stock} articles en stock pour cette combinaison</span>
+                                <span>Il y a {inventaireTotalOne} articles en stock pour cette combinaison</span>
                             </div>
                             <div className="detail-inventaire">
                                 <h2 className="detail-h2">INVENTAIRE</h2>
@@ -132,7 +143,6 @@ const PageDetails = () => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

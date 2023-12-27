@@ -77,10 +77,10 @@ const FormMouvement = () => {
       e.preventDefault();
   
       try{
-        await axios.post(`${DOMAIN}/api/vente/vente`, data)
+        await axios.post(`${DOMAIN}/api/produit/mouvement`, data)
         Swal.fire({
           title: 'Success',
-          text: 'Vente crée avec succès!',
+          text: 'Mouvement crée avec succès!',
           icon: 'success',
           confirmButtonText: 'OK',
         });

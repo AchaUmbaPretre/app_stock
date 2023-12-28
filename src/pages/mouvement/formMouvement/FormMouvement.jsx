@@ -155,36 +155,52 @@ const FormMouvement = () => {
                 <div className="product-wrapper">
                 <div className="product-container-bottom">
                     <div className="form-controle">
-                    <label htmlFor="">Produit</label>
-                    <Select
-                        name='id_varianteProduit'
-                        options={produit?.map(item => ({ value: item.id_produit, label: item.nom_produit }))}
-                        onChange={selectedOption => handleInputChange({ target: { name: 'id_produit', value: selectedOption.value } })}
-                    />
+                        <label htmlFor="">Produit</label>
+                        <Select
+                            name='id_varianteProduit'
+                            options={produit?.map(item => ({ value: item.id_produit, label: item.nom_produit }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_produit', value: selectedOption.value } })}
+                        />
                     </div>
                     <div className="form-controle">
-                    <label htmlFor="">Client</label>
-                    <Select
-                        name='id_client'
-                        options={client?.map(item => ({ value: item.id, label: item.nom }))}
-                        onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
-                    />
+                        <label htmlFor="">Client</label>
+                        <Select
+                            name='id_client'
+                            options={client?.map(item => ({ value: item.id, label: item.nom }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                        />
                     </div>
                     <div className="form-controle">
-                    <label htmlFor="">Type de mouvement</label>
-                    <Select
-                        name='id_type_mouvement '
-                        options={typeMouvement?.map(item => ({ value: item.id_type_mouvement , label: item.type_mouvement }))}
-                        onChange={selectedOption => handleInputChange({ target: { name: 'id_type_mouvement', value: selectedOption.value } })}
-                    />
+                        <label htmlFor="">Code variant</label>
+                        <Select
+                            name='id_varianteProduit'
+                            options={produit?.map(item => ({ value: item.id_produit, label: item.nom_produit }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_produit', value: selectedOption.value } })}
+                        />
                     </div>
                     <div className="form-controle">
-                    <label htmlFor="">Quantité</label>
-                    <input type="number" className="form-input" name='quantite' onChange={handleInputChange} placeholder='ex: 10'  required/>
+                        <label htmlFor="">Couleur</label>
+                        <Select
+                            name='id_client'
+                            options={client?.map(item => ({ value: item.id, label: item.nom }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                        />
                     </div>
                     <div className="form-controle">
-                    <label htmlFor="">Description</label>
-                    <textarea type="text" className="form-input form-desc" name='description' placeholder='Ecrire la description' onChange={handleInputChange}  required/>
+                        <label htmlFor="">Type de mouvement</label>
+                        <Select
+                            name='id_type_mouvement '
+                            options={typeMouvement?.map(item => ({ value: item.id_type_mouvement , label: item.type_mouvement }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_type_mouvement', value: selectedOption.value } })}
+                        />
+                    </div>
+                    <div className="form-controle">
+                        <label htmlFor="">Quantité</label>
+                        <input type="number" className="form-input" name='quantite' onChange={handleInputChange} placeholder='ex: 10'  required/>
+                    </div>
+                    <div className="form-controle">
+                        <label htmlFor="">Description</label>
+                        <textarea type="text" className="form-input form-desc" name='description' placeholder='Ecrire la description' onChange={handleInputChange}  required/>
                     </div>
                 </div>
                 <div className="form-submit">

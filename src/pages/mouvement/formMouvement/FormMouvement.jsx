@@ -30,24 +30,24 @@ const FormMouvement = () => {
             key: 'code_variant',
         },
         {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email'
-          },
-          {
-            title: 'Telephone',
-            dataIndex: 'telephone',
-            key: 'email'
-          },
-        {
-          title: 'Ville',
-          dataIndex: 'nom_province',
-          key: 'nom_province'
+            title: 'Marque',
+            dataIndex: 'nom_marque',
+            key: 'nom_marque'
         },
         {
-            title: 'Adresse',
-            dataIndex: 'adresse',
-            key: 'adresse',
+            title: 'stock',
+            dataIndex: 'stock',
+            key: 'stock'
+        },
+        {
+            title: 'Couleur',
+            dataIndex: 'description',
+            key: 'description'
+        },
+        {
+            title: 'Pointure',
+            dataIndex: 'pointure',
+            key: 'pointure'
         }
       ];
 

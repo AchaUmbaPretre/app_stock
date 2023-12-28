@@ -8,7 +8,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
-import Swal from 'sweetalert2';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -25,6 +24,7 @@ const Mouvement = () => {
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Content of the modal');
+    const [searchValue, setSearchValue] = useState('');
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -192,6 +192,16 @@ const Mouvement = () => {
             ),
         },
         {
+          title: 'Qté stock',
+          dataIndex: 'stock',
+          key: 'stock',
+          sorter: (a, b) => a.stock - b.stock,
+          sortDirections: ['descend', 'ascend'],
+          render: (stock) => (
+            <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
+          ),
+      },
+        {
           title: 'description',
           dataIndex: 'description',
           key: 'description'
@@ -262,7 +272,12 @@ const Mouvement = () => {
         }
     };
  */
-  return (
+  
+   const filteredData = data?.filter((item) =>
+    item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
+    )
+  
+    return (
     <>
         <div className="products">
             <div className="product-container">
@@ -292,7 +307,7 @@ const Mouvement = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

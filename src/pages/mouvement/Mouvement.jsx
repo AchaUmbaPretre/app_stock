@@ -162,7 +162,14 @@ const Mouvement = () => {
         {
             title: 'Date',
             dataIndex: 'date_mouvement',
-            key: 'date_mouvement'
+            key: 'date_mouvement',
+            sorter: (a, b) => a.date_mouvement - b.date_mouvement,
+            sortDirections: ['descend', 'ascend'],
+              render: (text) => (
+                <span>
+                  {format(new Date(text), 'dd-MM-yyyy')}
+                </span>
+              ),
           },
         {
           title: 'Type mouvement',
@@ -227,19 +234,7 @@ const Mouvement = () => {
         fetchData();
       }, []);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
-            setGetVente(data[0]);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [id]);
-
-      const handleOk = async (e) => {
+/*       const handleOk = async (e) => {
         try{
           await axios.put(`${DOMAIN}/api/vente/vente/${id}`,getVente)
   
@@ -267,7 +262,7 @@ const Mouvement = () => {
           });
         }
     };
-
+ */
   return (
     <>
         <div className="products">
@@ -298,18 +293,6 @@ const Mouvement = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-{/*                         <Modal
-                          title="Modifier la vente"
-                          centered
-                          open={open}
-                          onOk={handleOk}
-                          onCancel={() => setOpen(false)}
-                          width={860}
-                          okText="Soumettre"
-                          cancelText="Annuler"
-                        >
-                         <FormVenteEdit getVente={getVente} setGetVente={setGetVente} />
-                        </Modal> */}
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>

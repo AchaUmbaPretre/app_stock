@@ -103,7 +103,6 @@ const PageDetails = () => {
                                 <li><strong><span>{dd?.nom_famille === 'Chaussure' ? 'Pointure': "Taille"}</span> : </strong>{`${tailleMinObjet1} à ${tailleMaxDernierObjet}`}</li>
                                 <li><strong>Date d'entrée : </strong>{moment(dd?.date_entrant).format('DD-MM-YYYY')}</li>
                             </ul> ))}
-
                         </div>
                     </div>
                     { result?.map((dd)=>(

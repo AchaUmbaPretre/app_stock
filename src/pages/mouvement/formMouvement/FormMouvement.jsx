@@ -113,7 +113,7 @@ const FormMouvement = () => {
                   <Select
                     name='id_client'
                     options={client?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'client_id', value: selectedOption.value } })}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">
@@ -121,15 +121,15 @@ const FormMouvement = () => {
                   <Select
                     name='id_type_mouvement '
                     options={typeMouvement?.map(item => ({ value: item.id_type_mouvement , label: item.type_mouvement }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_type_mouvement ', value: selectedOption.value } })}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_type_mouvement', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Produit</label>
                   <Select
-                    name='id_varianteproduit '
+                    name='id_varianteProduit'
                     options={produit?.map(item => ({ value: item.id_varianteProduit, label: item.id_varianteProduit }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_varianteproduit ', value: selectedOption.value } })}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_varianteProduit', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">

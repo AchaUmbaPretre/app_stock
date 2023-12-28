@@ -35,6 +35,7 @@ const ProductView = () => {
     const scroll = { x: 400 };
     const scrollY = { y: 200 };
     const [selectedData, setSelectedData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const handleInputChange = async (e) => {
         const fieldName = e.target.name;
@@ -138,6 +139,7 @@ const ProductView = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/tailleOne/${idPays}`);
             setGetTaille(data)
+            setLoading(false)
 
           } catch (error) {
             console.log(error);
@@ -363,7 +365,7 @@ const ProductView = () => {
                             </div>
                             )}
                         </div>
-                        <Table columns={qTable} dataSource={getTaille} className="presenceTable" scroll={scroll} pagination={{ pageSize: 6}}/>
+                        <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll} pagination={{ pageSize: 6}}/>
                     </div>
                 </div>
             </div>

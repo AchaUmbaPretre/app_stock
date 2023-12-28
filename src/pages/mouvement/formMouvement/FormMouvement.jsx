@@ -155,7 +155,6 @@ const FormMouvement = () => {
       }
     }
 
-    console.log(data)
   return (
     <>
         <div className="clientForm">

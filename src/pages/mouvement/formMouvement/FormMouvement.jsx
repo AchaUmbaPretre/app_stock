@@ -22,6 +22,7 @@ const FormMouvement = () => {
     const [idVariante, setIdVariante] = useState();
     const scroll = { x: 400 };
     const [getCouleur,setGetCouleur] = useState([]);
+    const [getProduitVariant,setGetProduitVariant] = useState([]);
 
     const columns = [
         {

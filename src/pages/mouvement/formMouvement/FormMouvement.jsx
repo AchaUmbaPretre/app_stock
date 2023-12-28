@@ -18,6 +18,8 @@ const FormMouvement = () => {
     const [livreur, setLivreur] = useState([]);
     const [produit, setProduit] = useState([]);
     const [typeMouvement, setTypeMouvement] = useState([]);
+    const [variante, setVariante] = useState([]);
+    const [idVariante, setIdVariante] = useState()
 
     const handleInputChange = (e) => {
         const fieldName = e.target.name;
@@ -32,8 +34,8 @@ const FormMouvement = () => {
         }
       
         setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+        setIdVariante((prev) => ({ ...prev, [fieldName]: updatedValue }).id_produit)
       };
-    console.log(data)
 
     useEffect(() => {
       const fetchData = async () => {
@@ -73,6 +75,18 @@ const FormMouvement = () => {
       };
       fetchData();
     }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementVariante/${idVariante}`);
+            setVariante(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [idVariante])
 
     const handleClick = async (e) => {
       e.preventDefault();

@@ -170,13 +170,14 @@ const ProductView = () => {
           key: 'stock',
           width: '25%',
           render: (text, record) => {
-            const selectedRecord = selectedData.find((selectedRecord) => selectedRecord.id === record.id_taille);
+            const selectedRecord = selectedData.find((selectedRecord) => selectedRecord.id_taille === record.id_taille);
             return (
               <input
                 type="number"
                 name='stock'
                 className='input-stock'
                 onChange={(e) => handleStockChange(e, record.id_taille)}
+                disabled = {selectedRecord ? false : true}
               />
             );
           }

@@ -65,8 +65,20 @@ const FormMouvement = () => {
         }
       
         setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-        setIdVariante((prev) => ({ ...prev, [fieldName]: updatedValue }).id_produit)
       };
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementVariante/${data?.id_produit}`);
+            setVariante(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [data?.id_produit])
+
 
     useEffect(() => {
       const fetchData = async () => {
@@ -106,18 +118,6 @@ const FormMouvement = () => {
       };
       fetchData();
     }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementVariante/${idVariante}`);
-            setVariante(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [idVariante])
 
       useEffect(() => {
         const fetchData = async () => {

@@ -160,38 +160,15 @@ const Mouvement = () => {
           )
         },
         {
-            title: 'Nom produit',
-            dataIndex: 'nom_produit',
-            key: 'code'
+            title: 'Date',
+            dataIndex: 'date_mouvement',
+            key: 'date_mouvement'
           },
         {
-          title: 'Client',
-          dataIndex: 'nom_client',
-          key: 'client',
-          ...getColumnSearchProps('nom_client'),
-        },
-        {
-          title: 'Livreur',
-          dataIndex: 'prenom',
-          key: 'prenom',
-            ...getColumnSearchProps('prenom')
-        },
-        {
-          title: 'Prix unitaire',
-          dataIndex: 'prix_unitaire',
-          key: 'prix',
-          sorter: (a, b) => a.prix_unitaire.length - b.prix_unitaire.length,
-          sortDirections: ['descendre', 'monter'],
-          render: (text) => (
-            <span>
-            <Tag color={'green'}>
-            {parseFloat(text).toLocaleString('fr-FR', {
-                style: 'currency',
-                currency: 'USD',
-              })}
-            </Tag>
-          </span>
-          ),
+          title: 'Type mouvement',
+          dataIndex: 'type_mouvement',
+          key: 'type_mouvement',
+          ...getColumnSearchProps('type_mouvement'),
         },
         {
           title: 'Quantité',
@@ -204,16 +181,9 @@ const Mouvement = () => {
           ),
         },
         {
-            title: 'Date',
-            dataIndex: 'date_vente',
-            key: 'date',
-            sorter: (a, b) => a.date_vente - b.date_vente,
-            sortDirections: ['descend', 'ascend'],
-            render: (text) => (
-              <span>
-                {format(new Date(text), 'dd-MM-yyyy')}
-              </span>
-            ),
+          title: 'description',
+          dataIndex: 'description',
+          key: 'description'
         },
         {
             title: 'Action',
@@ -247,7 +217,7 @@ const Mouvement = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvement`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -256,6 +226,7 @@ const Mouvement = () => {
         };
         fetchData();
       }, []);
+
       useEffect(() => {
         const fetchData = async () => {
           try {

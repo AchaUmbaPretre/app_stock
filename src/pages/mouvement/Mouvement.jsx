@@ -171,21 +171,25 @@ const Mouvement = () => {
                 </span>
               ),
           },
-        {
-          title: 'Type mouvement',
-          dataIndex: 'type_mouvement',
-          key: 'type_mouvement',
-          ...getColumnSearchProps('type_mouvement'),
-        },
-        {
-          title: 'Quantité',
-          dataIndex: 'quantite',
-          key: 'quantite',
-          sorter: (a, b) => a.quantite - b.quantite,
-          sortDirections: ['descend', 'ascend'],
-          render: (quantite) => (
-            <Tag color={quantite > 0 ? 'green' : 'red'}>{quantite}</Tag>
-          ),
+          {
+            title: 'Type mouvement',
+            dataIndex: 'type_mouvement',
+            key: 'type_mouvement',
+            ...getColumnSearchProps('type_mouvement'),
+            render: (text, record) => {
+              const color = record.id_type_mouvement === 1 ? 'green' : 'red';
+              return <Tag color={color}>{text}</Tag>;
+            },
+          },
+          {
+            title: 'Quantité',
+            dataIndex: 'quantite',
+            key: 'quantite',
+            sorter: (a, b) => a.quantite - b.quantite,
+            sortDirections: ['descend', 'ascend'],
+            render: (quantite) => (
+              <Tag color={quantite > 0 ? 'green' : 'red'}>{quantite}</Tag>
+            ),
         },
         {
           title: 'description',
@@ -200,11 +204,6 @@ const Mouvement = () => {
               <Space size="middle">
                 <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=>showModal(record.id)} />
-                </Popover>
-                <Popover title="Voir le détail" trigger="hover">
-                  <Link to={`/venteView/${record.id}`}>
-                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                  </Link>
                 </Popover>
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm

@@ -21,13 +21,13 @@ const FormMouvement = () => {
     const [variante, setVariante] = useState([]);
     const [idVariante, setIdVariante] = useState();
     const scroll = { x: 400 };
+    const [getCouleur,setGetCouleur] = useState([]);
 
     const columns = [
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
-            title: 'code variant',
-            dataIndex: 'code_variant',
-            key: 'code_variant',
+            title: 'Code',
+            dataIndex: 'id_varianteProduit',
+            key: 'id_varianteProduit',
         },
         {
             title: 'Marque',
@@ -49,7 +49,7 @@ const FormMouvement = () => {
             dataIndex: 'pointure',
             key: 'pointure'
         }
-      ];
+    ];
 
     const handleInputChange = (e) => {
         const fieldName = e.target.name;
@@ -118,6 +118,19 @@ const FormMouvement = () => {
         fetchData();
       }, [idVariante])
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
+            setGetCouleur(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+
     const handleClick = async (e) => {
       e.preventDefault();
   
@@ -171,10 +184,10 @@ const FormMouvement = () => {
                         />
                     </div>
                     <div className="form-controle">
-                        <label htmlFor="">Code variant</label>
+                        <label htmlFor="">Code</label>
                         <Select
                             name='id_varianteProduit'
-                            options={produit?.map(item => ({ value: item.id_produit, label: item.nom_produit }))}
+                            options={variante?.map(item => ({ value: item.id_varianteProduit, label: item.id_varianteProduit }))}
                             onChange={selectedOption => handleInputChange({ target: { name: 'id_produit', value: selectedOption.value } })}
                         />
                     </div>
@@ -182,8 +195,8 @@ const FormMouvement = () => {
                         <label htmlFor="">Couleur</label>
                         <Select
                             name='id_client'
-                            options={client?.map(item => ({ value: item.id, label: item.nom }))}
-                            onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                            options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
                         />
                     </div>
                     <div className="form-controle">

@@ -6,7 +6,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import './formMouvement.scss'
-
+import { Button, Input, Space, Table, Popconfirm, Popover} from 'antd';
 
 const FormMouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -19,7 +19,37 @@ const FormMouvement = () => {
     const [produit, setProduit] = useState([]);
     const [typeMouvement, setTypeMouvement] = useState([]);
     const [variante, setVariante] = useState([]);
-    const [idVariante, setIdVariante] = useState()
+    const [idVariante, setIdVariante] = useState();
+    const scroll = { x: 400 };
+
+    const columns = [
+        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
+        {
+            title: 'code variant',
+            dataIndex: 'code_variant',
+            key: 'code_variant',
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email'
+          },
+          {
+            title: 'Telephone',
+            dataIndex: 'telephone',
+            key: 'email'
+          },
+        {
+          title: 'Ville',
+          dataIndex: 'nom_province',
+          key: 'nom_province'
+        },
+        {
+            title: 'Adresse',
+            dataIndex: 'adresse',
+            key: 'adresse',
+        }
+      ];
 
     const handleInputChange = (e) => {
         const fieldName = e.target.name;
@@ -165,7 +195,7 @@ const FormMouvement = () => {
                 <div className="mouvement-left">
                     <h2 className="mouvement-title">Détail</h2>
                     <div className="mouvement-info-detail">
-
+                        <Table columns={columns} dataSource={variante} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

@@ -156,6 +156,8 @@ const FormMouvement = () => {
       }
     }
 
+    console.log(data)
+
   return (
     <>
         <div className="clientForm">
@@ -199,6 +201,14 @@ const FormMouvement = () => {
                             name='id_client'
                             options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
                             onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
+                        />
+                    </div>
+                    <div className="form-controle">
+                        <label htmlFor="">Pointure</label>
+                        <Select
+                            name='id_taille'
+                            options={variante?.map(item => ({ value: item.id_taille, label: item.pointure }))}
+                            onChange={selectedOption => handleInputChange({ target: { name: 'id_taille', value: selectedOption.value } })}
                         />
                     </div>
                     <div className="form-controle">

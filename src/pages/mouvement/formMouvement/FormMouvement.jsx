@@ -67,17 +67,26 @@ const FormMouvement = () => {
         setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
       };
 
+
+      useEffect(()=>{
+        setIdVariante(data.id_produit)
+
+      },[data.id_produit])
+
+      console.log(data)
+
+
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementVariante/${data?.id_produit}`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementVariante/${idVariante}`);
             setVariante(data);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [data?.id_produit])
+      }, [idVariante])
 
 
     useEffect(() => {
@@ -132,29 +141,38 @@ const FormMouvement = () => {
       }, []);
 
 
-    const handleClick = async (e) => {
-      e.preventDefault();
-  
-      try{
-        await axios.post(`${DOMAIN}/api/produit/mouvement`, data)
-        Swal.fire({
-          title: 'Success',
-          text: 'Mouvement crée avec succès!',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        });
-        navigate('/ventes')
-        window.location.reload();
-  
-      }catch(err) {
-        Swal.fire({
-          title: 'Error',
-          text: err.message,
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
-      }
-    }
+      const handleClick = async (e) => {
+        e.preventDefault();
+      
+        try {
+          await axios.post(`${DOMAIN}/api/produit/mouvement`, data);
+          Swal.fire({
+            title: 'Success',
+            text: 'Mouvement créé avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+          navigate('/ventes');
+          window.location.reload();
+        } catch (err) {
+          if (err.response && err.response.data && err.response.data.error) {
+            Swal.fire({
+              title: 'Error',
+              text: err.response.data.error,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } else {
+            console.error(err);
+            Swal.fire({
+              title: 'Error',
+              text: 'Une erreur s\'est produite lors de la création du mouvement.',
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          }
+        }
+      };
 
   return (
     <>
@@ -205,7 +223,7 @@ const FormMouvement = () => {
                         <label htmlFor="">Pointure</label>
                         <Select
                             name='id_taille'
-                            options={variante?.map(item => ({ value: item.id_taille, label: item.pointure }))}
+                            options={variante?.map(item => ({ value: item.id_taille, label: item.pointure+ ' - ' +item.description }))}
                             onChange={selectedOption => handleInputChange({ target: { name: 'id_taille', value: selectedOption.value } })}
                         />
                     </div>

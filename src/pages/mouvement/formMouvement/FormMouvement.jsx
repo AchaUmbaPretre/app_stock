@@ -5,6 +5,7 @@ import config from '../../../config';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import './formMouvement.scss'
 
 
 const FormMouvement = () => {
@@ -37,7 +38,7 @@ const FormMouvement = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/produit/varianteProduit`);
+          const { data } = await axios.get(`${DOMAIN}/api/produit`);
           setProduit(data);
           setLoading(false)
         } catch (error) {
@@ -106,46 +107,54 @@ const FormMouvement = () => {
                 <span>Créer un nouveau mouvement</span>
               </div>
             </div>
-            <div className="product-wrapper">
-              <div className="product-container-bottom">
-                <div className="form-controle">
-                  <label htmlFor="">Client</label>
-                  <Select
-                    name='id_client'
-                    options={client?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
-                  />
+            <div className="formMouvementRows">
+                <div className="product-wrapper">
+                <div className="product-container-bottom">
+                    <div className="form-controle">
+                    <label htmlFor="">Produit</label>
+                    <Select
+                        name='id_varianteProduit'
+                        options={produit?.map(item => ({ value: item.id_produit, label: item.nom_produit }))}
+                        onChange={selectedOption => handleInputChange({ target: { name: 'id_produit', value: selectedOption.value } })}
+                    />
+                    </div>
+                    <div className="form-controle">
+                    <label htmlFor="">Client</label>
+                    <Select
+                        name='id_client'
+                        options={client?.map(item => ({ value: item.id, label: item.nom }))}
+                        onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                    />
+                    </div>
+                    <div className="form-controle">
+                    <label htmlFor="">Type de mouvement</label>
+                    <Select
+                        name='id_type_mouvement '
+                        options={typeMouvement?.map(item => ({ value: item.id_type_mouvement , label: item.type_mouvement }))}
+                        onChange={selectedOption => handleInputChange({ target: { name: 'id_type_mouvement', value: selectedOption.value } })}
+                    />
+                    </div>
+                    <div className="form-controle">
+                    <label htmlFor="">Quantité</label>
+                    <input type="number" className="form-input" name='quantite' onChange={handleInputChange} placeholder='ex: 10'  required/>
+                    </div>
+                    <div className="form-controle">
+                    <label htmlFor="">Description</label>
+                    <textarea type="text" className="form-input form-desc" name='description' placeholder='Ecrire la description' onChange={handleInputChange}  required/>
+                    </div>
                 </div>
-                <div className="form-controle">
-                  <label htmlFor="">Type de mouvement</label>
-                  <Select
-                    name='id_type_mouvement '
-                    options={typeMouvement?.map(item => ({ value: item.id_type_mouvement , label: item.type_mouvement }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_type_mouvement', value: selectedOption.value } })}
-                  />
+                <div className="form-submit">
+                    <button className="btn-submit" onClick={handleClick}>Soumetre</button>
+                    <button className="btn-submit btn-annuler">Annuler</button>
                 </div>
-                <div className="form-controle">
-                  <label htmlFor="">Produit</label>
-                  <Select
-                    name='id_varianteProduit'
-                    options={produit?.map(item => ({ value: item.id_varianteProduit, label: item.id_varianteProduit }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_varianteProduit', value: selectedOption.value } })}
-                  />
                 </div>
-                <div className="form-controle">
-                  <label htmlFor="">Quantité</label>
-                  <input type="number" className="form-input" name='quantite' onChange={handleInputChange} placeholder='ex: 10'  required/>
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Description</label>
-                  <textarea type="text" className="form-input form-desc" name='description' placeholder='Ecrire la description' onChange={handleInputChange}  required/>
+                <div className="mouvement-left">
+                    <h2 className="mouvement-title">Détail</h2>
+                    <div className="mouvement-info-detail">
+
+                    </div>
                 </div>
             </div>
-            <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick}>Soumetre</button>
-                <button className="btn-submit btn-annuler">Annuler</button>
-              </div>
-          </div>
         </div>
         </div>
 

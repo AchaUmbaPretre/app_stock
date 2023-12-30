@@ -63,6 +63,8 @@ const PageDetails = () => {
         const dernierObjet = inventaire[inventaire.length - 1];
         const tailleMaxDernierObjet = dernierObjet?.taille_max;
 
+        console.log(data)
+
     const groupedData = data.reduce((acc, item) => {
         const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img, ...rest } = item;
       

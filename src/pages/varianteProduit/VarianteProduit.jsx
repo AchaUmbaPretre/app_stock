@@ -24,7 +24,7 @@ const VarianteProduit = () => {
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
 
-    useEffect(() => {
+/*     useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltre/${famille}`);
@@ -34,7 +34,7 @@ const VarianteProduit = () => {
           }
         };
         fetchData();
-      }, [famille]);
+      }, [famille]); */
 
       useEffect(() => {
         const fetchData = async () => {
@@ -76,14 +76,14 @@ const VarianteProduit = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteProduit`);
+            const { data } = await axios.get( famille ? `${DOMAIN}/api/produit/varianteFiltre/${famille}`: `${DOMAIN}/api/produit/varianteProduit`);
             setData(data);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, []);
+      }, [famille]);
 
       useEffect(() => {
         const fetchData = async () => {

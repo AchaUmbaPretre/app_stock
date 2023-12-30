@@ -46,8 +46,6 @@ const TypeMouvement = () => {
     setPutEmplacement((prev) => ({ ...prev, [fieldName]: updatedValue }))
     };
 
-    console.log(data)
-
     const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
@@ -131,6 +129,16 @@ const TypeMouvement = () => {
 
     const handleClick = async (e) => {
       e.preventDefault();
+
+      if (!data.type_mouvement || !data.categorie_mouvement) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Veuillez remplir tous les champs requis',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return;
+      }
 
       try {
         await axios.post(`${DOMAIN}/api/produit/typeMouvement`,data)

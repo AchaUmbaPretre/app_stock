@@ -120,6 +120,16 @@ const ProductForm = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
+    if (!data.nom_produit || !data.id_categorie || !data.id_marque || !data.id_matiere || !data.prix || !data.code_variante ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez remplir tous les champs requis',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
     try{
       await axios.post(`${DOMAIN}/api/produit/produit`, {...data, date_entrant: dateEntrant, date_MisAjour: dateMiseAJour})
       Swal.fire({

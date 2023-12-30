@@ -211,6 +211,16 @@ const ProductView = () => {
 
       const handleClick = (e) => {
         e.preventDefault();
+
+        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img ) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez remplir tous les champs requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
       
         if ((Array.isArray(selectedData) && selectedData.length > 0)) {
           Promise.all(

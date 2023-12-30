@@ -160,6 +160,11 @@ const Mouvement = () => {
           )
         },
         {
+          title: 'Nom produit',
+          dataIndex: 'nom_produit',
+          key: 'nom_produit'
+        },
+        {
             title: 'Date',
             dataIndex: 'date_mouvement',
             key: 'date_mouvement',

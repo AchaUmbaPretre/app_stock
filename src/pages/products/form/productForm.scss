@@ -51,6 +51,10 @@
                         border: 1px solid rgba(36, 36, 250, 0.418);
                     }
                 }
+                .form-radio{
+                    display: flex;
+                    gap: 6px;
+                }
             }
         }
         .form-controle-desc{

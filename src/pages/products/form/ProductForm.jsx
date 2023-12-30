@@ -18,6 +18,7 @@ const ProductForm = () => {
   const [getMatiere, setGetMatiere] = useState([]);
   const [getMarque, setGetMarque] = useState();
   const [getCible, setGetCible] = useState([]);
+  const [getEtatProduit, setGetEtatProduit] = useState("Actif");
   const navigate = useNavigate();
   const [dateEntrant, setDateEntrant] = useState(new Date().toISOString().split('T')[0]);
   const [dateMiseAJour, setDateMiseAJour] = useState(new Date().toISOString().split('T')[0]);
@@ -45,6 +46,11 @@ const ProductForm = () => {
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
+  const handleInputChange1 = async (e) => {
+    setGetEtatProduit( e.target.value );
+  };
+
+  console.log(getEtatProduit)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -120,7 +126,7 @@ const ProductForm = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    if (!data.nom_produit || !data.id_categorie || !data.id_marque || !data.id_matiere || !data.prix || !data.code_variante ) {
+    if (!data.nom_produit || !data.id_categorie || !data.id_marque || !data.id_matiere || !data.prix || !data.code_variante || !getEtatProduit) {
       Swal.fire({
         title: 'Error',
         text: 'Veuillez remplir tous les champs requis',
@@ -131,7 +137,7 @@ const ProductForm = () => {
     }
 
     try{
-      await axios.post(`${DOMAIN}/api/produit/produit`, {...data, date_entrant: dateEntrant, date_MisAjour: dateMiseAJour})
+      await axios.post(`${DOMAIN}/api/produit/produit`, {...data, date_entrant: dateEntrant, date_MisAjour: dateMiseAJour, etatProduit: getEtatProduit})
       Swal.fire({
         title: 'Success',
         text: 'Produit créé avec succès!',
@@ -217,7 +223,19 @@ const ProductForm = () => {
                   <input type="date" name='date_MisAjour' value={dateMiseAJour} onChange={handleInputChange}
                    className="form-input" />
                 </div>
+                <div className="form-controle">
+                  <label htmlFor="">Etat du produit</label>
+                  <div className='form-radio'>
+                    <input type="radio" id="Actif" name="etatProduit" value="Actif" checked={getEtatProduit === 'Actif'} onChange={handleInputChange1}/>
+                    <label for="Actif">Actif</label>
+                  </div>
+                  <div className='form-radio'>
+                    <input type="radio" id="Passif" name="etatProduit" value="Passif" checked={getEtatProduit === 'Passif'} onChange={handleInputChange1}/>
+                    <label for="Passif">Passif</label>
+                  </div>
+                </div>
               </div>
+              
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Soumettre</button>
                 <button className="btn-submit btn-annuler">Annuler</button>

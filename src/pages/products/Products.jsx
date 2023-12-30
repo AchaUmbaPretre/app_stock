@@ -188,6 +188,16 @@ const columns = [
       ),
     },
     {
+      title: 'Etat produit',
+      dataIndex: 'etatProduit',
+      key: 'etatProduit',
+      ...getColumnSearchProps('etatProduit'),
+      render: (text, record) => {
+        const color = record.etatProduit === 'Actif' ? 'green' : 'red';
+        return <Tag color={color}>{text}</Tag>;
+      },
+    },
+    {
       title: "Date d'entrée",
       dataIndex: 'date_entrant',
       key: 'date',

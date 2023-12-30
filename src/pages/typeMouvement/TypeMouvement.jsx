@@ -175,6 +175,7 @@ const TypeMouvement = () => {
         });
       }
   };
+  
 /*   const filteredData = getdata?.filter((item) =>
   item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
 ); */

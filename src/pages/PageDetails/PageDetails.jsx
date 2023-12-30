@@ -76,8 +76,6 @@ const PageDetails = () => {
       }, {});
       
       const pointures = Object.values(groupedData).map((item) => item.pointure);
-      const minPointure = Math.min(...pointures.flat());
-      const maxPointure = Math.max(...pointures.flat());
       const result = Object.values(groupedData);
     
 

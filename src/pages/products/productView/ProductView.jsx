@@ -257,7 +257,7 @@ const ProductView = () => {
             <div className="product-wrapper">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Detail du produit</h2>
+                        <h2 className="product-h2">Gestion des tailles</h2>
                         <span>Voir les details</span>
                     </div>
                 </div>
@@ -366,7 +366,7 @@ const ProductView = () => {
                             </div>
                             )}
                         </div>
-                        <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll} pagination={{ pageSize: 6}}/>
+                        <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll}/>
                     </div>
                 </div>
             </div>

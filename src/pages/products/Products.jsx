@@ -257,7 +257,7 @@ const filteredData = getProduit?.filter((item) =>
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de produits</h2>
+                        <h2 className="product-h2">Liste des produits</h2>
                         <span>Gérer vos produits</span>
                     </div>
                     <div className="product-right" onClick={() =>navigate('/productForm')}>

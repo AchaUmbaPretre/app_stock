@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
 import Swal from 'sweetalert2';
+import { getDate } from 'date-fns';
 
 const TypeMouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,7 @@ const TypeMouvement = () => {
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Content of the modal');
     const [putEmplacement, setPutEmplacement] = useState({});
+    const [getType, setGetType] = useState([]);
     const {pathname} = useLocation();
     const [searchValue, setSearchValue] = useState('');
     const id = pathname.split('/')[2]
@@ -44,19 +46,20 @@ const TypeMouvement = () => {
     setPutEmplacement((prev) => ({ ...prev, [fieldName]: updatedValue }))
     };
 
+    console.log(data)
 
     const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
-            title: 'Nom du type',
-            dataIndex: 'nom_type_mouvement',
-            key: 'nom_type_mouvement',
-            
+          title: 'Type du mouvement',
+          dataIndex: 'type_mouvement',
+          key: 'type_mouvement',
+          
         },
         {
-            title: 'Type du mouvement',
-            dataIndex: 'type_mouvement',
-            key: 'type_mouvement',
+            title: 'Categorie du mouvement',
+            dataIndex: 'nom_categorie',
+            key: 'nom_categorie',
             
         },
         {
@@ -89,6 +92,19 @@ const TypeMouvement = () => {
       }
     };
 
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/typeCat`);
+          setGetType(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, []);
+
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -120,7 +136,7 @@ const TypeMouvement = () => {
         await axios.post(`${DOMAIN}/api/produit/typeMouvement`,data)
           Swal.fire({
             title: 'Success',
-            text: 'Emplacement créé avec succès!',
+            text: 'Type du mouvement créé avec succès!',
             icon: 'success',
             confirmButtonText: 'OK',
           });
@@ -159,9 +175,9 @@ const TypeMouvement = () => {
         });
       }
   };
-  const filteredData = getdata?.filter((item) =>
+/*   const filteredData = getdata?.filter((item) =>
   item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
-);
+); */
 
   return (
     <>
@@ -177,12 +193,17 @@ const TypeMouvement = () => {
                     <div className="categorie-container-left">
                         <h2 className="categorie-title">Ajouter les types des mouvements</h2>
                         <div className="categorie-form">
-                            <label htmlFor="">Nom du type</label>
-                            <input type="text" name='nom_type_mouvement' className="input-form" placeholder='Entrer le nom du type...' onChange={handleInputChange} />
+                            <label htmlFor="">Ajoutez un type du mouvement</label>
+                            <input type="text" className="input-form" name='type_mouvement' placeholder='Entrer le type des mouvements..' onChange={handleInputChange} />
                         </div>
                         <div className="categorie-form">
-                            <label htmlFor="">Type des mouvement</label>
-                            <input type="text" className="input-form" name='type_mouvement' placeholder='Entrer le type des mouvements..' onChange={handleInputChange} />
+                            <label htmlFor="">Ajoutez une categorie du mouvement</label>
+                            <select name="categorie_mouvement" className="input-form" onChange={handleInputChange}>
+                              <option value="" selected>Sélectionnez une categorie</option>
+                              {getType?.map((dd)=>(
+                                <option value={dd.id_cat_mouvement}>{dd.nom_categorie}</option>
+                              ))}
+                            </select>
                         </div>
                         <button className="categorie-btn" onClick={handleClick} >Envoyer</button>
                     </div>
@@ -198,7 +219,7 @@ const TypeMouvement = () => {
                             </div>
                         </div>
                         <div className="categorie-right-bottom">
-                            <Table columns={columns} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 5}} />
+                            <Table columns={columns} dataSource={getdata} scroll={scroll} pagination={{ pageSize: 8}} />
                         </div>
                     </div>
                 </div>

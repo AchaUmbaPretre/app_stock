@@ -106,6 +106,16 @@ const Marque = () => {
       const handleClick = async (e) => {
         e.preventDefault();
 
+        if (!nomMarque) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez remplir tous les champs requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
+
         try{
           await axios.post(`${DOMAIN}/api/produit/marque`, {nom : nomMarque})
           Swal.fire({

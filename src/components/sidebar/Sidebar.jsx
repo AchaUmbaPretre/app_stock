@@ -65,6 +65,28 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
+      <SubMenu key="commande" title={<span className="sidebarH3">Commande</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
+        <Item key="commande">
+          <Link to="/commande" className="sidebarLink">
+            Commande
+          </Link>
+        </Item>
+        <Item key="ventes">
+          <Link to="/ventes" className="sidebarLink">
+            Liste des commandes
+          </Link>
+        </Item>
+        <Item key="retour">
+          <Link to="/retour" className="sidebarLink">
+            Retour
+          </Link>
+        </Item>
+        <Item key="echange">
+          <Link to="/echange" className="sidebarLink">
+            Echange
+          </Link>
+        </Item>
+      </SubMenu>
       <SubMenu key="mouvement" title={<span className="sidebarH3">Ventes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="mouvement">
           <Link to="/mouvement" className="sidebarLink">
@@ -86,11 +108,6 @@ const Sidebar = () => {
             Echange
           </Link>
         </Item>
-{/*         <Item key="invoices">
-          <Link to="/factures" className="sidebarLink">
-            Factures
-          </Link>
-        </Item> */}
       </SubMenu>
       <SubMenu key="clients" title={<span className="sidebarH3">Peuples</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="clients">

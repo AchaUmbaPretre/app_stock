@@ -57,6 +57,7 @@
                         .cart-product-name{
                             display: flex;
                             gap: 5px;
+                            
                         }
                         .cart-product-id{
                             display: flex;
@@ -119,7 +120,7 @@
                 border-radius: 30px;
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
                 height: max-content;
                 .cart-summary-title{
                     font-weight: 300;
@@ -130,11 +131,11 @@
                     align-items: center;
                     justify-content: space-between;
                     .cart-summary-txt{
-                        font-size: 18px;
+                        font-size: 19px;
                         font-weight: 300;
                     }
                     .cart-black{
-                        font-size: 18px;
+                        font-size: 19px;
                         font-weight: 500;
                     }
                     .cart-summary-price{

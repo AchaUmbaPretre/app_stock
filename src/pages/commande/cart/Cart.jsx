@@ -8,7 +8,7 @@ import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import logo from './../../../assets/logo doe.jpg'
 import AddIcon from '@mui/icons-material/Add';
-import MinimizeOutlinedIcon from '@mui/icons-material/MinimizeOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
 
 const Cart = () => {
@@ -93,7 +93,7 @@ const Cart = () => {
                           <div className="cart-amount">
                             <AddIcon className="product-icon"/>
                               <span className="cart-product-amount">10</span>
-                            <MinimizeOutlinedIcon className="product-icon"/>
+                            <RemoveOutlinedIcon className="product-icon"/>
                           </div>
                           <span className="cart-product-prix">$ 100</span>
                         </div>
@@ -112,7 +112,7 @@ const Cart = () => {
                           <div className="cart-amount">
                             <AddIcon className="product-icon"/>
                               <span className="cart-product-amount">10</span>
-                            <MinimizeOutlinedIcon className="product-icon"/>
+                            <RemoveOutlinedIcon className="product-icon"/>
                           </div>
                           <span className="cart-product-prix">$ 100</span>
                         </div>
@@ -131,7 +131,7 @@ const Cart = () => {
                           <div className="cart-amount">
                             <AddIcon className="product-icon"/>
                               <span className="cart-product-amount">10</span>
-                            <MinimizeOutlinedIcon className="product-icon"/>
+                            <RemoveOutlinedIcon className="product-icon"/>
                           </div>
                           <span className="cart-product-prix">$ 100</span>
                         </div>

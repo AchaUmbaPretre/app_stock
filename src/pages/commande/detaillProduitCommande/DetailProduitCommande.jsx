@@ -9,6 +9,9 @@ import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../../../redux/cartRedux'
+import logo1 from './../../../assets/logo doe.jpg'
+import AddIcon from '@mui/icons-material/Add';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
 
 const DetailProduitCommande = () => {
@@ -69,37 +72,40 @@ const DetailProduitCommande = () => {
                 <div className="detail-container-bottom">
                     <div className="detail-container-rows">
                         <div className="detail-bottom-left">
-                            <img src="" alt="" className="detail-bottom-img" />
+                            <img src={logo1} alt="" className="detail-bottom-img" />
                         </div>
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">Versace</h1>
                             <p className="product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio doloremque, possimus pariatur quae tempora exercitationem beatae illo officiis itaque consequuntur amet delectus quis, aperiam optio magnam quod dolor eveniet impedit.</p>
                             <span className="product-price">$ 100</span>
-                            <div className="filter-product">
-                                <div className="filter">
-                                    <span className="filter-titre">Color</span>
-{/*                                 {
-                                        product.color?.map(c =>(
-                                            <div className={`filter-color ${c}`} key={c} color={c} />
-                                        )) 
-                                    } */}
-                                </div>
-                                <div className="filter">
-                                    <span className="filter-titre">Taille</span>
-                                    {/* <select name="" id="">
-                                    { product.size?.map((s) =>(
-                                            <option value="" key={s} >{s}</option>
-                                            ))}
-                                    </select> */}
-                                </div>
+                            <div className="filter-products">
+                                <div className="filter-product-row">
+                                    <div className="filters">
+                                        <span className="filter-titre">Color</span>
+    {/*                                 {
+                                            product.color?.map(c =>(
+                                                <div className={`filter-color ${c}`} key={c} color={c} />
+                                            )) 
+                                        } */}
+                                    </div>
+                                    <div className="filters">
+                                        <span className="filter-titre">Taille</span>
+                                        <select name="" id="" className='select-filter'>
+                                        <option value="">ADDDD</option>
+                                        {/* { product.size?.map((s) =>(
+                                                <option value="" key={s} >{s}</option>
+                                                ))} */}
+                                        </select>
+                                    </div>
+                                </div>                                
                                 <div className="filter-product">
                                     <div className="filter">
-                                        <i className="fas fa-minus filter-icon " onClick={()=>handleQuantity('dec')}></i>
+                                        <AddIcon className="filter-icon" onClick={()=>handleQuantity('inc')}/>
                                         <span className="filter-nb">{quantity}</span>
-                                        <i className="fas fa-plus filter-icon" onClick={()=>handleQuantity('inc')}></i>
+                                        <RemoveOutlinedIcon className="filter-icon" onClick={()=>handleQuantity('desc')}/>
                                     </div>
                                     <div className="filter">
-                                        <button className="filter-btn" onClick={handleClick}>ADD TO CART</button>
+                                        <button className="filter-btn" onClick={handleClick}>Ajouter au panier</button>
                                     </div>
                                 </div>
                             </div>

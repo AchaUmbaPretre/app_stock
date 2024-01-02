@@ -139,19 +139,19 @@ const Cart = () => {
                       <hr className="cart-hr"/>
                     </div>
                     <div className="cart-bottom-right">
-                      <h1 className="cart-summary-title">ORDER SUMMARY</h1>
+                      <h1 className="cart-summary-title">RÉCAPITULATIF DE LA COMMANDE</h1>
                       <div className="cart-summary-items">
-                        <span className="cart-summary-txt">Subtotal</span>
+                        <span className="cart-summary-txt">Total</span>
                         <span className="cart-summary-price">$ 100</span>
                       </div>
 
                       <div className="cart-summary-items">
-                        <span className="cart-summary-txt">Estimated Shipping</span>
+                        <span className="cart-summary-txt">Frais de livraison estimés</span>
                         <span className="cart-summary-price">$ 450</span>
                       </div>
 
                       <div className="cart-summary-items">
-                        <span className="cart-summary-txt">Shipping Discount</span>
+                        <span className="cart-summary-txt">Remise sur les frais d'expédition</span>
                             <span className="cart-summary-price">$ 410</span>
                       </div>
 
@@ -159,7 +159,7 @@ const Cart = () => {
                             <span className="cart-summary-txt cart-black">Total</span>
                             <span className="cart-summary-price cart-black">$ 100</span>
                         </div>
-                        <button className="cart-summary-btn">CHECKOUT NOW</button>
+                        <button className="cart-summary-btn">PASSER À LA CAISSE</button>
                     </div>
                   </div>
                 </div>

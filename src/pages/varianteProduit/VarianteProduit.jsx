@@ -118,8 +118,6 @@ const VarianteProduit = () => {
         };
         fetchData();
       }, []);
-
-      
       
   return (
     <>

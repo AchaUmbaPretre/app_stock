@@ -114,7 +114,7 @@ const DetailProduitCommande = () => {
                             <p className="product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio doloremque, possimus pariatur quae tempora exercitationem beatae illo officiis itaque consequuntur amet delectus quis, aperiam optio magnam quod dolor eveniet impedit.</p>
                             <div className="pageEtoile-row">
                             <Rate allowHalf defaultValue={3.5} />
-                            <a href="">Voir le seul avis</a>
+                            <a href="/"> Voir le seul avis</a>
                         </div>
                             <span className="product-price">{dd.prix} $</span>
                             <div className="filter-products">

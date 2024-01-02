@@ -9,6 +9,9 @@ import { Image } from 'antd';
 import './varianteProduit.scss'
 import {FilterOutlined,ShoppingCartOutlined,SearchOutlined,HeartOutlined} from '@ant-design/icons';
 import config from '../../config'
+import { FadeLoader } from 'react-spinners';
+import { set } from 'date-fns'
+
 
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -23,6 +26,7 @@ const VarianteProduit = () => {
     const [famille, setFamille] = useState(null);
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
+    const [loading, setLoading] = useState(true);
 
 /*     useEffect(() => {
         const fetchData = async () => {
@@ -41,6 +45,7 @@ const VarianteProduit = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`);
             setData(data)
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -52,6 +57,7 @@ const VarianteProduit = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreCible/${cible}`);
+            setLoading(false)
             setData(data)
           } catch (error) {
             console.log(error);
@@ -66,6 +72,7 @@ const VarianteProduit = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
             setGetFamille(data);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -78,6 +85,7 @@ const VarianteProduit = () => {
           try {
             const { data } = await axios.get( famille ? `${DOMAIN}/api/produit/varianteFiltre/${famille}`: `${DOMAIN}/api/produit/varianteProduit`);
             setData(data);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -90,6 +98,7 @@ const VarianteProduit = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
             setGetMarque(data);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -102,6 +111,7 @@ const VarianteProduit = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
             setGetCible(data);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -114,7 +124,12 @@ const VarianteProduit = () => {
   return (
     <>
         <div className="varianteProduit">
-            <div className="varianteProduit-wrapper">
+        { loading ? (
+              <div className="spinner-container">
+                <FadeLoader color={'#36D7B7'} loading={loading} />
+              </div>
+            ) : (
+              <div className="varianteProduit-wrapper">
                 <div className="varianteProduit-container-top">
                     <div className="varianteProduit-left">
                         <h2 className="varianteProduit-h2">Les produits</h2>
@@ -180,6 +195,7 @@ const VarianteProduit = () => {
                     </div>
                 </div>
             </div>
+            )}
         </div>
 
     </>

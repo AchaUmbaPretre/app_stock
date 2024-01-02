@@ -44,6 +44,7 @@
                     flex: 1;
                     padding: 40px 0;
                     .product-titre{
+                        color: rgb(3, 3, 109);
                         font-weight: 300;
                     }
                     .product-desc{
@@ -51,7 +52,8 @@
                         line-height: 1.6;
                     }
                     .product-price{
-                        font-weight: 300;
+                        color: rgb(3, 3, 109);
+                        font-weight: bolder;
                         font-size: 45px;
                     }
                     .filter-products{
@@ -139,21 +141,25 @@
                                     font-size: 20px;
                                     cursor: pointer;
                                     margin: 0 5px;
+                                    color: rgb(3, 3, 109);
                                 }
                                 .filter-nb{
                                     font-size: 20px;
-                                    border-radius: 30%;
+                                    border-radius: 40%;
                                     padding: 8px;
                                     border: 1px solid lightgray;
+                                    color: rgb(3, 3, 109);
                                 }
                                 .filter-btn{
                                     border: none;
                                     font-size: 13px;
-                                    font-weight: 300;
+                                    font-weight: 600;
                                     border-radius: 5px;
                                     background: transparent;
                                     padding: 10px;
-                                    border: 2px solid black;
+                                    border: 2px solid rgba(1, 35, 138, 0.952);
+                                    color: rgba(1, 35, 138, 0.952);
+                                    transition: .5s;
                                     cursor: pointer;
                                     &:hover{
                                         background: black;

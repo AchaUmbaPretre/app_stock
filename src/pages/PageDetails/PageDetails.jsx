@@ -77,7 +77,6 @@ const PageDetails = () => {
       }, {});
       
       const result = Object.values(groupedData);
-    
 
   return (
     <>

@@ -24,14 +24,17 @@ const DetailProduitCommande = () => {
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
     const dispatch = useDispatch();
-    const [cible, setCible] = useState(null);
+    const [taille, setTaille] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [variante, setVariante] = useState([]);
+    const [inventaire, setInventaire] = useState([]);
 
         useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${id}`);
             setData(data);
+            setVariante(data[0]?.code_variant);
             setLoading(false);
           } catch (error) {
             console.log(error);
@@ -39,6 +42,21 @@ const DetailProduitCommande = () => {
         };
         fetchData();
       }, [id]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
+            setInventaire(data);
+            const tailles = data?.map(item => ({ id_taille: item.id_taille, taille: item.taille }));
+            setTaille(tailles)
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [variante]);
 
 
       const handleQuantity = (type) =>{
@@ -66,7 +84,6 @@ const DetailProduitCommande = () => {
       }, {});
       
       const result = Object.values(groupedData);
-
       
   return (
     <>
@@ -103,10 +120,9 @@ const DetailProduitCommande = () => {
                                     <div className="filters">
                                         <span className="filter-titre">Taille</span>
                                         <select name="" id="" className='select-filter'>
-                                        <option value="">ADDDD</option>
-                                        {/* { product.size?.map((s) =>(
-                                                <option value="" key={s} >{s}</option>
-                                                ))} */}
+                                        { taille?.map((s) =>(
+                                                <option value="" key={s.id_taille}  selected>{s.taille}</option>
+                                                ))}
                                         </select>
                                     </div>
                                 </div>                                

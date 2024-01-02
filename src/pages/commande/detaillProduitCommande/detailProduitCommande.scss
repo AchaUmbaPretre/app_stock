@@ -51,6 +51,8 @@
                     .product-desc{
                         margin: 40px 0px;
                         line-height: 1.6;
+                        font-weight: 300;
+                        text-align: justify;
                     }
                     .product-price{
                         color: rgb(3, 3, 109);
@@ -73,8 +75,9 @@
                             align-items: center;
                             gap: 10px;
                             .filter-titre{
-                                font-size: 20px;
-                                font-weight: 400;
+                                font-size: 18px;
+                                font-weight: 300;
+                                color: #222121;
                             }
                             .filter-color{
                                 width: 40px;
@@ -126,6 +129,7 @@
                             .select-filter{
                                 padding: 6px 10px;
                                 border: 1px solid rgb(221, 221, 221);
+                                outline: none;
                             }
                         }
                         .filter-product{

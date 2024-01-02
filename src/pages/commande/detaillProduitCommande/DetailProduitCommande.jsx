@@ -111,7 +111,7 @@ const DetailProduitCommande = () => {
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">{dd?.nom_produit}</h1>
                             <p className="product-desc">{dd?.code_pays}</p>
-                            <p className="product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio doloremque, possimus pariatur quae tempora exercitationem beatae illo officiis itaque consequuntur amet delectus quis, aperiam optio magnam quod dolor eveniet impedit.</p>
+                            <p className="product-desc"></p>
                             <div className="pageEtoile-row">
                             <Rate allowHalf defaultValue={3.5} />
                             <a href="/"> Voir le seul avis</a>

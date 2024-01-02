@@ -27,18 +27,19 @@ const DetailProduitCommande = () => {
     const [cible, setCible] = useState(null);
     const [loading, setLoading] = useState(true);
 
-      useEffect(() => {
+        useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreCible/${cible}`);
-            setLoading(false)
-            setData(data)
+            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${id}`);
+            setData(data);
+            setLoading(false);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [cible]);
+      }, [id]);
+
 
       const handleQuantity = (type) =>{
 
@@ -52,6 +53,19 @@ const DetailProduitCommande = () => {
         )
     }
 
+    const groupedData = data.reduce((acc, item) => {
+        const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img, ...rest } = item;
+      
+        if (!acc[id_produit]) {
+          acc[id_produit] = { id_produit, nom_produit, pointure: [], date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img };
+        }
+      
+        acc[id_produit].pointure.push(pointure);
+      
+        return acc;
+      }, {});
+      
+      const result = Object.values(groupedData);
 
       
   return (
@@ -69,24 +83,22 @@ const DetailProduitCommande = () => {
                         <span>Voir les details du produit</span>
                     </div>
                 </div>
+                {result.map((dd)=>(
+
                 <div className="detail-container-bottom">
                     <div className="detail-container-rows">
                         <div className="detail-bottom-left">
-                            <img src={logo1} alt="" className="detail-bottom-img" />
+                            <img src={dd.img} alt="" className="detail-bottom-img" />
                         </div>
                         <div className="detail-bottom-right">
-                            <h1 className="product-titre">Versace</h1>
+                            <h1 className="product-titre">{dd.nom_produit}</h1>
                             <p className="product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio doloremque, possimus pariatur quae tempora exercitationem beatae illo officiis itaque consequuntur amet delectus quis, aperiam optio magnam quod dolor eveniet impedit.</p>
-                            <span className="product-price">$ 100</span>
+                            <span className="product-price">{dd.prix} $</span>
                             <div className="filter-products">
                                 <div className="filter-product-row">
                                     <div className="filters">
                                         <span className="filter-titre">Color</span>
-    {/*                                 {
-                                            product.color?.map(c =>(
-                                                <div className={`filter-color ${c}`} key={c} color={c} />
-                                            )) 
-                                        } */}
+                                        <div className={`${dd.description}`} color={dd.description} />
                                     </div>
                                     <div className="filters">
                                         <span className="filter-titre">Taille</span>
@@ -112,6 +124,7 @@ const DetailProduitCommande = () => {
                         </div>
                     </div>
                 </div>
+                ))}
             </div>
             )}
         </div>

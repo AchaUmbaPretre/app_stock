@@ -14,7 +14,6 @@ const PageDetails = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
-    const [quantity, setQuantity] = useState(1);
     const [inventaire, setInventaire] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
@@ -26,7 +25,7 @@ const PageDetails = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${id}`);
             setData(data);
-/*             setLoading(false); */
+            setLoading(false)
             setVariante(data[0]?.code_variant);
           } catch (error) {
             console.log(error);
@@ -40,6 +39,7 @@ const PageDetails = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
             setInventaire(data);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -52,7 +52,7 @@ const PageDetails = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/inventaireTotalOne/${variante}`);
             setInventaireTotalOne(data[0].nombre_total_de_paires);
-/*             setLoading(false) */
+             setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -76,7 +76,6 @@ const PageDetails = () => {
         return acc;
       }, {});
       
-      const pointures = Object.values(groupedData).map((item) => item.pointure);
       const result = Object.values(groupedData);
     
 

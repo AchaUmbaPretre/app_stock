@@ -8,9 +8,14 @@
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             padding: 30px;
             border-radius: 5px;
-            gap: 20px;
+            gap: 25px;
             .pageDetail-left{
                 flex: 1;
+                .pageDetail-img{
+                    height: 360px;
+                    width: 320px;
+                    object-fit: cover;
+                }
                 .pageDetail-left-wrapper{
                     padding: 30px 0;
                     h2{

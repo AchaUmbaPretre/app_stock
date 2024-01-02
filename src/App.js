@@ -42,6 +42,7 @@ import TypeMouvement from './pages/typeMouvement/TypeMouvement';
 import Mouvement from './pages/mouvement/Mouvement';
 import FormMouvement from './pages/mouvement/formMouvement/FormMouvement';
 import Commande from './pages/commande/Commande';
+import Cart from './pages/commande/cart/Cart';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -148,6 +149,10 @@ function App() {
         {
           path: '/commande',
          element: <Commande /> 
+        },
+        {
+          path: '/cart',
+          element: <Cart/> 
         },
         {
           path: '/ventes',

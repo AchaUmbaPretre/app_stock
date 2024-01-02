@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Rate } from 'antd';
 import moment from 'moment';
+import { FadeLoader } from 'react-spinners';
 
 const PageDetails = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -15,7 +16,7 @@ const PageDetails = () => {
     const id = pathname.split('/')[2];
     const [quantity, setQuantity] = useState(1);
     const [inventaire, setInventaire] = useState([]);
-    const [loading, setLoading] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
     const [inventaireTotalOne, setInventaireTotalOne] = useState([]);
 
@@ -25,6 +26,7 @@ const PageDetails = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${id}`);
             setData(data);
+/*             setLoading(false); */
             setVariante(data[0]?.code_variant);
           } catch (error) {
             console.log(error);
@@ -38,7 +40,6 @@ const PageDetails = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
             setInventaire(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -51,7 +52,7 @@ const PageDetails = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/inventaireTotalOne/${variante}`);
             setInventaireTotalOne(data[0].nombre_total_de_paires);
-            setLoading(false)
+/*             setLoading(false) */
           } catch (error) {
             console.log(error);
           }
@@ -83,7 +84,12 @@ const PageDetails = () => {
     <>
         <div className="pageDetails">
             <div className="pageDetail-wrapper">
-                <div className="pageDetail-container">
+            { loading ? (
+              <div className="spinner-container">
+                <FadeLoader color={'#36D7B7'} loading={loading} />
+              </div>
+            ) : (
+              <div className="pageDetail-container">
                     <div className="pageDetail-left">
                     { result?.map((dd)=>(
                         <img src={dd?.img} alt="" className="pageDetail-img" />  ))}
@@ -138,6 +144,7 @@ const PageDetails = () => {
                         </div>
                     </div>))}
                 </div>
+              )}
             </div>
         </div>
     </>

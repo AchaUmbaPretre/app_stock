@@ -177,15 +177,13 @@ const VarianteProduit = () => {
                       <div className="variante-top-rows">
                       {
                           data?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id}>
+                        <div className="variante-top-row" key={dd.id} onClick={()=>navigate(`/pageDetail/${dd.id_varianteProduit}`)}>
                           <div className="cercle"></div>
                           <img src={dd.img} alt="" className="variante-img" />
                           <div className="info-products">
-                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
                               <Link to={`/pageDetail/${dd.id_varianteProduit}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
-                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
                           </div>
                         </div>
                         ))}

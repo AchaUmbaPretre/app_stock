@@ -12,6 +12,7 @@ import { addProduct } from '../../../redux/cartRedux'
 import logo1 from './../../../assets/logo doe.jpg'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import { Rate } from 'antd'
 
 
 const DetailProduitCommande = () => {
@@ -108,8 +109,13 @@ const DetailProduitCommande = () => {
                             <img src={dd.img} alt="" className="detail-bottom-img" />
                         </div>
                         <div className="detail-bottom-right">
-                            <h1 className="product-titre">{dd.nom_produit}</h1>
+                            <h1 className="product-titre">{dd?.nom_produit}</h1>
+                            <p className="product-desc">{dd?.code_pays}</p>
                             <p className="product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio doloremque, possimus pariatur quae tempora exercitationem beatae illo officiis itaque consequuntur amet delectus quis, aperiam optio magnam quod dolor eveniet impedit.</p>
+                            <div className="pageEtoile-row">
+                            <Rate allowHalf defaultValue={3.5} />
+                            <a href="">Voir le seul avis</a>
+                        </div>
                             <span className="product-price">{dd.prix} $</span>
                             <div className="filter-products">
                                 <div className="filter-product-row">

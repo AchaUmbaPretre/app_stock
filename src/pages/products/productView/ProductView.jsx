@@ -29,8 +29,6 @@ const ProductView = () => {
     const [idPays, setIdPays] = useState([]);
     const [idTaille, setIdTaille] = useState({});
     const [selectedIds, setSelectedIds] = useState([]);
-    const [pointureId, setPointureId] = useState([]);
-    const [stockId, setStockId] = useState('');
     const searchInput = React.useRef(null);
     const scroll = { x: 400 };
     const scrollY = { y: 200 };

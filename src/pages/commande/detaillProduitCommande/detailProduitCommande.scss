@@ -1,0 +1,25 @@
+.detailProduitCommande{
+    .detailProduit-wrapper{
+        .detailProduit-container-top{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background: #fff;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            padding: 20px;
+            border-radius: 5px;
+            .detailProduit-left{
+                .detailProduit-h2{
+                    font-size: 1rem;
+                    color: rgb(1, 35, 138);
+                }
+                span{
+                    font-size: .8rem;
+                    color: #6d6c6c;
+                }
+            }
+        }
+    }
+}

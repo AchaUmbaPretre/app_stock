@@ -41,6 +41,7 @@ import PageDetails from './pages/PageDetails/PageDetails';
 import TypeMouvement from './pages/typeMouvement/TypeMouvement';
 import Mouvement from './pages/mouvement/Mouvement';
 import FormMouvement from './pages/mouvement/formMouvement/FormMouvement';
+import Commande from './pages/commande/Commande';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -143,6 +144,10 @@ function App() {
         {
           path: '/mouvementForm',
           element: <FormMouvement />
+        },
+        {
+          path: '/commande',
+         element: <Commande /> 
         },
         {
           path: '/ventes',

@@ -45,7 +45,8 @@
                     padding: 40px 0;
                     .product-titre{
                         color: rgb(3, 3, 109);
-                        font-weight: 300;
+                        font-weight: bolder;
+                        font-size: 35px;
                     }
                     .product-desc{
                         margin: 40px 0px;
@@ -62,7 +63,6 @@
                         align-items: center;
                         width: 100%;
                         margin: 40px 0;
-                        color: #a7a7a7;
                         .filter-product-row{
                             width: 100%;
                             display: flex;

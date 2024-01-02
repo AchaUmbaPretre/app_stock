@@ -54,6 +54,11 @@
                         font-weight: 300;
                         text-align: justify;
                     }
+                    .product-rate{
+                        padding: 15px 0;
+                        border-top: 1px solid #d3d3d3;
+                        border-bottom: 1px solid #d3d3d3;
+                    }
                     .product-price{
                         color: rgb(3, 3, 109);
                         font-weight: bolder;
@@ -150,7 +155,7 @@
                                 }
                                 .filter-nb{
                                     font-size: 20px;
-                                    border-radius: 40%;
+                                    border-radius: 20%;
                                     padding: 8px;
                                     border: 1px solid lightgray;
                                     color: rgb(3, 3, 109);

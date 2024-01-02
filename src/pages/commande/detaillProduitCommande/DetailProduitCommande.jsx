@@ -112,11 +112,13 @@ const DetailProduitCommande = () => {
                             <h1 className="product-titre">{dd?.nom_produit}</h1>
                             <p className="product-desc">{dd?.code_pays}</p>
                             <p className="product-desc">Il y a {dd?.stock} articles en stock</p>
-                            <div className="pageEtoile-row">
-                            <Rate allowHalf defaultValue={3.5} />
-                            <a href="/"> Voir le seul avis</a>
-                        </div>
-                            <span className="product-price">{dd.prix} $</span>
+                            <div className="product-rate">
+                                <div className="pageEtoile-row">
+                                    <Rate allowHalf defaultValue={3.5} />
+                                    <a href="/"> Voir le seul avis</a>
+                                </div>
+                                <span className="product-price">{dd.prix} $</span>
+                            </div>
                             <div className="filter-products">
                                 <div className="filter-product-row">
                                     <div className="filters">

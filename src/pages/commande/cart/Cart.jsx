@@ -25,7 +25,7 @@ const Cart = () => {
     const [loading, setLoading] = useState(false);
     const cart = useSelector((state) => state?.cart);
 
-      console.log(cart.products)
+      console.log(cart)
   return (
     <>
         <div className="cart">
@@ -48,7 +48,7 @@ const Cart = () => {
                       <div className="cart-bottom-left">
                         <img src={dd[0]?.img} alt="" className="cart-row-img" />
                         <div className="cart-row-center">
-                          <span className="cart-product-name"><b>Product :</b> {dd[0]?.nom_produit}</span>
+                          <span className="cart-product-name"><b>Product :</b> {dd[0]?.nom_marque}</span>
                           <div className="pageEtoile-row">
                             <Rate allowHalf defaultValue={3.5} />
                           </div>

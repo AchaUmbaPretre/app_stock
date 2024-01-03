@@ -9,7 +9,6 @@ import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../../../redux/cartRedux'
-import logo1 from './../../../assets/logo doe.jpg'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { Rate } from 'antd'
@@ -21,11 +20,11 @@ const DetailProduitCommande = () => {
     const location = useLocation();
     const id = location.pathname.split('/')[2];
     const [product, setProduct] = useState({});
-    const [quantity, setQuantity] = useState(1);
-    const [color, setColor] = useState("");
-    const [size, setSize] = useState("");
+    const [quantite, setQuantite] = useState(1);
+    const [couleur, setCouleur] = useState("");
     const dispatch = useDispatch();
-    const [taille, setTaille] = useState(null);
+    const [taille, setTaille] = useState('');
+    const [getTaille, setGetTaille] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
     const [inventaire, setInventaire] = useState([]);
@@ -50,7 +49,7 @@ const DetailProduitCommande = () => {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
             setInventaire(data);
             const tailles = data?.map(item => ({ id_taille: item.id_taille, taille: item.taille }));
-            setTaille(tailles)
+            setGetTaille(tailles)
             setLoading(false)
           } catch (error) {
             console.log(error);
@@ -59,18 +58,21 @@ const DetailProduitCommande = () => {
         fetchData();
       }, [variante]);
 
+      console.log(taille)
 
       const handleQuantity = (type) =>{
 
-        type === "inc" ? setQuantity(quantity + 1) 
-                      : quantity > 1 && setQuantity(quantity - 1)
+        type === "inc" ? setQuantite(quantite + 1) 
+                      : quantite > 1 && setQuantite(quantite - 1)
     }
 
     const handleClick = () =>{
         dispatch(
-            addProduct({ ...product, quantity, color, size })
+            addProduct({ ...product, quantite, couleur, taille })
         )
     }
+
+    console.log()
 
     const groupedData = data.reduce((acc, item) => {
         const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img, ...rest } = item;
@@ -122,14 +124,14 @@ const DetailProduitCommande = () => {
                             <div className="filter-products">
                                 <div className="filter-product-row">
                                     <div className="filters">
-                                        <span className="filter-titre">Color</span>
+                                        <span className="filter-titre">Couleur</span>
                                         <div className={`${dd.description}`} color={dd.description} />
                                     </div>
                                     <div className="filters">
                                         <span className="filter-titre">Taille</span>
-                                        <select name="" id="" className='select-filter'>
-                                        { taille?.map((s) =>(
-                                                <option value="" key={s.id_taille}  selected>{s.taille}</option>
+                                        <select name="" id="" className='select-filter' onChange={(e)=>setTaille(e.target.value)}>
+                                        { getTaille?.map((s) =>(
+                                                <option value={s.id_taille} key={s.id_taille} selected>{s.taille}</option>
                                                 ))}
                                         </select>
                                     </div>
@@ -137,7 +139,7 @@ const DetailProduitCommande = () => {
                                 <div className="filter-product">
                                     <div className="filter">
                                         <AddIcon className="filter-icon" onClick={()=>handleQuantity('inc')}/>
-                                        <span className="filter-nb">{quantity}</span>
+                                        <span className="filter-nb">{quantite}</span>
                                         <RemoveOutlinedIcon className="filter-icon" onClick={()=>handleQuantity('desc')}/>
                                     </div>
                                     <div className="filter">

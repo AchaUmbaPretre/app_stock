@@ -5,8 +5,10 @@ import './topbar.css'
 import logo from './../../assets/logo_doe-removebg-preview.png'
 import { UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Topbar = () => {
+  const navigate = useNavigate();
   const quantite = useSelector(state => state.cart.quantite);
 
   console.log(quantite)
@@ -20,7 +22,7 @@ const Topbar = () => {
         </div>
         <div className="topbar-right">
         { quantite > 0 &&
-          <div className="topbar-icons">
+          <div className="topbar-icons" onClick={()=>navigate('/cart')}>
             <ShoppingCartOutlined/>
             <span className="topbar-not">{quantite}</span>
           </div>}

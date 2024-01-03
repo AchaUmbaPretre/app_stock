@@ -74,6 +74,48 @@
                             width: 20px;
                             border-radius: 50%;
                             background: black;
+                            .Noir{
+                                height: 20px;
+                                width: 20px;
+                                background: black;
+                                gap: 30px;
+                                border-radius: 50%;
+                            }
+                            .Gris{
+                                height: 20px;
+                                width: 20px;
+                                background: gray;
+                                gap: 30px;
+                                border-radius: 50%;
+                            }
+                            .Bleu{
+                                height: 20px;
+                                width: 20px;
+                                background: blue;
+                                gap: 30px;
+                                border-radius: 50%;
+                            }
+                            .Rouge{
+                                height: 20px;
+                                width: 20px;
+                                background: red;
+                                gap: 30px;
+                                border-radius: 50%;
+                            }
+                            .Vert{
+                                height: 20px;
+                                width: 20px;
+                                background: green;
+                                gap: 30px;
+                                border-radius: 50%;
+                            }
+                            .Marron{
+                                height: 20px;
+                                width: 20px;
+                                background: brown;
+                                gap: 30px;
+                                border-radius: 50%;
+                            }
                         }
                         .cart-product-size{
                             display: flex;

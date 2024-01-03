@@ -55,7 +55,7 @@ const Cart = () => {
                             <Rate allowHalf defaultValue={3.5} />
                           </div>
                           <span className="cart-product-id"><b>ID :</b> {dd.id_varianteProduit}</span>
-                          <div className="cart-product-color"></div>
+                          <div className={`cart-product-color ${dd[0]?.description}`}></div>
                           <span className="cart-product-size"><b>Size :</b> {dd[0].id_taille}</span>
                           <div className="cart-product-price"><b>Prix :</b>{dd[0].prix} $</div>
                         </div>

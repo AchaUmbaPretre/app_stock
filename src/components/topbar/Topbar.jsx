@@ -1,4 +1,4 @@
-import { Language, MailOutline, NotificationsNone, Settings, WbSunnyOutlined } from '@mui/icons-material'
+import { Language, MailOutline, NotificationsNone, Settings, ShoppingCartOutlined, WbSunnyOutlined, shop } from '@mui/icons-material'
 import { Avatar, Space } from 'antd';
 import React from 'react'
 import './topbar.css'
@@ -14,6 +14,10 @@ const Topbar = () => {
           <span className="logo">Ndoé Boutique</span>  
         </div>
         <div className="topbar-right">
+          <div className="topbar-icons">
+            <ShoppingCartOutlined/>
+            <span className="topbar-not">2</span>
+          </div>
           <div className="topbar-icons">
             <NotificationsNone/>
             <span className="topbar-not">2</span>

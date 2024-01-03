@@ -25,7 +25,9 @@ const Cart = () => {
     const [loading, setLoading] = useState(false);
     const cart = useSelector((state) => state?.cart);
 
-      console.log(cart)
+    console.log(cart)
+
+    
   return (
     <>
         <div className="cart">
@@ -52,7 +54,7 @@ const Cart = () => {
                           <div className="pageEtoile-row">
                             <Rate allowHalf defaultValue={3.5} />
                           </div>
-                          <span className="cart-product-id"><b>ID :</b> {dd[0].id_varianteProduit}</span>
+                          <span className="cart-product-id"><b>ID :</b> {dd.id_varianteProduit}</span>
                           <div className="cart-product-color"></div>
                           <span className="cart-product-size"><b>Size :</b> {dd[0].id_taille}</span>
                           <div className="cart-product-price"><b>Prix :</b>{dd[0].prix} $</div>
@@ -63,7 +65,7 @@ const Cart = () => {
                               <span className="cart-product-amount">{dd.quantite}</span>
                             <RemoveOutlinedIcon className="product-icon"/>
                           </div>
-                          <span className="cart-product-prix">{dd.totalPere} $</span>
+                          <span className="cart-product-prix">{dd.quantite * dd[0].prix} $</span>
                         </div>
                       </div>))}
                     </div>

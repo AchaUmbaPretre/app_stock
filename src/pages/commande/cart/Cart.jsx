@@ -66,7 +66,6 @@ const Cart = () => {
                           <span className="cart-product-prix">{dd.totalPere} $</span>
                         </div>
                       </div>))}
-                      <hr className="cart-hr"/>
                     </div>
                     <div className="cart-bottom-right">
                       <h1 className="cart-summary-title">RÉCAPITULATIF DE LA COMMANDE</h1>

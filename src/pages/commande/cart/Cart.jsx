@@ -24,8 +24,21 @@ const Cart = () => {
     const [cible, setCible] = useState(null);
     const [loading, setLoading] = useState(false);
     const cart = useSelector((state) => state?.cart);
+    const [getClient, setGetClient] = useState([]);
 
-    console.log(cart)
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/client`);
+          setGetClient(data);
+          setLoading(false)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, []);
 
     
   return (
@@ -69,28 +82,39 @@ const Cart = () => {
                         </div>
                       </div>))}
                     </div>
-                    <div className="cart-bottom-right">
-                      <h1 className="cart-summary-title">RÉCAPITULATIF DE LA COMMANDE</h1>
-                      <div className="cart-summary-items">
-                        <span className="cart-summary-txt">Total</span>
-                        <span className="cart-summary-price">{cart.total} $</span>
-                      </div>
-
-                      <div className="cart-summary-items">
-                        <span className="cart-summary-txt">Frais de livraison estimés</span>
-                        <span className="cart-summary-price">$ 450</span>
-                      </div>
-
-                      <div className="cart-summary-items">
-                        <span className="cart-summary-txt">Remise sur les frais d'expédition</span>
-                            <span className="cart-summary-price">$ 410</span>
-                      </div>
+                    <div className="cart-bottom-rows">
+                      <div className="cart-bottom-right">
+                        <h1 className="cart-summary-title">RÉCAPITULATIF DE LA COMMANDE</h1>
+                        <div className="cart-summary-items">
+                          <span className="cart-summary-txt">Total</span>
+                          <span className="cart-summary-price">{cart.total} $</span>
+                        </div>
 
                         <div className="cart-summary-items">
-                            <span className="cart-summary-txt cart-black">Total</span>
-                            <span className="cart-summary-price cart-black">$ {cart.total} $</span>
+                          <span className="cart-summary-txt">Frais de livraison estimés</span>
+                          <span className="cart-summary-price">$ 450</span>
                         </div>
-                        <button className="cart-summary-btn">PASSER À LA CAISSE</button>
+
+                        <div className="cart-summary-items">
+                          <span className="cart-summary-txt">Remise sur les frais d'expédition</span>
+                              <span className="cart-summary-price">$ 410</span>
+                        </div>
+
+                          <div className="cart-summary-items">
+                              <span className="cart-summary-txt cart-black">Total</span>
+                              <span className="cart-summary-price cart-black">$ {cart.total} $</span>
+                          </div>
+                          <button className="cart-summary-btn">PASSER À LA CAISSE</button>
+                      </div>
+                      <div className="cart-client">
+                        <label htmlFor="">Sélectionnez un client</label>
+                        <select name="" id="" className="cart-select">
+                          <option>Sélectionnez un client</option>
+                          { getClient.map((dd)=>(
+                          <option value={dd.id_client}>{dd.nom}</option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>

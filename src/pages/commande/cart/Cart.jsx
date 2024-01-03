@@ -10,6 +10,7 @@ import logo from './../../../assets/logo doe.jpg'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { useSelector } from 'react-redux'
+import { Rate } from 'antd'
 
 
 const Cart = () => {
@@ -21,49 +22,10 @@ const Cart = () => {
     const [famille, setFamille] = useState(null);
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const cart = useSelector((state) => state.cart);
+    const [loading, setLoading] = useState(false);
+    const cart = useSelector((state) => state?.cart);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`);
-            setData(data)
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [marque]);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreCible/${cible}`);
-            setLoading(false)
-            setData(data)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [cible]);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get( famille ? `${DOMAIN}/api/produit/varianteFiltre/${famille}`: `${DOMAIN}/api/produit/varianteProduit`);
-            setData(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [famille]);
-
-      console.log(cart)
+      console.log(cart.products)
   return (
     <>
         <div className="cart">
@@ -82,69 +44,35 @@ const Cart = () => {
                 <div className="cart-bottom">
                   <div className="cart-bottom-rows">
                     <div className="cart-bottom-row">
+                    { cart && cart?.products && cart.products.map((dd) =>(
                       <div className="cart-bottom-left">
-                        <img src={logo} alt="" className="cart-row-img" />
+                        <img src={dd[0]?.img} alt="" className="cart-row-img" />
                         <div className="cart-row-center">
-                          <span className="cart-product-name"><b>Product :</b> Produi1</span>
-                          <span className="cart-product-id"><b>ID :</b> 11cdddd1</span>
+                          <span className="cart-product-name"><b>Product :</b> {dd[0]?.nom_produit}</span>
+                          <div className="pageEtoile-row">
+                            <Rate allowHalf defaultValue={3.5} />
+                          </div>
+                          <span className="cart-product-id"><b>ID :</b> {dd[0].id_varianteProduit}</span>
                           <div className="cart-product-color"></div>
-                          <span className="cart-product-size"><b>Size :</b> 45</span>
-                          <div className="cart-product-price"><b>Prix :</b>$ 100</div>
+                          <span className="cart-product-size"><b>Size :</b> {dd[0].id_taille}</span>
+                          <div className="cart-product-price"><b>Prix :</b>{dd[0].prix} $</div>
                         </div>
                         <div className="cart-row-right">
                           <div className="cart-amount">
                             <AddIcon className="product-icon"/>
-                              <span className="cart-product-amount">10</span>
+                              <span className="cart-product-amount">{dd.quantite}</span>
                             <RemoveOutlinedIcon className="product-icon"/>
                           </div>
-                          <span className="cart-product-prix">$ 100</span>
+                          <span className="cart-product-prix">{dd.total} $</span>
                         </div>
-                      </div>
-                      <hr className="cart-hr"/>
-                      <div className="cart-bottom-left">
-                        <img src={logo} alt="" className="cart-row-img" />
-                        <div className="cart-row-center">
-                          <span className="cart-product-name"><b>Product :</b> Produi1</span>
-                          <span className="cart-product-id"><b>ID :</b> 11cdddd1</span>
-                          <div className="cart-product-color"></div>
-                          <span className="cart-product-size"><b>Size :</b> 45</span>
-                          <div className="cart-product-price"><b>Prix :</b>$ 100</div>
-                        </div>
-                        <div className="cart-row-right">
-                          <div className="cart-amount">
-                            <AddIcon className="product-icon"/>
-                              <span className="cart-product-amount">10</span>
-                            <RemoveOutlinedIcon className="product-icon"/>
-                          </div>
-                          <span className="cart-product-prix">$ 100</span>
-                        </div>
-                      </div>
-                      <hr className="cart-hr"/>
-                      <div className="cart-bottom-left">
-                        <img src={logo} alt="" className="cart-row-img" />
-                        <div className="cart-row-center">
-                          <span className="cart-product-name"><b>Product :</b> Produi1</span>
-                          <span className="cart-product-id"><b>ID :</b> 11cdddd1</span>
-                          <div className="cart-product-color"></div>
-                          <span className="cart-product-size"><b>Size :</b> 45</span>
-                          <div className="cart-product-price"><b>Prix :</b>$ 100</div>
-                        </div>
-                        <div className="cart-row-right">
-                          <div className="cart-amount">
-                            <AddIcon className="product-icon"/>
-                              <span className="cart-product-amount">10</span>
-                            <RemoveOutlinedIcon className="product-icon"/>
-                          </div>
-                          <span className="cart-product-prix">$ 100</span>
-                        </div>
-                      </div>
+                      </div>))}
                       <hr className="cart-hr"/>
                     </div>
                     <div className="cart-bottom-right">
                       <h1 className="cart-summary-title">RÉCAPITULATIF DE LA COMMANDE</h1>
                       <div className="cart-summary-items">
                         <span className="cart-summary-txt">Total</span>
-                        <span className="cart-summary-price">$ 100</span>
+                        <span className="cart-summary-price">{cart.total} $</span>
                       </div>
 
                       <div className="cart-summary-items">
@@ -159,7 +87,7 @@ const Cart = () => {
 
                         <div className="cart-summary-items">
                             <span className="cart-summary-txt cart-black">Total</span>
-                            <span className="cart-summary-price cart-black">$ 100</span>
+                            <span className="cart-summary-price cart-black">$ {cart.total} $</span>
                         </div>
                         <button className="cart-summary-btn">PASSER À LA CAISSE</button>
                     </div>

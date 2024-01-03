@@ -81,7 +81,7 @@ const DetailProduitCommande = () => {
 
       const handleClick = () =>{
         dispatch(
-            addProduct({ ...result, quantite, id_taille: taille })
+            addProduct({ ...result, quantite, id_taille: taille, id_varianteProduit: id })
         )
     }
       

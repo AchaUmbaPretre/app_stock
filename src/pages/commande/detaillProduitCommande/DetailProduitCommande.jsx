@@ -21,9 +21,8 @@ const DetailProduitCommande = () => {
     const id = location.pathname.split('/')[2];
     const [product, setProduct] = useState({});
     const [quantite, setQuantite] = useState(1);
-    const [couleur, setCouleur] = useState("");
     const dispatch = useDispatch();
-    const [taille, setTaille] = useState('');
+    const [taille, setTaille] = useState(null);
     const [getTaille, setGetTaille] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
@@ -66,14 +65,6 @@ const DetailProduitCommande = () => {
                       : quantite > 1 && setQuantite(quantite - 1)
     }
 
-    const handleClick = () =>{
-        dispatch(
-            addProduct({ ...product, quantite, couleur, taille })
-        )
-    }
-
-    console.log()
-
     const groupedData = data.reduce((acc, item) => {
         const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img, ...rest } = item;
       
@@ -87,6 +78,12 @@ const DetailProduitCommande = () => {
       }, {});
       
       const result = Object.values(groupedData);
+
+      const handleClick = () =>{
+        dispatch(
+            addProduct({ ...result, quantite, id_taille: taille })
+        )
+    }
       
   return (
     <>
@@ -129,7 +126,7 @@ const DetailProduitCommande = () => {
                                     </div>
                                     <div className="filters">
                                         <span className="filter-titre">Taille</span>
-                                        <select name="" id="" className='select-filter' onChange={(e)=>setTaille(e.target.value)}>
+                                        <select name="id_taille" id="" className='select-filter' onChange={(e)=>setTaille(e.target.value)}>
                                         { getTaille?.map((s) =>(
                                                 <option value={s.id_taille} key={s.id_taille} selected>{s.taille}</option>
                                                 ))}

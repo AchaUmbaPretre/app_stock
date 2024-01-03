@@ -9,6 +9,7 @@ import config from '../../../config'
 import logo from './../../../assets/logo doe.jpg'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import { useSelector } from 'react-redux'
 
 
 const Cart = () => {
@@ -21,6 +22,7 @@ const Cart = () => {
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
     const [loading, setLoading] = useState(true);
+    const cart = useSelector((state) => state.cart);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -61,7 +63,7 @@ const Cart = () => {
         fetchData();
       }, [famille]);
 
-      
+      console.log(cart)
   return (
     <>
         <div className="cart">

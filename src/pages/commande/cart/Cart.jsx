@@ -63,7 +63,7 @@ const Cart = () => {
                               <span className="cart-product-amount">{dd.quantite}</span>
                             <RemoveOutlinedIcon className="product-icon"/>
                           </div>
-                          <span className="cart-product-prix">{dd.total} $</span>
+                          <span className="cart-product-prix">{dd.totalPere} $</span>
                         </div>
                       </div>))}
                       <hr className="cart-hr"/>

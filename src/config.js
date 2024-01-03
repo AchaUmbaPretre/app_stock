@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
+/* const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
-const TOKEN = currentUser?.accessToken;
+const TOKEN = currentUser?.accessToken; */
 
 export default {
       REACT_APP_SERVER_DOMAIN : 'http://localhost:8080'
@@ -10,5 +10,5 @@ export default {
 
 export const userRequest = axios.create({
       baseURL: 'http://localhost:8080',
-      header: { token: `Bearer ${TOKEN}` },
+      header: { token: `Bearer ${''}` },
     });

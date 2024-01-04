@@ -76,6 +76,11 @@ const Sidebar = () => {
             Liste des commandes
           </Link>
         </Item>
+        <Item key="listeDetailCommande">
+          <Link to="/listeDetailCommande" className="sidebarLink">
+            Liste de detail des commandes
+          </Link>
+        </Item>
         <Item key="retour">
           <Link to="/retour" className="sidebarLink">
             Retour

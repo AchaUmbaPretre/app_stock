@@ -63,7 +63,7 @@ const ListeDetailCommande = () => {
           key: 'prix'
         },
         {
-            title: 'Date demande',
+            title: 'Date demande & heure',
             dataIndex: 'date_demande',
             key: 'date_demande',
             render: (text) => {

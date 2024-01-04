@@ -12,6 +12,7 @@ import { addProduct } from '../../../redux/cartRedux'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { Rate } from 'antd'
+import Swal from 'sweetalert2'
 
 
 const DetailProduitCommande = () => {
@@ -19,6 +20,7 @@ const DetailProduitCommande = () => {
     const [data, setData] = useState([]);
     const location = useLocation();
     const id = location.pathname.split('/')[2];
+    const id_commande = location.pathname.split('/')[3];
     const [product, setProduct] = useState({});
     const [quantite, setQuantite] = useState(1);
     const dispatch = useDispatch();
@@ -27,6 +29,10 @@ const DetailProduitCommande = () => {
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
     const [inventaire, setInventaire] = useState([]);
+    const [prix, setPrix] = useState();
+    const navigate = useNavigate();
+
+    console.log(id, "commande :" + id_commande)
 
         useEffect(() => {
         const fetchData = async () => {
@@ -57,8 +63,6 @@ const DetailProduitCommande = () => {
         fetchData();
       }, [variante]);
 
-      console.log(taille)
-
       const handleQuantity = (type) =>{
 
         type === "inc" ? setQuantite(quantite + 1) 
@@ -79,10 +83,44 @@ const DetailProduitCommande = () => {
       
       const result = Object.values(groupedData);
 
-      const handleClick = () =>{
+/*       const handleClick = () =>{
         dispatch(
             addProduct({ ...result, quantite, id_taille: taille, id_varianteProduit: id })
         )
+    } */
+
+
+    useEffect(() => {
+      const Vprix = result.map((dd) => dd.prix);
+      const totalPrice = Vprix.reduce((accumulator, currentValue) => accumulator + (currentValue * quantite), 0);
+      setPrix(totalPrice);
+    }, [quantite]);
+
+    console.log(prix)
+
+
+    const handleClick = async (e) => {
+      e.preventDefault();
+  
+      try{
+        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, quantite: quantite, prix: prix})
+        Swal.fire({
+          title: 'Success',
+          text: 'Commande créée avec succès!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+        navigate('/listeCommande')
+        window.location.reload();
+  
+      }catch(err) {
+        Swal.fire({
+          title: 'Error',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      }
     }
       
   return (
@@ -118,6 +156,7 @@ const DetailProduitCommande = () => {
                                 </div>
                                 <span className="product-price">{dd.prix} $</span>
                             </div>
+                            {prix && <span className="product-price">Prix total: {prix} $</span>}
                             <div className="filter-products">
                                 <div className="filter-product-row">
                                     <div className="filters">

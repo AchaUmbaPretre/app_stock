@@ -16,7 +16,6 @@ const Commande = () => {
     const [getFamille,setGetFamille] = useState([]);
     const [getMarque,setGetMarque] = useState([]);
     const [getCible,setGetCible] = useState([]);
-    const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [famille, setFamille] = useState(null);
@@ -166,7 +165,7 @@ const Commande = () => {
                           <img src={dd.img} alt="" className="variante-img" />
                           <div className="info-products">
                             <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/commande/${dd.id_varianteProduit}`}>
+                              <Link to={`/commande/${dd.id_varianteProduit}/${id}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
                             <div className="icon-products"><HeartOutlined className='icon1'/></div>

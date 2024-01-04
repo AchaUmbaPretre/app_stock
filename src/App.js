@@ -155,7 +155,7 @@ function App() {
          element: <Commande /> 
         },
         {
-          path: '/commande/:id',
+          path: '/commande/:id/:id_commande',
          element: <DetailProduitCommande /> 
         },
         {

@@ -1,29 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../login1/login.css'
 import logo from './../../assets/logo doe.jpg'
 import { FacebookOutlined, Instagram, LockOutlined, MailOutlined, PersonOutline, Twitter, WhatsApp } from '@mui/icons-material'
+import { register } from '../../redux/apiCalls'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Register1 = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    register(dispatch, { username,email, password });
+    navigate('/login')
+  };
+
   return (
     <>
-            <div class="container">
+      <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
           <form action="#" class="sign-in-form">
             <h2 class="title">S'inscrire</h2>
             <div class="input-field">
                 <PersonOutline className='icon-login'/>
-              <input type="text" placeholder="Username" />
+              <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div class="input-field">
                 <MailOutlined className='icon-login'/>
-              <input type="email" placeholder="Email" />
+              <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div class="input-field">
                 <LockOutlined className='icon-login'/>
-              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <input type="submit" class="btn" value="S'inscrire" />
+            <input type="submit" class="btn" value="S'inscrire" onClick={handleClick} disabled={isFetching}/>
             <p class="social-text">Connectez-vous avec les plateformes sociales</p>
             <div class="social-media">
                 <a href="#" class="social-icon">

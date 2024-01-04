@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from './../../assets/logo doe.jpg'
 import './login.css'
 import { FacebookOutlined, Instagram, LockOutlined, PersonOutline, Twitter, WhatsApp } from '@mui/icons-material'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../redux/apiCalls'
+import { useNavigate } from 'react-router-dom'
 
 const Login1 = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
   return (
     <>
     <div class="container">
@@ -12,14 +26,14 @@ const Login1 = () => {
           <form action="#" class="sign-in-form">
             <h2 class="title">Se connecter</h2>
             <div class="input-field">
-                <PersonOutline className='icon-login'/>
-              <input type="text" placeholder="Username" />
+              <PersonOutline className='icon-login'/>
+              <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div class="input-field">
                 <LockOutlined className='icon-login'/>
-              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <input type="submit" value="Se connecter" class="btn solid" />
+            <input type="submit" value="Se connecter" class="btn solid" onClick={handleClick} disabled={isFetching} />
             <p class="social-text">Connectez-vous avec les plateformes sociales</p>
             <div class="social-media">
               <a href="#" class="social-icon">
@@ -46,7 +60,7 @@ const Login1 = () => {
             <p>
                 Nous vous invitons à créer un compte pour profiter de tous les avantages de notre plateforme. En créant un compte, vous pourrez accéder à des fonctionnalités exclusives, bénéficier d'offres spéciales et suivre facilement vos commandes.
             </p>
-            <button class="btn transparent" id="sign-up-btn">
+            <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/register')}>
                 S'inscrire
             </button>
           </div>

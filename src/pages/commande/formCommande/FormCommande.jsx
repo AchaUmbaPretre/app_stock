@@ -12,6 +12,7 @@ const FormCommande = () => {
   const [province, setProvince] = useState([]);
   const [loading, setLoading] = useState(false);
   const [getClient, setGetClient] = useState([]);
+  const [getStatut, setGetStatut] = useState([]);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -65,6 +66,20 @@ const FormCommande = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/commande/statut`);
+        setGetStatut(data);
+        setLoading(false)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
   return (
     <>
         <div className="clientForm">
@@ -90,8 +105,11 @@ const FormCommande = () => {
                   <label htmlFor="">Statut</label>
                   <select id="" className="form-input" name="statut" onChange={handleInputChange} required>
                     <option value="" disabled selected>Selectionnez un statut</option>
-                    <option value="Validé">Validé</option>
-                    <option value="Non-validé">Non-validé</option>
+                    {
+                        getStatut.map((dd)=>(
+                            <option value={dd.id_statut}>{dd.nom_statut}</option>
+                        ))
+                    }
                   </select>
                 </div>
                 <div className="form-controle">

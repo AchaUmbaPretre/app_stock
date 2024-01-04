@@ -44,6 +44,8 @@ import FormMouvement from './pages/mouvement/formMouvement/FormMouvement';
 import Commande from './pages/commande/Commande';
 import Cart from './pages/commande/cart/Cart';
 import DetailProduitCommande from './pages/commande/detaillProduitCommande/DetailProduitCommande';
+import FormCommande from './pages/commande/formCommande/FormCommande';
+import ListeCommande from './pages/commande/ListeCommande/ListeCommande';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -149,12 +151,20 @@ function App() {
           element: <FormMouvement />
         },
         {
-          path: '/commande',
+          path: '/commandes/:id',
          element: <Commande /> 
         },
         {
           path: '/commande/:id',
          element: <DetailProduitCommande /> 
+        },
+        {
+          path: '/commandeForm',
+         element: <FormCommande /> 
+        },
+        {
+          path: '/listeCommande',
+         element: <ListeCommande /> 
         },
         {
           path: '/cart',

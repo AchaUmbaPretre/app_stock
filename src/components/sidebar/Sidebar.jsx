@@ -71,8 +71,13 @@ const Sidebar = () => {
             Commande
           </Link>
         </Item>
-        <Item key="ventes">
-          <Link to="/ventes" className="sidebarLink">
+        <Item key="commandeForm">
+          <Link to="/commandeForm" className="sidebarLink">
+            Ajouter une commande
+          </Link>
+        </Item>
+        <Item key="listeCommande">
+          <Link to="/listeCommande" className="sidebarLink">
             Liste des commandes
           </Link>
         </Item>

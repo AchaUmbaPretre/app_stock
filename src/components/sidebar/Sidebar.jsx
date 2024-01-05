@@ -81,7 +81,7 @@ const Sidebar = () => {
           Liste des détails des commandes
           </Link>
         </Item>
-        <Item key="retour">
+{/*         <Item key="retour">
           <Link to="/retour" className="sidebarLink">
             Retour
           </Link>
@@ -90,9 +90,9 @@ const Sidebar = () => {
           <Link to="/echange" className="sidebarLink">
             Echange
           </Link>
-        </Item>
+        </Item> */}
       </SubMenu>
-      <SubMenu key="mouvement" title={<span className="sidebarH3">Ventes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
+{/*       <SubMenu key="mouvement" title={<span className="sidebarH3">Ventes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="mouvement">
           <Link to="/mouvement" className="sidebarLink">
             Mouvement
@@ -113,8 +113,20 @@ const Sidebar = () => {
             Echange
           </Link>
         </Item>
+      </SubMenu> */}
+      <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<ShoppingCartOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
+        <Item key="livraison">
+          <Link to="/livraison" className="sidebarLink">
+            Livraison
+          </Link>
+        </Item>
+        <Item key="livraison_detail">
+          <Link to="/livraison_detail" className="sidebarLink">
+            Détail livraison
+          </Link>
+        </Item>
       </SubMenu>
-      <SubMenu key="clients" title={<span className="sidebarH3">Peuples</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
+      <SubMenu key="clients" title={<span className="sidebarH3">Membres</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="clients">
           <Link to="/clients" className="sidebarLink">
             Clients

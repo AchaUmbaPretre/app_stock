@@ -49,6 +49,8 @@ import ListeCommande from './pages/commande/ListeCommande/ListeCommande';
 import ListeDetailCommande from './pages/commande/listeDetailCommande/ListeDetailCommande';
 import EditCommande from './pages/commande/editCommande/EditCommande';
 import ListeDetailView from './pages/commande/listeDetailView/ListeDetailView';
+import Livraison from './pages/livraison/Livraison';
+import Livraison_detail from './pages/livraison/livraison_detail/Livraison_detail';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -184,6 +186,14 @@ function App() {
         {
           path: '/cart',
           element: <Cart/> 
+        },
+        {
+          path: '/livraison',
+          element: <Livraison/> 
+        },
+        {
+          path: '/livraison_detail',
+          element: <Livraison_detail/> 
         },
         {
           path: '/ventes',

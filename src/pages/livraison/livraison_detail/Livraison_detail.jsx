@@ -5,10 +5,13 @@ import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format, isValid } from 'date-fns';
-import config from '../../config';
+import Swal from 'sweetalert2';
+import config from '../../../config';
 
-const Livraison = () => {
+const Livraison_detail = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const [searchText, setSearchText] = useState('');
+    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const searchInput = useRef(null);
@@ -16,17 +19,26 @@ const Livraison = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
-    const [getVente, setGetVente] = useState({});
+    const [title, setTitle] = useState('');
     const [open, setOpen] = useState(false);
+
+
+      const showModal = (id) => {
+        setOpen(true);
+        navigate(`/ventes/${id}`);
+      };
+      const handleCancel = () => {
+        setOpen(false);
+      };
     
       const handleDelete = async (id) => {
-        try {
-            await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
-              window.location.reload();
-          } catch (err) {
-            console.log(err);
-          }
-        };
+      try {
+          await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
+            window.location.reload();
+        } catch (err) {
+          console.log(err);
+        }
+      };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -35,26 +47,21 @@ const Livraison = () => {
             dataIndex: 'id_commande',
             key: 'id_commande'
           },
-          {
-            title: 'image',
-            dataIndex: 'img',
-            key: 'image',
-            render: (text, record) => (
-              <div className="userList">
-                <img src={record.img} alt="" className="userImg"  />
-              </div>
-            )
-        },
         {
           title: 'Produit',
           dataIndex: 'id_varianteProduit',
           key: 'id_produit'
         },
         {
-          title: 'Quantité',
-          dataIndex: 'quantite',
-          key: 'quantite'
+          title: 'Quantité livré',
+          dataIndex: 'qte_livre',
+          key: 'qte_livre'
         },
+        {
+            title: 'Quantité commandé',
+            dataIndex: 'qte_commande',
+            key: 'qte_commande'
+          },
         {
             title: 'Prix',
             dataIndex: 'prix',
@@ -74,13 +81,18 @@ const Livraison = () => {
             ),
           },
         {
-            title: 'Date demande & heure',
-            dataIndex: 'date_demande',
-            key: 'date_demande',
+            title: 'Date création',
+            dataIndex: 'date_creation',
+            key: 'date_creation',
             render: (text) => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
               return <span>{formattedDate}</span>;
             },
+          },
+          {
+            title: 'package',
+            dataIndex: 'package',
+            key: 'package',
           },
         {
             title: 'Action',
@@ -88,11 +100,11 @@ const Livraison = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Voir la liste de cette commande" trigger="hover">
-                  <Link to={`/listeDetailView/${record.id_commande}`}>
+{/*                 <Popover title="Voir la liste de cette commande" trigger="hover">
+                  <Link to={`/venteView/${record.id}`}>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
-                </Popover>
+                </Popover> */}
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -111,26 +123,20 @@ const Livraison = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/detail-commande`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/detail-commande/${id}`);
             setData(data);
             setLoading(false)
+            const getTitle = data.map((dd)=>(dd.id_commande))
+
+            setTitle(getTitle[0])
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
       }, []);
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
-            setGetVente(data[0]);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [id]);
+
+      console.log(title)
 
 
   return (
@@ -139,13 +145,9 @@ const Livraison = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste du detail des commandes</h2>
-                        <span>Voir le detail des commandes</span>
+                        <h2 className="product-h2">Liste des détails des livraisons</h2>
+                        <span>Voir le détail des livraisons</span>
                     </div>
-                   {/*  <div className="product-right" onClick={() =>navigate('/ventesForm')}>
-                        <PlusOutlined />
-                        <span className="product-btn">voir les commandes</span>
-                    </div> */}
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
@@ -172,4 +174,4 @@ const Livraison = () => {
   )
 }
 
-export default Livraison
+export default Livraison_detail

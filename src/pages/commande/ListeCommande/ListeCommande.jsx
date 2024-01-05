@@ -37,6 +37,10 @@ const ListeCommande = () => {
           console.log(err);
         }
       };
+
+      const handleEdit = (id) => {
+        navigate(`/Editcommande/${id}`);
+    };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -105,7 +109,7 @@ const ListeCommande = () => {
                 
               <Space size="middle">
                 <Popover title="Modifier" trigger="hover">
-                  <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=>showModal(record.id)} />
+                  <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id_commande)} />
                 </Popover>
                 <Popover title="Détail commande" trigger="hover">
                     <Link to={`/commandes/${record.id_commande}`}>
@@ -139,6 +143,7 @@ const ListeCommande = () => {
         };
         fetchData();
       }, []);
+
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -161,10 +166,10 @@ const ListeCommande = () => {
                         <h2 className="product-h2">Liste des commandes</h2>
                         <span>Voir les commandes</span>
                     </div>
-                   {/*  <div className="product-right" onClick={() =>navigate('/ventesForm')}>
+                    <div className="product-right" onClick={() =>navigate('/commandeForm')}>
                         <PlusOutlined />
-                        <span className="product-btn">voir les commandes</span>
-                    </div> */}
+                        <span className="product-btn">Créez une commande</span>
+                    </div>
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">

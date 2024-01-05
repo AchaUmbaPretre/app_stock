@@ -47,6 +47,7 @@ import DetailProduitCommande from './pages/commande/detaillProduitCommande/Detai
 import FormCommande from './pages/commande/formCommande/FormCommande';
 import ListeCommande from './pages/commande/ListeCommande/ListeCommande';
 import ListeDetailCommande from './pages/commande/listeDetailCommande/ListeDetailCommande';
+import EditCommande from './pages/commande/editCommande/EditCommande';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -162,6 +163,10 @@ function App() {
         {
           path: '/commandeForm',
          element: <FormCommande /> 
+        },
+        {
+          path: '/Editcommande/:id',
+         element: <EditCommande /> 
         },
         {
           path: '/listeCommande',

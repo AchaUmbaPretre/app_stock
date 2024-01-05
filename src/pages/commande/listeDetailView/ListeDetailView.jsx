@@ -8,7 +8,7 @@ import { format, isValid } from 'date-fns';
 import Swal from 'sweetalert2';
 import config from '../../../config';
 
-const ListeDetailCommande = () => {
+const ListeDetailView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -19,7 +19,7 @@ const ListeDetailCommande = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
-    const [getVente, setGetVente] = useState({});
+    const [title, setTitle] = useState('');
     const [open, setOpen] = useState(false);
 
 
@@ -32,13 +32,13 @@ const ListeDetailCommande = () => {
       };
     
       const handleDelete = async (id) => {
-        try {
-            await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
-              window.location.reload();
-          } catch (err) {
-            console.log(err);
-          }
-        };
+      try {
+          await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
+            window.location.reload();
+        } catch (err) {
+          console.log(err);
+        }
+      };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -101,7 +101,7 @@ const ListeDetailCommande = () => {
                 
               <Space size="middle">
                 <Popover title="Voir la liste de cette commande" trigger="hover">
-                  <Link to={`/listeDetailView/${record.id_commande}`}>
+                  <Link to={`/venteView/${record.id}`}>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover>
@@ -123,26 +123,20 @@ const ListeDetailCommande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/detail-commande`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/detail-commande/${id}`);
             setData(data);
             setLoading(false)
+            const getTitle = data.map((dd)=>(dd.id_commande))
+
+            setTitle(getTitle[0])
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
       }, []);
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
-            setGetVente(data[0]);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [id]);
+
+      console.log(title)
 
 
   return (
@@ -151,13 +145,9 @@ const ListeDetailCommande = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste du detail des commandes</h2>
-                        <span>Voir le detail des commandes</span>
+                        <h2 className="product-h2">Liste de commande N° {title}</h2>
+                        <span>Voir le detail de commande {title}</span>
                     </div>
-                   {/*  <div className="product-right" onClick={() =>navigate('/ventesForm')}>
-                        <PlusOutlined />
-                        <span className="product-btn">voir les commandes</span>
-                    </div> */}
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
@@ -184,4 +174,4 @@ const ListeDetailCommande = () => {
   )
 }
 
-export default ListeDetailCommande
+export default ListeDetailView

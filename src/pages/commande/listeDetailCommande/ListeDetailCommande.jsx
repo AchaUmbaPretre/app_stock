@@ -159,7 +159,7 @@ const ListeDetailCommande = () => {
                         >
                          <FormVenteEdit getVente={getVente} setGetVente={setGetVente} />
                         </Modal> */}
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                     </div>
                 </div>
             </div>

@@ -94,7 +94,7 @@ const DetailProduitCommande = () => {
       const Vprix = result.map((dd) => dd.prix);
       const totalPrice = Vprix.reduce((accumulator, currentValue) => accumulator + (currentValue * quantite), 0);
       setPrix(totalPrice);
-    }, [quantite]);
+    });
 
     console.log(prix)
 
@@ -156,7 +156,7 @@ const DetailProduitCommande = () => {
                                 </div>
                                 <span className="product-price">{dd.prix} $</span>
                             </div>
-                            {prix && <span className="product-price">Prix total: {prix} $</span>}
+                            {quantite > 1 && <span className="product-price">Prix total: {prix} $</span>}
                             <div className="filter-products">
                                 <div className="filter-product-row">
                                     <div className="filters">

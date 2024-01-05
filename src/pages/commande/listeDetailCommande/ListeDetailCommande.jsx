@@ -43,10 +43,20 @@ const ListeDetailCommande = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-            title: 'Commande',
+            title: 'Id commande',
             dataIndex: 'id_commande',
             key: 'id_commande'
           },
+          {
+            title: 'image',
+            dataIndex: 'img',
+            key: 'image',
+            render: (text, record) => (
+              <div className="userList">
+                <img src={record.img} alt="" className="userImg"  />
+              </div>
+            )
+        },
         {
           title: 'Produit',
           dataIndex: 'id_varianteProduit',

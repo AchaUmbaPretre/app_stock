@@ -9,10 +9,23 @@ import {
 } from '@ant-design/icons';
 import { AttachMoney, HomeOutlined} from '@mui/icons-material';
 import './sidebar.css'
+import axios from 'axios';
+import config from '../../config';
+import { useState } from 'react';
 
 const { SubMenu, Item } = Menu;
 
 const Sidebar = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+  const [errorMessage,setErrorMessage] = useState('')
+  const Logout = async () => {
+    try {
+      await axios.post(`${DOMAIN}/api/auth/logout`);
+/*       setCurrentUser(null); */
+    } catch (error) {
+      setErrorMessage(error.response.data);
+    }
+  };
   return (
     <Menu mode="vertical" theme="dark" className="sidebar">
       <div className="sidebarWrapper">
@@ -156,22 +169,8 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-{/* 
-      <SubMenu key="settings" title={<span className="sidebarH3">Paramètres</span>} icon={<SettingOutlined style={{ fontSize: '20px', color: 'rgb(1, 35, 138)' }}/>}>
-        <Item key="generalSettings">
-          <Link to="/parametresGeneraux" className="sidebarLink">
-            Paramètres généraux
-          </Link>
-        </Item>
-        <Item key="userSettings">
-          <Link to="/parametresUtilisateur" className="sidebarLink">
-            Paramètres utilisateur
-          </Link>
-        </Item>
-      </SubMenu> */}
-
-      <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
-        <Link to="/logout" className="sidebarH3" style={{ color: '#fafafa'}}>
+      <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>} onClick={Logout}>
+        <Link to="/login" className="sidebarH3" style={{ color: '#fafafa'}}>
           Déconnexion
         </Link>
       </Item>

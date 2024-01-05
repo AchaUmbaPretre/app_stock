@@ -14,7 +14,7 @@ const EditCommande = () => {
   const [getStatut, setGetStatut] = useState([]);
   const {pathname} = useLocation();
   const id = pathname.split('/')[2]
-  const {id_client,id_statut,id_livraison,id_paiement,id_shop,paye} = data;
+  const {id_client,statut,id_livraison,id_paiement,id_shop,paye} = data;
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -35,7 +35,7 @@ const EditCommande = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`${DOMAIN}/api/commande/commandePost`, data)
+      await axios.put(`${DOMAIN}/api/commande/commandePut/${id}`, data)
       Swal.fire({
         title: 'Success',
         text: 'Commande créée avec succès!',
@@ -117,7 +117,7 @@ const EditCommande = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Statut</label>
-                  <select id="" className="form-input" value={id_statut} name="statut" onChange={handleInputChange} required>
+                  <select id="" className="form-input" value={statut} name="statut" onChange={handleInputChange} required>
                     <option value="" disabled selected>Selectionnez un statut</option>
                     {
                         getStatut.map((dd)=>(

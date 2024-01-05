@@ -242,6 +242,15 @@ const ProductView = () => {
           });
           return;
         }
+        if (variantExists) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez modifier la variante avant de soumettre',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
       
         if ((Array.isArray(selectedData) && selectedData.length > 0)) {
           Promise.all(
@@ -360,7 +369,7 @@ const ProductView = () => {
                                 <div className="produit-view-control">
                                     <label htmlFor="">Code Variant</label>
                                     <input type="text" className="produit_input" name='code_variant' placeholder='Entrez le code variant...' onChange={handleInputChange} />
-                                    {variantExists && <p className="error-message">La variante existe déjà.</p>}
+                                    {variantExists && <p className="error-message">Cette variante existe déjà.</p>}
                                 </div>
                             </div>
                             <button className="produit_submit" onClick={handleClick}>Soumettre</button>

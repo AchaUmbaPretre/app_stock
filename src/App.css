@@ -34,8 +34,14 @@ li{
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
+}
 
+.spinnerContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
   .mission-icon{
     color: rgb(5, 97, 5);
     cursor: pointer;

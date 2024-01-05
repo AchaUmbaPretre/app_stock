@@ -56,9 +56,11 @@ import { useSelector } from 'react-redux';
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
 const user = useSelector((state) => state.user.currentUser);
+
   const [loading, setLoading] = useState(false);
 
   const Layout = () => {
+
     return (
       <div>
         <Topbar/>

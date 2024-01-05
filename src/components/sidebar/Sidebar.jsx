@@ -12,8 +12,9 @@ import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '../../redux/userRedux';
+import Swal from 'sweetalert2';
 
 const { SubMenu, Item } = Menu;
 
@@ -22,24 +23,21 @@ const Sidebar = () => {
   const [errorMessage,setErrorMessage] = useState('')
   const [currentUser, setCurrentUser] = useState('')
   const dispatch = useDispatch();
+  const admin = useSelector((state) => state.user.currentUser)
 
-  const Logout = async (inputs) => {
+  const Logout = async () => {
     try {
       await axios.post(`${DOMAIN}/api/auth/logout`);
       setCurrentUser(null);
-      dispatch(
-        loginSuccess(null)
-    )
-    window.location.reload();
+      localStorage.setItem('persist:root', JSON.stringify(currentUser));
+      Swal.fire('Déconnexion réussie !', '', 'success');
+      window.location.reload();
     } catch (error) {
       setErrorMessage(error.response.data);
+      Swal.fire('Erreur lors de la déconnexion.', '', 'error');
     }
   };
 
-
-  useEffect(() => {
-    localStorage.setItem('persist:root', JSON.stringify(currentUser));
-  }, [currentUser]);
   return (
     <Menu mode="vertical" theme="dark" className="sidebar">
       <div className="sidebarWrapper">

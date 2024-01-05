@@ -27,45 +27,56 @@ const ProductView = () => {
     const [idCible,setIdcible] = useState();
     const [idFamille, setIdFamille] = useState();
     const [idPays, setIdPays] = useState([]);
-    const [idTaille, setIdTaille] = useState({});
+    const [variantCheck, setVariantCheck] = useState({});
     const [selectedIds, setSelectedIds] = useState([]);
     const searchInput = React.useRef(null);
     const scroll = { x: 400 };
     const scrollY = { y: 200 };
     const [selectedData, setSelectedData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [variantExists, setVariantExists] = useState(false);
+    const [variantInput, setVariantInput] = useState('')
 
+    
     const handleInputChange = async (e) => {
-        const fieldName = e.target.name;
-        const fieldValue = e.target.value;
-      
-        let updatedValue = fieldValue;
-      
-        if (fieldName === "img") {
-          const file = e.target.files[0];
-          const reader = new FileReader();
-      
-          reader.onload = () => {
-            const base64File = reader.result;
-            updatedValue = base64File;
-            setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-          };
-      
-          reader.onerror = (error) => {
-            console.error("Erreur de lecture du fichier :", error);
-          };
-      
-          reader.readAsDataURL(file);
-        } else if (fieldName === "contact_email") {
-          updatedValue = fieldValue.toLowerCase();
-        } else if (Number.isNaN(Number(fieldValue))) {
-          if (typeof fieldValue === "string" && fieldValue.length > 0) {
-            updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-          }
+      const fieldName = e.target.name;
+      const fieldValue = e.target.value;
+    
+      let updatedValue = fieldValue;
+    
+      if (fieldName === "img") {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = () => {
+          const base64File = reader.result;
+          updatedValue = base64File;
+          setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+        };
+    
+        reader.onerror = (error) => {
+          console.error("Erreur de lecture du fichier :", error);
+        };
+    
+        reader.readAsDataURL(file);
+      } else if (fieldName === "contact_email") {
+        updatedValue = fieldValue.toLowerCase();
+      } else if (Number.isNaN(Number(fieldValue))) {
+        if (typeof fieldValue === "string" && fieldValue.length > 0) {
+          updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
         }
-      
-        setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-      };
+      }
+    
+      // Vérifier si la variante existe déjà
+      if (fieldName === "code_variant") {
+        const exists = variantCheck.some(
+          (variant) => variant.code_variant.toLowerCase() === fieldValue.toLowerCase()
+        );
+        setVariantExists(exists);
+      }
+    
+      setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+    };
 
 
       const handleCheckboxChange = (id) => {
@@ -125,6 +136,18 @@ const ProductView = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/pays`);
             setGetPays(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/Codevariante`);
+            setVariantCheck(data);
           } catch (error) {
             console.log(error);
           }
@@ -337,6 +360,7 @@ const ProductView = () => {
                                 <div className="produit-view-control">
                                     <label htmlFor="">Code Variant</label>
                                     <input type="text" className="produit_input" name='code_variant' placeholder='Entrez le code variant...' onChange={handleInputChange} />
+                                    {variantExists && <p className="error-message">La variante existe déjà.</p>}
                                 </div>
                             </div>
                             <button className="produit_submit" onClick={handleClick}>Soumettre</button>
@@ -379,7 +403,6 @@ const ProductView = () => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

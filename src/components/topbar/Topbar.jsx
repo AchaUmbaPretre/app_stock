@@ -10,8 +10,8 @@ import { useNavigate } from 'react-router-dom';
 const Topbar = () => {
   const navigate = useNavigate();
   const quantite = useSelector(state => state.cart.quantite);
+  const user = useSelector((state) => state.user.currentUser.username);
 
-  console.log(quantite)
 
   return (
     <>
@@ -34,9 +34,10 @@ const Topbar = () => {
             <MailOutline/>
             <span className="topbar-not">2</span>
           </div>
-          <div className="topbar-icons">
+          <div className="topbar-icons icons-user">
             {/* <img src={logo} alt="" className="topbar-imgUser"/> */}
             <Avatar icon={<UserOutlined />} />
+            <span>{user}</span>
           </div>
         </div>
       </div>

@@ -13,10 +13,18 @@ const Login1 = () => {
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+  
+    try {
+      await login(dispatch, { username, password });
+      navigate('/')
+      window.location.reload();
+    } catch (error) {
+      console.log(error)
+    }
   };
+
 
   return (
     <>

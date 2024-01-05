@@ -51,10 +51,11 @@ import EditCommande from './pages/commande/editCommande/EditCommande';
 import ListeDetailView from './pages/commande/listeDetailView/ListeDetailView';
 import Livraison from './pages/livraison/Livraison';
 import Livraison_detail from './pages/livraison/livraison_detail/Livraison_detail';
+import { useSelector } from 'react-redux';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
-/* const user = useSelector((state) => state.user.currentUser); */
+const user = useSelector((state) => state.user.currentUser);
   const [loading, setLoading] = useState(false);
 
   const Layout = () => {
@@ -71,17 +72,16 @@ function App() {
     );
   };
 
-/*   const SecuriteRoute = ({ children }) => {
-    if () {
+ const SecuriteRoute = ({ children }) => {
+    if (!user) {
       return <Navigate to="/login" />;
     }
     return children;
-  }; */
-
+  };
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout />,
+      element: <SecuriteRoute><Layout /></SecuriteRoute>,
       children: [
         {
           path: '/',

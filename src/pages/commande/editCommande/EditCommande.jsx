@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import config from '../../../config';
@@ -12,6 +12,9 @@ const EditCommande = () => {
   const [loading, setLoading] = useState(false);
   const [getClient, setGetClient] = useState([]);
   const [getStatut, setGetStatut] = useState([]);
+  const {pathname} = useLocation();
+  const id = pathname.split('/')[2]
+  const {id_client,id_statut,id_livraison,id_paiement,id_shop,paye} = data;
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -78,6 +81,20 @@ const EditCommande = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
+        setData(data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  console.log(data)
+
 
   return (
     <>
@@ -93,7 +110,7 @@ const EditCommande = () => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Client</label>
-                  <select name="id_client" id="id_client" className="form-input" onChange={handleInputChange}  required>
+                  <select name="id_client" id="id_client" value={id_client} className="form-input" onChange={handleInputChange}  required>
                     <option>Sélectionnez un client</option>
                         { getClient.map((dd)=>(
                     <option value={dd.id}>{dd.nom}</option>
@@ -102,7 +119,7 @@ const EditCommande = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Statut</label>
-                  <select id="" className="form-input" name="statut" onChange={handleInputChange} required>
+                  <select id="" className="form-input" value={id_statut} name="statut" onChange={handleInputChange} required>
                     <option value="" disabled selected>Selectionnez un statut</option>
                     {
                         getStatut.map((dd)=>(
@@ -113,15 +130,15 @@ const EditCommande = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Livraison</label>
-                  <input type="email" name='id_livraison' className="form-input" onChange={handleInputChange} />
+                  <input type="email" name='id_livraison' value={id_livraison} className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Paiement</label>
-                  <input type="tel" name='id_paiement' className="form-input" onChange={handleInputChange} required />
+                  <input type="tel" name='id_paiement' value={id_paiement} className="form-input" onChange={handleInputChange} required />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Shop</label>
-                  <select id="" className="form-input" name="statut" onChange={handleInputChange} required>
+                  <select id="" className="form-input" value={id_shop} name="statut" onChange={handleInputChange} required>
                     <option value="" disabled selected>Selectionnez un shop</option>
 {/*                     <option value="Client VIP">Validé</option>
                     <option value="Client Normal">Non-validé</option> */}
@@ -129,7 +146,7 @@ const EditCommande = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Paye</label>
-                  <input type="text" name="paye" className="form-input" onChange={handleInputChange} />
+                  <input type="text" name="paye" value={paye} className="form-input" onChange={handleInputChange} />
                 </div>
               </div>
 

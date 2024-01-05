@@ -11,21 +11,35 @@ import { AttachMoney, HomeOutlined} from '@mui/icons-material';
 import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../redux/userRedux';
 
 const { SubMenu, Item } = Menu;
 
 const Sidebar = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [errorMessage,setErrorMessage] = useState('')
-  const Logout = async () => {
+  const [currentUser, setCurrentUser] = useState('')
+  const dispatch = useDispatch();
+
+  const Logout = async (inputs) => {
     try {
       await axios.post(`${DOMAIN}/api/auth/logout`);
-/*       setCurrentUser(null); */
+      setCurrentUser(null);
+      dispatch(
+        loginSuccess(null)
+    )
+    window.location.reload();
     } catch (error) {
       setErrorMessage(error.response.data);
     }
   };
+
+
+  useEffect(() => {
+    localStorage.setItem('persist:root', JSON.stringify(currentUser));
+  }, [currentUser]);
   return (
     <Menu mode="vertical" theme="dark" className="sidebar">
       <div className="sidebarWrapper">
@@ -170,7 +184,7 @@ const Sidebar = () => {
         </Item>
       </SubMenu>
       <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>} onClick={Logout}>
-        <Link to="/login" className="sidebarH3" style={{ color: '#fafafa'}}>
+        <Link className="sidebarH3" style={{ color: '#fafafa'}}>
           Déconnexion
         </Link>
       </Item>

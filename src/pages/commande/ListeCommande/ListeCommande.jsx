@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
@@ -59,10 +59,28 @@ const ListeCommande = () => {
           ),
         },
         {
-          title: 'Statut',
-          dataIndex: 'statut',
-          key: 'prenom'
-        },
+            title: 'Status',
+            dataIndex: 'nom_statut',
+            key: 'prenom',
+            render: (text) => {
+              let tagColor = '';
+              let icon = null;
+        
+              if (text === 'Non-validé') {
+                tagColor = 'red';
+                icon = <ExclamationCircleOutlined />;
+              } else if (text === 'Validé') {
+                tagColor = 'green';
+                icon = <CheckCircleOutlined />;
+              }
+        
+              return (
+                <Tag color={tagColor}>
+                  {icon} {text}
+                </Tag>
+              );
+            },
+          },
         {
           title: 'Livraison',
           dataIndex: 'id_livraison',
@@ -144,7 +162,7 @@ const ListeCommande = () => {
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Liste des commandes</h2>
-                        <span>Gérer vos ventes</span>
+                        <span>Voir les commandes</span>
                     </div>
                    {/*  <div className="product-right" onClick={() =>navigate('/ventesForm')}>
                         <PlusOutlined />

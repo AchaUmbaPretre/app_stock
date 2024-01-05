@@ -10,8 +10,6 @@ import config from '../../../config';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const searchInput = useRef(null);
@@ -21,7 +19,6 @@ const ListeCommande = () => {
     const id = pathname.split('/')[2]
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
 
 
       const showModal = (id) => {

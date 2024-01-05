@@ -93,8 +93,6 @@ const EditCommande = () => {
     fetchData();
   }, [id]);
 
-  console.log(data)
-
 
   return (
     <>

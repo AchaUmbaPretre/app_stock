@@ -30,6 +30,7 @@ const DetailProduitCommande = () => {
     const [variante, setVariante] = useState([]);
     const [inventaire, setInventaire] = useState([]);
     const [prix, setPrix] = useState();
+    const [inventaireTotalOne,setInventaireTotalOne] = useState([]);
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user.currentUser.id)
 
@@ -55,6 +56,19 @@ const DetailProduitCommande = () => {
             const tailles = data?.map(item => ({ id_taille: item.id_taille, taille: item.taille }));
             setGetTaille(tailles)
             setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [variante]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/inventaire/inventaireTotalOne/${variante}`);
+            setInventaireTotalOne(data[0].nombre_total_de_paires);
+             setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -100,6 +114,15 @@ const DetailProduitCommande = () => {
     const handleClick = async (e) => {
       e.preventDefault();
   
+      if (!taille) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Veuillez choisir une pointure',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return;
+      }
       try{
         await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
         Swal.fire({
@@ -146,7 +169,7 @@ const DetailProduitCommande = () => {
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">{dd?.nom_produit}</h1>
                             <p className="product-desc">{dd?.code_pays}</p>
-                            <p className="product-desc">Il y a {dd?.stock} articles en stock</p>
+                            <p className="product-desc">Il y a {inventaireTotalOne} articles en stock</p>
                             <div className="product-rate">
                                 <div className="pageEtoile-row">
                                     <Rate allowHalf defaultValue={3.5} />
@@ -164,8 +187,9 @@ const DetailProduitCommande = () => {
                                     <div className="filters">
                                         <span className="filter-titre">Taille</span>
                                         <select name="id_taille" id="" className='select-filter' onChange={(e)=>setTaille(e.target.value)}>
+                                          <option>Sélectionnez une pointure</option>
                                         { getTaille?.map((s) =>(
-                                                <option value={s.id_taille} key={s.id_taille} selected>{s.taille}</option>
+                                                <option value={s.id_taille} key={s.id_taille}>{s.taille}</option>
                                                 ))}
                                         </select>
                                     </div>

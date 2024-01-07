@@ -31,7 +31,7 @@ const ListeCommande = () => {
     
       const handleDelete = async (id) => {
       try {
-          await axios.put(`${DOMAIN}/api/vente/venteDelete/${id}`);
+          await axios.put(`${DOMAIN}/api/commande/commande/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
@@ -124,7 +124,7 @@ const ListeCommande = () => {
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id)}
+                    onConfirm={() => handleDelete(record.id_commande)}
                     okText="Oui"
                     cancelText="Non"
                   >

@@ -31,57 +31,15 @@ const Livraison = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-            title: 'Id commande',
-            dataIndex: 'id_commande',
-            key: 'id_commande'
-          },
-          {
-            title: 'image',
-            dataIndex: 'img',
-            key: 'image',
-            render: (text, record) => (
-              <div className="userList">
-                <img src={record.img} alt="" className="userImg"  />
-              </div>
-            )
+          title: 'Date livré',
+          dataIndex: 'date_livre',
+          key: 'date_livre'
         },
         {
-          title: 'Produit',
-          dataIndex: 'id_varianteProduit',
-          key: 'id_produit'
+          title: 'user_cr',
+          dataIndex: 'user_cr',
+          key: 'user_cr'
         },
-        {
-          title: 'Quantité',
-          dataIndex: 'quantite',
-          key: 'quantite'
-        },
-        {
-            title: 'Prix',
-            dataIndex: 'prix',
-            key: 'prix',
-            sorter: (a, b) => a.prix - b.prix,
-            sortDirections: ['descend', 'ascend'],
-            render: (text) => (
-              <span>
-              <Tag color={'green'}>
-                {parseFloat(text).toLocaleString('fr-FR', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </Tag>
-              
-              </span>
-            ),
-          },
-        {
-            title: 'Date demande & heure',
-            dataIndex: 'date_demande',
-            key: 'date_demande',
-            render: (text) => {
-              const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
-              return <span>{formattedDate}</span>;
-            },
-          },
         {
             title: 'Action',
             key: 'action',
@@ -111,7 +69,7 @@ const Livraison = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/detail-commande`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -120,17 +78,6 @@ const Livraison = () => {
         };
         fetchData();
       }, []);
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
-            setGetVente(data[0]);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [id]);
 
 
   return (
@@ -139,8 +86,8 @@ const Livraison = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste du detail des commandes</h2>
-                        <span>Voir le detail des commandes</span>
+                        <h2 className="product-h2">Liste des livraison</h2>
+                        <span>Voir les livraisons</span>
                     </div>
                    {/*  <div className="product-right" onClick={() =>navigate('/ventesForm')}>
                         <PlusOutlined />

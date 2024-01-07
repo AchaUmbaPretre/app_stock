@@ -1,6 +1,5 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -10,8 +9,6 @@ import config from '../../../config';
 
 const ListeDetailCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const searchInput = useRef(null);
@@ -93,6 +90,17 @@ const ListeDetailCommande = () => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
               return <span>{formattedDate}</span>;
             },
+          },
+          {
+            title: 'Créé par',
+            dataIndex: 'username',
+            key: 'username',
+            render: (text) => (
+              <Space>
+                <UserOutlined />
+                <Tag color="blue">{text}</Tag>
+              </Space>
+            ),
           },
         {
             title: 'Action',

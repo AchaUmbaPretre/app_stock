@@ -33,7 +33,11 @@ const Livraison = () => {
         {
           title: 'Date livré',
           dataIndex: 'date_livre',
-          key: 'date_livre'
+          key: 'date_livre',
+          render: (text) => {
+            const formattedDate = format(new Date(text), 'dd-MM-yyyy');
+            return <span>{formattedDate}</span>;
+          },
         },
         {
           title: 'user_cr',

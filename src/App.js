@@ -52,6 +52,7 @@ import ListeDetailView from './pages/commande/listeDetailView/ListeDetailView';
 import Livraison from './pages/livraison/Livraison';
 import Livraison_detail from './pages/livraison/livraison_detail/Livraison_detail';
 import { useSelector } from 'react-redux';
+import LivraisonForm from './pages/livraison/livraisonForm/LivraisonForm';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -196,6 +197,10 @@ const user = useSelector((state) => state.user.currentUser);
         {
           path: '/livraison_detail',
           element: <Livraison_detail/> 
+        },
+        {
+          path: '/livraisonForm',
+          element: <LivraisonForm/> 
         },
         {
           path: '/ventes',

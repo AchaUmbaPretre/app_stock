@@ -61,7 +61,7 @@ const Sidebar = () => {
         </Item>
         <Item key="varianteProduit">
           <Link to="/varianteProduit" className="sidebarLink">
-            variante produit
+            Editer taille produit
           </Link>
         </Item>
         <Item key="categories">

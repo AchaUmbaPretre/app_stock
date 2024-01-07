@@ -45,10 +45,15 @@ const ListeCommande = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
+          title: 'id_commande',
+          dataIndex: 'id_commande',
+          key: 'id_commande'
+        },
+        {
             title: 'Client',
             dataIndex: 'nom',
             key: 'id_client'
-          },
+        },
         {
           title: 'Date commande',
           dataIndex: 'date_commande',

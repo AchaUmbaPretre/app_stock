@@ -96,14 +96,13 @@ const DetailProduitCommande = () => {
       setPrix(totalPrice);
     });
 
-    console.log(prix)
 
 
     const handleClick = async (e) => {
       e.preventDefault();
   
       try{
-        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, quantite: quantite, prix: prix})
+        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, quantite: quantite, prix: prix, id_taille: taille})
         Swal.fire({
           title: 'Success',
           text: 'Commande créée avec succès!',
@@ -122,6 +121,8 @@ const DetailProduitCommande = () => {
         });
       }
     }
+
+    console.log(taille)
       
   return (
     <>

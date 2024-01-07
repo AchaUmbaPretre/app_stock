@@ -68,6 +68,11 @@ const ListeDetailView = () => {
           key: 'quantite'
         },
         {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          key: 'id_taille'
+        },
+        {
             title: 'Prix',
             dataIndex: 'prix',
             key: 'prix',
@@ -108,7 +113,7 @@ const ListeDetailView = () => {
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id)}
+                    onConfirm={() => handleDelete(record.id_detail)}
                     okText="Oui"
                     cancelText="Non"
                   >
@@ -135,8 +140,6 @@ const ListeDetailView = () => {
         };
         fetchData();
       }, []);
-
-      console.log(title)
 
 
   return (

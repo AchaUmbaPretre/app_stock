@@ -153,7 +153,7 @@ const Utilisateurs = () => {
             return (
               <Tag color={'green'}>
                 <span>
-                  {role === 0 ? "Admin" : "Utilisateur"}
+                  {role}
                 </span>
               </Tag>
             );
@@ -166,9 +166,9 @@ const Utilisateurs = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Modifier" trigger="hover">
+{/*                 <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
-                </Popover>
+                </Popover> */}
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -187,7 +187,7 @@ const Utilisateurs = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/auth/loginGet`);
+          const { data } = await axios.get(`${DOMAIN}/api/user/getUser`);
           setData(data);
           setLoading(false)
         } catch (error) {
@@ -199,7 +199,7 @@ const Utilisateurs = () => {
 
     const handleDelete = async (id) => {
       try {
-         await axios.delete(`${DOMAIN}/api/auth/loginDelete/${id}`);
+         await axios.delete(`${DOMAIN}/api/user/getUser/${id}`);
            window.location.reload();
        } catch (err) {
          console.log(err);

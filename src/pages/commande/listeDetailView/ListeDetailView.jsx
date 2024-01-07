@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { FieldBinaryOutlined, SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,PlusCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
@@ -65,12 +65,22 @@ const ListeDetailView = () => {
         {
           title: 'Quantité',
           dataIndex: 'quantite',
-          key: 'quantite'
+          key: 'quantite',
+          render: (text) => (
+            <Space>
+              <Tag color="green">{text}</Tag>
+            </Space>
+          ),
         },
         {
           title: 'Pointure',
           dataIndex: 'taille',
-          key: 'id_taille'
+          key: 'id_taille',
+          render: (text) => (
+            <Space>
+              <Tag color="orange">{text}</Tag>
+            </Space>
+          ),
         },
         {
             title: 'Prix',
@@ -91,13 +101,24 @@ const ListeDetailView = () => {
             ),
           },
         {
-            title: 'Date demande & heure',
-            dataIndex: 'date_demande',
-            key: 'date_demande',
+          title: 'Date demande & heure',
+          dataIndex: 'date_demande',
+          key: 'date_demande',
             render: (text) => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
               return <span>{formattedDate}</span>;
             },
+          },
+          {
+            title: 'Créé par',
+            dataIndex: 'username',
+            key: 'username',
+            render: (text) => (
+              <Space>
+                <UserOutlined />
+                <Tag color="blue">{text}</Tag>
+              </Space>
+            ),
           },
         {
             title: 'Action',

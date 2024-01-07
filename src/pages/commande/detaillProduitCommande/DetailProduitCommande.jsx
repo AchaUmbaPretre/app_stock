@@ -7,7 +7,7 @@ import Select from 'react-select';
 import './detailProduitCommande.scss'
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../../redux/cartRedux'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
@@ -31,8 +31,7 @@ const DetailProduitCommande = () => {
     const [inventaire, setInventaire] = useState([]);
     const [prix, setPrix] = useState();
     const navigate = useNavigate();
-
-    console.log(id, "commande :" + id_commande)
+    const userId = useSelector((state) => state.user.currentUser.id)
 
         useEffect(() => {
         const fetchData = async () => {
@@ -102,7 +101,7 @@ const DetailProduitCommande = () => {
       e.preventDefault();
   
       try{
-        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, quantite: quantite, prix: prix, id_taille: taille})
+        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
         Swal.fire({
           title: 'Success',
           text: 'Commande créée avec succès!',
@@ -121,8 +120,6 @@ const DetailProduitCommande = () => {
         });
       }
     }
-
-    console.log(taille)
       
   return (
     <>

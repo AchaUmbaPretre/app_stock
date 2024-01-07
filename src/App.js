@@ -6,7 +6,6 @@ import './App.css';
 import Rightbar from './pages/rightbar/Rightbar';
 import { FadeLoader } from 'react-spinners';
 import Page404 from './pages/page404/Page404';
-import { AuthContext } from './context/authContext';
 import Login1 from './pages/login1/Login1';
 import Register1 from './pages/register1/Register1';
 import Products from './pages/products/Products';

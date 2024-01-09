@@ -143,8 +143,8 @@ const Livreur = () => {
         },
         {
             title: 'Telephone',
-            dataIndex: 'numero',
-            key: 'numero'
+            dataIndex: 'telephone',
+            key: 'telephone'
         },
         {
           title: 'Adresse',
@@ -184,7 +184,7 @@ const Livreur = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/peuple/livreur`);
+            const { data } = await axios.get(`${DOMAIN}/api/livreur`);
             setGetLivreur(data);
             setLoading(false)
           } catch (error) {
@@ -196,7 +196,7 @@ const Livreur = () => {
 
       const handleDelete = async (id) => {
         try {
-           await axios.put(`${DOMAIN}/api/peuple/livreurDelete/${id}`);
+           await axios.put(`${DOMAIN}/api/livreur/${id}`);
              window.location.reload();
          } catch (err) {
            console.log(err);

@@ -28,7 +28,7 @@ const LivreurForm = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`${DOMAIN}/api/peuple/livreur`, data)
+      await axios.post(`${DOMAIN}/api/livreur`, data)
       Swal.fire({
         title: 'Success',
         text: 'Livreur crée avec succès!',
@@ -62,19 +62,23 @@ const LivreurForm = () => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Nom</label>
-                  <input type="text" className="form-input" name='nom' onChange={handleInputChange} required/>
+                  <input type="text" className="form-input" name='nom' placeholder='Entrer le nom...' onChange={handleInputChange} required/>
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Prenom</label>
-                  <input type="text" className="form-input" name='prenom' onChange={handleInputChange} required/>
+                  <input type="text" className="form-input" name='prenom' placeholder='Entrer le prenom...' onChange={handleInputChange} required/>
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Numero</label>
-                  <input type="email" className="form-input" name='numero' onChange={handleInputChange} />
+                  <input type="email" className="form-input" name='telephone' placeholder='Entrer le numero...' onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Adresse</label>
-                  <input type="text" className="form-input" name='adresse' onChange={handleInputChange}/>
+                  <input type="text" className="form-input" name='adresse' placeholder="Entrer l'adresse..." onChange={handleInputChange}/>
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Email</label>
+                  <input type="email" className="form-input" name='email' placeholder="Entrer l'email..." onChange={handleInputChange}/>
                 </div>
               </div>
 

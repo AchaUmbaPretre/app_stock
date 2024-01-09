@@ -26,5 +26,3 @@ export const register = async (dispatch, user) => {
   }
 };
 
-
-

@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, EyeOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
@@ -12,7 +12,6 @@ const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const {pathname} = useLocation();
@@ -115,6 +114,11 @@ const ListeCommande = () => {
               <Space size="middle">
                 <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id_commande)} />
+                </Popover>
+                <Popover title="Voir la liste de cette commande" trigger="hover">
+                  <Link to={`/listeDetailView/${record.id_commande}`}>
+                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                  </Link>
                 </Popover>
                 <Popover title="Détail commande" trigger="hover">
                     <Link to={`/commandes/${record.id_commande}`}>

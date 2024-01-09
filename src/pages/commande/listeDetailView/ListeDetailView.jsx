@@ -42,11 +42,6 @@ const ListeDetailView = () => {
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
-        {
-            title: 'Id commande',
-            dataIndex: 'id_commande',
-            key: 'id_commande'
-          },
           {
             title: 'image',
             dataIndex: 'img',
@@ -56,11 +51,6 @@ const ListeDetailView = () => {
                 <img src={record.img} alt="" className="userImg"  />
               </div>
             )
-        },
-        {
-          title: 'Produit',
-          dataIndex: 'id_varianteProduit',
-          key: 'id_produit'
         },
         {
           title: 'Quantité',

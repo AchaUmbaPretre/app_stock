@@ -21,7 +21,7 @@ const Livraison = () => {
     
       const handleDelete = async (id) => {
         try {
-            await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
+            await axios.delete(`${DOMAIN}/api/livraison/livraisonDelete/${id}`);
               window.location.reload();
           } catch (err) {
             console.log(err);
@@ -35,14 +35,14 @@ const Livraison = () => {
           dataIndex: 'date_livre',
           key: 'date_livre',
           render: (text) => {
-            const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
+            const formattedDate = format(new Date(text), 'dd-MM-yyyy');
             return <span>{formattedDate}</span>;
           },
         },
         {
-          title: 'user_cr',
-          dataIndex: 'user_cr',
-          key: 'user_cr'
+          title: 'Utilisateur',
+          dataIndex: 'username',
+          key: 'username'
         },
         {
             title: 'Action',

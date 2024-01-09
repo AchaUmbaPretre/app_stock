@@ -118,6 +118,44 @@
                     }
                 }
             }
+            .liste_bottom{
+                margin: 20px 0;
+                .liste_rows{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .liste-row{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        label{
+                            font-size: 1rem;
+                            color: #555;
+                        }
+                        .list_select{
+                            padding: 8px 0;
+                            width: 200px;
+                            border: 1px solid #d6d6d6;
+                            outline: none;
+                        }
+                    }
+                    .rows-btn{
+                        .list_btn{
+                            padding: 10px 15px;
+                            border: none;
+                            background:rgba(1, 35, 138, 0.952);
+                            color: #fff;
+                            cursor: pointer;
+                            transition: .5s;
+                            &:hover{
+                                border: 1px solid rgba(1, 35, 138, 0.952);
+                                background: transparent;
+                                color: rgba(1, 35, 138, 0.952);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

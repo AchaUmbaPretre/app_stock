@@ -120,7 +120,7 @@ const ListeCommande = () => {
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover>
-                <Popover title="Détail commande" trigger="hover">
+                <Popover title="Voir des produits" trigger="hover">
                     <Link to={`/commandes/${record.id_commande}`}>
                         <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
                     </Link>

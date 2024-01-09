@@ -1,12 +1,13 @@
 import { FieldBinaryOutlined, SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,PlusCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format, isValid } from 'date-fns';
 import Swal from 'sweetalert2';
 import config from '../../../config';
+import { useSelector } from 'react-redux';
 
 const ListeDetailView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -20,17 +21,20 @@ const ListeDetailView = () => {
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
     const [title, setTitle] = useState('');
-    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState([]);
+    const [getLivreur, setGetLivreur] = useState([]);
+    const [quantities, setQuantities] = useState({});
+    const userId = useSelector((state) => state.user.currentUser.id);
 
-
-      const showModal = (id) => {
-        setOpen(true);
-        navigate(`/ventes/${id}`);
-      };
-      const handleCancel = () => {
-        setOpen(false);
-      };
+    const handleSelectionChange = (event, id, quantite) => {
+      if (event.target.checked) {
+        setSelected([...selected, { id, quantite }]);
+      } else {
+        setSelected(selected.filter((row) => row.id !== id));
+      }
+    };
     
+    console.log(quantities)
       const handleDelete = async (id) => {
       try {
           await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
@@ -41,6 +45,32 @@ const ListeDetailView = () => {
       };
     
       const columns = [
+        {
+          title: '',
+          dataIndex: 'id_detail',
+          key: 'selected',
+          render: (text, record) => (
+            <div>
+              <Checkbox
+                checked={selected.some((item) => item.id === record.id_varianteProduit)}
+                onChange={(event) =>
+                  handleSelectionChange(event, record.id_varianteProduit, record.quantite)
+                }
+              />
+              {selected.some((item) => item.id === record.id_varianteProduit) && (
+                <Input
+                  value={quantities[record.id_varianteProduit] || ''}
+                  onChange={(event) =>
+                    setQuantities((prevQuantities) => ({
+                      ...prevQuantities,
+                      [record.id_varianteProduit]: event.target.value,
+                    }))
+                  }
+                />
+              )}
+            </div>
+          ),
+        },
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
           {
             title: 'image',
@@ -136,6 +166,8 @@ const ListeDetailView = () => {
           },
       ];
 
+      console.log(selected)
+
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -151,6 +183,56 @@ const ListeDetailView = () => {
         };
         fetchData();
       }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/livreur`);
+            setGetLivreur(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+
+      const handleClick = (e) => {
+        e.preventDefault();
+      
+        Promise.all(
+          selected.map((dd, index) =>
+            axios.post(`${DOMAIN}/api/livraison/livraisonDetail`, {
+              id_commande: id,
+              id_varianteProduit: dd.id,
+              qte_livre: Object.values(quantities)[index],
+              qte_commande: dd.quantite,
+              prix: 100,
+              id_livreur: 1,
+              user_cr: userId,
+            })
+          )
+        )
+          .then(() => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Livraison créée avec succès!',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            });
+            navigate('/listeCommande');
+            window.location.reload();
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: 'Error',
+              text: err.message,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          });
+      };
 
 
   return (
@@ -180,6 +262,22 @@ const ListeDetailView = () => {
                     </div>
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
+                    </div>
+                    <div className="liste_bottom">
+                      <div className="liste_rows">
+                        <div className="liste-row">
+                          <label htmlFor="">Livreur</label>
+                          <select name="" id="" className='list_select'>
+                            <option value="">Sélectionnez un livreur</option>
+                            {getLivreur.map((dd)=>(
+                              <option value={dd.id_livreur}>{`${dd.nom} - ${dd.prenom}`}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="rows-btn">
+                          <button className="list_btn" onClick={handleClick}>Soumettre</button>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>

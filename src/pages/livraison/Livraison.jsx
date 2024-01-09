@@ -35,7 +35,7 @@ const Livraison = () => {
           dataIndex: 'date_livre',
           key: 'date_livre',
           render: (text) => {
-            const formattedDate = format(new Date(text), 'dd-MM-yyyy');
+            const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
             return <span>{formattedDate}</span>;
           },
         },

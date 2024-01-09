@@ -293,7 +293,7 @@ const filteredData = getProduit?.filter((item) =>
                    {open &&
                     <ProductSelects getProduits={setGetProduit}/> } 
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

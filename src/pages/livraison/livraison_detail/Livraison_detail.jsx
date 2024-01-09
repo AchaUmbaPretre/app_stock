@@ -41,27 +41,27 @@ const Livraison_detail = () => {
       };
     
       const columns = [
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
-        {
-            title: 'Id commande',
-            dataIndex: 'id_commande',
-            key: 'id_commande'
-          },
-        {
-          title: 'Produit',
-          dataIndex: 'id_varianteProduit',
-          key: 'id_produit'
+          { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+          {
+            title: 'image',
+            dataIndex: 'img',
+            key: 'image',
+            render: (text, record) => (
+              <div className="userList">
+                <img src={record.img} alt="" className="userImg"  />
+              </div>
+            )
         },
         {
-          title: 'Quantité livré',
+          title: 'Qté livrée',
           dataIndex: 'qte_livre',
           key: 'qte_livre'
         },
         {
-            title: 'Quantité commandé',
+            title: 'Qté commandée',
             dataIndex: 'qte_commande',
             key: 'qte_commande'
-          },
+        },
         {
             title: 'Prix',
             dataIndex: 'prix',
@@ -79,7 +79,7 @@ const Livraison_detail = () => {
               
               </span>
             ),
-          },
+        },
         {
             title: 'Date création',
             dataIndex: 'date_creation',
@@ -88,12 +88,7 @@ const Livraison_detail = () => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
               return <span>{formattedDate}</span>;
             },
-          },
-          {
-            title: 'package',
-            dataIndex: 'package',
-            key: 'package',
-          },
+        },
         {
             title: 'Action',
             key: 'action',
@@ -123,20 +118,15 @@ const Livraison_detail = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/detail-commande/${id}`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail`);
             setData(data);
             setLoading(false)
-            const getTitle = data.map((dd)=>(dd.id_commande))
-
-            setTitle(getTitle[0])
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
       }, []);
-
-      console.log(title)
 
 
   return (

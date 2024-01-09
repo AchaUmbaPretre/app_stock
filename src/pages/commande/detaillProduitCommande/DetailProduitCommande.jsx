@@ -131,7 +131,7 @@ const DetailProduitCommande = () => {
           icon: 'success',
           confirmButtonText: 'OK',
         });
-        navigate('/listeDetailCommande')
+        navigate('/listeCommande')
         window.location.reload();
   
       }catch(err) {

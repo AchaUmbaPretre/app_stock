@@ -43,6 +43,11 @@
                 padding: 10px;
                 background:rgba(1, 35, 138, 0.952);
                 color: #fff;
+                &:hover{
+                    border: 1px solid rgba(1, 35, 138, 0.952);
+                    background: transparent;
+                    color: rgba(1, 35, 138, 0.952);
+                }
             }
         }
     }

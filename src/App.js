@@ -53,6 +53,9 @@ import Livraison from './pages/livraison/Livraison';
 import Livraison_detail from './pages/livraison/livraison_detail/Livraison_detail';
 import { useSelector } from 'react-redux';
 import LivraisonForm from './pages/livraison/livraisonForm/LivraisonForm';
+import PageLivreur from './pages/pageLivreur/PageLivreur';
+import PageLivreurDetail from './pages/pageLivreur/pageLivreurDetail/PageLivreurDetail';
+import PageLivreurNavbar from './pages/pageLivreur/pageNavbar/PageLivreurNavbar';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -67,6 +70,20 @@ const user = useSelector((state) => state.user.currentUser);
         <Topbar/>
         <div className="appContainer">
           <Sidebar/>
+          <div className="appOutlet">
+            <Outlet />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const Layout2 = () => {
+
+    return (
+      <div>
+        <PageLivreurNavbar/>
+        <div className="appContainer">
           <div className="appOutlet">
             <Outlet />
           </div>
@@ -307,6 +324,19 @@ const user = useSelector((state) => state.user.currentUser);
     {
       path: '/*',
       element: <Page404 />
+    },{
+      path: '/',
+      element: <SecuriteRoute><Layout2 /></SecuriteRoute>,
+      children: [
+        {
+          path: '/pageLivreur',
+          element: <PageLivreur />
+        },
+        {
+          path: '/pageLivreurDetail',
+          element: <PageLivreurDetail />
+        },
+      ]
     }
   ]);
 

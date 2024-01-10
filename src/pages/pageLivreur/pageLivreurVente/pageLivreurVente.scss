@@ -8,5 +8,10 @@
         @include mobileXR{
             padding: 20px;
         }
+        .rowChart-row-table{
+            @include mobileXR{
+                
+            }
+        }
     }
 }

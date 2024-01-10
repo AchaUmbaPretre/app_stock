@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import config from '../../../config';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -9,6 +9,10 @@ const UtilisateurEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({})
   const navigate = useNavigate();
+  const {pathname} = useLocation();
+  const id = pathname.split('/')[2];
+  const [loading, setLoading] = useState(true);
+  const {username,email,password,role} = data;
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -24,6 +28,21 @@ const UtilisateurEdit = () => {
   
   setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
+
+  console.log(data)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/user/getUserOne/${id}`);
+        setData(data[0]);
+        setLoading(false)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -48,6 +67,25 @@ const UtilisateurEdit = () => {
       });
     }
   }
+  
+  const taps = [
+    {
+      label : "Admin",
+      id : "admin"
+    },
+    {
+      label : "Secretaire",
+      id : "secretaire"
+    },
+    {
+      label : "Livreur",
+      id : "livreur"
+    },
+    {
+      label : "Client",
+      id : "client"
+    },
+  ]
   return (
     <>
         <div className="clientForm">
@@ -62,25 +100,25 @@ const UtilisateurEdit = () => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Nom</label>
-                  <input type="text" className="form-input" name='username' onChange={handleInputChange} required/>
+                  <input type="text" value={username} className="form-input" name='username' onChange={handleInputChange} required/>
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Email</label>
-                  <input type="email" className="form-input" name='email' onChange={handleInputChange}  required/>
+                  <input type="email" value={email} className="form-input" name='email' onChange={handleInputChange}  required/>
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Mot de passe</label>
-                  <input type="password" className="form-input" name='password' onChange={handleInputChange}  required/>
+                  <input type="password" value={password} className="form-input" name='password' onChange={handleInputChange}  required/>
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Permission</label>
-                  <select className="form-input" name='role' onChange={handleInputChange}>
-                    <option >Selectionnez une permission</option>
-                    <option value="admin">Admin</option>
-                    <option value="secretaire">Secretaire</option>
-                    <option value="livreur">Livreur</option>
-                    <option value="client">Client</option>
+                  <select className="form-input" value={role} name='role' onChange={handleInputChange}>
+                    <option value="" disabled>Selectionnez une permission</option>
+                    {taps.map((dd)=>(
+                      <option value={dd.id}>{dd.label}</option>
+                    ))}
                   </select>
+      <p>La valeur sélectionnée est : {role !== '' ? role : 'Aucune permission sélectionnée'}</p>
                 </div>
 
               <div className="form-submit">

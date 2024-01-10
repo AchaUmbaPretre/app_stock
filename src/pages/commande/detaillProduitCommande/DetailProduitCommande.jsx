@@ -1,9 +1,8 @@
 import React from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
-import Select from 'react-select';
 import './detailProduitCommande.scss'
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'

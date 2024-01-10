@@ -1,0 +1,12 @@
+@import '../../../style.scss';
+
+.pageLivreurVente{
+    @include mobileXR{
+        
+    }
+    .pageLivreurVente-container{
+        @include mobileXR{
+            padding: 20px;
+        }
+    }
+}

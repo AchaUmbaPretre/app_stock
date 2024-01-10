@@ -3,8 +3,10 @@ import { BellOutlined, PoweroffOutlined, MailOutlined,ExclamationOutlined } from
 import './pageLivreurNavbar.scss'
 import { Badge } from 'antd';
 import logoIcon from './../../../assets/logo doe.jpg'
+import { useSelector } from 'react-redux';
 
 const PageLivreurNavbar = () => {
+    const userId = useSelector((state) => state.user.currentUser.id);
   return (
     <>
         <div className="pageLivreurNavbar">

@@ -1,6 +1,5 @@
 import { PlusOutlined, SearchOutlined, EyeOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -19,14 +18,6 @@ const ListeCommande = () => {
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
 
-
-      const showModal = (id) => {
-        setOpen(true);
-        navigate(`/ventes/${id}`);
-      };
-      const handleCancel = () => {
-        setOpen(false);
-      };
     
       const handleDelete = async (id) => {
       try {

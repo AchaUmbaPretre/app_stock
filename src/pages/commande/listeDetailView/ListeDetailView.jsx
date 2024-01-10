@@ -1,6 +1,5 @@
 import { FieldBinaryOutlined, SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,PlusCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -11,11 +10,8 @@ import { useSelector } from 'react-redux';
 
 const ListeDetailView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const {pathname} = useLocation();

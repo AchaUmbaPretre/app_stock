@@ -1,9 +1,7 @@
 import React from 'react'
 import './pageLivreur.scss'
-import { BellOutlined, PoweroffOutlined, MailOutlined,ExclamationOutlined } from '@ant-design/icons'
-import { Badge } from 'antd';
-import logoIcon from './../../assets/logo doe.jpg'
-import { useActionData, useNavigate } from 'react-router-dom';
+import { ExclamationOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom';
 
 const PageLivreur = () => {
     const navigate = useNavigate();

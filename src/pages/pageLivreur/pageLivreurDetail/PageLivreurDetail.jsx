@@ -9,14 +9,13 @@ const PageLivreurDetail = () => {
         <div className="pageLivreurDetail-wrapper">
           <img src={profil} alt="" className="img-page-livreur" />
           <div className="pageLivreurDetail-rows">
-            <span className="pageLivreur-name">Produit1</span>
-            <span className="pageLivreur-name">Produit1</span>
-            <span className="pageLivreur-name">Produit1</span>
-            <span className="pageLivreur-name">Produit1</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span> Produit1</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span>Produit1</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span>Produit1</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span>Produit1</span>
           </div>
         </div>
       </div>
-      
     </>
   )
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { CloudUploadOutlined  } from '@ant-design/icons';
 import config from '../../../config';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -77,8 +76,10 @@ const UtilisateurEdit = () => {
                   <label htmlFor="">Permission</label>
                   <select className="form-input" name='role' onChange={handleInputChange}>
                     <option >Selectionnez une permission</option>
-                    <option value="0">Admin</option>
-                    <option value="1">Utilisateur</option>
+                    <option value="admin">Admin</option>
+                    <option value="secretaire">Secretaire</option>
+                    <option value="livreur">Livreur</option>
+                    <option value="client">Client</option>
                   </select>
                 </div>
 

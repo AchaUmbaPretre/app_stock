@@ -166,9 +166,9 @@ const Utilisateurs = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-{/*                 <Popover title="Modifier" trigger="hover">
+                <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
-                </Popover> */}
+                </Popover> 
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"

@@ -81,3 +81,9 @@ li{
 ::-webkit-scrollbar-thumb:hover{
   background: linear-gradient(#253053,#253053d7) no-repeat;
 }
+
+.pageNavbar{
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+}

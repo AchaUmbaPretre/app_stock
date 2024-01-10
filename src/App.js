@@ -83,10 +83,8 @@ const user = useSelector((state) => state.user.currentUser);
     return (
       <div>
         <PageLivreurNavbar/>
-        <div className="appContainer">
-          <div className="appOutlet">
-            <Outlet />
-          </div>
+        <div className="pageNavbar">
+          <Outlet />
         </div>
       </div>
     );

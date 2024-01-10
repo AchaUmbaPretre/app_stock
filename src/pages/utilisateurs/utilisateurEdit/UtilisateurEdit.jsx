@@ -48,10 +48,10 @@ const UtilisateurEdit = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`${DOMAIN}/api/auth/register`, data)
+      await axios.put(`${DOMAIN}/api/user/getUser/${id}`, data)
       Swal.fire({
         title: 'Success',
-        text: 'Utilisateur a été crée avec succès!',
+        text: 'Utilisateur a été modifier avec succès!',
         icon: 'success',
         confirmButtonText: 'OK',
       });

@@ -56,6 +56,7 @@ import LivraisonForm from './pages/livraison/livraisonForm/LivraisonForm';
 import PageLivreur from './pages/pageLivreur/PageLivreur';
 import PageLivreurDetail from './pages/pageLivreur/pageLivreurDetail/PageLivreurDetail';
 import PageLivreurNavbar from './pages/pageLivreur/pageNavbar/PageLivreurNavbar';
+import PageLivreurVente from './pages/pageLivreur/pageLivreurVente/PageLivreurVente';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -334,6 +335,10 @@ const user = useSelector((state) => state.user.currentUser);
           path: '/pageLivreurDetail',
           element: <PageLivreurDetail />
         },
+        {
+          path: '/pageLivreurVente',
+          element: <PageLivreurVente />
+        }
       ]
     }
   ]);

@@ -29,7 +29,7 @@ const PageLivreur = () => {
                     </div>
                 </nav> */}
                 <div className="pageLivreur-wrapper">
-                    <div className="pageLivreur-message" onClick={()=>navigate('/pageLivreurDetail')}>
+                    <div className="pageLivreur-message" onClick={()=>navigate('/pageLivreurVente')}>
                         Il ya une livraison, cliquez ici pour voir les details
                         <ExclamationOutlined />
                     </div>

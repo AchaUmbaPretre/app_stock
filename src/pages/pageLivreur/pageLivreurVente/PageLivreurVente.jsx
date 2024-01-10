@@ -121,13 +121,14 @@ const PageLivreurVente = () => {
                 <div className="pageLivreur-form-rows">
                     <div className="pageLivreur-form-row">
                         <label htmlFor="">Type de livraison</label>
-                        <select name="" id="">
+                        <select name="" id="" className='page-select'>
                             <option value=""selected>Sélectionnez un type</option>
                             {getType.map((dd)=>(
                                 <option value={dd.id_type_mouvement}>{dd.type_mouvement}</option>
                             ))}
                         </select>
                     </div>
+                    <button className='pageLivreur-btn'>Livrer maintenant</button>
                 </div>
             </div>
         </div>

@@ -15,10 +15,34 @@
         }
         .pageLivreur-form-rows{
             padding: 20px 0;
+            @include mobileXR{
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
             .pageLivreur-form-row{
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 10px;
+                label{
+                    @include mobileXR{
+                        font-size: .9rem;
+                        color: #555;
+                    }
+                }
+                .page-select{
+                    @include mobileXR{
+                        width: 100%;
+                        border: 1px solid #555;
+                        padding: 10px ;
+                    }
+                }
+            }
+            .pageLivreur-btn{
+                border: none;
+                padding: 10px;
+                background:rgba(1, 35, 138, 0.952);
+                color: #fff;
             }
         }
     }

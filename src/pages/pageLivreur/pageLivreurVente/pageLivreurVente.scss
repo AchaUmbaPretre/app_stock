@@ -13,5 +13,13 @@
                 
             }
         }
+        .pageLivreur-form-rows{
+            padding: 20px 0;
+            .pageLivreur-form-row{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
     }
 }

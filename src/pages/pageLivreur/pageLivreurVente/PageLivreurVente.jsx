@@ -4,6 +4,7 @@ import axios from 'axios';
 import './pageLivreurVente.scss'
 import config from '../../../config';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PageLivreurVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -13,6 +14,7 @@ const PageLivreurVente = () => {
     const navigate = useNavigate();
     const [getType, setGetType] = useState([]);
     const [data, setData] = useState([]);
+    const userId = useSelector((state) => state.user.currentUser.id);
 
     const handleSelectionChange = (event, id) => {
         if (event.target.checked) {
@@ -50,9 +52,9 @@ const PageLivreurVente = () => {
             )
         },
         {
-          title: 'Quantité',
-          dataIndex: 'quantite',
-          key: 'quantite',
+          title: 'Qté',
+          dataIndex: 'qte_livre',
+          key: 'qte_livre',
           render: (text) => (
             <Space>
               <Tag color="green">{text}</Tag>
@@ -110,6 +112,20 @@ const PageLivreurVente = () => {
         };
         fetchData();
       }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-user/${userId}`);
+            setData(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+    
 
   return (
     <>

@@ -19,17 +19,7 @@ const Livraison_detail = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
-    const [title, setTitle] = useState('');
-    const [open, setOpen] = useState(false);
 
-
-      const showModal = (id) => {
-        setOpen(true);
-        navigate(`/ventes/${id}`);
-      };
-      const handleCancel = () => {
-        setOpen(false);
-      };
     
       const handleDelete = async (id) => {
       try {

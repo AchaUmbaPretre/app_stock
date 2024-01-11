@@ -57,6 +57,7 @@ import PageLivreur from './pages/pageLivreur/PageLivreur';
 import PageLivreurDetail from './pages/pageLivreur/pageLivreurDetail/PageLivreurDetail';
 import PageLivreurNavbar from './pages/pageLivreur/pageNavbar/PageLivreurNavbar';
 import PageLivreurVente from './pages/pageLivreur/pageLivreurVente/PageLivreurVente';
+import Page405 from './pages/page404/page405';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -100,7 +101,7 @@ const user = useSelector((state) => state.user?.currentUser);
   };
 
   const router = createBrowserRouter([
-    user?.role === 'admin' ? {
+    (user?.role === 'admin' || user?.role === 'secretaire') && {
       path: '/',
       element: <SecuriteRoute><Layout /></SecuriteRoute>,
       children: [
@@ -313,12 +314,12 @@ const user = useSelector((state) => state.user?.currentUser);
           element: <RapportDachats/>
         },
       ]
-    } : {
+    }, user?.role === 'livreur' && {
       path: '/',
       element: <SecuriteRoute><Layout2 /></SecuriteRoute>,
       children: [
         {
-          path: '/pageLivreur',
+          path: '/',
           element: <PageLivreur />
         },
         {
@@ -339,10 +340,14 @@ const user = useSelector((state) => state.user?.currentUser);
       path: '/register',
       element: <Register1 />
     },
+    user?.role === null && {
+      path: '/*',
+      element: <Page405 />
+    },
     {
       path: '/*',
       element: <Page404 />
-    }
+    },
   ]);
 
   return (

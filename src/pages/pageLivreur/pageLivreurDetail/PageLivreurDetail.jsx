@@ -1,18 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './pageLivreurDetail.scss'
 import profil from '../../../assets/2e6501ef-e0e6-4968-af04-5a90fe0ffd69.jpg'
+import { useLocation, useNavigate } from 'react-router-dom';
+import config from '../../../config';
+import axios from 'axios';
+import moment from 'moment';
 
 const PageLivreurDetail = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+  const [selected, setSelected] = useState([]);
+  const [data, setData] = useState([]);
+  const scroll = { x: 400 };
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const {pathname} = useLocation();
+  const id = pathname.split('/')[2]
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-user-detail/${id}`);
+        setData(data[0]);
+        setLoading(false)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
   return (
     <>
       <div className="pageLivreurDetail">
         <div className="pageLivreurDetail-wrapper">
-          <img src={profil} alt="" className="img-page-livreur" />
+          <img src={data.img} alt="" className="img-page-livreur" />
           <div className="pageLivreurDetail-rows">
-            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span> Produit1</span>
-            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span>Produit1</span>
-            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span>Produit1</span>
-            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Nom : </span>Produit1</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Marque : </span>{data.nom}</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Créer par </span>{data.username}</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Pointure : </span>{data.taille}</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Quantité à livrer : </span>{data.qte_livre}</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Prix : </span>{data.prix} $</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Date de création : </span>{moment(data.date_creation).format('DD/MM/YYYY')}</span>
           </div>
         </div>
       </div>

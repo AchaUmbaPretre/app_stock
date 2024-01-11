@@ -323,13 +323,13 @@ const user = useSelector((state) => state.user?.currentUser);
           element: <PageLivreur />
         },
         {
-          path: '/pageLivreurDetail',
-          element: <PageLivreurDetail />
-        },
-        {
           path: '/pageLivreurVente',
           element: <PageLivreurVente />
-        }
+        },
+        {
+          path: '/pageLivreurDetail/:id',
+          element: <PageLivreurDetail />
+        },
       ]
     },
     {

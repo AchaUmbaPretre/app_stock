@@ -46,7 +46,7 @@ const PageLivreurVente = () => {
             dataIndex: 'img',
             key: 'image',
             render: (text, record) => (
-              <div className="userList">
+              <div className="userList" onClick={()=>navigate(`/pageLivreurDetail/${record.id_varianteProduit}`)}>
                 <img src={record.img} alt="" className="userImg"  />
               </div>
             )

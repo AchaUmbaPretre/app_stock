@@ -22,15 +22,15 @@ const ListeDetailView = () => {
     const [quantities, setQuantities] = useState({});
     const userId = useSelector((state) => state.user.currentUser.id);
 
-    const handleSelectionChange = (event, id, quantite) => {
+    const handleSelectionChange = (event, id, quantite,id_detail) => {
       if (event.target.checked) {
-        setSelected([...selected, { id, quantite }]);
+        setSelected([...selected, { id, quantite,id_detail }]);
       } else {
         setSelected(selected.filter((row) => row.id !== id));
       }
     };
     
-    console.log(quantities)
+    console.log(selected)
       const handleDelete = async (id) => {
       try {
           await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
@@ -50,7 +50,7 @@ const ListeDetailView = () => {
               <Checkbox
                 checked={selected.some((item) => item.id === record.id_varianteProduit)}
                 onChange={(event) =>
-                  handleSelectionChange(event, record.id_varianteProduit, record.quantite)
+                  handleSelectionChange(event, record.id_varianteProduit, record.quantite, record.id_detail)
                 }
               />
               {selected.some((item) => item.id === record.id_varianteProduit) && (
@@ -162,8 +162,6 @@ const ListeDetailView = () => {
           },
       ];
 
-      console.log(selected)
-
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -193,6 +191,7 @@ const ListeDetailView = () => {
         fetchData();
       }, []);
 
+      console.log(selected)
 
       const handleClick = (e) => {
         e.preventDefault();
@@ -206,6 +205,7 @@ const ListeDetailView = () => {
               qte_commande: dd.quantite,
               prix: 100,
               id_livreur: 1,
+              id_detail_commande: dd.id_detail,
               user_cr: userId,
             })
           )

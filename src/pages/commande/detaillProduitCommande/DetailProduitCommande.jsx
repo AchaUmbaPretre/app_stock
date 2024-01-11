@@ -192,7 +192,13 @@ const DetailProduitCommande = () => {
                                                 ))}
                                         </select>
                                     </div>
-                                </div>                                
+                                </div>
+                                <div className="detail_client-row">
+                                  <label htmlFor="">Client </label>
+                                  <select name="" id="">
+                                    <option>Sélectionnez un client</option>
+                                  </select>
+                                </div>                               
                                 <div className="filter-product">
                                     <div className="filter">
                                         <AddIcon className="filter-icon" onClick={()=>handleQuantity('inc')}/>

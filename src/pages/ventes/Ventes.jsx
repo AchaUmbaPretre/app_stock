@@ -169,13 +169,11 @@ const Ventes = () => {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
-          ...getColumnSearchProps('nom_client'),
         },
         {
           title: 'Livreur',
           dataIndex: 'username',
-          key: 'username',
-            ...getColumnSearchProps('prenom')
+          key: 'username'
         },
         {
           title: 'Pointure',
@@ -230,14 +228,6 @@ const Ventes = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Modifier" trigger="hover">
-                  <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=>showModal(record.id)} />
-                </Popover>
-                <Popover title="Voir le détail" trigger="hover">
-                  <Link to={`/venteView/${record.id}`}>
-                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                  </Link>
-                </Popover>
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -315,10 +305,10 @@ const Ventes = () => {
                         <h2 className="product-h2">Liste de ventes</h2>
                         <span>Gérer vos ventes</span>
                     </div>
-                    <div className="product-right" onClick={() =>navigate('/ventesForm')}>
+                    {/* <div className="product-right" onClick={() =>navigate('/ventesForm')}>
                         <PlusOutlined />
                         <span className="product-btn">Ajouter des ventes</span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">

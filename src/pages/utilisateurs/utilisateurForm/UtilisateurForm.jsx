@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import { CloudUploadOutlined  } from '@ant-design/icons';
 import config from '../../../config';
 import { useNavigate } from 'react-router-dom';
@@ -95,4 +95,44 @@ const UtilisateurForm = () => {
   )
 }
 
-export default UtilisateurForm
+export default UtilisateurForm */
+
+
+/* const router = createBrowserRouter([
+  {
+    path: '/',
+    element: user?.role === 'admin' ? (
+      <SecuriteRoute>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Rightbar />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/productView/:id" element={<ProductView />} />
+            <Route path="/productForm" element={<ProductForm />} />
+            <Route path="/productForm/:id" element={<FormProduitEdit />} />
+            <Route path="/varianteProduit" element={<VarianteProduit />} />
+            <Route path="/pageDetail/:id" element={<PageDetails />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/categories/:id" element={<Categories />} />
+            <Route path="/emplacement" element={<Emplacement />} />
+            <Route path="/emplacement/:id" element={<Emplacement />} />
+            <Route path="/matiere" element={<Matiere />} />
+            <Route path="/matiere/:id" element={<Matiere />} />
+            <Route path="/marque" element={<Marque />} />
+            <Route path="/marque/:id" element={<Marque />} />
+            <Route path="/typeMouvement" element={<TypeMouvement />} />
+            <Route path="/mouvement" element={<Mouvement />} />
+            <Route path="/mouvementForm" element={<FormMouvement />} />
+          </Routes>
+        </Layout>
+      </SecuriteRoute>
+    ) : (
+      <SecuriteRoute>
+        <Layout2>
+        <Routes>
+          <Route path="/" element={<PageLivreur />} />
+        </Routes>
+      </Layout2>
+      </SecuriteRoute>
+    )
+  }, */

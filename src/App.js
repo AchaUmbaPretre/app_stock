@@ -100,7 +100,7 @@ const user = useSelector((state) => state.user?.currentUser);
   };
 
   const router = createBrowserRouter([
-    {
+    user?.role === 'admin' ? {
       path: '/',
       element: <SecuriteRoute><Layout /></SecuriteRoute>,
       children: [
@@ -313,20 +313,8 @@ const user = useSelector((state) => state.user?.currentUser);
           element: <RapportDachats/>
         },
       ]
-    },
-    {
-      path: '/login',
-      element: <Login1 />
-    },
-    {
-      path: '/register',
-      element: <Register1 />
-    },
-    {
-      path: '/*',
-      element: <Page404 />
-    },{
-      path: '/pageLivreur',
+    } : {
+      path: '/',
       element: <SecuriteRoute><Layout2 /></SecuriteRoute>,
       children: [
         {
@@ -342,6 +330,18 @@ const user = useSelector((state) => state.user?.currentUser);
           element: <PageLivreurVente />
         }
       ]
+    },
+    {
+      path: '/login',
+      element: <Login1 />
+    },
+    {
+      path: '/register',
+      element: <Register1 />
+    },
+    {
+      path: '/*',
+      element: <Page404 />
     }
   ]);
 

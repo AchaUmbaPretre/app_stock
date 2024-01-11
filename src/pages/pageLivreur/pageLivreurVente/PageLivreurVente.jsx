@@ -178,7 +178,7 @@ const PageLivreurVente = () => {
                             ))}
                         </select>
                     </div>
-                    <button className='pageLivreur-btn'>Livrer maintenant</button>
+                    <button className='pageLivreur-btn' onClick={handleClick}>Livrer maintenant</button>
                 </div>
             </div>
         </div>

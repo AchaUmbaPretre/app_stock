@@ -55,12 +55,22 @@ const Livraison_detail = () => {
         {
           title: 'Qté livrée',
           dataIndex: 'qte_livre',
-          key: 'qte_livre'
+          key: 'qte_livre',
+          render: (text) => (
+            <Tag color={"#108ee9"}>
+              {text}
+            </Tag>
+          )
         },
         {
             title: 'Qté commandée',
             dataIndex: 'qte_commande',
-            key: 'qte_commande'
+            key: 'qte_commande',
+            render: (text) => (
+              <Tag color={"#87d068"}>
+                {text}
+              </Tag>
+            )
         },
         {
             title: 'Prix',

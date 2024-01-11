@@ -8,11 +8,12 @@
     .pageLivreurDetail-wrapper{
         @include mobileXR{
             padding: 20px;
+            width: 100%;
         }
         .img-page-livreur{
             @include mobileXR{
                 width: 100%;
-                height: auto;
+                height: 350px;
                 object-fit: cover;
             }
         }

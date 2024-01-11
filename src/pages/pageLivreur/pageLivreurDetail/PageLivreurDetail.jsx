@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../../../config';
 import axios from 'axios';
 import moment from 'moment';
+import { FadeLoader } from 'react-spinners';
 
 const PageLivreurDetail = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -31,6 +32,11 @@ const PageLivreurDetail = () => {
   return (
     <>
       <div className="pageLivreurDetail">
+      { loading ? (
+              <div className="spinner-container">
+                <FadeLoader color={'#36D7B7'} loading={loading} />
+              </div>
+            ) : (
         <div className="pageLivreurDetail-wrapper">
           <img src={data.img} alt="" className="img-page-livreur" />
           <div className="pageLivreurDetail-rows">
@@ -41,7 +47,7 @@ const PageLivreurDetail = () => {
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Prix : </span>{data.prix} $</span>
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Date de création : </span>{moment(data.date_creation).format('DD/MM/YYYY')}</span>
           </div>
-        </div>
+        </div>)}
       </div>
     </>
   )

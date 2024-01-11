@@ -20,9 +20,7 @@ const DetailProduitCommande = () => {
     const location = useLocation();
     const id = location.pathname.split('/')[2];
     const id_commande = location.pathname.split('/')[3];
-    const [product, setProduct] = useState({});
     const [quantite, setQuantite] = useState(1);
-    const dispatch = useDispatch();
     const [taille, setTaille] = useState(null);
     const [getTaille, setGetTaille] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,6 +28,8 @@ const DetailProduitCommande = () => {
     const [inventaire, setInventaire] = useState([]);
     const [prix, setPrix] = useState();
     const [inventaireTotalOne,setInventaireTotalOne] = useState([]);
+    const [getClient, setGetClient] = useState([]);
+    const [client, setClient] = useState([]);
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user.currentUser.id)
 
@@ -108,6 +108,18 @@ const DetailProduitCommande = () => {
       setPrix(totalPrice);
     });
 
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/client`);
+          setGetClient(data);
+          setLoading(false)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, []);
 
 
     const handleClick = async (e) => {
@@ -123,7 +135,7 @@ const DetailProduitCommande = () => {
         return;
       }
       try{
-        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
+        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, id_client: client, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
         Swal.fire({
           title: 'Success',
           text: 'Commande créée avec succès!',
@@ -142,6 +154,8 @@ const DetailProduitCommande = () => {
         });
       }
     }
+
+    console.log(client)
       
   return (
     <>
@@ -195,8 +209,12 @@ const DetailProduitCommande = () => {
                                 </div>
                                 <div className="detail_client-row">
                                   <label htmlFor="">Client </label>
-                                  <select name="" id="">
+                                  <select name="id_client" id="" onChange={(e)=>setClient(e.target.value)}>
                                     <option>Sélectionnez un client</option>
+                                    { getClient.map((dd)=>(
+                                      <option value={dd.id}>{dd.nom}</option>
+                                    ))
+                                    }
                                   </select>
                                 </div>                               
                                 <div className="filter-product">

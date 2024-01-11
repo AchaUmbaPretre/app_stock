@@ -17,9 +17,9 @@ const PageLivreurVente = () => {
     const [data, setData] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
 
-    const handleSelectionChange = (event, id,id_commande,qte_livre,prix) => {
+    const handleSelectionChange = (event, id,id_commande,id_detail_commande,qte_livre,prix) => {
         if (event.target.checked) {
-          setSelected([...selected, { id,id_commande,qte_livre,prix}]);
+          setSelected([...selected, { id,id_commande,id_detail_commande,qte_livre,prix}]);
         } else {
           setSelected(selected.filter((row) => row.id !== id));
         }
@@ -37,7 +37,7 @@ const PageLivreurVente = () => {
               <Checkbox
                 checked={selected.some((item) => item.id === record.id_varianteProduit)}
                 onChange={(event) =>
-                  handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.qte_livre, record.prix)
+                  handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.qte_livre, record.prix)
                 }
               />
             </div>
@@ -140,6 +140,7 @@ const PageLivreurVente = () => {
                 id_livreur: userId,
                 quantite: dd.qte_livre,
                 id_commande: dd.id_commande,
+                id_detail_commande : dd.id_detail_commande,
                 prix_unitaire: dd.prix
               });
             })

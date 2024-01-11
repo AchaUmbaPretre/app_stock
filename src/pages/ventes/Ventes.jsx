@@ -141,7 +141,7 @@ const Ventes = () => {
     
       const handleDelete = async (id) => {
       try {
-          await axios.put(`${DOMAIN}/api/vente/venteDelete/${id}`);
+          await axios.put(`${DOMAIN}/api/vente/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
@@ -161,21 +161,29 @@ const Ventes = () => {
           )
         },
         {
-            title: 'Nom produit',
-            dataIndex: 'nom_produit',
-            key: 'code'
+            title: 'Marque',
+            dataIndex: 'nom_marque',
+            key: 'nom_marque'
           },
         {
           title: 'Client',
           dataIndex: 'nom_client',
-          key: 'client',
+          key: 'nom_client',
           ...getColumnSearchProps('nom_client'),
         },
         {
           title: 'Livreur',
-          dataIndex: 'prenom',
-          key: 'prenom',
+          dataIndex: 'username',
+          key: 'username',
             ...getColumnSearchProps('prenom')
+        },
+        {
+          title: 'Pointure',
+          dataIndex: 'pointure',
+          key: 'pointure',
+          render: (text) => (
+            <Tag color={'#87d068'}>{text}</Tag>
+          ),
         },
         {
           title: 'Prix unitaire',
@@ -260,7 +268,7 @@ const Ventes = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/${id}`);
             setGetVente(data[0]);
           } catch (error) {
             console.log(error);

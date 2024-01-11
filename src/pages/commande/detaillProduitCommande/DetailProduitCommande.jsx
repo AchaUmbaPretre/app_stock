@@ -154,8 +154,6 @@ const DetailProduitCommande = () => {
         });
       }
     }
-
-    console.log(client)
       
   return (
     <>

@@ -63,7 +63,7 @@ const Register1 = () => {
         <div class="panel left-panel">
           <div class="content">
             <h3>Voulez-vous retouner à la page Login ?</h3>
-            <button class="btn transparent" id="sign-up-btn">
+            <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/login')}>
                 Se connecter
             </button>
           </div>

@@ -17,13 +17,15 @@ const PageLivreurVente = () => {
     const [data, setData] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
 
-    const handleSelectionChange = (event, id) => {
+    const handleSelectionChange = (event, id,id_commande,qte_livre,prix) => {
         if (event.target.checked) {
-          setSelected([...selected, { id}]);
+          setSelected([...selected, { id,id_commande,qte_livre,prix}]);
         } else {
           setSelected(selected.filter((row) => row.id !== id));
         }
       };
+
+      console.log(selected)
 
       const columns = [
         {
@@ -35,7 +37,7 @@ const PageLivreurVente = () => {
               <Checkbox
                 checked={selected.some((item) => item.id === record.id_varianteProduit)}
                 onChange={(event) =>
-                  handleSelectionChange(event, record.id_varianteProduit)
+                  handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.qte_livre, record.prix)
                 }
               />
             </div>
@@ -129,28 +131,31 @@ const PageLivreurVente = () => {
 
       const handleClick = async (e) => {
         e.preventDefault();
-    
-/*         if (!taille) {
-          Swal.fire({
-            title: 'Error',
-            text: 'Veuillez choisir une pointure',
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-          return;
-        } */
-        try{
-          await axios.post(`${DOMAIN}/api/vente`, {id_client:'', id_livreur:'', quantite: '', prix_unitaire: ''})
+      
+        try {
+          await Promise.all(
+            selected.map(async (dd) => {
+              await axios.post(`${DOMAIN}/api/vente`, {
+                id_client: '',
+                id_livreur: userId,
+                quantite: dd.qte_livre,
+                id_commande: dd.id_commande,
+                prix_unitaire: dd.prix
+              });
+            })
+          );
+      
           Swal.fire({
             title: 'Success',
-            text: 'La vente été créée avec succès!',
+            text: 'La vente a été créée avec succès!',
             icon: 'success',
             confirmButtonText: 'OK',
           });
-          navigate('/')
+      
+          navigate('/');
           window.location.reload();
-    
-        }catch(err) {
+      
+        } catch (err) {
           Swal.fire({
             title: 'Error',
             text: err.message,

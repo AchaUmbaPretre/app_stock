@@ -119,15 +119,15 @@ const Sidebar = () => {
           </Link>
         </Item> */}
       </SubMenu>
-{/*       <SubMenu key="mouvement" title={<span className="sidebarH3">Ventes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
-        <Item key="mouvement">
-          <Link to="/mouvement" className="sidebarLink">
-            Mouvement
-          </Link>
-        </Item>
+      <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="ventes">
           <Link to="/ventes" className="sidebarLink">
             Ventes
+          </Link>
+        </Item>
+        <Item key="mouvement">
+          <Link to="/mouvement" className="sidebarLink">
+            Mouvement
           </Link>
         </Item>
         <Item key="retour">
@@ -140,7 +140,7 @@ const Sidebar = () => {
             Echange
           </Link>
         </Item>
-      </SubMenu> */}
+      </SubMenu>
       <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<ShoppingCartOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="livraison">
           <Link to="/livraison" className="sidebarLink">

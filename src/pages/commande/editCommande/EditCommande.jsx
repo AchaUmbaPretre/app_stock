@@ -150,7 +150,7 @@ const EditCommande = () => {
 
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Modifier</button>
-                <button className="btn-submit btn-annuler">Annuler</button>
+                <button className="btn-submit btn-annuler" onClick={()=> window.location.reload()}>Annuler</button>
               </div>
             </div>
           </div>

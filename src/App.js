@@ -60,7 +60,7 @@ import PageLivreurVente from './pages/pageLivreur/pageLivreurVente/PageLivreurVe
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
-const user = useSelector((state) => state.user.currentUser);
+const user = useSelector((state) => state.user?.currentUser);
 
   const [loading, setLoading] = useState(false);
 
@@ -95,8 +95,10 @@ const user = useSelector((state) => state.user.currentUser);
     if (!user) {
       return <Navigate to="/login" />;
     }
+
     return children;
   };
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -324,7 +326,7 @@ const user = useSelector((state) => state.user.currentUser);
       path: '/*',
       element: <Page404 />
     },{
-      path: '/',
+      path: '/pageLivreur',
       element: <SecuriteRoute><Layout2 /></SecuriteRoute>,
       children: [
         {

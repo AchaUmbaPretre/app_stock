@@ -113,7 +113,7 @@ const UtilisateurEdit = () => {
                 <div className="form-controle">
                   <label htmlFor="">Permission</label>
                   <select className="form-input" value={role} name='role' onChange={handleInputChange}>
-                    <option value="" disabled>Selectionnez une permission</option>
+                    <option>Selectionnez une permission</option>
                     {taps.map((dd)=>(
                       <option value={dd.id}>{dd.label}</option>
                     ))}

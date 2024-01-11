@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   UsergroupAddOutlined,
   ShoppingCartOutlined,
@@ -20,6 +20,7 @@ const { SubMenu, Item } = Menu;
 
 const Sidebar = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+  const navigate = useNavigate();
   const [errorMessage,setErrorMessage] = useState('')
   const [currentUser, setCurrentUser] = useState('')
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Sidebar = () => {
       setCurrentUser(null);
       localStorage.setItem('persist:root', JSON.stringify(currentUser));
       Swal.fire('Déconnexion réussie !', '', 'success');
+      navigate('/login')
       window.location.reload();
     } catch (error) {
       setErrorMessage(error.response.data);

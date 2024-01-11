@@ -9,7 +9,7 @@ const Page405 = () => {
     <Result
     status="403"
     title="403"
-    subTitle="Attend l'autorisation de l'administrateur pour accéder dans votre compte!"
+    subTitle="Veuillez attendre l'autorisation de l'administrateur pour accéder à votre compte"
     extra={<Button type="primary" onClick={() => navigate('/login')} >Retour</Button>}
   />
   );

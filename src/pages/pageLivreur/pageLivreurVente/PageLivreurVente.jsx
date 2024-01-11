@@ -5,6 +5,7 @@ import './pageLivreurVente.scss'
 import config from '../../../config';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 const PageLivreurVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -125,6 +126,39 @@ const PageLivreurVente = () => {
         };
         fetchData();
       }, []);
+
+      const handleClick = async (e) => {
+        e.preventDefault();
+    
+/*         if (!taille) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez choisir une pointure',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        } */
+        try{
+          await axios.post(`${DOMAIN}/api/vente`, {id_client:'', id_livreur:'', quantite: '', prix_unitaire: ''})
+          Swal.fire({
+            title: 'Success',
+            text: 'La vente été créée avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+          navigate('/')
+          window.location.reload();
+    
+        }catch(err) {
+          Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+        }
+      }
     
 
   return (

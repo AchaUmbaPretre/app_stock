@@ -209,18 +209,6 @@ const ListeCommande = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-{/*                         <Modal
-                          title="Modifier la vente"
-                          centered
-                          open={open}
-                          onOk={handleOk}
-                          onCancel={() => setOpen(false)}
-                          width={860}
-                          okText="Soumettre"
-                          cancelText="Annuler"
-                        >
-                         <FormVenteEdit getVente={getVente} setGetVente={setGetVente} />
-                        </Modal> */}
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>

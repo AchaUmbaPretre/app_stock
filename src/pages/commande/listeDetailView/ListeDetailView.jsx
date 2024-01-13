@@ -20,17 +20,17 @@ const ListeDetailView = () => {
     const [selected, setSelected] = useState([]);
     const [getLivreur, setGetLivreur] = useState([]);
     const [quantities, setQuantities] = useState({});
+    const [livreur, setLivreur] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
 
-    const handleSelectionChange = (event, id, quantite,id_detail) => {
+    const handleSelectionChange = (event, id, prix, quantite,id_detail) => {
       if (event.target.checked) {
-        setSelected([...selected, { id, quantite,id_detail }]);
+        setSelected([...selected, { id, prix, quantite,id_detail }]);
       } else {
-        setSelected(selected.filter((row) => row.id !== id));
+        setSelected(selected.filter((row) => row.id_detail !== id_detail));
       }
     };
     
-    console.log(selected)
       const handleDelete = async (id) => {
       try {
           await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
@@ -48,12 +48,12 @@ const ListeDetailView = () => {
           render: (text, record) => (
             <div>
               <Checkbox
-                checked={selected.some((item) => item.id === record.id_varianteProduit)}
+                checked={selected.some((item) => item.id_detail === record.id_detail)}
                 onChange={(event) =>
-                  handleSelectionChange(event, record.id_varianteProduit, record.quantite, record.id_detail)
+                  handleSelectionChange(event, record.id_varianteProduit,record.prix, record.quantite, record.id_detail)
                 }
               />
-              {selected.some((item) => item.id === record.id_varianteProduit) && (
+              {selected.some((item) => item.id_detail === record.id_detail) && (
                 <Input
                   value={quantities[record.id_varianteProduit] || ''}
                   onChange={(event) =>
@@ -202,7 +202,7 @@ const ListeDetailView = () => {
               qte_livre: Object.values(quantities)[index],
               qte_commande: dd.quantite,
               prix: 100,
-              id_livreur: 6,
+              id_livreur: livreur,
               id_detail_commande: dd.id_detail,
               user_cr: userId,
             })
@@ -227,7 +227,6 @@ const ListeDetailView = () => {
             });
           });
       };
-
 
   return (
     <>
@@ -261,10 +260,10 @@ const ListeDetailView = () => {
                       <div className="liste_rows">
                         <div className="liste-row">
                           <label htmlFor="">Livreur</label>
-                          <select name="" id="" className='list_select'>
+                          <select name="" id="" className='list_select' onChange={(e)=>setLivreur(e.target.value)}>
                             <option value="">Sélectionnez un livreur</option>
                             {getLivreur.map((dd)=>(
-                              <option value={dd.id_livreur}>{`${dd.nom} - ${dd.prenom}`}</option>
+                              <option value={dd.id}>{`${dd.username}`}</option>
                             ))}
                           </select>
                         </div>

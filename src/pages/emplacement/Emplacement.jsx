@@ -21,6 +21,7 @@ const Emplacement = () => {
     const {pathname} = useLocation();
     const [searchValue, setSearchValue] = useState('');
     const id = pathname.split('/')[2]
+    const [loading, setLoading] = useState(true);
 
     const showModal = (id) => {
       setOpen(true);
@@ -95,6 +96,7 @@ const Emplacement = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/produit/emplacement`);
           setGetData(data);
+          setLoading(false)
         } catch (error) {
           console.log(error);
         }
@@ -117,6 +119,15 @@ const Emplacement = () => {
     const handleClick = async (e) => {
       e.preventDefault();
 
+      if (!data.nom ||  !data.capacite) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Veuillez remplir tous les champs requis',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return;
+      }
       try {
         await axios.post(`${DOMAIN}/api/produit/emplacement`,data)
           Swal.fire({
@@ -179,7 +190,7 @@ const Emplacement = () => {
                         <h2 className="categorie-title">Ajouter emplacement</h2>
                         <div className="categorie-form">
                             <label htmlFor="">Nom</label>
-                            <input type="text" className="input-form" placeholder='Entrer le nom...' onChange={handleInputChange} />
+                            <input type="text" className="input-form" name='nom' placeholder='Entrer le nom...' onChange={handleInputChange} />
                         </div>
                         <div className="categorie-form">
                             <label htmlFor="">Capacité maximale</label>
@@ -210,7 +221,7 @@ const Emplacement = () => {
                             >
                               <FormEmplacement  setUpdata={setPutEmplacement} getUpdataOne={putEmplacement} OnchangePut={handleInputChange} />
                             </Modal>
-                            <Table columns={columns} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 5}} />
+                            <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                         </div>
                     </div>
                 </div>

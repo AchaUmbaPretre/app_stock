@@ -11,14 +11,9 @@ const Livraison = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
-    const [getVente, setGetVente] = useState({});
-    const [open, setOpen] = useState(false);
-    
+
       const handleDelete = async (id) => {
         try {
             await axios.delete(`${DOMAIN}/api/livraison/livraisonDelete/${id}`);
@@ -93,10 +88,10 @@ const Livraison = () => {
                         <h2 className="product-h2">Liste des livraison</h2>
                         <span>Voir les livraisons</span>
                     </div>
-                   {/*  <div className="product-right" onClick={() =>navigate('/ventesForm')}>
+                    <div className="product-right" onClick={() =>navigate('/livraisonForm')}>
                         <PlusOutlined />
-                        <span className="product-btn">voir les commandes</span>
-                    </div> */}
+                        <span className="product-btn">Créer une livraison</span>
+                    </div>
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">

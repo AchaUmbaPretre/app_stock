@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BellOutlined, PoweroffOutlined, MailOutlined,ExclamationOutlined } from '@ant-design/icons'
 import './pageLivreurNavbar.scss'
 import { Badge } from 'antd';
@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 const PageLivreurNavbar = () => {
     const navigate = useNavigate();
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
     const [errorMessage,setErrorMessage] = useState('')
     const [currentUser, setCurrentUser] = useState('')
     const user = useSelector((state) => state.user.currentUser.username);
@@ -30,6 +32,25 @@ const PageLivreurNavbar = () => {
         Swal.fire('Erreur lors de la déconnexion.', '', 'error');
       }
     };
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-user/${userId}`);
+          setData(data);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    
+      fetchData();
+    
+      const intervalId = setInterval(fetchData, 4000);
+    
+      return () => clearInterval(intervalId);
+    }, [userId]);
+
   return (
     <>
         <div className="pageLivreurNavbar">
@@ -40,10 +61,10 @@ const PageLivreurNavbar = () => {
                             <img src={logoIcon} alt="" className="nav-img" />
                         </div>
                         <div className="navbar-right">
-                            <Badge count={5}>
+                            <Badge count={''}>
                                 <MailOutlined className='navbar-icon' />
                             </Badge>
-                            <Badge count={3}>
+                            <Badge count={data.length}>
                                 <BellOutlined className='navbar-icon'/>
                             </Badge>
                             <PoweroffOutlined className='navbar-icon' onClick={Logout}/>

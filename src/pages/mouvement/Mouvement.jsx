@@ -187,6 +187,14 @@ const Mouvement = () => {
             },
           },
           {
+            title: 'Pointure',
+            dataIndex: 'taille',
+            key: 'taille',
+            render: (text, record) => {
+              return <Tag color={"green"}>{text}</Tag>;
+            },
+          },
+          {
             title: 'Quantité',
             dataIndex: 'quantite',
             key: 'quantite',
@@ -207,19 +215,11 @@ const Mouvement = () => {
           ),
       },
         {
-          title: 'description',
-          dataIndex: 'description',
-          key: 'description'
-        },
-        {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Modifier" trigger="hover">
-                  <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=>showModal(record.id)} />
-                </Popover>
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"

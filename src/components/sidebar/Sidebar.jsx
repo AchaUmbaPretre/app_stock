@@ -130,7 +130,7 @@ const Sidebar = () => {
             Mouvement
           </Link>
         </Item>
-        <Item key="retour">
+        {/* <Item key="retour">
           <Link to="/retour" className="sidebarLink">
             Retour
           </Link>
@@ -139,7 +139,7 @@ const Sidebar = () => {
           <Link to="/echange" className="sidebarLink">
             Echange
           </Link>
-        </Item>
+        </Item> */}
       </SubMenu>
       <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<ShoppingCartOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="livraison">

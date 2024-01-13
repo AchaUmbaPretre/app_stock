@@ -15,17 +15,17 @@ const PageLivreurVente = () => {
     const navigate = useNavigate();
     const [getType, setGetType] = useState([]);
     const [data, setData] = useState([]);
+    const [typeLivraison, setTypeLivraison] = useState([]);
+    const [Idcommande, setIdcommande] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
 
-    const handleSelectionChange = (event, id,id_commande,id_detail_commande,qte_livre,prix) => {
+    const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille) => {
         if (event.target.checked) {
-          setSelected([...selected, { id,id_commande,id_detail_commande,qte_livre,prix}]);
+          setSelected([...selected, { id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,typeLivraison}]);
         } else {
           setSelected(selected.filter((row) => row.id !== id));
         }
       };
-
-      console.log(selected)
 
       const columns = [
         {
@@ -37,7 +37,7 @@ const PageLivreurVente = () => {
               <Checkbox
                 checked={selected.some((item) => item.id === record.id_varianteProduit)}
                 onChange={(event) =>
-                  handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.qte_livre, record.prix)
+                  handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.id_detail_livraison, record.qte_livre, record.prix,record.id_taille)
                 }
               />
             </div>
@@ -127,10 +127,23 @@ const PageLivreurVente = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [userId]);
+
+
+      console.log(typeLivraison)
 
       const handleClick = async (e) => {
         e.preventDefault();
+
+        if (typeLivraison.length === 0) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez remplir le champ requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
       
         try {
           await Promise.all(
@@ -141,7 +154,10 @@ const PageLivreurVente = () => {
                 quantite: dd.qte_livre,
                 id_commande: dd.id_commande,
                 id_detail_commande : dd.id_detail_commande,
-                prix_unitaire: dd.prix
+                prix_unitaire: dd.prix,
+                id_varianteProduit: dd.id,
+                id_taille : dd.id_taille,
+                id_type_mouvement : typeLivraison
               });
             })
           );
@@ -153,6 +169,41 @@ const PageLivreurVente = () => {
             confirmButtonText: 'OK',
           });
       
+        } catch (err) {
+          const errorResponse = err.response;
+          if (errorResponse && errorResponse.status === 400) {
+            const errorMessage = errorResponse.data.error;
+    
+            Swal.fire({
+              title: 'Error',
+              text: errorMessage,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: err,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          }
+        }
+      }
+
+      const handleClick2 = async (e) => {
+        e.preventDefault();
+      
+        try {     
+              await axios.put(`${DOMAIN}/api/livraison/vuLivreur/${data[0]?.id_commande}`);
+      
+          Swal.fire({
+            title: 'Success',
+            text: 'La page a été mise à jour!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+
           navigate('/');
           window.location.reload();
       
@@ -177,14 +228,21 @@ const PageLivreurVente = () => {
                 <div className="pageLivreur-form-rows">
                     <div className="pageLivreur-form-row">
                         <label htmlFor="">Type de livraison</label>
-                        <select name="" id="" className='page-select'>
+                        <select name="id_type_mouvement" id="" className='page-select' onChange={(e)=>setTypeLivraison(e.target.value)}>
                             <option value=""selected>Sélectionnez un type</option>
                             {getType.map((dd)=>(
                                 <option value={dd.id_type_mouvement}>{dd.type_mouvement}</option>
                             ))}
                         </select>
                     </div>
+                    <div className="pageLivreur-form-row">
+                      <label htmlFor="">Description</label>
+                      <textarea name="description" id="" cols="20" rows="8">
+
+                      </textarea>
+                    </div>
                     <button className='pageLivreur-btn' onClick={handleClick}>Livrer maintenant</button>
+                    <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
                 </div>
             </div>
         </div>

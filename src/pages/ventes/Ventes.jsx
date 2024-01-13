@@ -231,7 +231,7 @@ const Ventes = () => {
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id)}
+                    onConfirm={() => handleDelete(record.id_vente)}
                     okText="Oui"
                     cancelText="Non"
                   >

@@ -191,8 +191,6 @@ const ListeDetailView = () => {
         fetchData();
       }, []);
 
-      console.log(selected)
-
       const handleClick = (e) => {
         e.preventDefault();
       
@@ -204,7 +202,7 @@ const ListeDetailView = () => {
               qte_livre: Object.values(quantities)[index],
               qte_commande: dd.quantite,
               prix: 100,
-              id_livreur: 1,
+              id_livreur: 6,
               id_detail_commande: dd.id_detail,
               user_cr: userId,
             })

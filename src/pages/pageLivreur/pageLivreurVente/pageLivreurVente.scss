@@ -9,8 +9,16 @@
             padding: 20px;
         }
         .rowChart-row-table{
-            @include mobileXR{
-                
+            .userList{
+                .userImg{
+                    @include mobileXR{
+                        position: relative;
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+    
+                    }
+                }
             }
         }
         .pageLivreur-form-rows{
@@ -35,6 +43,14 @@
                         width: 100%;
                         border: 1px solid #555;
                         padding: 10px ;
+                    }
+                }
+                textarea{
+                    @include mobileXR{
+                        width: 100%;
+                        border: 1px solid #555;
+                        padding: 10px ;
+                        resize: none;
                     }
                 }
             }

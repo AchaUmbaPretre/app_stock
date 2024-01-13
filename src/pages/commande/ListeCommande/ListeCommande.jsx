@@ -35,7 +35,7 @@ const ListeCommande = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'id_commande',
+          title: 'Code',
           dataIndex: 'id_commande',
           key: 'id_commande'
         },
@@ -80,7 +80,29 @@ const ListeCommande = () => {
         {
           title: 'Livraison',
           dataIndex: 'id_livraison',
-          key: 'id_livraison'
+          key: 'id_livraison',
+          render: (text) => {
+            let tagColor = '';
+            let textValue = '';
+      
+            if (text === 0) {
+              tagColor = 'red';
+              textValue= 'Status en attente'
+            } else if (text === 1) {
+              tagColor = 'green';
+              textValue = 'En cours';
+            }
+            else if (text === 2) {
+              tagColor = 'green';
+              textValue = 'Livré';
+            }
+      
+            return (
+              <Tag color={tagColor}>
+                 {textValue}
+              </Tag>
+            );
+          },
         },
         {
           title: 'Paiement',

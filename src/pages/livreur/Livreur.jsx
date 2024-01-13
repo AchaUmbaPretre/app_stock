@@ -1,7 +1,7 @@
 import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect,useState,useRef } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
@@ -21,25 +21,21 @@ const Livreur = () => {
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
             title: 'Nom',
-            dataIndex: 'nom',
-            key: 'nom',
-            width: '15%',
+            dataIndex: 'username',
+            key: 'username',
         },
         {
-            title: 'Prenom',
-            dataIndex: 'prenom',
-            key: 'prenom',
-            width: '15%',
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
         },
         {
-            title: 'Telephone',
-            dataIndex: 'telephone',
-            key: 'telephone'
-        },
-        {
-          title: 'Adresse',
-          dataIndex: 'adresse',
-          key: 'adresse',
+          title: 'Role',
+          dataIndex: 'role',
+          key: 'role',
+          render: (text) => (
+            <Tag color={'#87d068'}>{text}</Tag>
+          ),
         },
         {
             title: 'Action',
@@ -47,9 +43,9 @@ const Livreur = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Modifier" trigger="hover">
+               {/*  <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
-                </Popover>
+                </Popover> */}
 {/*                 <Popover title="Voir le detail" trigger="hover">
                   <Link to={`/presenceListView/${record.emp1_id}`}>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />

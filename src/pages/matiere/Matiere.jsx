@@ -105,6 +105,16 @@ const Matiere = () => {
       const handleClick = async (e) => {
         e.preventDefault();
 
+        if (!nomMatiere) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez remplir le champs requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
+
         try{
           await axios.post(`${DOMAIN}/api/produit/matiere`, {nom : nomMatiere})
           Swal.fire({

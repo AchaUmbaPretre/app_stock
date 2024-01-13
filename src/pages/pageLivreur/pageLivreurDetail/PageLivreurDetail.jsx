@@ -40,8 +40,8 @@ const PageLivreurDetail = () => {
         <div className="pageLivreurDetail-wrapper">
           <img src={data.img} alt="" className="img-page-livreur" />
           <div className="pageLivreurDetail-rows">
-            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Marque : </span>{data.nom}</span>
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Créer par </span>{data.username}</span>
+            <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Marque : </span>{data.nom}</span>
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Pointure : </span>{data.taille}</span>
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Quantité à livrer : </span>{data.qte_livre}</span>
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Prix : </span>{data.prix} $</span>

@@ -158,12 +158,17 @@ const ListeCommande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/commande`);
             setData(data);
-            setLoading(false)
+            setLoading(false);
           } catch (error) {
             console.log(error);
           }
         };
+    
         fetchData();
+      
+        const timeoutId = setTimeout(fetchData, 4000);
+      
+        return () => clearTimeout(timeoutId);
       }, []);
 
       useEffect(() => {

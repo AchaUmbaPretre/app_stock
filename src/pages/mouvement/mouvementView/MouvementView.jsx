@@ -1,15 +1,13 @@
-import './../products/products.scss'
 import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import photoIcon from './../../assets/logo doe.jpg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import config from '../../config';
+import config from '../../../config';
 import { format } from 'date-fns';
 
-const Mouvement = () => {
+const MouvementView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -22,8 +20,6 @@ const Mouvement = () => {
     const id = pathname.split('/')[2]
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
     const [searchValue, setSearchValue] = useState('');
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -139,13 +135,13 @@ const Mouvement = () => {
       };
     
       const handleDelete = async (id) => {
-      try {
-          await axios.delete(`${DOMAIN}/api/produit/mouvementDelete/${id}`);
-            window.location.reload();
-        } catch (err) {
-          console.log(err);
-        }
-      };
+        try {
+            await axios.delete(`${DOMAIN}/api/produit/mouvementDelete/${id}`);
+              window.location.reload();
+          } catch (err) {
+            console.log(err);
+          }
+        };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -216,11 +212,6 @@ const Mouvement = () => {
                 
               <Space size="middle">
                 <Popover title="Supprimer" trigger="hover">
-                <Popover title="Voir la liste de mouvement de cette chaussure" trigger="hover">
-                  <Link to={`/mouvement/${record.id_varianteProduit}`}>
-                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                  </Link>
-                </Popover>
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
                     onConfirm={() => handleDelete(record.id_mouvement)}
@@ -238,7 +229,7 @@ const Mouvement = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvement`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvement/${id}`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -246,7 +237,7 @@ const Mouvement = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [id]);
 
 /*       const handleOk = async (e) => {
         try{
@@ -288,7 +279,7 @@ const Mouvement = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des mouvements</h2>
+                        <h2 className="product-h2">Liste de details mouvements</h2>
                         <span>Gérer vos mouvements</span>
                     </div>
                 </div>
@@ -318,4 +309,4 @@ const Mouvement = () => {
   )
 }
 
-export default Mouvement
+export default MouvementView

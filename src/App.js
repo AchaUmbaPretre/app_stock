@@ -58,6 +58,7 @@ import PageLivreurDetail from './pages/pageLivreur/pageLivreurDetail/PageLivreur
 import PageLivreurNavbar from './pages/pageLivreur/pageNavbar/PageLivreurNavbar';
 import PageLivreurVente from './pages/pageLivreur/pageLivreurVente/PageLivreurVente';
 import Page405 from './pages/page404/page405';
+import MouvementView from './pages/mouvement/mouvementView/MouvementView';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -172,6 +173,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/mouvement',
           element: <Mouvement />
+        },
+        {
+          path: '/mouvement/:id',
+          element: <MouvementView />
         },
         {
           path: '/mouvementForm',

@@ -27,6 +27,8 @@ const PageLivreurVente = () => {
         }
       };
 
+      console.log(selected)
+
       const columns = [
         {
           title: '',
@@ -35,7 +37,7 @@ const PageLivreurVente = () => {
           render: (text, record) => (
             <div>
               <Checkbox
-                checked={selected.some((item) => item.id === record.id_varianteProduit)}
+                checked={selected.some((item) => item.id_detail_livraison === record.id_detail_livraison)}
                 onChange={(event) =>
                   handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.id_detail_livraison, record.qte_livre, record.prix,record.id_taille)
                 }

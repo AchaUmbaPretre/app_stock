@@ -40,6 +40,7 @@ const ListeDetailView = () => {
         }
       };
     
+      console.log(quantities)
       const columns = [
         {
           title: '',
@@ -55,11 +56,11 @@ const ListeDetailView = () => {
               />
               {selected.some((item) => item.id_detail === record.id_detail) && (
                 <Input
-                  value={quantities[record.id_varianteProduit] || ''}
+                  value={quantities[record.id_detail] || ''}
                   onChange={(event) =>
                     setQuantities((prevQuantities) => ({
                       ...prevQuantities,
-                      [record.id_varianteProduit]: event.target.value,
+                      [record.id_detail]: event.target.value,
                     }))
                   }
                 />

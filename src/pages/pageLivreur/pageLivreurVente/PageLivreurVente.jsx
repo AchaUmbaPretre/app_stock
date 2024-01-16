@@ -27,8 +27,6 @@ const PageLivreurVente = () => {
         }
       };
 
-      console.log(selected)
-
       const columns = [
         {
           title: '',
@@ -130,9 +128,6 @@ const PageLivreurVente = () => {
         };
         fetchData();
       }, [userId]);
-
-
-      console.log(typeLivraison)
 
       const handleClick = async (e) => {
         e.preventDefault();

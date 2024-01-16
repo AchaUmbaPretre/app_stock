@@ -3,5 +3,10 @@
 .pageCommandeLivraison{
     @include mobileXR{
         padding: 20px;
+        h1{
+            color: rgb(3, 3, 109);
+            font-size: 1.5rem;
+            padding: 10px 0 20px 0;
+        }
     }
 }

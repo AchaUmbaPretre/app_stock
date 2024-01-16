@@ -202,7 +202,7 @@ const PageCommandeVente = () => {
                       <textarea name="description" id="" cols="20" rows="8">
                       </textarea>
                     </div>
-                    <button className='pageLivreur-btn' onClick={handleClick}>Livrer maintenant</button>
+                    <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
                     <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
                 </div> 
             </div>

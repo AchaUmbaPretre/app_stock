@@ -61,6 +61,7 @@ import Page405 from './pages/page404/page405';
 import MouvementView from './pages/mouvement/mouvementView/MouvementView';
 import PageCommandeLivraison from './pages/pageLivreur/pageCommandeLivraison/PageCommandeLivraison';
 import PageCommandeVente from './pages/pageLivreur/pageCommandeVente/PageCommandeVente';
+import PageRetourCommande from './pages/pageLivreur/pageRetourCommande/PageRetourCommande';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -344,6 +345,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/pageCommandeVentes/:id',
           element: <PageCommandeVente />
+        },
+        {
+          path: '/pageRetourCommande',
+          element: <PageRetourCommande />
         },
       ]
     },

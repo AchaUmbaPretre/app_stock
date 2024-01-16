@@ -1,12 +1,11 @@
 import { useSelector } from 'react-redux';
-import './pageCommandeLivraison.scss'
 import { Avatar, List } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import config from '../../../config';
 
-const PageCommandeLivraison = () => {
+const PageRetourCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const scroll = { x: 400 };
     const [loading, setLoading] = useState(true);
@@ -14,22 +13,6 @@ const PageCommandeLivraison = () => {
     const [getType, setGetType] = useState([]);
     const [data, setData] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
-
-
- /*    const data = [
-        {
-          title: 'commande 1',
-        },
-        {
-          title: 'commande 2',
-        },
-        {
-          title: 'commande 3',
-        },
-        {
-          title: 'commande 4',
-        },
-      ]; */
 
      useEffect(() => {
         const fetchData = async () => {
@@ -69,4 +52,4 @@ const PageCommandeLivraison = () => {
   )
 }
 
-export default PageCommandeLivraison;
+export default PageRetourCommande;

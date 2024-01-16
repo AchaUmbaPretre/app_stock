@@ -212,10 +212,19 @@ const ListeDetailView = () => {
         fetchData();
       }, []);
 
-      console.log(totalAvecRemise)
-
       const handleClick = (e) => {
         e.preventDefault();
+
+        
+        if (livreur.length === 0 || selected.length === 0) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez remplir le champ requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
       
         Promise.all(
           selected.map((dd, index) =>

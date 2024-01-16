@@ -21,7 +21,10 @@ const ListeDetailView = () => {
     const [getLivreur, setGetLivreur] = useState([]);
     const [quantities, setQuantities] = useState([]);
     const [livreur, setLivreur] = useState([]);
+    const [totalPrice, setTotalPrice] = useState([])
     const userId = useSelector((state) => state.user.currentUser.id);
+    const [remise, setRemise] = useState(0);
+    const [totalAvecRemise, setTotalAvecRemise] = useState(totalPrice);
 
     const handleSelectionChange = (event, id, prix, quantite,id_detail) => {
       if (event.target.checked) {
@@ -30,6 +33,15 @@ const ListeDetailView = () => {
         setSelected(selected.filter((row) => row.id_detail !== id_detail));
       }
     };
+
+    useEffect(() => {
+      if (remise !== 0) {
+        const totalAvecRemiseValue = totalPrice - remise;
+        setTotalAvecRemise(totalAvecRemiseValue);
+      } else {
+        setTotalAvecRemise(totalPrice);
+      }
+    }, [remise, totalPrice]);
     
       const handleDelete = async (id) => {
       try {
@@ -169,8 +181,10 @@ const ListeDetailView = () => {
             setData(data);
             setLoading(false)
             const getTitle = data.map((dd)=>(dd.id_commande))
-
             setTitle(getTitle[0])
+
+            const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
+            setTotalPrice(totalPrice)
           } catch (error) {
             console.log(error);
           }
@@ -228,8 +242,6 @@ const ListeDetailView = () => {
           });
       };
 
-      console.log(quantities)
-
   return (
     <>
         <div className="products">
@@ -270,11 +282,30 @@ const ListeDetailView = () => {
                           </select>
                         </div>
                         <div className="liste-row">
-                          <label htmlFor="">La remise</label>
-                          <input type="text" className='list_select'/>
+                          <label htmlFor="">Prix total</label>
+                          <input type="text" className='list_select' value={isFinite(totalAvecRemise) ? totalAvecRemise : ''} readOnly/>
+                        </div>
+                        <div className="liste-row">
+                        <label htmlFor="">La remise</label>
+                        <input
+                          type="text"
+                          className='list_select'
+                          value={remise}
+                          onChange={(e) => {
+                            const remiseValue = parseInt(e.target.value);
+                            setRemise(e.target.value);
+
+                            if (!isNaN(remiseValue) && remiseValue !== 0) {
+                              const totalAvecRemiseValue = totalPrice - remiseValue;
+                              setTotalAvecRemise(totalAvecRemiseValue);
+                            } else {
+                              setTotalAvecRemise(totalPrice);
+                            }
+                          }}
+                        />
                         </div>
                         <div className="rows-btn">
-                          <button className="list_btn" onClick={handleClick}>Soumettre</button>
+                          <button className="list_btn" onClick={handleClick}>Envoyer</button>
                         </div>
                       </div>
                     </div>

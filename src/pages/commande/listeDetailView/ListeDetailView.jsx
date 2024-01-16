@@ -26,13 +26,20 @@ const ListeDetailView = () => {
     const [remise, setRemise] = useState(0);
     const [totalAvecRemise, setTotalAvecRemise] = useState(totalPrice);
 
-    const handleSelectionChange = (event, id, prix, quantite,id_detail) => {
+    const handleSelectionChange = (event, id, prix, quantite, id_detail) => {
       if (event.target.checked) {
-        setSelected([...selected, { id, prix, quantite,id_detail }]);
+        const updatedSelected = [...selected, { id, prix, quantite, id_detail }];
+        setSelected(updatedSelected);
+        const totalPrice = updatedSelected.reduce((acc, item) => acc + item.prix, 0);
+        setTotalPrice(totalPrice);
       } else {
-        setSelected(selected.filter((row) => row.id_detail !== id_detail));
+        const updatedSelected = selected.filter((row) => row.id_detail !== id_detail);
+        setSelected(updatedSelected);
+        const totalPrice = updatedSelected.reduce((acc, item) => acc + item.prix, 0);
+        setTotalPrice(totalPrice);
       }
     };
+
 
     useEffect(() => {
       if (remise !== 0) {
@@ -41,7 +48,7 @@ const ListeDetailView = () => {
       } else {
         setTotalAvecRemise(totalPrice);
       }
-    }, [remise, totalPrice]);
+    }, [remise, totalPrice, selected]);
     
       const handleDelete = async (id) => {
       try {
@@ -183,8 +190,8 @@ const ListeDetailView = () => {
             const getTitle = data.map((dd)=>(dd.id_commande))
             setTitle(getTitle[0])
 
-            const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
-            setTotalPrice(totalPrice)
+/*             const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
+            setTotalPrice(totalPrice) */
           } catch (error) {
             console.log(error);
           }
@@ -205,6 +212,8 @@ const ListeDetailView = () => {
         fetchData();
       }, []);
 
+      console.log(totalAvecRemise)
+
       const handleClick = (e) => {
         e.preventDefault();
       
@@ -212,10 +221,11 @@ const ListeDetailView = () => {
           selected.map((dd, index) =>
             axios.post(`${DOMAIN}/api/livraison/livraisonDetail`, {
               id_commande: id,
+              quantite_prix : totalAvecRemise,
               id_varianteProduit: dd.id,
               qte_livre: Object.values(quantities)[index],
               qte_commande: dd.quantite,
-              prix: 100,
+              prix: dd.prix,
               id_livreur: livreur,
               id_detail_commande: dd.id_detail,
               user_cr: userId,
@@ -283,12 +293,12 @@ const ListeDetailView = () => {
                         </div>
                         <div className="liste-row">
                           <label htmlFor="">Prix total</label>
-                          <input type="text" className='list_select' value={isFinite(totalAvecRemise) ? totalAvecRemise : ''} readOnly/>
+                          <h3>{isFinite(totalAvecRemise) ? totalAvecRemise : ''} $</h3>
                         </div>
                         <div className="liste-row">
                         <label htmlFor="">La remise</label>
                         <input
-                          type="text"
+                          type="number"
                           className='list_select'
                           value={remise}
                           onChange={(e) => {

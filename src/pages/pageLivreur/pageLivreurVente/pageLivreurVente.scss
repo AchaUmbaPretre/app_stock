@@ -103,6 +103,12 @@
                     color: #555;
                 }
             }
+            h2{
+                @include mobileXR{
+                    font-size: 1.5rem;
+                    color: rgb(3, 3, 109);
+                }
+            }
             .pageLivreur-input{
                 width: 100%;
                 border: 1px solid #555;

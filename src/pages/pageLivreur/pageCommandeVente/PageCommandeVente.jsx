@@ -15,6 +15,7 @@ const PageCommandeVente = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [typeLivraison, setTypeLivraison] = useState([]);
+    const [totalPrice, setTotalPrice] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
     const IdCommande = pathname.split('/')[2];
@@ -92,6 +93,9 @@ const PageCommandeVente = () => {
                 }});
             setData(data);
             setLoading(false)
+
+            const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
+            setTotalPrice(totalPrice)
           } catch (error) {
             console.log(error);
           }
@@ -173,6 +177,7 @@ const PageCommandeVente = () => {
         }
       }
 
+      console.log(totalPrice)
   return (
     <>
         <div className="pageLivreurVente">
@@ -194,7 +199,11 @@ const PageCommandeVente = () => {
                 </div>
                 <div className="pageLivreur_submit">
                     <label htmlFor="">Prix Total</label>
-                    <input type="number" className='pageLivreur-input' />
+                    <h2>{totalPrice} $</h2>
+                </div>
+                <div className="pageLivreur_submit">
+                    <label htmlFor="">Remise</label>
+                    <h2>{data[0]?.quantite_prix} $</h2>
                 </div>
                <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>

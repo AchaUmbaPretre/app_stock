@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} from 'antd';
-import { StepBackwardOutlined,ShoppingCartOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined ,PhoneOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -172,14 +172,29 @@ const PageCommandeVente = () => {
           });
         }
       }
-    
 
   return (
     <>
         <div className="pageLivreurVente">
             <div className="pageLivreurVente-container">
+                <div className="pageLivreur-call">
+                    <a href={`tel:${data[0]?.telephone}`} className="pageLivreur-call-row">
+                        <div >
+                            <PhoneOutlined className="pageLivreur-icon" />
+                        </div>
+                    </a>
+                    <a href={`https://wa.me/${data[0]?.telephone}`} className="pageLivreur-call-row">
+                        <div >
+                            <WhatsAppOutlined className='pageLivreur-icon icon-whatsapp' />
+                        </div>
+                    </a>
+                </div>
                 <div className="rowChart-row-table">
                     <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
+                </div>
+                <div className="pageLivreur_submit">
+                    <label htmlFor="">Prix Total</label>
+                    <input type="number" className='pageLivreur-input' />
                 </div>
                <div className="pageLivreur-form-rows">
                     <div className="pageLivreur-form-row">

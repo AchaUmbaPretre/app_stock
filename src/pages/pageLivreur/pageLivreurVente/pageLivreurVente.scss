@@ -8,6 +8,35 @@
         @include mobileXR{
             padding: 20px;
         }
+        .pageLivreur-call{
+            @include mobileXR{
+                padding: 20px 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+                .pageLivreur-call-row{
+                    background: #fff;
+                    -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                    box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 30px;
+                    border-radius: 5px;
+                    border: 1px solid rgba(3, 3, 109, 0.171);
+                    .pageLivreur-icon{
+                        font-size: 2.1rem;
+                        color: rgb(3, 3, 109);
+                    }
+                    .icon-whatsapp{
+                        color: green;
+                    }
+                }
+            }
+        }
         .page-rows-top{
             @include mobileXR{
                 margin: 20px 0;
@@ -19,13 +48,14 @@
             }
             .page-row-top{
                 @include mobileXR{
+                    background: #fff;
                     flex: 1;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 10px;
                     padding: 20px;
-                    border: 1px solid rgb(3, 3, 109);
+                    border: 1px solid rgba(3, 3, 109, 0.171);
                     border-radius: 5px;
                     cursor: pointer;
                     -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
@@ -33,9 +63,8 @@
                 }
                 .page-icon{
                     @include mobileXR{
-                        font-size: 3rem;
+                        font-size: 2.1rem;
                         color: rgb(3, 3, 109);
- 
                     }
                 }
                 .page-top-desc{
@@ -56,6 +85,26 @@
                         border-radius: 50%;
     
                     }
+                }
+            }
+        }
+        .pageLivreur_submit{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            label{
+                @include mobileXR{
+                    font-size: .9rem;
+                    color: #555;
+                }
+            }
+            .pageLivreur-input{
+                width: 100%;
+                border: 1px solid #555;
+                padding: 10px ;
+                outline: none;
+                &:hover{
+                    border: 1px solid rgba(105, 140, 247, 0.801);
                 }
             }
         }

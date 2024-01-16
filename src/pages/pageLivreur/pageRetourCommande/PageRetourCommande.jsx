@@ -39,7 +39,7 @@ const PageRetourCommande = () => {
                 return (
                 <List.Item>
                     <List.Item.Meta
-                    title={<a href={`pageCommandeVentes/${item.id_commande}`} >{`Ligne ${lineNumber}: Commande n° ${item.id_commande} de ${item.nom}`}</a>}
+                    title={<a href={`pageLivraisonRetour/${item.id_commande}`} >{`Ligne ${lineNumber}: Commande n° ${item.id_commande} de ${item.nom}`}</a>}
                     description={`Adresse de la livraison : ${item.adresse}`}
                     />
                 </List.Item>

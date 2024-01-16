@@ -3,7 +3,7 @@ import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} f
 import { StepBackwardOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
@@ -13,11 +13,11 @@ const PageCommandeVente = () => {
     const scroll = { x: 400 };
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const [getType, setGetType] = useState([]);
     const [data, setData] = useState([]);
     const [typeLivraison, setTypeLivraison] = useState([]);
-    const [Idcommande, setIdcommande] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
+    const {pathname} = useLocation();
+    const IdCommande = pathname.split('/')[2];
 
     const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille) => {
         if (event.target.checked) {
@@ -77,49 +77,19 @@ const PageCommandeVente = () => {
                   style: 'currency',
                   currency: 'USD',
                 })}
-              </Tag>
-              
+              </Tag>   
               </span>
             ),
-          },
-/*         {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                
-              <Space size="middle">
-                <Popover title="Supprimer" trigger="hover">
-                  <Popconfirm
-                    title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id_detail)}
-                    okText="Oui"
-                    cancelText="Non"
-                  >
-                    <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
-                </Popover>
-              </Space>
-            ),
-          }, */
-      ];
-
-      
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/typeMouvement`);
-            setGetType(data);
-          } catch (error) {
-            console.log(error);
           }
-        };
-        fetchData();
-      }, []);
+      ];
 
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-user/${userId}`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-userOne/${userId}`, {
+                params: {
+                  id_commande: IdCommande
+                }});
             setData(data);
             setLoading(false)
           } catch (error) {

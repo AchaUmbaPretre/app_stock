@@ -48,16 +48,19 @@ const PageCommandeLivraison = () => {
     <>
         <div className="pageCommandeLivraison">
         <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item, index) => (
-            <List.Item>
-                <List.Item.Meta
-                title={<a href={`pageCommandeVentes/${item.id_commande}`} >{`commande ${item.id_commande}`}</a>}
-                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, non ratione!"
-                />
-            </List.Item>
-            )}
+            itemLayout="horizontal"
+            dataSource={data}
+            renderItem={(item, index) => {
+                const lineNumber = index + 1;
+                return (
+                <List.Item>
+                    <List.Item.Meta
+                    title={<a href={`pageCommandeVentes/${item.id_commande}`} >{`Ligne ${lineNumber}: Commande n° ${item.id_commande} de ${item.nom}`}</a>}
+                    description={`Adresse de la livraison : ${item.adresse}`}
+                    />
+                </List.Item>
+                );
+            }}
         />
         </div>
 

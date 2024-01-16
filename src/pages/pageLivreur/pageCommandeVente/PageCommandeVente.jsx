@@ -197,11 +197,6 @@ const PageCommandeVente = () => {
                     <input type="number" className='pageLivreur-input' />
                 </div>
                <div className="pageLivreur-form-rows">
-                    <div className="pageLivreur-form-row">
-                      <label htmlFor="">Description</label>
-                      <textarea name="description" id="" cols="20" rows="8">
-                      </textarea>
-                    </div>
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
                     <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
                 </div> 

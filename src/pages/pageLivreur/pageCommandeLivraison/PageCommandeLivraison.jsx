@@ -16,21 +16,6 @@ const PageCommandeLivraison = () => {
     const userId = useSelector((state) => state.user.currentUser.id);
 
 
- /*    const data = [
-        {
-          title: 'commande 1',
-        },
-        {
-          title: 'commande 2',
-        },
-        {
-          title: 'commande 3',
-        },
-        {
-          title: 'commande 4',
-        },
-      ]; */
-
      useEffect(() => {
         const fetchData = async () => {
           try {

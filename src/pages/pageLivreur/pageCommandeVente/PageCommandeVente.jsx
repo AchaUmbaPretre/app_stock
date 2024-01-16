@@ -117,7 +117,7 @@ const PageCommandeVente = () => {
                 prix_unitaire: dd.prix,
                 id_varianteProduit: dd.id,
                 id_taille : dd.id_taille,
-                id_type_mouvement : 4
+                id_type_mouvement : 4,
               });
             })
           );

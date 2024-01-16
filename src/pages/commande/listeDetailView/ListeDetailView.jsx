@@ -239,6 +239,9 @@ const ListeDetailView = () => {
               id_livreur: livreur,
               id_detail_commande: dd.id_detail,
               user_cr: userId,
+              quantite : dd.quantite,
+              id_user_cr : userId,
+              id_type_mouvement: 12
             })
           )
         )

@@ -19,7 +19,7 @@ const ListeDetailView = () => {
     const [title, setTitle] = useState('');
     const [selected, setSelected] = useState([]);
     const [getLivreur, setGetLivreur] = useState([]);
-    const [quantities, setQuantities] = useState({});
+    const [quantities, setQuantities] = useState([]);
     const [livreur, setLivreur] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
 
@@ -40,7 +40,6 @@ const ListeDetailView = () => {
         }
       };
     
-      console.log(quantities)
       const columns = [
         {
           title: '',
@@ -56,7 +55,7 @@ const ListeDetailView = () => {
               />
               {selected.some((item) => item.id_detail === record.id_detail) && (
                 <Input
-                  value={quantities[record.id_detail] || ''}
+                  value={quantities?.length === 0 ? record.quantite : quantities[record.id_detail]}
                   onChange={(event) =>
                     setQuantities((prevQuantities) => ({
                       ...prevQuantities,
@@ -229,6 +228,8 @@ const ListeDetailView = () => {
           });
       };
 
+      console.log(quantities)
+
   return (
     <>
         <div className="products">
@@ -267,6 +268,10 @@ const ListeDetailView = () => {
                               <option value={dd.id}>{`${dd.username}`}</option>
                             ))}
                           </select>
+                        </div>
+                        <div className="liste-row">
+                          <label htmlFor="">La remise</label>
+                          <input type="text" className='list_select'/>
                         </div>
                         <div className="rows-btn">
                           <button className="list_btn" onClick={handleClick}>Soumettre</button>

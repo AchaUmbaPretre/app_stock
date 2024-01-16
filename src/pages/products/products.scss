@@ -133,10 +133,13 @@
                             color: #555;
                         }
                         .list_select{
-                            padding: 8px 0;
+                            padding: 8px 10px;
                             width: 200px;
                             border: 1px solid #d6d6d6;
                             outline: none;
+                            &:hover{
+                                border: 1px solid rgb(78, 119, 241);
+                            }
                         }
                     }
                     .rows-btn{

@@ -19,9 +19,9 @@ const PageCommandeVente = () => {
     const {pathname} = useLocation();
     const IdCommande = pathname.split('/')[2];
 
-    const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille) => {
+    const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client) => {
         if (event.target.checked) {
-          setSelected([...selected, { id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,typeLivraison}]);
+          setSelected([...selected, { id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,typeLivraison,id_client}]);
         } else {
           setSelected(selected.filter((row) => row.id !== id));
         }
@@ -37,7 +37,7 @@ const PageCommandeVente = () => {
               <Checkbox
                 checked={selected.some((item) => item.id_detail_livraison === record.id_detail_livraison)}
                 onChange={(event) =>
-                  handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.id_detail_livraison, record.qte_livre, record.prix,record.id_taille)
+                  handleSelectionChange(event,record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.id_detail_livraison, record.qte_livre, record.prix,record.id_taille,record.id_client)
                 }
               />
             </div>
@@ -113,7 +113,7 @@ const PageCommandeVente = () => {
                 prix_unitaire: dd.prix,
                 id_varianteProduit: dd.id,
                 id_taille : dd.id_taille,
-                id_type_mouvement : typeLivraison
+                id_type_mouvement : 4
               });
             })
           );

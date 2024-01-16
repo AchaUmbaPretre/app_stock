@@ -8,6 +8,44 @@
         @include mobileXR{
             padding: 20px;
         }
+        .page-rows-top{
+            @include mobileXR{
+                margin: 20px 0;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+            .page-row-top{
+                @include mobileXR{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 20px;
+                    border: 1px solid rgb(3, 3, 109);
+                    border-radius: 5px;
+                    cursor: pointer;
+                    -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                    box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                }
+                .page-icon{
+                    @include mobileXR{
+                        font-size: 3rem;
+                        color: rgb(3, 3, 109);
+ 
+                    }
+                }
+                .page-top-desc{
+                    @include mobileXR{
+                        font-size: 1.2rem;
+                        color: rgb(3, 3, 109);
+                    }
+                }
+            }
+        }
         .rowChart-row-table{
             .userList{
                 .userImg{

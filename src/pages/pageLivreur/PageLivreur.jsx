@@ -57,8 +57,8 @@ const PageLivreur = () => {
     <>
         <div className="pageLivreur">
             <div className="pageLivreur-container">
-                <div className="pageLivreur-wrapper">
-                { data.length > 0 ?
+               <div className="pageLivreur-wrapper">
+                {/*{ data.length > 0 ?
                     <div className="pageLivreur-message" onClick={handleClick}>
                         Il ya une livraison, cliquez ici pour voir les details
                         <ExclamationOutlined />
@@ -67,8 +67,13 @@ const PageLivreur = () => {
                         Il n'ya pas des livraisons
                         <ExclamationOutlined />
                     </div>
-                }
-                </div>
+                }*/}
+                  <div className="pageLivreur-message" onClick={handleClick}>
+                    Il ya une livraison, cliquez ici pour voir les details
+                    <ExclamationOutlined />
+                  </div>
+                </div> 
+                
             </div>
         </div>
     </>

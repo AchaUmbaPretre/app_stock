@@ -1,0 +1,7 @@
+@import '../../../style.scss';
+
+.pageCommandeLivraison{
+    @include mobileXR{
+        padding: 20px;
+    }
+}

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} from 'antd';
 import { StepBackwardOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import './pageLivreurVente.scss'
 import config from '../../../config';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
-const PageLivreurVente = () => {
+const PageCommandeVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [selected, setSelected] = useState([]);
     const scroll = { x: 400 };
@@ -209,20 +208,10 @@ const PageLivreurVente = () => {
     <>
         <div className="pageLivreurVente">
             <div className="pageLivreurVente-container">
-              <div className="page-rows-top">
-                <div className="page-row-top" onClick={()=>navigate("/pageCommandeLivraison")}>
-                  <StepBackwardOutlined className='page-icon' />
-                  <span className="page-top-desc">Retour</span>
-                </div>
-                <div className="page-row-top">
-                  <ShoppingCartOutlined className='page-icon' onClick={()=>navigate("/pageCommandeLivraison")}/>
-                  <span className="page-top-desc">Livraison</span>
-                </div>
-              </div>
-{/*                 <div className="rowChart-row-table">
+                <div className="rowChart-row-table">
                     <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
-                </div> */}
-{/*                 <div className="pageLivreur-form-rows">
+                </div>
+               <div className="pageLivreur-form-rows">
                     <div className="pageLivreur-form-row">
                       <label htmlFor="">Description</label>
                       <textarea name="description" id="" cols="20" rows="8">
@@ -230,7 +219,7 @@ const PageLivreurVente = () => {
                     </div>
                     <button className='pageLivreur-btn' onClick={handleClick}>Livrer maintenant</button>
                     <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
-                </div> */}
+                </div> 
             </div>
         </div>
 
@@ -238,4 +227,4 @@ const PageLivreurVente = () => {
   )
 }
 
-export default PageLivreurVente
+export default PageCommandeVente

@@ -72,7 +72,7 @@ const ListeDetailView = () => {
                   handleSelectionChange(event, record.id_varianteProduit,record.prix, record.quantite, record.id_detail)
                 }
               />
-              {selected.some((item) => item.id_detail === record.id_detail) && (
+              {/* {selected.some((item) => item.id_detail === record.id_detail) && (
                 <Input
                   value={quantities?.length === 0 ? record.quantite : quantities[record.id_detail]}
                   onChange={(event) =>
@@ -82,7 +82,7 @@ const ListeDetailView = () => {
                     }))
                   }
                 />
-              )}
+              )} */}
             </div>
           ),
         },
@@ -223,7 +223,8 @@ const ListeDetailView = () => {
               id_commande: id,
               quantite_prix : totalAvecRemise,
               id_varianteProduit: dd.id,
-              qte_livre: Object.values(quantities)[index],
+/*               qte_livre: Object.values(quantities)[index], */
+              qte_livre: dd.quantite,
               qte_commande: dd.quantite,
               prix: dd.prix,
               id_livreur: livreur,

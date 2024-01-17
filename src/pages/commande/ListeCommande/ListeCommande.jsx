@@ -87,7 +87,7 @@ const ListeCommande = () => {
       
             if (text === 0) {
               tagColor = 'red';
-              textValue= 'Status en attente'
+              textValue= 'En attente'
             } else if (text === 1) {
               tagColor = 'green';
               textValue = 'En cours';

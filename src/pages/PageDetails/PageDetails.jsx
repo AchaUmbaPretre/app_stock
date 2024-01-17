@@ -9,7 +9,6 @@ import { FadeLoader } from 'react-spinners';
 
 const PageDetails = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [getProduit, setGetProduit] = useState([]);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();

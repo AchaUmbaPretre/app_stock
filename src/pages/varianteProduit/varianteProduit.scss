@@ -32,7 +32,7 @@
             .variant_top{
                 display: flex;
                 align-items: center;
-                gap: 20px;
+                gap: 10px;
                 .variant-top-left{
                     display: flex;
                     align-items: center;
@@ -53,6 +53,7 @@
                     }
                     .variant-select{
                         width: 180px;
+                        z-index: 999;
                     }
                 }
             }

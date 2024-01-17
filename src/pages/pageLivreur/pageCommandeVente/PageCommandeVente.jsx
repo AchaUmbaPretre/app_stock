@@ -6,6 +6,7 @@ import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { FadeLoader } from 'react-spinners';
 
 const PageCommandeVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -109,7 +110,7 @@ const PageCommandeVente = () => {
           await Promise.all(
             selected.map(async (dd) => {
               await axios.post(`${DOMAIN}/api/vente`, {
-                id_client: '',
+                id_client: dd.id_client,
                 id_livreur: userId,
                 quantite: dd.qte_livre,
                 id_commande: dd.id_commande,
@@ -128,6 +129,7 @@ const PageCommandeVente = () => {
             icon: 'success',
             confirmButtonText: 'OK',
           });
+          window.location.reload();
       
         } catch (err) {
           const errorResponse = err.response;
@@ -177,10 +179,14 @@ const PageCommandeVente = () => {
         }
       }
 
-      console.log(totalPrice)
   return (
     <>
         <div className="pageLivreurVente">
+        { loading ? (
+              <div className="spinner-container">
+                <FadeLoader color={'#36D7B7'} loading={loading} />
+              </div>
+            ) : (
             <div className="pageLivreurVente-container">
                 <div className="pageLivreur-call">
                     <a href={`tel:${data[0]?.telephone}`} className="pageLivreur-call-row">
@@ -209,7 +215,7 @@ const PageCommandeVente = () => {
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
                     <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
                 </div> 
-            </div>
+            </div>) }
         </div>
 
     </>

@@ -177,7 +177,7 @@ const Mouvement = () => {
             key: 'type_mouvement',
             ...getColumnSearchProps('type_mouvement'),
             render: (text, record) => {
-              const color = record.id_type_mouvement === 1 ? 'green' : 'red';
+              const color = record.id_type_mouvement === 4 ? 'green' : 'red';
               return <Tag color={color}>{text}</Tag>;
             },
           },
@@ -215,12 +215,11 @@ const Mouvement = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Supprimer" trigger="hover">
-                <Popover title="Voir la liste de mouvement de cette chaussure" trigger="hover">
-                  <Link to={`/mouvement/${record.id_varianteProduit}`}>
-                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                  </Link>
-                </Popover>
+                  <Popover title="Voir la liste de mouvement de cette chaussure" trigger="hover">
+                    <Link to={`/mouvement/${record.id_varianteProduit}`}>
+                      <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                    </Link>
+                  </Popover>
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
                     onConfirm={() => handleDelete(record.id_mouvement)}
@@ -229,7 +228,6 @@ const Mouvement = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
               </Space>
             ),
           },
@@ -248,36 +246,6 @@ const Mouvement = () => {
         fetchData();
       }, []);
 
-/*       const handleOk = async (e) => {
-        try{
-          await axios.put(`${DOMAIN}/api/vente/vente/${id}`,getVente)
-  
-          Swal.fire({
-            title: 'Success',
-            text: "La vente a été modifiée avec succès!",
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-      
-          setModalText('The modal will be closed after two seconds');
-          setConfirmLoading(true);
-          setTimeout(() => {
-          setOpen(false);
-          setConfirmLoading(false);
-      }, 2000);
-          window.location.reload();
-  
-        }catch(err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        }
-    };
- */
-  
    const filteredData = data?.filter((item) =>
     item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
     )

@@ -58,7 +58,7 @@ const PageLivreurNavbar = () => {
                 <nav>
                     <div className="navbar-wrapper">
                         <div className="nav-logo">
-                            <img src={logoIcon} alt="" className="nav-img" />
+                            <img src={logoIcon} alt="" className="nav-img" onClick={()=>navigate('/')} />
                         </div>
                         <div className="navbar-right">
                             <Badge count={''}>

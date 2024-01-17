@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
-import { Tag, Popconfir } from 'antd';
+import { Tag } from 'antd';
 
 const Products = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -141,7 +141,7 @@ const Products = () => {
       }
     };
     
-const columns = [
+  const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
         title: 'Nom produit',
@@ -236,7 +236,7 @@ const columns = [
           </Space>
         ),
     },
-];
+  ];
 
 const HandOpen = () =>{
   setOpen(!open)

@@ -6,6 +6,7 @@ import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { FadeLoader } from 'react-spinners';
 
 const PageLivraisonRetour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,6 +15,7 @@ const PageLivraisonRetour = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [desc, setDesc] = useState([]);
     const [typeLivraison, setTypeLivraison] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
@@ -104,8 +106,8 @@ const PageLivraisonRetour = () => {
         try {
           await Promise.all(
             selected.map(async (dd) => {
-              await axios.post(`${DOMAIN}/api/vente`, {
-                id_client: '',
+              await axios.post(`${DOMAIN}/api/vente/retour`, {
+                id_client: dd.id_client,
                 id_livreur: userId,
                 quantite: dd.qte_livre,
                 id_commande: dd.id_commande,
@@ -113,17 +115,20 @@ const PageLivraisonRetour = () => {
                 prix_unitaire: dd.prix,
                 id_varianteProduit: dd.id,
                 id_taille : dd.id_taille,
-                id_type_mouvement : 4
+                id_type_mouvement : 5,
+                description : desc
               });
             })
           );
-      
+            
           Swal.fire({
             title: 'Success',
-            text: 'La vente a été créée avec succès!',
+            text: 'Le produit est retourné avec succès!',
             icon: 'success',
             confirmButtonText: 'OK',
           });
+
+          window.location.reload();
       
         } catch (err) {
           const errorResponse = err.response;
@@ -176,6 +181,11 @@ const PageLivraisonRetour = () => {
   return (
     <>
         <div className="pageLivreurVente">
+        { loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+          ) : (
             <div className="pageLivreurVente-container">
             <h1>Retourne les produits restants</h1>
                 <div className="rowChart-row-table">
@@ -184,13 +194,13 @@ const PageLivraisonRetour = () => {
                <div className="pageLivreur-form-rows">
                     <div className="pageLivreur-form-row">
                       <label htmlFor="">Description</label>
-                      <textarea name="description" id="" cols="20" rows="8">
+                      <textarea name="description" id="" cols="20" rows="8" onChange={(e)=>setDesc(e.target.value)}>
                       </textarea>
                     </div>
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
                     <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
                 </div> 
-            </div>
+            </div>)}
         </div>
     </>
   )

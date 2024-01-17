@@ -28,18 +28,6 @@ const VarianteProduit = () => {
     const [cible, setCible] = useState(null);
     const [loading, setLoading] = useState(true);
 
-/*     useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltre/${famille}`);
-            setData(data)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [famille]); */
-
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -130,7 +118,7 @@ const VarianteProduit = () => {
               <div className="varianteProduit-wrapper">
                 <div className="varianteProduit-container-top">
                     <div className="varianteProduit-left">
-                        <h2 className="varianteProduit-h2">Les produits</h2>
+                        <h2 className="varianteProduit-h2">Nos produits</h2>
                         <span>Voir les images de produits</span>
                     </div>
                 </div>

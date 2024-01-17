@@ -26,7 +26,7 @@ const Livraison = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'Date livré',
+          title: 'Date de livraison',
           dataIndex: 'date_livre',
           key: 'date_livre',
           render: (text) => {

@@ -7,6 +7,7 @@ import { format, isValid } from 'date-fns';
 import Swal from 'sweetalert2';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
+import { FadeLoader } from 'react-spinners';
 
 const ListeDetailView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -253,6 +254,7 @@ const ListeDetailView = () => {
               confirmButtonText: 'OK',
             });
             navigate('/listeCommande');
+
             window.location.reload();
           })
           .catch((err) => {
@@ -276,6 +278,11 @@ const ListeDetailView = () => {
                     </div>
                 </div>
                 <div className="product-bottom">
+                  { loading ? (
+                  <div className="spinner-container">
+                    <FadeLoader color={'#36D7B7'} loading={loading} />
+                  </div>
+                  ) : ( <>
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                             <SisternodeOutlined className='product-icon' />
@@ -331,7 +338,7 @@ const ListeDetailView = () => {
                           <button className="list_btn" onClick={handleClick}>Envoyer</button>
                         </div>
                       </div>
-                    </div>
+                    </div> </>)}
                 </div>
             </div>
         </div>

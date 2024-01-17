@@ -131,14 +131,7 @@ const Ventes = () => {
           ),
       });
 
-      const showModal = (id) => {
-        setOpen(true);
-        navigate(`/ventes/${id}`);
-      };
-      const handleCancel = () => {
-        setOpen(false);
-      };
-    
+
       const handleDelete = async (id) => {
       try {
           await axios.put(`${DOMAIN}/api/vente/${id}`);
@@ -277,13 +270,6 @@ const Ventes = () => {
             icon: 'success',
             confirmButtonText: 'OK',
           });
-      
-          setModalText('The modal will be closed after two seconds');
-          setConfirmLoading(true);
-          setTimeout(() => {
-          setOpen(false);
-          setConfirmLoading(false);
-      }, 2000);
           window.location.reload();
   
         }catch(err) {

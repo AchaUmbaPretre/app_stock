@@ -171,6 +171,7 @@ const Emplacement = () => {
         });
       }
   };
+  
   const filteredData = getdata?.filter((item) =>
   item.nom.toLowerCase().includes(searchValue.toLowerCase())
 );

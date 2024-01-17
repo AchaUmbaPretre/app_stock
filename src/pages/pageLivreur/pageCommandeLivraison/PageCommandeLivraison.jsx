@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import config from '../../../config';
+import { FadeLoader } from 'react-spinners';
 
 const PageCommandeLivraison = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -33,6 +34,11 @@ const PageCommandeLivraison = () => {
     <>
         <div className="pageCommandeLivraison">
         <h1>Liste de commande</h1>
+        { loading ? (
+            <div className="spinner-container">
+              <FadeLoader color={'#36D7B7'} loading={loading} />
+            </div>
+        ) : (
         <List
             itemLayout="horizontal"
             dataSource={data}
@@ -47,7 +53,7 @@ const PageCommandeLivraison = () => {
                 </List.Item>
                 );
             }}
-        />
+        />)}
         </div>
 
     </>

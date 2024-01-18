@@ -140,7 +140,7 @@ const ListeCommande = () => {
                 tagColor = 'red';
                 textValue= 'Aucun'
               } 
-              else if (text === 0) {
+              else if (text === 2) {
                 tagColor = 'green';
                 textValue = 'Payé';
               }

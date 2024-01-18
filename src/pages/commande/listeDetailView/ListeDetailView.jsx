@@ -33,11 +33,19 @@ const ListeDetailView = () => {
         setSelected(updatedSelected);
         const totalPrice = updatedSelected.reduce((acc, item) => acc + item.prix, 0);
         setTotalPrice(totalPrice);
+        setQuantities((prevQuantities) => ({
+          ...prevQuantities,
+          [id_detail]: quantite,
+        }));
       } else {
         const updatedSelected = selected.filter((row) => row.id_detail !== id_detail);
         setSelected(updatedSelected);
         const totalPrice = updatedSelected.reduce((acc, item) => acc + item.prix, 0);
         setTotalPrice(totalPrice);
+        setQuantities((prevQuantities) => {
+          const { [id_detail]: removedQuantity, ...restQuantities } = prevQuantities;
+          return restQuantities;
+        });
       }
     };
 
@@ -238,8 +246,7 @@ const ListeDetailView = () => {
               id_commande: id,
               quantite_prix : totalAvecRemise,
               id_varianteProduit: dd.id,
-/*               qte_livre: Object.values(quantities)[index], */
-              qte_livre: dd.quantite,
+              qte_livre: Object.values(quantities)[index],
               qte_commande: dd.quantite,
               prix: dd.prix,
               id_livreur: livreur,

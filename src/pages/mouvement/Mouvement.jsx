@@ -254,7 +254,7 @@ const Mouvement = () => {
                           centered
                           open={open}
                           onCancel={() => setOpen(false)}
-                          width={800}
+                          width={750}
                           footer={[
                             <Button key="annuler" onClick={() => setOpen(false)}>
                               Annuler

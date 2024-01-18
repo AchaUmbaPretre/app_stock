@@ -21,7 +21,7 @@ const ListeCommande = () => {
     
       const handleDelete = async (id) => {
       try {
-          await axios.put(`${DOMAIN}/api/commande/commande/${id}`);
+          await axios.delete(`${DOMAIN}/api/commande/commande/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
@@ -132,12 +132,50 @@ const ListeCommande = () => {
             title: 'Shop',
             dataIndex: 'id_shop',
             key: 'id_shop',
+            render: (text) => {
+              let tagColor = '';
+              let textValue = '';
+        
+              if (text === 1) {
+                tagColor = 'red';
+                textValue= 'Aucun'
+              } 
+              else if (text === 0) {
+                tagColor = 'green';
+                textValue = 'Payé';
+              }
+        
+              return (
+                <Tag color={tagColor}>
+                   {textValue}
+                </Tag>
+              );
+            },
         },
-        {
+/*         {
             title: 'Paie',
             dataIndex: 'paye',
             key: 'paye',
-        },
+            render: (text) => {
+              let tagColor = '';
+              let textValue = '';
+        
+              if (text === 0) {
+                tagColor = 'red';
+                textValue= 'Non-payé'
+              } 
+              else if (text === 1) {
+                tagColor = 'green';
+                textValue = 'Payé';
+              }
+        
+              return (
+                <Tag color={tagColor}>
+                   {textValue}
+                </Tag>
+              );
+            },
+        }, */
         {
             title: 'Action',
             key: 'action',

@@ -13,6 +13,7 @@ const FormCommande = () => {
   const [loading, setLoading] = useState(false);
   const [getClient, setGetClient] = useState([]);
   const [getStatut, setGetStatut] = useState([]);
+  const [checkeds, setCheckeds] = useState(false);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -53,6 +54,30 @@ const FormCommande = () => {
     }
   }
 
+  const handleClick2 = async (e) => {
+    e.preventDefault();
+
+    try{
+      await axios.post(`${DOMAIN}/api/client/client`, data)
+      Swal.fire({
+        title: 'Success',
+        text: 'Client crée avec succès!',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+      setCheckeds(false)
+      navigate('/commandeForm')
+      window.location.reload();
+
+    }catch(err) {
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -79,6 +104,26 @@ const FormCommande = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/client/province`);
+        setProvince(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleCheck = (e) => {
+    if(e.target.checked){
+      setCheckeds(true)
+    } else{
+      setCheckeds(false)
+    }
+  }
+
 
   return (
     <>
@@ -100,42 +145,56 @@ const FormCommande = () => {
                     <option value={dd.id}>{dd.nom}</option>
                         ))}
                 </select>
+                <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour ajouter un client  </label>
+                <input type="checkbox" onChange={handleCheck} />
                 </div>
-                <div className="form-controle">
-                  <label htmlFor="">Statut</label>
-                  <select id="" className="form-input" name="statut" onChange={handleInputChange} required>
-                    <option value="" disabled selected>Selectionnez un statut</option>
-                    {
-                        getStatut.map((dd)=>(
-                            <option value={dd.id_statut}>{dd.nom_statut}</option>
-                        ))
-                    }
-                  </select>
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Livraison</label>
-                  <input type="email" name='id_livraison' className="form-input" onChange={handleInputChange} />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Paiement</label>
-                  <input type="tel" name='id_paiement' className="form-input" onChange={handleInputChange} required />
+                { checkeds &&
+                <div className="rows-client">
+                  <div className="product-container-bottom">
+                    <div className="form-controle">
+                      <label htmlFor="">Nom</label>
+                      <input type="text" name='nom' className="form-input" onChange={handleInputChange}  required/>
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Raison sociale</label>
+                      <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} required>
+                        <option value="" disabled selected>Selectionnez une raison sociale</option>
+                        <option value="Client VIP">client VIP</option>
+                        <option value="Client Normal">client Normal</option>
+                      </select>
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Email</label>
+                      <input type="email" name='email' className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Telephone</label>
+                      <input type="tel" name='telephone' className="form-input" onChange={handleInputChange} required />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Ville</label>
+                      <Select
+                        name="id_province"
+                        options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
+                        onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
+                      />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Adresse</label>
+                      <input type="text" name="adresse" className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <button className="btn-submit" onClick={handleClick2}>Soumetre</button>
+                  </div>
+                </div> }
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Shop</label>
-                  <select id="" className="form-input" name="statut" onChange={handleInputChange} required>
-                    <option value="" disabled selected>Selectionnez un shop</option>
-{/*                     <option value="Client VIP">Validé</option>
-                    <option value="Client Normal">Non-validé</option> */}
-                  </select>
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Paye</label>
-                  <input type="text" name="paye" className="form-input" onChange={handleInputChange} />
+                  <input type="text" name='id_shop' className="form-input" onChange={handleInputChange}/>
                 </div>
               </div>
-
               <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick}>Soumetre</button>
+                <button className="btn-submit" onClick={handleClick}>Envoyer</button>
                 <button className="btn-submit btn-annuler" onClick={()=> window.location.reload()}>Annuler</button>
               </div>
             </div>

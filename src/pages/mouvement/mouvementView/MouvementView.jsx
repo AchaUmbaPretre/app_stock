@@ -156,6 +156,16 @@ const MouvementView = () => {
           )
         },
         {
+          title: 'Marque',
+          dataIndex: 'nom_marque',
+          key: 'nom_marque'
+        },
+        {
+          title: 'Client',
+          dataIndex: 'nom_client',
+          key: 'nom_client'
+        },
+        {
             title: 'Date',
             dataIndex: 'date_mouvement',
             key: 'date_mouvement',
@@ -173,7 +183,7 @@ const MouvementView = () => {
             key: 'type_mouvement',
             ...getColumnSearchProps('type_mouvement'),
             render: (text, record) => {
-              const color = record.id_type_mouvement === 1 ? 'green' : 'red';
+              const color = record.id_type_mouvement === 4 ? 'green' : 'red';
               return <Tag color={color}>{text}</Tag>;
             },
           },
@@ -279,7 +289,7 @@ const MouvementView = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de details mouvements</h2>
+                        <h2 className="product-h2">Liste de detail de mouvement de commande n° {id}</h2>
                         <span>Gérer vos mouvements</span>
                     </div>
                 </div>

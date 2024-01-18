@@ -59,6 +59,8 @@ const ListeDetailView = () => {
           console.log(err);
         }
       };
+
+      console.log(quantities)
     
       const columns = [
         {
@@ -73,9 +75,11 @@ const ListeDetailView = () => {
                   handleSelectionChange(event, record.id_varianteProduit,record.prix, record.quantite, record.id_detail)
                 }
               />
-              {/* {selected.some((item) => item.id_detail === record.id_detail) && (
+              {selected.some((item) => item.id_detail === record.id_detail) && (
+                <div  style={{display: 'flex',flexDirection: "column", gap: "8px"}}>
+                <label htmlFor="" style={{color: '#555'}}>Qté à livrer</label>
                 <Input
-                  value={quantities?.length === 0 ? record.quantite : quantities[record.id_detail]}
+                  value={quantities[record.id_detail]}
                   onChange={(event) =>
                     setQuantities((prevQuantities) => ({
                       ...prevQuantities,
@@ -83,7 +87,8 @@ const ListeDetailView = () => {
                     }))
                   }
                 />
-              )} */}
+                </div>
+              )}
             </div>
           ),
         },
@@ -260,7 +265,7 @@ const ListeDetailView = () => {
           .catch((err) => {
             Swal.fire({
               title: 'Error',
-              text: err.message,
+              text: err.response.data.error,
               icon: 'error',
               confirmButtonText: 'OK',
             });

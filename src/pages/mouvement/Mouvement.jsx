@@ -150,14 +150,19 @@ const Mouvement = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'image',
-          dataIndex: 'img',
-          key: 'image',
-          render: (text, record) => (
-            <div className="userList">
-              <img src={record.img} alt="" className="userImg"  />
-            </div>
-          )
+          title: 'Commande N°',
+          dataIndex: 'id_commande',
+          key: 'id_commande'
+        },
+        {
+          title: 'Marque',
+          dataIndex: 'nom_marque',
+          key: 'nom_marque'
+        },
+        {
+          title: 'Client',
+          dataIndex: 'nom_client',
+          key: 'nom_client'
         },
         {
             title: 'Date',
@@ -171,44 +176,6 @@ const Mouvement = () => {
                 </span>
               ),
           },
-          {
-            title: 'Type mouvement',
-            dataIndex: 'type_mouvement',
-            key: 'type_mouvement',
-            ...getColumnSearchProps('type_mouvement'),
-            render: (text, record) => {
-              const color = record.id_type_mouvement === 4 ? 'green' : 'red';
-              return <Tag color={color}>{text}</Tag>;
-            },
-          },
-          {
-            title: 'Pointure',
-            dataIndex: 'taille',
-            key: 'taille',
-            render: (text, record) => {
-              return <Tag color={"green"}>{text}</Tag>;
-            },
-          },
-          {
-            title: 'Quantité',
-            dataIndex: 'quantite',
-            key: 'quantite',
-            sorter: (a, b) => a.quantite - b.quantite,
-            sortDirections: ['descend', 'ascend'],
-            render: (quantite) => (
-              <Tag color={quantite > 0 ? 'green' : 'red'}>{quantite}</Tag>
-            ),
-        },
-        {
-          title: 'Qté stock',
-          dataIndex: 'stock',
-          key: 'stock',
-          sorter: (a, b) => a.stock - b.stock,
-          sortDirections: ['descend', 'ascend'],
-          render: (stock) => (
-            <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
-          ),
-      },
         {
             title: 'Action',
             key: 'action',
@@ -216,7 +183,7 @@ const Mouvement = () => {
                 
               <Space size="middle">
                   <Popover title="Voir la liste de mouvement de cette chaussure" trigger="hover">
-                    <Link to={`/mouvement/${record.id_varianteProduit}`}>
+                    <Link to={`/mouvement/${record.id_commande}`}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                   </Popover>

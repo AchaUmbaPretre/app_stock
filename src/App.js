@@ -63,6 +63,7 @@ import PageCommandeLivraison from './pages/pageLivreur/pageCommandeLivraison/Pag
 import PageCommandeVente from './pages/pageLivreur/pageCommandeVente/PageCommandeVente';
 import PageRetourCommande from './pages/pageLivreur/pageRetourCommande/PageRetourCommande';
 import PageLivraisonRetour from './pages/pageLivreur/pageRetourCommande/PageLivraisonRetour';
+import LivraisonView from './pages/livraison/livraisonView/LivraisonView';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -229,6 +230,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/livraisonForm',
           element: <LivraisonForm/> 
+        },
+        {
+          path: '/livraisonView/:id',
+          element: <LivraisonView/> 
         },
         {
           path: '/ventes',

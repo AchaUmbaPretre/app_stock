@@ -107,7 +107,26 @@ const ListeCommande = () => {
         {
           title: 'Paiement',
           dataIndex: 'id_paiement',
-          key: 'id_paiement'
+          key: 'id_paiement',
+          render: (text) => {
+            let tagColor = '';
+            let textValue = '';
+      
+            if (text === 0) {
+              tagColor = 'red';
+              textValue= 'Non-payé'
+            } 
+            else if (text === 1) {
+              tagColor = 'green';
+              textValue = 'Payé';
+            }
+      
+            return (
+              <Tag color={tagColor}>
+                 {textValue}
+              </Tag>
+            );
+          },
         },
         {
             title: 'Shop',
@@ -115,7 +134,7 @@ const ListeCommande = () => {
             key: 'id_shop',
         },
         {
-            title: 'Paye',
+            title: 'Paie',
             dataIndex: 'paye',
             key: 'paye',
         },

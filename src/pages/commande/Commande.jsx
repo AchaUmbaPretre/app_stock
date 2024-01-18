@@ -113,7 +113,7 @@ const Commande = () => {
               <div className="varianteProduit-wrapper">
                 <div className="varianteProduit-container-top">
                     <div className="varianteProduit-left">
-                        <h2 className="varianteProduit-h2">Les commandes</h2>
+                        <h2 className="varianteProduit-h2">La commande N° {id}</h2>
                         <span>Voir les produit pour faire les commandes</span>
                     </div>
                 </div>

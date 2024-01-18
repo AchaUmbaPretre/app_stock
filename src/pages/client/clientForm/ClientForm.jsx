@@ -62,6 +62,8 @@ const ClientForm = () => {
     };
     fetchData();
   }, []);
+
+  
   return (
     <>
         <div className="clientForm">
@@ -106,11 +108,11 @@ const ClientForm = () => {
                   <label htmlFor="">Adresse</label>
                   <input type="text" name="adresse" className="form-input" onChange={handleInputChange} />
                 </div>
+
               </div>
 
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Soumetre</button>
-                <button className="btn-submit btn-annuler">Annuler</button>
               </div>
             </div>
           </div>

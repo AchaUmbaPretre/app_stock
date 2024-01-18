@@ -101,6 +101,8 @@ const PageLivraisonRetour = () => {
         fetchData();
       }, [userId]);
 
+      console.log(selected)
+
       const handleClick = async (e) => {
         e.preventDefault();
         try {

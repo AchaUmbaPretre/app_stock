@@ -29,7 +29,7 @@ const DetailProduitCommande = () => {
     const [prix, setPrix] = useState();
     const [inventaireTotalOne,setInventaireTotalOne] = useState([]);
     const [getClient, setGetClient] = useState([]);
-    const [client, setClient] = useState([]);
+    const [idVarianteProduit, setIdVarianteProduit] = useState([]);
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user.currentUser.id)
 
@@ -121,6 +121,18 @@ const DetailProduitCommande = () => {
       fetchData();
     }, []);
 
+    useEffect(()=> {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/commande/idVariantproduit/${variante}/${taille}`);
+          setIdVarianteProduit(data[0].id_varianteProduit);
+          setLoading(false)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    },[taille])
 
     const handleClick = async (e) => {
       e.preventDefault();
@@ -135,7 +147,7 @@ const DetailProduitCommande = () => {
         return;
       }
       try{
-        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:id, id_client: client, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
+        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:idVarianteProduit, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
         Swal.fire({
           title: 'Success',
           text: 'Commande créée avec succès!',
@@ -166,7 +178,7 @@ const DetailProduitCommande = () => {
               <div className="detailProduit-wrapper">
                 <div className="detailProduit-container-top">
                     <div className="detailProduit-left">
-                        <h2 className="detailProduit-h2">Detail du produit commande</h2>
+                        <h2 className="detailProduit-h2">Commande N° {id_commande}</h2>
                         <span>Voir les details du produit</span>
                     </div>
                 </div>
@@ -204,17 +216,7 @@ const DetailProduitCommande = () => {
                                                 ))}
                                         </select>
                                     </div>
-                                </div>
-                                <div className="detail_client-row">
-                                  <label htmlFor="">Client </label>
-                                  <select name="id_client" id="" onChange={(e)=>setClient(e.target.value)}>
-                                    <option>Sélectionnez un client</option>
-                                    { getClient.map((dd)=>(
-                                      <option value={dd.id}>{dd.nom}</option>
-                                    ))
-                                    }
-                                  </select>
-                                </div>                               
+                                </div>                             
                                 <div className="filter-product">
                                     <div className="filter">
                                         <AddIcon className="filter-icon" onClick={()=>handleQuantity('inc')}/>

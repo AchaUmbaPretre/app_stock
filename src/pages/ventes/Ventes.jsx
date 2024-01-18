@@ -1,14 +1,12 @@
 import './../products/products.scss'
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import photoIcon from './../../assets/logo doe.jpg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
-import FormVenteEdit from './formVenteEdit/FormVenteEdit';
 import Swal from 'sweetalert2';
 
 const Ventes = () => {
@@ -24,8 +22,6 @@ const Ventes = () => {
     const id = pathname.split('/')[2]
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -144,20 +140,15 @@ const Ventes = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'image',
-          dataIndex: 'img',
-          key: 'image',
-          render: (text, record) => (
-            <div className="userList">
-              <img src={record.img} alt="" className="userImg"  />
-            </div>
-          )
-        },
+          title: 'Commande n°',
+          dataIndex: 'id_commande',
+          key: 'id_commande'
+      },
         {
             title: 'Marque',
             dataIndex: 'nom_marque',
             key: 'nom_marque'
-          },
+        },
         {
           title: 'Client',
           dataIndex: 'nom_client',
@@ -167,14 +158,6 @@ const Ventes = () => {
           title: 'Livreur',
           dataIndex: 'username',
           key: 'username'
-        },
-        {
-          title: 'Pointure',
-          dataIndex: 'pointure',
-          key: 'pointure',
-          render: (text) => (
-            <Tag color={'#87d068'}>{text}</Tag>
-          ),
         },
         {
           title: 'Prix unitaire',
@@ -191,16 +174,6 @@ const Ventes = () => {
               })}
             </Tag>
           </span>
-          ),
-        },
-        {
-          title: 'Quantité',
-          dataIndex: 'quantite',
-          key: 'quantite',
-          sorter: (a, b) => a.quantite - b.quantite,
-          sortDirections: ['descend', 'ascend'],
-          render: (quantite) => (
-            <Tag color={quantite > 0 ? 'green' : 'red'}>{quantite}</Tag>
           ),
         },
         {
@@ -221,6 +194,11 @@ const Ventes = () => {
             render: (text, record) => (
                 
               <Space size="middle">
+                <Popover title="Voir la liste de vante de cette commande" trigger="hover">
+                    <Link to={`/venteView/${record.id_commande}`}>
+                      <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                    </Link>
+                </Popover>
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -312,7 +290,7 @@ const Ventes = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Modal
+{/*                         <Modal
                           title="Modifier la vente"
                           centered
                           open={open}
@@ -323,7 +301,7 @@ const Ventes = () => {
                           cancelText="Annuler"
                         >
                          <FormVenteEdit getVente={getVente} setGetVente={setGetVente} />
-                        </Modal>
+                        </Modal> */}
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>

@@ -8,7 +8,7 @@ import { format, isValid } from 'date-fns';
 import Swal from 'sweetalert2';
 import config from '../../../config';
 
-const Livraison_detail = () => {
+const LivraisonView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -31,16 +31,31 @@ const Livraison_detail = () => {
       };
     
       const columns = [
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
-        {
-          title: 'Commande N°',
-          dataIndex: 'id_commande',
-          key: 'id_commande'
+          { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+          {
+            title: 'Image',
+            dataIndex: 'img',
+            key: 'image',
+            render: (text, record) => (
+              <div className="userList">
+                <img src={record.img} alt="" className="userImg"  />
+              </div>
+            )
         },
         {
           title: 'Marque',
           dataIndex: 'nom_marque',
           key: 'nom_marque'
+        },
+        {
+          title: 'Pointure',
+          dataIndex: 'pointure',
+          key: 'pointure',
+          render: (text) => (
+            <Tag color={"#87d068"}>
+              {text}
+            </Tag>
+          )
         },
         {
           title: 'Client',
@@ -51,6 +66,26 @@ const Livraison_detail = () => {
           title: 'Livreur',
           dataIndex: 'nom_livreur',
           key: 'nom_livreur'
+        },
+        {
+          title: 'Qté livrée',
+          dataIndex: 'qte_livre',
+          key: 'qte_livre',
+          render: (text) => (
+            <Tag color={"#108ee9"}>
+              {text}
+            </Tag>
+          )
+        },
+        {
+            title: 'Qté commandée',
+            dataIndex: 'qte_commande',
+            key: 'qte_commande',
+            render: (text) => (
+              <Tag color={"#87d068"}>
+                {text}
+              </Tag>
+            )
         },
         {
             title: 'Prix',
@@ -85,11 +120,11 @@ const Livraison_detail = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Voir la liste de cette commande" trigger="hover">
+{/*                 <Popover title="Voir la liste de cette commande" trigger="hover">
                   <Link to={`/livraisonView/${record.id_commande}`}>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
-                </Popover>
+                </Popover> */}
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -108,7 +143,7 @@ const Livraison_detail = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetailOne/${id}`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -125,7 +160,7 @@ const Livraison_detail = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des détails des livraisons</h2>
+                        <h2 className="product-h2">Liste de détail des livraisons de commande N° {id}</h2>
                         <span>Voir le détail des livraisons</span>
                     </div>
                 </div>
@@ -154,4 +189,4 @@ const Livraison_detail = () => {
   )
 }
 
-export default Livraison_detail
+export default LivraisonView

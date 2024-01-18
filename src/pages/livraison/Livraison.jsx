@@ -1,10 +1,9 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Button, Space, Table, Popover,Popconfirm } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { format, isValid } from 'date-fns';
+import { format } from 'date-fns';
 import config from '../../config';
 
 const Livraison = () => {
@@ -35,7 +34,7 @@ const Livraison = () => {
           },
         },
         {
-          title: 'Utilisateur',
+          title: 'Créer par',
           dataIndex: 'username',
           key: 'username'
         },

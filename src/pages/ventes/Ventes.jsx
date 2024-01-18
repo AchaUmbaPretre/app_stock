@@ -1,13 +1,11 @@
 import './../products/products.scss'
 import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
-import Swal from 'sweetalert2';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -49,6 +47,11 @@ const Ventes = () => {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
+          render : (text)=>(
+            <div onClick={handleOk} style={{cursor: 'pointer'}}>
+              {text}
+            </div>
+          )
         },
         {
           title: 'Livreur',
@@ -135,25 +138,7 @@ const Ventes = () => {
       }, [id]);
 
       const handleOk = async (e) => {
-        try{
-          await axios.put(`${DOMAIN}/api/vente/vente/${id}`,getVente)
-  
-          Swal.fire({
-            title: 'Success',
-            text: "La vente a été modifiée avec succès!",
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-          window.location.reload();
-  
-        }catch(err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        }
+        setOpen(true)
     };
 
   return (
@@ -182,18 +167,20 @@ const Ventes = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-{/*                         <Modal
-                          title="Modifier la vente"
+                        <Modal
+                          title="Information du client"
                           centered
                           open={open}
-                          onOk={handleOk}
                           onCancel={() => setOpen(false)}
-                          width={860}
-                          okText="Soumettre"
-                          cancelText="Annuler"
+                          width={800}
+                          footer={[
+                            <Button key="annuler" onClick={() => setOpen(false)}>
+                              Annuler
+                            </Button>
+                          ]}
                         >
-                         <FormVenteEdit getVente={getVente} setGetVente={setGetVente} />
-                        </Modal> */}
+                         aaaaaaaaaaaaaaaaaaaaaaaaa
+                        </Modal>
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
+import VenteClientDetail from './venteClientDetail/VenteClientDetail';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -179,7 +180,7 @@ const Ventes = () => {
                             </Button>
                           ]}
                         >
-                         aaaaaaaaaaaaaaaaaaaaaaaaa
+                         <VenteClientDetail/>
                         </Modal>
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>

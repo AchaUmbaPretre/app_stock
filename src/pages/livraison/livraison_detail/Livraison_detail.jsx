@@ -7,6 +7,7 @@ import axios from 'axios';
 import { format, isValid } from 'date-fns';
 import Swal from 'sweetalert2';
 import config from '../../../config';
+import LivraisonClientDetail from './livraisonClientDetail/LivraisonClientDetail';
 
 const Livraison_detail = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -19,6 +20,7 @@ const Livraison_detail = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
+    const [open, setOpen] = useState(false);
 
     
       const handleDelete = async (id) => {
@@ -30,6 +32,10 @@ const Livraison_detail = () => {
         }
       };
     
+      const showModal = (id) => {
+        setOpen(true);
+      };
+
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
@@ -45,7 +51,12 @@ const Livraison_detail = () => {
         {
           title: 'Client',
           dataIndex: 'nom_client',
-          key: 'nom_client'
+          key: 'nom_client',
+          render : (text)=>(
+            <div onClick={showModal} style={{cursor: 'pointer'}}>
+              {text}
+            </div>
+          )
         },
         {
           title: 'Livreur',
@@ -145,6 +156,20 @@ const Livraison_detail = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
+                        <Modal
+                          title="Information du client"
+                          centered
+                          open={open}
+                          onCancel={() => setOpen(false)}
+                          width={730}
+                          footer={[
+                            <Button key="annuler" onClick={() => setOpen(false)}>
+                              Annuler
+                            </Button>
+                          ]}
+                        >
+                         <LivraisonClientDetail/>
+                        </Modal>
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                     </div>
                 </div>

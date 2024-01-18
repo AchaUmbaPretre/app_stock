@@ -1,0 +1,16 @@
+.mouvClient{
+    margin-top: 30px;
+    .mouvWrapper{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        .mouvClient-row{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            span{
+                font-size: 1rem;
+            }
+        }
+    }
+}

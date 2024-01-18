@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
+import MouvClientDetail from './mouvementClientDetail/MouvClientDetail';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -25,6 +26,7 @@ const Mouvement = () => {
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState('Content of the modal');
     const [searchValue, setSearchValue] = useState('');
+    
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -132,7 +134,6 @@ const Mouvement = () => {
 
       const showModal = (id) => {
         setOpen(true);
-        navigate(`/ventes/${id}`);
       };
       const handleCancel = () => {
         setOpen(false);
@@ -162,7 +163,12 @@ const Mouvement = () => {
         {
           title: 'Client',
           dataIndex: 'nom_client',
-          key: 'nom_client'
+          key: 'nom_client',
+          render : (text)=>(
+            <div onClick={showModal} style={{cursor: 'pointer'}}>
+              {text}
+            </div>
+          )
         },
         {
             title: 'Date',
@@ -243,6 +249,20 @@ const Mouvement = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
+                        <Modal
+                          title="Information du client"
+                          centered
+                          open={open}
+                          onCancel={() => setOpen(false)}
+                          width={800}
+                          footer={[
+                            <Button key="annuler" onClick={() => setOpen(false)}>
+                              Annuler
+                            </Button>
+                          ]}
+                        >
+                         <MouvClientDetail/>
+                        </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>

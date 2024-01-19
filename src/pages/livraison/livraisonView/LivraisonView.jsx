@@ -23,7 +23,7 @@ const LivraisonView = () => {
     
       const handleDelete = async (id) => {
       try {
-          await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
+          await axios.delete(`${DOMAIN}/api/livraison/livraisonDeleteDetail/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);

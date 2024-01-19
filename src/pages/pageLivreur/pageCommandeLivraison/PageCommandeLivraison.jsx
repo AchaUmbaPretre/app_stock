@@ -48,7 +48,7 @@ const PageCommandeLivraison = () => {
                 <List.Item>
                     <List.Item.Meta
                     title={<a href={`pageCommandeVentes/${item.id_commande}`} >{`Ligne ${lineNumber}: Commande n° ${item.id_commande} de ${item.nom}`}</a>}
-                    description={`Adresse de la livraison : ${item.adresse}`}
+                    description={`Adresse de la livraison : C/${item.nom_commune} Q/${item.quartier} Av/${item.avenue} N°${item.num}`}
                     />
                 </List.Item>
                 );

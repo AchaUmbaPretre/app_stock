@@ -23,18 +23,24 @@ const Livreur = () => {
             title: 'Nom',
             dataIndex: 'username',
             key: 'username',
+            render: (text) => (
+              <Tag color={'blue'}>{text}</Tag>
+            ),
         },
         {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',
+            render: (text) => (
+              <Tag color={'yellow'}>{text}</Tag>
+            ),
         },
         {
           title: 'Role',
           dataIndex: 'role',
           key: 'role',
           render: (text) => (
-            <Tag color={'#87d068'}>{text}</Tag>
+            <Tag color={'green'}>{text}</Tag>
           ),
         },
         {

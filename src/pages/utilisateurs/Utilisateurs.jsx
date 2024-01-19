@@ -134,11 +134,17 @@ const Utilisateurs = () => {
             key: 'nom',
             width: '15%',
             ...getColumnSearchProps('username'),
+            render: (text) => (
+              <Tag color={'blue'}>{text}</Tag>
+            ),
         },
         {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',
+            render: (text) => (
+              <Tag color={'yellow'}>{text}</Tag>
+            ),
         },
         {
             title: 'Mot de passe',

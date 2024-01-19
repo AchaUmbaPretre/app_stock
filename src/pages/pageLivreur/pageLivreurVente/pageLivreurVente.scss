@@ -12,6 +12,31 @@
                 color: rgb(3, 3, 109);
                 padding: 20px 0;
             }
+            .pageH4{
+                background: #fff;
+                -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                font-size: 1.3rem;
+                color: rgb(3, 3, 109);
+                padding: 20px;
+                border-radius: 5px;
+                border: 1px solid rgba(3, 3, 109, 0.171);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .pageLivreur_info{
+                background: #fff;
+                    -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                    box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+/*                     align-items: center;
+                    justify-content: center; */
+                    padding: 20px;
+                    border-radius: 5px;
+                    border: 1px solid rgba(3, 3, 109, 0.171);
+            }
         }
         .pageLivreur-call{
             @include mobileXR{

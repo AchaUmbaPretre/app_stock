@@ -17,6 +17,8 @@ const ListeCommande = () => {
     const id = pathname.split('/')[2]
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
+    const searchInput = useRef(null);
+    const [searchValue, setSearchValue] = useState('');
 
     
       const handleDelete = async (id) => {
@@ -240,6 +242,9 @@ const ListeCommande = () => {
         fetchData();
       }, [id]);
 
+      const filteredData = data?.filter((item) =>
+  item.nom?.toLowerCase().includes(searchValue.toLowerCase())
+)
 
   return (
     <>
@@ -261,7 +266,7 @@ const ListeCommande = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" id="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">
@@ -271,7 +276,7 @@ const ListeCommande = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

@@ -11,6 +11,8 @@ const ClientForm = () => {
   const [data, setData] = useState({})
   const navigate = useNavigate();
   const [province, setProvince] = useState([]);
+  const [idProvince, setIdProvince] = useState([]);
+  const [commune, setCommune] = useState([]);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -29,6 +31,17 @@ const ClientForm = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    
+    if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier || !data.id_commune || !data.num) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez remplir tous les champs requis',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
 
     try{
       await axios.post(`${DOMAIN}/api/client/client`, data)
@@ -63,6 +76,21 @@ const ClientForm = () => {
     fetchData();
   }, []);
 
+  useEffect(()=>{
+    setIdProvince(data?.id_province)
+  },[data?.id_province])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/client/commune/${idProvince}`);
+        setCommune(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [idProvince]);
   
   return (
     <>
@@ -105,8 +133,24 @@ const ClientForm = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Adresse</label>
-                  <input type="text" name="adresse" className="form-input" onChange={handleInputChange} />
+                  <label htmlFor="">Avenue</label>
+                  <input type="text" name="avenue" className="form-input" onChange={handleInputChange} />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Quartier</label>
+                  <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Commune</label>
+                  <Select
+                    name="id_commune"
+                    options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
+                  />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">N°</label>
+                  <input type="number" name="num" className="form-input" onChange={handleInputChange} />
                 </div>
 
               </div>

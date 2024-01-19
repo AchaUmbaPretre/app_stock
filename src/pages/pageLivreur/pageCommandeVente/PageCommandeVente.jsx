@@ -20,6 +20,7 @@ const PageCommandeVente = () => {
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
     const IdCommande = pathname.split('/')[2];
+    const [checkeds, setCheckeds] = useState(false);
 
     const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client) => {
         if (event.target.checked) {
@@ -129,6 +130,8 @@ const PageCommandeVente = () => {
             icon: 'success',
             confirmButtonText: 'OK',
           });
+
+          navigate('/pageLivreurVente')
           window.location.reload();
       
         } catch (err) {
@@ -153,7 +156,7 @@ const PageCommandeVente = () => {
         }
       }
 
-      const handleClick2 = async (e) => {
+/*       const handleClick2 = async (e) => {
         e.preventDefault();
       
         try {     
@@ -177,8 +180,15 @@ const PageCommandeVente = () => {
             confirmButtonText: 'OK',
           });
         }
-      }
+      } */
 
+      const handleCheck = (e) => {
+        if(e.target.checked){
+          setCheckeds(true)
+        } else{
+          setCheckeds(false)
+        }
+      }
   return (
     <>
         <div className="pageLivreurVente">
@@ -188,16 +198,34 @@ const PageCommandeVente = () => {
               </div>
             ) : (
             <div className="pageLivreurVente-container">
+                <h4 className='pageH4'>Commande n° {IdCommande}</h4>
+                <div style={{display: 'flex', alignItems: 'center', gap: '8px', marginBottom:'10px'}}>
+                <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour voir les details </label>
+                <input type="checkbox" onChange={handleCheck} style={{background: 'rgb(3, 3, 109)'}} />
+                </div>
+                { checkeds &&
+                <div className="pageLivreur_info">
+                  <div className="pageLivreur-info-row" style={{display: "flex", flexDirection:'column'}}>
+                    <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>Nom client : {data[0]?.nom}</span>
+                    <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>Commune : {data[0]?.nom_commune}</span>
+                    <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>Avenue : {data[0]?.avenue}</span>
+                    <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>Quartier : {data[0]?.quartier}</span>
+                    <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>N° : {data[0]?.num}</span>
+                    <span style={{padding: "10px 0", color: '#555'}}>Telephone : {data[0]?.telephone}</span>
+                  </div>
+                </div> }
                 <div className="pageLivreur-call">
-                    <a href={`tel:${data[0]?.telephone}`} className="pageLivreur-call-row">
+                    <a href={`tel:${data[0]?.telephone}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                         <div >
                             <PhoneOutlined className="pageLivreur-icon" />
                         </div>
+                        <span style={{fontSize:"15px"}}>Appelez client</span>
                     </a>
-                    <a href={`https://wa.me/${data[0]?.telephone}`} className="pageLivreur-call-row">
+                    <a href={`https://wa.me/${data[0]?.telephone}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                         <div >
                             <WhatsAppOutlined className='pageLivreur-icon icon-whatsapp' />
                         </div>
+                        <span>Ecritez le client</span>
                     </a>
                 </div>
                 <div className="rowChart-row-table">
@@ -213,7 +241,7 @@ const PageCommandeVente = () => {
                 </div>
                <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
-                    <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
+{/*                     <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button> */}
                 </div> 
             </div>) }
         </div>

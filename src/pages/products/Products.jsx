@@ -215,9 +215,9 @@ const Products = () => {
         render: (text, record) => (
                 
           <Space size="middle">
-            <Popover title="Modifier" trigger="hover">
+{/*             <Popover title="Modifier" trigger="hover">
               <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id_produit)} />
-            </Popover>
+            </Popover> */}
             <Popover title="Voir le détail" trigger="hover">
               <Link to={`/productView/${record.id_produit}`}>
                 <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
@@ -256,9 +256,9 @@ useEffect(() => {
 }, []);
 
 const filteredData = getProduit?.filter((item) =>
-  item.nom_produit.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_couleur.toLowerCase().includes(searchValue.toLowerCase())
+  item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase())
+
 );
 
   return (

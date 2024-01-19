@@ -21,19 +21,22 @@ const Livraison_detail = () => {
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
     const [open, setOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
+    const [idClient, setIdClient] = useState({});
 
     
       const handleDelete = async (id) => {
-      try {
-          await axios.delete(`${DOMAIN}/api/commande/detail-commande/${id}`);
-            window.location.reload();
-        } catch (err) {
-          console.log(err);
-        }
-      };
+        try {
+            await axios.delete(`${DOMAIN}/api/livraison/livraisonDeleteDetail/${id}`);
+              window.location.reload();
+          } catch (err) {
+            console.log(err);
+          }
+        };
     
-      const showModal = (id) => {
+      const showModal = (e) => {
         setOpen(true);
+        setIdClient(e)
       };
 
       const columns = [
@@ -46,15 +49,20 @@ const Livraison_detail = () => {
         {
           title: 'Marque',
           dataIndex: 'nom_marque',
-          key: 'nom_marque'
+          key: 'nom_marque',
+          render : (text)=>(
+            <div>
+                <Tag color={'blue'}>{text}</Tag>
+            </div>
+          )
         },
         {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
-          render : (text)=>(
-            <div onClick={showModal} style={{cursor: 'pointer'}}>
-              {text}
+          render : (text, record)=>(
+            <div onClick={()=> showModal(record.id_client)} style={{cursor: 'pointer'}}>
+               <Tag color={'green'}>{text}</Tag>
             </div>
           )
         },
@@ -129,6 +137,10 @@ const Livraison_detail = () => {
         fetchData();
       }, []);
 
+      const filteredData = data?.filter((item) =>
+      item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
   return (
     <>
@@ -146,7 +158,7 @@ const Livraison_detail = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">
@@ -168,9 +180,9 @@ const Livraison_detail = () => {
                             </Button>
                           ]}
                         >
-                         <LivraisonClientDetail/>
+                         <LivraisonClientDetail idClients={idClient}/>
                         </Modal>
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                     </div>
                 </div>
             </div>

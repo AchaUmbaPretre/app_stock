@@ -12,7 +12,8 @@ const RowTotalDetail = () => {
     const navigate = useNavigate();
     const [produit, setProduit] = useState([]);
     const [client, setClient] = useState([]);
-    const [livreur, setLivreur] = useState([])
+    const [livreur, setLivreur] = useState([]);
+    const [vente, setVente] = useState([]);
 
     useEffect(()=>{
         const fetchData = async ()=> {
@@ -29,7 +30,7 @@ const RowTotalDetail = () => {
      useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`${DOMAIN}/api/peuple/clientCount`);
+                const res = await axios.get(`${DOMAIN}/api/client/clientCount`);
                 setClient(res.data)
               }catch(error){
                 console.log(error)
@@ -41,8 +42,20 @@ const RowTotalDetail = () => {
      useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`${DOMAIN}/api/peuple/livreurCount`);
+                const res = await axios.get(`${DOMAIN}/api/livreur/livreurCount`);
                 setLivreur(res.data)
+              }catch(error){
+                console.log(error)
+              };
+        }
+        fetchData()
+     }, [])
+
+     useEffect(()=>{
+        const fetchData = async ()=> {
+            try{
+                const {data} = await axios.get(`${DOMAIN}/api/vente/venteCount`);
+                setVente(data[0]?.total)
               }catch(error){
                 console.log(error)
               };
@@ -83,7 +96,7 @@ const RowTotalDetail = () => {
                 </div>
                 <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2">5</h2>
+                        <h2 className="rowTotal-h2">{vente}</h2>
                         <span className="rowTotal-span">vente</span>
                     </div>
                     <div className="rowTotalDetail-right">

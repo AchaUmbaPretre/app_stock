@@ -178,7 +178,7 @@ const PageLivreurVente = () => {
         }
       }
 
-      const handleClick2 = async (e) => {
+/*       const handleClick2 = async (e) => {
         e.preventDefault();
       
         try {     
@@ -203,7 +203,7 @@ const PageLivreurVente = () => {
           });
         }
       }
-    
+     */
 
   return (
     <>
@@ -219,6 +219,7 @@ const PageLivreurVente = () => {
                   <span className="page-top-desc">Livraison</span>
                 </div>
               </div>
+              
 {/*                 <div className="rowChart-row-table">
                     <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                 </div> */}

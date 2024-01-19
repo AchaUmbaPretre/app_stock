@@ -10,22 +10,21 @@ import VenteClientDetail from './venteClientDetail/VenteClientDetail';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
+    const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
+    const [idClient, setIdClient] = useState({});
 
 
       const handleDelete = async (id) => {
       try {
-          await axios.put(`${DOMAIN}/api/vente/${id}`);
+          await axios.delete(`${DOMAIN}/api/vente/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
@@ -42,15 +41,20 @@ const Ventes = () => {
         {
             title: 'Marque',
             dataIndex: 'nom_marque',
-            key: 'nom_marque'
+            key: 'nom_marque',
+            render : (text)=>(
+              <div>
+                  <Tag color={'blue'}>{text}</Tag>
+              </div>
+            )
         },
         {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
-          render : (text)=>(
-            <div onClick={handleOk} style={{cursor: 'pointer'}}>
-              {text}
+          render : (text,record)=>(
+            <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
+              <Tag color={'green'}>{text}</Tag>
             </div>
           )
         },
@@ -138,9 +142,15 @@ const Ventes = () => {
         fetchData();
       }, [id]);
 
-      const handleOk = async (e) => {
-        setOpen(true)
+    const handleOk = async (e) => {
+      setOpen(true)
+      setIdClient(e)
     };
+
+  const filteredData = data?.filter((item) =>
+  item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+);
 
   return (
     <>
@@ -158,7 +168,7 @@ const Ventes = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">
@@ -180,9 +190,9 @@ const Ventes = () => {
                             </Button>
                           ]}
                         >
-                         <VenteClientDetail/>
+                         <VenteClientDetail idClients={idClient}/>
                         </Modal>
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

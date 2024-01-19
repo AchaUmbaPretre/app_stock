@@ -2,7 +2,7 @@ import './client.scss'
 import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popconfirm, Popover} from 'antd';
+import { Button, Input, Space, Table, Popconfirm, Popover, Tag} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
@@ -16,6 +16,7 @@ const Client = () => {
     const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
+    const [searchValue, setSearchValue] = useState('');
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -128,33 +129,57 @@ const Client = () => {
             dataIndex: 'nom',
             key: 'nom',
             ...getColumnSearchProps('nom'),
+            render : (text)=>(
+              <div>
+                 <Tag color={'green'}>{text}</Tag>
+              </div>
+            )
         },
         {
             title: 'Raison sociale',
             dataIndex: 'raison_sociale',
             key: 'raison_sociale',
             ...getColumnSearchProps('raison_sociale'),
+            render: (text)=> {
+              return <Tag color={'green'}>{text}</Tag>;
+            }
         },
         {
             title: 'Email',
             dataIndex: 'email',
-            key: 'email'
+            key: 'email',
+            render: (text) => (
+              <Tag color={'yellow'}>{text}</Tag>
+            ),
           },
           {
             title: 'Telephone',
             dataIndex: 'telephone',
-            key: 'email'
+            key: 'email',
+            render: (text) => (
+              <Tag color={'royalblue'}>{text}</Tag>
+            ),
           },
         {
           title: 'Ville',
           dataIndex: 'nom_province',
           key: 'nom_province',
-          ...getColumnSearchProps('nom_province')
+          ...getColumnSearchProps('nom_province'),
+          render : (text)=>(
+            <div>
+               <Tag color={'blue'}>{text}</Tag>
+            </div>
+          )
         },
         {
-            title: 'Adresse',
-            dataIndex: 'adresse',
-            key: 'adresse',
+            title: 'Commune',
+            dataIndex: 'nom_commune',
+            key: 'nom_commune',
+            render : (text)=>(
+              <div>
+                 <Tag color={'royalblue'}>{text}</Tag>
+              </div>
+            )
         },
         {
             title: 'Action',
@@ -209,6 +234,13 @@ const Client = () => {
         } 
       };
 
+  const filteredData = getClient?.filter((item) =>
+  item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.raison_sociale?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.email?.toLowerCase().includes(searchValue.toLowerCase())
+
+);
+
   return (
     <>
         <div className="products">
@@ -229,7 +261,7 @@ const Client = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)}  placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">
@@ -239,7 +271,7 @@ const Client = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={getClient} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

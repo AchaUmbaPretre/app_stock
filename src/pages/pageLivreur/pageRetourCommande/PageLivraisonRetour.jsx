@@ -101,8 +101,6 @@ const PageLivraisonRetour = () => {
         fetchData();
       }, [userId]);
 
-      console.log(selected)
-
       const handleClick = async (e) => {
         e.preventDefault();
         try {
@@ -129,7 +127,7 @@ const PageLivraisonRetour = () => {
             icon: 'success',
             confirmButtonText: 'OK',
           });
-
+          navigate('/pageLivreurVente')
           window.location.reload();
       
         } catch (err) {
@@ -154,32 +152,6 @@ const PageLivraisonRetour = () => {
         }
       }
 
-      const handleClick2 = async (e) => {
-        e.preventDefault();
-      
-        try {     
-              await axios.put(`${DOMAIN}/api/livraison/vuLivreur/${data[0]?.id_commande}`);
-      
-          Swal.fire({
-            title: 'Success',
-            text: 'La page a été mise à jour!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-
-          navigate('/');
-          window.location.reload();
-      
-        } catch (err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        }
-      }
-
   return (
     <>
         <div className="pageLivreurVente">
@@ -200,7 +172,6 @@ const PageLivraisonRetour = () => {
                       </textarea>
                     </div>
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
-                    <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button>
                 </div> 
             </div>)}
         </div>

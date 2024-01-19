@@ -67,8 +67,6 @@ const ListeDetailView = () => {
           console.log(err);
         }
       };
-
-      console.log(quantities)
     
       const columns = [
         {

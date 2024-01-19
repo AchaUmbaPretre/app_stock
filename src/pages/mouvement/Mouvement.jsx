@@ -1,9 +1,8 @@
 import './../products/products.scss'
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import photoIcon from './../../assets/logo doe.jpg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
@@ -23,9 +22,8 @@ const Mouvement = () => {
     const id = pathname.split('/')[2]
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
     const [searchValue, setSearchValue] = useState('');
+    const [idClient, setIdClient] = useState({});
     
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -132,13 +130,14 @@ const Mouvement = () => {
           ),
       });
 
-      const showModal = (id) => {
+      const showModal = (e) => {
         setOpen(true);
+        setIdClient(e)
       };
       const handleCancel = () => {
         setOpen(false);
       };
-    
+   
       const handleDelete = async (id) => {
       try {
           await axios.delete(`${DOMAIN}/api/produit/mouvementDelete/${id}`);
@@ -158,15 +157,20 @@ const Mouvement = () => {
         {
           title: 'Marque',
           dataIndex: 'nom_marque',
-          key: 'nom_marque'
+          key: 'nom_marque',
+          render : (text)=>(
+            <div style={{cursor: 'pointer'}}>
+                <Tag color={'blue'}>{text}</Tag>
+            </div>
+          )
         },
         {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
-          render : (text)=>(
-            <div onClick={showModal} style={{cursor: 'pointer'}}>
-              {text}
+          render : (text,record)=>(
+            <div onClick={()=> showModal(record.id_client1)} style={{cursor: 'pointer'}}>
+                <Tag color={'green'}>{text}</Tag>
             </div>
           )
         },
@@ -188,7 +192,7 @@ const Mouvement = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                  <Popover title="Voir la liste de mouvement de cette chaussure" trigger="hover">
+                  <Popover title="Voir la liste de mouvement de cette commande" trigger="hover">
                     <Link to={`/mouvement/${record.id_commande}`}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
@@ -220,7 +224,8 @@ const Mouvement = () => {
       }, []);
 
    const filteredData = data?.filter((item) =>
-    item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
+    item.nom_client.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())
     )
   
     return (
@@ -239,7 +244,7 @@ const Mouvement = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">
@@ -250,18 +255,16 @@ const Mouvement = () => {
                     </div>
                     <div className="rowChart-row-table">
                         <Modal
-                          title="Information du client"
+                          title="Information de client"
                           centered
                           open={open}
                           onCancel={() => setOpen(false)}
                           width={730}
                           footer={[
-                            <Button key="annuler" onClick={() => setOpen(false)}>
-                              Annuler
-                            </Button>
+                            
                           ]}
                         >
-                         <MouvClientDetail/>
+                         <MouvClientDetail idClients={idClient}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>

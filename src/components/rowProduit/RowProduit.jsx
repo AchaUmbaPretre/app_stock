@@ -143,10 +143,10 @@ const RowProduit = () => {
       )
     },
     {
-      title: 'Produits',
-      dataIndex: 'nom_produit',
-      key: 'nom_produit',
-      ...getColumnSearchProps('nom_produit'),
+      title: 'Marque',
+      dataIndex: 'nom',
+      key: 'nom',
+      ...getColumnSearchProps('nom'),
     },
     {
       title: 'Prix',

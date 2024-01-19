@@ -14,6 +14,8 @@ const FormCommande = () => {
   const [getClient, setGetClient] = useState([]);
   const [getStatut, setGetStatut] = useState([]);
   const [checkeds, setCheckeds] = useState(false);
+  const [idProvince, setIdProvince] = useState([]);
+  const [commune, setCommune] = useState([]);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -124,6 +126,22 @@ const FormCommande = () => {
     }
   }
 
+  useEffect(()=>{
+    setIdProvince(data?.id_province)
+  },[data?.id_province])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/client/commune/${idProvince}`);
+        setCommune(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [idProvince]);
+
 
   return (
     <>
@@ -139,12 +157,17 @@ const FormCommande = () => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Client</label>
-                  <select name="id_client" id="id_client" className="form-input" onChange={handleInputChange}  required>
+{/*                   <select name="id_client" id="id_client" className="form-input" onChange={handleInputChange}  required>
                     <option>Sélectionnez un client</option>
                         { getClient.map((dd)=>(
                     <option value={dd.id}>{dd.nom}</option>
                         ))}
-                </select>
+                </select> */}
+                <Select
+                  name="id_client"
+                  options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
+                  onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                />
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                 <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour ajouter un client  </label>
                 <input type="checkbox" onChange={handleCheck} />
@@ -181,10 +204,26 @@ const FormCommande = () => {
                       />
                     </div>
                     <div className="form-controle">
-                      <label htmlFor="">Adresse</label>
-                      <input type="text" name="adresse" className="form-input" onChange={handleInputChange} />
+                      <label htmlFor="">Commune</label>
+                      <Select
+                        name="id_commune"
+                        options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
+                        onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
+                      />
                     </div>
-                    <button className="btn-submit" onClick={handleClick2}>Soumetre</button>
+                    <div className="form-controle">
+                      <label htmlFor="">Avenue</label>
+                      <input type="text" name="avenue" className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Quartier</label>
+                      <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">N°</label>
+                      <input type="number" name="num" className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <button className="btn-submit" onClick={handleClick2} style={{border: 'none', height: "50px", marginTop: '35px', background:'rgb(1, 35, 138)',color:'#fff', borderRadius: '5px',cursor:'pointer'}}>Envoyer</button>
                   </div>
                 </div> }
                 </div>

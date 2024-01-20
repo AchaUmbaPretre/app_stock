@@ -25,10 +25,8 @@ const DetailProduitCommande = () => {
     const [getTaille, setGetTaille] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
-    const [inventaire, setInventaire] = useState([]);
     const [prix, setPrix] = useState();
     const [inventaireTotalOne,setInventaireTotalOne] = useState([]);
-    const [getClient, setGetClient] = useState([]);
     const [idVarianteProduit, setIdVarianteProduit] = useState([]);
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user.currentUser.id)
@@ -51,7 +49,6 @@ const DetailProduitCommande = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
-            setInventaire(data);
             const tailles = data?.map(item => ({ id_taille: item.id_taille, taille: item.taille }));
             setGetTaille(tailles)
             setLoading(false)
@@ -108,19 +105,6 @@ const DetailProduitCommande = () => {
       setPrix(totalPrice);
     });
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const { data } = await axios.get(`${DOMAIN}/api/client`);
-          setGetClient(data);
-          setLoading(false)
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, []);
-
     useEffect(()=> {
       const fetchData = async () => {
         try {
@@ -132,7 +116,7 @@ const DetailProduitCommande = () => {
         }
       };
       fetchData();
-    },[taille])
+    },[variante,taille])
 
     const handleClick = async (e) => {
       e.preventDefault();

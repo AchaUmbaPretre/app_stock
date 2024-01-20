@@ -1,9 +1,9 @@
-import { FieldBinaryOutlined, SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,PlusCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Checkbox} from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { format, isValid } from 'date-fns';
+import { format } from 'date-fns';
 import Swal from 'sweetalert2';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
@@ -17,7 +17,6 @@ const ListeDetailView = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
-    const [title, setTitle] = useState('');
     const [selected, setSelected] = useState([]);
     const [getLivreur, setGetLivreur] = useState([]);
     const [quantities, setQuantities] = useState([]);
@@ -199,17 +198,12 @@ const ListeDetailView = () => {
             const { data } = await axios.get(`${DOMAIN}/api/commande/detail-commande/${id}`);
             setData(data);
             setLoading(false)
-            const getTitle = data.map((dd)=>(dd.id_commande))
-            setTitle(getTitle[0])
-
-/*             const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
-            setTotalPrice(totalPrice) */
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, []);
+      }, [id]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -283,8 +277,8 @@ const ListeDetailView = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de commande N° {title}</h2>
-                        <span>Voir le detail de commande {title}</span>
+                        <h2 className="product-h2">Liste de commande N° {id}</h2>
+                        <span>Voir le detail de commande n° {id}</span>
                     </div>
                 </div>
                 <div className="product-bottom">

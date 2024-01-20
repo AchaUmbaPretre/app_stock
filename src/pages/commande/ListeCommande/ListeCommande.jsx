@@ -230,7 +230,7 @@ const ListeCommande = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
-      useEffect(() => {
+/*       useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
@@ -240,7 +240,7 @@ const ListeCommande = () => {
           }
         };
         fetchData();
-      }, [id]);
+      }, [id]); */
 
       const filteredData = data?.filter((item) =>
   item.nom?.toLowerCase().includes(searchValue.toLowerCase())

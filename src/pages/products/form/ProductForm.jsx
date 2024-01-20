@@ -50,7 +50,6 @@ const ProductForm = () => {
     setGetEtatProduit( e.target.value );
   };
 
-  console.log(getEtatProduit)
   useEffect(() => {
     const fetchData = async () => {
       try {

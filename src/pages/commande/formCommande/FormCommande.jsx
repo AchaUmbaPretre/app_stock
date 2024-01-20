@@ -109,7 +109,7 @@ const FormCommande = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/client/province`);
+        const { data } = await axios.get(`${DOMAIN}/api/livreur/province`);
         setProvince(data);
       } catch (error) {
         console.log(error);
@@ -133,7 +133,7 @@ const FormCommande = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/client/commune/${idProvince}`);
+        const { data } = await axios.get(`${DOMAIN}/api/livreur/commune/${idProvince}`);
         setCommune(data);
       } catch (error) {
         console.log(error);

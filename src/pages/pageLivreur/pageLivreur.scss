@@ -62,13 +62,23 @@
             
         } */
         .pageLivreur-wrapper{
+            position: relative;
+            width: 100%;
+            margin: auto;
+            @include mobile12pro{
+                width: 350px;
+            }
             @include mobileXR{
                 height: calc(100vh - 80px);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                width: 380px;
             }
             .pageLivreur-message{
+                @include mobile12pro{
+                    padding: 0 10px;
+                }
                 @include mobileXR{
                     cursor: pointer;
                     border: 1px solid rgba(1, 35, 138, 0.952);
@@ -85,7 +95,7 @@
             .pageLivreur-message-red{
                 @include mobileXR{
                     border: 1px solid red;
-                    width: 380px;
+                    width: 100%;
                     margin: auto;
                     padding: 10px;
                     border-radius: 5px;

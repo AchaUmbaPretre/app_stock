@@ -17,6 +17,10 @@
                 transition: .5s;
             }
             .navbar-wrapper{
+                @include mobile12pro{
+                    width: 300px;
+                    padding: 0 10px;
+                }
                 @include mobileXR{
                     width: 380px;
                     margin: 0 auto;

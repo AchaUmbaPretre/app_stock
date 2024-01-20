@@ -29,19 +29,20 @@ const ClientForm = () => {
   setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
+  console.log(data)
   const handleClick = async (e) => {
     e.preventDefault();
 
     
-    if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier || !data.id_commune || !data.num) {
+/*     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier || !data.id_commune || !data.num) {
       Swal.fire({
-        title: 'Error',
+        title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
         icon: 'error',
         confirmButtonText: 'OK',
       });
       return;
-    }
+    } */
 
     try{
       await axios.post(`${DOMAIN}/api/client/client`, data)
@@ -67,7 +68,7 @@ const ClientForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/client/province`);
+        const { data } = await axios.get(`${DOMAIN}/api/livreur/province`);
         setProvince(data);
       } catch (error) {
         console.log(error);
@@ -83,7 +84,7 @@ const ClientForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/client/commune/${idProvince}`);
+        const { data } = await axios.get(`${DOMAIN}/api/livreur/commune/${idProvince}`);
         setCommune(data);
       } catch (error) {
         console.log(error);

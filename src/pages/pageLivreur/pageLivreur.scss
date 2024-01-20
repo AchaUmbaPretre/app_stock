@@ -76,6 +76,10 @@
                     margin: auto;
                     padding: 10px;
                     border-radius: 5px;
+                    @include mobileSE{
+                        width: 335px;
+                        font-size: .9rem;
+                    }
                 }
             }
             .pageLivreur-message-red{
@@ -87,6 +91,10 @@
                     border-radius: 5px;
                     text-align: center;
                     color: red;
+                    @include mobileSE{
+                        width: 335px;
+                        font-size: .9rem;
+                    }
                 }
             }
         }

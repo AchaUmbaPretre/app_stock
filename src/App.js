@@ -376,7 +376,7 @@ const user = useSelector((state) => state.user?.currentUser);
     },
     {
       path: '/*',
-      element: <Page404 />
+      element:<SecuriteRoute><Page404 /></SecuriteRoute>
     },
   ]);
 

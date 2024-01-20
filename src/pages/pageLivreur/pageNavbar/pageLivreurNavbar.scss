@@ -23,12 +23,20 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    @include mobileSE{
+                        width: 345px;
+                    }
                 }
                 .nav-logo{
                     .nav-img{
                         height: 50px;
                         width: 50px;
                         border-radius: 50%;
+                        object-fit: cover;
+                        @include mobileSE{
+                            height: 40px;
+                            width: 40px;
+                        }
                     }
                 }
                 .navbar-right{
@@ -39,14 +47,20 @@
                     }
                     .navbar-icon{
                         @include mobileXR{
-                            font-size: 1.6rem;
+                            font-size: 1.3rem;
                             color: #cccccc;
+                            @include mobileSE{
+                                font-size: 1.1rem;
+                            }
                         }
                     }
                     .navbar_username{
                         @include mobileXR{
-                            font-size: 1.5rem;
+                            font-size: 1.2rem;
                             color: #cccccc;
+                            @include mobileSE{
+                                font-size: 1rem;
+                            }
                         }
                     }
                 }

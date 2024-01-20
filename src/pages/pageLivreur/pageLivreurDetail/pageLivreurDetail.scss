@@ -4,6 +4,9 @@
     @include mobileXR{
         background: #fff;
         margin: auto;
+        @include mobileSE{
+            width: 380px;;
+        }
     }
     .pageLivreurDetail-wrapper{
         @include mobileXR{

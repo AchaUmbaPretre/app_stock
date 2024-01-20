@@ -2,15 +2,20 @@
 
 .pageLivreurVente{
     @include mobileXR{
-        
+        @include mobileSE{
+            width: 380px;
+        }
     }
     .pageLivreurVente-container{
         @include mobileXR{
             padding: 20px;
             h1{
-                font-size: 1.5rem;
+                font-size: 1.4rem;
                 color: rgb(3, 3, 109);
                 padding: 20px 0;
+                @include mobileSE{
+                    font-size: 1.2rem;
+                }
             }
             .pageH4{
                 background: #fff;
@@ -23,6 +28,9 @@
                 border: 1px solid rgba(3, 3, 109, 0.171);
                 margin-bottom: 20px;
                 text-align: center;
+                @include mobileSE{
+                    font-size: 1.1rem;
+                }
             }
             .pageLivreur_info{
                 background: #fff;
@@ -31,8 +39,6 @@
                     flex: 1;
                     display: flex;
                     flex-direction: column;
-/*                     align-items: center;
-                    justify-content: center; */
                     padding: 20px;
                     border-radius: 5px;
                     border: 1px solid rgba(3, 3, 109, 0.171);
@@ -101,6 +107,9 @@
                     @include mobileXR{
                         font-size: 1.2rem;
                         color: rgb(3, 3, 109);
+                        @include mobileSE{
+                            font-size: 1rem;
+                        }
                     }
                 }
             }
@@ -110,8 +119,8 @@
                 .userImg{
                     @include mobileXR{
                         position: relative;
-                        width: 80px;
-                        height: 80px;
+                        width: 60px;
+                        height: 60px;
                         border-radius: 50%;
     
                     }
@@ -132,6 +141,10 @@
                 @include mobileXR{
                     font-size: 1.5rem;
                     color: rgb(3, 3, 109);
+                    @include mobileSE{
+                        font-size: 1.3rem;
+                    }
+
                 }
             }
             .pageLivreur-input{

@@ -6,6 +6,8 @@ import {
   FileTextOutlined,
   SettingOutlined,
   LogoutOutlined,
+  DollarCircleOutlined,
+  AppstoreOutlined 
 } from '@ant-design/icons';
 import { AttachMoney, HomeOutlined} from '@mui/icons-material';
 import './sidebar.css'
@@ -13,7 +15,6 @@ import axios from 'axios';
 import config from '../../config';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccess } from '../../redux/userRedux';
 import Swal from 'sweetalert2';
 
 const { SubMenu, Item } = Menu;
@@ -50,7 +51,7 @@ const Sidebar = () => {
           Accueil
         </Link>
       </Item>
-      <SubMenu key="products" title={<span className="sidebarH3">Produits</span>} icon={<ShoppingCartOutlined style={{ fontSize: '19px', color: '#fafafa' }} />}>
+      <SubMenu key="products" title={<span className="sidebarH3">Produits</span>} icon={<AppstoreOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="allProducts">
           <Link to="/products" className="sidebarLink">
             Produits
@@ -119,7 +120,7 @@ const Sidebar = () => {
           </Link>
         </Item> */}
       </SubMenu>
-      <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
+      <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<DollarCircleOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="ventes">
           <Link to="/ventes" className="sidebarLink">
             Ventes

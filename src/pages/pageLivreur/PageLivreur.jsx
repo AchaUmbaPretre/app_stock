@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 
 const PageLivreur = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [commande, setCommande] = useState([]);
@@ -20,7 +19,6 @@ const PageLivreur = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-user/${userId}`);
           setData(data);
-          setLoading(false);
           const Idcommande = data.map((dd) => dd.id_commande);
           setCommande(Idcommande[0]);
         } catch (error) {
@@ -33,7 +31,7 @@ const PageLivreur = () => {
       const intervalId = setInterval(fetchData, 4000);
     
       return () => clearInterval(intervalId);
-    }, [userId]);
+    }, [DOMAIN,userId]);
 
       const handleClick = async (e) => {
         e.preventDefault();

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} from 'antd';
-import { WhatsAppOutlined ,PhoneOutlined } from '@ant-design/icons';
+import { Button, Input, Space, Table,Tag,Checkbox} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -15,15 +14,14 @@ const PageLivraisonRetour = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [desc, setDesc] = useState([]);
-    const [typeLivraison, setTypeLivraison] = useState([]);
+    const [desc, setDesc] = useState(null);
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
     const IdCommande = pathname.split('/')[2];
 
     const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client) => {
         if (event.target.checked) {
-          setSelected([...selected, { id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,typeLivraison,id_client}]);
+          setSelected([...selected, { id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client}]);
         } else {
           setSelected(selected.filter((row) => row.id !== id));
         }
@@ -161,6 +159,11 @@ const PageLivraisonRetour = () => {
           </div>
           ) : (
             <div className="pageLivreurVente-container">
+              <div className="page-rows-retour" onClick={()=>navigate('/pageRetourCommande')}>
+                  <div className="page-retour-row">
+                    retour
+                  </div>
+              </div>
             <h1>Retourne les produits restants</h1>
                 <div className="rowChart-row-table">
                     <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />

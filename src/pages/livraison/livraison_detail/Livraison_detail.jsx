@@ -1,25 +1,17 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { format, isValid } from 'date-fns';
-import Swal from 'sweetalert2';
+import { format } from 'date-fns';
 import config from '../../../config';
 import LivraisonClientDetail from './livraisonClientDetail/LivraisonClientDetail';
 
 const Livraison_detail = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
-    const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
@@ -44,7 +36,11 @@ const Livraison_detail = () => {
         {
           title: 'Commande N°',
           dataIndex: 'id_commande',
-          key: 'id_commande'
+          key: 'id_commande',
+          render: (text) => 
+          <Tag color={'rgb(128, 128, 231)'}>
+            {text}
+          </Tag>
         },
         {
           title: 'Marque',
@@ -70,24 +66,6 @@ const Livraison_detail = () => {
           title: 'Livreur',
           dataIndex: 'nom_livreur',
           key: 'nom_livreur'
-        },
-        {
-            title: 'Prix',
-            dataIndex: 'prix',
-            key: 'prix',
-            sorter: (a, b) => a.prix - b.prix,
-            sortDirections: ['descend', 'ascend'],
-            render: (text) => (
-              <span>
-              <Tag color={'green'}>
-                {parseFloat(text).toLocaleString('fr-FR', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </Tag>
-              
-              </span>
-            ),
         },
         {
             title: 'Date création',
@@ -135,7 +113,7 @@ const Livraison_detail = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       const filteredData = data?.filter((item) =>
       item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -173,7 +151,7 @@ const Livraison_detail = () => {
                           centered
                           open={open}
                           onCancel={() => setOpen(false)}
-                          width={730}
+                          width={850}
                           footer={[
                             <Button key="annuler" onClick={() => setOpen(false)}>
                               Annuler

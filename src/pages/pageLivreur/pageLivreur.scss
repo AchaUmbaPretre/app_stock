@@ -2,13 +2,19 @@
 
 .pageLivreur{
     @include mobileXR{
+        width: 100%;
     }
     @include mobileSE{
-
+        width: 100%;
     }
     .pageLivreur-container{
         @include mobileXR{
-           
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
         }
 /*         nav{
             @include mobileXR{
@@ -66,14 +72,14 @@
             width: 100%;
             margin: auto;
             @include mobile12pro{
-                width: 350px;
+                width: 340px;
+                margin: auto;
             }
             @include mobileXR{
-                height: calc(100vh - 80px);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 380px;
+                width: 350px;
+                @include mobileSE{
+                    width: 100%;
+                }
             }
             .pageLivreur-message{
                 @include mobile12pro{
@@ -82,12 +88,12 @@
                 @include mobileXR{
                     cursor: pointer;
                     border: 1px solid rgba(1, 35, 138, 0.952);
-                    width: 380px;
+                    width: 350px;
                     margin: auto;
                     padding: 10px;
                     border-radius: 5px;
                     @include mobileSE{
-                        width: 335px;
+                        width: 330px;
                         font-size: .9rem;
                     }
                 }
@@ -95,14 +101,17 @@
             .pageLivreur-message-red{
                 @include mobileXR{
                     border: 1px solid red;
-                    width: 100%;
+                    width: 350px;
                     margin: auto;
                     padding: 10px;
                     border-radius: 5px;
                     text-align: center;
                     color: red;
+                    @include mobile12pro{
+                        width: 345px;
+                    }
                     @include mobileSE{
-                        width: 335px;
+                        width: 330px;
                         font-size: .9rem;
                     }
                 }

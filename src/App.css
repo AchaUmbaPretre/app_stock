@@ -69,7 +69,7 @@ li{
     max-width: 100%;
   }
 
-  ::-webkit-scrollbar{
+/*   ::-webkit-scrollbar{
     width: .60rem;
     background: linear-gradient(#253053,#253053d7) no-repeat;
     z-index: -22;
@@ -80,7 +80,7 @@ li{
 }
 ::-webkit-scrollbar-thumb:hover{
   background: linear-gradient(#253053,#253053d7) no-repeat;
-}
+} */
 
 .pageNavbar{
   display: flex;

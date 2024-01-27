@@ -6,7 +6,6 @@ import config from '../../../config'
 import axios from 'axios'
 import { useEffect } from 'react'
 import Select from 'react-select';
-import { format } from 'date-fns'
 import moment from 'moment';
 import { Image, Table } from 'antd';
 import { CloudUploadOutlined } from '@ant-design/icons';
@@ -24,18 +23,14 @@ const ProductView = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
-    const [idCible,setIdcible] = useState();
-    const [idFamille, setIdFamille] = useState();
+    const [prix, setPrix] = useState([]);
     const [idPays, setIdPays] = useState([]);
     const [variantCheck, setVariantCheck] = useState({});
     const [selectedIds, setSelectedIds] = useState([]);
-    const searchInput = React.useRef(null);
     const scroll = { x: 400 };
-    const scrollY = { y: 200 };
     const [selectedData, setSelectedData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variantExists, setVariantExists] = useState(false);
-    const [variantInput, setVariantInput] = useState('')
 
     
     const handleInputChange = async (e) => {
@@ -74,7 +69,6 @@ const ProductView = () => {
         );
         setVariantExists(exists);
       }
-    
       setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
     };
 
@@ -111,13 +105,12 @@ const ProductView = () => {
           }
         };
         fetchData();
-      }, [id]);
+      }, [DOMAIN,id]);
 
       useEffect(()=>{
-        setIdcible(getProduit?.id_cible)
-        setIdFamille(getProduit?.id_famille)
         setIdPays(data?.id_pays)
-      },[getProduit?.id_cible, data?.id_pays])
+        setPrix(getProduit?.prix)
+      },[data?.id_pays,getProduit?.prix])
 
       useEffect(() => {
         const fetchData = async () => {
@@ -129,7 +122,7 @@ const ProductView = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -141,7 +134,7 @@ const ProductView = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -153,7 +146,7 @@ const ProductView = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -167,7 +160,7 @@ const ProductView = () => {
           }
         };
         fetchData();
-      }, [idPays]);
+      }, [DOMAIN,idPays]);
 
       const qTable = [
         {
@@ -261,7 +254,8 @@ const ProductView = () => {
                 id_cible: item.id_cible,
                 id_taille: item.id_taille,
                 id_famille: item.id_famille,
-                stock: item.stock
+                stock: item.stock,
+                prix: prix
               })
             )
           )
@@ -364,7 +358,7 @@ const ProductView = () => {
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Prix</label>
-                                    <input type="number" name='prix' className="produit_input" onChange={handleInputChange} />
+                                    <input type="number" name='prix' value={prix} className="produit_input" onChange={(e)=>setPrix(e.target.value)} />
                                 </div>
                                 <div className="produit-view-control">
                                     <label htmlFor="">Code Variant</label>

@@ -31,6 +31,11 @@ const PageRetourCommande = () => {
   return (
     <>
         <div className="pageCommandeLivraison">
+          <div className="page-rows-retour" onClick={()=>navigate('/pageLivreurVente')}>
+            <div className="page-retour-row">
+              retour
+            </div>
+          </div>
         <h1>Liste de commande non livré</h1>
         { loading ? (
           <div className="spinner-container">
@@ -45,6 +50,7 @@ const PageRetourCommande = () => {
                 return (
                 <List.Item>
                     <List.Item.Meta
+                    className='pageCommande-list'
                     title={<a href={`pageLivraisonRetour/${item.id_commande}`} >{`Ligne ${lineNumber}: Commande n° ${item.id_commande} de ${item.nom}`}</a>}
                     description={`Adresse de la livraison : ${item.adresse}`}
                     />

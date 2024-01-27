@@ -1,32 +1,18 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Button, Space, Table, Popover,Popconfirm, Tag} from 'antd';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { format, isValid } from 'date-fns';
-import Swal from 'sweetalert2';
+import { format } from 'date-fns';
 import config from '../../../config';
 
 const ListeDetailCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
-    const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
-    const [getVente, setGetVente] = useState({});
-    const [open, setOpen] = useState(false);
 
 
-      const showModal = (id) => {
-        setOpen(true);
-        navigate(`/ventes/${id}`);
-      };
-      const handleCancel = () => {
-        setOpen(false);
-      };
     
       const handleDelete = async (id) => {
         try {
@@ -139,18 +125,7 @@ const ListeDetailCommande = () => {
           }
         };
         fetchData();
-      }, []);
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
-            setGetVente(data[0]);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [id]);
+      }, [DOMAIN]);
 
 
   return (
@@ -162,10 +137,6 @@ const ListeDetailCommande = () => {
                         <h2 className="product-h2">Liste du detail des commandes</h2>
                         <span>Voir le detail des commandes</span>
                     </div>
-                   {/*  <div className="product-right" onClick={() =>navigate('/ventesForm')}>
-                        <PlusOutlined />
-                        <span className="product-btn">voir les commandes</span>
-                    </div> */}
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">

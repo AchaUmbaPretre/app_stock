@@ -203,7 +203,7 @@ const ListeDetailView = () => {
           }
         };
         fetchData();
-      }, [id]);
+      }, [DOMAIN,id]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -216,12 +216,11 @@ const ListeDetailView = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       const handleClick = (e) => {
         e.preventDefault();
 
-        
         if (livreur.length === 0 || selected.length === 0) {
           Swal.fire({
             title: 'Error',

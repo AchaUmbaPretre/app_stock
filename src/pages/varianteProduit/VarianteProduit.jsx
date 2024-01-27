@@ -1,37 +1,33 @@
 import React from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
 import Select from 'react-select';
-import moment from 'moment';
-import { Image } from 'antd';
 import './varianteProduit.scss'
-import {FilterOutlined,ShoppingCartOutlined,SearchOutlined,HeartOutlined} from '@ant-design/icons';
+import {FilterOutlined,SearchOutlined} from '@ant-design/icons';
 import config from '../../config'
 import { FadeLoader } from 'react-spinners';
-import { set } from 'date-fns'
 
 
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [getProduit, setGetProduit] = useState([]);
     const [data, setData] = useState([]);
     const [getFamille,setGetFamille] = useState([]);
     const [getMarque,setGetMarque] = useState([]);
     const [getCible,setGetCible] = useState([]);
+    const [getTaille,setGetTaille] = useState([]);
     const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
     const [famille, setFamille] = useState(null);
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
+    const [taille, setTaille] = useState(null);
     const [loading, setLoading] = useState(true);
 
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`);
+            const { data } = await axios.get( marque ? `${DOMAIN}/api/produit/varianteFiltreMarque/${marque}` : `${DOMAIN}/api/produit/varianteProduit`);
             setData(data)
             setLoading(false)
           } catch (error) {
@@ -39,12 +35,12 @@ const VarianteProduit = () => {
           }
         };
         fetchData();
-      }, [marque]);
+      }, [DOMAIN,marque]);
 
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreCible/${cible}`);
+            const { data } = await axios.get( cible ? `${DOMAIN}/api/produit/varianteFiltreCible/${cible}` : `${DOMAIN}/api/produit/varianteProduit`);
             setLoading(false)
             setData(data)
           } catch (error) {
@@ -52,7 +48,20 @@ const VarianteProduit = () => {
           }
         };
         fetchData();
-      }, [cible]);
+      }, [DOMAIN,cible]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(marque ? `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}` : `${DOMAIN}/api/produit/varianteProduit` );
+            setLoading(false)
+            setData(data)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,taille,marque]);
 
 
       useEffect(() => {
@@ -66,7 +75,7 @@ const VarianteProduit = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -79,7 +88,7 @@ const VarianteProduit = () => {
           }
         };
         fetchData();
-      }, [famille]);
+      }, [DOMAIN,famille]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -92,7 +101,7 @@ const VarianteProduit = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -105,7 +114,21 @@ const VarianteProduit = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
+            setGetTaille(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
       
   return (
     <>
@@ -127,7 +150,7 @@ const VarianteProduit = () => {
                         <div className="variant-top-left">
                           <div className="variant-top-row">
                             <FilterOutlined className='variant-icon'/>
-                            <span>filtrer par categorie</span>
+                            <span>Categorie</span>
                           </div>
                           <Select
                             name='id_famille'
@@ -139,7 +162,7 @@ const VarianteProduit = () => {
                         <div className="variant-top-left">
                           <div className="variant-top-row">
                             <FilterOutlined className='variant-icon'/>
-                            <span>filtrer par marque</span>
+                            <span>Marque</span>
                           </div>
                           <Select
                             name='id_marque'
@@ -151,13 +174,25 @@ const VarianteProduit = () => {
                         <div className="variant-top-left">
                           <div className="variant-top-row">
                             <FilterOutlined className='variant-icon'/>
-                            <span>filtrer par cible</span>
+                            <span>Cible</span>
                           </div>
                           <Select
                             name='id_cible'
                             className='variant-select'
                             options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
                             onChange={(selectedOption) => setCible(selectedOption.value)}
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>Pointure</span>
+                          </div>
+                          <Select
+                            name='id_taille'
+                            className='variant-select'
+                            options={getTaille?.map(item => ({ value: item.id_taille, label: item.taille }))}
+                            onChange={(selectedOption) => setTaille(selectedOption.value)}
                           />
                         </div>
                     </div>
@@ -181,7 +216,6 @@ const VarianteProduit = () => {
             </div>
             )}
         </div>
-
     </>
   )
 }

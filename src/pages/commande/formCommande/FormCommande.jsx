@@ -10,9 +10,7 @@ const FormCommande = () => {
   const [data, setData] = useState({})
   const navigate = useNavigate();
   const [province, setProvince] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [getClient, setGetClient] = useState([]);
-  const [getStatut, setGetStatut] = useState([]);
   const [checkeds, setCheckeds] = useState(false);
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
@@ -85,26 +83,12 @@ const FormCommande = () => {
       try {
         const { data } = await axios.get(`${DOMAIN}/api/client`);
         setGetClient(data);
-        setLoading(false)
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/commande/statut`);
-        setGetStatut(data);
-        setLoading(false)
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,7 +100,7 @@ const FormCommande = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   const handleCheck = (e) => {
     if(e.target.checked){
@@ -140,7 +124,7 @@ const FormCommande = () => {
       }
     };
     fetchData();
-  }, [idProvince]);
+  }, [DOMAIN,idProvince]);
 
 
   return (
@@ -157,12 +141,6 @@ const FormCommande = () => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Client</label>
-{/*                   <select name="id_client" id="id_client" className="form-input" onChange={handleInputChange}  required>
-                    <option>Sélectionnez un client</option>
-                        { getClient.map((dd)=>(
-                    <option value={dd.id}>{dd.nom}</option>
-                        ))}
-                </select> */}
                 <Select
                   name="id_client"
                   options={getClient?.map(item => ({ value: item.id, label: item.nom }))}

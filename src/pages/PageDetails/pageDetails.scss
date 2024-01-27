@@ -12,8 +12,9 @@
             .pageDetail-left{
                 flex: 1;
                 .pageDetail-img{
-                    height: 360px;
-                    width: 320px;
+                    position: relative;
+                    height: 350px;
+                    width: 100%;
                     object-fit: cover;
                 }
                 .pageDetail-left-wrapper{
@@ -71,6 +72,27 @@
                             height: 20px;
                             width: 20px;
                             background: brown;
+                            gap: 30px;
+                            border-radius: 50%;
+                        }
+                        .Orange{
+                            height: 20px;
+                            width: 20px;
+                            background: orangered;
+                            gap: 30px;
+                            border-radius: 50%;
+                        }
+                        .Rose{
+                            height: 20px;
+                            width: 20px;
+                            background: deeppink;
+                            gap: 30px;
+                            border-radius: 50%;
+                        }
+                        .Beige{
+                            height: 20px;
+                            width: 20px;
+                            background: beige;
                             gap: 30px;
                             border-radius: 50%;
                         }

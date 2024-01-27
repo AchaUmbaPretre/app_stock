@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './productSelects.scss'
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -10,7 +10,6 @@ const ProductSelects = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [produit, setProduit] = useState([]);
     const [datas, setDatas] = useState({});
-    const [loading, setLoading] = useState(true);
     const [getCategorie, setGetCategorie] = useState([]);
     const [couleur, setCouleur] = useState([]);
     
@@ -35,13 +34,12 @@ const ProductSelects = ({getProduits}) => {
       try {
         const { data } = await axios.get(`${DOMAIN}/api/produit`);
         setProduit(data);
-        setLoading(false)
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +51,7 @@ const ProductSelects = ({getProduits}) => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +63,7 @@ const ProductSelects = ({getProduits}) => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
 
   const handleClick = async (e) => {
@@ -83,7 +81,6 @@ const ProductSelects = ({getProduits}) => {
     try {
       const {data} = await axios.get(`${DOMAIN}/api/produit/produitSelect?nom_produit=${datas.nom_produit}&categorie=${datas.categorie}&prix=${datas.prix}&couleur=${datas.couleur}`);
       getProduits(data)
-      setLoading(false)
     } catch (err) {
       Swal.fire({
         title: 'Error',

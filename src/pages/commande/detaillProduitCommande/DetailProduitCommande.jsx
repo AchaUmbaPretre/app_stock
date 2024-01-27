@@ -28,6 +28,7 @@ const DetailProduitCommande = () => {
     const [prix, setPrix] = useState();
     const [inventaireTotalOne,setInventaireTotalOne] = useState([]);
     const [idVarianteProduit, setIdVarianteProduit] = useState([]);
+    const [stock, setStock] = useState([]);
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user.currentUser.id)
 
@@ -57,7 +58,7 @@ const DetailProduitCommande = () => {
           }
         };
         fetchData();
-      }, [variante]);
+      }, [DOMAIN,variante]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -70,7 +71,7 @@ const DetailProduitCommande = () => {
           }
         };
         fetchData();
-      }, [variante]);
+      }, [DOMAIN,variante]);
 
       const handleQuantity = (type) =>{
 
@@ -110,13 +111,16 @@ const DetailProduitCommande = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/commande/idVariantproduit/${variante}/${taille}`);
           setIdVarianteProduit(data[0].id_varianteProduit);
+          setStock(data[0].stock);
           setLoading(false)
         } catch (error) {
           console.log(error);
         }
       };
       fetchData();
-    },[variante,taille])
+    },[DOMAIN,variante,taille])
+
+    console.log(stock)
 
     const handleClick = async (e) => {
       e.preventDefault();
@@ -196,8 +200,8 @@ const DetailProduitCommande = () => {
                                         <select name="id_taille" id="" className='select-filter' onChange={(e)=>setTaille(e.target.value)}>
                                           <option>Sélectionnez une pointure</option>
                                         { getTaille?.map((s) =>(
-                                                <option value={s.id_taille} key={s.id_taille}>{s.taille}</option>
-                                                ))}
+                                            <option value={s.id_taille} key={s.id_taille}>{s.taille}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>                             
@@ -207,8 +211,9 @@ const DetailProduitCommande = () => {
                                         <span className="filter-nb">{quantite}</span>
                                         <RemoveOutlinedIcon className="filter-icon" onClick={()=>handleQuantity('desc')}/>
                                     </div>
+                                    {taille && quantite > stock && <div style={{color:'red', fontSize:"12px"}}>Il ya que {stock} dans le stock pour cette pointure</div>}
                                     <div className="filter">
-                                        <button className="filter-btn" onClick={handleClick}>Ajouter au panier</button>
+                                        <button className="filter-btn" onClick={handleClick} disabled={taille && quantite > stock ? true : false}>Ajouter au panier</button>
                                     </div>
                                 </div>
                             </div>
@@ -219,7 +224,6 @@ const DetailProduitCommande = () => {
             </div>
             )}
         </div>
-
     </>
   )
 }

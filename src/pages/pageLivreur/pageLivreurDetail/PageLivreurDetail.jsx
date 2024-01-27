@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './pageLivreurDetail.scss'
-import profil from '../../../assets/2e6501ef-e0e6-4968-af04-5a90fe0ffd69.jpg'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import config from '../../../config';
 import axios from 'axios';
 import moment from 'moment';
@@ -9,11 +8,8 @@ import { FadeLoader } from 'react-spinners';
 
 const PageLivreurDetail = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [selected, setSelected] = useState([]);
   const [data, setData] = useState([]);
-  const scroll = { x: 400 };
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const {pathname} = useLocation();
   const id = pathname.split('/')[2]
 
@@ -28,7 +24,8 @@ const PageLivreurDetail = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [DOMAIN,id]);
+
   return (
     <>
       <div className="pageLivreurDetail">

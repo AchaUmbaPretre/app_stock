@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BellOutlined, PoweroffOutlined, MailOutlined,ExclamationOutlined } from '@ant-design/icons'
+import { BellOutlined, PoweroffOutlined, MailOutlined } from '@ant-design/icons'
 import './pageLivreurNavbar.scss'
 import { Badge } from 'antd';
 import logoIcon from './../../../assets/logo doe.jpg'
@@ -12,9 +12,7 @@ import { useNavigate } from 'react-router-dom';
 const PageLivreurNavbar = () => {
     const navigate = useNavigate();
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [errorMessage,setErrorMessage] = useState('')
     const [currentUser, setCurrentUser] = useState('')
     const user = useSelector((state) => state.user.currentUser.username);
     const userId = useSelector((state) => state.user.currentUser.id);
@@ -28,7 +26,6 @@ const PageLivreurNavbar = () => {
         navigate('/login')
         window.location.reload();
       } catch (error) {
-        setErrorMessage(error.response.data);
         Swal.fire('Erreur lors de la déconnexion.', '', 'error');
       }
     };
@@ -38,7 +35,6 @@ const PageLivreurNavbar = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-user/${userId}`);
           setData(data);
-          setLoading(false);
         } catch (error) {
           console.log(error);
         }
@@ -49,7 +45,7 @@ const PageLivreurNavbar = () => {
       const intervalId = setInterval(fetchData, 4000);
     
       return () => clearInterval(intervalId);
-    }, [userId]);
+    }, [DOMAIN, userId]);
 
   return (
     <>

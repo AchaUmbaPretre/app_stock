@@ -3,10 +3,14 @@
 .pageLivreurNavbar{
     .pageLivreurNavbar-container{
         nav{
+            width: 100%;
+            position: relative;
+            overflow: hidden;
             @include mobileXR{
                 width: 100%;
                 position: sticky;
                 top: 0;
+                left: 0;
                 z-index: 111;
                 box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.151);
                 background:rgba(1, 35, 138, 0.952);
@@ -15,11 +19,18 @@
                 justify-content: space-between;
                 padding: 10px 0;
                 transition: .5s;
+                @include mobileSE{
+                    position: relative;
+                    width: 100%;
+                    overflow: hidden;
+                }
             }
             .navbar-wrapper{
                 @include mobile12pro{
+                    position: relative;
                     width: 300px;
                     padding: 0 10px;
+                    overflow: hidden;
                 }
                 @include mobileXR{
                     width: 380px;
@@ -27,6 +38,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    overflow: hidden;
                     @include mobileSE{
                         width: 345px;
                     }

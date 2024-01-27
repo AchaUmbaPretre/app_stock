@@ -137,7 +137,7 @@ const RowProduit = () => {
       dataIndex: 'img',
       key: 'img',
       render: (text, record) => (
-        <div className="userList" onClick={()=> navigate(`/productView/${record.produit_id}`)}>
+        <div className="userList" onClick={()=>navigate(`/pageDetail/${record.id_varianteProduit}`)}>
           <img src={record.img} alt="" className="userImg"  />
         </div>
       )
@@ -176,7 +176,7 @@ const RowProduit = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
 
   return (

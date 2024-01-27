@@ -1,7 +1,7 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import { Button, Input, Space, Table, Popover,Popconfirm,Modal} from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import { Button, Space, Table, Popconfirm,Modal} from 'antd';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import config from '../../config';
@@ -17,8 +17,6 @@ const Marque = () => {
     const scroll = { x: 400 };
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
     const [searchValue, setSearchValue] = useState('');
   
       const columns = [
@@ -53,6 +51,7 @@ const Marque = () => {
         setOpen(true);
         navigate(`/marque/${id}`);
       };
+
       const handleCancel = () => {
         setOpen(false);
       };
@@ -74,7 +73,8 @@ const Marque = () => {
           }
         };
         fetchData();
-      }, [id])
+      }, [DOMAIN,id])
+
       const handleOk = async (e) => {
         try{
           await axios.put(`${DOMAIN}/api/produit/marque/${id}`,{nom : putMarque})
@@ -86,11 +86,8 @@ const Marque = () => {
             confirmButtonText: 'OK',
           });
       
-          setModalText('The modal will be closed after two seconds');
-          setConfirmLoading(true);
           setTimeout(() => {
           setOpen(false);
-          setConfirmLoading(false);
       }, 2000);
           window.location.reload();
   
@@ -103,6 +100,7 @@ const Marque = () => {
           });
         }
     };
+
       const handleClick = async (e) => {
         e.preventDefault();
 
@@ -146,7 +144,7 @@ const Marque = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
     
     const handleDelete = async (id) => {
      try {
@@ -193,7 +191,6 @@ const Marque = () => {
                               title="Modifier une marque"
                               open={open}
                               onOk={handleOk}
-                              confirmLoading={confirmLoading}
                               onCancel={handleCancel}
                               okText="Confirmer"
                               cancelText="Annuler"
@@ -204,10 +201,8 @@ const Marque = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </>
   )
 }

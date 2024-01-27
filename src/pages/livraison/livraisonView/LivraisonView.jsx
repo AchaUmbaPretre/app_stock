@@ -1,24 +1,23 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { format, isValid } from 'date-fns';
-import Swal from 'sweetalert2';
+import { format } from 'date-fns';
 import config from '../../../config';
+import LivraisonViewPrix from './LivraisonViewPrix';
 
 const LivraisonView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
-    const navigate = useNavigate();
     const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
+    const id = pathname.split('/')[2];
+    const [open, setOpen] = useState(false);
+    const [idClient, setIdClient] = useState({});
+    const [prix, setPrix] = useState({});
+    const [searchValue, setSearchValue] = useState('');
 
     
       const handleDelete = async (id) => {
@@ -28,6 +27,11 @@ const LivraisonView = () => {
         } catch (err) {
           console.log(err);
         }
+      };
+
+      const showModal = (e) => {
+        setOpen(true);
+        setIdClient(e);
       };
     
       const columns = [
@@ -45,7 +49,12 @@ const LivraisonView = () => {
         {
           title: 'Marque',
           dataIndex: 'nom_marque',
-          key: 'nom_marque'
+          key: 'nom_marque',
+          render: (text) => (
+            <Tag color={"green"}>
+              {text}
+            </Tag>
+          )
         },
         {
           title: 'Pointure',
@@ -60,17 +69,29 @@ const LivraisonView = () => {
         {
           title: 'Client',
           dataIndex: 'nom_client',
-          key: 'nom_client'
+          key: 'nom_client',
+          render: (text) => (
+            <Tag color={"green"}>
+              {text}
+            </Tag>
+          )
         },
         {
           title: 'Livreur',
           dataIndex: 'nom_livreur',
-          key: 'nom_livreur'
+          key: 'nom_livreur',
+          render: (text) => (
+            <Tag color={"blue"}>
+              {text}
+            </Tag>
+          )
         },
         {
           title: 'Qté livrée',
           dataIndex: 'qte_livre',
           key: 'qte_livre',
+          sorter: (a, b) => a.qte_livre - b.qte_livre,
+          sortDirections: ['descend', 'ascend'],
           render: (text) => (
             <Tag color={"#108ee9"}>
               {text}
@@ -81,6 +102,8 @@ const LivraisonView = () => {
             title: 'Qté commandée',
             dataIndex: 'qte_commande',
             key: 'qte_commande',
+            sorter: (a, b) => a.qte_commande - b.qte_commande,
+            sortDirections: ['descend', 'ascend'],
             render: (text) => (
               <Tag color={"#87d068"}>
                 {text}
@@ -93,9 +116,9 @@ const LivraisonView = () => {
             key: 'prix',
             sorter: (a, b) => a.prix - b.prix,
             sortDirections: ['descend', 'ascend'],
-            render: (text) => (
+            render: (text,record) => (
               <span>
-              <Tag color={'green'}>
+              <Tag color={'green'} onClick={()=> showModal(record.id_detail_livraison)}>
                 {parseFloat(text).toLocaleString('fr-FR', {
                   style: 'currency',
                   currency: 'USD',
@@ -111,7 +134,11 @@ const LivraisonView = () => {
             key: 'date_creation',
             render: (text) => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy');
-              return <span>{formattedDate}</span>;
+              return <span>
+              <Tag color={"blue"}>
+                {formattedDate}
+              </Tag>
+              </span>;
             },
         },
         {
@@ -151,7 +178,25 @@ const LivraisonView = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN,id]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonPrix/${idClient}`);
+            setPrix(data[0].prix);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,idClient]);
+
+      const filteredData = data?.filter((item) =>
+      item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
 
   return (
@@ -170,7 +215,7 @@ const LivraisonView = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">
@@ -180,7 +225,19 @@ const LivraisonView = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
+                        <Modal
+                          title="Modifier le prix"
+                          centered
+                          open={open}
+                          onCancel={() => setOpen(false)}
+                          width={400}
+                          footer={[
+                            
+                          ]}
+                        >
+                         <LivraisonViewPrix prixTotal={prix} idDetail={idClient}/> 
+                        </Modal>
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                     </div>
                 </div>
             </div>

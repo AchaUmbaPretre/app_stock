@@ -64,6 +64,7 @@ import PageCommandeVente from './pages/pageLivreur/pageCommandeVente/PageCommand
 import PageRetourCommande from './pages/pageLivreur/pageRetourCommande/PageRetourCommande';
 import PageLivraisonRetour from './pages/pageLivreur/pageRetourCommande/PageLivraisonRetour';
 import LivraisonView from './pages/livraison/livraisonView/LivraisonView';
+import Couleur from './pages/couleur/Couleur';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -174,6 +175,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/typeMouvement',
           element: <TypeMouvement />
+        },
+        {
+          path: '/couleur',
+          element: <Couleur />
         },
         {
           path: '/mouvement',

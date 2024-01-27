@@ -8,13 +8,11 @@ const EditCommande = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({})
   const navigate = useNavigate();
-  const [province, setProvince] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [getClient, setGetClient] = useState([]);
   const [getStatut, setGetStatut] = useState([]);
   const {pathname} = useLocation();
   const id = pathname.split('/')[2]
-  const {id_client,statut,id_livraison,id_paiement,id_shop,paye} = data;
+  const {id_client} = data;
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -60,26 +58,12 @@ const EditCommande = () => {
       try {
         const { data } = await axios.get(`${DOMAIN}/api/client`);
         setGetClient(data);
-        setLoading(false)
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/commande/statut`);
-        setGetStatut(data);
-        setLoading(false)
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,7 +75,7 @@ const EditCommande = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [DOMAIN,id]);
 
 
   return (
@@ -115,7 +99,7 @@ const EditCommande = () => {
                         ))}
                 </select>
                 </div>
-                <div className="form-controle">
+{/*                 <div className="form-controle">
                   <label htmlFor="">Statut</label>
                   <select id="" className="form-input" value={statut} name="statut" onChange={handleInputChange} required>
                     <option value="" disabled selected>Selectionnez un statut</option>
@@ -138,14 +122,14 @@ const EditCommande = () => {
                   <label htmlFor="">Shop</label>
                   <select id="" className="form-input" value={id_shop} name="statut" onChange={handleInputChange} required>
                     <option value="" disabled selected>Selectionnez un shop</option>
-{/*                     <option value="Client VIP">Validé</option>
-                    <option value="Client Normal">Non-validé</option> */}
+                    <option value="Client VIP">Validé</option>
+                    <option value="Client Normal">Non-validé</option> 
                   </select>
-                </div>
-                <div className="form-controle">
+                </div> */}
+{/*                 <div className="form-controle">
                   <label htmlFor="">Paye</label>
                   <input type="text" name="paye" value={paye} className="form-input" onChange={handleInputChange} />
-                </div>
+                </div> */}
               </div>
 
               <div className="form-submit">

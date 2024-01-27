@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal,Checkbox} from 'antd';
+import { Space, Table, Tag, Checkbox} from 'antd';
 import { WhatsAppOutlined ,PhoneOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
@@ -15,7 +15,6 @@ const PageCommandeVente = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [typeLivraison, setTypeLivraison] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
@@ -24,7 +23,10 @@ const PageCommandeVente = () => {
 
     const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client) => {
         if (event.target.checked) {
-          setSelected([...selected, { id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,typeLivraison,id_client}]);
+          const updatedSelected = [...selected, { id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client}]
+          setSelected(updatedSelected);
+          const totalPrice = updatedSelected.reduce((acc, item) => acc + item.prix, 0);
+          setTotalPrice(totalPrice);
         } else {
           setSelected(selected.filter((row) => row.id !== id));
         }
@@ -96,14 +98,16 @@ const PageCommandeVente = () => {
             setData(data);
             setLoading(false)
 
-            const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
-            setTotalPrice(totalPrice)
+/*             const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
+            setTotalPrice(totalPrice) */
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [userId]);
+        const intervalId = setInterval(fetchData, 4000);
+        return () => clearInterval(intervalId);
+      }, [DOMAIN,userId,IdCommande]);
 
       const handleClick = async (e) => {
         e.preventDefault();
@@ -156,32 +160,6 @@ const PageCommandeVente = () => {
         }
       }
 
-/*       const handleClick2 = async (e) => {
-        e.preventDefault();
-      
-        try {     
-              await axios.put(`${DOMAIN}/api/livraison/vuLivreur/${data[0]?.id_commande}`);
-      
-          Swal.fire({
-            title: 'Success',
-            text: 'La page a été mise à jour!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-
-          navigate('/');
-          window.location.reload();
-      
-        } catch (err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        }
-      } */
-
       const handleCheck = (e) => {
         if(e.target.checked){
           setCheckeds(true)
@@ -189,6 +167,7 @@ const PageCommandeVente = () => {
           setCheckeds(false)
         }
       }
+
   return (
     <>
         <div className="pageLivreurVente">
@@ -198,6 +177,11 @@ const PageCommandeVente = () => {
               </div>
             ) : (
             <div className="pageLivreurVente-container">
+              <div className="page-rows-retour" onClick={()=>navigate('/pageCommandeLivraison')}>
+                  <div className="page-retour-row">
+                    retour
+                  </div>
+              </div>
                 <h4 className='pageH4'>Commande n° {IdCommande}</h4>
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px', marginBottom:'10px'}}>
                 <input type="checkbox" onChange={handleCheck} style={{background: 'rgb(3, 3, 109)'}} />
@@ -241,7 +225,6 @@ const PageCommandeVente = () => {
                 </div>
                <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
-{/*                     <button className='pageLivreur-btn' onClick={handleClick2}>Terminer le processus</button> */}
                 </div> 
             </div>) }
         </div>

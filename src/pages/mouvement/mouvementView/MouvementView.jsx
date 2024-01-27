@@ -130,9 +130,6 @@ const MouvementView = () => {
         setOpen(true);
         navigate(`/ventes/${id}`);
       };
-      const handleCancel = () => {
-        setOpen(false);
-      };
     
       const handleDelete = async (id) => {
         try {
@@ -158,12 +155,18 @@ const MouvementView = () => {
         {
           title: 'Marque',
           dataIndex: 'nom_marque',
-          key: 'nom_marque'
+          key: 'nom_marque',
+          render: (text, record) => {
+            return <Tag color={"blue"}>{text}</Tag>;
+          },
         },
         {
           title: 'Client',
           dataIndex: 'nom_client',
-          key: 'nom_client'
+          key: 'nom_client',
+          render: (text, record) => {
+            return <Tag color={"green"}>{text}</Tag>;
+          },
         },
         {
             title: 'Date',
@@ -183,7 +186,7 @@ const MouvementView = () => {
             key: 'type_mouvement',
             ...getColumnSearchProps('type_mouvement'),
             render: (text, record) => {
-              const color = record.id_type_mouvement === 4 ? 'green' : 'red';
+              const color = record.id_type_mouvement === 5 ? 'red' : 'green';
               return <Tag color={color}>{text}</Tag>;
             },
           },
@@ -299,7 +302,7 @@ const MouvementView = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">

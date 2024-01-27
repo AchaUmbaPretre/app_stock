@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './rowTotalDetail.scss'
 import { UsergroupAddOutlined, UserOutlined, SnippetsOutlined,ShoppingOutlined } from '@ant-design/icons';
-import CountUp from 'react-countup';
 import config from '../../config';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -67,16 +66,16 @@ const RowTotalDetail = () => {
     <>
         <div className="rowTotalDetail">
             <div className="rowTotalDetail-wrapper">
-                <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}}>
+                <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2">{client[0]?.total}</h2>
+                        <h2 className="rowTotal-h2">{client[0]?.total ? client[0]?.total : 0 }</h2>
                         <span className="rowTotal-span">Clients</span>
                     </div>
                     <div className="rowTotalDetail-right">
                     <UserOutlined className='rowTotalIcon' />
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}}>
+                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/livreur')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2">{livreur[0]?.total}</h2>
                         <span className="rowTotal-span">Livreurs</span>
@@ -85,7 +84,7 @@ const RowTotalDetail = () => {
                     <UsergroupAddOutlined className='rowTotalIcon'/>
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}}>
+                <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/products')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2">{produit[0]?.total}</h2>
                         <span className="rowTotal-span">Produits</span>
@@ -94,7 +93,7 @@ const RowTotalDetail = () => {
                         <SnippetsOutlined className='rowTotalIcon'/>
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}}>
+                <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2">{vente}</h2>
                         <span className="rowTotal-span">vente</span>

@@ -87,6 +87,11 @@ const Sidebar = () => {
             Marques
           </Link>
         </Item>
+        <Item key="couleur">
+          <Link to="/couleur" className="sidebarLink">
+            Couleur
+          </Link>
+        </Item>
         <Item key="typeMouvement">
           <Link to="/typeMouvement" className="sidebarLink">
             Type des mouvements

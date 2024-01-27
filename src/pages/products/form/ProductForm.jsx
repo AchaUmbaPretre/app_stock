@@ -1,6 +1,5 @@
 import React from 'react'
 import './productForm.scss'
-import { CloudUploadOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import Select from 'react-select';
 import { useEffect } from 'react';
@@ -13,15 +12,15 @@ const ProductForm = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({})
   const [getCategorie, setGetCategorie] = useState([]);
-  const [getData, setGetData] = useState([]);
-  const [couleur, setCouleur] = useState([]);
   const [getMatiere, setGetMatiere] = useState([]);
   const [getMarque, setGetMarque] = useState();
   const [getCible, setGetCible] = useState([]);
   const [getEtatProduit, setGetEtatProduit] = useState("Actif");
   const navigate = useNavigate();
+  const [variantCheck, setVariantCheck] = useState({});
   const [dateEntrant, setDateEntrant] = useState(new Date().toISOString().split('T')[0]);
   const [dateMiseAJour, setDateMiseAJour] = useState(new Date().toISOString().split('T')[0]);
+  const [variantExists, setVariantExists] = useState(false);
 
   const handleInputChange = async (e) => {
     const fieldName = e.target.name;
@@ -41,6 +40,14 @@ const ProductForm = () => {
     } else if (fieldName === "date_MisAjour") {
       // Mettre à jour la valeur par défaut de "Date de mise à jour" avec la valeur modifiée
       setDateMiseAJour(fieldValue);
+     }
+     
+     // Vérifier si la variante existe déjà
+     if (fieldName === "code_variante") {
+      const exists = variantCheck.some(
+        (variant) => variant.code_variante.toLowerCase() === fieldValue.toLowerCase()
+      );
+      setVariantExists(exists);
     }
   
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
@@ -60,30 +67,7 @@ const ProductForm = () => {
       }
     };
     fetchData();
-  }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/emplacement`);
-        setGetData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
-        setCouleur(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,7 +79,7 @@ const ProductForm = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,7 +91,7 @@ const ProductForm = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,7 +103,21 @@ const ProductForm = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/produit/CodevarianteProduit`);
+        setVariantCheck(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN]);
+
+  console.log(variantCheck)
 
 
   const handleClick = async (e) => {
@@ -212,6 +210,7 @@ const ProductForm = () => {
                 <div className="form-controle">
                   <label htmlFor="">Code variant</label>
                   <input type="text" name='code_variante' placeholder='ex: P329' className="form-input" onChange={handleInputChange} />
+                  {variantExists && <p className="error-message" style={{color:"red", fontSize:"13px"}}>Cette variante existe déjà.</p>}
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Date d'entrant</label>

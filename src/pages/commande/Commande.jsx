@@ -22,6 +22,8 @@ const Commande = () => {
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [getTaille,setGetTaille] = useState([]);
+    const [taille, setTaille] = useState(null);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -101,6 +103,32 @@ const Commande = () => {
         };
         fetchData();
       }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
+            setGetTaille(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(marque ? `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}` : `${DOMAIN}/api/produit/varianteProduit` );
+            setLoading(false)
+            setData(data)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,taille,marque]);
       
   return (
     <>
@@ -153,6 +181,18 @@ const Commande = () => {
                             className='variant-select'
                             options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
                             onChange={(selectedOption) => setCible(selectedOption.value)}
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>Pointure</span>
+                          </div>
+                          <Select
+                            name='id_taille'
+                            className='variant-select'
+                            options={getTaille?.map(item => ({ value: item.id_taille, label: item.taille }))}
+                            onChange={(selectedOption) => setTaille(selectedOption.value)}
                           />
                         </div>
                     </div>

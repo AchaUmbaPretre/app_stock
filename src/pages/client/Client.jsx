@@ -2,10 +2,11 @@ import './client.scss'
 import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popconfirm, Popover, Tag} from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
+import { useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
+import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetail';
 
 const Client = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,6 +18,8 @@ const Client = () => {
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
+    const [open, setOpen] = useState(false);
+    const [idClient, setIdClient] = useState({});
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -121,6 +124,11 @@ const Client = () => {
             text
           ),
       });
+
+      const showModal = (e) => {
+        setOpen(true);
+        setIdClient(e)
+      };
           
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -129,9 +137,9 @@ const Client = () => {
             dataIndex: 'nom',
             key: 'nom',
             ...getColumnSearchProps('nom'),
-            render : (text)=>(
+            render : (text,record)=>(
               <div>
-                 <Tag color={'green'}>{text}</Tag>
+                 <Tag color={'green'} onClick={()=> showModal(record.id)} style={{cursor: "pointer"}}>{text}</Tag>
               </div>
             )
         },
@@ -187,12 +195,10 @@ const Client = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Modifier" trigger="hover">
+{/*                 <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
-                </Popover>
-{/*                 <Link to={`/presenceListView/${record.id}`}>
-                  <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                </Link> */}
+                </Popover> */}
+                  <Button icon={<EyeOutlined />} style={{ color: 'blue', cursor: 'pointer' }} onClick={()=> showModal(record.id)} />
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -219,7 +225,7 @@ const Client = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       const handleEdit = (id) => {
         navigate(`/clientEdit/${id}`);
@@ -271,6 +277,18 @@ const Client = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
+                        <Modal
+                          title="Information de client"
+                          centered
+                          open={open}
+                          onCancel={() => setOpen(false)}
+                          width={850}
+                          footer={[
+                            
+                          ]}
+                        >
+                         <MouvClientDetail idClients={idClient}/>
+                        </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>

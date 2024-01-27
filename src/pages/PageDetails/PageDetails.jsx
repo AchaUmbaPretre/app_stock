@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './pageDetails.scss'
 import config from '../../config';
 import axios from 'axios';
@@ -10,7 +10,6 @@ import { FadeLoader } from 'react-spinners';
 const PageDetails = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
-    const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [inventaire, setInventaire] = useState([]);
@@ -31,9 +30,9 @@ const PageDetails = () => {
           }
         };
         fetchData();
-      }, [id]);
+      }, [DOMAIN,id]);
 
-      useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
@@ -44,9 +43,9 @@ const PageDetails = () => {
           }
         };
         fetchData();
-      }, [variante]);
+      }, [DOMAIN,variante]);
 
-      useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/inventaireTotalOne/${variante}`);
@@ -57,23 +56,22 @@ const PageDetails = () => {
           }
         };
         fetchData();
-      }, [variante]);
+      }, [DOMAIN,variante]);
 
-        const tailleMinObjet1 = inventaire[0]?.taille_min;
-        const dernierObjet = inventaire[inventaire.length - 1];
-        const tailleMaxDernierObjet = dernierObjet?.taille_max;
+    const tailleMinObjet1 = inventaire[0]?.taille_min;
+    const dernierObjet = inventaire[inventaire.length - 1];
+    const tailleMaxDernierObjet = dernierObjet?.taille_max;
 
     const groupedData = data.reduce((acc, item) => {
-        const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img, ...rest } = item;
+    const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img } = item;
       
-        if (!acc[id_produit]) {
+    if (!acc[id_produit]) {
           acc[id_produit] = { id_produit, nom_produit, pointure: [], date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img };
         }
       
         acc[id_produit].pointure.push(pointure);
-      
         return acc;
-      }, {});
+        }, {});
       
       const result = Object.values(groupedData);
 
@@ -89,7 +87,10 @@ const PageDetails = () => {
               <div className="pageDetail-container">
                     <div className="pageDetail-left">
                     { result?.map((dd)=>(
-                        <img src={dd?.img} alt="" className="pageDetail-img" />  ))}
+                      <div style={{position: 'relative', width:"400px"}}>
+                        <img src={dd?.img} alt="" className="pageDetail-img" /> 
+                      </div> ))}
+                        
                         <div className="pageDetail-left-wrapper" id='description'>
                             <h2>Description</h2>
                             { result?.map((dd)=>(
@@ -101,21 +102,21 @@ const PageDetails = () => {
                                 <li><strong>Couleur : </strong><span className={`${dd?.description}`}></span><span>{dd?.description}</span></li>
                                 <li><strong>Cible : </strong>{dd?.nom_cible}</li>
                                 <li><strong>Code pays : </strong>{dd?.code_pays}</li>
-                                <li><strong><span>{dd?.nom_famille === 'Chaussure' ? 'Pointure': "Taille"}</span> : </strong>{`${tailleMinObjet1} à ${tailleMaxDernierObjet}`}</li>
+                                <li><strong><span>{dd?.nom_famille === 'Chaussure' ? 'Pointure': "Taille"}</span> : </strong> { tailleMinObjet1 === tailleMaxDernierObjet ? `${tailleMinObjet1}`: `${tailleMinObjet1} à ${tailleMaxDernierObjet}`}</li>
                                 <li><strong>Date d'entrée : </strong>{moment(dd?.date_entrant).format('DD-MM-YYYY')}</li>
                             </ul> ))}
                         </div>
                     </div>
                     { result?.map((dd)=>(
                     <div className="pageDetail-right">
-                        <h2 className="pageDetail-h2">{dd?.nom_famille}</h2>
+                        <h2 className="pageDetail-h2">{dd?.nom_marque}</h2>
                         <div className="pagedetailDescr">
                             <span>{dd?.code_pays}</span>
                             <a href='#description'>En savoir plus</a>
                         </div>
                         <div className="pageEtoile-row">
                             <Rate allowHalf defaultValue={3.5} />
-                            <a href="">Voir le seul avis</a>
+                            <Link>Voir le seul avis</Link>
                         </div>
                         <div className="pageDetail-bottom">
                         </div>

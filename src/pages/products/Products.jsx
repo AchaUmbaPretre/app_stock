@@ -1,14 +1,16 @@
 import './products.scss'
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
 import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Modal} from 'antd';
 import { format } from 'date-fns';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { Tag } from 'antd';
+import ProductDetail from './productDetail/ProductDetail';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const Products = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -20,7 +22,9 @@ const Products = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const navigate = useNavigate();
+    const [opens, setOpens] = useState(false);
     const [open, setOpen] = useState(false);
+    const [idProduit, setIdProduit] = useState({});
 
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -127,10 +131,6 @@ const Products = () => {
             text
           ),
       });
-
-      const handleEdit = (id) => {
-        navigate(`/productForm/${id}`);
-    };
     
     const handleDelete = async (id) => {
       try {
@@ -148,44 +148,46 @@ const Products = () => {
         dataIndex: 'nom_produit',
         key: 'nom_produit',
         ...getColumnSearchProps('nom_produit'),
+        render: (text,record) => 
+          <Tag color={'green'} style={{cursor:'pointer'}} onClick={()=> showModal(record.id_produit)}>
+            {text}
+          </Tag>
     },
     {
       title: 'Categorie',
       dataIndex: 'nom_categorie',
       key: 'nom_categorie',
+      render: (text) => 
+          <Tag color={'orange'}>
+            {text}
+          </Tag>
     },
     {
       title: 'Marque',
       dataIndex: 'nom_marque',
       key: 'nom_marque',
+      render: (text) => 
+          <Tag color={'blue'}>
+            {text}
+          </Tag>
     },
     {
       title: 'Matière',
       dataIndex: 'nom_matiere',
       key: 'nom_matiere',
+      render: (text) => 
+          <Tag color={'rgb(128, 128, 231)'}>
+            {text}
+          </Tag>
     },
     {
       title: 'Famille',
       dataIndex: 'nom_famille',
       key: 'nom_famille',
-    },
-    {
-      title: 'Prix',
-      dataIndex: 'prix',
-      key: 'prix',
-      sorter: (a, b) => a.prix - b.prix,
-      sortDirections: ['descend', 'ascend'],
-      render: (text) => (
-        <span>
-        <Tag color={'green'}>
-          {parseFloat(text).toLocaleString('fr-FR', {
-            style: 'currency',
-            currency: 'USD',
-          })}
-        </Tag>
-        
-        </span>
-      ),
+      render: (text) => 
+          <Tag color={'blue'}>
+            {text}
+          </Tag>
     },
     {
       title: 'Etat produit',
@@ -204,9 +206,9 @@ const Products = () => {
         sorter: (a, b) => a.date_entrant - b.date_entrant,
       sortDirections: ['descend', 'ascend'],
         render: (text) => (
-          <span>
+          <Tag color={'blue'}>
             {format(new Date(text), 'dd-MM-yyyy')}
-          </span>
+          </Tag>
         ),
     }, 
     {
@@ -215,10 +217,10 @@ const Products = () => {
         render: (text, record) => (
                 
           <Space size="middle">
-{/*             <Popover title="Modifier" trigger="hover">
-              <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id_produit)} />
-            </Popover> */}
-            <Popover title="Voir le détail" trigger="hover">
+             <Popover title="Voir les details" trigger="hover">
+              <Button icon={<EyeOutlined />} style={{ color: 'green' }} onClick={()=> showModal(record.id_produit)} />
+            </Popover>
+            <Popover title="Ajoutez des produits" trigger="hover">
               <Link to={`/productView/${record.id_produit}`}>
                 <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
               </Link>
@@ -239,7 +241,7 @@ const Products = () => {
   ];
 
 const HandOpen = () =>{
-  setOpen(!open)
+  setOpens(!opens)
 }
 
 useEffect(() => {
@@ -253,7 +255,12 @@ useEffect(() => {
     }
   };
   fetchData();
-}, []);
+}, [DOMAIN]);
+
+const showModal = (e) => {
+  setOpen(true);
+  setIdProduit(e)
+};
 
 const filteredData = getProduit?.filter((item) =>
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -278,7 +285,7 @@ const filteredData = getProduit?.filter((item) =>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                            {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
                                 <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -290,8 +297,23 @@ const filteredData = getProduit?.filter((item) =>
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                   {open &&
+                    <BarReturn/>
+                   {opens &&
                     <ProductSelects getProduits={setGetProduit}/> } 
+                        <Modal
+                          title="Information du produit"
+                          centered
+                          open={open}
+                          onCancel={() => setOpen(false)}
+                          width={850}
+                          footer={[
+                            <Button key="annuler" onClick={() => setOpen(false)}>
+                              Annuler
+                            </Button>
+                          ]}
+                        >
+                        <ProductDetail idProduit={idProduit}/>
+                        </Modal>
                     <div className="rowChart-row-table">
                       <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>

@@ -75,7 +75,7 @@ const Livraison = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
 
   return (

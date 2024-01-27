@@ -1,11 +1,11 @@
 import { PlusOutlined, SearchOutlined, EyeOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Button,Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
-import Swal from 'sweetalert2';
 import config from '../../../config';
+import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -13,12 +13,9 @@ const ListeCommande = () => {
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
-    const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
-    const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
+    const [idClient, setIdClient] = useState({});
 
     
       const handleDelete = async (id) => {
@@ -33,18 +30,32 @@ const ListeCommande = () => {
       const handleEdit = (id) => {
         navigate(`/Editcommande/${id}`);
     };
+
+    const showModal = (e) => {
+      setOpen(true);
+      setIdClient(e)
+    };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
           title: 'Code',
           dataIndex: 'id_commande',
-          key: 'id_commande'
+          key: 'id_commande',
+          render: (text) => 
+          <Tag color={'rgb(128, 128, 231)'}>
+            {text}
+          </Tag>
         },
         {
             title: 'Client',
             dataIndex: 'nom',
-            key: 'id_client'
+            key: 'id_client',
+            render : (text,record)=>(
+              <div onClick={()=> showModal(record.id_client)} style={{cursor: 'pointer'}}>
+                  <Tag color={'green'}>{text}</Tag>
+              </div>
+            )
         },
         {
           title: 'Date commande',
@@ -230,19 +241,7 @@ const ListeCommande = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
-/*       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteOne/${id}`);
-            setGetVente(data[0]);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [id]); */
-
-      const filteredData = data?.filter((item) =>
+  const filteredData = data?.filter((item) =>
   item.nom?.toLowerCase().includes(searchValue.toLowerCase())
 )
 
@@ -276,12 +275,23 @@ const ListeCommande = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
+                        <Modal
+                          title="Information de client"
+                          centered
+                          open={open}
+                          onCancel={() => setOpen(false)}
+                          width={850}
+                          footer={[
+                            
+                          ]}
+                        >
+                         <MouvClientDetail idClients={idClient}/>
+                        </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>
         </div>
-
     </>
   )
 }

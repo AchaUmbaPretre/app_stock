@@ -9,6 +9,23 @@
     .pageLivreurVente-container{
         @include mobileXR{
             padding: 20px;
+            .page-rows-retour{
+                background: #fff;
+                -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                font-size: 1.3rem;
+                color: rgb(3, 3, 109);
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid rgba(3, 3, 109, 0.171);
+                margin-bottom: 20px;
+                text-align: center;
+                width: max-content;
+                cursor: pointer;
+                .page-retour-row{
+                    font-size: .8rem;
+                }
+            }
             h1{
                 font-size: 1.4rem;
                 color: rgb(3, 3, 109);

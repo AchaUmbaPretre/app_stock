@@ -120,7 +120,6 @@ const DetailProduitCommande = () => {
       fetchData();
     },[DOMAIN,variante,taille])
 
-    console.log(stock)
 
     const handleClick = async (e) => {
       e.preventDefault();

@@ -6,8 +6,10 @@ import { useEffect } from 'react'
 import Select from 'react-select';
 import './commande.scss'
 import {FilterOutlined,ShoppingCartOutlined,SearchOutlined,HeartOutlined} from '@ant-design/icons';
+import { Modal} from 'antd';
 import config from '../../config'
 import { FadeLoader } from 'react-spinners';
+import DetailProduitCommande from './detaillProduitCommande/DetailProduitCommande'
 
 
 const Commande = () => {
@@ -24,6 +26,9 @@ const Commande = () => {
     const [taille, setTaille] = useState(null);
     const [getCommande, setGetCommande] = useState([]);
     const [famillesSelectionnees, setFamillesSelectionnees] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [idVariante, setIdVariante] = useState({});
+    const [idCommande, setIdCommande] = useState([]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -150,6 +155,12 @@ const Commande = () => {
         fetchData();
       }, [DOMAIN,id]);
       
+      const showModal = (e,f) => {
+        setOpen(true);
+        setIdVariante(e)
+        setIdCommande(f)
+      };
+      
   return (
     <>
         <div className="varianteProduit">
@@ -245,13 +256,26 @@ const Commande = () => {
                           <img src={dd.img} alt="" className="variante-img" />
                           <div className="info-products">
                             <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
-                              <Link to={`/commande/${dd.id_varianteProduit}/${id}`}>
+                              <Link onClick={()=> showModal(dd.id_varianteProduit,id)}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
                             <div className="icon-products"><HeartOutlined className='icon1'/></div>
                           </div>
                         </div>
                         ))}
+                        <Modal
+                          centered
+                          open={open}
+                          onCancel={() => {
+                            setOpen(false)
+                            window.location.reload();
+                          }}
+                          width={900}
+                          footer={[
+                          ]}
+                        >
+                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande}/>
+                        </Modal>
                       </div>  )}
                     </div>
                 </div>

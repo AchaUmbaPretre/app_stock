@@ -14,7 +14,7 @@ import { Image, Rate } from 'antd'
 import Swal from 'sweetalert2'
 
 
-const DetailProduitCommande = () => {
+const DetailProduitCommande = ({idVariant, idCommande}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const location = useLocation();
@@ -36,7 +36,7 @@ const DetailProduitCommande = () => {
         useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${id}`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${idVariant}`);
             setData(data);
             setVariante(data[0]?.code_variant);
             setLoading(false);
@@ -124,7 +124,7 @@ const DetailProduitCommande = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id_commande}`);
+          const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${idCommande}`);
           setGetCommande(data[0]);
         } catch (error) {
           console.log(error);
@@ -147,15 +147,13 @@ const DetailProduitCommande = () => {
         return;
       }
       try{
-        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:id_commande, id_varianteProduit:idVarianteProduit, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
+        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:idCommande, id_varianteProduit:idVarianteProduit, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
         Swal.fire({
           title: 'Success',
           text: 'Commande créée avec succès!',
           icon: 'success',
           confirmButtonText: 'OK',
         });
-        navigate('/listeCommande')
-        window.location.reload();
   
       }catch(err) {
         Swal.fire({
@@ -176,7 +174,7 @@ const DetailProduitCommande = () => {
               </div>
             ) : (
               <div className="detailProduit-wrapper">
-                <div className="detailProduit-container-top">
+{/*                 <div className="detailProduit-container-top">
                     <div className="detailProduit-left">
                         <h2 className="detailProduit-h2">Commande N° {id_commande}</h2>
                         <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
@@ -185,7 +183,7 @@ const DetailProduitCommande = () => {
                       <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
                       <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
-                </div>
+                </div> */}
                 {result.map((dd)=>(
 
                 <div className="detail-container-bottom">
@@ -237,7 +235,7 @@ const DetailProduitCommande = () => {
                     </div>
                     <div className="detail-rows-bottom">
                       <div className="detail-rows-bottom-left">
-                        <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Commande N° {id_commande}</h2>
+                        <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Commande N° {idCommande}</h2>
                         <span style={{fontSize:'.8rem', color:'#6d6c6c'}}>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
                       </div>
                       <div className="detail-rows-bottom-left">

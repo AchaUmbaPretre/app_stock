@@ -17,6 +17,7 @@ const ListeDetailView = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
+    const [selected, setSelected] = useState([]);
     const [getLivreur, setGetLivreur] = useState([]);
     const [quantities, setQuantities] = useState([]);
     const [livreur, setLivreur] = useState([]);
@@ -24,18 +25,6 @@ const ListeDetailView = () => {
     const userId = useSelector((state) => state.user.currentUser.id);
     const [remise, setRemise] = useState(0);
     const [totalAvecRemise, setTotalAvecRemise] = useState(totalPrice);
-
-    const [selected, setSelected] = useState([]);
-
-    useEffect(() => {
-      const initialSelection = data.map((item) => ({
-        id: item.id_varianteProduit,
-        prix: item.prix,
-        quantite: item.quantite,
-        id_detail: item.id_detail,
-      }));
-      setSelected(initialSelection);
-    }, [data]);
 
     const handleSelectionChange = (event, id, prix, quantite, id_detail) => {
       if (event.target.checked) {
@@ -59,6 +48,8 @@ const ListeDetailView = () => {
       }
     };
 
+    console.log(selected)
+
 
     useEffect(() => {
       if (remise !== 0) {
@@ -67,7 +58,7 @@ const ListeDetailView = () => {
       } else {
         setTotalAvecRemise(totalPrice);
       }
-    }, [remise, totalPrice]);
+    }, [remise, totalPrice, selected]);
     
       const handleDelete = async (id) => {
       try {

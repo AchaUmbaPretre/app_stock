@@ -262,7 +262,7 @@ const showModal = (e) => {
   setIdProduit(e)
 };
 
-const filteredData = getProduit?.filter((item) =>
+const filteredData = getProduit?.filter((item) => 
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase())
 

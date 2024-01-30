@@ -131,18 +131,22 @@ const Commande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = marque && taille.length > 0
-            ? `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}`
-            : `${DOMAIN}/api/produit/varianteProduit`
+            let url = `${DOMAIN}/api/produit/varianteProduit`;
+      
+            if ((marque || famillesSelectionnees) && taille.length > 0) {
+              url = `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}`;
+            }
+      
             const { data } = await axios.get(url);
-            setLoading(false)
-            setData(data)
+            setLoading(false);
+            setData(data);
           } catch (error) {
             console.log(error);
           }
         };
+      
         fetchData();
-      }, [DOMAIN,taille,marque]);
+      }, [DOMAIN, taille, marque, famillesSelectionnees]);
 
       useEffect(() => {
         const fetchData = async () => {

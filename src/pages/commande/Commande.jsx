@@ -18,10 +18,8 @@ const Commande = () => {
     const [getCible,setGetCible] = useState([]);
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
-    const [famille, setFamille] = useState(null);
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [getTaille,setGetTaille] = useState([]);
     const [taille, setTaille] = useState(null);
     const [getCommande, setGetCommande] = useState([]);
@@ -36,7 +34,6 @@ const Commande = () => {
 
             const { data } = await axios.get(url);
             setData(data)
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -48,7 +45,6 @@ const Commande = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreCible/${cible}`);
-            setLoading(false)
             setData(data)
           } catch (error) {
             console.log(error);
@@ -63,7 +59,6 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
             setGetFamille(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -80,7 +75,6 @@ const Commande = () => {
       
             const { data } = await axios.get(url);
             setData(data);
-            setLoading(false);
           } catch (error) {
             console.log(error);
           }
@@ -94,7 +88,6 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
             setGetMarque(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -107,7 +100,6 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
             setGetCible(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -120,7 +112,6 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
             setGetTaille(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -138,7 +129,6 @@ const Commande = () => {
             }
       
             const { data } = await axios.get(url);
-            setLoading(false);
             setData(data);
           } catch (error) {
             console.log(error);

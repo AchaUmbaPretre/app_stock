@@ -131,7 +131,10 @@ const Commande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(marque ? `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}` : `${DOMAIN}/api/produit/varianteProduit` );
+            const url = marque && taille.length > 0
+            ? `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}`
+            : `${DOMAIN}/api/produit/varianteProduit`
+            const { data } = await axios.get(url);
             setLoading(false)
             setData(data)
           } catch (error) {
@@ -222,7 +225,11 @@ const Commande = () => {
                             name='id_taille'
                             className='variant-select'
                             options={getTaille?.map(item => ({ value: item.id_taille, label: item.taille }))}
-                            onChange={(selectedOption) => setTaille(selectedOption.value)}
+                            isMulti
+                            onChange={(selectedOption) => {
+                              const selectedValue = selectedOption.map(option => option.value)
+                              setTaille(selectedValue)}
+                            }
                           />
                         </div>
                     </div>

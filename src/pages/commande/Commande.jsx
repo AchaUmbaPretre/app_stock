@@ -75,7 +75,7 @@ const Commande = () => {
         const fetchData = async () => {
           try {
             const url = famillesSelectionnees.length > 0
-              ? `${DOMAIN}/api/produit/varianteFiltre/${famillesSelectionnees.join(',')}`
+              ? `${DOMAIN}/api/produit/varianteFiltre/${famillesSelectionnees}`
               : `${DOMAIN}/api/produit/varianteProduit`;
       
             const { data } = await axios.get(url);

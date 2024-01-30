@@ -20,7 +20,7 @@ const ClientForm = () => {
   
     let updatedValue = fieldValue;
   
-    if (fieldName === "contact_email") {
+    if (fieldName === "email") {
       updatedValue = fieldValue.toLowerCase();
     } else if (Number.isNaN(Number(fieldValue))) {
       updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
@@ -29,12 +29,11 @@ const ClientForm = () => {
   setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  console.log(data)
   const handleClick = async (e) => {
     e.preventDefault();
 
     
-/*     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier || !data.id_commune || !data.num) {
+     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -42,7 +41,7 @@ const ClientForm = () => {
         confirmButtonText: 'OK',
       });
       return;
-    } */
+    } 
 
     try{
       await axios.post(`${DOMAIN}/api/client/client`, data)
@@ -75,7 +74,7 @@ const ClientForm = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   useEffect(()=>{
     setIdProvince(data?.id_province)
@@ -91,7 +90,7 @@ const ClientForm = () => {
       }
     };
     fetchData();
-  }, [idProvince]);
+  }, [DOMAIN,idProvince]);
   
   return (
     <>

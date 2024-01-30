@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../../redux/cartRedux'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
-import { Rate } from 'antd'
+import { Image, Rate } from 'antd'
 import Swal from 'sweetalert2'
 
 
@@ -29,6 +29,7 @@ const DetailProduitCommande = () => {
     const [inventaireTotalOne,setInventaireTotalOne] = useState([]);
     const [idVarianteProduit, setIdVarianteProduit] = useState([]);
     const [stock, setStock] = useState([]);
+    const [getCommande, setGetCommande] = useState([]);
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user.currentUser.id)
 
@@ -120,6 +121,18 @@ const DetailProduitCommande = () => {
       fetchData();
     },[DOMAIN,variante,taille])
 
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id_commande}`);
+          setGetCommande(data[0]);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN,id_commande]);
+
 
     const handleClick = async (e) => {
       e.preventDefault();
@@ -166,7 +179,11 @@ const DetailProduitCommande = () => {
                 <div className="detailProduit-container-top">
                     <div className="detailProduit-left">
                         <h2 className="detailProduit-h2">Commande N° {id_commande}</h2>
-                        <span>Voir les details du produit</span>
+                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                    </div>
+                    <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
+                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
                 </div>
                 {result.map((dd)=>(
@@ -174,12 +191,12 @@ const DetailProduitCommande = () => {
                 <div className="detail-container-bottom">
                     <div className="detail-container-rows">
                         <div className="detail-bottom-left">
-                            <img src={dd.img} alt="" className="detail-bottom-img" />
+                        <Image src={dd.img} alt="" className="detail-bottom-img" />
                         </div>
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">{dd?.nom_produit}</h1>
                             <p className="product-desc">{dd?.code_pays}</p>
-                            <p className="product-desc">Il y a {inventaireTotalOne} articles en stock</p>
+                            <p className="product-desc">Il y a {inventaireTotalOne} article{inventaireTotalOne === 1 ? '' : "s"} en stock</p>
                             <div className="product-rate">
                                 <div className="pageEtoile-row">
                                     <Rate allowHalf defaultValue={3.5} />
@@ -217,6 +234,16 @@ const DetailProduitCommande = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="detail-rows-bottom">
+                      <div className="detail-rows-bottom-left">
+                        <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Commande N° {id_commande}</h2>
+                        <span style={{fontSize:'.8rem', color:'#6d6c6c'}}>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                      </div>
+                      <div className="detail-rows-bottom-left">
+                        <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                        <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
+                      </div>
                     </div>
                 </div>
                 ))}

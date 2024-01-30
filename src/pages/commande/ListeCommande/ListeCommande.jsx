@@ -282,7 +282,6 @@ const ListeCommande = () => {
                           onCancel={() => setOpen(false)}
                           width={850}
                           footer={[
-                            
                           ]}
                         >
                          <MouvClientDetail idClients={idClient}/>

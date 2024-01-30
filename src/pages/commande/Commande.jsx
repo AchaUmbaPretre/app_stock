@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -24,6 +24,7 @@ const Commande = () => {
     const [loading, setLoading] = useState(true);
     const [getTaille,setGetTaille] = useState([]);
     const [taille, setTaille] = useState(null);
+    const [getCommande, setGetCommande] = useState([]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -36,7 +37,7 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, [marque]);
+      }, [DOMAIN,marque]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -49,7 +50,7 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, [cible]);
+      }, [DOMAIN,cible]);
 
 
       useEffect(() => {
@@ -63,7 +64,7 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -76,7 +77,7 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, [famille]);
+      }, [DOMAIN,famille]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -89,7 +90,7 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -102,7 +103,7 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -129,6 +130,18 @@ const Commande = () => {
         };
         fetchData();
       }, [DOMAIN,taille,marque]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
+            setGetCommande(data[0]);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,id]);
       
   return (
     <>
@@ -137,7 +150,11 @@ const Commande = () => {
                 <div className="varianteProduit-container-top">
                     <div className="varianteProduit-left">
                         <h2 className="varianteProduit-h2">La commande N° {id}</h2>
-                        <span>Voir les produit pour faire les commandes</span>
+                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                    </div>
+                    <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
+                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
                 </div>
                 <div className="variant-container-bottom">

@@ -4,17 +4,15 @@ import {
   UsergroupAddOutlined,
   ShoppingCartOutlined,
   FileTextOutlined,
-  SettingOutlined,
   LogoutOutlined,
   DollarCircleOutlined,
   AppstoreOutlined 
 } from '@ant-design/icons';
-import { AttachMoney, HomeOutlined} from '@mui/icons-material';
+import { HomeOutlined} from '@mui/icons-material';
 import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const { SubMenu, Item } = Menu;
@@ -24,8 +22,6 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [errorMessage,setErrorMessage] = useState('')
   const [currentUser, setCurrentUser] = useState('')
-  const dispatch = useDispatch();
-  const admin = useSelector((state) => state.user.currentUser)
 
   const Logout = async () => {
     try {

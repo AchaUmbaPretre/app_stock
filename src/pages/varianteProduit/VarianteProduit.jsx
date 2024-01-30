@@ -129,15 +129,11 @@ const VarianteProduit = () => {
         fetchData();
       }, [DOMAIN]);
 
+      console.log(data.length === 0)
       
   return (
     <>
         <div className="varianteProduit">
-        { loading ? (
-              <div className="spinner-container">
-                <FadeLoader color={'#36D7B7'} loading={loading} />
-              </div>
-            ) : (
               <div className="varianteProduit-wrapper">
                 <div className="varianteProduit-container-top">
                     <div className="varianteProduit-left">
@@ -197,6 +193,11 @@ const VarianteProduit = () => {
                         </div>
                     </div>
                     <div className="variant_bottom">
+                    { data.length === 0 ? (
+                      <div className="spinner-container">
+                        <FadeLoader color={'#36D7B7'} loading={data.length === 0} />
+                      </div>
+                    ) : (
                       <div className="variante-top-rows">
                       {
                           data?.map((dd)=>(
@@ -210,11 +211,10 @@ const VarianteProduit = () => {
                           </div>
                         </div>
                         ))}
-                      </div>
+                      </div>)}
                     </div>
                 </div>
             </div>
-            )}
         </div>
     </>
   )

@@ -95,6 +95,7 @@ const PageDetails = () => {
                             <h2>Description</h2>
                             { result?.map((dd)=>(
                             <ul>
+                                <li><strong>Nom produit : </strong>{dd?.nom_produit}</li>
                                 <li><strong>Matière : </strong>{dd?.nom_matiere}</li>
                                 <li><strong>Marque : </strong>{dd?.nom_marque}</li>
                                 <li><strong>Categorie : </strong>{dd?.nom_categorie}</li>

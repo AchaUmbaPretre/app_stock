@@ -315,7 +315,7 @@ const filteredData = getProduit?.filter((item) =>
                         <ProductDetail idProduit={idProduit}/>
                         </Modal>
                     <div className="rowChart-row-table">
-                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
                     </div>
                 </div>
             </div>

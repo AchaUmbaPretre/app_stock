@@ -206,8 +206,12 @@ const Commande = () => {
                           <Select
                             name='id_cible'
                             className='variant-select'
+                            isMulti
                             options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
-                            onChange={(selectedOption) => setCible(selectedOption.value)}
+                            onChange={(selectedOption) => {
+                              const selectedValue = selectedOption.map(option => option.value)
+                              setCible(selectedValue)}
+                            }
                           />
                         </div>
                         <div className="variant-top-left">

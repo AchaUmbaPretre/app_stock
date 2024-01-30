@@ -25,6 +25,7 @@ const Commande = () => {
     const [getTaille,setGetTaille] = useState([]);
     const [taille, setTaille] = useState(null);
     const [getCommande, setGetCommande] = useState([]);
+    const [famillesSelectionnees, setFamillesSelectionnees] = useState([]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -69,15 +70,20 @@ const Commande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get( famille ? `${DOMAIN}/api/produit/varianteFiltre/${famille}`: `${DOMAIN}/api/produit/varianteProduit`);
+            const url = famillesSelectionnees.length > 0
+              ? `${DOMAIN}/api/produit/varianteFiltre/${famillesSelectionnees.join(',')}`
+              : `${DOMAIN}/api/produit/varianteProduit`;
+      
+            const { data } = await axios.get(url);
             setData(data);
-            setLoading(false)
+            setLoading(false);
           } catch (error) {
             console.log(error);
           }
         };
+      
         fetchData();
-      }, [DOMAIN,famille]);
+      }, [DOMAIN, famillesSelectionnees]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -168,7 +174,11 @@ const Commande = () => {
                             name='id_famille'
                             className='variant-select'
                             options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
-                            onChange={(selectedOption) => setFamille(selectedOption.value)}
+                            isMulti
+                            onChange={(selectedOptions) => {
+                              const selectedValues = selectedOptions.map(option => option.value);
+                              setFamillesSelectionnees(selectedValues);
+                            }}
                           />
                         </div>
                         <div className="variant-top-left">

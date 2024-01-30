@@ -30,7 +30,11 @@ const Commande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`);
+            const url = marque.length > 0
+            ? `${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`
+            : `${DOMAIN}/api/produit/varianteProduit`;
+
+            const { data } = await axios.get(url);
             setData(data)
             setLoading(false)
           } catch (error) {
@@ -189,8 +193,12 @@ const Commande = () => {
                           <Select
                             name='id_marque'
                             className='variant-select'
+                            isMulti
                             options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
-                            onChange={(selectedOption) => setMarque(selectedOption.value)}
+                            onChange={(selectedOption) => {
+                              const selectedValues = selectedOption.map(option => option.value)
+                             setMarque(selectedValues)}
+                            }
                           />
                         </div>
                         <div className="variant-top-left">

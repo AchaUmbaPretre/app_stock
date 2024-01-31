@@ -24,44 +24,94 @@ const VarianteProduit = () => {
     const [taille, setTaille] = useState(null);
     const [loading, setLoading] = useState(true);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get( marque ? `${DOMAIN}/api/produit/varianteFiltreMarque/${marque}` : `${DOMAIN}/api/produit/varianteProduit`);
-            setData(data)
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN,marque]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
+          setGetMarque(data);
+          setLoading(false)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get( cible ? `${DOMAIN}/api/produit/varianteFiltreCible/${cible}` : `${DOMAIN}/api/produit/varianteProduit`);
-            setLoading(false)
-            setData(data)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN,cible]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
+          setGetCible(data);
+          setLoading(false)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(marque ? `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}` : `${DOMAIN}/api/produit/varianteProduit` );
-            setLoading(false)
-            setData(data)
-          } catch (error) {
-            console.log(error);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
+          setGetTaille(data);
+          setLoading(false)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const url = marque.length > 0
+          ? `${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`
+          : `${DOMAIN}/api/produit/varianteProduit`;
+
+          const { data } = await axios.get(url);
+          setData(data)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN,marque]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const url = cible.length > 0 
+          ? `${DOMAIN}/api/produit/varianteFiltreCible/${cible}`
+          : `${DOMAIN}/api/produit/varianteProduit`
+          const { data } = await axios.get(url);
+          setData(data)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN,cible]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          let url = `${DOMAIN}/api/produit/varianteProduit`;
+    
+          if ((marque || famille) && taille.length > 0) {
+            url = `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}`;
           }
-        };
-        fetchData();
-      }, [DOMAIN,taille,marque]);
+    
+          const { data } = await axios.get(url);
+          setData(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    
+      fetchData();
+    }, [DOMAIN, taille, marque, famille]);
 
 
       useEffect(() => {
@@ -80,56 +130,20 @@ const VarianteProduit = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get( famille ? `${DOMAIN}/api/produit/varianteFiltre/${famille}`: `${DOMAIN}/api/produit/varianteProduit`);
+            const url = famille.length > 0
+              ? `${DOMAIN}/api/produit/varianteFiltre/${famille}`
+              : `${DOMAIN}/api/produit/varianteProduit`;
+      
+            const { data } = await axios.get(url);
             setData(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
         };
+      
         fetchData();
-      }, [DOMAIN,famille]);
+      }, [DOMAIN, famille]);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
-            setGetMarque(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
-            setGetCible(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
-            setGetTaille(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-
-      console.log(data.length === 0)
       
   return (
     <>
@@ -152,7 +166,11 @@ const VarianteProduit = () => {
                             name='id_famille'
                             className='variant-select'
                             options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
-                            onChange={(selectedOption) => setFamille(selectedOption.value)}
+                            isMulti
+                            onChange={(selectedOption) =>{
+                              const selectedValues = selectedOption.map(option => option.value)
+                              setFamille(selectedValues)
+                            }}
                           />
                         </div>
                         <div className="variant-top-left">
@@ -163,8 +181,12 @@ const VarianteProduit = () => {
                           <Select
                             name='id_marque'
                             className='variant-select'
+                            isMulti
                             options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
-                            onChange={(selectedOption) => setMarque(selectedOption.value)}
+                            onChange={(selectedOption) =>{
+                              const selectedValues = selectedOption.map(option => option.value)
+                              setMarque(selectedValues)
+                            }}
                           />
                         </div>
                         <div className="variant-top-left">
@@ -175,8 +197,12 @@ const VarianteProduit = () => {
                           <Select
                             name='id_cible'
                             className='variant-select'
+                            isMulti
                             options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
-                            onChange={(selectedOption) => setCible(selectedOption.value)}
+                            onChange={(selectedOption) => {
+                              const selectedValue = selectedOption.map(option => option.value)
+                              setCible(selectedValue)}
+                            }
                           />
                         </div>
                         <div className="variant-top-left">
@@ -188,7 +214,11 @@ const VarianteProduit = () => {
                             name='id_taille'
                             className='variant-select'
                             options={getTaille?.map(item => ({ value: item.id_taille, label: item.taille }))}
-                            onChange={(selectedOption) => setTaille(selectedOption.value)}
+                            isMulti
+                            onChange={(selectedOption) => {
+                              const selectedValue = selectedOption.map(option => option.value)
+                              setTaille(selectedValue)}
+                            }
                           />
                         </div>
                     </div>

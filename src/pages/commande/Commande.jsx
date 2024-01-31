@@ -281,7 +281,6 @@ const Commande = () => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

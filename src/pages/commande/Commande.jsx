@@ -49,7 +49,10 @@ const Commande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltreCible/${cible}`);
+            const url = cible.length > 0 
+            ? `${DOMAIN}/api/produit/varianteFiltreCible/${cible}`
+            : `${DOMAIN}/api/produit/varianteProduit`
+            const { data } = await axios.get(url);
             setData(data)
           } catch (error) {
             console.log(error);

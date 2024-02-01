@@ -264,7 +264,8 @@ const showModal = (e) => {
 
 const filteredData = getProduit?.filter((item) => 
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase())
+  item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.nom_marque?.toLowerCase().includes(searchValue.toLocaleLowerCase())
 
 );
 

@@ -44,11 +44,6 @@ const Livraison = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Voir la liste de cette commande" trigger="hover">
-                  <Link to={`/listeDetailView/${record.id_commande}`}>
-                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                  </Link>
-                </Popover>
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"

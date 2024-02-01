@@ -150,8 +150,8 @@ const ListeCommande = () => {
               let textValue = '';
         
               if (text === 1) {
-                tagColor = 'red';
-                textValue= 'Aucun'
+                tagColor = 'blue';
+                textValue= 'Shop ngaliema'
               } 
               else if (text === 2) {
                 tagColor = 'green';

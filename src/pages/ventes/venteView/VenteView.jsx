@@ -16,6 +16,7 @@ const VenteView = () => {
     const id = pathname.split('/')[2];
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
+    const [getCommande, setGetCommande] = useState([]);
 
       const handleDelete = async (id) => {
       try {
@@ -112,11 +113,11 @@ const VenteView = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Voir la liste de vante de cette commande" trigger="hover">
+{/*                 <Popover title="Voir la liste de vante de cette commande" trigger="hover">
                     <Link to={`/venteView/${record.id_commande}`}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
-                </Popover>
+                </Popover> */}
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -138,6 +139,18 @@ const VenteView = () => {
             const { data } = await axios.get(`${DOMAIN}/api/vente/${id}`);
             setLoading(false)
             setData(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,id]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
+            setGetCommande(data[0]);
           } catch (error) {
             console.log(error);
           }
@@ -174,7 +187,11 @@ const VenteView = () => {
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Liste de ventes de commande N° {id}</h2>
-                        <span>Gérer vos ventes</span>
+                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                    </div>
+                    <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
+                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
                 </div>
                 <div className="product-bottom">

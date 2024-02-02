@@ -24,19 +24,19 @@ const RowTotalDetail = () => {
               };
         }
         fetchData()
-     }, [])
+     }, [DOMAIN])
 
-     useEffect(()=>{
-        const fetchData = async ()=> {
-            try{
-                const res = await axios.get(`${DOMAIN}/api/client/clientCount`);
-                setClient(res.data)
-              }catch(error){
-                console.log(error)
-              };
-        }
-        fetchData()
-     }, [])
+     useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get(`${DOMAIN}/api/client/clientCount`);
+            setClient(res.data.total);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
 
      useEffect(()=>{
         const fetchData = async ()=> {
@@ -48,7 +48,7 @@ const RowTotalDetail = () => {
               };
         }
         fetchData()
-     }, [])
+     }, [DOMAIN])
 
      useEffect(()=>{
         const fetchData = async ()=> {
@@ -68,7 +68,7 @@ const RowTotalDetail = () => {
             <div className="rowTotalDetail-wrapper">
                 <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2">{client[0]?.total ? client[0]?.total : 0 }</h2>
+                        <h2 className="rowTotal-h2">{client ? client : 0 }</h2>
                         <span className="rowTotal-span">Clients</span>
                     </div>
                     <div className="rowTotalDetail-right">

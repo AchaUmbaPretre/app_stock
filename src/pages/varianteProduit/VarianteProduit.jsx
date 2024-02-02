@@ -8,6 +8,7 @@ import './varianteProduit.scss'
 import {FilterOutlined,SearchOutlined} from '@ant-design/icons';
 import config from '../../config'
 import { FadeLoader } from 'react-spinners';
+import ReactPaginate from 'react-paginate';
 
 
 const VarianteProduit = () => {
@@ -23,6 +24,16 @@ const VarianteProduit = () => {
     const [cible, setCible] = useState(null);
     const [taille, setTaille] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 18;
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentData = data.slice(startIndex, endIndex);
+
+    const handlePageChange = (selectedPage) => {
+      setCurrentPage(selectedPage.selected);
+    };
 
     useEffect(() => {
       const fetchData = async () => {
@@ -230,7 +241,7 @@ const VarianteProduit = () => {
                     ) : (
                       <div className="variante-top-rows">
                       {
-                          data?.map((dd)=>(
+                        currentData?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id} onClick={()=>navigate(`/pageDetail/${dd.id_varianteProduit}`)}>
                           <div className="cercle"></div>
                           <img src={dd.img} alt="" className="variante-img" />
@@ -242,6 +253,16 @@ const VarianteProduit = () => {
                         </div>
                         ))}
                       </div>)}
+                      <ReactPaginate
+                        pageCount={totalPages}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageChange}
+                        previousLabel={'Précédent'}
+                        nextLabel={'Suivant'}
+                        containerClassName={'pagination'}
+                        activeClassName={'active'}
+                      />
                     </div>
                 </div>
             </div>

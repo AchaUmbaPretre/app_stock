@@ -14,7 +14,39 @@ const ClientForm = () => {
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
 
+  const [deliveryAddresses, setDeliveryAddresses] = useState([{ avenue: '', quartier: '', commune: '' }]);
+  const [clientInfo, setClientInfo] = useState({
+    nom: '',
+    raison_sociale: '',
+    email: '',
+  });
+
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setClientInfo((prevClientInfo) => ({
+      ...prevClientInfo,
+      [name]: value,
+    }));
+  };
+
+  const handleAddressInputChange = (index, e) => {
+    const { name, value } = e.target;
+    const addresses = [...deliveryAddresses];
+    addresses[index][name] = value;
+    setDeliveryAddresses(addresses);
+  };
+
+  const addDeliveryAddress = () => {
+    setDeliveryAddresses([...deliveryAddresses, { avenue: '', quartier: '', commune: '' }]);
+  };
+
+  const removeDeliveryAddress = (index) => {
+    const addresses = [...deliveryAddresses];
+    addresses.splice(index, 1);
+    setDeliveryAddresses(addresses);
+  };
+
+/*   const handleInputChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
   
@@ -27,7 +59,7 @@ const ClientForm = () => {
     }
   
   setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-  };
+  }; */
 
   const handleClick = async (e) => {
     e.preventDefault();

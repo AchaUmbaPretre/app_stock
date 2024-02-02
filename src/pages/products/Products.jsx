@@ -4,13 +4,13 @@ import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Modal} from 'antd';
-import { format } from 'date-fns';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { Tag } from 'antd';
 import ProductDetail from './productDetail/ProductDetail';
 import BarReturn from '../../components/barReturn/BarReturn';
+import moment from 'moment';
 
 const Products = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -203,14 +203,14 @@ const Products = () => {
       title: "Date d'entrée",
       dataIndex: 'date_entrant',
       key: 'date',
-        sorter: (a, b) => a.date_entrant - b.date_entrant,
+      sorter: (a, b) => moment(a.date_entrant).unix() - moment(b.date_entrant).unix(),
       sortDirections: ['descend', 'ascend'],
-        render: (text) => (
-          <Tag color={'blue'}>
-            {format(new Date(text), 'dd-MM-yyyy')}
-          </Tag>
-        ),
-    }, 
+      render: (text) => (
+        <Tag color={'blue'}>
+          {moment(text).format('DD-MM-yyyy')}
+        </Tag>
+      ),
+    },
     {
       title: 'Action',
       key: 'action',

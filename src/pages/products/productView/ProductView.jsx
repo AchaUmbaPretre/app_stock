@@ -235,7 +235,7 @@ const ProductView = () => {
           });
           return;
         }
-        if (variantExists) {
+/*         if (variantExists) {
           Swal.fire({
             title: 'Error',
             text: 'Veuillez modifier la variante avant de soumettre',
@@ -243,7 +243,7 @@ const ProductView = () => {
             confirmButtonText: 'OK',
           });
           return;
-        }
+        } */
       
         if ((Array.isArray(selectedData) && selectedData.length > 0)) {
           Promise.all(

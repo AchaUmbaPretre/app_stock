@@ -63,10 +63,10 @@ const PageDetails = () => {
     const tailleMaxDernierObjet = dernierObjet?.taille_max;
 
     const groupedData = data.reduce((acc, item) => {
-    const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img } = item;
+    const { id_produit, nom_produit, pointure, date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille,code_variant,stock, img } = item;
       
     if (!acc[id_produit]) {
-          acc[id_produit] = { id_produit, nom_produit, pointure: [], date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille, stock, img };
+          acc[id_produit] = { id_produit, nom_produit, pointure: [], date_entrant, nom_marque, nom_categorie, nom_matiere, nom_cible, code_pays, description, prix, nom_famille,code_variant, stock, img };
         }
       
         acc[id_produit].pointure.push(pointure);
@@ -96,6 +96,7 @@ const PageDetails = () => {
                             { result?.map((dd)=>(
                             <ul>
                                 <li><strong>Nom produit : </strong>{dd?.nom_produit}</li>
+                                <li><strong>Code variant : </strong>{dd?.code_variant}</li>
                                 <li><strong>Matière : </strong>{dd?.nom_matiere}</li>
                                 <li><strong>Marque : </strong>{dd?.nom_marque}</li>
                                 <li><strong>Categorie : </strong>{dd?.nom_categorie}</li>

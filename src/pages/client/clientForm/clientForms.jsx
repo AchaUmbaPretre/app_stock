@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config';
 
-const ClientForm = () => {
+const ClientForms = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({})
   const navigate = useNavigate();
@@ -219,7 +219,7 @@ const ClientForm = () => {
                 </div>
                 {index > 0 && (
                   <div className="form-controle">
-                    <button type="button" className="remove-btn" onClick={() => removeDeliveryAddress(index)}>
+                    <button type="button" className="remove-btn" onClick={() => removeDeliveryAddress(index)} style={{border:'none', marginTop: "20px", padding: "10px", background:'red',color:'#fff', cursor:'pointer'}}>
                       Supprimer
                     </button>
                   </div>
@@ -228,7 +228,7 @@ const ClientForm = () => {
             ))}
 
             <div className="form-controle">
-              <button type="button" className="add-btn" onClick={addDeliveryAddress} style={{border:'none', marginTop: "20px"}}>
+              <button type="button" className="add-btn" onClick={addDeliveryAddress} style={{border:'none', marginTop: "20px",padding: '10px'}}>
                 Ajouter une adresse de livraison
               </button>
             </div>
@@ -247,4 +247,4 @@ const ClientForm = () => {
   )
 }
 
-export default ClientForm
+export default ClientForms

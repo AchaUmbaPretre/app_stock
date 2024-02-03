@@ -65,6 +65,7 @@ import PageRetourCommande from './pages/pageLivreur/pageRetourCommande/PageRetou
 import PageLivraisonRetour from './pages/pageLivreur/pageRetourCommande/PageLivraisonRetour';
 import LivraisonView from './pages/livraison/livraisonView/LivraisonView';
 import Couleur from './pages/couleur/Couleur';
+import ClientForms from './pages/client/clientForm/clientForms';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -284,10 +285,14 @@ const user = useSelector((state) => state.user?.currentUser);
           path: '/clients',
           element: <Client />
         },
-        {
+         {
           path: '/clientForm',
           element: <ClientForm />
         },
+/*         {
+          path: '/clientForm',
+          element: <ClientForms />
+        }, */
         {
           path: '/clientEdit/:id',
           element: <ClientEdit />

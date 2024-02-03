@@ -252,8 +252,7 @@ const VarianteProduit = () => {
                           </div>
                         </div>
                         ))}
-                      </div>)}
-                      <ReactPaginate
+                        <ReactPaginate
                         pageCount={totalPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
@@ -263,6 +262,7 @@ const VarianteProduit = () => {
                         containerClassName={'pagination'}
                         activeClassName={'active'}
                       />
+                      </div>)}
                     </div>
                 </div>
             </div>

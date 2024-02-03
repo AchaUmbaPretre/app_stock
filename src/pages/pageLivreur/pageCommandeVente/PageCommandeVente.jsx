@@ -105,8 +105,6 @@ const PageCommandeVente = () => {
           }
         };
         fetchData();
-        const intervalId = setInterval(fetchData, 4000);
-        return () => clearInterval(intervalId);
       }, [DOMAIN,userId,IdCommande]);
 
       const handleClick = async (e) => {

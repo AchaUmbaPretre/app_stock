@@ -10,6 +10,7 @@ import { Modal} from 'antd';
 import config from '../../config'
 import { FadeLoader } from 'react-spinners';
 import DetailProduitCommande from './detaillProduitCommande/DetailProduitCommande'
+import ReactPaginate from 'react-paginate'
 
 
 const Commande = () => {
@@ -29,6 +30,17 @@ const Commande = () => {
     const [open, setOpen] = useState(false);
     const [idVariante, setIdVariante] = useState({});
     const [idCommande, setIdCommande] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 18;
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentData = data.slice(startIndex, endIndex);
+
+      const handlePageChange = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
+      };
 
       useEffect(() => {
         const fetchData = async () => {
@@ -39,6 +51,7 @@ const Commande = () => {
 
             const { data } = await axios.get(url);
             setData(data)
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -54,6 +67,7 @@ const Commande = () => {
             : `${DOMAIN}/api/produit/varianteProduit`
             const { data } = await axios.get(url);
             setData(data)
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -67,6 +81,7 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
             setGetFamille(data);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -83,6 +98,7 @@ const Commande = () => {
       
             const { data } = await axios.get(url);
             setData(data);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -137,6 +153,7 @@ const Commande = () => {
             }
       
             const { data } = await axios.get(url);
+            setLoading(false)
             setData(data);
           } catch (error) {
             console.log(error);
@@ -151,6 +168,7 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
             setGetCommande(data[0]);
+            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -169,6 +187,7 @@ const Commande = () => {
         <div className="varianteProduit">
               <div className="varianteProduit-wrapper">
                 <div className="varianteProduit-container-top">
+                {getCommande && <>
                     <div className="varianteProduit-left">
                         <h2 className="varianteProduit-h2">La commande N° {id}</h2>
                         <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
@@ -176,7 +195,8 @@ const Commande = () => {
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
                       <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
                       <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
-                    </div>
+                    </div> </>
+                  }
                 </div>
                 <div className="variant-container-bottom">
                     <div className="variant_top">
@@ -246,14 +266,14 @@ const Commande = () => {
                         </div>
                     </div>
                     <div className="variant_bottom">
-                    { data.length === 0 ? (
+                    { loading ? (
                       <div className="spinner-container">
-                        <FadeLoader color={'#36D7B7'} loading={data.length === 0} />
+                        <FadeLoader color={'#36D7B7'} loading={loading} />
                       </div>
                     ) : (
                       <div className="variante-top-rows">
                       {
-                          data?.map((dd)=>(
+                        currentData?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
                           <div className="cercle"></div>
                           <img src={dd.img} alt="" className="variante-img" />
@@ -280,6 +300,16 @@ const Commande = () => {
                          <DetailProduitCommande idVariant={idVariante} idCommande={idCommande}/>
                         </Modal>
                       </div>  )}
+                      <ReactPaginate
+                        pageCount={totalPages}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageChange}
+                        previousLabel={'Précédent'}
+                        nextLabel={'Suivant'}
+                        containerClassName={'pagination'}
+                        activeClassName={'active'}
+                      />
                     </div>
                 </div>
             </div>

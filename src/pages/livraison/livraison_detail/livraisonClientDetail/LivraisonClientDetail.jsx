@@ -19,7 +19,7 @@ const LivraisonClientDetail = ({idClients}) => {
           }
         };
         fetchData();
-      }, [idClients]);
+      }, [DOMAIN,idClients]);
 
   return (
     <>

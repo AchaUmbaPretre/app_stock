@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../config';
+import { useSelector } from 'react-redux';
 
 const Livraison = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -12,6 +13,7 @@ const Livraison = () => {
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user?.currentUser);
 
       const handleDelete = async (id) => {
         try {
@@ -44,6 +46,7 @@ const Livraison = () => {
             render: (text, record) => (
                 
               <Space size="middle">
+              {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -52,8 +55,8 @@ const Livraison = () => {
                     cancelText="Non"
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
-                </Popover>
+                  </Popconfirm> 
+                </Popover>}
               </Space>
             ),
           },

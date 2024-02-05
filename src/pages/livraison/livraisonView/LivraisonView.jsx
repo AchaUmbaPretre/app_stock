@@ -6,6 +6,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
 import LivraisonViewPrix from './LivraisonViewPrix';
+import { useSelector } from 'react-redux';
 
 const LivraisonView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -18,6 +19,7 @@ const LivraisonView = () => {
     const [idClient, setIdClient] = useState({});
     const [prix, setPrix] = useState({});
     const [searchValue, setSearchValue] = useState('');
+    const user = useSelector((state) => state.user?.currentUser);
 
     
       const handleDelete = async (id) => {
@@ -152,6 +154,7 @@ const LivraisonView = () => {
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover> */}
+                {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -161,7 +164,7 @@ const LivraisonView = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover>}
               </Space>
             ),
           },

@@ -5,12 +5,14 @@ import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { CircularProgress } from '@mui/material';
 import { FadeLoader } from 'react-spinners';
 
 const PageLivraisonRetour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [selected, setSelected] = useState([]);
     const scroll = { x: 400 };
+    const [isLoading, setIsLoading] = useState(false);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
@@ -110,6 +112,7 @@ const PageLivraisonRetour = () => {
       const handleClick = async (e) => {
         e.preventDefault();
         try {
+          setIsLoading(true);
           await Promise.all(
             selected.map(async (dd) => {
               await axios.post(`${DOMAIN}/api/vente/retour`, {
@@ -155,6 +158,9 @@ const PageLivraisonRetour = () => {
               confirmButtonText: 'OK',
             });
           }
+        }
+        finally {
+          setIsLoading(false);
         }
       }
 

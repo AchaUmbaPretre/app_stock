@@ -87,17 +87,25 @@ const PageLivraisonRetour = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-userOne/${userId}`, {
-                params: {
-                  id_commande: IdCommande
-                }});
-            setData(data);
-            setLoading(false)
+              params: {
+                id_commande: IdCommande
+              }
+            });
+      
+            // Utiliser un ensemble (Set) pour éliminer les doublons
+            const uniqueData = Array.from(new Set(data.map(item => item.id_varianteProduit))).map(id => {
+              return data.find(item => item.id_varianteProduit === id);
+            });
+      
+            setData(uniqueData);
+            setLoading(false);
           } catch (error) {
             console.log(error);
           }
         };
+      
         fetchData();
-      }, [userId]);
+      }, [DOMAIN, userId, IdCommande]);
 
       const handleClick = async (e) => {
         e.preventDefault();

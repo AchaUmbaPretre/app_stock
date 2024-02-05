@@ -4,6 +4,7 @@ import { WhatsAppOutlined ,PhoneOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { FadeLoader } from 'react-spinners';
@@ -13,6 +14,7 @@ const PageCommandeVente = () => {
     const [selected, setSelected] = useState([]);
     const scroll = { x: 400 };
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
@@ -92,24 +94,31 @@ const PageCommandeVente = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-userOne/${userId}`, {
-                params: {
-                  id_commande: IdCommande
-                }});
-            setData(data);
-            setLoading(false)
-
-/*             const totalPrice = data.reduce((acc, item) => acc + item.prix, 0);
-            setTotalPrice(totalPrice) */
+              params: {
+                id_commande: IdCommande
+              }
+            });
+      
+            // Utiliser un ensemble (Set) pour éliminer les doublons
+            const uniqueData = Array.from(new Set(data.map(item => item.id_varianteProduit))).map(id => {
+              return data.find(item => item.id_varianteProduit === id);
+            });
+      
+            setData(uniqueData);
+            setLoading(false);
           } catch (error) {
             console.log(error);
           }
         };
+      
         fetchData();
-      }, [DOMAIN,userId,IdCommande]);
+      }, [DOMAIN, userId, IdCommande]);
 
       const handleClick = async (e) => {
         e.preventDefault();
         try {
+          setIsLoading(true);
+
           await Promise.all(
             selected.map(async (dd) => {
               await axios.post(`${DOMAIN}/api/vente`, {
@@ -155,6 +164,8 @@ const PageCommandeVente = () => {
               confirmButtonText: 'OK',
             });
           }
+        } finally {
+          setIsLoading(false);
         }
       }
 
@@ -221,9 +232,14 @@ const PageCommandeVente = () => {
                     <label htmlFor="">Remise</label>
                     <h2>{data[0]?.quantite_prix} $</h2>
                 </div>
-               <div className="pageLivreur-form-rows">
+                <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
-                </div> 
+                </div>
+                {isLoading && (
+                <div className="loader-container loader-container-center">
+                  <CircularProgress size={28} />
+                </div>
+            )}
             </div>) }
         </div>
 

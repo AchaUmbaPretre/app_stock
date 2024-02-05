@@ -2,6 +2,7 @@
 
 .pageLivreurVente{
     @include mobileXR{
+        width: 100%;
         @include mobileSE{
             width: 100%;
         }

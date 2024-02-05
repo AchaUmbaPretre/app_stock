@@ -189,6 +189,11 @@ const PageLivraisonRetour = () => {
                       </textarea>
                     </div>
                     <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
+                    {isLoading && (
+                  <div className="loader-container loader-container-center">
+                    <CircularProgress size={28} />
+                  </div>
+                  )}
                 </div> 
             </div>)}
         </div>

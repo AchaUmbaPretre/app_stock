@@ -1,23 +1,69 @@
 import React, { useState } from 'react'
 import '../login1/login.css'
 import logo from './../../assets/logo doe.jpg'
+import { CircularProgress } from '@mui/material';
 import { FacebookOutlined, Instagram, LockOutlined, MailOutlined, PersonOutline, Twitter, WhatsApp } from '@mui/icons-material'
 import { register } from '../../redux/apiCalls'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const Register1 = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    register(dispatch, { username,email, password });
-    navigate('/login')
+  
+    try {
+      setIsLoading(true);
+  
+      const response = await register(dispatch, { username, email, password });
+  
+      if (response.status === 409) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: response.data.error,
+        });
+      } else {
+        // Code à exécuter en cas de succès
+        navigate('/register');
+      }
+    } catch (error) {
+      console.log('Erreur:', error);
+  
+      if (error.response && error.response.data && error.response.data.error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: error.response.data.error,
+        });
+      } else {
+        const results = []; // Define and initialize the 'results' variable
+  
+        if (results.length > 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'L\'utilisateur existe déjà.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'Ce mail existe déjà.',
+          });
+        }
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -66,6 +112,11 @@ const Register1 = () => {
             <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/login')}>
                 Se connecter
             </button>
+            {isLoading && (
+                <div className="loader-container loader-container-center">
+                  <CircularProgress size={28} />
+                </div>
+            )}
           </div>
           <img src={logo} class="image" alt="" />
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import logo from './../../assets/logo doe.jpg'
 import './login.css'
 import { FacebookOutlined, Instagram, LockOutlined, PersonOutline, Twitter, WhatsApp } from '@mui/icons-material'
+import { CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/apiCalls'
 import { useNavigate } from 'react-router-dom'
@@ -10,11 +11,12 @@ import Swal from 'sweetalert2'
 const Login1 = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-  const handleClick = async (e) => {
+/*   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
@@ -29,8 +31,28 @@ const Login1 = () => {
         text: 'Une erreur s\'est produite. Veuillez réessayer.',
       });
     }
-  };
+  }; */
 
+  const handleClick = async (e) => {
+    e.preventDefault();
+  
+    try {
+      setIsLoading(true);
+  
+      await login(dispatch, { username, password });
+      navigate('/');
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Une erreur s\'est produite. Veuillez réessayer.',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -77,6 +99,11 @@ const Login1 = () => {
             <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/register')}>
                 S'inscrire
             </button>
+            {isLoading && (
+              <div className="loader-container loader-container-center">
+                <CircularProgress size={24} />
+              </div>
+            )}
           </div>
           <img src={logo} class="image" alt="" />
         </div>

@@ -3,7 +3,7 @@
 .pageLivreurVente{
     @include mobileXR{
         @include mobileSE{
-            width: 380px;
+            width: 100%;
         }
     }
     .pageLivreurVente-container{
@@ -12,7 +12,7 @@
             .page-rows-retour{
                 background: #fff;
                 -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-                box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 15px -10px rgba(131, 129, 129, 0.75);
                 font-size: 1.3rem;
                 color: rgb(3, 3, 109);
                 padding: 8px;

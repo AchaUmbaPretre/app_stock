@@ -6,6 +6,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
 import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
+import { useSelector } from 'react-redux';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,7 @@ const ListeCommande = () => {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
+    const user = useSelector((state) => state.user?.currentUser);
 
     
       const handleDelete = async (id) => {
@@ -208,6 +210,7 @@ const ListeCommande = () => {
                         <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
+                {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -217,7 +220,7 @@ const ListeCommande = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover> }
               </Space>
             ),
           },

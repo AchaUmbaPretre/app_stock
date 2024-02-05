@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
+import { useSelector } from 'react-redux';
 
 const ListeDetailCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
+    const user = useSelector((state) => state.user?.currentUser);
 
 
     
@@ -99,6 +101,7 @@ const ListeDetailCommande = () => {
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover>
+                {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -108,7 +111,7 @@ const ListeDetailCommande = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover> }
               </Space>
             ),
           },

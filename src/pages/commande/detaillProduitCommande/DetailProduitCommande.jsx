@@ -233,7 +233,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                             </div>
                         </div>
                     </div>
-                    <div className="detail-rows-bottom">
+                    <div className="detail-rows-bottom"> { getCommande && <>
                       <div className="detail-rows-bottom-left">
                         <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Commande N° {idCommande}</h2>
                         <span style={{fontSize:'.8rem', color:'#6d6c6c'}}>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
@@ -241,7 +241,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                       <div className="detail-rows-bottom-left">
                         <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
                         <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
-                      </div>
+                      </div> </>}
                     </div>
                 </div>
                 ))}

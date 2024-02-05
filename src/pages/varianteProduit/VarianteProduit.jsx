@@ -234,9 +234,9 @@ const VarianteProduit = () => {
                         </div>
                     </div>
                     <div className="variant_bottom">
-                    { data.length === 0 ? (
+                    { loading ? (
                       <div className="spinner-container">
-                        <FadeLoader color={'#36D7B7'} loading={data.length === 0} />
+                        <FadeLoader color={'#36D7B7'} loading={loading} />
                       </div>
                     ) : (
                       <div className="variante-top-rows">
@@ -252,7 +252,8 @@ const VarianteProduit = () => {
                           </div>
                         </div>
                         ))}
-                        <ReactPaginate
+                      </div>)}
+                      <ReactPaginate
                         pageCount={totalPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
@@ -262,7 +263,6 @@ const VarianteProduit = () => {
                         containerClassName={'pagination'}
                         activeClassName={'active'}
                       />
-                      </div>)}
                     </div>
                 </div>
             </div>

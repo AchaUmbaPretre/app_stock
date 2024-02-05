@@ -26,6 +26,7 @@ const ListeDetailView = () => {
     const [remise, setRemise] = useState(0);
     const [totalAvecRemise, setTotalAvecRemise] = useState(totalPrice);
     const [getCommande, setGetCommande] = useState([]);
+    const user = useSelector((state) => state.user?.currentUser);
 
     const handleSelectionChange = (event, id, prix, quantite, id_detail) => {
       if (event.target.checked) {
@@ -178,6 +179,7 @@ const ListeDetailView = () => {
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover> */}
+                {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -187,7 +189,7 @@ const ListeDetailView = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover> }
               </Space>
             ),
           },

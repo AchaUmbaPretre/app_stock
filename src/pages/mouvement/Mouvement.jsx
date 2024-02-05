@@ -7,6 +7,7 @@ import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
 import MouvClientDetail from './mouvementClientDetail/MouvClientDetail';
+import { useSelector } from 'react-redux';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,7 @@ const Mouvement = () => {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
+    const user = useSelector((state) => state.user?.currentUser);
 
 
       const showModal = (e) => {
@@ -86,6 +88,7 @@ const Mouvement = () => {
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                   </Popover>
+                  {user?.role === 'admin' &&
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
                     onConfirm={() => handleDelete(record.id_mouvement)}
@@ -93,7 +96,7 @@ const Mouvement = () => {
                     cancelText="Non"
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
+                  </Popconfirm> }
               </Space>
             ),
           },

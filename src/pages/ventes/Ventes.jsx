@@ -7,6 +7,7 @@ import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
 import VenteClientDetail from './venteClientDetail/VenteClientDetail';
+import { useSelector } from 'react-redux';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,7 @@ const Ventes = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const [idClient, setIdClient] = useState({});
+    const user = useSelector((state) => state.user?.currentUser);
 
 
       const handleDelete = async (id) => {
@@ -103,6 +105,7 @@ const Ventes = () => {
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
+                {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -112,7 +115,7 @@ const Ventes = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover>}
               </Space>
             ),
           },

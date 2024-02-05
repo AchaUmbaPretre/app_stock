@@ -6,6 +6,7 @@ import axios from 'axios';
 import config from '../../../config';
 import { format } from 'date-fns';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const VenteView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,6 +18,7 @@ const VenteView = () => {
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
     const [getCommande, setGetCommande] = useState([]);
+    const user = useSelector((state) => state.user?.currentUser);
 
       const handleDelete = async (id) => {
       try {
@@ -118,6 +120,7 @@ const VenteView = () => {
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover> */}
+                {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -127,7 +130,7 @@ const VenteView = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover> }
               </Space>
             ),
           },

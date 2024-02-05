@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const Utilisateurs = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,7 @@ const Utilisateurs = () => {
     const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user?.currentUser);
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -175,6 +177,7 @@ const Utilisateurs = () => {
                 <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
                 </Popover> 
+                {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -184,7 +187,7 @@ const Utilisateurs = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover> }
               </Space>
             ),
           },

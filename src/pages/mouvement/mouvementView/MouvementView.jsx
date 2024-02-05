@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { format } from 'date-fns';
+import { useSelector } from 'react-redux';
 
 const MouvementView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -21,6 +22,7 @@ const MouvementView = () => {
     const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const user = useSelector((state) => state.user?.currentUser);
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -224,6 +226,7 @@ const MouvementView = () => {
             render: (text, record) => (
                 
               <Space size="middle">
+              {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -233,7 +236,7 @@ const MouvementView = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover> }
               </Space>
             ),
           },

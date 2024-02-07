@@ -12,10 +12,12 @@ import { CloudUploadOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2'
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
+import { CircularProgress } from '@mui/material';
 
 const ProductView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getProduit, setGetProduit] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
     const [getCouleur,setGetCouleur] = useState([]);
     const [getPays,setGetPays] = useState([]);
@@ -223,61 +225,56 @@ const ProductView = () => {
         },
       ];
 
-      const handleClick = (e) => {
+      const handleClick = async (e) => {
         e.preventDefault();
-
-        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0 ) {
+      
+        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
           Swal.fire({
-            title: 'Error',
+            title: 'Erreur',
             text: 'Veuillez remplir tous les champs requis',
             icon: 'error',
             confirmButtonText: 'OK',
           });
           return;
         }
-/*         if (variantExists) {
-          Swal.fire({
-            title: 'Error',
-            text: 'Veuillez modifier la variante avant de soumettre',
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-          return;
-        } */
       
-        if ((Array.isArray(selectedData) && selectedData.length > 0)) {
-          Promise.all(
-            selectedData?.map((item) =>
-              axios.post(`${DOMAIN}/api/produit/varianteProduit`, {
-                ...data,
-                id_produit: id,
-                id_cible: item.id_cible,
-                id_taille: item.id_taille,
-                id_famille: item.id_famille,
-                stock: item.stock,
-                prix: prix
-              })
-            )
-          )
-            .then(() => {
-              Swal.fire({
-                title: 'Success',
-                text: 'Produit créé avec succès!',
-                icon: 'success',
-                confirmButtonText: 'OK',
-              });
+        if (Array.isArray(selectedData) && selectedData.length > 0) {
+          try {
+            setIsLoading(true);
       
-              navigate('/varianteProduit');
-              window.location.reload();
-            })
-            .catch((err) => {
-              Swal.fire({
-                title: 'Error',
-                text: err.message,
-                icon: 'error',
-                confirmButtonText: 'OK',
-              });
+            await Promise.all(
+              selectedData.map((item) =>
+                axios.post(`${DOMAIN}/api/produit/varianteProduit`, {
+                  ...data,
+                  id_produit: id,
+                  id_cible: item.id_cible,
+                  id_taille: item.id_taille,
+                  id_famille: item.id_famille,
+                  stock: item.stock,
+                  prix: prix,
+                })
+              )
+            );
+      
+            Swal.fire({
+              title: 'Succès',
+              text: 'Produit créé avec succès !',
+              icon: 'success',
+              confirmButtonText: 'OK',
             });
+      
+            navigate('/varianteProduit');
+            window.location.reload();
+          } catch (err) {
+            Swal.fire({
+              title: 'Erreur',
+              text: err.message,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } finally {
+            setIsLoading(false);
+          }
         } else {
           console.error('idTaille is not an array');
         }
@@ -367,6 +364,11 @@ const ProductView = () => {
                                 </div>
                             </div>
                             <button className="produit_submit" onClick={handleClick}>Soumettre</button>
+                            {isLoading && (
+                                <div className="loader-container loader-container-center">
+                                  <CircularProgress size={28} />
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="product-view-right">

@@ -6,7 +6,6 @@ import { FacebookOutlined, Instagram, LockOutlined, MailOutlined, PersonOutline,
 import { register } from '../../redux/apiCalls'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
 
 const Register1 = () => {
   const [username, setUsername] = useState("");
@@ -22,45 +21,10 @@ const Register1 = () => {
   
     try {
       setIsLoading(true);
-  
-      const response = await register(dispatch, { username, email, password });
-  
-      if (response.status === 409) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: response.data.error,
-        });
-      } else {
-        // Code à exécuter en cas de succès
-        navigate('/register');
-      }
+      await register(dispatch, { username, email, password });
+      navigate('/register')
     } catch (error) {
-      console.log('Erreur:', error);
-  
-      if (error.response && error.response.data && error.response.data.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: error.response.data.error,
-        });
-      } else {
-        const results = []; // Define and initialize the 'results' variable
-  
-        if (results.length > 0) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'L\'utilisateur existe déjà.',
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Ce mail existe déjà.',
-          });
-        }
-      }
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -75,7 +39,7 @@ const Register1 = () => {
             <h2 class="title">S'inscrire</h2>
             <div class="input-field">
                 <PersonOutline className='icon-login'/>
-              <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+              <input type="text" placeholder="Nom" onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div class="input-field">
                 <MailOutlined className='icon-login'/>
@@ -83,7 +47,7 @@ const Register1 = () => {
             </div>
             <div class="input-field">
                 <LockOutlined className='icon-login'/>
-              <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+              <input type="password" placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)} />
             </div>
             <input type="submit" class="btn" value="S'inscrire" onClick={handleClick} disabled={isFetching}/>
             <p class="social-text">Connectez-vous avec les plateformes sociales</p>

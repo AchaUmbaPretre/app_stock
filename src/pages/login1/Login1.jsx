@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/apiCalls'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { message } from 'antd';
 
 const Login1 = () => {
   const [username, setUsername] = useState("");
@@ -16,39 +17,16 @@ const Login1 = () => {
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-/*   const handleClick = async (e) => {
-    e.preventDefault();
-
-    try {
-      await login(dispatch, { username, password });
-      navigate('/');
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Erreur',
-        text: 'Une erreur s\'est produite. Veuillez réessayer.',
-      });
-    }
-  }; */
-
   const handleClick = async (e) => {
     e.preventDefault();
   
     try {
       setIsLoading(true);
-  
-      await login(dispatch, { username, password });
-      navigate('/');
-      window.location.reload();
+      await login(dispatch, { username, password },navigate);
+
     } catch (error) {
       console.log(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Erreur',
-        text: 'Une erreur s\'est produite. Veuillez réessayer.',
-      });
+
     } finally {
       setIsLoading(false);
     }

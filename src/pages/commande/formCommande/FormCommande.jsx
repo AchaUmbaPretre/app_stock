@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config';
+import { CircularProgress } from '@mui/material';
 
 const FormCommande = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,6 +15,7 @@ const FormCommande = () => {
   const [checkeds, setCheckeds] = useState(false);
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -34,6 +36,7 @@ const FormCommande = () => {
     e.preventDefault();
 
     try{
+      setIsLoading(true);
       await axios.post(`${DOMAIN}/api/commande/commandePost`, data)
       Swal.fire({
         title: 'Success',
@@ -51,6 +54,9 @@ const FormCommande = () => {
         icon: 'error',
         confirmButtonText: 'OK',
       });
+    }
+    finally {
+      setIsLoading(false);
     }
   }
 
@@ -202,6 +208,11 @@ const FormCommande = () => {
                       <input type="number" name="num" className="form-input" onChange={handleInputChange} />
                     </div>
                     <button className="btn-submit" onClick={handleClick2} style={{border: 'none', height: "50px", marginTop: '35px', background:'rgb(1, 35, 138)',color:'#fff', borderRadius: '5px',cursor:'pointer'}}>Envoyer</button>
+                    {isLoading && (
+                      <div className="loader-container loader-container-center">
+                        <CircularProgress size={28} />
+                      </div>
+                    )}
                   </div>
                 </div> }
                 </div>
@@ -213,6 +224,11 @@ const FormCommande = () => {
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Envoyer</button>
                 <button className="btn-submit btn-annuler" onClick={()=> window.location.reload()}>Annuler</button>
+                {isLoading && (
+                <div className="loader-container loader-container-center">
+                  <CircularProgress size={28} />
+                </div>
+            )}
               </div>
             </div>
           </div>

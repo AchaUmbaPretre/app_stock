@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config';
+import { CircularProgress } from '@mui/material';
 
 const ClientForm = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -13,6 +14,7 @@ const ClientForm = () => {
   const [province, setProvince] = useState([]);
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -29,12 +31,11 @@ const ClientForm = () => {
   setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  console.log(data)
   const handleClick = async (e) => {
     e.preventDefault();
 
     
-     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier || !data.id_commune) {
+     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -45,6 +46,7 @@ const ClientForm = () => {
     } 
 
     try{
+      setIsLoading(true);
       await axios.post(`${DOMAIN}/api/client/client`, data)
       Swal.fire({
         title: 'Success',
@@ -62,6 +64,9 @@ const ClientForm = () => {
         icon: 'error',
         confirmButtonText: 'OK',
       });
+    }
+    finally {
+      setIsLoading(false);
     }
   }
 
@@ -158,6 +163,11 @@ const ClientForm = () => {
 
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Soumetre</button>
+                {isLoading && (
+                <div className="loader-container loader-container-center">
+                  <CircularProgress size={28} />
+                </div>
+            )}
               </div>
             </div>
           </div>

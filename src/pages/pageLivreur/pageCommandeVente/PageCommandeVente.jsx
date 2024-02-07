@@ -212,13 +212,13 @@ const PageCommandeVente = () => {
                         <div >
                             <PhoneOutlined className="pageLivreur-icon" />
                         </div>
-                        <span style={{fontSize:"15px"}}>Appelez client</span>
+                        <span style={{fontSize:"13px"}}>Appelez client</span>
                     </a>
                     <a href={`https://wa.me/${data[0]?.telephone}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                         <div >
                             <WhatsAppOutlined className='pageLivreur-icon icon-whatsapp' />
                         </div>
-                        <span>Ecritez le client</span>
+                        <span style={{fontSize:"13px"}}>Ecritez le client</span>
                     </a>
                 </div>
                 <div className="rowChart-row-table">

@@ -9,7 +9,6 @@ const EditCommande = () => {
   const [data, setData] = useState({})
   const navigate = useNavigate();
   const [getClient, setGetClient] = useState([]);
-  const [getStatut, setGetStatut] = useState([]);
   const {pathname} = useLocation();
   const id = pathname.split('/')[2]
   const {id_client} = data;

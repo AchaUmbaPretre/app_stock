@@ -6,6 +6,7 @@ import config from '../../config';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import FormMatiere from './formMatiere/FormMatiere';
+import { CircularProgress } from '@mui/material';
 
 const Matiere = () => {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Matiere = () => {
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
     const [searchValue, setSearchValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const showModal = (id) => {
       setOpen(true);
@@ -116,6 +118,7 @@ const Matiere = () => {
         }
 
         try{
+          setIsLoading(true);
           await axios.post(`${DOMAIN}/api/produit/matiere`, {nom : nomMatiere})
           Swal.fire({
             title: 'Success',
@@ -132,6 +135,9 @@ const Matiere = () => {
             icon: 'error',
             confirmButtonText: 'OK',
           });
+        }
+        finally {
+          setIsLoading(false);
         }
       }
 
@@ -175,6 +181,11 @@ const Matiere = () => {
                         <h2 className="categorie-title">Ajouter une matière</h2>
                         <input type="text" name='nom' onChange={handleInputChange} value={nomMatiere} placeholder='Entrer une matière...' className="categorie-input" />
                         <button className="categorie-btn" onClick={handleClick}>Envoyer</button>
+                        {isLoading && (
+                            <div className="loader-container loader-container-center">
+                              <CircularProgress size={28} />
+                            </div>
+                        )}
                     </div>
                     <div className="categorie-container-right">
                         <div className="categorie-right-top">

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
 import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetail';
+import { useSelector } from 'react-redux';
 
 const Client = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -20,6 +21,8 @@ const Client = () => {
     const [searchValue, setSearchValue] = useState('');
     const [open, setOpen] = useState(false);
     const [idClient, setIdClient] = useState({});
+    const user = useSelector((state) => state.user?.currentUser);
+
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -199,6 +202,7 @@ const Client = () => {
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
                 </Popover> */}
                   <Button icon={<EyeOutlined />} style={{ color: 'blue', cursor: 'pointer' }} onClick={()=> showModal(record.id)} />
+                  {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
@@ -208,7 +212,7 @@ const Client = () => {
                   >
                     <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                   </Popconfirm>
-                </Popover>
+                </Popover>}
               </Space>
             ),
           },

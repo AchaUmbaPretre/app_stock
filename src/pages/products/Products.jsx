@@ -11,6 +11,7 @@ import { Tag } from 'antd';
 import ProductDetail from './productDetail/ProductDetail';
 import BarReturn from '../../components/barReturn/BarReturn';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 const Products = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -25,6 +26,7 @@ const Products = () => {
     const [opens, setOpens] = useState(false);
     const [open, setOpen] = useState(false);
     const [idProduit, setIdProduit] = useState({});
+    const user = useSelector((state) => state.user?.currentUser);
 
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -225,6 +227,7 @@ const Products = () => {
                 <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
               </Link>
             </Popover>
+            {user?.role === 'admin' &&
             <Popover title="Supprimer" trigger="hover">
               <Popconfirm
                 title="Êtes-vous sûr de vouloir supprimer?"
@@ -234,7 +237,7 @@ const Products = () => {
               >
                 <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
               </Popconfirm>
-            </Popover>
+            </Popover>}
           </Space>
         ),
     },

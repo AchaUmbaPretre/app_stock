@@ -86,7 +86,6 @@ const Register1 = () => {
         </div>
       </div>
     </div>
-
     </>
   )
 }

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Checkbox} from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 import { format } from 'date-fns';
 import Swal from 'sweetalert2';
 import config from '../../../config';
@@ -12,6 +13,7 @@ import { FadeLoader } from 'react-spinners';
 const ListeDetailView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const navigate = useNavigate();
@@ -223,7 +225,7 @@ const ListeDetailView = () => {
 
       const handleClick = (e) => {
         e.preventDefault();
-
+        setIsLoading(true);
         if (livreur.length === 0 || selected.length === 0) {
           Swal.fire({
             title: 'Error',
@@ -259,6 +261,7 @@ const ListeDetailView = () => {
               icon: 'success',
               confirmButtonText: 'OK',
             });
+            setIsLoading(false);
             navigate('/listeCommande');
 
             window.location.reload();
@@ -358,6 +361,11 @@ const ListeDetailView = () => {
                         </div>
                         <div className="rows-btn">
                           <button className="list_btn" onClick={handleClick}>Envoyer</button>
+                          {isLoading && (
+                            <div className="loader-container loader-container-center">
+                              <CircularProgress size={28} />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div> </>)}

@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import config from '../../../config';
 import Swal from 'sweetalert2';
+import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const ProductForm = () => {
@@ -21,7 +22,7 @@ const ProductForm = () => {
   const [dateEntrant, setDateEntrant] = useState(new Date().toISOString().split('T')[0]);
   const [dateMiseAJour, setDateMiseAJour] = useState(new Date().toISOString().split('T')[0]);
   const [variantExists, setVariantExists] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = async (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -117,8 +118,6 @@ const ProductForm = () => {
     fetchData();
   }, [DOMAIN]);
 
-  console.log(variantCheck)
-
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -134,6 +133,7 @@ const ProductForm = () => {
     }
 
     try{
+      setIsLoading(true);
       await axios.post(`${DOMAIN}/api/produit/produit`, {...data, date_entrant: dateEntrant, date_MisAjour: dateMiseAJour, etatProduit: getEtatProduit})
       Swal.fire({
         title: 'Success',
@@ -152,6 +152,9 @@ const ProductForm = () => {
         icon: 'error',
         confirmButtonText: 'OK',
       });
+    }
+    finally {
+      setIsLoading(false);
     }
   }
 
@@ -237,6 +240,11 @@ const ProductForm = () => {
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Soumettre</button>
                 <button className="btn-submit btn-annuler" onClick={()=> window.location.reload()}>Annuler</button>
+                {isLoading && (
+                <div className="loader-container loader-container-center">
+                  <CircularProgress size={30} />
+                </div>
+            )}
               </div>
             </div>
           </div>

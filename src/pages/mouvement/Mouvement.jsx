@@ -46,16 +46,6 @@ const Mouvement = () => {
           </Tag>
         },
         {
-          title: 'Marque',
-          dataIndex: 'nom_marque',
-          key: 'nom_marque',
-          render : (text)=>(
-            <div style={{cursor: 'pointer'}}>
-                <Tag color={'blue'}>{text}</Tag>
-            </div>
-          )
-        },
-        {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',

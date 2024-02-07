@@ -41,16 +41,6 @@ const Ventes = () => {
           </Tag>
       },
         {
-            title: 'Marque',
-            dataIndex: 'nom_marque',
-            key: 'nom_marque',
-            render : (text)=>(
-              <div>
-                  <Tag color={'blue'}>{text}</Tag>
-              </div>
-            )
-        },
-        {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
@@ -59,28 +49,6 @@ const Ventes = () => {
               <Tag color={'green'}>{text}</Tag>
             </div>
           )
-        },
-        {
-          title: 'Livreur',
-          dataIndex: 'username',
-          key: 'username'
-        },
-        {
-          title: 'Prix unitaire',
-          dataIndex: 'prix_unitaire',
-          key: 'prix',
-          sorter: (a, b) => a.prix_unitaire.length - b.prix_unitaire.length,
-          sortDirections: ['descendre', 'monter'],
-          render: (text) => (
-            <span>
-            <Tag color={'green'}>
-            {parseFloat(text).toLocaleString('fr-FR', {
-                style: 'currency',
-                currency: 'USD',
-              })}
-            </Tag>
-          </span>
-          ),
         },
         {
             title: 'Date',

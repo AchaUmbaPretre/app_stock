@@ -46,16 +46,6 @@ const Livraison_detail = () => {
           </Tag>
         },
         {
-          title: 'Marque',
-          dataIndex: 'nom_marque',
-          key: 'nom_marque',
-          render : (text)=>(
-            <div>
-                <Tag color={'blue'}>{text}</Tag>
-            </div>
-          )
-        },
-        {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
@@ -66,17 +56,12 @@ const Livraison_detail = () => {
           )
         },
         {
-          title: 'Livreur',
-          dataIndex: 'nom_livreur',
-          key: 'nom_livreur'
-        },
-        {
             title: 'Date création',
             dataIndex: 'date_creation',
             key: 'date_creation',
             render: (text) => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy');
-              return <span>{formattedDate}</span>;
+              return <Tag color={'green'}>{formattedDate}</Tag>;
             },
         },
         {

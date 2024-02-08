@@ -63,7 +63,7 @@ const Mouvement = () => {
             sortDirections: ['descend', 'ascend'],
               render: (text) => (
                 <span>
-                  {format(new Date(text), 'dd-MM-yyyy')}
+                <Tag color={'green'}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>
                 </span>
               ),
           },

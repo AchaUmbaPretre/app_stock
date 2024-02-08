@@ -149,7 +149,7 @@ const FormCommande = () => {
                   <label htmlFor="">Client</label>
                 <Select
                   name="id_client"
-                  options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
+                  options={getClient?.map(item => ({ value: item.id, label: item.nom + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Tel :' + item.telephone }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
                 />
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>

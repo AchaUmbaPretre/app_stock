@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { CircularProgress } from '@mui/material';
 import { Button, Space, Table, Popconfirm,Modal} from 'antd';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -18,6 +19,7 @@ const Marque = () => {
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
     const [searchValue, setSearchValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
   
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width: '8%' },
@@ -115,6 +117,7 @@ const Marque = () => {
         }
 
         try{
+          setIsLoading(true);
           await axios.post(`${DOMAIN}/api/produit/marque`, {nom : nomMarque})
           Swal.fire({
             title: 'Success',
@@ -131,6 +134,9 @@ const Marque = () => {
             icon: 'error',
             confirmButtonText: 'OK',
           });
+        }
+        finally {
+          setIsLoading(false);
         }
       }
 
@@ -174,6 +180,11 @@ const Marque = () => {
                         <h2 className="categorie-title">Ajouter une marque</h2>
                         <input type="text" name='nom' onChange={handleInputChange} value={nomMarque} placeholder='Entrer une marque...' className="categorie-input" />
                         <button className="categorie-btn" onClick={handleClick}>Envoyer</button>
+                        {isLoading && (
+                            <div className="loader-container loader-container-center">
+                              <CircularProgress size={30} />
+                            </div>
+                        )}
                     </div>
                     <div className="categorie-container-right">
                         <div className="categorie-right-top">

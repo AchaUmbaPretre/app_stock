@@ -148,7 +148,7 @@ const Mouvement = () => {
                         >
                          <MouvClientDetail idClients={idClient}/>
                         </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                     </div>
                 </div>
             </div>

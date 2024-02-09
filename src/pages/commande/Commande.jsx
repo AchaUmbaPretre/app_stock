@@ -81,7 +81,6 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
             setGetFamille(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -168,7 +167,6 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
             setGetCommande(data[0]);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -293,7 +291,7 @@ const Commande = () => {
                             setOpen(false)
                             window.location.reload();
                           }}
-                          width={900}
+                          width={950}
                           footer={[
                           ]}
                         >

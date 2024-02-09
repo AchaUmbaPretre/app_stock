@@ -19,9 +19,9 @@ const MouvementView = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
-    const [getVente, setGetVente] = useState({});
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -255,6 +255,18 @@ const MouvementView = () => {
         fetchData();
       }, [id]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
+            setGetCommande(data[0]);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,id]);
+
 /*       const handleOk = async (e) => {
         try{
           await axios.put(`${DOMAIN}/api/vente/vente/${id}`,getVente)
@@ -296,7 +308,11 @@ const MouvementView = () => {
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Liste de detail de mouvement de commande n° {id}</h2>
-                        <span>Gérer vos mouvements</span>
+                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                    </div>
+                    <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
+                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
                 </div>
                 <div className="product-bottom">

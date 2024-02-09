@@ -19,6 +19,7 @@ const LivraisonView = () => {
     const [idClient, setIdClient] = useState({});
     const [prix, setPrix] = useState({});
     const [searchValue, setSearchValue] = useState('');
+    const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
 
     
@@ -195,6 +196,17 @@ const LivraisonView = () => {
         };
         fetchData();
       }, [DOMAIN,idClient]);
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
+            setGetCommande(data[0]);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,id]);
 
       const filteredData = data?.filter((item) =>
       item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -209,7 +221,11 @@ const LivraisonView = () => {
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Liste de détail des livraisons de commande N° {id}</h2>
-                        <span>Voir le détail des livraisons</span>
+                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                    </div>
+                    <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
+                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
                 </div>
                 <div className="product-bottom">

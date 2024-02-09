@@ -40,7 +40,6 @@ const VarianteProduit = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
           setGetMarque(data);
-          setLoading(false)
         } catch (error) {
           console.log(error);
         }
@@ -53,7 +52,6 @@ const VarianteProduit = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
           setGetCible(data);
-          setLoading(false)
         } catch (error) {
           console.log(error);
         }
@@ -66,7 +64,6 @@ const VarianteProduit = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
           setGetTaille(data);
-          setLoading(false)
         } catch (error) {
           console.log(error);
         }
@@ -83,6 +80,7 @@ const VarianteProduit = () => {
 
           const { data } = await axios.get(url);
           setData(data)
+          setLoading(false)
         } catch (error) {
           console.log(error);
         }
@@ -98,6 +96,7 @@ const VarianteProduit = () => {
           : `${DOMAIN}/api/produit/varianteProduit`
           const { data } = await axios.get(url);
           setData(data)
+          setLoading(false)
         } catch (error) {
           console.log(error);
         }
@@ -116,6 +115,7 @@ const VarianteProduit = () => {
     
           const { data } = await axios.get(url);
           setData(data);
+          setLoading(false)
         } catch (error) {
           console.log(error);
         }
@@ -130,7 +130,6 @@ const VarianteProduit = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
             setGetFamille(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }

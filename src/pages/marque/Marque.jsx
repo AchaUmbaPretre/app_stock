@@ -111,7 +111,7 @@ const Marque = () => {
             title: 'Error',
             text: 'Veuillez remplir tous les champs requis',
             icon: 'error',
-            confirmButtonText: 'OK',
+            confirmButtonText: 'OK',    
           });
           return;
         }

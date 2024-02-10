@@ -19,6 +19,7 @@ const ClientForms = () => {
     nom: '',
     raison_sociale: '',
     email: '',
+    telephone:'',
   });
 
   const handleInputChange = (e) => {
@@ -31,8 +32,10 @@ const ClientForms = () => {
 
   const handleAddressInputChange = (index, e) => {
     const { name, value } = e.target;
+    const [fieldName, fieldIndex] = name.split('-');
+  
     const addresses = [...deliveryAddresses];
-    addresses[index][name] = value;
+    addresses[index][fieldName] = value;
     setDeliveryAddresses(addresses);
   };
 
@@ -45,6 +48,7 @@ const ClientForms = () => {
     addresses.splice(index, 1);
     setDeliveryAddresses(addresses);
   };
+
 
 /*   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -65,7 +69,7 @@ const ClientForms = () => {
     e.preventDefault();
 
     
-     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier) {
+/*      if (!clientInfo.nom || !clientInfo.raison_sociale || !clientInfo.telephone || !clientInfo.id_province || !clientInfo.avenue || !clientInfo.quartier) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -73,10 +77,20 @@ const ClientForms = () => {
         confirmButtonText: 'OK',
       });
       return;
-    } 
+    }  */
 
     try{
-      await axios.post(`${DOMAIN}/api/client/client`, data)
+      await Promise.all(
+        deliveryAddresses.map((item) =>
+          axios.post(`${DOMAIN}/api/client/client`,{
+            ...clientInfo,
+            avenue: item.avenue,
+            quartier: item.quartier,
+            commune : item.commune,
+            num: item.num
+          })
+        )
+      )
       Swal.fire({
         title: 'Success',
         text: 'Client crée avec succès!',
@@ -108,9 +122,10 @@ const ClientForms = () => {
     fetchData();
   }, [DOMAIN]);
 
+
   useEffect(()=>{
-    setIdProvince(data?.id_province)
-  },[data?.id_province])
+    setIdProvince(clientInfo?.id_province)
+  },[clientInfo?.id_province])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,6 +138,8 @@ const ClientForms = () => {
     };
     fetchData();
   }, [DOMAIN,idProvince]);
+
+  console.log(deliveryAddresses)
   
   return (
     <>
@@ -173,6 +190,18 @@ const ClientForms = () => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="form-controle">
+                  <label htmlFor="">Telephone</label>
+                  <input type="tel" name='telephone' className="form-input" onChange={handleInputChange} required />
+            </div>
+            <div className="form-controle">
+                <label htmlFor="">Ville</label>
+                <Select
+                    name="id_province"
+                    options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
+                />
+            </div>
 
             {/* Champs d'adresse de livraison dynamiques */}
             {deliveryAddresses.map((address, index) => (
@@ -183,7 +212,6 @@ const ClientForms = () => {
                     type="text"
                     name={`avenue-${index}`}
                     className="form-input"
-                    value={address.avenue}
                     onChange={(e) => handleAddressInputChange(index, e)}
                   />
                 </div>
@@ -193,19 +221,16 @@ const ClientForms = () => {
                     type="text"
                     name={`quartier-${index}`}
                     className="form-input"
-                    value={address.quartier}
                     onChange={(e) => handleAddressInputChange(index, e)}
                   />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Commune</label>
-                  <input
-                    type="text"
-                    name={`commune-${index}`}
-                    className="form-input"
-                    value={address.commune}
-                    onChange={(e) => handleAddressInputChange(index, e)}
-                  />
+                  <Select
+                      name={`commune-${index}`}
+                      options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
+                      onChange={selectedOption => handleAddressInputChange(index, { target: { name: 'commune', value: selectedOption.value } })}
+                    />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">N°</label>
@@ -213,7 +238,6 @@ const ClientForms = () => {
                     type="text"
                     name={`num-${index}`}
                     className="form-input"
-                    value={address.num}
                     onChange={(e) => handleAddressInputChange(index, e)}
                   />
                 </div>
@@ -242,7 +266,6 @@ const ClientForms = () => {
         </div>
       </div>
     </div>
-
     </>
   )
 }

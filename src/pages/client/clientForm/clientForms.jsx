@@ -138,8 +138,6 @@ const ClientForms = () => {
     };
     fetchData();
   }, [DOMAIN,idProvince]);
-
-  console.log(deliveryAddresses)
   
   return (
     <>
@@ -252,7 +250,7 @@ const ClientForms = () => {
             ))}
 
             <div className="form-controle">
-              <button type="button" className="add-btn" onClick={addDeliveryAddress} style={{border:'none', marginTop: "20px",padding: '10px'}}>
+              <button type="button" className="add-btn" onClick={addDeliveryAddress} style={{border:'none', marginTop: "20px",padding: '10px', background:'rgb(1, 35, 138)', color:'#fff', cursor:'pointer'}}>
                 Ajouter une adresse de livraison
               </button>
             </div>

@@ -29,8 +29,8 @@ const RowTotalDetail = () => {
      useEffect(() => {
         const fetchData = async () => {
           try {
-            const res = await axios.get(`${DOMAIN}/api/client/clientCount`);
-            setClient(res.data.total);
+            const res = await axios.get(`${DOMAIN}/api/client/clientCount/count`);
+            setClient(res.data);
           } catch (error) {
             console.log(error);
           }

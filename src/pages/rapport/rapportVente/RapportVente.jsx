@@ -132,31 +132,39 @@ const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
       title: 'image',
-      dataIndex: 'image',
+      dataIndex: 'img',
       key: 'img',
         render: (text, record) => (
           <div className="userList">
-            <img src={record.image} alt="" className="userImg"  />
+            <img src={record.img} alt="" className="userImg"  />
           </div>
           )
     },
-/*     {
-        title: 'Nom produit',
-        dataIndex: 'nom_produit',
-        key: 'nom_produit',
-        ...getColumnSearchProps('nom_produit'),
-    }, */
     {
       title: 'Categorie',
       dataIndex: 'nom_categorie',
       key: 'categorie',
+      render: (categorie) => (
+        <Tag color={'blue'}>{categorie}</Tag>
+      ),
     },
     {
       title: 'Marque',
       dataIndex: 'nom_marque',
       key: 'nom_marque',
+      render: (nom_marque) => (
+        <Tag color={'green'}>{nom_marque}</Tag>
+      ),
     },
     {
+      title: 'Pointure',
+      dataIndex: 'taille',
+      key: 'taille',
+      render: (taille) => (
+        <Tag color={'blue'}>{taille}</Tag>
+      ),
+    },
+/*     {
       title: 'Couleur',
       dataIndex: 'description',
       key: 'description',
@@ -188,13 +196,13 @@ const columns = [
           </span>
         );
       },
-    },
-    {
+    }, */
+/*     {
       title: 'Taille',
       dataIndex: 'pointure',
       key: 'pointure',
-    },
-/*     {
+    }, */
+     {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
       key: 'quantite_vendue',
@@ -203,16 +211,26 @@ const columns = [
       render: (quantite_vendue) => (
         <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
       ),
-    }, */
+    },
+    {
+      title: 'Montant vendu',
+      dataIndex: 'montant_vendu',
+      key: 'quantite_vendue',
+      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+      sortDirections: ['descend', 'ascend'],
+      render: (montant_vendu) => (
+        <Tag color={montant_vendu > 0 ? 'green' : 'red'}>{montant_vendu}</Tag>
+      ),
+    },
     {
         title: 'Qté en stock',
-        dataIndex: 'stock',
-        key: 'stock',
-        sorter: (a, b) => a.stock - b.stock,
+        dataIndex: 'quantite_en_stock',
+        key: 'quantite_en_stock',
+        sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
         sortDirections: ['descend', 'ascend'],
         width: "18%",
-        render: (stock) => (
-          <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
+        render: (quantite_en_stock) => (
+          <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
         ),
       }
 ];
@@ -224,7 +242,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/inventaire`);
+      const { data } = await axios.get(`${DOMAIN}/api/vente/rapport/vente`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -232,7 +250,7 @@ useEffect(() => {
     }
   };
   fetchData();
-}, []);
+}, [DOMAIN]);
 
  const filteredData = getRapport?.filter((item) =>
 item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||

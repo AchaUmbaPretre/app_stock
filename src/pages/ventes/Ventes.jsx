@@ -32,14 +32,16 @@ const Ventes = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'Commande n°',
+          title: 'N° de commande',
           dataIndex: 'id_commande',
+          width: '40px',
           key: 'id_commande',
-          render: (text) => 
-          <Tag color={'rgb(128, 128, 231)'}>
-            {text}
-          </Tag>
-      },
+          render: (text) => (
+            <Tag color={'blue'}>
+              {text}
+            </Tag>
+          )
+        },
         {
           title: 'Client',
           dataIndex: 'nom_client',
@@ -48,6 +50,34 @@ const Ventes = () => {
             <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
               <Tag color={'green'}>{text}</Tag>
             </div>
+          )
+        },
+        {
+          title: 'Telephone',
+          dataIndex: 'telephone',
+          key: 'telephone',
+          render : (text,record)=>(
+              <Tag color={'blue'}>{record.telephone}</Tag>
+          )
+        },
+        {
+          title: 'Total produit',
+          dataIndex: 'total_varianteproduit',
+          key: 'total_varianteproduit',
+          sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
+          sortDirections: ['descend', 'ascend'],
+          render : (text,record)=>(
+              <Tag color={'green'}>{record.total_varianteproduit}</Tag>
+          )
+        },
+        {
+          title: 'Total prix',
+          dataIndex: 'total_prix_vente',
+          key: 'total_prix_vente',
+          sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
+            sortDirections: ['descend', 'ascend'],
+          render : (text,record)=>(
+              <Tag color={'green'}>{record.total_prix_vente}</Tag>
           )
         },
         {
@@ -157,7 +187,6 @@ const Ventes = () => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

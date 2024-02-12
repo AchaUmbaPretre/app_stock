@@ -45,7 +45,7 @@ const ListeCommande = () => {
           dataIndex: 'id_commande',
           key: 'id_commande',
           render: (text) => 
-          <Tag color={'rgb(128, 128, 231)'}>
+          <Tag color={'blue'}>
             {text}
           </Tag>
         },

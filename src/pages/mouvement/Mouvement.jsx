@@ -39,9 +39,10 @@ const Mouvement = () => {
         {
           title: 'Commande N°',
           dataIndex: 'id_commande',
+          width: '40px',
           key: 'id_commande',
           render: (text) => 
-          <Tag color={'rgb(128, 128, 231)'}>
+          <Tag color={'blue'}>
             {text}
           </Tag>
         },
@@ -53,6 +54,24 @@ const Mouvement = () => {
             <div onClick={()=> showModal(record.id_client1)} style={{cursor: 'pointer'}}>
                 <Tag color={'green'}>{text}</Tag>
             </div>
+          )
+        },
+        {
+          title: 'Telephone',
+          dataIndex: 'telephone',
+          key: 'telephone',
+          render : (text,record)=>(
+              <Tag color={'blue'}>{record.telephone}</Tag>
+          )
+        },
+        {
+          title: 'Total produit',
+          dataIndex: 'total_varianteproduit',
+          key: 'total_varianteproduit',
+          sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
+          sortDirections: ['descend', 'ascend'],
+          render : (text,record)=>(
+              <Tag color={'green'}>{record.total_varianteproduit}</Tag>
           )
         },
         {

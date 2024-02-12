@@ -65,7 +65,7 @@ const ListeCommande = () => {
           key: 'date_commande',
           render: (text) => (
             <span>
-              {format(new Date(text), 'dd-MM-yyyy')}
+              {<Tag color={'blue'}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>}
             </span>
           ),
         },

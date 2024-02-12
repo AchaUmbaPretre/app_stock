@@ -18,8 +18,6 @@ const Livraison_detail = () => {
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
     
-
-    
       const handleDelete = async (id) => {
         try {
             await axios.delete(`${DOMAIN}/api/livraison/livraisonDeleteDetail/${id}`);
@@ -41,7 +39,7 @@ const Livraison_detail = () => {
           dataIndex: 'id_commande',
           key: 'id_commande',
           render: (text) => 
-          <Tag color={'rgb(128, 128, 231)'}>
+          <Tag color={'blue'}>
             {text}
           </Tag>
         },
@@ -53,6 +51,14 @@ const Livraison_detail = () => {
             <div onClick={()=> showModal(record.id_client)} style={{cursor: 'pointer'}}>
                <Tag color={'green'}>{text}</Tag>
             </div>
+          )
+        },
+        {
+          title: 'Telephone',
+          dataIndex: 'telephone',
+          key: 'telephone',
+          render : (text,record)=>(
+              <Tag color={'blue'}>{record.telephone}</Tag>
           )
         },
         {

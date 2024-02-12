@@ -25,7 +25,7 @@ const VarianteProduit = () => {
     const [taille, setTaille] = useState(null);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 18;
+    const itemsPerPage = 15;
     const totalPages = Math.ceil(data.length / itemsPerPage);
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;

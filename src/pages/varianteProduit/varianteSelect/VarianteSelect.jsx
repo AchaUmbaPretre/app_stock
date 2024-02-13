@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import './productSelects.scss'
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from './../../../config';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 
-const ProductSelects = ({getProduits}) => {
+const VarianteSelect = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [produit, setProduit] = useState([]);
     const [datas, setDatas] = useState({});
     const [getCategorie, setGetCategorie] = useState([]);
     const [couleur, setCouleur] = useState([]);
+    const [getMarque, setGetMarque] = useState([]);
     
 
     const handleInputChange = (e) => {
@@ -44,8 +44,8 @@ const ProductSelects = ({getProduits}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
-        setCouleur(data);
+        const { data } = await axios.get(`${DOMAIN}/api/produit/categorie`);
+        setGetCategorie(data);
       } catch (error) {
         console.log(error);
       }
@@ -56,8 +56,8 @@ const ProductSelects = ({getProduits}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/categorie`);
-        setGetCategorie(data);
+        const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
+        setGetMarque(data);
       } catch (error) {
         console.log(error);
       }
@@ -113,17 +113,10 @@ const ProductSelects = ({getProduits}) => {
                 />
                 <Select
                     className="product-input-select"
-                    name='couleur'
-                    options={couleur?.map(item => ({ value: item.id, label: item.description }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'couleur', value: selectedOption.value } })}
-                    placeholder="Choisir une couleur"
-                />
-                <Select
-                    className="product-input-select"
-                    name='prix'
-                    options={produit?.map(item => ({ value: item.prix, label: item.prix }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'prix', value: selectedOption.value } })}
-                    placeholder="Prix"
+                    name='id_marque'
+                    options={getMarque?.map(item => ({ value: item.id, label: item.nom }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
+                    placeholder="Choisir une marque"
                 />
                 <div className="select-btn">
                     <SearchOutlined className='select-search-btn' onClick={handleClick} />
@@ -135,4 +128,4 @@ const ProductSelects = ({getProduits}) => {
   )
 }
 
-export default ProductSelects
+export default VarianteSelect

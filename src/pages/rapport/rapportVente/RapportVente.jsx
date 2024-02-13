@@ -1,14 +1,14 @@
 import './rapportVente.scss'
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm} from 'antd';
-import { format } from 'date-fns';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button, Input, Space, Table} from 'antd';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
-import { Tag, Popconfir } from 'antd';
+import { Tag } from 'antd';
+import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
 
 const RapportVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -21,6 +21,7 @@ const RapportVente = () => {
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const [getProduit, setGetProduit] = useState();
 
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -282,8 +283,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-{/*                    {open &&
-                    <ProductSelects getProduits={setGetProduit}/> }  */}
+                   {open &&
+                    <RapportVenteSelects getProduits={setGetProduit}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>

@@ -66,6 +66,7 @@ import PageLivraisonRetour from './pages/pageLivreur/pageRetourCommande/PageLivr
 import LivraisonView from './pages/livraison/livraisonView/LivraisonView';
 import Couleur from './pages/couleur/Couleur';
 import ClientForms from './pages/client/clientForm/clientForms';
+import ListeVariante from './pages/varianteProduit/listeVariante/ListeVariante';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -136,6 +137,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/varianteProduit',
           element: <VarianteProduit />
+        },
+        {
+          path: '/listeVariante',
+          element: <ListeVariante />
         },
         {
           path: '/pageDetail/:id',

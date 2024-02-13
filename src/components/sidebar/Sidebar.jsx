@@ -50,12 +50,17 @@ const Sidebar = () => {
       <SubMenu key="products" title={<span className="sidebarH3">Produits</span>} icon={<AppstoreOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="allProducts">
           <Link to="/products" className="sidebarLink">
-            Produits
+            Liste des produits
           </Link>
         </Item>
         <Item key="productForm">
           <Link to="/productForm" className="sidebarLink">
             Créer un nouveau produit
+          </Link>
+        </Item>
+        <Item key="ListeVariante">
+          <Link to="/ListeVariante" className="sidebarLink">
+            Liste des variantes
           </Link>
         </Item>
         <Item key="varianteProduit">

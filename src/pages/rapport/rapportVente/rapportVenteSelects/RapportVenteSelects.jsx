@@ -65,24 +65,28 @@ const RapportVenteSelects = ({ getProduits }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
+  
     try {
+      const marqueIds = Array.isArray(datas.id_marque)
+        ? datas.id_marque.join(',')
+        : datas.id_marque;
+  
       const { data } = await axios.get(
-        `${DOMAIN}/api/vente/rapport/vente?start_date=${datas.start_date}&end_date=${datas.end_date}`
+        `${DOMAIN}/api/vente/rapport/vente?start_date=${datas.start_date}&end_date=${datas.end_date}&marque_id=${marqueIds}`
       );
+  
       getProduits(data);
     } catch (err) {
       Swal.fire({
         title: 'Error',
-        text: err.message,
+        text: err.response.data.error,
         icon: 'error',
         confirmButtonText: 'OK',
       });
-
+  
       console.log(err);
     }
   };
-
   const handleStartDateChange = (e) => {
     const startDate = e.target.value;
     setDatas((prev) => ({ ...prev, start_date: startDate }));
@@ -99,17 +103,17 @@ const RapportVenteSelects = ({ getProduits }) => {
         <div className="productSelects-container">
           <Select
             className="product-input-select"
-            name="nom_produit"
-            options={produit?.map((item) => ({
-              value: item.nom_produit,
-              label: item.nom_produit,
+            name="id_marque"
+            options={getMarque?.map((item) => ({
+              value: item.id_marque,
+              label: item.nom,
             }))}
             onChange={(selectedOption) =>
               handleInputChange({
-                target: { name: 'nom_produit', value: selectedOption?.value },
+                target: { name: 'id_marque', value: selectedOption?.value },
               })
             }
-            placeholder="Choisir un produit"
+            placeholder="Choisir une marque"
           />
           <input
             type="date"

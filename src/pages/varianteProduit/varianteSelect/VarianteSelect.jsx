@@ -10,7 +10,6 @@ const VarianteSelect = ({getProduits}) => {
     const [produit, setProduit] = useState([]);
     const [datas, setDatas] = useState({});
     const [getCategorie, setGetCategorie] = useState([]);
-    const [couleur, setCouleur] = useState([]);
     const [getMarque, setGetMarque] = useState([]);
     
 

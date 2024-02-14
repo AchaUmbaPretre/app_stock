@@ -1,16 +1,14 @@
-import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { Button, Space, Table, Popover, Tag, Input } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import config from '../../../config';
-import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
+import config from '../../../../config';
+/* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
-const RapportVente = () => {
+const RapportVenteAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -240,7 +238,7 @@ const columns = [
           
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteAll/${record.id_marque}`}>
+            <Link to={`/pageDetail/${record.id_marque}`}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>
@@ -297,8 +295,8 @@ console.log(getRapport)
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                   {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> }
+{/*                    {open &&
+                    <RapportVenteSelects getProduits={setGetRapport}/> } */}
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
@@ -310,4 +308,4 @@ console.log(getRapport)
   )
 }
 
-export default RapportVente
+export default RapportVenteAll

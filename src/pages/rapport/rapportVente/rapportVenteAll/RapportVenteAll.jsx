@@ -17,6 +17,7 @@ const RapportVenteAll = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
+    const id = pathname.split('/')[2];
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 

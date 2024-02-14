@@ -5,7 +5,7 @@ import config from '../../../../config';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 
-const RapportVenteAllSelects = ({ getProduits }) => {
+const RapportVenteAllSelects = ({ getProduits,id }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [produit, setProduit] = useState([]);
   const [datas, setDatas] = useState({});
@@ -63,16 +63,15 @@ const RapportVenteAllSelects = ({ getProduits }) => {
     fetchData();
   }, [DOMAIN]);
 
+  console.log(id)
+
   const handleClick = async (e) => {
     e.preventDefault();
   
     try {
-      const marqueIds = Array.isArray(datas.id_marque)
-        ? datas.id_marque.join(',')
-        : datas.id_marque;
   
       const { data } = await axios.get(
-        `${DOMAIN}/api/vente/rapport/vente?start_date=${datas.start_date}&end_date=${datas.end_date}&marque_id=${marqueIds}`
+        `${DOMAIN}/api/vente/rapport/venteAllSearch?id_marque=${id}&start_date=${datas.start_date}&end_date=${datas.end_date}`
       );
   
       getProduits(data);
@@ -101,20 +100,6 @@ const RapportVenteAllSelects = ({ getProduits }) => {
     <>
       <div className="productSelects">
         <div className="productSelects-container">
-          <Select
-            className="product-input-select"
-            name="id_marque"
-            options={getMarque?.map((item) => ({
-              value: item.id_marque,
-              label: item.nom,
-            }))}
-            onChange={(selectedOption) =>
-              handleInputChange({
-                target: { name: 'id_marque', value: selectedOption?.value },
-              })
-            }
-            placeholder="Choisir une marque"
-          />
           <input
             type="date"
             className="product-input-select"

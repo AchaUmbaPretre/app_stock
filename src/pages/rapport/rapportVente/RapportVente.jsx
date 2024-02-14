@@ -271,7 +271,6 @@ item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
 item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
 )
 
-console.log(getRapport)
   return (
     <>
         <div className="products">

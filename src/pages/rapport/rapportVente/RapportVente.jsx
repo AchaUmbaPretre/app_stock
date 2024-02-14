@@ -21,7 +21,6 @@ const RapportVente = () => {
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    const [getProduit, setGetProduit] = useState();
 
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -258,6 +257,7 @@ item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
 item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
 )
 
+console.log(getRapport)
   return (
     <>
         <div className="products">
@@ -284,7 +284,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                         </div>
                     </div>
                    {open &&
-                    <RapportVenteSelects getProduits={setGetProduit}/> }
+                    <RapportVenteSelects getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>

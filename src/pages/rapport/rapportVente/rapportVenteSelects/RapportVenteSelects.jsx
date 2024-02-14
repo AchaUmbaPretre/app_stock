@@ -68,7 +68,7 @@ const RapportVenteSelects = ({ getProduits }) => {
 
     try {
       const { data } = await axios.get(
-        `${DOMAIN}/api/produit/produitSelect?nom_produit=${datas.nom_produit}&categorie=${datas.categorie}&prix=${datas.prix}&couleur=${datas.couleur}`
+        `${DOMAIN}/api/vente/rapport/vente?start_date=${datas.start_date}&end_date=${datas.end_date}`
       );
       getProduits(data);
     } catch (err) {
@@ -92,8 +92,6 @@ const RapportVenteSelects = ({ getProduits }) => {
     const endDate = e.target.value;
     setDatas((prev) => ({ ...prev, end_date: endDate }));
   };
-
-  console.log(datas)
 
   return (
     <>

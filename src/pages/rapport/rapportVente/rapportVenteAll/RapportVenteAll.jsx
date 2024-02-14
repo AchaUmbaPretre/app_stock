@@ -6,6 +6,7 @@ import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../../config';
+import { CheckCircleOutlined } from '@mui/icons-material';
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
 const RapportVenteAll = () => {
@@ -17,9 +18,10 @@ const RapportVenteAll = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
+    const {pathname} = useLocation();
     const id = pathname.split('/')[2];
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const [marqueName,setMarqueName] = useState('');
 
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -163,44 +165,36 @@ const columns = [
         <Tag color={'blue'}>{taille}</Tag>
       ),
     },
-/*     {
-      title: 'Couleur',
-      dataIndex: 'description',
-      key: 'description',
-      render: (color) => {
-        let icon;
-        let iconColor;
-  
-        if (color === 'Rouge') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'red';
-        } else if (color === 'Noir') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'black';
-        } else if (color === 'Orange') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'orange';
-        } else if (color === 'Bleu') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'skyblue';
-        } else if (color === 'Chocolat') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'chocolate';
-        }
-  
-        return (
-          <span style={{ color: iconColor, display: 'flex', gap:'5px'}}>
-            {icon}
-            {color}
-          </span>
-        );
+    {
+        title: 'Couleur',
+        dataIndex: 'description',
+        key: 'description',
+        render: (color) => {
+          let tagColor;
+      
+          if (color === 'Rouge') {
+            tagColor = 'red';
+          } else if (color === 'Noir') {
+            tagColor = 'black';
+          } else if (color === 'Orange') {
+            tagColor = 'orange';
+          } else if (color === 'Bleu') {
+            tagColor = 'skyblue';
+          } else if (color === 'Chocolat') {
+            tagColor = 'chocolate';
+          } else if (color === 'Vert fluo') {
+            tagColor = 'lime';
+          } else if (color === 'Rose fuchsia') {
+            tagColor = 'hotpink';
+          } else if (color === 'Beige saumon') {
+            tagColor = 'burlywood';
+          }
+      
+          return (
+            <Tag color={tagColor}>{color}</Tag>
+          );
+        },
       },
-    }, */
-/*     {
-      title: 'Taille',
-      dataIndex: 'pointure',
-      key: 'pointure',
-    }, */
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
@@ -231,21 +225,7 @@ const columns = [
         render: (quantite_en_stock) => (
           <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
         ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/pageDetail/${record.id_marque}`}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    },
+    }
 ];
 
 const HandOpen = () =>{
@@ -253,32 +233,34 @@ const HandOpen = () =>{
 }
 
 useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const { data } = await axios.get(`${DOMAIN}/api/vente/rapport/vente`);
-      setGetRapport(data);
-      setLoading(false)
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchData();
-}, [DOMAIN]);
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/vente/rapport/venteAll/${id}`);
+        
+        setGetRapport(data);
+        setMarqueName(data[0]?.nom_marque)
+        setLoading(false)
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN,id]);
 
  const filteredData = getRapport?.filter((item) =>
 item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
 item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
 )
 
-console.log(getRapport)
   return (
     <>
         <div className="products">
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport de ventes</h2>
-                        <span>Gérez votre rapport de ventes</span>
+                        <h2 className="product-h2">Rapport de ventes de marque {marqueName}</h2>
+                        <span>Gérez votre rapport de ventes de marque {marqueName}</span>
                     </div>
                 </div>
                 <div className="product-bottom">

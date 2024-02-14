@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../../config';
 import { CheckCircleOutlined } from '@mui/icons-material';
+import RapportVenteAllSelects from './RapportVenteAllSelects';
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
 const RapportVenteAll = () => {
@@ -278,8 +279,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-{/*                    {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> } */}
+                    {open &&
+                    <RapportVenteAllSelects getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>

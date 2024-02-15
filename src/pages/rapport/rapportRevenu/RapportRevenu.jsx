@@ -1,14 +1,12 @@
-import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, ArrowUpOutlined, ArrowDownOutlined,FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { Button, Space, Table, Popover,Tag, Input } from 'antd';
+import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
-import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
+/* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
 const RapportRevenu = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -19,7 +17,6 @@ const RapportRevenu = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
 
@@ -131,110 +128,53 @@ const RapportRevenu = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'image',
-      dataIndex: 'img',
-      key: 'img',
-        render: (text, record) => (
-          <div className="userList">
-            <img src={record.img} alt="" className="userImg"  />
-          </div>
-          )
-    },
-    {
-      title: 'Categorie',
-      dataIndex: 'nom_categorie',
-      key: 'categorie',
-      render: (categorie) => (
-        <Tag color={'blue'}>{categorie}</Tag>
+      title: 'Mois',
+      dataIndex: 'mois',
+      key: 'mois',
+      render: (mois) => (
+        <Tag color={'blue'}>{mois}</Tag>
       ),
     },
     {
-      title: 'Marque',
-      dataIndex: 'nom_marque',
-      key: 'nom_marque',
-      render: (nom_marque) => (
-        <Tag color={'green'}>{nom_marque}</Tag>
+      title: 'Année',
+      dataIndex: 'annee',
+      key: 'annee',
+      render: (annee) => (
+        <Tag color={'green'}>{annee}</Tag>
       ),
     },
     {
-      title: 'Pointure',
-      dataIndex: 'taille',
-      key: 'taille',
-      render: (taille) => (
-        <Tag color={'blue'}>{taille}</Tag>
-      ),
-    },
-/*     {
-      title: 'Couleur',
-      dataIndex: 'description',
-      key: 'description',
-      render: (color) => {
-        let icon;
-        let iconColor;
-  
-        if (color === 'Rouge') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'red';
-        } else if (color === 'Noir') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'black';
-        } else if (color === 'Orange') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'orange';
-        } else if (color === 'Bleu') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'skyblue';
-        } else if (color === 'Chocolat') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'chocolate';
-        }
-  
-        return (
-          <span style={{ color: iconColor, display: 'flex', gap:'5px'}}>
-            {icon}
-            {color}
-          </span>
-        );
-      },
-    }, */
-/*     {
-      title: 'Taille',
-      dataIndex: 'pointure',
-      key: 'pointure',
-    }, */
-     {
-      title: 'Quantité vendue',
-      dataIndex: 'quantite_vendue',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
-      sortDirections: ['descend', 'ascend'],
-      render: (quantite_vendue) => (
-        <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
+      title: 'Nombre de vente',
+      dataIndex: 'nombre_ventes',
+      key: 'nombre_ventes',
+      render: (nombre_ventes) => (
+        <Tag color={'blue'}>{nombre_ventes}</Tag>
       ),
     },
     {
-      title: 'Montant vendu',
-      dataIndex: 'montant_vendu',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
-      sortDirections: ['descend', 'ascend'],
-      render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
-          {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-        </Tag>
-      ),
-    },
-    {
-        title: 'Qté en stock',
-        dataIndex: 'quantite_en_stock',
-        key: 'quantite_en_stock',
-        sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
+        title: 'Revenu total',
+        dataIndex: 'revenu_total',
+        key: 'revenu_total',
+        sorter: (a, b) => a.revenu_total - b.revenu_total,
         sortDirections: ['descend', 'ascend'],
-        width: "18%",
-        render: (quantite_en_stock) => (
-          <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
+        render: (revenu_total) => (
+          <Tag color={revenu_total > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+            {`$${revenu_total}`}
+          </Tag>
         ),
-    },
+      },
+{
+  title: 'Revenu moyen',
+  dataIndex: 'revenu_moyen_par_vente',
+  key: 'revenu_moyen_par_vente',
+  sorter: (a, b) => a.revenu_moyen_par_vente - b.revenu_moyen_par_vente,
+  sortDirections: ['descend', 'ascend'],
+  render: (revenu_moyen_par_vente) => (
+    <Tag color={revenu_moyen_par_vente > 0 ? 'green' : 'red'} icon={revenu_moyen_par_vente > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}>
+      {`$${revenu_moyen_par_vente}`}
+    </Tag>
+  ),
+},
     {
       title: 'Action',
       key: 'action',
@@ -258,7 +198,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/vente/rapport/vente`);
+      const { data } = await axios.get(`${DOMAIN}/api/vente/rapportRevenu/revenu`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -268,19 +208,14 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
- const filteredData = getRapport?.filter((item) =>
-item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
-)
-
   return (
     <>
         <div className="products">
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport de ventes</h2>
-                        <span>Gérez votre rapport de ventes</span>
+                        <h2 className="product-h2">Rapport des revenus</h2>
+                        <span>Gérez votre revenus</span>
                     </div>
                 </div>
                 <div className="product-bottom">
@@ -298,10 +233,10 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                   {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> }
+{/*                    {open &&
+                    <RapportVenteSelects getProduits={setGetRapport}/> } */}
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

@@ -131,34 +131,38 @@ const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
       title: 'Nom client',
-      dataIndex: 'nom_categorie',
-      key: 'categorie',
+      dataIndex: 'nom_client',
+      key: 'nom_client',
       render: (categorie) => (
         <Tag color={'blue'}>{categorie}</Tag>
       ),
     },
     {
       title: 'Quantité',
-      dataIndex: 'quantite',
-      key: 'quantite',
-      render: (quantite) => (
-        <Tag color={'green'}>{quantite}</Tag>
+      dataIndex: 'total_varianteproduit',
+      key: 'total_varianteproduit',
+      sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
+      sortDirections: ['descend', 'ascend'],
+      render: (total_varianteproduit) => (
+        <Tag color={'green'}>{total_varianteproduit}</Tag>
       ),
     },
     {
-      title: 'Montant',
-      dataIndex: 'Montant',
-      key: 'montant',
-      render: (montant) => (
-        <Tag color={'blue'}>{montant}</Tag>
+      title: 'Montant de vente',
+      dataIndex: 'total_prix_vente',
+      key: 'total_prix_vente',
+      sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
+      sortDirections: ['descend', 'ascend'],
+      render: (total_prix_vente) => (
+        <Tag color={'blue'}>{total_prix_vente}</Tag>
       ),
     },
     {
-        title: 'Montant',
-        dataIndex: 'Montant',
-        key: 'montant',
-        render: (montant) => (
-          <Tag color={'blue'}>{montant}</Tag>
+        title: 'Statut',
+        dataIndex: 'statut',
+        key: 'statut',
+        render: (statut) => (
+          <Tag color={'blue'}>{statut}</Tag>
         ),
     },
     {
@@ -184,7 +188,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/vente/rapport/vente`);
+      const { data } = await axios.get(`${DOMAIN}/api/vente/rapportClient/venteClient`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {

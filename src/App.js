@@ -70,6 +70,7 @@ import ListeVariante from './pages/varianteProduit/listeVariante/ListeVariante';
 import RapportVenteAll from './pages/rapport/rapportVente/rapportVenteAll/RapportVenteAll';
 import RapportClient from './pages/rapport/rapportClient/RapportClient';
 import RapportClientVenteOne from './pages/rapport/rapportClient/RapportClientVenteOne';
+import RapportRevenu from './pages/rapport/rapportRevenu/RapportRevenu';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -352,6 +353,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/rapportClientOne',
           element: <RapportClientVenteOne/>
+        },
+        {
+          path: '/rapportRevenu',
+          element: <RapportRevenu/>
         },
         {
           path: '/rapportDachats',

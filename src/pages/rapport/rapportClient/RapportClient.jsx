@@ -130,17 +130,7 @@ const RapportClient = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'image',
-      dataIndex: 'img',
-      key: 'img',
-        render: (text, record) => (
-          <div className="userList">
-            <img src={record.img} alt="" className="userImg"  />
-          </div>
-          )
-    },
-    {
-      title: 'Categorie',
+      title: 'Nom client',
       dataIndex: 'nom_categorie',
       key: 'categorie',
       render: (categorie) => (
@@ -148,88 +138,27 @@ const columns = [
       ),
     },
     {
-      title: 'Marque',
-      dataIndex: 'nom_marque',
-      key: 'nom_marque',
-      render: (nom_marque) => (
-        <Tag color={'green'}>{nom_marque}</Tag>
+      title: 'Quantité',
+      dataIndex: 'quantite',
+      key: 'quantite',
+      render: (quantite) => (
+        <Tag color={'green'}>{quantite}</Tag>
       ),
     },
     {
-      title: 'Pointure',
-      dataIndex: 'taille',
-      key: 'taille',
-      render: (taille) => (
-        <Tag color={'blue'}>{taille}</Tag>
-      ),
-    },
-/*     {
-      title: 'Couleur',
-      dataIndex: 'description',
-      key: 'description',
-      render: (color) => {
-        let icon;
-        let iconColor;
-  
-        if (color === 'Rouge') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'red';
-        } else if (color === 'Noir') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'black';
-        } else if (color === 'Orange') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'orange';
-        } else if (color === 'Bleu') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'skyblue';
-        } else if (color === 'Chocolat') {
-          icon = <CheckCircleOutlined />;
-          iconColor = 'chocolate';
-        }
-  
-        return (
-          <span style={{ color: iconColor, display: 'flex', gap:'5px'}}>
-            {icon}
-            {color}
-          </span>
-        );
-      },
-    }, */
-/*     {
-      title: 'Taille',
-      dataIndex: 'pointure',
-      key: 'pointure',
-    }, */
-     {
-      title: 'Quantité vendue',
-      dataIndex: 'quantite_vendue',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
-      sortDirections: ['descend', 'ascend'],
-      render: (quantite_vendue) => (
-        <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
+      title: 'Montant',
+      dataIndex: 'Montant',
+      key: 'montant',
+      render: (montant) => (
+        <Tag color={'blue'}>{montant}</Tag>
       ),
     },
     {
-      title: 'Montant vendu',
-      dataIndex: 'montant_vendu',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
-      sortDirections: ['descend', 'ascend'],
-      render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'}>{montant_vendu}</Tag>
-      ),
-    },
-    {
-        title: 'Qté en stock',
-        dataIndex: 'quantite_en_stock',
-        key: 'quantite_en_stock',
-        sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
-        sortDirections: ['descend', 'ascend'],
-        width: "18%",
-        render: (quantite_en_stock) => (
-          <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
+        title: 'Montant',
+        dataIndex: 'Montant',
+        key: 'montant',
+        render: (montant) => (
+          <Tag color={'blue'}>{montant}</Tag>
         ),
     },
     {

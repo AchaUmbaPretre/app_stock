@@ -1,7 +1,6 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { Button, Space, Table, Popover,Tag, Input } from 'antd';
+import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
@@ -148,15 +147,17 @@ const columns = [
       ),
     },
     {
-      title: 'Montant de vente',
-      dataIndex: 'total_prix_vente',
-      key: 'total_prix_vente',
-      sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
-      sortDirections: ['descend', 'ascend'],
-      render: (total_prix_vente) => (
-        <Tag color={'blue'}>{total_prix_vente}</Tag>
-      ),
-    },
+        title: 'Montant de vente',
+        dataIndex: 'total_prix_vente',
+        key: 'total_prix_vente',
+        sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
+        sortDirections: ['descend', 'ascend'],
+        render: (total_prix_vente) => (
+          <Tag color="blue" icon={<DollarOutlined />}>
+            {total_prix_vente.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </Tag>
+        ),
+      },
     {
         title: 'Statut',
         dataIndex: 'statut',

@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
@@ -75,22 +75,27 @@ const Ventes = () => {
           dataIndex: 'total_prix_vente',
           key: 'total_prix_vente',
           sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
-            sortDirections: ['descend', 'ascend'],
-          render : (text,record)=>(
-              <Tag color={'green'}>{record.total_prix_vente}</Tag>
-          )
+          sortDirections: ['descend', 'ascend'],
+          render: (text, record) => (
+            <Tag color="green" icon={<DollarOutlined />}>
+              {record.total_prix_vente.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              })}
+            </Tag>
+          ),
         },
         {
-            title: 'Date',
-            dataIndex: 'date_vente',
-            key: 'date',
-            sorter: (a, b) => a.date_vente - b.date_vente,
-            sortDirections: ['descend', 'ascend'],
-            render: (text) => (
-              <span>
-                {format(new Date(text), 'dd-MM-yyyy')}
-              </span>
-            ),
+          title: 'Date',
+          dataIndex: 'date_vente',
+          key: 'date',
+          sorter: (a, b) => a.date_vente - b.date_vente,
+          sortDirections: ['descend', 'ascend'],
+          render: (text) => (
+            <Tag color="blue" icon={<CalendarOutlined />}>
+              {format(new Date(text), 'dd-MM-yyyy')}
+            </Tag>
+          ),
         },
         {
             title: 'Action',

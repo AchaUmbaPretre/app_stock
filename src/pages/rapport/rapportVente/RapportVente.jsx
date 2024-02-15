@@ -1,5 +1,5 @@
 import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
@@ -219,7 +219,9 @@ const columns = [
       sorter: (a, b) => a.montant_vendu - b.montant_vendu,
       sortDirections: ['descend', 'ascend'],
       render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'}>{montant_vendu}</Tag>
+        <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+          {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+        </Tag>
       ),
     },
     {

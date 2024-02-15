@@ -1,11 +1,13 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined,UserOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import { Button, Space, Table, Popover, Tag, Input } from 'antd';
+import { CalendarOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
+import moment from 'moment';
 /* import RapportVenteAllSelects from './RapportVenteAllSelects'; */
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
@@ -23,6 +25,7 @@ const RapportClientVenteOne = () => {
     const id = searchParams.get('client');
     const [open, setOpen] = useState(false);
     const [marqueName,setMarqueName] = useState('');
+    
 
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -133,6 +136,54 @@ const RapportClientVenteOne = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
+            title: 'image',
+            dataIndex: 'img',
+            key: 'image',
+            render: (text, record) => (
+              <div className="userList">
+                <img src={record.img} alt="" className="userImg"  />
+              </div>
+            )
+          },
+        {
+            title: 'Marque',
+            dataIndex: 'nom_marque',
+            key: 'nom_marque',
+            render: (nom_marque) => (
+              <Tag color={'blue'}>{nom_marque}</Tag>
+            ),
+          },
+          {
+            title: 'Livreur',
+            dataIndex: 'username',
+            key: 'username',
+            render: (username) => (
+              <Tag color="green" icon={<UserOutlined />}>
+                {username}
+              </Tag>
+            ),
+          },
+        {
+            title: 'Date',
+            dataIndex: 'date_vente',
+            key: 'date',
+            sorter: (a, b) => moment(a.date_vente) - moment(b.date_vente),
+            sortDirections: ['descend', 'ascend'],
+            render: (text) => (
+              <Tag icon={<CalendarOutlined />} color="blue">
+                {moment(text).format('DD-MM-yyyy')}
+              </Tag>
+            ),
+          },
+          {
+            title: 'Pointure',
+            dataIndex: 'pointure',
+            key: 'pointure',
+            render: (pointure) => (
+              <Tag color={'blue'}>{pointure}</Tag>
+            ),
+          },
+        {
           title: 'Quantité',
           dataIndex: 'total_varianteproduit',
           key: 'total_varianteproduit',
@@ -143,15 +194,17 @@ const RapportClientVenteOne = () => {
           ),
         },
         {
-          title: 'Montant de vente',
-          dataIndex: 'total_prix_vente',
-          key: 'total_prix_vente',
-          sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
-          sortDirections: ['descend', 'ascend'],
-          render: (total_prix_vente) => (
-            <Tag color={'blue'}>{total_prix_vente}</Tag>
-          ),
-        },
+            title: 'Montant de vente',
+            dataIndex: 'total_prix_vente',
+            key: 'total_prix_vente',
+            sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
+            sortDirections: ['descend', 'ascend'],
+            render: (total_prix_vente) => (
+              <Tag color="blue">
+                {total_prix_vente.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+              </Tag>
+            ),
+          },
         {
             title: 'Statut',
             dataIndex: 'statut',
@@ -159,21 +212,7 @@ const RapportClientVenteOne = () => {
             render: (statut) => (
               <Tag color={'blue'}>{statut}</Tag>
             ),
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (text, record) => (
-              
-            <Space size="middle">
-               <Popover title="Voir les détails" trigger="hover">
-                <Link to={`/rapportClientOne/${record.id_client}`}>
-                  <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                </Link>
-              </Popover>
-            </Space>
-          ),
-        },
+        }
     ];
 
 const HandOpen = () =>{

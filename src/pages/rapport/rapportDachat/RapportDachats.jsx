@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,CalendarOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm} from 'antd';
@@ -139,21 +139,40 @@ const columns = [
           )
     },
     {
-        title: 'Nom produit',
+        title: 'Description',
         dataIndex: 'nom_produit',
         key: 'nom_produit',
         ...getColumnSearchProps('nom_produit'),
+        render: (nom_produit) => (
+          <Tag color={'blue'}>{nom_produit}</Tag>
+        ),
     },
     {
-      title: "Montant total d'achats",
-      dataIndex: 'montant_total_achat',
-      key: 'montant_total_achat',
-      sorter: (a, b) => a.montant_total_achat - b.montant_total_achat,
+      title: 'Marque',
+      dataIndex: 'nom_marque',
+      key: 'marque',
+      render: (marque) => (
+        <Tag color={'blue'}>{marque}</Tag>
+      ),
+    },
+    {
+      title: 'Couleur',
+      dataIndex: 'description',
+      key: 'description',
+      render: (description) => (
+        <Tag color={'blue'}>{description}</Tag>
+      ),
+    },
+    {
+      title: "Prix",
+      dataIndex: 'prix',
+      key: 'prix',
+      sorter: (a, b) => a.prix - b.prix,
       sortDirections: ['descend', 'ascend'],
-      render: (montant_total_achat) => (
+      render: (prix) => (
         <span>
         <Tag color={'green'}>
-          {parseFloat(montant_total_achat).toLocaleString('fr-FR', {
+          {parseFloat(prix).toLocaleString('fr-FR', {
             style: 'currency',
             currency: 'USD',
           })}
@@ -163,23 +182,25 @@ const columns = [
       ),
     },
     {
-      title: 'Quantité achetée',
-      dataIndex: 'quantite_totale_achetee',
-      key: 'quantite_totale_achetee',
-      sorter: (a, b) => a.quantite_totale_achetee - b.quantite_totale_achetee,
+      title: 'Date',
+      dataIndex: 'created_at',
+      key: 'created_at',
+      sorter: (a, b) => a.created_at - b.created_at,
       sortDirections: ['descend', 'ascend'],
-      render: (quantite_totale_achetee) => (
-        <Tag color={quantite_totale_achetee > 0 ? 'green' : 'red'}>{quantite_totale_achetee}</Tag>
+      render: (text) => (
+        <Tag color="blue" icon={<CalendarOutlined />}>
+          {format(new Date(text), 'dd-MM-yyyy')}
+        </Tag>
       ),
     },
     {
         title: 'Qté en stock',
-        dataIndex: 'quantite_en_stock',
-        key: 'quantite_en_stock',
-        sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
+        dataIndex: 'stock',
+        key: 'stock',
+        sorter: (a, b) => a.stock - b.stock,
         sortDirections: ['descend', 'ascend'],
-        render: (quantite_en_stock) => (
-          <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
+        render: (stock) => (
+          <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
         ),
       }
 ];
@@ -191,7 +212,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportDachats`);
+      const { data } = await axios.get(`${DOMAIN}/api/vente/rapportAchats/achats`);
       setGetRapportDachat(data);
       setLoading(false)
     } catch (error) {
@@ -202,7 +223,7 @@ useEffect(() => {
 }, []);
 
  const filteredData = getRapportDachat?.filter((item) =>
-item.nom_produit.toLowerCase().includes(searchValue.toLowerCase()))
+item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()))
 
   return (
     <>

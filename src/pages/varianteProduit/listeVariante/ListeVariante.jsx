@@ -83,55 +83,6 @@ const ListeVariante = () => {
           )
         },
         {
-          title: 'Couleur',
-          dataIndex: 'description',
-          key: 'description',
-          render: (text) => {
-            let tagColor;
-        
-            switch (text) {
-              case 'Jaune':
-                tagColor = 'yellow';
-                break;
-              case 'Rouge':
-                tagColor = 'red';
-                break;
-              case 'Noir':
-                tagColor = 'black';
-                break;
-              case 'Vert fluo':
-              case 'Vert':
-                tagColor = 'green';
-                break;
-              case 'Bleu':
-              case 'Bleu pic':
-                tagColor = 'blue';
-                break;
-              case 'Marron':
-              case 'Marron caramel':
-                tagColor = 'brown';
-                break;
-              case 'Orange':
-                tagColor = 'orangered';
-                break;
-              case 'Rose':
-              case 'Rose fuchsia':
-                tagColor = 'deeppink';
-                break;
-              case 'Beige':
-                tagColor = 'beige';
-                break;
-              case 'Gris':
-                tagColor = 'gray';
-                break;
-              default:
-                tagColor = 'default-color'; // Définir une couleur par défaut si aucun cas ne correspond
-            }
-        
-            return <Tag color={tagColor}>{text}</Tag>;
-          },
-        },
-        {
             title: 'Prix',
             dataIndex: 'prix',
             key: 'prix',

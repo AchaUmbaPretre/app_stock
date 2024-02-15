@@ -68,6 +68,7 @@ import Couleur from './pages/couleur/Couleur';
 import ClientForms from './pages/client/clientForm/clientForms';
 import ListeVariante from './pages/varianteProduit/listeVariante/ListeVariante';
 import RapportVenteAll from './pages/rapport/rapportVente/rapportVenteAll/RapportVenteAll';
+import RapportClient from './pages/rapport/rapportClient/RapportClient';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -342,6 +343,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/rapportVentesChart',
           element: <RapportVenteChart/>
+        },
+        {
+          path: '/rapportClient',
+          element: <RapportClient/>
         },
         {
           path: '/rapportDachats',

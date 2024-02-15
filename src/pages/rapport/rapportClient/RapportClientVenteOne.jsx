@@ -1,15 +1,15 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { Button, Space, Table, Popover, Tag, Input } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
+/* import RapportVenteAllSelects from './RapportVenteAllSelects'; */
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
-const RapportClient = () => {
+const RapportClientVenteOne = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -18,8 +18,11 @@ const RapportClient = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const navigate = useNavigate();
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const id = searchParams.get('client');
     const [open, setOpen] = useState(false);
+    const [marqueName,setMarqueName] = useState('');
 
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -127,76 +130,71 @@ const RapportClient = () => {
           ),
       });
     
-const columns = [
-    { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
-    {
-      title: 'Nom client',
-      dataIndex: 'nom_client',
-      key: 'nom_client',
-      render: (categorie) => (
-        <Tag color={'blue'}>{categorie}</Tag>
-      ),
-    },
-    {
-      title: 'Quantité',
-      dataIndex: 'total_varianteproduit',
-      key: 'total_varianteproduit',
-      sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
-      sortDirections: ['descend', 'ascend'],
-      render: (total_varianteproduit) => (
-        <Tag color={'green'}>{total_varianteproduit}</Tag>
-      ),
-    },
-    {
-      title: 'Montant de vente',
-      dataIndex: 'total_prix_vente',
-      key: 'total_prix_vente',
-      sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
-      sortDirections: ['descend', 'ascend'],
-      render: (total_prix_vente) => (
-        <Tag color={'blue'}>{total_prix_vente}</Tag>
-      ),
-    },
-    {
-        title: 'Statut',
-        dataIndex: 'statut',
-        key: 'statut',
-        render: (statut) => (
-          <Tag color={'blue'}>{statut}</Tag>
-        ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportClientOne?client=${record.id_client}`}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    },
-];
+      const columns = [
+        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
+        {
+          title: 'Quantité',
+          dataIndex: 'total_varianteproduit',
+          key: 'total_varianteproduit',
+          sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
+          sortDirections: ['descend', 'ascend'],
+          render: (total_varianteproduit) => (
+            <Tag color={'green'}>{total_varianteproduit}</Tag>
+          ),
+        },
+        {
+          title: 'Montant de vente',
+          dataIndex: 'total_prix_vente',
+          key: 'total_prix_vente',
+          sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
+          sortDirections: ['descend', 'ascend'],
+          render: (total_prix_vente) => (
+            <Tag color={'blue'}>{total_prix_vente}</Tag>
+          ),
+        },
+        {
+            title: 'Statut',
+            dataIndex: 'statut',
+            key: 'statut',
+            render: (statut) => (
+              <Tag color={'blue'}>{statut}</Tag>
+            ),
+        },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (text, record) => (
+              
+            <Space size="middle">
+               <Popover title="Voir les détails" trigger="hover">
+                <Link to={`/rapportClientOne/${record.id_client}`}>
+                  <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                </Link>
+              </Popover>
+            </Space>
+          ),
+        },
+    ];
 
 const HandOpen = () =>{
   setOpen(!open)
 }
 
 useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const { data } = await axios.get(`${DOMAIN}/api/vente/rapportClient/venteClient`);
-      setGetRapport(data);
-      setLoading(false)
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchData();
-}, [DOMAIN]);
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/vente/rapportClient/${id}`);
+        
+        setGetRapport(data);
+        setMarqueName(data[0]?.nom_client)
+        setLoading(false)
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN,id]);
 
  const filteredData = getRapport?.filter((item) =>
 item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -209,8 +207,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport de vente client</h2>
-                        <span>Gérez votre rapport de ventes client</span>
+                        <h2 className="product-h2">Rapport de ventes de Mmn {marqueName}</h2>
+                        <span>Gérez votre rapport de ventes de Mm {marqueName}</span>
                     </div>
                 </div>
                 <div className="product-bottom">
@@ -228,8 +226,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                   {/* {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> } */}
+{/*                     {open &&
+                    <RapportVenteAllSelects getProduits={setGetRapport} id={id}/> } */}
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
@@ -241,4 +239,4 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
   )
 }
 
-export default RapportClient
+export default RapportClientVenteOne

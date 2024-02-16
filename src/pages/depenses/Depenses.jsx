@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,PlusOutlined, FilePdfOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import axios from 'axios';
@@ -30,15 +30,20 @@ const Depenses = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'Livreur',
-          dataIndex: 'username',
-          key: 'username',
-          render : (text,record)=>(
-            <div>
-              <Tag color={'green'}>{text}</Tag>
-            </div>
-          )
-        },
+            title: 'Livreur',
+            dataIndex: 'username',
+            key: 'username',
+            render: (text, record) => (
+              <div>
+                <Tag color="green">
+                  <Space>
+                    <UserOutlined />
+                    {text}
+                  </Space>
+                </Tag>
+              </div>
+            )
+          },
         {
             title: 'Nom catégorie',
             dataIndex: 'nom_categorie',

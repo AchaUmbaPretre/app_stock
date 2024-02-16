@@ -61,17 +61,16 @@ const Depenses = () => {
               </Tag>
             ),
           },
-        {
-          title: 'Montant',
-          dataIndex: 'montant',
-          key: 'montant',
-          sorter: (a, b) => a.montant - b.montant,
-          sortDirections: ['descend', 'ascend'],
-          render : (text,record)=>(
-              <Tag color={'green'}>{record.montant}</Tag>
-          )
-        },
-
+          {
+            title: 'Montant',
+            dataIndex: 'montant',
+            key: 'montant',
+            sorter: (a, b) => a.montant - b.montant,
+            sortDirections: ['descend', 'ascend'],
+            render: (text, record) => (
+              <Tag color={'green'}>{record.montant} FC</Tag>
+            )
+          },
         {
           title: 'Description',
           dataIndex: 'description',

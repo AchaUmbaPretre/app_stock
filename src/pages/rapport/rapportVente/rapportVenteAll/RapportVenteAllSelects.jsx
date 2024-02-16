@@ -1,69 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../../config';
-import Select from 'react-select';
 import Swal from 'sweetalert2';
 
 const RapportVenteAllSelects = ({ getProduits,id }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [produit, setProduit] = useState([]);
   const [datas, setDatas] = useState({});
-  const [getCategorie, setGetCategorie] = useState([]);
-  const [getMarque, setGetMarque] = useState([]);
-
-  const handleInputChange = (e) => {
-    const fieldName = e.target.name;
-    const fieldValue = e.target.value;
-
-    let updatedValue = fieldValue;
-
-    if (fieldName === 'contact_email') {
-      updatedValue = fieldValue.toLowerCase();
-    } else if (Number.isNaN(Number(fieldValue))) {
-      updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-    }
-
-    setDatas((prev) => ({ ...prev, [fieldName]: updatedValue }));
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit`);
-        setProduit(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/categorie`);
-        setGetCategorie(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
-        setGetMarque(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
-
-  console.log(id)
 
   const handleClick = async (e) => {
     e.preventDefault();

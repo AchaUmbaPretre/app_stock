@@ -7,9 +7,7 @@ import Swal from 'sweetalert2';
 
 const RapportVenteSelects = ({ getProduits }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [produit, setProduit] = useState([]);
   const [datas, setDatas] = useState({});
-  const [getCategorie, setGetCategorie] = useState([]);
   const [getMarque, setGetMarque] = useState([]);
 
   const handleInputChange = (e) => {
@@ -27,29 +25,6 @@ const RapportVenteSelects = ({ getProduits }) => {
     setDatas((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit`);
-        setProduit(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/categorie`);
-        setGetCategorie(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {

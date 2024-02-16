@@ -124,13 +124,13 @@ const RowChart = () => {
     datasets: [
       {
         label: 'Ventes',
-        data: venteData, // Utilisez les données de vente récupérées depuis l'API
+        data: venteData,
         backgroundColor: 'rgba(255, 166, 0, 0.932)',
         stack: 'Stack 0',
       },
       {
         label: 'Achats',
-        data: achatsTotal, // Utilisez les données d'achats récupérées depuis l'API
+        data: achatsTotal,
         backgroundColor: 'rgb(131, 159, 241)',
         stack: 'Stack 0',
       },

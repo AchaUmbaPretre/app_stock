@@ -71,7 +71,7 @@ const RapportVenteAllSelects = ({ getProduits,id }) => {
     try {
   
       const { data } = await axios.get(
-        `${DOMAIN}/api/vente/rapport/venteAllSearch?id_marque=${id}&start_date=${datas.start_date}&end_date=${datas.end_date}`
+        `${DOMAIN}/api/rapport/rapport/venteAllSearch?id_marque=${id}&start_date=${datas.start_date}&end_date=${datas.end_date}`
       );
   
       getProduits(data);

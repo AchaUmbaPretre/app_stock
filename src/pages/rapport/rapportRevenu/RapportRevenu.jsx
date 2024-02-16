@@ -3,7 +3,6 @@ import { Button, Space, Table, Popover,Tag, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
@@ -198,7 +197,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/vente/rapportRevenu/revenu`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportRevenu/revenu`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {

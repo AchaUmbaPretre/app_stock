@@ -236,7 +236,7 @@ const HandOpen = () =>{
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/vente/rapport/venteAll/${id}`);
+        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteAll/${id}`);
         
         setGetRapport(data);
         setMarqueName(data[0]?.nom_marque)

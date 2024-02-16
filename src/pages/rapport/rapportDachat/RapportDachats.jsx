@@ -212,7 +212,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/vente/rapportAchats/achats`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportAchats/achats`);
       setGetRapportDachat(data);
       setLoading(false)
     } catch (error) {

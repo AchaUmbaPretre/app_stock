@@ -20,7 +20,7 @@ const Depenses = () => {
 
       const handleDelete = async (id) => {
       try {
-          await axios.delete(`${DOMAIN}/api/vente/${id}`);
+          await axios.delete(`${DOMAIN}/api/depenses/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
@@ -92,7 +92,7 @@ const Depenses = () => {
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id_vente)}
+                    onConfirm={() => handleDelete(record.id_depense)}
                     okText="Oui"
                     cancelText="Non"
                   >

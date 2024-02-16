@@ -125,7 +125,7 @@ const FormDepenses = () => {
                 <textarea name="description"  placeholder='Description.....' onChange={handleInputChange}></textarea>
               </div>
               <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick}>Modifier</button>
+                <button className="btn-submit" onClick={handleClick}>Envoyer</button>
                 <button className="btn-submit btn-annuler" onClick={()=> window.location.reload()}>Annuler</button>
                 {loading && (
                 <div className="loader-container loader-container-center">

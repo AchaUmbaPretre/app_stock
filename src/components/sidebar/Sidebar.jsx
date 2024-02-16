@@ -112,21 +112,6 @@ const Sidebar = () => {
             Liste des commandes
           </Link>
         </Item>
-{/*         <Item key="listeDetailCommande">
-          <Link to="/listeDetailCommande" className="sidebarLink">
-          Liste des détails des commandes
-          </Link>
-        </Item> */}
-{/*         <Item key="retour">
-          <Link to="/retour" className="sidebarLink">
-            Retour
-          </Link>
-        </Item>
-        <Item key="echange">
-          <Link to="/echange" className="sidebarLink">
-            Echange
-          </Link>
-        </Item> */}
       </SubMenu>
       <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<DollarCircleOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="ventes">

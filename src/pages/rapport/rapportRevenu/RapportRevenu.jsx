@@ -173,21 +173,7 @@ const columns = [
       {`$${revenu_moyen_par_vente}`}
     </Tag>
   ),
-},
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteAll/${record.id_marque}`}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    },
+}
 ];
 
 const HandOpen = () =>{

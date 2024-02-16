@@ -1,0 +1,160 @@
+.formCatDepense{
+    .product-container{
+        .product-container-top{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background: #fff;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            margin-bottom: 20px;
+            border-radius: 5px;
+            .product-left{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .product-h2{
+                    font-size: 1rem;
+                    color: rgb(1, 35, 138);
+
+                }
+                span{
+                    font-size: .8rem;
+                    color: #6d6c6c;
+                }
+            }
+        }
+       .product-wrapper{
+            background: #fff;
+            border-radius: 5px;
+        .product-container-bottom{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            .form-controle{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                label{
+                    font-size: .9rem;
+                    color: #797979;
+                }
+                .form-input{
+                    padding: 8px 10px;
+                    border: none;
+                    outline: none;
+                    border: 1px solid #c5c5c5;
+                    border-radius: 5px;
+                    &:focus{
+                        border: 1px solid rgba(36, 36, 250, 0.418);
+                    }
+                }
+                .form-radio{
+                    display: flex;
+                    gap: 6px;
+                }
+            }
+        }
+        .form-controle-desc{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            label{
+                margin-top: 20px;
+                font-size: .9rem;
+                color: #797979;
+            }
+            textarea{
+                padding: 10px;
+                border: none;
+                outline: none;
+                border: 1px solid #c5c5c5;
+                border-radius: 5px;
+                resize: none;
+                height: 120px;
+                &:focus{
+                    border: 1px solid rgba(36, 36, 250, 0.418);
+                }
+            }
+        }
+        .form-controleFile{
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            label{
+                font-size: .9rem;
+                color: #797979;
+                padding-bottom: 20px;
+            }
+            .form-file{
+                width: 100%;
+                border: 1px dashed #c5c5c5;
+                background: #f7f7f7;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                height:150px;
+                gap: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                &:focus{
+                    border: 1px solid rgba(36, 36, 250, 0.418);
+                }
+                label{
+                    font-size: .9rem;
+                    color: #797979;
+                }
+                .cloud-icon{
+                    color: rgba(14, 62, 204, 0.719);
+                    font-size: 2.8rem;
+                }
+                span{
+                    font-size: .9rem;
+                    color: #929292;
+                    letter-spacing: 1px;
+                }
+            }
+        }
+        .form-img{
+            height: 150px;
+            width: 150px;
+            border: 1px solid #c5c5c5;
+            position: relative;
+            overflow: hidden;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .capture-img{
+                height: 100%;
+            }
+        }
+        .form-submit{
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            .btn-submit{
+                padding: 15px 20px;
+                border: none;
+                color: #fff;
+                background:rgb(1, 35, 138);
+                border-radius: 5px;
+                cursor: pointer;
+                transition: .5s;
+                &:hover{
+                    background:rgb(2, 55, 214);
+                }
+            }
+            .btn-annuler{
+                background: #464444;
+                cursor: pointer;
+            }
+        }
+       }
+       
+    }
+}

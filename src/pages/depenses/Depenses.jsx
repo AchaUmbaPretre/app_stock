@@ -1,22 +1,20 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,PlusOutlined, FilePdfOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,PlusOutlined, FilePdfOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import config from '../../config';
-import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
+import FormDepenses from './FormDepenses';
+import config from '../../config';
+import moment from 'moment';
 
 const Depenses = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -33,8 +31,8 @@ const Depenses = () => {
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
           title: 'Livreur',
-          dataIndex: 'livreur',
-          key: 'livreur',
+          dataIndex: 'username',
+          key: 'username',
           render : (text,record)=>(
             <div>
               <Tag color={'green'}>{text}</Tag>
@@ -42,13 +40,27 @@ const Depenses = () => {
           )
         },
         {
-          title: 'Date',
-          dataIndex: 'date',
-          key: 'date',
-          render : (text,record)=>(
-              <Tag color={'blue'}>{record.date}</Tag>
-          )
-        },
+            title: 'Nom catégorie',
+            dataIndex: 'nom_categorie',
+            key: 'nom_categorie',
+            render : (text,record)=>(
+              <div>
+                <Tag color={'green'}>{text}</Tag>
+              </div>
+            )
+          },
+          {
+            title: 'Date',
+            dataIndex: 'date_depense',
+            key: 'date_depens',
+            sorter: (a, b) => moment(a.date_depense) - moment(b.date_depense),
+            sortDirections: ['descend', 'ascend'],
+            render: (text) => (
+              <Tag icon={<CalendarOutlined />} color="blue">
+                {moment(text).format('DD-MM-yyyy')}
+              </Tag>
+            ),
+          },
         {
           title: 'Montant',
           dataIndex: 'montant',
@@ -95,7 +107,7 @@ const Depenses = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -105,14 +117,13 @@ const Depenses = () => {
         fetchData();
       }, [DOMAIN]);
 
+
     const handleOk = async (e) => {
       setOpen(true)
-      setIdClient(e)
     };
 
   const filteredData = data?.filter((item) =>
-  item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+  item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (
@@ -124,7 +135,7 @@ const Depenses = () => {
                         <h2 className="product-h2">Liste de dépenses</h2>
                         <span>Gérer vos dépenses</span>
                     </div>
-                    <div className="product-right" onClick={() =>navigate('/productForm')}>
+                    <div className="product-right" onClick={handleOk}>
                         <PlusOutlined className='product-icon'/>
                         <span className="product-btn">Ajouter une nouvelle dépense</span>
                     </div>
@@ -145,6 +156,19 @@ const Depenses = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
+                    <Modal
+                          centered
+                          title='Ajouter une catégorie de dépenses'
+                          open={open}
+                          onCancel={() => {
+                            setOpen(false)
+                          }}
+                          width={650}
+                          footer={[
+                          ]}
+                        >
+                            <FormDepenses/>
+                        </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>

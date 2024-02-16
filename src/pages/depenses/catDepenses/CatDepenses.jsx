@@ -16,13 +16,12 @@ const CatDepenses = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
 
       const handleDelete = async (id) => {
       try {
-          await axios.delete(`${DOMAIN}/api/vente/${id}`);
+          await axios.delete(`${DOMAIN}/api/depenses/catDepenses/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
@@ -33,11 +32,11 @@ const CatDepenses = () => {
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
           title: 'Nom de categorie',
-          dataIndex: 'nom_categorie',
+          dataIndex: 'nom',
           key: 'nom_categorie',
           render : (text,record)=>(
             <div>
-              <Tag color={'green'}>{text}</Tag>
+              <Tag color={'blue'}>{text}</Tag>
             </div>
           )
         },
@@ -46,7 +45,7 @@ const CatDepenses = () => {
           dataIndex: 'description',
           key: 'description',
           render : (text,record)=>(
-              <Tag color={'green'}>{text}</Tag>
+              <Tag color={'blue'}>{text}</Tag>
           )
         },
         {
@@ -58,7 +57,7 @@ const CatDepenses = () => {
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id_vente)}
+                    onConfirm={() => handleDelete(record.id_catDepense)}
                     okText="Oui"
                     cancelText="Non"
                   >
@@ -73,7 +72,7 @@ const CatDepenses = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/catDepenses`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -82,14 +81,14 @@ const CatDepenses = () => {
         };
         fetchData();
       }, [DOMAIN]);
+      
 
     const handleOk = async (e) => {
       setOpen(true)
     };
 
   const filteredData = data?.filter((item) =>
-  item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+  item.nom?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (
@@ -98,8 +97,8 @@ const CatDepenses = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de dépenses</h2>
-                        <span>Gérer vos dépenses</span>
+                        <h2 className="product-h2">Liste de categorie de dépenses</h2>
+                        <span>Gérer vos categorie de dépenses</span>
                     </div>
                     <div className="product-right" onClick={handleOk}>
                         <PlusOutlined className='product-icon'/>

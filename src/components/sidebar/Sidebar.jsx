@@ -6,7 +6,9 @@ import {
   FileTextOutlined,
   LogoutOutlined,
   DollarCircleOutlined,
-  AppstoreOutlined 
+  AppstoreOutlined,
+  CreditCardOutlined,
+  CarOutlined
 } from '@ant-design/icons';
 import { HomeOutlined} from '@mui/icons-material';
 import './sidebar.css'
@@ -138,7 +140,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<ShoppingCartOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
+      <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<CarOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="livraison">
           <Link to="/livraison" className="sidebarLink">
             Livraison
@@ -167,7 +169,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<FileTextOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
+      <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<CreditCardOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="depenses">
           <Link to="/depenses" className="sidebarLink">
             Dépenses

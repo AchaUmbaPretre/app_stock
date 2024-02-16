@@ -87,12 +87,12 @@ const RowTotal = () => {
                     </div>
                 </div>
                 <div className="rowTotal">
-                    <div className="rowTotal-left" style={{background : 'rgba(0, 128, 0, 0.164)'}}>
-                        <VerticalAlignTopOutlined className='rowTotalIcon' style={{color: 'green'}}/>
+                    <div className="rowTotal-left" style={{background : 'rgba(255, 0, 0, 0.164)'}}>
+                        <VerticalAlignTopOutlined className='rowTotalIcon' style={{color: 'red'}}/>
                     </div>
                     <div className="rowTotal-right">
                         <h2><CountUp end={venteTotal}/>$</h2>
-                        <span className="rowTotal-span">Montant total de la vente</span>
+                        <span className="rowTotal-span">Montant total des dépenses</span>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ li{
 }
 .appOutlet{
     position: relative;
-    background: #f2f2f2;
+    background: #fafafa;
     flex: 8;
     overflow: hidden;
 }

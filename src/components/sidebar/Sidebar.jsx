@@ -137,16 +137,6 @@ const Sidebar = () => {
             Mouvement
           </Link>
         </Item>
-        {/* <Item key="retour">
-          <Link to="/retour" className="sidebarLink">
-            Retour
-          </Link>
-        </Item>
-        <Item key="echange">
-          <Link to="/echange" className="sidebarLink">
-            Echange
-          </Link>
-        </Item> */}
       </SubMenu>
       <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<ShoppingCartOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="livraison">
@@ -183,8 +173,8 @@ const Sidebar = () => {
             Dépenses
           </Link>
         </Item>
-        <Item key="categorieDepenses">
-          <Link to="/categorieDepenses" className="sidebarLink">
+        <Item key="catDepenses">
+          <Link to="/catDepenses" className="sidebarLink">
             Categorie de dépenses
           </Link>
         </Item>

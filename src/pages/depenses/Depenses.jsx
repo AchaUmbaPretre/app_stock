@@ -1,8 +1,8 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,PlusOutlined, FilePdfOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 
 const Depenses = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
@@ -122,6 +123,10 @@ const Depenses = () => {
                     <div className="product-left">
                         <h2 className="product-h2">Liste de dépenses</h2>
                         <span>Gérer vos dépenses</span>
+                    </div>
+                    <div className="product-right" onClick={() =>navigate('/productForm')}>
+                        <PlusOutlined className='product-icon'/>
+                        <span className="product-btn">Ajouter une nouvelle dépense</span>
                     </div>
                 </div>
                 <div className="product-bottom">

@@ -72,6 +72,7 @@ import RapportClient from './pages/rapport/rapportClient/RapportClient';
 import RapportClientVenteOne from './pages/rapport/rapportClient/RapportClientVenteOne';
 import RapportRevenu from './pages/rapport/rapportRevenu/RapportRevenu';
 import Depenses from './pages/depenses/Depenses';
+import CatDepenses from './pages/depenses/catDepenses/CatDepenses';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -338,6 +339,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/depenses',
           element: <Depenses/>
+        },
+        {
+          path: '/catDepenses',
+          element: <CatDepenses/>
         },
         {
           path: '/rapportVente',

@@ -6,6 +6,7 @@ import axios from 'axios';
 import config from '../../../config';
 import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
+import FormCatDepense from './FormCatDepense';
 
 const CatDepenses = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -84,7 +85,6 @@ const CatDepenses = () => {
 
     const handleOk = async (e) => {
       setOpen(true)
-      setIdClient(e)
     };
 
   const filteredData = data?.filter((item) =>
@@ -101,7 +101,7 @@ const CatDepenses = () => {
                         <h2 className="product-h2">Liste de dépenses</h2>
                         <span>Gérer vos dépenses</span>
                     </div>
-                    <div className="product-right" onClick={() =>navigate('/productForm')}>
+                    <div className="product-right" onClick={handleOk}>
                         <PlusOutlined className='product-icon'/>
                         <span className="product-btn">Ajouter une nouvelle dépense</span>
                     </div>
@@ -122,6 +122,19 @@ const CatDepenses = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
+                        <Modal
+                          centered
+                          title='Ajouter une catégorie de dépenses'
+                          open={open}
+                          onCancel={() => {
+                            setOpen(false)
+                          }}
+                          width={600}
+                          footer={[
+                          ]}
+                        >
+                            <FormCatDepense/>
+                        </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>

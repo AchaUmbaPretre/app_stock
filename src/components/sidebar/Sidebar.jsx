@@ -177,7 +177,18 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-
+      <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<FileTextOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
+        <Item key="depenses">
+          <Link to="/depenses" className="sidebarLink">
+            Dépenses
+          </Link>
+        </Item>
+        <Item key="categorieDepenses">
+          <Link to="/categorieDepenses" className="sidebarLink">
+            Categorie de dépenses
+          </Link>
+        </Item>
+      </SubMenu>
       <SubMenu key="reports" title={<span className="sidebarH3">Rapports</span>} icon={<FileTextOutlined style={{ fontSize: '19px', color: '#fafafa' }}/>}>
         <Item key="rapportVente">
           <Link to="/rapportVente" className="sidebarLink">

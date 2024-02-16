@@ -71,6 +71,7 @@ import RapportVenteAll from './pages/rapport/rapportVente/rapportVenteAll/Rappor
 import RapportClient from './pages/rapport/rapportClient/RapportClient';
 import RapportClientVenteOne from './pages/rapport/rapportClient/RapportClientVenteOne';
 import RapportRevenu from './pages/rapport/rapportRevenu/RapportRevenu';
+import Depenses from './pages/depenses/Depenses';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -333,6 +334,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/utilisateurEdit/:id',
           element: <UtilisateurEdit/>
+        },
+        {
+          path: '/depenses',
+          element: <Depenses/>
         },
         {
           path: '/rapportVente',

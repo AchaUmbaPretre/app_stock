@@ -33,9 +33,10 @@ const ProductView = () => {
     const [selectedData, setSelectedData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variantExists, setVariantExists] = useState(false);
+    const [imagePreview, setImagePreview] = useState('');
 
     
-    const handleInputChange = async (e) => {
+/*     const handleInputChange = async (e) => {
       const fieldName = e.target.name;
       const fieldValue = e.target.value;
     
@@ -72,9 +73,47 @@ const ProductView = () => {
         setVariantExists(exists);
       }
       setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+    }; */
+
+
+    const handleInputChange = (e) => {
+      const fieldName = e.target.name;
+      const fieldValue = e.target.value;
+    
+      let updatedValue = fieldValue;
+      let file = null;
+      
+      if (fieldName === "img") {
+        file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          setImagePreview('');
+        }
+        updatedValue = file;
+      } else if (fieldName === "contact_email") {
+        updatedValue = fieldValue.toLowerCase();
+      } else if (Number.isNaN(Number(fieldValue))) {
+        if (typeof fieldValue === "string" && fieldValue.length > 0) {
+          updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+        }
+      }
+    
+      // Vérifier si la variante existe déjà
+      if (fieldName === "code_variant") {
+        const exists = variantCheck.some(
+          (variant) => variant.code_variant.toLowerCase() === fieldValue.toLowerCase()
+        );
+        setVariantExists(exists);
+      }
+      setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
     };
 
-
+    
       const handleCheckboxChange = (id) => {
         const selectedRecord = getTaille?.find((record) => record.id_taille === id);
         if (selectedIds.includes(id)) {
@@ -194,6 +233,7 @@ const ProductView = () => {
                 className='input-stock'
                 onChange={(e) => handleStockChange(e, record.id_taille)}
                 disabled = {selectedRecord ? false : true}
+                min={0}
               />
             );
           }
@@ -225,7 +265,7 @@ const ProductView = () => {
         },
       ];
 
-      const handleClick = async (e) => {
+/*       const handleClick = async (e) => {
         e.preventDefault();
       
         if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
@@ -255,6 +295,69 @@ const ProductView = () => {
                 })
               )
             );
+      
+            Swal.fire({
+              title: 'Succès',
+              text: 'Produit créé avec succès !',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            });
+      
+            navigate('/varianteProduit');
+            window.location.reload();
+          } catch (err) {
+            Swal.fire({
+              title: 'Erreur',
+              text: err.message,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } finally {
+            setIsLoading(false);
+          }
+        } else {
+          console.error('idTaille is not an array');
+        }
+      }; */
+
+      const handleClick = async (e) => {
+        e.preventDefault();
+      
+        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
+          Swal.fire({
+            title: 'Erreur',
+            text: 'Veuillez remplir tous les champs requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
+      
+        if (Array.isArray(selectedData) && selectedData.length > 0) {
+          try {
+            setIsLoading(true);
+      
+            const requests = selectedData.map((item) => {
+              const formData = new FormData();
+              formData.append('id_pays', data.id_pays);
+              formData.append('id_couleur', data.id_couleur);
+              formData.append('code_variant', data.code_variant);
+              formData.append('img', data.img);
+              formData.append('id_produit', id);
+              formData.append('id_cible', item.id_cible);
+              formData.append('id_taille', item.id_taille);
+              formData.append('id_famille', item.id_famille);
+              formData.append('stock', item.stock);
+              formData.append('prix', prix);
+      
+              return axios.post(`${DOMAIN}/api/produit/varianteProduit`, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+            });
+      
+            await Promise.all(requests);
       
             Swal.fire({
               title: 'Succès',
@@ -374,14 +477,14 @@ const ProductView = () => {
                     <div className="product-view-right">
                         <h2 className="product-h2">L'image</h2>
                         <div className="product-img-row">
-                            {data.img ? (
+                            {data.img || imagePreview ? (
                             <div>
                                 <Image
                                     className="product-img"
                                     width={200}
                                     height={200}
                                     src="error"
-                                    fallback={data?.img}
+                                    fallback={imagePreview || data.img}
                                 />
                             </div>
                             ) : (

@@ -47,7 +47,7 @@ const ListeVariante = () => {
             key: 'image',
             render: (text, record) => (
               <div className="userList">
-                <img src={record.img} alt="" className="userImg"  />
+                <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
               </div>
             )
         },
@@ -140,8 +140,21 @@ const ListeVariante = () => {
         fetchData();
       }, [DOMAIN]);
 
+      const groupedData = Object.values(
+        data.reduce((acc, item) => {
+          const { code_variant, ...rest } = item;
+          if (acc[code_variant]) {
+            Object.assign(acc[code_variant], { data: [...acc[code_variant].data, rest] });
+          } else {
+            acc[code_variant] = { code_variant, data: [rest] };
+          }
+          return acc;
+        }, {})
+      );
+      const firstDataArray = groupedData.map(obj => obj.data[0]);
 
-    const filteredData = data?.filter((item) =>
+
+    const filteredData = firstDataArray?.filter((item) =>
       item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
     );

@@ -88,7 +88,7 @@ const PageDetails = () => {
                     <div className="pageDetail-left">
                     { result?.map((dd)=>(
                       <div style={{position: 'relative', width:"400px"}}>
-                        <img src={dd?.img} alt="" className="pageDetail-img" /> 
+                        <img src={`${DOMAIN}${dd.img}`} alt="" className="pageDetail-img" /> 
                       </div> ))}
                         
                         <div className="pageDetail-left-wrapper" id='description'>

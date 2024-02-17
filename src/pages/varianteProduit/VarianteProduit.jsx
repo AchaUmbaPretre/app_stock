@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import Select from 'react-select';
 import './varianteProduit.scss'
 import {FilterOutlined,SearchOutlined} from '@ant-design/icons';
-import config from '../../config'
+import config from '../../config';
 import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
 
@@ -29,7 +29,19 @@ const VarianteProduit = () => {
     const totalPages = Math.ceil(data.length / itemsPerPage);
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentData = data.slice(startIndex, endIndex);
+    const groupedData = Object.values(
+      data.reduce((acc, item) => {
+        const { code_variant, ...rest } = item;
+        if (acc[code_variant]) {
+          Object.assign(acc[code_variant], { data: [...acc[code_variant].data, rest] });
+        } else {
+          acc[code_variant] = { code_variant, data: [rest] };
+        }
+        return acc;
+      }, {})
+    );
+    const firstDataArray = groupedData.map(obj => obj.data[0]);
+    const currentData = firstDataArray?.slice(startIndex, endIndex);
 
     const handlePageChange = (selectedPage) => {
       setCurrentPage(selectedPage.selected);
@@ -153,6 +165,8 @@ const VarianteProduit = () => {
       
         fetchData();
       }, [DOMAIN, famille]);
+    
+      
       
   return (
     <>
@@ -242,7 +256,7 @@ const VarianteProduit = () => {
                         currentData?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id} onClick={()=>navigate(`/pageDetail/${dd.id_varianteProduit}`)}>
                           <div className="cercle"></div>
-                          <img src={dd.img} alt="" className="variante-img" />
+                          <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                           <div className="info-products">
                               <Link to={`/pageDetail/${dd.id_varianteProduit}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>

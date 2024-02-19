@@ -274,7 +274,7 @@ const Commande = () => {
                         currentData?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
                           <div className="cercle"></div>
-                          <img src={dd.img} alt="" className="variante-img" />
+                          <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                           <div className="info-products">
                             <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
                               <Link onClick={()=> showModal(dd.id_varianteProduit,id)}>

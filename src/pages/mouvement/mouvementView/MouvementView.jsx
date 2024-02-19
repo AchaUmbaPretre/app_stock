@@ -150,7 +150,7 @@ const MouvementView = () => {
           key: 'image',
           render: (text, record) => (
             <div className="userList">
-              <img src={record.img} alt="" className="userImg"  />
+              <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
             </div>
           )
         },

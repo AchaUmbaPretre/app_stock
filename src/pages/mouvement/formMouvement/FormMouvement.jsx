@@ -15,7 +15,6 @@ const FormMouvement = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState({});
     const [client, setClient] = useState([]);
-    const [livreur, setLivreur] = useState([]);
     const [produit, setProduit] = useState([]);
     const [typeMouvement, setTypeMouvement] = useState([]);
     const [variante, setVariante] = useState([]);
@@ -72,8 +71,6 @@ const FormMouvement = () => {
         setIdVariante(data.id_produit)
 
       },[data.id_produit])
-
-      console.log(data)
 
 
       useEffect(() => {

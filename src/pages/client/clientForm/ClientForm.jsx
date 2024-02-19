@@ -35,7 +35,7 @@ const ClientForm = () => {
     e.preventDefault();
 
     
-     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province || !data.avenue || !data.quartier) {
+     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',

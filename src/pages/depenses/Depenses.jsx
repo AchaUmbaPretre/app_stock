@@ -162,7 +162,7 @@ const Depenses = () => {
                     <div className="rowChart-row-table">
                     <Modal
                           centered
-                          title='Ajouter une catégorie de dépenses'
+                          title='Ajouter une dépense'
                           open={open}
                           onCancel={() => {
                             setOpen(false)

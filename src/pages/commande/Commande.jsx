@@ -32,7 +32,7 @@ const Commande = () => {
     const [idCommande, setIdCommande] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 18;
+    const itemsPerPage = 12;
     const totalPages = Math.ceil(data.length / itemsPerPage);
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;

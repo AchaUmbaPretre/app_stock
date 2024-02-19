@@ -138,7 +138,7 @@ const RowProduit = () => {
       key: 'img',
       render: (text, record) => (
         <div className="userList" onClick={()=>navigate(`/pageDetail/${record.id_varianteProduit}`)}>
-          <img src={`http://localhost:8080${record.img}`} alt="" className="userImg"  />
+          <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
         </div>
       )
     },

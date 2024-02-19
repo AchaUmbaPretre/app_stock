@@ -165,8 +165,6 @@ const VarianteProduit = () => {
       
         fetchData();
       }, [DOMAIN, famille]);
-    
-      
       
   return (
     <>

@@ -121,6 +121,9 @@ li{
   background-color: #36d7b7;
   color: #fff;
 }
+.pointer-cursor {
+  cursor: pointer;
+}
 
 .loader-container {
   display: flex;

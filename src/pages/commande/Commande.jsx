@@ -32,11 +32,23 @@ const Commande = () => {
     const [idCommande, setIdCommande] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
+    const groupedData = Object.values(
+      data.reduce((acc, item) => {
+        const { code_variant, ...rest } = item;
+        if (acc[code_variant]) {
+          Object.assign(acc[code_variant], { data: [...acc[code_variant].data, rest] });
+        } else {
+          acc[code_variant] = { code_variant, data: [rest] };
+        }
+        return acc;
+      }, {})
+    );
     const itemsPerPage = 12;
-    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const totalPages = Math.ceil(groupedData.length / itemsPerPage);
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentData = data.slice(startIndex, endIndex);
+    const firstDataArray = groupedData.map(obj => obj.data[0]);
+    const currentData = firstDataArray?.slice(startIndex, endIndex);
 
       const handlePageChange = (selectedPage) => {
         setCurrentPage(selectedPage.selected);

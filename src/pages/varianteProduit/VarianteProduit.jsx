@@ -25,10 +25,6 @@ const VarianteProduit = () => {
     const [taille, setTaille] = useState(null);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 12;
-    const totalPages = Math.ceil(data.length / itemsPerPage);
-    const startIndex = currentPage * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
     const groupedData = Object.values(
       data.reduce((acc, item) => {
         const { code_variant, ...rest } = item;
@@ -40,6 +36,10 @@ const VarianteProduit = () => {
         return acc;
       }, {})
     );
+    const itemsPerPage = 12;
+    const totalPages = Math.ceil(groupedData.length / itemsPerPage);
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
     const firstDataArray = groupedData.map(obj => obj.data[0]);
     const currentData = firstDataArray?.slice(startIndex, endIndex);
 
@@ -272,6 +272,7 @@ const VarianteProduit = () => {
                         nextLabel={'Suivant'}
                         containerClassName={'pagination'}
                         activeClassName={'active'}
+                        itemClass={'pointer-cursor'}
                       /> }
                     </div>
                 </div>

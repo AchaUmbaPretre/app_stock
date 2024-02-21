@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { Image, Rate } from 'antd'
 import Swal from 'sweetalert2'
+import { CircularProgress } from '@mui/material'
 
 
 const DetailProduitCommande = ({idVariant, idCommande}) => {
@@ -30,7 +31,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
     const [idVarianteProduit, setIdVarianteProduit] = useState([]);
     const [stock, setStock] = useState([]);
     const [getCommande, setGetCommande] = useState([]);
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const userId = useSelector((state) => state.user.currentUser.id)
 
         useEffect(() => {
@@ -163,6 +164,9 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
           confirmButtonText: 'OK',
         });
       }
+      finally {
+        setIsLoading(false);
+      }
     }
       
   return (
@@ -189,7 +193,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                 <div className="detail-container-bottom">
                     <div className="detail-container-rows">
                         <div className="detail-bottom-left">
-                        <Image src={dd.img} alt="" className="detail-bottom-img" />
+                        <Image src={`${DOMAIN}${dd.img}`} alt="" className="detail-bottom-img" />
                         </div>
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">{dd?.nom_produit}</h1>
@@ -228,6 +232,11 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                                     {taille && quantite > stock && <div style={{color:'red', fontSize:"12px"}}>Il ya que {stock} dans le stock pour cette pointure</div>}
                                     <div className="filter">
                                         <button className="filter-btn" onClick={handleClick} disabled={taille && quantite > stock ? true : false}>Ajouter au panier</button>
+                                        {isLoading && (
+                                            <div className="loader-container loader-container-center">
+                                              <CircularProgress size={28} />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>

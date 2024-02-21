@@ -35,7 +35,7 @@ const PageLivreurDetail = () => {
               </div>
             ) : (
         <div className="pageLivreurDetail-wrapper">
-          <img src={data.img} alt="" className="img-page-livreur" />
+          <img src={`${DOMAIN}${data.img}`} alt="" className="img-page-livreur" />
           <div className="pageLivreurDetail-rows">
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Créer par </span>{data.username}</span>
             <span className="pageLivreur-name"><span className='pageLivreur-sous-nom'>Marque : </span>{data.nom}</span>

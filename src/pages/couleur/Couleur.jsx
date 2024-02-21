@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
 import Swal from 'sweetalert2';
+import { CircularProgress } from '@mui/material';
 
 const Couleur = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -13,12 +14,12 @@ const Couleur = () => {
     const [getdata, setGetData] = useState([]);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
     const [putEmplacement, setPutEmplacement] = useState({});
     const {pathname} = useLocation();
     const [searchValue, setSearchValue] = useState('');
     const id = pathname.split('/')[2]
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const showModal = (id) => {
       setOpen(true);
@@ -129,7 +130,15 @@ const Couleur = () => {
           window.location.reload();
         
       } catch (error) {
-        
+        Swal.fire({
+          title: 'Error',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      }
+      finally {
+        setIsLoading(false);
       }
     }
 
@@ -155,6 +164,11 @@ const Couleur = () => {
                             <input type="text" className="input-form" name='description' placeholder='Entrer le nom de couleur...' onChange={handleInputChange} />
                         </div>
                         <button className="categorie-btn" onClick={handleClick} >Envoyer</button>
+                        {isLoading && (
+                            <div className="loader-container loader-container-center">
+                              <CircularProgress size={28} />
+                            </div>
+                        )}
                     </div>
                     <div className="categorie-container-right">
                         <div className="categorie-right-top">

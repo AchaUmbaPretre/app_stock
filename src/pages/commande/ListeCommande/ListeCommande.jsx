@@ -119,7 +119,7 @@ const ListeCommande = () => {
             );
           },
         },
-        {
+/*         {
           title: 'Paiement',
           dataIndex: 'id_paiement',
           key: 'id_paiement',
@@ -142,7 +142,7 @@ const ListeCommande = () => {
               </Tag>
             );
           },
-        },
+        }, */
         {
             title: 'Shop',
             dataIndex: 'id_shop',

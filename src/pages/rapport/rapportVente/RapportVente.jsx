@@ -1,5 +1,6 @@
 import './rapportVente.scss'
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
@@ -278,8 +279,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport des ventes par client</h2>
-                        <span>Gérez votre rapport de ventes par client</span>
+                        <h2 className="product-h2">Rapport des ventes</h2>
+                        <span>Gérez votre rapport des ventes</span>
                     </div>
                 </div>
                 <div className="product-bottom">

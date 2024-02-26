@@ -210,7 +210,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport de vente client</h2>
+                        <h2 className="product-h2">Rapport des ventes par client</h2>
                         <span>Gérez votre rapport de ventes client</span>
                     </div>
                 </div>

@@ -280,7 +280,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                     {open &&
                     <RapportVenteAllSelects getProduits={setGetRapport} id={id}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

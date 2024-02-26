@@ -1,7 +1,7 @@
 import './rapportVente.scss'
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Input, Image } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
@@ -135,11 +135,15 @@ const columns = [
       title: 'image',
       dataIndex: 'img',
       key: 'img',
-        render: (text, record) => (
-          <div className="userList">
-            <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
-          </div>
-          )
+      render: (text, record) => (
+        <div className="userList">
+          <Image
+            className="userImg"
+            src="error"
+            fallback={`${DOMAIN}${record.img}`}
+          />
+        </div>
+      ),
     },
     {
       title: 'Marque',

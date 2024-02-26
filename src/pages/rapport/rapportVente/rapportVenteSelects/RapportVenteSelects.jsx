@@ -97,6 +97,7 @@ const RapportVenteSelects = ({ getProduits }) => {
             style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
             onChange={handleStartDateChange}
           />
+          à
           <input
             type="date"
             className="product-input-select"

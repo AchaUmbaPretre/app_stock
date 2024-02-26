@@ -239,7 +239,6 @@ const columns = [
       key: 'quantite_en_stock',
       sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
       sortDirections: ['descend', 'ascend'],
-      width: "18%",
       render: (quantite_en_stock) => (
         <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
       ),

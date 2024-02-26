@@ -3,7 +3,6 @@ import { Button, Space, Table, Popover,Tag, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteSelects from './../rapportVenteSelects/RapportVenteSelects';
@@ -17,7 +16,6 @@ const RapportVenteMarque = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
 

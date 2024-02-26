@@ -73,6 +73,7 @@ import RapportClientVenteOne from './pages/rapport/rapportClient/RapportClientVe
 import RapportRevenu from './pages/rapport/rapportRevenu/RapportRevenu';
 import Depenses from './pages/depenses/Depenses';
 import CatDepenses from './pages/depenses/catDepenses/CatDepenses';
+import RapportVenteMarque from './pages/rapport/rapportVente/rapportVenteMarque/RapportVenteMarque';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -355,6 +356,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/rapportVentesChart',
           element: <RapportVenteChart/>
+        },
+        {
+          path: '/rapportVenteMarque',
+          element: <RapportVenteMarque/>
         },
         {
           path: '/rapportClient',

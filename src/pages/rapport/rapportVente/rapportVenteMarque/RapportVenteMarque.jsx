@@ -1,16 +1,14 @@
-import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { Button, Space, Table, Popover,Tag, Input } from 'antd';
+import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import config from '../../../config';
-import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
+import config from '../../../../config';
+import RapportVenteSelects from './../rapportVenteSelects/RapportVenteSelects';
 
-const RapportVente = () => {
+const RapportVenteMarque = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -236,4 +234,4 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
   )
 }
 
-export default RapportVente
+export default RapportVenteMarque

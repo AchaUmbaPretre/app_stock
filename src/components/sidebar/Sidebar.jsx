@@ -172,6 +172,11 @@ const Sidebar = () => {
             Rapport des ventes
           </Link>
         </Item>
+        <Item key="rapportVenteMarque">
+          <Link to="/rapportVenteMarque" className="sidebarLink">
+            Rapport des ventes marques
+          </Link>
+        </Item>
         <Item key="rapportClient">
           <Link to="/rapportClient" className="sidebarLink">
             Rapport des clients

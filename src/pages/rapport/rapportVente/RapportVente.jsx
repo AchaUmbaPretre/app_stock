@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
+import moment from 'moment';
 
 const RapportVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -131,6 +132,16 @@ const RapportVente = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
+      title: 'image',
+      dataIndex: 'img',
+      key: 'img',
+        render: (text, record) => (
+          <div className="userList">
+            <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
+          </div>
+          )
+    },
+    {
       title: 'Marque',
       dataIndex: 'nom_marque',
       key: 'nom_marque',
@@ -138,6 +149,64 @@ const columns = [
         <Tag color={'blue'}>{nom_marque}</Tag>
       ),
     },
+    {
+      title: 'Categorie',
+      dataIndex: 'nom_categorie',
+      key: 'categorie',
+      render: (categorie) => (
+        <Tag color={'blue'}>{categorie}</Tag>
+      ),
+    },
+    {
+      title: 'Pointure',
+      dataIndex: 'taille',
+      key: 'taille',
+      render: (taille) => (
+        <Tag color={'blue'}>{taille}</Tag>
+      ),
+    },
+    {
+        title: 'Couleur',
+        dataIndex: 'description',
+        key: 'description',
+        render: (color) => {
+          let tagColor;
+      
+          if (color === 'Rouge') {
+            tagColor = 'red';
+          } else if (color === 'Noir') {
+            tagColor = 'black';
+          } else if (color === 'Orange') {
+            tagColor = 'orange';
+          } else if (color === 'Bleu') {
+            tagColor = 'skyblue';
+          } else if (color === 'Chocolat') {
+            tagColor = 'chocolate';
+          } else if (color === 'Vert fluo') {
+            tagColor = 'lime';
+          } else if (color === 'Rose fuchsia') {
+            tagColor = 'hotpink';
+          } else if (color === 'Beige saumon') {
+            tagColor = 'burlywood';
+          }
+      
+          return (
+            <Tag color={tagColor}>{color}</Tag>
+          );
+        },
+      },
+      {
+        title: "Date",
+        dataIndex: 'date_vente',
+        key: 'date',
+        sorter: (a, b) => moment(a.date_vente).unix() - moment(b.date_vente).unix(),
+        sortDirections: ['descend', 'ascend'],
+        render: (text) => (
+          <Tag color={'blue'}>
+            {moment(text).format('DD-MM-yyyy')}
+          </Tag>
+        ),
+      },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
@@ -161,6 +230,17 @@ const columns = [
       ),
     },
     {
+      title: 'Qté en stock',
+      dataIndex: 'quantite_en_stock',
+      key: 'quantite_en_stock',
+      sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
+      sortDirections: ['descend', 'ascend'],
+      width: "18%",
+      render: (quantite_en_stock) => (
+        <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
+      ),
+    },
+/*     {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
@@ -173,7 +253,7 @@ const columns = [
           </Popover>
         </Space>
       ),
-    },
+    }, */
 ];
 
 const HandOpen = () =>{
@@ -183,7 +263,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/vente`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -226,7 +306,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                    {open &&
                     <RapportVenteSelects getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                     </div>
                 </div>
             </div>

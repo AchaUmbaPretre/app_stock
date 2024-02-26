@@ -193,7 +193,7 @@ const columns = [
             <Tag color={tagColor}>{color}</Tag>
           );
         },
-      },,
+      },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',

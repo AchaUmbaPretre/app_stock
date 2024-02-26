@@ -147,7 +147,7 @@ const columns = [
       ),
     },
     {
-        title: 'Montant de vente',
+        title: 'Montant de total de vente',
         dataIndex: 'total_prix_vente',
         key: 'total_prix_vente',
         sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,

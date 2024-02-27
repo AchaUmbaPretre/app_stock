@@ -246,8 +246,8 @@ const Client = () => {
 
   const filteredData = getClient?.filter((item) =>
   item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.raison_sociale?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.email?.toLowerCase().includes(searchValue.toLowerCase())
+  item.nom_province?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase())
 
 );
 
@@ -293,7 +293,7 @@ const Client = () => {
                         >
                          <MouvClientDetail idClients={idClient}/>
                         </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

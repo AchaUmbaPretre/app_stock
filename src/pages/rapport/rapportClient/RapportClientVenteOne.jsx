@@ -1,5 +1,5 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined,UserOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Popover, Tag, Input } from 'antd';
+import { Button, Space, Table, Popover, Tag, Input, Image } from 'antd';
 import { CalendarOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
@@ -136,15 +136,19 @@ const RapportClientVenteOne = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
-            title: 'image',
-            dataIndex: 'img',
-            key: 'image',
-            render: (text, record) => (
-              <div className="userList">
-                <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
-              </div>
-            )
-          },
+          title: 'image',
+          dataIndex: 'img',
+          key: 'img',
+          render: (text, record) => (
+            <div className="userList">
+              <Image
+                className="userImg"
+                src="error"
+                fallback={`${DOMAIN}${record.img}`}
+              />
+            </div>
+          ),
+        },
         {
             title: 'Marque',
             dataIndex: 'nom_marque',
@@ -236,8 +240,7 @@ useEffect(() => {
   }, [DOMAIN,id]);
 
  const filteredData = getRapport?.filter((item) =>
-item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
+item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())
 )
 
   return (

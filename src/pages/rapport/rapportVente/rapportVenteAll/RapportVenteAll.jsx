@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined, CalendarOutlined} from '@ant-design/icons';
 import { Button, Space, Table, Tag, Input, Image } from 'antd';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
@@ -6,6 +6,7 @@ import Highlighter from 'react-highlight-words';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteAllSelects from './RapportVenteAllSelects';
+import { format } from 'date-fns';
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
 const RapportVenteAll = () => {
@@ -197,6 +198,18 @@ const columns = [
             <Tag color={tagColor}>{color}</Tag>
           );
         },
+      },
+      {
+        title: 'Date',
+        dataIndex: 'date_vente',
+        key: 'date',
+        sorter: (a, b) => a.date_vente - b.date_vente,
+        sortDirections: ['descend', 'ascend'],
+        render: (text) => (
+          <Tag color="blue" icon={<CalendarOutlined />}>
+            {format(new Date(text), 'dd-MM-yyyy')}
+          </Tag>
+        ),
       },
      {
       title: 'Quantité vendue',

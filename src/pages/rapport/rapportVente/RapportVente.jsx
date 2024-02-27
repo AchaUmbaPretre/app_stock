@@ -226,16 +226,6 @@ const columns = [
       ),
     },
     {
-      title: 'Qté en stock',
-      dataIndex: 'quantite_en_stock',
-      key: 'quantite_en_stock',
-      sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
-      sortDirections: ['descend', 'ascend'],
-      render: (quantite_en_stock) => (
-        <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
-      ),
-    },
-    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (

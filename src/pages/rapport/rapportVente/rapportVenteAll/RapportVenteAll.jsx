@@ -1,5 +1,5 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Tag, Input } from 'antd';
+import { Button, Space, Table, Tag, Input, Image } from 'antd';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
@@ -134,11 +134,15 @@ const columns = [
       title: 'image',
       dataIndex: 'img',
       key: 'img',
-        render: (text, record) => (
-          <div className="userList">
-            <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
-          </div>
-          )
+      render: (text, record) => (
+        <div className="userList">
+          <Image
+            className="userImg"
+            src="error"
+            fallback={`${DOMAIN}${record.img}`}
+          />
+        </div>
+      ),
     },
     {
       title: 'Categorie',

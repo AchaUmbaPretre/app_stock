@@ -1,10 +1,11 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Tag, Input } from 'antd';
+import { Button, Space, Table, Tag, Input, Image } from 'antd';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import axios from 'axios';
 import config from '../../../../config';
+import moment from 'moment';
 
 const RapportVenteCode = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -128,14 +129,18 @@ const RapportVenteCode = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'image',
-      dataIndex: 'img',
-      key: 'img',
+        title: 'image',
+        dataIndex: 'img',
+        key: 'img',
         render: (text, record) => (
           <div className="userList">
-            <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
+            <Image
+              className="userImg"
+              src="error"
+              fallback={`${DOMAIN}${record.img}`}
+            />
           </div>
-          )
+        ),
     },
     {
       title: 'Categorie',
@@ -191,6 +196,18 @@ const columns = [
           );
         },
       },
+      {
+        title: "Date",
+        dataIndex: 'date_vente',
+        key: 'date',
+        sorter: (a, b) => moment(a.date_vente).unix() - moment(b.date_vente).unix(),
+        sortDirections: ['descend', 'ascend'],
+        render: (text) => (
+          <Tag color={'blue'}>
+            {moment(text).format('DD-MM-yyyy')}
+          </Tag>
+        ),
+      },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
@@ -217,7 +234,6 @@ const columns = [
         key: 'quantite_en_stock',
         sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
         sortDirections: ['descend', 'ascend'],
-        width: "18%",
         render: (quantite_en_stock) => (
           <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
         ),

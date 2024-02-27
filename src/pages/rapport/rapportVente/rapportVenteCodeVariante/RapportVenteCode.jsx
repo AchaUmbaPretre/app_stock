@@ -1,17 +1,12 @@
-import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input, Image } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { Button, Space, Table, Tag, Input } from 'antd';
+import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import config from '../../../config';
-import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
-import moment from 'moment';
+import config from '../../../../config';
 
-const RapportVente = () => {
+const RapportVenteCode = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -20,7 +15,8 @@ const RapportVente = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const navigate = useNavigate();
+    const {pathname} = useLocation();
+    const id = pathname.split('/')[2];
     const [open, setOpen] = useState(false);
 
 
@@ -135,23 +131,11 @@ const columns = [
       title: 'image',
       dataIndex: 'img',
       key: 'img',
-      render: (text, record) => (
-        <div className="userList">
-          <Image
-            className="userImg"
-            src="error"
-            fallback={`${DOMAIN}${record.img}`}
-          />
-        </div>
-      ),
-    },
-    {
-      title: 'Marque',
-      dataIndex: 'nom_marque',
-      key: 'nom_marque',
-      render: (nom_marque) => (
-        <Tag color={'blue'}>{nom_marque}</Tag>
-      ),
+        render: (text, record) => (
+          <div className="userList">
+            <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
+          </div>
+          )
     },
     {
       title: 'Categorie',
@@ -159,6 +143,22 @@ const columns = [
       key: 'categorie',
       render: (categorie) => (
         <Tag color={'blue'}>{categorie}</Tag>
+      ),
+    },
+    {
+      title: 'Marque',
+      dataIndex: 'nom_marque',
+      key: 'nom_marque',
+      render: (nom_marque) => (
+        <Tag color={'green'}>{nom_marque}</Tag>
+      ),
+    },
+    {
+      title: 'Pointure',
+      dataIndex: 'taille',
+      key: 'taille',
+      render: (taille) => (
+        <Tag color={'blue'}>{taille}</Tag>
       ),
     },
     {
@@ -191,18 +191,6 @@ const columns = [
           );
         },
       },
-      {
-        title: "Date",
-        dataIndex: 'date_vente',
-        key: 'date',
-        sorter: (a, b) => moment(a.date_vente).unix() - moment(b.date_vente).unix(),
-        sortDirections: ['descend', 'ascend'],
-        render: (text) => (
-          <Tag color={'blue'}>
-            {moment(text).format('DD-MM-yyyy')}
-          </Tag>
-        ),
-      },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
@@ -220,35 +208,20 @@ const columns = [
       sorter: (a, b) => a.montant_vendu - b.montant_vendu,
       sortDirections: ['descend', 'ascend'],
       render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
-          {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-        </Tag>
+        <Tag color={montant_vendu > 0 ? 'green' : 'red'}>{montant_vendu}</Tag>
       ),
     },
     {
-      title: 'Qté en stock',
-      dataIndex: 'quantite_en_stock',
-      key: 'quantite_en_stock',
-      sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
-      sortDirections: ['descend', 'ascend'],
-      render: (quantite_en_stock) => (
-        <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteV/${record.code_variant}`}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    },
+        title: 'Qté en stock',
+        dataIndex: 'quantite_en_stock',
+        key: 'quantite_en_stock',
+        sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
+        sortDirections: ['descend', 'ascend'],
+        width: "18%",
+        render: (quantite_en_stock) => (
+          <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
+        ),
+    }
 ];
 
 const HandOpen = () =>{
@@ -256,17 +229,19 @@ const HandOpen = () =>{
 }
 
 useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV`);
-      setGetRapport(data);
-      setLoading(false)
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchData();
-}, [DOMAIN]);
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV/${id}`);
+        
+        setGetRapport(data);
+        setLoading(false)
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN,id]);
 
  const filteredData = getRapport?.filter((item) =>
 item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -280,7 +255,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Rapport des ventes</h2>
-                        <span>Gérez votre rapport des ventes</span>
+                        <span>Gérez votre rapport de ventes</span>
                     </div>
                 </div>
                 <div className="product-bottom">
@@ -298,8 +273,6 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                   {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
@@ -311,4 +284,4 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
   )
 }
 
-export default RapportVente
+export default RapportVenteCode

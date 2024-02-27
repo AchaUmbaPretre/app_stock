@@ -137,3 +137,13 @@ li{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.rapport-vente-selects {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.rapport-vente-selects.open {
+  max-height: 500px; /* Hauteur maximale souhaitée */
+}

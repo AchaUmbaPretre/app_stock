@@ -288,8 +288,9 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                   {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> }
+                    <div className={`rapport-vente-selects ${open ? 'open' : ''}`}>
+                      <RapportVenteSelects getProduits={setGetRapport} />
+                    </div>
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

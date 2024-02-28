@@ -148,6 +148,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
         return;
       }
       try{
+        setIsLoading(true);
         await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:idCommande, id_varianteProduit:idVarianteProduit, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
         Swal.fire({
           title: 'Success',

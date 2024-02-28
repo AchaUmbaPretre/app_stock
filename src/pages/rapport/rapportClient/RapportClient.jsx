@@ -1,11 +1,12 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Input } from 'antd';
+import { Button, Space, Table, Popover,Tag, Input, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
+import RapportClientAll from './rapportClientAll/RapportClientAll';
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
 const RapportClient = () => {
@@ -213,27 +214,34 @@ item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
                         <span>Gérez votre rapport de ventes client</span>
                     </div>
                 </div>
-                <div className="product-bottom">
-                    <div className="product-bottom-top">
-                        <div className="product-bottom-left">
-                            {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
-                        </div>
-                        <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
-                        </div>
+                <Tabs>
+                  <Tabs.TabPane tab='Vente par client' key={0}>
+                    <div className="product-bottom">
+                      <div className="product-bottom-top">
+                          <div className="product-bottom-left">
+                              {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                              <div className="product-row-search">
+                                  <SearchOutlined className='product-icon-plus'/>
+                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
+                              </div>
+                          </div>
+                          <div className="product-bottom-right">
+                              <FilePdfOutlined className='product-icon-pdf' />
+                              <FileExcelOutlined className='product-icon-excel'/>
+                              <PrinterOutlined className='product-icon-printer'/>
+                          </div>
+                      </div>
+                    {/* {open &&
+                      <RapportVenteSelects getProduits={setGetRapport}/> } */}
+                      <div className="rowChart-row-table">
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                      </div>
                     </div>
-                   {/* {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> } */}
-                    <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
-                    </div>
-                </div>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Vente complet' key={1}>
+                    <RapportClientAll/>
+                  </Tabs.TabPane>
+                </Tabs>
             </div>
         </div>
 

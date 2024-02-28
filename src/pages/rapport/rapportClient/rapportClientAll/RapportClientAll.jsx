@@ -44,6 +44,16 @@ const RapportClientAll = () => {
             ),
           },
           {
+            title: 'Client',
+            dataIndex: 'nom_client',
+            key: 'nom_client',
+            render: (nom_client) => (
+              <Tag color="green" icon={<UserOutlined />}>
+                {nom_client}
+              </Tag>
+            ),
+          },
+          {
             title: 'Livreur',
             dataIndex: 'username',
             key: 'username',
@@ -69,6 +79,8 @@ const RapportClientAll = () => {
             title: 'Pointure',
             dataIndex: 'taille',
             key: 'taille',
+            sorter: (a, b) => a.taille - b.taille,
+            sortDirections: ['descend', 'ascend'],
             render: (pointure) => (
               <Tag color={'blue'}>{pointure}</Tag>
             ),

@@ -178,16 +178,6 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
               </div>
             ) : (
               <div className="detailProduit-wrapper">
-{/*                 <div className="detailProduit-container-top">
-                    <div className="detailProduit-left">
-                        <h2 className="detailProduit-h2">Commande N° {id_commande}</h2>
-                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
-                    </div>
-                    <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
-                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
-                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
-                    </div>
-                </div> */}
                 {result.map((dd)=>(
 
                 <div className="detail-container-bottom">

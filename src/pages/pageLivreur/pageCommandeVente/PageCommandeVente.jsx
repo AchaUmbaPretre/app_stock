@@ -62,6 +62,33 @@ const PageCommandeVente = () => {
             )
         },
         {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          key: 'taille',
+          render: (text) => (
+            <Space>
+              <Tag color="green">{text}</Tag>
+            </Space>
+          ),
+        },
+        {
+          title: 'Prix',
+          dataIndex: 'prix',
+          key: 'prix',
+          sorter: (a, b) => a.prix - b.prix,
+          sortDirections: ['descend', 'ascend'],
+          render: (text) => (
+            <span>
+            <Tag color={'green'}>
+              {parseFloat(text).toLocaleString('fr-FR', {
+                style: 'currency',
+                currency: 'USD',
+              })}
+            </Tag>   
+            </span>
+          ),
+        },
+        {
           title: 'Qté',
           dataIndex: 'qte_livre',
           key: 'qte_livre',
@@ -70,24 +97,7 @@ const PageCommandeVente = () => {
               <Tag color="green">{text}</Tag>
             </Space>
           ),
-        },
-        {
-            title: 'Prix',
-            dataIndex: 'prix',
-            key: 'prix',
-            sorter: (a, b) => a.prix - b.prix,
-            sortDirections: ['descend', 'ascend'],
-            render: (text) => (
-              <span>
-              <Tag color={'green'}>
-                {parseFloat(text).toLocaleString('fr-FR', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </Tag>   
-              </span>
-            ),
-          }
+        }
       ];
 
       useEffect(() => {
@@ -112,6 +122,12 @@ const PageCommandeVente = () => {
         };
       
         fetchData();
+        const interval = setInterval(fetchData, 5000)
+
+        return () => {
+          clearInterval(interval);
+        };
+
       }, [DOMAIN, userId, IdCommande]);
 
       const handleClick = async (e) => {

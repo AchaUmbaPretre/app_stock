@@ -1,7 +1,7 @@
 import './rapportVente.scss'
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover, Tag, Input, Image } from 'antd';
+import { Button, Space, Table, Popover, Tag, Input, Image, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
@@ -10,6 +10,7 @@ import config from '../../../config';
 import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
 import moment from 'moment';
 import { format } from 'date-fns';
+import RapportVenteCouleur from './rapportVenteCouleur/RapportVenteCouleur';
 
 const RapportVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -272,27 +273,35 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                         <span>Gérez votre rapport des ventes</span>
                     </div>
                 </div>
-                <div className="product-bottom">
-                    <div className="product-bottom-top">
-                        <div className="product-bottom-left">
-                            {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
-                        </div>
-                        <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
-                        </div>
+                <Tabs>
+                  <Tabs.TabPane tab='Rapport des ventes' key={0}>
+                    <div className="product-bottom">
+                      <div className="product-bottom-top">
+                          <div className="product-bottom-left">
+                              {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                              <div className="product-row-search">
+                                  <SearchOutlined className='product-icon-plus'/>
+                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
+                              </div>
+                          </div>
+                          <div className="product-bottom-right">
+                              <FilePdfOutlined className='product-icon-pdf' />
+                              <FileExcelOutlined className='product-icon-excel'/>
+                              <PrinterOutlined className='product-icon-printer'/>
+                          </div>
+                      </div>
+                      {open &&
+                              <RapportVenteSelects getProduits={setGetRapport}/> }
+                      <div className="rowChart-row-table">
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                      </div>
                     </div>
-                    {open &&
-                            <RapportVenteSelects getProduits={setGetRapport}/> }
-                    <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
-                    </div>
-                </div>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Rapport de vente par couleur vendue' key={1}>
+                    <RapportVenteCouleur/>
+                  </Tabs.TabPane>
+
+                </Tabs>
             </div>
         </div>
 

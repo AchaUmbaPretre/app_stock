@@ -1,5 +1,5 @@
 import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popover, Tag, Input, Image } from 'antd';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import axios from 'axios';
 import config from '../../../config';
 import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
 import moment from 'moment';
+import { format } from 'date-fns';
 
 const RapportVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -190,21 +191,21 @@ const columns = [
         },
       },
       {
-        title: "Date",
+        title: 'Date',
         dataIndex: 'date_vente',
         key: 'date',
-        sorter: (a, b) => moment(a.date_vente).unix() - moment(b.date_vente).unix(),
+        sorter: (a, b) => a.date_vente - b.date_vente,
         sortDirections: ['descend', 'ascend'],
         render: (text) => (
-          <Tag color={'blue'}>
-            {moment(text).format('DD-MM-yyyy')}
+          <Tag color="blue" icon={<CalendarOutlined />}>
+            {format(new Date(text), 'dd-MM-yyyy')}
           </Tag>
         ),
       },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
-      key: 'quantite_vendue',
+      key: 'quantite_vendue', 
       sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
       sortDirections: ['descend', 'ascend'],
       render: (quantite_vendue) => (

@@ -67,40 +67,30 @@ const RapportClientAll = () => {
           },
           {
             title: 'Pointure',
-            dataIndex: 'pointure',
-            key: 'pointure',
+            dataIndex: 'taille',
+            key: 'taille',
             render: (pointure) => (
               <Tag color={'blue'}>{pointure}</Tag>
             ),
           },
         {
-          title: 'Quantité',
-          dataIndex: 'total_varianteproduit',
-          key: 'total_varianteproduit',
-          sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
+          title: 'Quantité vendue',
+          dataIndex: 'quantite_vendue',
+          key: 'quantite_vendue',
+          sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
           sortDirections: ['descend', 'ascend'],
-          render: (total_varianteproduit) => (
-            <Tag color={'green'}>{total_varianteproduit}</Tag>
+          render: (quantite_vendue) => (
+            <Tag color={'green'}>{quantite_vendue}</Tag>
           ),
         },
         {
-            title: 'Montant de vente',
-            dataIndex: 'total_prix_vente',
-            key: 'total_prix_vente',
-            sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
+            title: 'Qté en stock',
+            dataIndex: 'quantite_en_stock',
+            key: 'quantite_en_stock',
+            sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
             sortDirections: ['descend', 'ascend'],
-            render: (total_prix_vente) => (
-              <Tag color="blue">
-                {total_prix_vente.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-              </Tag>
-            ),
-          },
-        {
-            title: 'Statut',
-            dataIndex: 'statut',
-            key: 'statut',
-            render: (statut) => (
-              <Tag color={'blue'}>{statut}</Tag>
+            render: (quantite_en_stock) => (
+              <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
             ),
         }
     ];
@@ -112,10 +102,9 @@ const HandOpen = () =>{
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportClient/${id}`);
+        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportClient/venteClientAll`);
         
         setGetRapport(data);
-        setMarqueName(data[0]?.nom_client)
         setLoading(false)
 
       } catch (error) {
@@ -123,7 +112,7 @@ useEffect(() => {
       }
     };
     fetchData();
-  }, [DOMAIN,id]);
+  }, [DOMAIN]);
 
  const filteredData = getRapport?.filter((item) =>
 item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())

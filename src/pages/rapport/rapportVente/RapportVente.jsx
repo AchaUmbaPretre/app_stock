@@ -1,11 +1,10 @@
 import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Input, Image } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { Button, Space, Table, Popover, Tag, Input, Image } from 'antd';
+import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
@@ -20,7 +19,6 @@ const RapportVente = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
 
@@ -288,9 +286,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                    <div className={`rapport-vente-selects ${open ? 'open' : ''}`}>
-                      <RapportVenteSelects getProduits={setGetRapport} />
-                    </div>
+                    {open &&
+                            <RapportVenteSelects getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

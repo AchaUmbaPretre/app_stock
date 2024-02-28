@@ -249,8 +249,8 @@ item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport de ventes de Mmn {marqueName}</h2>
-                        <span>Gérez votre rapport de ventes de Mm {marqueName}</span>
+                      <h2 className="product-h2">Rapport de ventes de {marqueName}</h2>
+                      <span>Gérez votre rapport de ventes de {marqueName}</span>
                     </div>
                 </div>
                 <div className="product-bottom">

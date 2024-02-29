@@ -1,134 +1,19 @@
-import './rapportVente.scss'
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import {  CloseCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover, Tag, Input, Image, Tabs } from 'antd';
+import { Button, Space, Table, Popover, Tag, Image } from 'antd';
 import { Link } from 'react-router-dom';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import config from '../../../config';
-import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
-import moment from 'moment';
+import config from '../../../../config';
 import { format } from 'date-fns';
-import RapportVenteCouleur from './rapportVenteCouleur/RapportVenteCouleur';
-import RapportAjour from './rapportAjour/RapportAjour';
 
-const RapportVente = () => {
+const RapportAjour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
-    const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
 
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-    
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Recherche
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Supprimer
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -249,7 +134,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteJour`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -268,15 +153,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Rapport des ventes</h2>
-                        <span>Gérez votre rapport des ventes</span>
-                    </div>
-                </div>
-                <Tabs>
-                  <Tabs.TabPane tab='Rapport des ventes' key={0}>
-                    <div className="product-bottom">
+                <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
                               {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
@@ -291,26 +168,16 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                               <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-                      {open &&
-                              <RapportVenteSelects getProduits={setGetRapport}/> }
+{/*                       {open &&
+                              <RapportVenteSelects getProduits={setGetRapport}/> } */}
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
-                    </div>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Rapport des ventes à jour' key={1}>
-                    <RapportAjour/>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Rapport sur la couleur la plus vendue des ventes' key={2}>
-                    <RapportVenteCouleur/>
-                  </Tabs.TabPane>
-
-                </Tabs>
+                </div>
             </div>
         </div>
-
     </>
   )
 }
 
-export default RapportVente
+export default RapportAjour

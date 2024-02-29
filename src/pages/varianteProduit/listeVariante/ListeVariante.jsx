@@ -1,6 +1,6 @@
 import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Image } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
@@ -42,15 +42,19 @@ const ListeVariante = () => {
       const columns = [
           { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
           {
-            title: 'Image',
+            title: 'image',
             dataIndex: 'img',
-            key: 'image',
+            key: 'img',
             render: (text, record) => (
               <div className="userList">
-                <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
+                <Image
+                  className="userImg"
+                  src="error"
+                  fallback={`${DOMAIN}${record.img}`}
+                />
               </div>
-            )
-        },
+            ),
+          },
         {
             title: 'Description',
             dataIndex: 'nom_produit',
@@ -192,7 +196,7 @@ const ListeVariante = () => {
                     <div className="rowChart-row-table">
                     {opens &&
                     <VarianteSelect getProduits={setData}/> } 
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

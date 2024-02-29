@@ -111,20 +111,6 @@ const columns = [
         </Tag>
       ),
     },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteV/${record.code_variant}`}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    },
 ];
 
 const HandOpen = () =>{

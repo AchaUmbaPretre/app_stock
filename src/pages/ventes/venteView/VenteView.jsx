@@ -1,6 +1,6 @@
 import { SearchOutlined, SisternodeOutlined,FilePdfOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image} from 'antd';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
@@ -34,12 +34,16 @@ const VenteView = () => {
         {
           title: 'image',
           dataIndex: 'img',
-          key: 'image',
+          key: 'img',
           render: (text, record) => (
             <div className="userList">
-              <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
+              <Image
+                className="userImg"
+                src="error"
+                fallback={`${DOMAIN}${record.img}`}
+              />
             </div>
-          )
+          ),
         },
         {
             title: 'Marque',

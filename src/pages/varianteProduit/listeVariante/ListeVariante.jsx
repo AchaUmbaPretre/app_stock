@@ -1,7 +1,7 @@
 import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
@@ -12,14 +12,9 @@ const ListeVariante = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
-    const [open, setOpen] = useState(false);
-    const [idClient, setIdClient] = useState({});
     const [searchValue, setSearchValue] = useState('');
     const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
-
     
       const handleDelete = async (id) => {
       try {
@@ -28,11 +23,6 @@ const ListeVariante = () => {
         } catch (err) {
           console.log(err);
         }
-      };
-
-      const showModal = (e) => {
-        setOpen(true);
-        setIdClient(e);
       };
 
       const HandOpen = () =>{
@@ -94,7 +84,7 @@ const ListeVariante = () => {
             sortDirections: ['descend', 'ascend'],
             render: (text,record) => (
               <span>
-              <Tag color={'blue'} onClick={()=> showModal(record.id_detail_livraison)}>
+              <Tag color={'blue'}>
                 {parseFloat(text).toLocaleString('fr-FR', {
                   style: 'currency',
                   currency: 'USD',
@@ -174,7 +164,6 @@ const ListeVariante = () => {
                         <span>Gérer vos variantes</span>
                     </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
-                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}></h2>
                       <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}></span>
                     </div>
                 </div>

@@ -223,7 +223,7 @@ useEffect(() => {
 }, []);
 
  const filteredData = getRapportDachat?.filter((item) =>
-item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()))
+  item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()))
 
   return (
     <>

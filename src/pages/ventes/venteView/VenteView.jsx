@@ -1,11 +1,10 @@
 import { SearchOutlined, SisternodeOutlined,FilePdfOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { format } from 'date-fns';
-import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 
 const VenteView = () => {
@@ -15,8 +14,6 @@ const VenteView = () => {
     const scroll = { x: 400 };
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
-    const [getVente, setGetVente] = useState({});
-    const [open, setOpen] = useState(false);
     const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -165,28 +162,6 @@ const VenteView = () => {
         fetchData();
       }, [DOMAIN,id]);
 
-      const handleOk = async (e) => {
-        try{
-          await axios.put(`${DOMAIN}/api/vente/vente/${id}`,getVente)
-  
-          Swal.fire({
-            title: 'Success',
-            text: "La vente a été modifiée avec succès!",
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
-          window.location.reload();
-  
-        }catch(err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-        }
-      };
-
   return (
     <>
         <div className="products">
@@ -217,18 +192,6 @@ const VenteView = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Modal
-                          title="Modifier la vente"
-                          centered
-                          open={open}
-                          onOk={handleOk}
-                          onCancel={() => setOpen(false)}
-                          width={860}
-                          okText="Soumettre"
-                          cancelText="Annuler"
-                        >
-{/*                          <FormVenteEdit getVente={getVente} setGetVente={setGetVente} /> */}
-                        </Modal>
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>

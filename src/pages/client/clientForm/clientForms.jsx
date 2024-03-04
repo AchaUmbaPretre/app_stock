@@ -262,7 +262,7 @@ const ClientForms = () => {
             </div>
 
             <div className="form-submit">
-              <button className="btn-submit" onClick={handleClick}>
+              <button className="btn-submit" onClick={handleClick} disabled={isLoading}>
                 Soumettre
               </button>
               {isLoading && (

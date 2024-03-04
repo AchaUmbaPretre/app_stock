@@ -1,9 +1,8 @@
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,CalendarOutlined, FilePdfOutlined,CheckCircleOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,CalendarOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm} from 'antd';
+import { Button, Input, Space, Table } from 'antd';
 import { format } from 'date-fns';
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { Tag } from 'antd';
@@ -17,7 +16,6 @@ const RapportDachats = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
 
@@ -220,7 +218,7 @@ useEffect(() => {
     }
   };
   fetchData();
-}, []);
+}, [DOMAIN]);
 
  const filteredData = getRapportDachat?.filter((item) =>
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()))

@@ -162,7 +162,7 @@ const ClientForm = () => {
               </div>
 
               <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick}>Soumetre</button>
+                <button className="btn-submit" onClick={handleClick} disabled={isLoading}>Envoyer</button>
                 {isLoading && (
                 <div className="loader-container loader-container-center">
                   <CircularProgress size={28} />
@@ -172,7 +172,6 @@ const ClientForm = () => {
             </div>
           </div>
         </div>
-
     </>
   )
 }

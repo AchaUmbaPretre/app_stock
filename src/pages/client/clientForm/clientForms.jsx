@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config';
+import { CircularProgress } from '@mui/material';
 
 const ClientForms = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -13,6 +14,7 @@ const ClientForms = () => {
   const [province, setProvince] = useState([]);
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [deliveryAddresses, setDeliveryAddresses] = useState([{ avenue: '', quartier: '', commune: '', num:'' }]);
   const [clientInfo, setClientInfo] = useState({
@@ -80,6 +82,7 @@ const ClientForms = () => {
     }  */
 
     try{
+      setIsLoading(true);
       await Promise.all(
         deliveryAddresses.map((item) =>
           axios.post(`${DOMAIN}/api/client/client`,{
@@ -107,6 +110,9 @@ const ClientForms = () => {
         icon: 'error',
         confirmButtonText: 'OK',
       });
+    }
+    finally {
+      setIsLoading(false);
     }
   }
 
@@ -259,6 +265,11 @@ const ClientForms = () => {
               <button className="btn-submit" onClick={handleClick}>
                 Soumettre
               </button>
+              {isLoading && (
+                <div className="loader-container loader-container-center">
+                  <CircularProgress size={28} />
+                </div>
+            )}
             </div>
           </div>
         </div>

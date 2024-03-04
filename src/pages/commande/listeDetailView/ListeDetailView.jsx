@@ -360,7 +360,7 @@ const ListeDetailView = () => {
                         />
                         </div>
                         <div className="rows-btn">
-                          <button className="list_btn" onClick={handleClick}>Envoyer</button>
+                          <button className="list_btn" onClick={handleClick} disabled={isLoading}>Envoyer</button>
                           {isLoading && (
                             <div className="loader-container loader-container-center">
                               <CircularProgress size={28} />

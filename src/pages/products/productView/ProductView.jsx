@@ -466,7 +466,7 @@ const ProductView = () => {
                                     {variantExists && <p className="error-message">Cette variante existe déjà.</p>}
                                 </div>
                             </div>
-                            <button className="produit_submit" onClick={handleClick}>Soumettre</button>
+                            <button className="produit_submit" onClick={handleClick} disabled={isLoading}>Envoyer</button>
                             {isLoading && (
                                 <div className="loader-container loader-container-center">
                                   <CircularProgress size={28} />

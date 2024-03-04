@@ -1,5 +1,5 @@
 import './products.scss'
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
 import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
@@ -208,7 +208,7 @@ const Products = () => {
       sorter: (a, b) => moment(a.date_entrant).unix() - moment(b.date_entrant).unix(),
       sortDirections: ['descend', 'ascend'],
       render: (text) => (
-        <Tag color={'blue'}>
+        <Tag color={'blue'} icon={<CalendarOutlined />}>
           {moment(text).format('DD-MM-yyyy')}
         </Tag>
       ),

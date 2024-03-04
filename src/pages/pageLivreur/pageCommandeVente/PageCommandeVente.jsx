@@ -249,7 +249,7 @@ const PageCommandeVente = () => {
                     <h2>{data[0]?.quantite_prix} $</h2>
                 </div>
                 <div className="pageLivreur-form-rows">
-                    <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
+                    <button className='pageLivreur-btn' onClick={handleClick} disabled={isLoading}>Envoyer maintenant</button>
                 </div>
                 {isLoading && (
                 <div className="loader-container loader-container-center">

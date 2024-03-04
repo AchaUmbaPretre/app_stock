@@ -263,7 +263,7 @@ const ClientForms = () => {
 
             <div className="form-submit">
               <button className="btn-submit" onClick={handleClick} disabled={isLoading}>
-                Soumettre
+                Envoyer
               </button>
               {isLoading && (
                 <div className="loader-container loader-container-center">

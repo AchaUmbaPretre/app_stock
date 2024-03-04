@@ -188,7 +188,7 @@ const PageLivraisonRetour = () => {
                       <textarea name="description" id="" cols="20" rows="8" onChange={(e)=>setDesc(e.target.value)}>
                       </textarea>
                     </div>
-                    <button className='pageLivreur-btn' onClick={handleClick}>Envoyer maintenant</button>
+                    <button className='pageLivreur-btn' onClick={handleClick} disabled={isLoading}>Envoyer maintenant</button>
                     {isLoading && (
                   <div className="loader-container loader-container-center">
                     <CircularProgress size={28} />

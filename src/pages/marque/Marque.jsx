@@ -179,7 +179,7 @@ const Marque = () => {
                     <div className="categorie-container-left">
                         <h2 className="categorie-title">Ajouter une marque</h2>
                         <input type="text" name='nom' onChange={handleInputChange} value={nomMarque} placeholder='Entrer une marque...' className="categorie-input" />
-                        <button className="categorie-btn" onClick={handleClick} >Envoyer</button>
+                        <button className="categorie-btn" onClick={handleClick} disabled={isLoading} >Envoyer</button>
                         {isLoading && (
                             <div className="loader-container loader-container-center">
                               <CircularProgress size={30} />

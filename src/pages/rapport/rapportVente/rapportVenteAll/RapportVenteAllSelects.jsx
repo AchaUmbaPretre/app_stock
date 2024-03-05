@@ -12,7 +12,6 @@ const RapportVenteAllSelects = ({ getProduits,id }) => {
     e.preventDefault();
   
     try {
-  
       const { data } = await axios.get(
         `${DOMAIN}/api/rapport/rapport/venteAllSearch?id_marque=${id}&start_date=${datas.start_date}&end_date=${datas.end_date}`
       );
@@ -29,7 +28,7 @@ const RapportVenteAllSelects = ({ getProduits,id }) => {
       console.log(err);
     }
   };
-  
+
   const handleStartDateChange = (e) => {
     const startDate = e.target.value;
     setDatas((prev) => ({ ...prev, start_date: startDate }));

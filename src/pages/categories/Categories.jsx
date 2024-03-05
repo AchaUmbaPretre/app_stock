@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import FormCategorie from './formCategorie/FormCategorie';
 import Select from 'react-select';
+import { CircularProgress } from '@mui/material';
 
 const Categories = () => {
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Categories = () => {
     const id = pathname.split('/')[2]
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     
 
 
@@ -144,6 +146,7 @@ const Categories = () => {
         e.preventDefault();
 
         try{
+          setIsLoading(true);
           await axios.post(`${DOMAIN}/api/produit/categorie`, categorie)
           Swal.fire({
             title: 'Success',
@@ -160,6 +163,9 @@ const Categories = () => {
             icon: 'error',
             confirmButtonText: 'OK',
           });
+        }
+        finally {
+          setIsLoading(false);
         }
       }
 
@@ -232,7 +238,12 @@ const Categories = () => {
                           options={famille?.map(item => ({ value: item.id_famille, label: item.nom }))}
                           onChange={selectedOption => handleInputChange({ target: { name: 'id_famille', value: selectedOption.value } })}
                         />
-                        <button className="categorie-btn" onClick={handleClick}>Envoyer</button>
+                        <button className="categorie-btn" onClick={handleClick} disabled={isLoading}>Envoyer</button>
+                        {isLoading && (
+                            <div className="loader-container loader-container-center">
+                              <CircularProgress size={28} />
+                            </div>
+                        )}
                     </div>
                     <div className="categorie-container-right">
                         <div className="categorie-right-top">

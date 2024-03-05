@@ -113,6 +113,7 @@ const VarianteProduit = () => {
           console.log(error);
         }
       };
+      
       fetchData();
     }, [DOMAIN,cible]);
 

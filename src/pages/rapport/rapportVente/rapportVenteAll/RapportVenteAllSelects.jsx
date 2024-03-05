@@ -29,6 +29,7 @@ const RapportVenteAllSelects = ({ getProduits,id }) => {
       console.log(err);
     }
   };
+  
   const handleStartDateChange = (e) => {
     const startDate = e.target.value;
     setDatas((prev) => ({ ...prev, start_date: startDate }));

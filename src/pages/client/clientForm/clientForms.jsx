@@ -71,7 +71,7 @@ const ClientForms = () => {
     e.preventDefault();
 
     
-/*      if (!clientInfo.nom || !clientInfo.raison_sociale || !clientInfo.telephone || !clientInfo.id_province || !clientInfo.avenue || !clientInfo.quartier) {
+      if (!clientInfo.telephone || !clientInfo.nom || !clientInfo.id_province) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -79,7 +79,7 @@ const ClientForms = () => {
         confirmButtonText: 'OK',
       });
       return;
-    }  */
+    }
 
     try{
       setIsLoading(true);
@@ -256,7 +256,7 @@ const ClientForms = () => {
             ))}
 
             <div className="form-controle">
-              <button type="button" className="add-btn" onClick={addDeliveryAddress} style={{border:'none', marginTop: "20px",padding: '10px', background:'rgb(1, 35, 138)', color:'#fff', cursor:'pointer'}}>
+              <button type="button" className="add-btn" onClick={addDeliveryAddress} style={{border:'none', marginTop: "20px",padding: '10px', background:'rgb(1, 35, 138)', color:'#fff', cursor:'pointer'}} disabled={isLoading}>
                 Ajouter une adresse de livraison
               </button>
             </div>

@@ -10,7 +10,6 @@ import config from '../../config';
 import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
 
-
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
@@ -113,7 +112,7 @@ const VarianteProduit = () => {
           console.log(error);
         }
       };
-      
+
       fetchData();
     }, [DOMAIN,cible]);
 

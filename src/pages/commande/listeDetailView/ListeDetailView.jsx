@@ -1,6 +1,6 @@
 import { SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Checkbox} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Checkbox, Image} from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
@@ -102,15 +102,19 @@ const ListeDetailView = () => {
           ),
         },
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
-          {
-            title: 'image',
-            dataIndex: 'img',
-            key: 'image',
-            render: (text, record) => (
-              <div className="userList">
-                <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
-              </div>
-            )
+        {
+          title: 'image',
+          dataIndex: 'img',
+          key: 'img',
+          render: (text, record) => (
+            <div className="userList">
+              <Image
+                className="userImg"
+                src="error"
+                fallback={`${DOMAIN}${record.img}`}
+              />
+            </div>
+          ),
         },
         {
           title: 'Quantité',

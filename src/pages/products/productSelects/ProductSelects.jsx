@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 const ProductSelects = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [produit, setProduit] = useState([]);
+    const [getMarque, setGetMarque] = useState([]);
     const [datas, setDatas] = useState({});
     const [getCategorie, setGetCategorie] = useState([]);
     const [couleur, setCouleur] = useState([]);
@@ -29,17 +29,17 @@ const ProductSelects = ({getProduits}) => {
       setDatas((prev) => ({ ...prev, [fieldName]: updatedValue }));
       };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit`);
-        setProduit(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
+            setGetMarque(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,10 +99,10 @@ const ProductSelects = ({getProduits}) => {
             <div className="productSelects-container">
                 <Select
                     className="product-input-select"
-                    name='produit_id'
-                    options={produit?.map(item => ({ value: item.nom_produit, label: item.nom_produit }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'nom_produit', value: selectedOption.value } })}
-                    placeholder="Choisir un produit"
+                    name='id_marque'
+                    options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
+                    placeholder="Choisir une marque"
                 />
                  <Select
                     className="product-input-select"
@@ -110,20 +110,6 @@ const ProductSelects = ({getProduits}) => {
                     options={getCategorie?.map(item => ({ value: item.id, label: item.nom_categorie }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'categorie', value: selectedOption.value } })}
                     placeholder="Choisir une categorie"
-                />
-                <Select
-                    className="product-input-select"
-                    name='couleur'
-                    options={couleur?.map(item => ({ value: item.id, label: item.description }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'couleur', value: selectedOption.value } })}
-                    placeholder="Choisir une couleur"
-                />
-                <Select
-                    className="product-input-select"
-                    name='prix'
-                    options={produit?.map(item => ({ value: item.prix, label: item.prix }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'prix', value: selectedOption.value } })}
-                    placeholder="Prix"
                 />
                 <div className="select-btn">
                     <SearchOutlined className='select-search-btn' onClick={handleClick} />

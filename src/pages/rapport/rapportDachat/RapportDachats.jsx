@@ -1,7 +1,7 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,CalendarOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Image, Input, Space, Table } from 'antd';
 import { format } from 'date-fns';
 import axios from 'axios';
 import config from '../../../config';
@@ -130,11 +130,15 @@ const columns = [
       title: 'image',
       dataIndex: 'img',
       key: 'img',
-        render: (text, record) => (
-          <div className="userList">
-            <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
-          </div>
-          )
+      render: (text, record) => (
+        <div className="userList">
+          <Image
+            className="userImg"
+            src="error"
+            fallback={`${DOMAIN}${record.img}`}
+          />
+        </div>
+      ),
     },
     {
         title: 'Description',

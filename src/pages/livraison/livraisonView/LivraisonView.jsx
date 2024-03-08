@@ -1,6 +1,6 @@
 import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image} from 'antd';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
@@ -40,15 +40,19 @@ const LivraisonView = () => {
       const columns = [
           { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
           {
-            title: 'Image',
+            title: 'image',
             dataIndex: 'img',
-            key: 'image',
+            key: 'img',
             render: (text, record) => (
               <div className="userList">
-                <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
+                <Image
+                  className="userImg"
+                  src="error"
+                  fallback={`${DOMAIN}${record.img}`}
+                />
               </div>
-            )
-        },
+            ),
+          },
         {
           title: 'Marque',
           dataIndex: 'nom_marque',

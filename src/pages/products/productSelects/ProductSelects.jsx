@@ -65,11 +65,11 @@ const ProductSelects = ({getProduits}) => {
     fetchData();
   }, [DOMAIN]);
 
-
+console.log(datas)
   const handleClick = async (e) => {
     e.preventDefault();
 
-    if (!datas.nom_produit || !datas.categorie ) {
+/*     if (!datas.id_marque || !datas.categorie ) {
       Swal.fire({
         title: 'Error',
         text: 'Veuillez remplir tous les champs requis',
@@ -77,9 +77,9 @@ const ProductSelects = ({getProduits}) => {
         confirmButtonText: 'OK',
       });
       return;
-    }
+    } */
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/produit/produitSelect?nom_produit=${datas.nom_produit}&categorie=${datas.categorie}&prix=${datas.prix}&couleur=${datas.couleur}`);
+      const {data} = await axios.get(`${DOMAIN}/api/produit?id_marque=${datas.id_marque}&categorie=${datas.categorie}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({
@@ -107,7 +107,7 @@ const ProductSelects = ({getProduits}) => {
                  <Select
                     className="product-input-select"
                     name='categorie'
-                    options={getCategorie?.map(item => ({ value: item.id, label: item.nom_categorie }))}
+                    options={getCategorie?.map(item => ({ value: item.id_categorie, label: item.nom_categorie }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'categorie', value: selectedOption.value } })}
                     placeholder="Choisir une categorie"
                 />

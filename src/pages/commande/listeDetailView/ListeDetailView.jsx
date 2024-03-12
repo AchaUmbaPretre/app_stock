@@ -95,6 +95,7 @@ const ListeDetailView = () => {
                       [record.id_detail]: event.target.value,
                     }))
                   }
+                  style={{ width: '65px' }} 
                 />
                 </div>
               )}

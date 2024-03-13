@@ -1,11 +1,11 @@
-import { SearchOutlined, SisternodeOutlined,FilePdfOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,FilePdfOutlined,CalendarOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
-import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const VenteView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -67,6 +67,8 @@ const VenteView = () => {
           title: 'Pointure',
           dataIndex: 'pointure',
           key: 'pointure',
+          sorter: (a, b) => a.pointure.length - b.pointure.length,
+          sortDirections: ['descend', 'ascend'],
           render: (text) => (
             <Tag color={'#87d068'}>{text}</Tag>
           ),
@@ -76,7 +78,7 @@ const VenteView = () => {
           dataIndex: 'prix_unitaire',
           key: 'prix',
           sorter: (a, b) => a.prix_unitaire.length - b.prix_unitaire.length,
-          sortDirections: ['descendre', 'monter'],
+          sortDirections: ['descend', 'ascend'],
           render: (text) => (
             <span>
             <Tag color={'green'}>
@@ -106,7 +108,9 @@ const VenteView = () => {
             sortDirections: ['descend', 'ascend'],
             render: (text) => (
               <span>
-                {format(new Date(text), 'dd-MM-yyyy')}
+                <Tag color={'blue'} icon={<CalendarOutlined />}>
+                  {moment(text).format('DD-MM-yyyy')}
+                </Tag>
               </span>
             ),
         },

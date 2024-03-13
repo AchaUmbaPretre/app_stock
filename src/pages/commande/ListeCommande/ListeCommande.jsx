@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, EyeOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, EyeOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button,Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import config from '../../../config';
 import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
 import { useSelector } from 'react-redux';
+import ListeCommandeSelect from './ListeCommandeSelect';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -15,6 +16,7 @@ const ListeCommande = () => {
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
@@ -244,6 +246,10 @@ const ListeCommande = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
+      const HandOpen = () =>{
+        setOpens(!opens)
+      }
+
   const filteredData = data?.filter((item) =>
   item.nom?.toLowerCase().includes(searchValue.toLowerCase())
 )
@@ -265,7 +271,7 @@ const ListeCommande = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
+                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
                                 <input type="search" name="" id="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -278,6 +284,8 @@ const ListeCommande = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
+                    {opens &&
+                    <ListeCommandeSelect getProduits={setData}/> } 
                         <Modal
                           title="Information de client"
                           centered

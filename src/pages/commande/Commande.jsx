@@ -54,7 +54,7 @@ const Commande = () => {
         setCurrentPage(selectedPage.selected);
       };
 
-      useEffect(() => {
+/*       useEffect(() => {
         const fetchData = async () => {
           try {
             const url = marque.length > 0
@@ -69,9 +69,9 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, [DOMAIN,marque]);
+      }, [DOMAIN,marque]); */
 
-      useEffect(() => {
+/*       useEffect(() => {
         const fetchData = async () => {
           try {
             const url = cible.length > 0 
@@ -85,7 +85,7 @@ const Commande = () => {
           }
         };
         fetchData();
-      }, [DOMAIN,cible]);
+      }, [DOMAIN,cible]); */
 
 
       useEffect(() => {
@@ -103,9 +103,7 @@ const Commande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = famillesSelectionnees.length > 0
-              ? `${DOMAIN}/api/produit/varianteFiltre/${famillesSelectionnees}`
-              : `${DOMAIN}/api/produit/varianteProduit`;
+            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famillesSelectionnees}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}`
       
             const { data } = await axios.get(url);
             setData(data);
@@ -116,7 +114,7 @@ const Commande = () => {
         };
       
         fetchData();
-      }, [DOMAIN, famillesSelectionnees]);
+      }, [DOMAIN, famillesSelectionnees, marque, cible, taille]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -154,7 +152,7 @@ const Commande = () => {
         fetchData();
       }, [DOMAIN]);
 
-      useEffect(() => {
+/*       useEffect(() => {
         const fetchData = async () => {
           try {
             let url = `${DOMAIN}/api/produit/varianteProduit`;
@@ -172,7 +170,7 @@ const Commande = () => {
         };
       
         fetchData();
-      }, [DOMAIN, taille, marque, famillesSelectionnees]);
+      }, [DOMAIN, taille, marque, famillesSelectionnees]); */
 
       useEffect(() => {
         const fetchData = async () => {

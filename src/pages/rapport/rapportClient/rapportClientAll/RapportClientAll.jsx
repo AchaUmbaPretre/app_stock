@@ -18,7 +18,6 @@ const RapportClientAll = () => {
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('client');
     const [open, setOpen] = useState(false);
-    const [marqueName,setMarqueName] = useState('');
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },

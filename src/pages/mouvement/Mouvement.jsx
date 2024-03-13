@@ -1,13 +1,13 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
-import { format } from 'date-fns';
 import MouvClientDetail from './mouvementClientDetail/MouvClientDetail';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -81,9 +81,9 @@ const Mouvement = () => {
             sorter: (a, b) => a.date_mouvement - b.date_mouvement,
             sortDirections: ['descend', 'ascend'],
               render: (text) => (
-                <span>
-                <Tag color={'green'}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>
-                </span>
+                <Tag color={'blue'} icon={<CalendarOutlined />}>
+                  {moment(text).format('DD-MM-yyyy')}
+                </Tag>
               ),
           },
         {

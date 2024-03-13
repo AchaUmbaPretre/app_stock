@@ -7,6 +7,7 @@ import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteSelects from './../rapportVenteSelects/RapportVenteSelects';
 import RapportMarqueCount from '../rapportMarqueCount/RapportMarqueCount';
+import RapportVenteMSelect from './RapportVenterMSelect';
 
 const RapportVenteMarque = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -223,7 +224,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                                 </div>
                             </div>
                             {open &&
-                            <RapportVenteSelects getProduits={setGetRapport}/> }
+                            <RapportVenteMSelect getProduits={setGetRapport}/> }
                             <div className="rowChart-row-table">
                                 <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                             </div>

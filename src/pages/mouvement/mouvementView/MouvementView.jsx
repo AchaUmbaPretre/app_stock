@@ -1,12 +1,12 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Modal, Image} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
-import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const MouvementView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -182,7 +182,9 @@ const MouvementView = () => {
             sortDirections: ['descend', 'ascend'],
               render: (text) => (
                 <span>
-                  {format(new Date(text), 'dd-MM-yyyy')}
+                  <Tag color={'blue'} icon={<CalendarOutlined />}>
+                    {moment(text).format('DD-MM-yyyy')}
+                  </Tag>
                 </span>
               ),
           },

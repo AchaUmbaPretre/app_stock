@@ -82,7 +82,7 @@ const VarianteProduit = () => {
       fetchData();
     }, [DOMAIN]);
 
-    useEffect(() => {
+/*     useEffect(() => {
       const fetchData = async () => {
         try {
           const url = marque.length > 0
@@ -97,9 +97,9 @@ const VarianteProduit = () => {
         }
       };
       fetchData();
-    }, [DOMAIN,marque]);
+    }, [DOMAIN,marque]); */
 
-    useEffect(() => {
+/*     useEffect(() => {
       const fetchData = async () => {
         try {
           const url = cible.length > 0 
@@ -114,9 +114,9 @@ const VarianteProduit = () => {
       };
 
       fetchData();
-    }, [DOMAIN,cible]);
+    }, [DOMAIN,cible]); */
 
-    useEffect(() => {
+/*     useEffect(() => {
       const fetchData = async () => {
         try {
           let url = `${DOMAIN}/api/produit/varianteProduit`;
@@ -134,7 +134,7 @@ const VarianteProduit = () => {
       };
     
       fetchData();
-    }, [DOMAIN, taille, marque, famille]);
+    }, [DOMAIN, taille, marque, famille]); */
 
 
       useEffect(() => {
@@ -149,7 +149,7 @@ const VarianteProduit = () => {
         fetchData();
       }, [DOMAIN]);
 
-      useEffect(() => {
+/*       useEffect(() => {
         const fetchData = async () => {
           try {
             const url = famille.length > 0
@@ -164,7 +164,23 @@ const VarianteProduit = () => {
         };
       
         fetchData();
-      }, [DOMAIN, famille]);
+      }, [DOMAIN, famille]); */
+      
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}`
+      
+            const { data } = await axios.get(url);
+            setData(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+      
+        fetchData();
+      }, [DOMAIN, famille, marque, cible, taille]);
       
   return (
     <>
@@ -234,12 +250,15 @@ const VarianteProduit = () => {
                           <Select
                             name='id_taille'
                             className='variant-select'
-                            options={getTaille?.map(item => ({ value: item.id_taille, label: item.taille }))}
+                            options={getTaille
+                              ?.sort((a, b) => a.id_taille - b.id_taille) // Tri par ordre croissant des tailles
+                              .map(item => ({ value: item.id_taille, label: item.taille }))
+                            }
                             isMulti
                             onChange={(selectedOption) => {
-                              const selectedValue = selectedOption.map(option => option.value)
-                              setTaille(selectedValue)}
-                            }
+                              const selectedValue = selectedOption.map(option => option.value);
+                              setTaille(selectedValue);
+                            }}
                           />
                         </div>
                     </div>

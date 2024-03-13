@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './productSelects.scss'
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from './../../../config';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
+import { DatePicker } from 'antd';
 
-const ProductSelects = ({getProduits}) => {
+const ListeCommandeSelect = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getMarque, setGetMarque] = useState([]);
     const [datas, setDatas] = useState({});
@@ -14,20 +14,17 @@ const ProductSelects = ({getProduits}) => {
     const [couleur, setCouleur] = useState([]);
     
 
-    const handleInputChange = (e) => {
-        const fieldName = e.target.name;
-        const fieldValue = e.target.value;
-      
-        let updatedValue = fieldValue;
-      
-        if (fieldName === "contact_email") {
-          updatedValue = fieldValue.toLowerCase();
-        } else if (Number.isNaN(Number(fieldValue))) {
-          updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-        }
-      
-      setDatas((prev) => ({ ...prev, [fieldName]: updatedValue }));
-      };
+    const handleStartDateChange = (e) => {
+      const startDate = e.target.value;
+      setDatas((prev) => ({ ...prev, start_date: startDate }));
+    };
+  
+    const handleEndDateChange = (e) => {
+      const endDate = e.target.value;
+      setDatas((prev) => ({ ...prev, end_date: endDate }));
+    };
+
+      console.log(datas)
 
       useEffect(() => {
         const fetchData = async () => {
@@ -78,7 +75,7 @@ const ProductSelects = ({getProduits}) => {
       return;
     } */
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/produit?id_marque=${datas.id_marque}&categorie=${datas.categorie}`);
+      const {data} = await axios.get(`${DOMAIN}/api/commande?date_start=${datas.start_date}&date_end=${datas.end_date}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({
@@ -96,20 +93,20 @@ const ProductSelects = ({getProduits}) => {
     <>
         <div className="productSelects">
             <div className="productSelects-container">
-                <Select
-                    className="product-input-select"
-                    name='id_marque'
-                    options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
-                    placeholder="Choisir une marque"
-                />
-                 <Select
-                    className="product-input-select"
-                    name='categorie'
-                    options={getCategorie?.map(item => ({ value: item.id_categorie, label: item.nom_categorie }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'categorie', value: selectedOption.value } })}
-                    placeholder="Choisir une categorie"
-                />
+              <input
+              type="date"
+              className="product-input-select"
+              name="start_date"
+              style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
+              onChange={handleStartDateChange}
+            />
+            <input
+              type="date"
+              className="product-input-select"
+              name="end_date"
+              style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
+              onChange={handleEndDateChange}
+            />
                 <div className="select-btn">
                     <SearchOutlined className='select-search-btn' onClick={handleClick} />
                 </div>
@@ -120,4 +117,4 @@ const ProductSelects = ({getProduits}) => {
   )
 }
 
-export default ProductSelects
+export default ListeCommandeSelect

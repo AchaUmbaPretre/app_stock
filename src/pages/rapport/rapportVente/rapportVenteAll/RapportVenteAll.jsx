@@ -7,6 +7,7 @@ import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteAllSelects from './RapportVenteAllSelects';
 import { format } from 'date-fns';
+import moment from 'moment';
 /* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
 const RapportVenteAll = () => {
@@ -23,111 +24,6 @@ const RapportVenteAll = () => {
     const [open, setOpen] = useState(false);
     const [marqueName,setMarqueName] = useState('');
 
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-    
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Recherche
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Supprimer
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -165,6 +61,8 @@ const columns = [
       title: 'Pointure',
       dataIndex: 'taille',
       key: 'taille',
+      sorter: (a, b) => a.taille - b.taille,
+      sortDirections: ['descend', 'ascend'],
       render: (taille) => (
         <Tag color={'blue'}>{taille}</Tag>
       ),
@@ -206,8 +104,8 @@ const columns = [
         sorter: (a, b) => a.date_vente - b.date_vente,
         sortDirections: ['descend', 'ascend'],
         render: (text) => (
-          <Tag color="blue" icon={<CalendarOutlined />}>
-            {format(new Date(text), 'dd-MM-yyyy')}
+          <Tag color={'blue'} icon={<CalendarOutlined />}>
+            {moment(text).format('DD-MM-yyyy')}
           </Tag>
         ),
       },
@@ -237,7 +135,6 @@ const columns = [
         key: 'quantite_en_stock',
         sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
         sortDirections: ['descend', 'ascend'],
-        width: "18%",
         render: (quantite_en_stock) => (
           <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
         ),

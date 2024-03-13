@@ -16,6 +16,8 @@ const VarianteSelect = ({getProduits}) => {
     const handleInputChange = (e) => {
         const fieldName = e.target.name;
         const fieldValue = e.target.value;
+
+        console.log(fieldValue)
       
         let updatedValue = fieldValue;
       
@@ -68,17 +70,8 @@ const VarianteSelect = ({getProduits}) => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    if (!datas.nom_produit || !datas.categorie ) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Veuillez remplir tous les champs requis',
-        icon: 'error',
-        confirmButtonText: 'OK',
-      });
-      return;
-    }
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/produit/produitSelect?nom_produit=${datas.nom_produit}&categorie=${datas.categorie}&prix=${datas.prix}&couleur=${datas.couleur}`);
+      const {data} = await axios.get(`${DOMAIN}/api/produit/listeVarianteProduit?nom_produit=${datas.nom_produit}&id_cat=${datas.categorie}&id_marque=${datas.id_marque}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({
@@ -87,7 +80,6 @@ const VarianteSelect = ({getProduits}) => {
         icon: 'error',
         confirmButtonText: 'OK',
       });
-
       console.log(err);
     }
 }
@@ -106,14 +98,14 @@ const VarianteSelect = ({getProduits}) => {
                  <Select
                     className="product-input-select"
                     name='categorie'
-                    options={getCategorie?.map(item => ({ value: item.id, label: item.nom_categorie }))}
+                    options={getCategorie?.map(item => ({ value: item.id_categorie, label: item.nom_categorie }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'categorie', value: selectedOption.value } })}
                     placeholder="Choisir une categorie"
                 />
                 <Select
                     className="product-input-select"
                     name='id_marque'
-                    options={getMarque?.map(item => ({ value: item.id, label: item.nom }))}
+                    options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
                     placeholder="Choisir une marque"
                 />

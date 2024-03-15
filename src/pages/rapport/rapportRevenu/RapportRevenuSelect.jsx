@@ -8,8 +8,7 @@ const RapportRevenuSelect = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getMarque, setGetMarque] = useState([]);
     const [datas, setDatas] = useState({start_date: "2024"});
-    const [getCategorie, setGetCategorie] = useState([]);
-    const [couleur, setCouleur] = useState([]);
+    const [getCategorie, setGetCategorie] = useState([]);;
     
 
     const handleStartDateChange = (e) => {

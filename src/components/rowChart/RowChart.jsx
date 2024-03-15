@@ -47,34 +47,22 @@ ChartJS.register(
 
   const labels = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre','Octobre','Novembre','Decembre'];
 
-/* export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Ventes',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      backgroundColor: 'rgba(255, 166, 0, 0.932)',
-      stack: 'Stack 0',
-    },
-    {
-      label: 'Achats',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      backgroundColor: 'rgb(131, 159, 241)',
-      stack: 'Stack 0',
-    },
-  ],
-}; */
-
 const RowChart = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [loading, setLoading] = useState(true);
   const [venteData, setVenteData] = useState(null);
+  const [datas, setDatas] = useState({start_date: 2024});
   const [achatsTotal, setAchatsTotal] = useState(null);
+
+  const handleStartDateChange = (e) => {
+    const startDate = e.target.value || new Date().getFullYear().toString();
+    setDatas((prev) => ({ ...prev, start_date: startDate }));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportAchatsMois/total`);
+        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportAchatsMois/total?months=${datas.start_date}`);
         const achatsData = data.map(({ mois, total_achats }) => ({
           x: monthLabels[mois - 1],
           y: total_achats,
@@ -86,12 +74,13 @@ const RowChart = () => {
       }
     };
     fetchData();
-  }, [DOMAIN]);
+  }, [DOMAIN,datas.start_date]);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportVenteMois/total`);
+        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportVenteMois/total?months=${datas.start_date}`);
         const ventesData = data.map(({ mois, total_vente }) => ({
           x: monthLabels[mois - 1],
           y: total_vente,
@@ -103,7 +92,8 @@ const RowChart = () => {
       }
     };
     fetchData();
-  }, [DOMAIN]);
+  }, [DOMAIN, datas.start_date]);
+
   const monthLabels = [
     'Janvier',
     'Février',
@@ -144,6 +134,16 @@ const RowChart = () => {
             <div className="rowChart-wrapper">
                 <div className="rowChart-title">
                     <h3>Achats et ventes</h3>
+                    <input 
+                      type="number"
+                      className="input-chart" 
+                      onChange={handleStartDateChange}
+                      min='1900'
+                      max='2099'
+                      step={1}
+                      placeholder='YYYY'
+                      value={datas.start_date}
+                    />
                 </div>
                 <div className='rowChart-container'>
                   <Bar options={options} data={data} />

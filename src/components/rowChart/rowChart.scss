@@ -2,10 +2,27 @@
     .rowChart-wrapper{
         .rowChart-title{
             padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             h3{
                 font-size: 1rem;
                 color: rgb(1, 35, 138);
                 font-weight: 400;
+            }
+            .input-chart{
+                outline: none;
+                border: 1px solid #d6d6d69c;
+                border-radius: 5px;
+                width: 75px;
+                padding: 5px 2px 5px 10px;
+                font-size: 11px;
+                background: #fff;
+                -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                &:focus{
+                    border: 1px solid rgba(1, 35, 138, 0.349);
+                }
             }
 
         }

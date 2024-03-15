@@ -70,7 +70,6 @@ const MouvementSelect = ({getProduits}) => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

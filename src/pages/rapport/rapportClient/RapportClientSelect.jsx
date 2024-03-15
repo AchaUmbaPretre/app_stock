@@ -66,8 +66,8 @@ const RapportClientSelect = ({getProduits}) => {
               style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
               onChange={handleEndDateChange}
             />
-                <div className="select-btn">
-                    <SearchOutlined className='select-search-btn' onClick={handleClick} />
+                <div className="select-btn" onClick={handleClick}>
+                    <SearchOutlined className='select-search-btn' />
                 </div>
             </div>
         </div>

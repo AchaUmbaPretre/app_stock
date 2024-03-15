@@ -119,9 +119,9 @@
                 }
                 .page-icon{
                     @include mobileXR{
-                        height: 260px;
-                        width: 100%;
-                    }
+                        height: 200px;
+                        width: 250px;
+                    }   
                 }
                 .page-top-desc{
                     @include mobileXR{

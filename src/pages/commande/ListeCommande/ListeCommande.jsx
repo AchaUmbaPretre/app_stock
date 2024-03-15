@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, EyeOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, EyeOutlined,CalendarOutlined, CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button,Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -67,14 +67,14 @@ const ListeCommande = () => {
           key: 'date_commande',
           render: (text) => (
             <span>
-              {<Tag color={'blue'}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>}
+              {<Tag color={'blue'} icon={<CalendarOutlined />}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>}
             </span>
           ),
         },
         {
             title: 'Status',
             dataIndex: 'nom_statut',
-            key: 'prenom',
+            key: 'nom_statut',
             render: (text) => {
               let tagColor = '';
               let icon = null;
@@ -251,7 +251,8 @@ const ListeCommande = () => {
       }
 
   const filteredData = data?.filter((item) =>
-  item.nom?.toLowerCase().includes(searchValue.toLowerCase())
+  item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.nom_statut?.toLowerCase().includes(searchValue.toLowerCase())
 )
 
   return (

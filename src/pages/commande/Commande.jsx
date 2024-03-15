@@ -54,40 +54,6 @@ const Commande = () => {
         setCurrentPage(selectedPage.selected);
       };
 
-/*       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const url = marque.length > 0
-            ? `${DOMAIN}/api/produit/varianteFiltreMarque/${marque}`
-            : `${DOMAIN}/api/produit/varianteProduit`;
-
-            const { data } = await axios.get(url);
-            setData(data)
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN,marque]); */
-
-/*       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const url = cible.length > 0 
-            ? `${DOMAIN}/api/produit/varianteFiltreCible/${cible}`
-            : `${DOMAIN}/api/produit/varianteProduit`
-            const { data } = await axios.get(url);
-            setData(data)
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN,cible]); */
-
-
       useEffect(() => {
         const fetchData = async () => {
           try {

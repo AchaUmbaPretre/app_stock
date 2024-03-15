@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import axios from 'axios';
 import config from '../../../config';
 import { Tag } from 'antd';
+import RapportAchatSelect from './rapportAchatSelect/RapportAchatSelect';
 
 const RapportDachats = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -252,8 +253,8 @@ useEffect(() => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-{/*                    {open &&
-                    <ProductSelects getProduits={setGetProduit}/> }  */}
+                    {open &&
+                    <RapportAchatSelect getProduits={setGetRapportDachat}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

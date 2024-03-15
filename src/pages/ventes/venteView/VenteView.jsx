@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined,FilePdfOutlined,CalendarOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,FilePdfOutlined,CalendarOutlined,CloseOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
 import { useLocation } from 'react-router-dom';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import VenteViewSelect from './VenteViewSelect';
 
 const VenteView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,7 @@ const VenteView = () => {
     const id = pathname.split('/')[2];
     const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
+    const [opens, setOpens] = useState(false);
 
       const handleDelete = async (id) => {
       try {
@@ -24,6 +26,10 @@ const VenteView = () => {
         } catch (err) {
           console.log(err);
         }
+      };
+
+      const HandOpen = () => {
+        setOpens(!opens);
       };
     
       const columns = [
@@ -183,7 +189,7 @@ const VenteView = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
+                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
                                 <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
@@ -195,6 +201,8 @@ const VenteView = () => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
+                    {opens &&
+                    <VenteViewSelect getProduits={setData} getId={id}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

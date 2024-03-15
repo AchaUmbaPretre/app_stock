@@ -109,8 +109,8 @@ const VarianteSelect = ({getProduits}) => {
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
                     placeholder="Choisir une marque"
                 />
-                <div className="select-btn">
-                    <SearchOutlined className='select-search-btn' onClick={handleClick} />
+                <div className="select-btn" onClick={handleClick}>
+                    <SearchOutlined className='select-search-btn' />
                 </div>
             </div>
         </div>

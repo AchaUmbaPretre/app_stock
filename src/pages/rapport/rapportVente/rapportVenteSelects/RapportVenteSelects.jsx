@@ -9,6 +9,8 @@ const RapportVenteSelects = ({ getProduits }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [datas, setDatas] = useState({});
   const [getMarque, setGetMarque] = useState([]);
+  const [couleur, setCouleur] = useState([]);
+  const [taille, setTaille] = useState([])
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -38,6 +40,40 @@ const RapportVenteSelects = ({ getProduits }) => {
     fetchData();
   }, [DOMAIN]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
+        setCouleur(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
+        setTaille(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN]);
+
+  const handleStartDateChange = (e) => {
+    const startDate = e.target.value;
+    setDatas((prev) => ({ ...prev, start_date: startDate }));
+  };
+
+  const handleEndDateChange = (e) => {
+    const endDate = e.target.value;
+    setDatas((prev) => ({ ...prev, end_date: endDate }));
+  };
+
   const handleClick = async (e) => {
     e.preventDefault();
   
@@ -47,7 +83,7 @@ const RapportVenteSelects = ({ getProduits }) => {
         : datas.id_marque;
   
       const { data } = await axios.get(
-        `${DOMAIN}/api/rapport/rapport/venteV?start_date=${datas.start_date}&end_date=${datas.end_date}&marque_id=${marqueIds}`
+        `${DOMAIN}/api/rapport/rapport/venteV?start_date=${datas.start_date}&end_date=${datas.end_date}&marque_id=${marqueIds}&couleur_id=${datas.id_couleur}&taille_id=${datas.id_taille}`
       );
   
       getProduits(data);
@@ -60,16 +96,9 @@ const RapportVenteSelects = ({ getProduits }) => {
       });
   
       console.log(err);
-    }
-  };
-  const handleStartDateChange = (e) => {
-    const startDate = e.target.value;
-    setDatas((prev) => ({ ...prev, start_date: startDate }));
-  };
 
-  const handleEndDateChange = (e) => {
-    const endDate = e.target.value;
-    setDatas((prev) => ({ ...prev, end_date: endDate }));
+      console.log(datas)
+    }
   };
 
   return (
@@ -90,6 +119,34 @@ const RapportVenteSelects = ({ getProduits }) => {
             }
             placeholder="Choisir une marque"
           />
+          <Select
+            className="product-input-select"
+            name="id_couleur"
+            options={couleur?.map((item) => ({
+              value: item.id_couleur,
+              label: item.description,
+            }))}
+            onChange={(selectedOption) =>
+              handleInputChange({
+                target: { name: 'id_couleur', value: selectedOption?.value },
+              })
+            }
+            placeholder="Choisir une couleur"
+          />
+          <Select
+            className="product-input-select"
+            name="id_taille"
+            options={taille?.map((item) => ({
+              value: item.id_taille,
+              label: item.taille,
+            }))}
+            onChange={(selectedOption) =>
+              handleInputChange({
+                target: { name: 'id_taille', value: selectedOption?.value },
+              })
+            }
+            placeholder="Choisir une taille"
+          />
           <input
             type="date"
             className="product-input-select"
@@ -105,8 +162,8 @@ const RapportVenteSelects = ({ getProduits }) => {
             style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
             onChange={handleEndDateChange}
           />
-          <div className="select-btn">
-            <SearchOutlined className="select-search-btn" onClick={handleClick} />
+          <div className="select-btn" onClick={handleClick}>
+            <SearchOutlined className="select-search-btn" />
           </div>
         </div>
       </div>

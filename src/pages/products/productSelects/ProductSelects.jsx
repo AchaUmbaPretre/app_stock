@@ -110,8 +110,8 @@ const ProductSelects = ({getProduits}) => {
                     onChange={selectedOption => handleInputChange({ target: { name: 'categorie', value: selectedOption.value } })}
                     placeholder="Choisir une categorie"
                 />
-                <div className="select-btn">
-                    <SearchOutlined className='select-search-btn' onClick={handleClick} />
+                <div className="select-btn" onClick={handleClick}>
+                    <SearchOutlined className='select-search-btn' />
                 </div>
             </div>
         </div>

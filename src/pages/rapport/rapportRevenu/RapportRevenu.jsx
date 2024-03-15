@@ -1,128 +1,17 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, ArrowUpOutlined, ArrowDownOutlined,FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Input } from 'antd';
-import { Link } from 'react-router-dom';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined, ArrowUpOutlined, ArrowDownOutlined,FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { Table, Tag } from 'antd';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../config';
-/* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
+import RapportRevenuSelect from './RapportRevenuSelect';
 
 const RapportRevenu = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
-    const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-    
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Recherche
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Supprimer
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -146,6 +35,8 @@ const columns = [
       title: 'Nombre de vente',
       dataIndex: 'nombre_ventes',
       key: 'nombre_ventes',
+      sorter: (a, b) => a.nombre_ventes - b.nombre_ventes,
+        sortDirections: ['descend', 'ascend'],
       render: (nombre_ventes) => (
         <Tag color={'blue'}>{nombre_ventes}</Tag>
       ),
@@ -193,6 +84,10 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
+const filteredData = getRapport?.filter((item) =>
+item.mois.toLowerCase().includes(searchValue.toLowerCase())
+)
+
   return (
     <>
         <div className="products">
@@ -218,10 +113,10 @@ useEffect(() => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-{/*                    {open &&
-                    <RapportVenteSelects getProduits={setGetRapport}/> } */}
+                    {open &&
+                    <RapportRevenuSelect getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                     </div>
                 </div>
             </div>

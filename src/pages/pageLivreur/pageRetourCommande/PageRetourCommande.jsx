@@ -11,7 +11,6 @@ const PageRetourCommande = () => {
     const scroll = { x: 400 };
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const [getType, setGetType] = useState([]);
     const [data, setData] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
 
@@ -32,7 +31,7 @@ const PageRetourCommande = () => {
     <>
         <div className="pageCommandeLivraison">
           <div className="page-rows-retour" onClick={()=>navigate('/pageLivreurVente')}>
-            <div className="page-retour-row">
+            <div className="page-retour-row" style={{background:'#fff',border: "1px solid rgba(3, 3, 109, 0.171)", color:"rgb(3, 3, 109)",padding: '6px',width:'max-content',cursor:'pointer',borderRadius: "5px"}}>
               retour
             </div>
           </div>

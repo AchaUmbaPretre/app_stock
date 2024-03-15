@@ -21,13 +21,6 @@ const Couleur = () => {
     const [loading, setLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
-    const showModal = (id) => {
-      setOpen(true);
-      navigate(`/emplacement/${id}`);
-    };
-    const handleCancel = () => {
-      setOpen(false);
-    };
 
     const handleInputChange = (e) => {
       const fieldName = e.target.name;

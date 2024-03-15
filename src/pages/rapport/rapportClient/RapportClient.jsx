@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../config';
 import RapportClientAll from './rapportClientAll/RapportClientAll';
-/* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
+import RapportClientSelect from './RapportClientSelect';
 
 const RapportClient = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -89,8 +89,8 @@ useEffect(() => {
 }, [DOMAIN]);
 
  const filteredData = getRapport?.filter((item) =>
-item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
-)
+  item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
+  )
 
   return (
     <>
@@ -119,8 +119,8 @@ item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
                               <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-                    {/* {open &&
-                      <RapportVenteSelects getProduits={setGetRapport}/> } */}
+                    {open &&
+                      <RapportClientSelect getProduits={setGetRapport}/> }
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

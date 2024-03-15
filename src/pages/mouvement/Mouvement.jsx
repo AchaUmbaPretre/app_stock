@@ -1,13 +1,15 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import MouvClientDetail from './mouvementClientDetail/MouvClientDetail';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import MouvementSelect from './MouvementSelect';
+import MouvementDepart from './MouvementDepart';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -15,6 +17,7 @@ const Mouvement = () => {
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
@@ -23,6 +26,10 @@ const Mouvement = () => {
       const showModal = (e) => {
         setOpen(true);
         setIdClient(e)
+      };
+
+      const HandOpen = () =>{
+        setOpens(!opens)
       };
    
       const handleDelete = async (id) => {
@@ -139,37 +146,47 @@ const Mouvement = () => {
                         <span>Gérer vos mouvements</span>
                     </div>
                 </div>
-                <div className="product-bottom">
-                    <div className="product-bottom-top">
-                        <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
-                        </div>
-                        <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
-                        </div>
+                <Tabs>
+                  <Tabs.TabPane tab='Mouvement par client' key={0}>
+                    <div className="product-bottom">
+                      <div className="product-bottom-top">
+                          <div className="product-bottom-left">
+                          {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                              <div className="product-row-search">
+                                  <SearchOutlined className='product-icon-plus'/>
+                                  <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
+                              </div>
+                          </div>
+                          <div className="product-bottom-right">
+                              <FilePdfOutlined className='product-icon-pdf' />
+                              <FileExcelOutlined className='product-icon-excel'/>
+                              <PrinterOutlined className='product-icon-printer'/>
+                          </div>
+                      </div>
+                      {opens &&
+                      <MouvementSelect getProduits={setData}/> }
+                      <div className="rowChart-row-table">
+                          <Modal
+                            title="Information de client"
+                            centered
+                            open={open}
+                            onCancel={() => setOpen(false)}
+                            width={850}
+                            footer={[
+                              
+                            ]}
+                          >
+                          <MouvClientDetail idClients={idClient}/>
+                          </Modal>
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
+                      </div>
                     </div>
-                    <div className="rowChart-row-table">
-                        <Modal
-                          title="Information de client"
-                          centered
-                          open={open}
-                          onCancel={() => setOpen(false)}
-                          width={850}
-                          footer={[
-                            
-                          ]}
-                        >
-                         <MouvClientDetail idClients={idClient}/>
-                        </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
-                    </div>
-                </div>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Départ en livraison' key={1}>
+                     <MouvementDepart/>
+                  </Tabs.TabPane>
+                </Tabs>
+                
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,CloseOutlined,FilePdfOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import config from '../../config';
 import { format } from 'date-fns';
 import VenteClientDetail from './venteClientDetail/VenteClientDetail';
 import { useSelector } from 'react-redux';
+import VenteSelect from './VentesSelect';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,17 +17,22 @@ const Ventes = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
 
       const handleDelete = async (id) => {
-      try {
+        try {
           await axios.delete(`${DOMAIN}/api/vente/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
         }
+      };
+
+      const HandOpen = () => {
+        setOpens(!opens);
       };
     
       const columns = [
@@ -160,7 +166,7 @@ const Ventes = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
+                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
                                 <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -172,6 +178,8 @@ const Ventes = () => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
+                    {opens &&
+                    <VenteSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
                         <Modal
                           title="Information du client"

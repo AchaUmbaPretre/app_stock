@@ -12,7 +12,7 @@ import { FadeLoader } from 'react-spinners';
 const PageCommandeVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [selected, setSelected] = useState([]);
-    const scroll = { x: 400 };
+    const scroll = { x: 450 };
     const [loading, setLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -50,7 +50,7 @@ const PageCommandeVente = () => {
             </div>
           ),
         },
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"2%"},
           {
             title: 'image',
             dataIndex: 'img',
@@ -86,6 +86,16 @@ const PageCommandeVente = () => {
               })}
             </Tag>   
             </span>
+          ),
+        },
+        {
+          title: 'Couleur',
+          dataIndex: 'couleur',
+          key: 'couleur',
+          render: (couleur) => (
+            <Space>
+              <Tag color="green">{couleur}</Tag>
+            </Space>
           ),
         },
         {

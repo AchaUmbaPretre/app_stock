@@ -33,7 +33,6 @@ const ClientForm = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
     
      if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province) {
       Swal.fire({

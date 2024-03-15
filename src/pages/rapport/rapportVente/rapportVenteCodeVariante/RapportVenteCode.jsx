@@ -6,6 +6,7 @@ import Highlighter from 'react-highlight-words';
 import axios from 'axios';
 import config from '../../../../config';
 import moment from 'moment';
+import RapportVenteCodeSelect from './RapportVenteCodeSelect';
 
 const RapportVenteCode = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -20,111 +21,6 @@ const RapportVenteCode = () => {
     const id = pathname.split('/')[2];
     const [open, setOpen] = useState(false);
 
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-    
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Recherche
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Supprimer
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -289,6 +185,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
+                    {open &&
+                    <RapportVenteCodeSelect getProduits={setGetRapport} id={id}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

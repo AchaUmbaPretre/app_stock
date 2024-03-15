@@ -1,19 +1,14 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined, CalendarOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Tag, Input, Image } from 'antd';
+import { Table, Tag, Image } from 'antd';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteAllSelects from './RapportVenteAllSelects';
-import { format } from 'date-fns';
 import moment from 'moment';
-/* import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects'; */
 
 const RapportVenteAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
     const searchInput = useRef(null);

@@ -29,8 +29,6 @@ const UtilisateurEdit = () => {
   setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  console.log(data)
-
   useEffect(() => {
     const fetchData = async () => {
       try {

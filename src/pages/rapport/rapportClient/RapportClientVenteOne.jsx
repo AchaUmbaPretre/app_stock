@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../config';
 import moment from 'moment';
+import RapportClientVenteOneSelect from './RapportClientVenteOneSelect';
 
 const RapportClientVenteOne = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -154,8 +155,8 @@ item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-{/*                     {open &&
-                    <RapportVenteAllSelects getProduits={setGetRapport} id={id}/> } */}
+                     {open &&
+                    <RapportClientVenteOneSelect getProduits={setGetRapport} id={id}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

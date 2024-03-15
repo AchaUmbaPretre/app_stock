@@ -1,7 +1,7 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import { Button, Input, Space, Table, Popover,Popconfirm,Modal} from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import { Button, Space, Table,Popconfirm,Modal} from 'antd';
+import React, { useEffect, useState } from 'react';
 import config from '../../config';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -48,6 +48,7 @@ const Matiere = () => {
         };
         fetchData();
       }, [id])
+      
       const handleOk = async (e) => {
         try{
           await axios.put(`${DOMAIN}/api/produit/matiereUpdate/${id}`,{nom : putMatiere})

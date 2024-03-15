@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import config from './../../../../config';
+import config from './../../config';
 import Swal from 'sweetalert2';
 
-const RapportVenteMSelect = ({getProduits}) => {
+const MouvementSelect = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [datas, setDatas] = useState({});
     
@@ -19,32 +19,32 @@ const RapportVenteMSelect = ({getProduits}) => {
       setDatas((prev) => ({ ...prev, end_date: endDate }));
     };
 
-    const handleClick = async (e) => {
-        e.preventDefault();
+  const handleClick = async (e) => {
+    e.preventDefault();
 
-    if (!datas.start_date || !datas.end_date ) {
-        Swal.fire({
-            title: 'Error',
-            text: 'Veuillez remplir tous les champs requis',
-            icon: 'error',
-            confirmButtonText: 'OK',
-        });
-        return;
-        }
-        try {
-        const {data} = await axios.get(`${DOMAIN}/api/rapport/rapport/vente?start_date=${datas.start_date}&end_date=${datas.end_date}`);
-        getProduits(data)
-        } catch (err) {
-        Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-        });
+   if (!datas.start_date || !datas.end_date ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez remplir tous les champs requis',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+    try {
+      const {data} = await axios.get(`${DOMAIN}/api/produit/mouvement?start_date=${datas.start_date}&end_date=${datas.end_date}`);
+      getProduits(data)
+    } catch (err) {
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
 
-        console.log(err);
-        }
-        }
+      console.log(err);
+    }
+}
 
   return (
     <>
@@ -75,4 +75,4 @@ const RapportVenteMSelect = ({getProduits}) => {
   )
 }
 
-export default RapportVenteMSelect
+export default MouvementSelect

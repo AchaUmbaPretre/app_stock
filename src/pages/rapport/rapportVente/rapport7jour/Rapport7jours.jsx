@@ -1,17 +1,11 @@
-import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover, Tag, Image, Tabs } from 'antd';
-import { Link } from 'react-router-dom';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { Table, Tag, Image } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import config from '../../../config';
-import RapportVenteSelects from './rapportVenteSelects/RapportVenteSelects';
+import config from '../../../../config';
 import { format } from 'date-fns';
-import RapportVenteCouleur from './rapportVenteCouleur/RapportVenteCouleur';
-import RapportAjour from './rapportAjour/RapportAjour';
-import Rapport7jours from './rapport7jour/Rapport7jours';
 
-const RapportVente = () => {
+const Rapport7jours = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,6 +13,7 @@ const RapportVente = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
 
+    
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
@@ -115,20 +110,6 @@ const columns = [
         </Tag>
       ),
     },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteV/${record.code_variant}`}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    },
 ];
 
 const HandOpen = () =>{
@@ -138,7 +119,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/vente7Jour`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -157,18 +138,9 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Rapport des ventes</h2>
-                        <span>Gérez votre rapport des ventes</span>
-                    </div>
-                </div>
-                <Tabs>
-                  <Tabs.TabPane tab='Rapport des ventes' key={0}>
-                    <div className="product-bottom">
+                <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
-                              {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                               <div className="product-row-search">
                                   <SearchOutlined className='product-icon-plus'/>
                                   <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -180,28 +152,16 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                               <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-                      {open &&
-                              <RapportVenteSelects getProduits={setGetRapport}/> }
+{/*                       {open &&
+                              <RapportVenteSelects getProduits={setGetRapport}/> } */}
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
-                    </div>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Vente du jour' key={1}>
-                    <RapportAjour/>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Ventes des 7 derniers jours' key={2}>
-                    <Rapport7jours/>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Rapport sur les couleurs, marques et pointures les plus vendues' key={3}>
-                    <RapportVenteCouleur/>
-                  </Tabs.TabPane>
-                </Tabs>
+                </div>
             </div>
         </div>
-
     </>
   )
 }
 
-export default RapportVente
+export default Rapport7jours

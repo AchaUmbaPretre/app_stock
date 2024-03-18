@@ -1,8 +1,9 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Table,Tag } from 'antd';
+import { SearchOutlined, CloseOutlined,EyeOutlined,SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { Button, Popover, Space, Table,Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
+import { Link } from 'react-router-dom';
 
 const RapportVenteCouleur = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -80,6 +81,20 @@ const columns = [
       render: (marque) => (
         <Tag color={'blue'}>{marque}</Tag>
       ),
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+          
+        <Space size="middle">
+           <Popover title="Voir les détails" trigger="hover">
+            <Link to={`/rapportVenteAll/${record.id_marque}`}>
+              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+            </Link>
+          </Popover>
+        </Space>
+      ),
     }
 ];
 
@@ -101,8 +116,8 @@ useEffect(() => {
 }, [DOMAIN]);
 
  const filteredData = getRapport?.filter((item) =>
-item.description.toLowerCase().includes(searchValue.toLowerCase())
-)
+  item.description.toLowerCase().includes(searchValue.toLowerCase())
+  )
 
   return (
     <>

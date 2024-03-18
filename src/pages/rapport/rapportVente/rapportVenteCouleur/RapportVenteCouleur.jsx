@@ -45,6 +45,24 @@ const columns = [
           );
         },
       },
+      {
+        title: 'Categorie',
+        dataIndex: 'categorie_plus_vendue',
+        key: 'categorie',
+        render: (categorie) => (
+          <Tag color={'blue'}>{categorie}</Tag>
+        ),
+      },
+      {
+        title: 'Pointure',
+        dataIndex: 'taille_plus_vendue',
+        key: 'pointure',
+        sorter: (a, b) => a.taille_plus_vendue - b.taille_plus_vendue,
+        sortDirections: ['descend', 'ascend'],
+        render: (pointure) => (
+          <Tag color={'blue'}>{pointure}</Tag>
+        ),
+      },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
@@ -53,6 +71,14 @@ const columns = [
       sortDirections: ['descend', 'ascend'],
       render: (quantite_vendue) => (
         <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
+      ),
+    },
+    {
+      title: 'Marque',
+      dataIndex: 'marque_plus_vendue',
+      key: 'marque',
+      render: (marque) => (
+        <Tag color={'blue'}>{marque}</Tag>
       ),
     }
 ];

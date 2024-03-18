@@ -186,13 +186,15 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                       </div>
                     </div>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Rapport des ventes à jour' key={1}>
+                  <Tabs.TabPane tab='Vente du jour' key={1}>
                     <RapportAjour/>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Rapport sur la couleur la plus vendue des ventes' key={2}>
+                  <Tabs.TabPane tab='Vente de 7 derniers jours' key={2}>
+                    <RapportAjour/>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Rapport sur la couleur, marque, pointure la plus vendue des ventes' key={3}>
                     <RapportVenteCouleur/>
                   </Tabs.TabPane>
-
                 </Tabs>
             </div>
         </div>

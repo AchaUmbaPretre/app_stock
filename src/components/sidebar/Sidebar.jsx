@@ -169,27 +169,27 @@ const Sidebar = () => {
       <SubMenu key="reports" title={<span className="sidebarH3">Rapports</span>} icon={<FileTextOutlined style={{ fontSize: '19px', color: '#fafafa' }}/>}>
         <Item key="rapportVente">
           <Link to="/rapportVente" className="sidebarLink">
-            Rapport des ventes
+            Ventes
           </Link>
         </Item>
         <Item key="rapportVenteMarque">
           <Link to="/rapportVenteMarque" className="sidebarLink">
-            Rapport par marques
+            Marques
           </Link>
         </Item>
         <Item key="rapportClient">
           <Link to="/rapportClient" className="sidebarLink">
-            Rapport des clients
+            Clients
           </Link>
         </Item>
           <Item key="rapportRevenu">
           <Link to="/rapportRevenu" className="sidebarLink">
-            Rapport des revenus
+            Revenus
           </Link>
         </Item>
         <Item key="rapportdAchats">
           <Link to="/rapportDachats" className="sidebarLink">
-            Rapport d'achats
+            Achats
           </Link>
         </Item>
       </SubMenu>

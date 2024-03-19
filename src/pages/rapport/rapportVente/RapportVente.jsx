@@ -93,6 +93,18 @@ const columns = [
           </Tag>
         ),
       },
+      {
+        title: 'Montant vendu',
+        dataIndex: 'montant_vendu',
+        key: 'quantite_vendue',
+        sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+        sortDirections: ['descend', 'ascend'],
+        render: (montant_vendu) => (
+          <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+            {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </Tag>
+        ),
+      },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
@@ -104,15 +116,13 @@ const columns = [
       ),
     },
     {
-      title: 'Montant vendu',
-      dataIndex: 'montant_vendu',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+      title: 'Quantité en stock',
+      dataIndex: 'quantite_en_stock',
+      key: 'quantite_en_stock', 
+      sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
       sortDirections: ['descend', 'ascend'],
-      render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
-          {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-        </Tag>
+      render: (quantite_en_stock) => (
+        <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
       ),
     },
     {

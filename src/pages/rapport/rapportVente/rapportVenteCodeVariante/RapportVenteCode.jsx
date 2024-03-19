@@ -1,8 +1,7 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Tag, Input, Image } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,UserOutlined,FilePdfOutlined,DollarOutlined,CalendarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { Table, Tag, Image } from 'antd';
 import { useLocation } from 'react-router-dom';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import moment from 'moment';
@@ -10,11 +9,8 @@ import RapportVenteCodeSelect from './RapportVenteCodeSelect';
 
 const RapportVenteCode = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
-    const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const {pathname} = useLocation();
@@ -58,8 +54,10 @@ const columns = [
       title: 'Pointure',
       dataIndex: 'taille',
       key: 'taille',
-      render: (taille) => (
-        <Tag color={'blue'}>{taille}</Tag>
+      sorter: (a, b) => a.taille - b.taille,
+      sortDirections: ['descend', 'ascend'],
+      render: (pointure) => (
+        <Tag color={'blue'}>{pointure}</Tag>
       ),
     },
     {
@@ -93,14 +91,36 @@ const columns = [
         },
       },
       {
+        title: 'Livreur',
+        dataIndex: 'username',
+        key: 'username',
+        render: (username) => (
+          <Tag color="green" icon={<UserOutlined />}>
+            {username}
+          </Tag>
+        ),
+      },
+      {
         title: "Date",
         dataIndex: 'date_vente',
         key: 'date',
         sorter: (a, b) => moment(a.date_vente).unix() - moment(b.date_vente).unix(),
         sortDirections: ['descend', 'ascend'],
         render: (text) => (
-          <Tag color={'blue'}>
+          <Tag color={'blue'} icon={<CalendarOutlined />}>
             {moment(text).format('DD-MM-yyyy')}
+          </Tag>
+        ),
+      },
+      {
+        title: 'Montant vendu',
+        dataIndex: 'montant_vendu',
+        key: 'montant_vendu',
+        sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+        sortDirections: ['descend', 'ascend'],
+        render: (montant_vendu) => (
+          <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+            {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
           </Tag>
         ),
       },
@@ -112,16 +132,6 @@ const columns = [
       sortDirections: ['descend', 'ascend'],
       render: (quantite_vendue) => (
         <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
-      ),
-    },
-    {
-      title: 'Montant vendu',
-      dataIndex: 'montant_vendu',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
-      sortDirections: ['descend', 'ascend'],
-      render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'}>{montant_vendu}</Tag>
       ),
     },
     {

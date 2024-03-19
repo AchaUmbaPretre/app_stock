@@ -89,7 +89,7 @@ const columns = [
           
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteAll/${record.id_marque}`}>
+            <Link to={`/rapportCouleurAll/${record.id_couleur}/${record.id_marque}`}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>

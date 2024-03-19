@@ -1,18 +1,22 @@
-import { SearchOutlined,CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import { Table, Tag, Image } from 'antd';
+import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import { format } from 'date-fns';
 
-const Rapport7jours = () => {
+const RapportCouleurAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
+    const [open, setOpen] = useState(false);
+    const id = useLocation().pathname.split('/')[2];
+    const id_marque = useLocation().pathname.split('/')[3];
 
-    
+
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
@@ -74,18 +78,32 @@ const columns = [
             <Tag color={tagColor}>{color}</Tag>
           );
         },
-      },
-      {
-        title: 'Pointure',
-        dataIndex: 'taille',
-        key: 'taille',
-        sorter: (a, b) => a.taille - b.taille,
-        sortDirections: ['descend', 'ascend'],
-        render: (taille) => (
-          <Tag color={'blue'}>{taille}</Tag>
+    },
+    {
+      title: 'Pointure',
+      dataIndex: 'taille',
+      key: 'taille',
+      render: (taille) => (
+        <Tag color={'blue'}>{taille}</Tag>
+      ),
+    },
+    {
+        title: 'Client',
+        dataIndex: 'nom_client',
+        key: 'nom_client',
+        render: (nom_client) => (
+          <Tag color={'blue'}>{nom_client}</Tag>
         ),
-      },
-      {
+    },
+    {
+      title: 'Livreur',
+      dataIndex: 'username',
+      key: 'username',
+      render: (username) => (
+        <Tag color={'blue'}>{username}</Tag>
+      ),
+  },
+    {
         title: 'Date',
         dataIndex: 'date_vente',
         key: 'date',
@@ -96,20 +114,20 @@ const columns = [
             {format(new Date(text), 'dd-MM-yyyy')}
           </Tag>
         ),
-      },
-      {
-        title: 'Montant vendu',
-        dataIndex: 'montant_vendu',
-        key: 'quantite_vendue',
-        sorter: (a, b) => a.montant_vendu - b.montant_vendu,
-        sortDirections: ['descend', 'ascend'],
-        render: (montant_vendu) => (
-          <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
-            {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-          </Tag>
-        ),
-      },
-     {
+    },
+    {
+      title: 'Montant vendu',
+      dataIndex: 'montant_vendu',
+      key: 'quantite_vendue',
+      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+      sortDirections: ['descend', 'ascend'],
+      render: (montant_vendu) => (
+        <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+          {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+        </Tag>
+      ),
+    },
+    {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
       key: 'quantite_vendue', 
@@ -131,10 +149,14 @@ const columns = [
     },
 ];
 
+const HandOpen = () =>{
+  setOpen(!open)
+}
+
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/vente7Jour`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteCouleurAll?id_couleur=${id}&id_marque=${id_marque}`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -142,20 +164,27 @@ useEffect(() => {
     }
   };
   fetchData();
-}, [DOMAIN]);
+}, [DOMAIN,id,id_marque]);
 
  const filteredData = getRapport?.filter((item) =>
-item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
-)
+    item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
+  )
 
   return (
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-bottom">
+                <div className="product-container-top">
+                    <div className="product-left">
+                        <h2 className="product-h2">Rapport des ventes</h2>
+                        <span>Gérez votre rapport des ventes</span>
+                    </div>
+                </div>
+                    <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
+                              {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                               <div className="product-row-search">
                                   <SearchOutlined className='product-icon-plus'/>
                                   <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -172,11 +201,12 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
-                </div>
+                    </div>
             </div>
         </div>
+
     </>
   )
 }
 
-export default Rapport7jours
+export default RapportCouleurAll

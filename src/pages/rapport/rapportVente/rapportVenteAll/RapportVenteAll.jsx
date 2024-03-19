@@ -1,7 +1,7 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined, CalendarOutlined} from '@ant-design/icons';
 import { Table, Tag, Image } from 'antd';
 import { useLocation } from 'react-router-dom';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteAllSelects from './RapportVenteAllSelects';
@@ -11,7 +11,6 @@ const RapportVenteAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
-    const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const {pathname} = useLocation();

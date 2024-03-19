@@ -46,7 +46,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
           }
         };
         fetchData();
-      }, [id]);
+      }, [id,idVariant]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -188,6 +188,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                         </div>
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">{dd?.nom_produit}</h1>
+                            <h2 className="product-titre" style={{color:'#6d6c6c', fontSize:'17px'}}>{dd?.nom_marque}</h2>
                             <p className="product-desc">{dd?.code_pays}</p>
                             <p className="product-desc">Il y a {inventaireTotalOne} article{inventaireTotalOne === 1 ? '' : "s"} en stock</p>
                             <div className="product-rate">

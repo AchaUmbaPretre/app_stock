@@ -22,7 +22,7 @@ const { SubMenu, Item } = Menu;
 const Sidebar = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
-  const [errorMessage,setErrorMessage] = useState('')
+/*   const [errorMessage,setErrorMessage] = useState('') */
   const [currentUser, setCurrentUser] = useState('')
 
   const Logout = async () => {
@@ -34,7 +34,7 @@ const Sidebar = () => {
       navigate('/login')
       window.location.reload();
     } catch (error) {
-      setErrorMessage(error.response.data);
+/*       setErrorMessage(error.response.data); */
       Swal.fire('Erreur lors de la déconnexion.', '', 'error');
     }
   };
@@ -58,11 +58,6 @@ const Sidebar = () => {
         <Item key="productForm">
           <Link to="/productForm" className="sidebarLink">
             Créer un nouveau produit
-          </Link>
-        </Item>
-        <Item key="ListeVariante">
-          <Link to="/ListeVariante" className="sidebarLink">
-            Liste des variantes
           </Link>
         </Item>
         <Item key="varianteProduit">
@@ -185,6 +180,11 @@ const Sidebar = () => {
           <Item key="rapportRevenu">
           <Link to="/rapportRevenu" className="sidebarLink">
             Revenus
+          </Link>
+        </Item>
+        <Item key="listeVariante">
+          <Link to="/listeVariante" className="sidebarLink">
+            Stock
           </Link>
         </Item>
         <Item key="rapportdAchats">

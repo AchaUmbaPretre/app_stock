@@ -75,6 +75,7 @@ import Depenses from './pages/depenses/Depenses';
 import CatDepenses from './pages/depenses/catDepenses/CatDepenses';
 import RapportVenteMarque from './pages/rapport/rapportVente/rapportVenteMarque/RapportVenteMarque';
 import RapportVenteCode from './pages/rapport/rapportVente/rapportVenteCodeVariante/RapportVenteCode';
+import RapportCouleurAll from './pages/rapport/rapportVente/rapportVenteCouleur/RapportCouleurAll';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -369,6 +370,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/rapportClient',
           element: <RapportClient/>
+        },
+        {
+          path: '/rapportCouleurAll/:id/:id_marque',
+          element: <RapportCouleurAll/>
         },
         {
           path: '/rapportClientOne',

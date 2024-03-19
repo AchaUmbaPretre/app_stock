@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined,CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import { Table, Tag, Image } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -11,7 +11,6 @@ const RapportAjour = () => {
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const [open, setOpen] = useState(false);
 
     
 const columns = [
@@ -47,6 +46,14 @@ const columns = [
       ),
     },
     {
+      title: 'Pointure',
+      dataIndex: 'taille',
+      key: 'taille',
+      render: (taille) => (
+        <Tag color={'blue'}>{taille}</Tag>
+      ),
+    },
+    {
         title: 'Couleur',
         dataIndex: 'description',
         key: 'description',
@@ -75,8 +82,8 @@ const columns = [
             <Tag color={tagColor}>{color}</Tag>
           );
         },
-      },
-      {
+    },
+    {
         title: 'Date',
         dataIndex: 'date_vente',
         key: 'date',
@@ -87,8 +94,20 @@ const columns = [
             {format(new Date(text), 'dd-MM-yyyy')}
           </Tag>
         ),
-      },
-     {
+    },
+    {
+        title: 'Montant vendu',
+        dataIndex: 'montant_vendu',
+        key: 'quantite_vendue',
+        sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+        sortDirections: ['descend', 'ascend'],
+        render: (montant_vendu) => (
+          <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+            {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </Tag>
+        ),
+    },
+    {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',
       key: 'quantite_vendue', 
@@ -99,22 +118,16 @@ const columns = [
       ),
     },
     {
-      title: 'Montant vendu',
-      dataIndex: 'montant_vendu',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+      title: 'Quantité en stock',
+      dataIndex: 'quantite_en_stock',
+      key: 'quantite_en_stock', 
+      sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,
       sortDirections: ['descend', 'ascend'],
-      render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
-          {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-        </Tag>
+      render: (quantite_en_stock) => (
+        <Tag color={quantite_en_stock > 0 ? 'green' : 'red'}>{quantite_en_stock}</Tag>
       ),
     },
 ];
-
-const HandOpen = () =>{
-  setOpen(!open)
-}
 
 useEffect(() => {
   const fetchData = async () => {

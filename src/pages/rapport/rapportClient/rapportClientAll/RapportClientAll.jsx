@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,UserOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,UserOutlined,DollarOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import { Table, Tag, Image } from 'antd';
 import { CalendarOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
@@ -114,6 +114,18 @@ const RapportClientAll = () => {
                 <Tag color={tagColor}>{color}</Tag>
               );
             },
+          },
+          {
+            title: 'Montant vendu',
+            dataIndex: 'montant_vendu',
+            key: 'montant_vendu',
+            sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+            sortDirections: ['descend', 'ascend'],
+            render: (montant_vendu) => (
+              <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+                {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+              </Tag>
+            ),
           },
         {
           title: 'Quantité vendue',

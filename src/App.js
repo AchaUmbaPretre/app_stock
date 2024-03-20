@@ -76,6 +76,9 @@ import CatDepenses from './pages/depenses/catDepenses/CatDepenses';
 import RapportVenteMarque from './pages/rapport/rapportVente/rapportVenteMarque/RapportVenteMarque';
 import RapportVenteCode from './pages/rapport/rapportVente/rapportVenteCodeVariante/RapportVenteCode';
 import RapportCouleurAll from './pages/rapport/rapportVente/rapportVenteCouleur/RapportCouleurAll';
+import Dette from './pages/dette/Dette';
+import Paiement from './pages/paiement/Paiement';
+import EntreeStock from './pages/entreeStock/EntreeStock';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -386,6 +389,18 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/rapportDachats',
           element: <RapportDachats/>
+        },
+        {
+          path: '/dette',
+          element: <Dette />
+        },
+        {
+          path: '/paiement',
+          element: <Paiement />
+        },
+        {
+          path: '/entreeStock',
+          element: <EntreeStock />
         },
       ]
     }, user?.role === 'livreur' && {

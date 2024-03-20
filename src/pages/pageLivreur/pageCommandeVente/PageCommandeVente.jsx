@@ -22,6 +22,7 @@ const PageCommandeVente = () => {
     const {pathname} = useLocation();
     const IdCommande = pathname.split('/')[2];
     const [checkeds, setCheckeds] = useState(false);
+    const [dette, setDette] = useState('');
 
     const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client) => {
         if (event.target.checked) {
@@ -157,6 +158,8 @@ const PageCommandeVente = () => {
                 id_varianteProduit: dd.id,
                 id_taille : dd.id_taille,
                 id_type_mouvement : 4,
+                montant_convenu : dd.prix,
+                montant_paye : dette
               });
             })
           );
@@ -257,6 +260,10 @@ const PageCommandeVente = () => {
                 <div className="pageLivreur_submit">
                     <label htmlFor="">Remise</label>
                     <h2>{data[0]?.quantite_prix} $</h2>
+                </div>
+                <div className="pageLivreur_submit">
+                    <label htmlFor="">Dette</label>
+                    <input type='number' min={0} className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la datte...' />
                 </div>
                 <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleClick} disabled={isLoading}>Envoyer maintenant</button>

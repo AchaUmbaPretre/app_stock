@@ -1,4 +1,3 @@
-import { StepBackwardOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import iconRetour from './../../../assets/return-box_2649277.png'
 import iconLivraison from './../../../assets/delivery_1350253.png'
 import './pageLivreurVente.scss'

@@ -3,7 +3,7 @@ import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOu
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
 import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetail';
@@ -168,8 +168,8 @@ const Client = () => {
             dataIndex: 'telephone',
             key: 'email',
             render: (text) => (
-              <Tag color={'royalblue'}>{text}</Tag>
-            ),
+               <Link color={'royalblue'} to={`https://wa.me/${text}`}>{text}</Link>
+            ), 
           },
         {
           title: 'Ville',

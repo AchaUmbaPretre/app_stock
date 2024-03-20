@@ -1,0 +1,451 @@
+import React from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import config from '../../config'
+import axios from 'axios'
+import { useEffect } from 'react'
+import Select from 'react-select';
+import moment from 'moment';
+import { Image, Table } from 'antd';
+import { CloudUploadOutlined } from '@ant-design/icons';
+import Swal from 'sweetalert2'
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
+import { CircularProgress } from '@mui/material';
+
+const EntreeStock = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const [getProduit, setGetProduit] = useState([]);
+    const [produit, setProduit] = useState([]);
+    const [produitId, setProduitId] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState([]);
+    const [getCouleur,setGetCouleur] = useState([]);
+    const [getPays,setGetPays] = useState([]);
+    const [getTaille,setGetTaille] = useState([]);
+    const navigate = useNavigate();
+    const {pathname} = useLocation();
+    const id = pathname.split('/')[2];
+    const [prix, setPrix] = useState([]);
+    const [idPays, setIdPays] = useState([]);
+    const [variantCheck, setVariantCheck] = useState({});
+    const [selectedIds, setSelectedIds] = useState([]);
+    const scroll = { x: 400 };
+    const [selectedData, setSelectedData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [variantExists, setVariantExists] = useState(false);
+    const [imagePreview, setImagePreview] = useState('');
+
+  
+    const handleInputChange = (e) => {
+      const fieldName = e.target.name;
+      const fieldValue = e.target.value;
+    
+      let updatedValue = fieldValue;
+      let file = null;
+      
+      if (fieldName === "img") {
+        file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          setImagePreview('');
+        }
+        updatedValue = file;
+      } else if (fieldName === "contact_email") {
+        updatedValue = fieldValue.toLowerCase();
+      } else if (Number.isNaN(Number(fieldValue))) {
+        if (typeof fieldValue === "string" && fieldValue.length > 0) {
+          updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+        }
+      }
+    
+      // Vérifier si la variante existe déjà
+      if (fieldName === "code_variant") {
+        const exists = variantCheck.some(
+          (variant) => variant.code_variant.toLowerCase() === fieldValue.toLowerCase()
+        );
+        setVariantExists(exists);
+      }
+      setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+    };
+
+    const handleChange = (e) => {
+      const fieldName = e.target.name;
+      const fieldValue = e.target.value
+      setProduitId((prev)=>({...prev, [fieldName]: fieldValue}))
+    }
+
+    
+    const handleCheckboxChange = (id) => {
+        const selectedRecord = getTaille?.find((record) => record.id_taille === id);
+        if (selectedIds.includes(id)) {
+          setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
+          setSelectedData(selectedData.filter((record) => record.id !== id));
+        } else {
+          setSelectedIds([...selectedIds, id]);
+          setSelectedData([...selectedData, selectedRecord]);
+        }
+    };
+
+    const handleStockChange = (e, id) => {
+        const updatedData = selectedData.map((record) => {
+          if (record.id_taille === id) {
+            return { ...record, stock: e.target.value };
+          }
+          return record;
+        });
+        setSelectedData(updatedData);
+      };
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit`);
+            setProduit(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/produit/${produitId?.id_produit}`);
+            setGetProduit(data[0])
+
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+    }, [DOMAIN,produitId?.id_produit]);
+
+    useEffect(()=>{
+        setIdPays(data?.id_pays)
+        setPrix(getProduit?.prix)
+    },[data?.id_pays,getProduit?.prix])
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
+            setGetCouleur(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/pays`);
+            setGetPays(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/Codevariante`);
+            setVariantCheck(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/tailleOne/${idPays}`);
+            setGetTaille(data)
+            setLoading(false)
+
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,idPays]);
+
+      const qTable = [
+        {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          width: '25%',
+          render: (record) => {
+            return (
+              <input
+                disabled
+                type="number"
+                className='input-timeBar'
+                value={record}
+              />
+            );
+          }
+        },
+        {
+          title: 'Quantité',
+          dataIndex: 'stock',
+          key: 'stock',
+          width: '25%',
+          render: (text, record) => {
+            const selectedRecord = selectedData.find((selectedRecord) => selectedRecord.id_taille === record.id_taille);
+            return (
+              <input
+                type="number"
+                name='stock'
+                className='input-stock'
+                onChange={(e) => handleStockChange(e, record.id_taille)}
+                disabled = {selectedRecord ? false : true}
+                min={0}
+              />
+            );
+          }
+        },
+        {
+          title: 'Sélectionner',
+          dataIndex: 'id_taille',
+          width: '25%',
+          render: (text, record) => {
+            const isChecked = selectedIds.includes(record.id_taille);
+            return (
+              <>
+                {isChecked ? (
+                  <ToggleOnIcon
+                    color="primary"
+                    style={{ fontSize: '40px', cursor: 'pointer' }}
+                    onClick={() => handleCheckboxChange(record.id_taille)}
+                  />
+                ) : (
+                  <ToggleOffIcon
+                    color="disabled"
+                    style={{ fontSize: '40px', cursor: 'pointer' }}
+                    onClick={() => handleCheckboxChange(record.id_taille)}
+                  />
+                )}
+              </>
+            );
+          },
+        },
+      ];
+
+      const handleClick = async (e) => {
+        e.preventDefault();
+      
+        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
+          Swal.fire({
+            title: 'Erreur',
+            text: 'Veuillez remplir tous les champs requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
+      
+        if (Array.isArray(selectedData) && selectedData.length > 0) {
+          try {
+            setIsLoading(true);
+      
+            const requests = selectedData.map((item) => {
+              const formData = new FormData();
+              formData.append('id_pays', data.id_pays);
+              formData.append('id_couleur', data.id_couleur);
+              formData.append('code_variant', data.code_variant);
+              formData.append('img', data.img);
+              formData.append('id_produit', produitId?.id_produit);
+              formData.append('id_cible', item.id_cible);
+              formData.append('id_taille', item.id_taille);
+              formData.append('id_famille', item.id_famille);
+              formData.append('stock', item.stock);
+              formData.append('prix', prix);
+      
+              return axios.post(`${DOMAIN}/api/produit/varianteProduitEntree`, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+            });
+      
+            await Promise.all(requests);
+      
+            Swal.fire({
+              title: 'Succès',
+              text: 'Produit créé avec succès !',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            });
+      
+            navigate('/varianteProduit');
+            window.location.reload();
+          } catch (err) {
+            Swal.fire({
+              title: 'Erreur',
+              text: err.message,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } finally {
+            setIsLoading(false);
+          }
+        } else {
+          console.error('idTaille is not an array');
+        }
+      };
+
+      const formattedDatEntrant = moment(getProduit?.date_entrant).format('DD-MM-YYYY');
+  return (
+    <>
+        <div className="productView">
+            <div className="product-wrapper">
+                <div className="product-container-top">
+                    <div className="product-left">
+                        <h2 className="product-h2">Réception de stock</h2>
+                        <span>Réception</span>
+                    </div>
+                </div>
+                <div className="product-bottom">
+                    <div className="product-view-left">
+                        <div className="product_stock_controle" style={{display:'flex', flexDirection:'column', gap: '10px', paddingBottom:'20px'}}>
+                          <label htmlFor="" style={{color:"#6d6c6c"}}>Produit</label>
+                            <Select
+                              name="id_produit"
+                              placeholder="sélectionnez un produit"
+                              options={produit?.map(item => ({ value: item.id_produit, label: `${item.nom_produit}/ Marque : ${item.nom_marque}/ categorie: ${item.nom_categorie}/ famille: ${item.nom_famille}/ matière: ${item.nom_matiere}` }))}
+                              onChange={selectedOption => handleChange({ target: { name: 'id_produit', value: selectedOption.value } })}
+                            />
+                        </div>
+                        <table>
+                            <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Détail</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Produit</th>
+                                <td>{getProduit?.nom_produit}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Catégorie</th>
+                                <td>{getProduit?.nom_categorie}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Matière</th>
+                                <td>{getProduit?.nom_matiere}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prix</th>
+                                <td>{getProduit?.prix} {getProduit?.prix && '$'}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Marque</th>
+                                <td>{getProduit?.nom_marque}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Cible</th>
+                                <td>{getProduit?.nom_cible}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Famille</th>
+                                <td>{getProduit?.nom_famille}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date d'entrée</th>
+                                <td>{getProduit?.date_entrant && formattedDatEntrant}</td>
+                            </tr>
+                        </table>
+                        <div className="product_view_form">
+                            <h2 className="product-h2">Ajoutez des informations</h2>
+                            <div className="product_view_wrapper">
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Pays</label>
+                                    <Select
+                                        name="id_pays"
+                                        placeholder="sélectionnez un pays"
+                                        options={getPays?.map(item => ({ value: item.id_pays, label: item.code_pays }))}
+                                        onChange={selectedOption => handleInputChange({ target: { name: 'id_pays', value: selectedOption.value } })}
+                                    />
+                                </div>
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Couleur</label>
+                                    <Select
+                                      name="id_couleur"
+                                      placeholder="sélectionnez une couleur"
+                                      options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
+                                      onChange={selectedOption => handleInputChange({ target: { name: 'id_couleur', value: selectedOption.value } })}
+                                    />
+                                </div>
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Prix</label>
+                                    <input type="number" name='prix' value={prix} className="produit_input" onChange={(e)=>setPrix(e.target.value)} />
+                                </div>
+                                <div className="produit-view-control">
+                                    <label htmlFor="">Code Variant</label>
+                                    <input type="text" className="produit_input" name='code_variant' placeholder='Entrez le code variant...' onChange={handleInputChange} />
+                                    {variantExists && <p className="error-message">Cette variante existe déjà.</p>}
+                                </div>
+                            </div>
+                            <button className="produit_submit" onClick={handleClick} disabled={isLoading}>Envoyer</button>
+                            {isLoading && (
+                                <div className="loader-container loader-container-center">
+                                  <CircularProgress size={28} />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="product-view-right">
+                        <h2 className="product-h2">Sélectionnez une image</h2>
+                        <div className="product-img-row">
+                            {data.img || imagePreview ? (
+                            <div>
+                                <Image
+                                    className="product-img"
+                                    width={200}
+                                    height={200}
+                                    src="error"
+                                    fallback={imagePreview || data.img}
+                                />
+                            </div>
+                            ) : (
+                                <div>
+                                <input
+                                type="file"
+                                name="img"
+                                className="form-input"
+                                style={{ display: "none" }}
+                                label="Profil"
+                                id="file-upload"
+                                accept=".jpeg, .png, .jpg"
+                                onChange={handleInputChange}
+                                />
+                                <div className="form-file" onClick={() => document.getElementById('file-upload').click()}>
+                                <CloudUploadOutlined className="cloud-icon" />
+                                <span>Glissez et déposez un fichier à télécharger</span>
+                                </div>
+                            </div>
+                            )}
+                        </div>
+                        <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </>
+  )
+}
+
+export default EntreeStock

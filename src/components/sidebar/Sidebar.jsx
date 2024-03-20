@@ -60,6 +60,11 @@ const Sidebar = () => {
             Créer un nouveau produit
           </Link>
         </Item>
+        <Item key="entreeStock">
+          <Link to="/entreeStock" className="sidebarLink">
+            Entrée de stock
+          </Link>
+        </Item>
         <Item key="varianteProduit">
           <Link to="/varianteProduit" className="sidebarLink">
             Editer taille produit
@@ -185,6 +190,16 @@ const Sidebar = () => {
         <Item key="listeVariante">
           <Link to="/listeVariante" className="sidebarLink">
             Stock
+          </Link>
+        </Item>
+        <Item key="dette">
+          <Link to="/dette" className="sidebarLink">
+            Dette
+          </Link>
+        </Item>
+        <Item key="paiement">
+          <Link to="/paiement" className="sidebarLink">
+            Paiement
           </Link>
         </Item>
         <Item key="rapportdAchats">

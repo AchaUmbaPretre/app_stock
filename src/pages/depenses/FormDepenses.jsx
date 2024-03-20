@@ -102,6 +102,7 @@ const FormDepenses = () => {
                       name="id_livreur"
                       options={livreur?.map(item => ({ value: item.id, label: item.username }))}
                       onChange={selectedOption => handleInputChange({ target: { name: 'id_livreur', value: selectedOption.value } })}
+                      placeholder = 'sélectionnez un livreur...'
                     />
                 </div>
                 <div className="form-controle-desc">
@@ -110,6 +111,7 @@ const FormDepenses = () => {
                       name="id_catDepense"
                       options={catDepenses?.map(item => ({ value: item.id_catDepense, label: item.nom }))}
                       onChange={selectedOption => handleInputChange({ target: { name: 'id_catDepense', value: selectedOption.value } })}
+                      placeholder = 'sélectionnez une catégorie...'
                     />
                 </div>
                 <div className="form-controle-desc">
@@ -119,6 +121,10 @@ const FormDepenses = () => {
                 <div className="form-controle-desc">
                   <label htmlFor="">Montant</label>
                   <input type="number" name='montant' style={{padding:'8px 10px', border:'1px solid #c5c5c5', outline:'none', borderRadius:'5px'}} min={0} onChange={handleInputChange} />
+                </div>
+                <div className="form-controle-desc">
+                  <label htmlFor="">Device en dollars</label>
+                  <input type="number" name='device' style={{padding:'8px 10px', border:'1px solid #c5c5c5', outline:'none', borderRadius:'5px'}} min={0} onChange={handleInputChange} />
                 </div>
               <div className="form-controle-desc">
                 <label htmlFor="">Description</label>

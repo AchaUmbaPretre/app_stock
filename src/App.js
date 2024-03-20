@@ -79,6 +79,7 @@ import RapportCouleurAll from './pages/rapport/rapportVente/rapportVenteCouleur/
 import Dette from './pages/dette/Dette';
 import Paiement from './pages/paiement/Paiement';
 import EntreeStock from './pages/entreeStock/EntreeStock';
+import Reception from './pages/reception/Reception';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -401,6 +402,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/entreeStock',
           element: <EntreeStock />
+        },
+        {
+          path: '/reception',
+          element: <Reception />
         },
       ]
     }, user?.role === 'livreur' && {

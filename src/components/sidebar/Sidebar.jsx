@@ -65,6 +65,11 @@ const Sidebar = () => {
             Entrée de stock
           </Link>
         </Item>
+        <Item key="reception">
+          <Link to="/reception" className="sidebarLink">
+            Réception
+          </Link>
+        </Item>
         <Item key="varianteProduit">
           <Link to="/varianteProduit" className="sidebarLink">
             Editer taille produit

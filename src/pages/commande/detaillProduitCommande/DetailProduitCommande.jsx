@@ -207,11 +207,11 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                                     </div>
                                     <div className="filters">
                                         <span className="filter-titre">Taille</span>
-                                        <select name="id_taille" id="" className='select-filter' onChange={(e)=>setTaille(e.target.value)}>
+                                        <select name="id_taille" id="" className='select-filter' onChange={(e) => setTaille(e.target.value)}>
                                           <option>Sélectionnez une pointure</option>
-                                        { getTaille?.map((s) =>(
+                                          {getTaille?.sort((a, b) => a.taille - b.taille).map((s) => (
                                             <option value={s.id_taille} key={s.id_taille}>{s.taille}</option>
-                                            ))}
+                                          ))}
                                         </select>
                                     </div>
                                 </div>                             

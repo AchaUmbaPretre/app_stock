@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,DollarOutlined, PlusOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import axios from 'axios';
@@ -73,8 +73,13 @@ const Depenses = () => {
             sorter: (a, b) => a.montant - b.montant,
             sortDirections: ['descend', 'ascend'],
             render: (text, record) => (
-              <Tag color={'green'}>{record.montant} FC</Tag>
-            )
+              <Tag color="green" icon={<DollarOutlined />}>
+                {record.montant.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                })}
+              </Tag>
+            ),
           },
         {
           title: 'Description',

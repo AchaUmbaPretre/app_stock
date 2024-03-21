@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,CloseOutlined,FilePdfOutlined,FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,CloseOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
 import axios from 'axios';
@@ -89,6 +89,17 @@ const Dette = () => {
                   style: 'currency',
                   currency: 'USD',
                 })}
+              </Tag>
+            ),
+          },
+          {
+            title: 'Statut',
+            dataIndex: 'statut',
+            key: 'statut',
+            render: (text) => (
+              <Tag color={text === 'Validé' ? 'green' : 'red'}>
+                {text === 'Validé' ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
+                &nbsp; {text }
               </Tag>
             ),
           },

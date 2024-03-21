@@ -10,7 +10,7 @@ import {
   CreditCardOutlined,
   CarOutlined
 } from '@ant-design/icons';
-import { HomeOutlined} from '@mui/icons-material';
+import { FireTruckOutlined, HomeOutlined } from '@mui/icons-material';
 import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
@@ -60,16 +60,6 @@ const Sidebar = () => {
             Créer un nouveau produit
           </Link>
         </Item>
-        <Item key="entreeStock">
-          <Link to="/entreeStock" className="sidebarLink">
-            Entrée de stock
-          </Link>
-        </Item>
-        <Item key="reception">
-          <Link to="/reception" className="sidebarLink">
-            Réception
-          </Link>
-        </Item>
         <Item key="varianteProduit">
           <Link to="/varianteProduit" className="sidebarLink">
             Editer taille produit
@@ -103,6 +93,18 @@ const Sidebar = () => {
         <Item key="typeMouvement">
           <Link to="/typeMouvement" className="sidebarLink">
             Type des mouvements
+          </Link>
+        </Item>
+      </SubMenu>
+      <SubMenu key="reception" title={<span className="sidebarH3">Réception</span>} icon={<FireTruckOutlined style={{ fontSize: '19px', color: '#fafafa' }} />}>
+        <Item key="entreeStock">
+          <Link to="/entreeStock" className="sidebarLink">
+            Entrée de stock
+          </Link>
+        </Item>
+        <Item key="reception">
+          <Link to="/reception" className="sidebarLink">
+            Liste des Réceptions
           </Link>
         </Item>
       </SubMenu>

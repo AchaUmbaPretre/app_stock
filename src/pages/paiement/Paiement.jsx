@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined,CloseOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import config from '../../config';
 import moment from 'moment';
 import FormPaiement from './formPaiement/FormPaiement';
+import PaiementSelect from './PaiementSelect';
 
 const Paiement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -15,6 +16,7 @@ const Paiement = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -25,6 +27,10 @@ const Paiement = () => {
         } catch (err) {
           console.log(err);
         }
+      };
+
+      const HandOpen = () => {
+        setOpens(!opens);
       };
     
       const columns = [
@@ -142,7 +148,7 @@ const Paiement = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
+                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
                                 <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -154,6 +160,8 @@ const Paiement = () => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
+                    {opens &&
+                    <PaiementSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
                     <Modal
                           centered

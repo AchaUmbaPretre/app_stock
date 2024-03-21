@@ -5,6 +5,7 @@ import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
 import axios from 'axios';
 import config from '../../config';
 import { useSelector } from 'react-redux';
+import DetteSelect from './DetteSelect';
 
 const Dette = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -172,8 +173,8 @@ const Dette = () => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-{/*                     {opens &&
-                    <VenteSelect getProduits={setData}/> } */}
+                    {opens &&
+                    <DetteSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

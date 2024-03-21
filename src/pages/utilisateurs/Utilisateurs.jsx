@@ -204,7 +204,7 @@ const Utilisateurs = () => {
         }
       };
       fetchData();
-    }, []);
+    }, [DOMAIN]);
 
     const handleDelete = async (id) => {
       try {

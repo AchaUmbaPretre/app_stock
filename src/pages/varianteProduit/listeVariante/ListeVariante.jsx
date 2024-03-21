@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,CalendarOutlined, CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image } from 'antd';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import VarianteSelect from '../varianteSelect/VarianteSelect';
+import moment from 'moment';
 
 const ListeVariante = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -77,22 +78,28 @@ const ListeVariante = () => {
           )
         },
         {
-            title: 'Prix',
-            dataIndex: 'prix',
-            key: 'prix',
-            sorter: (a, b) => a.prix - b.prix,
-            sortDirections: ['descend', 'ascend'],
-            render: (text,record) => (
+          title: "Date d'entrée",
+          dataIndex: 'created_at',
+          key: 'created_at',
+          sorter: (a, b) => a.created_at - b.created_at,
+          sortDirections: ['descend', 'ascend'],
+            render: (text) => (
               <span>
-              <Tag color={'blue'}>
-                {parseFloat(text).toLocaleString('fr-FR', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </Tag>
-              
+                <Tag color={'blue'} icon={<CalendarOutlined />}>
+                  {moment(text).format('DD-MM-yyyy')}
+                </Tag>
               </span>
             ),
+        },
+        {
+          title: 'Quantité en stock',
+          dataIndex: 'total_stock',
+          key: 'total_stock', 
+          sorter: (a, b) => a.total_stock - b.total_stock,
+          sortDirections: ['descend', 'ascend'],
+          render: (total_stock) => (
+            <Tag color={total_stock > 0 ? 'green' : 'red'}>{total_stock}</Tag>
+          ),
         },
         {
             title: 'Action',

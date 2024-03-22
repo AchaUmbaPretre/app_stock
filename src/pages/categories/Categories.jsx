@@ -268,7 +268,7 @@ const Categories = () => {
                           >
                             <FormCategorie getUpdata={setPutCategorie} getUpdataOne={putCategorie} />
                           </Modal>
-                          <Table columns={columns} loading={loading} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 5}} />
+                          <Table columns={columns} loading={loading} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 8}} />
                         </div>
                     </div>
                 </div>

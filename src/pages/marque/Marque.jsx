@@ -208,7 +208,7 @@ const Marque = () => {
                             >
                               <FormMarque  setUpdata={setPutMarque} getUpdataOne={putMarque} OnchangePut={handleInputChange} />
                             </Modal>
-                            <Table columns={columns} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 5}} />
+                            <Table columns={columns} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 8}} />
                         </div>
                     </div>
                 </div>

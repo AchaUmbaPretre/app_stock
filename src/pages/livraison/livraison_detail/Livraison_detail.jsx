@@ -169,7 +169,7 @@ const Livraison_detail = () => {
                         >
                          <LivraisonClientDetail idClients={idClient}/>
                         </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,EyeOutlined,SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,EyeOutlined,SisternodeOutlined,InfoCircleOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import { Button, Popover, Space, Table,Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -61,7 +61,15 @@ const columns = [
         sorter: (a, b) => a.taille_plus_vendue - b.taille_plus_vendue,
         sortDirections: ['descend', 'ascend'],
         render: (pointure) => (
-          <Tag color={'blue'}>{pointure}</Tag>
+          <Popover
+            content="Cliquez ici pour voir les Informations sur les pointures les plus vendues"
+            title="Pointures les plus vendues"
+            trigger="hover"
+          >
+            <Tag color="blue" style={{ cursor: 'pointer' }}>
+              {pointure} <InfoCircleOutlined />
+            </Tag>
+          </Popover>
         ),
       },
      {

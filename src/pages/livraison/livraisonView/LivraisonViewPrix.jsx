@@ -5,11 +5,12 @@ import config from '../../../config';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 
-const LivraisonViewPrix = ({prixTotal,idDetail}) => {
+const LivraisonViewPrix = ({prixTotal,idDetail,userUpdate}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const navigate  = useNavigate();
     const [getPrix,setGetPrix] = useState('');
     const [loading, setLoading] = useState(false);
+
 
     useEffect(()=>{
         setGetPrix(prixTotal)
@@ -20,7 +21,7 @@ const LivraisonViewPrix = ({prixTotal,idDetail}) => {
     
         try{
           setLoading(true);
-          await axios.put(`${DOMAIN}/api/livraison/livraisonPrix/${idDetail}`, {prix: getPrix})
+          await axios.put(`${DOMAIN}/api/livraison/livraisonPrix/${idDetail}`, {prix: getPrix,userUpdate: userUpdate})
           Swal.fire({
             title: 'Success',
             text: 'La livraison a été modifiée avec succès !',

@@ -102,7 +102,7 @@ const LivraisonView = () => {
           sorter: (a, b) => a.qte_livre - b.qte_livre,
           sortDirections: ['descend', 'ascend'],
           render: (text) => (
-            <Tag color={"#108ee9"}>
+            <Tag color={"blue"}>
               {text}
             </Tag>
           )
@@ -114,7 +114,7 @@ const LivraisonView = () => {
             sorter: (a, b) => a.qte_commande - b.qte_commande,
             sortDirections: ['descend', 'ascend'],
             render: (text) => (
-              <Tag color={"#87d068"}>
+              <Tag color={"green"}>
                 {text}
               </Tag>
             )
@@ -146,6 +146,17 @@ const LivraisonView = () => {
               {<Tag color={'blue'} icon={<CalendarOutlined />}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>}
               </span>;
             },
+        },
+        {
+          title: 'Modifier par',
+          dataIndex: 'modifier',
+          key: 'modifier',
+          render: (text) => (
+            <Tag color={text === null ? 'green' : 'blue'}>
+              {text !== null ? <UserOutlined style={{ marginRight: '5px' }} /> : null}
+              {text !== null ? text : 'Non modifié'}
+            </Tag>
+          ),
         },
         {
             title: 'Action',
@@ -216,7 +227,6 @@ const LivraisonView = () => {
       item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-
   return (
     <>
         <div className="products">
@@ -257,7 +267,7 @@ const LivraisonView = () => {
                             
                           ]}
                         >
-                         <LivraisonViewPrix prixTotal={prix} idDetail={idClient}/> 
+                         <LivraisonViewPrix prixTotal={prix} idDetail={idClient} userUpdate={user.id}/> 
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

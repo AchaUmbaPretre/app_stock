@@ -263,7 +263,7 @@ const PageCommandeVente = () => {
                 </div>
                 <div className="pageLivreur_submit">
                     <label htmlFor="">Dette</label>
-                    <input type='number' min={0} className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la datte...' />
+                    <input type='number' min={0} className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la dette...' />
                 </div>
                 <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleClick} disabled={isLoading}>Envoyer maintenant</button>

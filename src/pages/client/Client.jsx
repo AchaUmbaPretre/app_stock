@@ -1,5 +1,5 @@
 import './client.scss'
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
@@ -168,8 +168,11 @@ const Client = () => {
             dataIndex: 'telephone',
             key: 'email',
             render: (text) => (
-               <Link color={'royalblue'} to={`https://wa.me/${text}`}>{text}</Link>
-            ), 
+              <Tag to={`https://wa.me/${text}`} color='green'>
+                <WhatsAppOutlined style={{ color: 'green',marginRight: "5px" }} />
+                {text}
+              </Tag>
+            ),
           },
         {
           title: 'Ville',
@@ -293,7 +296,7 @@ const Client = () => {
                         >
                          <MouvClientDetail idClients={idClient}/>
                         </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>
             </div>

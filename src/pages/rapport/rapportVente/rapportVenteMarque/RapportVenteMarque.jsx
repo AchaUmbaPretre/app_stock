@@ -120,7 +120,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             </div>
                         </div>
                     </Tabs.TabPane>
-                    <Tabs.TabPane tab={<span><BarChartOutlined /> Nombre total de marque</span>} key={1}>
+                    <Tabs.TabPane tab={<span><BarChartOutlined /> Nombre total de marque en Stock</span>} key={1}>
                         <RapportMarqueCount/>
                     </Tabs.TabPane>
                 </Tabs>

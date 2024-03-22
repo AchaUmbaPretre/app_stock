@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,UserOutlined, SisternodeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import { Table, Tag, Image } from 'antd';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -93,7 +93,7 @@ const columns = [
         dataIndex: 'nom_client',
         key: 'nom_client',
         render: (nom_client) => (
-          <Tag color={'blue'}>{nom_client}</Tag>
+          <Tag color={'blue'} icon={<UserOutlined />}>{nom_client}</Tag>
         ),
     },
     {
@@ -101,7 +101,7 @@ const columns = [
       dataIndex: 'username',
       key: 'username',
       render: (username) => (
-        <Tag color={'blue'}>{username}</Tag>
+        <Tag color={'blue'} icon={<UserOutlined />}>{username}</Tag>
       ),
   },
     {

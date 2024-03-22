@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined,WhatsAppOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
@@ -66,10 +66,15 @@ const Mouvement = () => {
         {
           title: 'Telephone',
           dataIndex: 'telephone',
-          key: 'telephone',
-          render : (text,record)=>(
-              <Tag color={'blue'}>{record.telephone}</Tag>
-          )
+          key: 'email',
+          render: (text) => (
+            <Popover content="Discutez avec lui sur WhatsApp" placement="top">
+              <Tag to={`https://wa.me/${text}`} color="green" style={{ cursor: 'pointer' }}>
+                <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
+                {text}
+              </Tag>
+            </Popover>
+          ),
         },
         {
           title: 'Total produit',

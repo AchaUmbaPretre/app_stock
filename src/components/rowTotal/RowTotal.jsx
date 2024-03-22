@@ -105,7 +105,7 @@ const RowTotal = () => {
                         <VerticalAlignTopOutlined className='rowTotalIcon' style={{color: 'red'}}/>
                     </div>
                     <div className="rowTotal-right">
-                        <h2><CountUp end={depenses}/> FC</h2>
+                        <h2><CountUp end={depenses}/>$</h2>
                         <span className="rowTotal-span">Montant total des dépenses</span>
                     </div>
                 </div>

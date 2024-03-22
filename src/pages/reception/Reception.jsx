@@ -60,6 +60,8 @@ const columns = [
         title: 'Taille',
         dataIndex: 'taille',
         key: 'taille',
+        sorter: (a, b) => a.taille - b.taille,
+        sortDirections: ['descend', 'ascend'],
         render: (taille) => (
           <Tag color={'blue'}>{taille}</Tag>
         ),
@@ -95,7 +97,7 @@ const columns = [
         },
       },
        {
-        title: 'Date',
+        title: 'Date de réception',
         dataIndex: 'created_at',
         key: 'created_at',
         sorter: (a, b) => a.created_at - b.created_at,

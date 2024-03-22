@@ -123,7 +123,7 @@ const Sidebar = () => {
       <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<DollarCircleOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="ventes">
           <Link to="/ventes" className="sidebarLink">
-            Ventes
+            Liste des ventes
           </Link>
         </Item>
         <Item key="mouvement">

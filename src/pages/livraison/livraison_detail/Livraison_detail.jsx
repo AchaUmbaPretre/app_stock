@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
@@ -55,7 +55,7 @@ const Livraison_detail = () => {
           key: 'nom_client',
           render : (text, record)=>(
             <div onClick={()=> showModal(record.id_client)} style={{cursor: 'pointer'}}>
-               <Tag color={'green'}>{text}</Tag>
+               <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             </div>
           )
         },

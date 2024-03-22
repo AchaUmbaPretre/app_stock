@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
+import ReceptionSelect from './ReceptionSelect';
 
 const Reception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -188,8 +189,8 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                               <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-{/*                       {open &&
-                              <RapportVenteSelects getProduits={setGetRapport}/> } */}
+                       {open &&
+                              <ReceptionSelect getProduits={setGetRapport}/> }
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

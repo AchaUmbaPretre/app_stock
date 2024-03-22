@@ -1,9 +1,9 @@
 import './client.scss'
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,EnvironmentOutlined,EyeOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
 import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetail';
@@ -142,7 +142,7 @@ const Client = () => {
             ...getColumnSearchProps('nom'),
             render : (text,record)=>(
               <div>
-                 <Tag color={'green'} onClick={()=> showModal(record.id)} style={{cursor: "pointer"}}>{text}</Tag>
+                 <Tag color={'green'} onClick={()=> showModal(record.id)} style={{cursor: "pointer"}}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
               </div>
             )
         },
@@ -176,24 +176,27 @@ const Client = () => {
               </Popover>
             ),
           },
-        {
-          title: 'Ville',
-          dataIndex: 'nom_province',
-          key: 'nom_province',
-          ...getColumnSearchProps('nom_province'),
-          render : (text)=>(
-            <div>
-               <Tag color={'blue'}>{text}</Tag>
-            </div>
-          )
-        },
+          {
+            title: 'Ville',
+            dataIndex: 'nom_province',
+            key: 'nom_province',
+            ...getColumnSearchProps('nom_province'),
+            render: (text) => (
+              <div>
+                <Tag color="blue">
+                  <EnvironmentOutlined style={{ marginRight: '5px' }} />
+                  {text}
+                </Tag>
+              </div>
+            ),
+          },
         {
             title: 'Commune',
             dataIndex: 'nom_commune',
             key: 'nom_commune',
             render : (text)=>(
               <div>
-                 <Tag color={'royalblue'}>{text}</Tag>
+                 <Tag color={'blue'}><EnvironmentOutlined style={{ marginRight: '5px' }} />{text}</Tag>
               </div>
             )
         },

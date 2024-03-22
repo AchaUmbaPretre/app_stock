@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined,UserOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import { Button, Space, Table, Popover,Tag, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -21,8 +21,8 @@ const columns = [
       title: 'Nom client',
       dataIndex: 'nom_client',
       key: 'nom_client',
-      render: (categorie) => (
-        <Tag color={'blue'}>{categorie}</Tag>
+      render: (nom_client) => (
+        <Tag color={'blue'}><UserOutlined style={{ marginRight: "5px" }} />{nom_client}</Tag>
       ),
     },
     {

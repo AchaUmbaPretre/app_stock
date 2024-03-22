@@ -1,8 +1,7 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect,useState,useRef } from 'react';
-import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag} from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,UserOutlined,CarOutlined, FilePdfOutlined,MailOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useEffect,useState } from 'react';
+import { Button,Space, Table, Popover,Popconfirm, Tag} from 'antd';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 
@@ -12,10 +11,6 @@ const Livreur = () => {
     const [loading, setLoading] = useState(true);
     const scroll = { x: 400 };
     const navigate = useNavigate();
-
-      const handleEdit = (id) => {
-        navigate(`/livreurEdit/${id}`);
-    };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -24,23 +19,29 @@ const Livreur = () => {
             dataIndex: 'username',
             key: 'username',
             render: (text) => (
-              <Tag color={'blue'}>{text}</Tag>
+              <Tag color={'blue'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             ),
         },
         {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-            render: (text) => (
-              <Tag color={'yellow'}>{text}</Tag>
-            ),
+          title: 'Email',
+          dataIndex: 'email',
+          key: 'email',
+          render: (text) => (
+            <Tag color="yellow">
+              <MailOutlined style={{ marginRight: '5px' }} />
+              {text}
+            </Tag>
+          ),
         },
         {
           title: 'Role',
           dataIndex: 'role',
           key: 'role',
           render: (text) => (
-            <Tag color={'green'}>{text}</Tag>
+            <Tag color="green">
+              <CarOutlined style={{ marginRight: '5px' }} />
+              {text}
+            </Tag>
           ),
         },
         {

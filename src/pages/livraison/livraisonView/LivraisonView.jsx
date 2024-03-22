@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image} from 'antd';
 import { useLocation } from 'react-router-dom';
@@ -79,6 +79,7 @@ const LivraisonView = () => {
           key: 'nom_client',
           render: (text) => (
             <Tag color={"green"}>
+              <UserOutlined style={{ marginRight: "5px" }} />
               {text}
             </Tag>
           )
@@ -89,6 +90,7 @@ const LivraisonView = () => {
           key: 'nom_livreur',
           render: (text) => (
             <Tag color={"blue"}>
+              <UserOutlined style={{ marginRight: "5px" }} />
               {text}
             </Tag>
           )
@@ -143,6 +145,7 @@ const LivraisonView = () => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy');
               return <span>
               <Tag color={"blue"}>
+              {<Tag color={'blue'} icon={<CalendarOutlined />}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>}
                 {formattedDate}
               </Tag>
               </span>;

@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined,WhatsAppOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
@@ -59,7 +59,7 @@ const Mouvement = () => {
           key: 'nom_client',
           render : (text,record)=>(
             <div onClick={()=> showModal(record.id_client1)} style={{cursor: 'pointer'}}>
-                <Tag color={'green'}>{text}</Tag>
+                <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
             </div>
           )
         },

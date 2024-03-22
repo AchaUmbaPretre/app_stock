@@ -32,7 +32,7 @@ const ReceptionSelect = ({getProduits}) => {
       return;
     }
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/vente?start_date=${datas.start_date}&end_date=${datas.end_date}`);
+      const {data} = await axios.get(`${DOMAIN}/api/produit/reception?start_date=${datas.start_date}&end_date=${datas.end_date}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({

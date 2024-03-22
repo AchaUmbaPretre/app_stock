@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import { format } from 'date-fns';
+import RapportCouleurSelect from './RapportCouleurSelect';
 
 const RapportCouleurAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -177,7 +178,7 @@ useEffect(() => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport des ventes</h2>
+                        <h2 className="product-h2">Rapport des ventes de couleur {getRapport[0]?.description}</h2>
                         <span>Gérez votre rapport des ventes</span>
                     </div>
                 </div>
@@ -196,10 +197,10 @@ useEffect(() => {
                               <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-{/*                       {open &&
-                              <RapportVenteSelects getProduits={setGetRapport}/> } */}
+                       {open &&
+                              <RapportCouleurSelect getProduits={setGetRapport} id={id} id_marque={id_marque}/> }
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>
                     </div>
             </div>

@@ -169,9 +169,9 @@ useEffect(() => {
   }, [DOMAIN]);
 
  const filteredData = getRapport?.filter((item) =>
-item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.description?.toLowerCase().includes(searchValue.toLowerCase())
-)
+  item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.description?.toLowerCase().includes(searchValue.toLowerCase())
+  )
 
   return (
     <>

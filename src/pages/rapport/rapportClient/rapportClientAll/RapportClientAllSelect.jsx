@@ -25,9 +25,6 @@ const RapportClientAllSelect = ({ getProduits }) => {
     setDatas((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  console.log(datas)
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {

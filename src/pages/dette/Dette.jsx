@@ -72,6 +72,21 @@ const Dette = () => {
               </Popover>
             ),
           },
+          {
+            title: 'Montant convenu',
+            dataIndex: 'montant_convenu',
+            key: 'montant_convenu',
+            sorter: (a, b) => a.montant_convenu - b.montant_convenu,
+            sortDirections: ['descend', 'ascend'],
+            render: (text, record) => (
+              <Tag color="blue" icon={<DollarOutlined />}>
+                {record.montant_convenu.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                })}
+              </Tag>
+            ),
+          },
         {
           title: 'Montant payé',
           dataIndex: 'montant_paye',
@@ -87,21 +102,6 @@ const Dette = () => {
             </Tag>
           ),
         },
-        {
-            title: 'Montant convenu',
-            dataIndex: 'montant_convenu',
-            key: 'montant_convenu',
-            sorter: (a, b) => a.montant_convenu - b.montant_convenu,
-            sortDirections: ['descend', 'ascend'],
-            render: (text, record) => (
-              <Tag color="blue" icon={<DollarOutlined />}>
-                {record.montant_convenu.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </Tag>
-            ),
-          },
           {
             title: 'Montant restant',
             dataIndex: 'montant_restant',

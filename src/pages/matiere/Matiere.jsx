@@ -211,7 +211,7 @@ const Matiere = () => {
                             >
                               <FormMatiere  setUpdata={setPutMatiere} getUpdataOne={putMatiere} OnchangePut={handleInputChange} />
                             </Modal>
-                            <Table columns={columns} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 3}} />
+                            <Table columns={columns} dataSource={filteredData} scroll={scroll} pagination={{ pageSize: 8}} />
                         </div>
                     </div>
                 </div>

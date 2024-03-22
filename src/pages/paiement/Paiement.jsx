@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined,CloseOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined,CloseOutlined,WhatsAppOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import axios from 'axios';
@@ -50,15 +50,18 @@ const Paiement = () => {
               </div>
             )
           },
-        {
+          {
             title: 'Telephone',
             dataIndex: 'telephone',
             key: 'telephone',
-            render : (text,record)=>(
-              <div>
-                <Tag color={'green'}>{text}</Tag>
-              </div>
-            )
+            render: (text) => (
+              <Popover content="Discutez avec lui sur WhatsApp" placement="top">
+                <Tag to={`https://wa.me/${text}`} color="green" style={{ cursor: 'pointer' }}>
+                  <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
+                  {text}
+                </Tag>
+              </Popover>
+            ),
           },
           {
             title: 'Date de paiement',

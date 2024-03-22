@@ -102,6 +102,8 @@ const ClientEdit = () => {
   }, [DOMAIN,idProvince]);
 
 
+  console.log(data)
+
 
 
   return (
@@ -138,13 +140,22 @@ const ClientEdit = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Ville</label>
-                  <Select
+                  <select
+                    className="form-input"
                     name="id_province"
                     value={data.id_province}
-                    options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
-                    placeholder='Selectionnez une ville'
-                  />
+                    onChange={(e) => handleInputChange(e)}
+                    placeholder="Selectionnez une ville"
+                  >
+                    <option value="" disabled>
+                      Selectionnez une ville
+                    </option>
+                    {province?.map((item) => (
+                      <option key={item.id_province} value={item.id_province}>
+                        {item.nom_province}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Avenue</label>
@@ -155,13 +166,23 @@ const ClientEdit = () => {
                   <input type="text" name="quartier" value={data?.quartier} className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Commune</label>
-                  <Select
-                    value={data?.id_commune}
-                    name="id_commune"
-                    options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
-                  />
+                <label htmlFor="id_commune">Commune</label>
+                <select
+                  className="form-input"
+                  id="id_commune"
+                  name="id_commune"
+                  value={data?.id_commune}
+                  onChange={(e) => handleInputChange(e)}
+                >
+                  <option value="" disabled>
+                    Sélectionnez une commune
+                  </option>
+                  {commune?.map((item) => (
+                    <option key={item.id_commune} value={item.id_commune}>
+                      {item.nom_commune}
+                    </option>
+                  ))}
+                </select>
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">N°</label>

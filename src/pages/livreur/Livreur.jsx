@@ -27,10 +27,14 @@ const Livreur = () => {
           dataIndex: 'email',
           key: 'email',
           render: (text) => (
-            <Tag color="yellow">
-              <MailOutlined style={{ marginRight: '5px' }} />
-              {text}
-            </Tag>
+            <Popover content="Cliquez pour ouvrir Gmail" trigger="hover">
+              <Tag color="yellow">
+                <a href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">
+                  <MailOutlined style={{ marginRight: '5px' }} />
+                  {text}
+                </a>
+              </Tag>
+            </Popover>
           ),
         },
         {

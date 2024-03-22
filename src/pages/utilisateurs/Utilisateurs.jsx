@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,FilePdfOutlined,UserOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag} from 'antd';
@@ -137,7 +137,7 @@ const Utilisateurs = () => {
             width: '15%',
             ...getColumnSearchProps('username'),
             render: (text) => (
-              <Tag color={'blue'}>{text}</Tag>
+              <Tag color={'blue'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             ),
         },
         {

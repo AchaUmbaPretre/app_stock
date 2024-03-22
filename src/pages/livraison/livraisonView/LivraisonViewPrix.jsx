@@ -48,7 +48,7 @@ const LivraisonViewPrix = ({prixTotal,idDetail}) => {
         <div className="livraisonViewPrix">
             <div className="livraisonviewPrix-wrapper" style={{display: 'flex', flexDirection:'column',gap:"10px"}}>
                 <label htmlFor="">Prix</label>
-                <input type="text" value={getPrix} onChange={(e)=>setGetPrix(e.target.value)} style={{width:"100%", padding:"10px", border: '1px solid #c7c7c7', borderRadius:'5px', outline:'none'}}/>
+                <input type="number" value={getPrix} onChange={(e)=>setGetPrix(e.target.value)} style={{width:"100%", padding:"10px", border: '1px solid #c7c7c7', borderRadius:'5px', outline:'none'}}/>
                 <button style={{padding: '10px 15px', border:'none', color:'#fff', background:'rgb(1, 35, 138)', borderRadius:'5px',cursor:'pointer'}} onClick={handleClick} >Envoyer</button>
                 {loading && (
                 <div className="loader-container loader-container-center">

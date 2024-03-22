@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
@@ -62,10 +62,13 @@ const Livraison_detail = () => {
         {
           title: 'Telephone',
           dataIndex: 'telephone',
-          key: 'telephone',
-          render : (text,record)=>(
-              <Tag color={'blue'}>{record.telephone}</Tag>
-          )
+          key: 'email',
+          render: (text) => (
+            <Tag to={`https://wa.me/${text}`} color='green'>
+              <WhatsAppOutlined style={{ color: 'green',marginRight: "5px" }} />
+              {text}
+            </Tag>
+          ),
         },
         {
             title: 'Date création',

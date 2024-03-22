@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,FilePdfOutlined,UserOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,MailOutlined,FilePdfOutlined,UserOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag} from 'antd';
@@ -141,12 +141,19 @@ const Utilisateurs = () => {
             ),
         },
         {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-            render: (text) => (
-              <Tag color={'yellow'}>{text}</Tag>
-            ),
+          title: 'Email',
+          dataIndex: 'email',
+          key: 'email',
+          render: (text) => (
+            <Popover content="Cliquez pour ouvrir Gmail" trigger="hover">
+              <Tag color="yellow">
+                <a href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">
+                  <MailOutlined style={{ marginRight: '5px' }} />
+                  {text}
+                </a>
+              </Tag>
+            </Popover>
+          ),
         },
         {
             title: 'Mot de passe',

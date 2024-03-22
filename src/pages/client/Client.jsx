@@ -1,5 +1,5 @@
 import './client.scss'
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,EnvironmentOutlined,EyeOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,MailOutlined,EnvironmentOutlined,EyeOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
@@ -156,13 +156,20 @@ const Client = () => {
             }
         },
         {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-            render: (text) => (
-              <Tag color={'yellow'}>{text}</Tag>
-            ),
-          },
+          title: 'Email',
+          dataIndex: 'email',
+          key: 'email',
+          render: (text) => (
+            <Popover content="Cliquez pour ouvrir Gmail" trigger="hover">
+              <Tag color="yellow">
+                <a href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">
+                  <MailOutlined style={{ marginRight: '5px' }} />
+                  {text}
+                </a>
+              </Tag>
+            </Popover>
+          ),
+        },
           {
             title: 'Telephone',
             dataIndex: 'telephone',

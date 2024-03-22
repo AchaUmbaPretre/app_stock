@@ -2,7 +2,6 @@ import React, { useEffect,useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Select from 'react-select';
 import config from '../../../config';
 import { CircularProgress } from '@mui/material';
 
@@ -41,9 +40,7 @@ const ClientEdit = () => {
       }
     };
     fetchData();
-  }, []);
-
-  console.log(data)
+  }, [DOMAIN]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -100,11 +97,6 @@ const ClientEdit = () => {
     };
     fetchData();
   }, [DOMAIN,idProvince]);
-
-
-  console.log(data)
-
-
 
   return (
     <>

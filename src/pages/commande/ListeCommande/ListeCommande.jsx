@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, EyeOutlined,CalendarOutlined, CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button,Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -57,7 +57,7 @@ const ListeCommande = () => {
             key: 'id_client',
             render : (text,record)=>(
               <div onClick={()=> showModal(record.id_client)} style={{cursor: 'pointer'}}>
-                  <Tag color={'green'}>{text}</Tag>
+                  <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
               </div>
             )
         },
@@ -298,7 +298,7 @@ const ListeCommande = () => {
                         >
                          <MouvClientDetail idClients={idClient}/>
                         </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>
             </div>

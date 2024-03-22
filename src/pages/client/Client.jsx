@@ -168,10 +168,12 @@ const Client = () => {
             dataIndex: 'telephone',
             key: 'email',
             render: (text) => (
-              <Tag to={`https://wa.me/${text}`} color='green'>
-                <WhatsAppOutlined style={{ color: 'green',marginRight: "5px" }} />
-                {text}
-              </Tag>
+              <Popover content="Discutez avec lui sur WhatsApp" placement="top">
+                <Tag to={`https://wa.me/${text}`} color="green" style={{ cursor: 'pointer' }}>
+                  <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
+                  {text}
+                </Tag>
+              </Popover>
             ),
           },
         {

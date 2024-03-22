@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,CloseOutlined,FilePdfOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,CloseOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
@@ -54,7 +54,7 @@ const Ventes = () => {
           key: 'nom_client',
           render : (text,record)=>(
             <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
-              <Tag color={'green'}>{text}</Tag>
+              <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             </div>
           )
         },
@@ -62,9 +62,14 @@ const Ventes = () => {
           title: 'Telephone',
           dataIndex: 'telephone',
           key: 'telephone',
-          render : (text,record)=>(
-              <Tag color={'blue'}>{record.telephone}</Tag>
-          )
+          render: (text) => (
+            <Popover content="Discutez avec lui sur WhatsApp" placement="top">
+              <Tag to={`https://wa.me/${text}`} color="green" style={{ cursor: 'pointer' }}>
+                <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
+                {text}
+              </Tag>
+            </Popover>
+          ),
         },
         {
           title: 'Total produit',

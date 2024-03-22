@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,ClockCircleOutlined,FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Checkbox, Image} from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -155,13 +155,18 @@ const ListeDetailView = () => {
               </span>
             ),
           },
-        {
-          title: 'Date demande & heure',
-          dataIndex: 'date_demande',
-          key: 'date_demande',
+          {
+            title: 'Date demande & heure',
+            dataIndex: 'date_demande',
+            key: 'date_demande',
             render: (text) => {
               const formattedDate = format(new Date(text), 'dd-MM-yyyy HH:mm:ss');
-              return <span>{formattedDate}</span>;
+              return (
+                <Tag color="green">
+                  <ClockCircleOutlined style={{ marginRight: '5px' }} />
+                  <span>{formattedDate}</span>
+                </Tag>
+              );
             },
           },
           {
@@ -169,10 +174,7 @@ const ListeDetailView = () => {
             dataIndex: 'username',
             key: 'username',
             render: (text) => (
-              <Space>
-                <UserOutlined />
-                <Tag color="blue">{text}</Tag>
-              </Space>
+                <Tag color="blue"><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             ),
           },
         {

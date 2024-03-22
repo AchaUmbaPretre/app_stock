@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import config from '../../../config';
 import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 
 const LivraisonViewPrix = ({prixTotal,idDetail}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const navigate  = useNavigate();
     const [getPrix,setGetPrix] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
         setGetPrix(prixTotal)
@@ -17,10 +19,11 @@ const LivraisonViewPrix = ({prixTotal,idDetail}) => {
         e.preventDefault();
     
         try{
+          setLoading(true);
           await axios.put(`${DOMAIN}/api/livraison/livraisonPrix/${idDetail}`, {prix: getPrix})
           Swal.fire({
             title: 'Success',
-            text: 'Livraison modifiée avec succès!',
+            text: 'La livraison a été modifiée avec succès !',
             icon: 'success',
             confirmButtonText: 'OK',
           });
@@ -35,6 +38,9 @@ const LivraisonViewPrix = ({prixTotal,idDetail}) => {
             confirmButtonText: 'OK',
           });
         }
+        finally {
+          setLoading(false);
+        }
       }
 
   return (
@@ -44,6 +50,11 @@ const LivraisonViewPrix = ({prixTotal,idDetail}) => {
                 <label htmlFor="">Prix</label>
                 <input type="text" value={getPrix} onChange={(e)=>setGetPrix(e.target.value)} style={{width:"100%", padding:"10px", border: '1px solid #c7c7c7', borderRadius:'5px', outline:'none'}}/>
                 <button style={{padding: '10px 15px', border:'none', color:'#fff', background:'rgb(1, 35, 138)', borderRadius:'5px',cursor:'pointer'}} onClick={handleClick} >Envoyer</button>
+                {loading && (
+                <div className="loader-container loader-container-center">
+                  <CircularProgress size={30} />
+                </div>
+                )}
             </div>
         </div>
 

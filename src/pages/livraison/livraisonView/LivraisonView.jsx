@@ -142,12 +142,8 @@ const LivraisonView = () => {
             dataIndex: 'date_creation',
             key: 'date_creation',
             render: (text) => {
-              const formattedDate = format(new Date(text), 'dd-MM-yyyy');
               return <span>
-              <Tag color={"blue"}>
               {<Tag color={'blue'} icon={<CalendarOutlined />}>{format(new Date(text), 'dd-MM-yyyy')}</Tag>}
-                {formattedDate}
-              </Tag>
               </span>;
             },
         },

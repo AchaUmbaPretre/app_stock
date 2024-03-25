@@ -111,7 +111,7 @@ const Sidebar = () => {
       <SubMenu key="commande" title={<span className="sidebarH3">Commande</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="commandeForm">
           <Link to="/commandeForm" className="sidebarLink">
-            Créer une commande
+            Nouvelle commande
           </Link>
         </Item>
         <Item key="listeCommande">

@@ -5,6 +5,12 @@ import { useEffect, useState } from 'react';
 import { Rate } from 'antd';
 import moment from 'moment';
 import { FadeLoader } from 'react-spinners';
+import { Image, Table } from 'antd';
+import { CloudUploadOutlined } from '@ant-design/icons';
+import Swal from 'sweetalert2'
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
+import { CircularProgress } from '@mui/material';
 
 const DetailReception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -89,7 +95,6 @@ const DetailReception = () => {
                       <div style={{position: 'relative', width:"400px"}}>
                         <img src={`${DOMAIN}${dd.img}`} alt="" className="pageDetail-img" /> 
                       </div> ))}
-                        
                         <div className="pageDetail-left-wrapper" id='description'>
                             <h2>Description</h2>
                             { result?.map((dd)=>(

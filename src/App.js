@@ -82,6 +82,7 @@ import EntreeStock from './pages/entreeStock/EntreeStock';
 import Reception from './pages/reception/Reception';
 import RapportVenteCouleurTaille from './pages/rapport/rapportVente/rapportVenteCouleur/RapportVenteCouleurTaille';
 import CatReception from './pages/reception/catReception/CatReception';
+import DetailReception from './pages/reception/detailReception/DetailReception';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -413,6 +414,10 @@ const user = useSelector((state) => state.user?.currentUser);
           path: '/reception',
           element: <Reception />
         },
+        {
+          path: '/detailReception/:id',
+          element: <DetailReception />
+        }
       ]
     }, user?.role === 'livreur' && {
       path: '/',

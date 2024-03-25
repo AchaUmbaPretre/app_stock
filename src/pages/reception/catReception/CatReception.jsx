@@ -198,11 +198,11 @@ const CatReception = () => {
                       <div className="variante-top-rows">
                       {
                         currentData?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id} onClick={()=>navigate(`/pageDetail/${dd.id_varianteProduit}`)}>
+                        <div className="variante-top-row" key={dd.id} onClick={()=>navigate(`/detailReception/${dd.id_varianteProduit}`)}>
                           <div className="cercle"></div>
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                           <div className="info-products">
-                              <Link to={`/pageDetail/${dd.id_varianteProduit}`}>
+                              <Link to={`/detailReception/${dd.id_varianteProduit}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
                           </div>

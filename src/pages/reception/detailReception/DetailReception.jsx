@@ -17,6 +17,7 @@ const DetailReception = () => {
     const [data, setData] = useState([]);
     const [produitId, setProduitId] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [getTaille,setGetTaille] = useState([]);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
@@ -26,6 +27,30 @@ const DetailReception = () => {
     const [inventaireTotalOne, setInventaireTotalOne] = useState([]);
     const [prix, setPrix] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
+    const [vPays, setVpays] = useState([]);
+    const [selectedIds, setSelectedIds] = useState([]);
+    const scroll = { x: 400 };
+
+    const handleCheckboxChange = (id) => {
+        const selectedRecord = getTaille?.find((record) => record.id_taille === id);
+        if (selectedIds.includes(id)) {
+          setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
+          setSelectedData(selectedData.filter((record) => record.id !== id));
+        } else {
+          setSelectedIds([...selectedIds, id]);
+          setSelectedData([...selectedData, selectedRecord]);
+        }
+    };
+
+    const handleStockChange = (e, id) => {
+        const updatedData = selectedData.map((record) => {
+          if (record.id_taille === id) {
+            return { ...record, stock: e.target.value };
+          }
+          return record;
+        });
+        setSelectedData(updatedData);
+      };
 
 
     useEffect(() => {
@@ -42,8 +67,68 @@ const DetailReception = () => {
         fetchData();
       }, [DOMAIN,id]);
 
-
        
+      const qTable = [
+        {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          width: '25%',
+          render: (record) => {
+            return (
+              <input
+                disabled
+                type="number"
+                className='input-timeBar'
+                value={record}
+              />
+            );
+          }
+        },
+        {
+          title: 'Quantité',
+          dataIndex: 'stock',
+          key: 'stock',
+          width: '25%',
+          render: (text, record) => {
+            const selectedRecord = selectedData.find((selectedRecord) => selectedRecord.id_taille === record.id_taille);
+            return (
+              <input
+                type="number"
+                name='stock'
+                className='input-stock'
+                onChange={(e) => handleStockChange(e, record.id_taille)}
+                disabled = {selectedRecord ? false : true}
+                min={0}
+              />
+            );
+          }
+        },
+        {
+          title: 'Sélectionner',
+          dataIndex: 'id_taille',
+          width: '25%',
+          render: (text, record) => {
+            const isChecked = selectedIds.includes(record.id_taille);
+            return (
+              <>
+                {isChecked ? (
+                  <ToggleOnIcon
+                    color="primary"
+                    style={{ fontSize: '40px', cursor: 'pointer' }}
+                    onClick={() => handleCheckboxChange(record.id_taille)}
+                  />
+                ) : (
+                  <ToggleOffIcon
+                    color="disabled"
+                    style={{ fontSize: '40px', cursor: 'pointer' }}
+                    onClick={() => handleCheckboxChange(record.id_taille)}
+                  />
+                )}
+              </>
+            );
+          },
+        },
+      ];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -87,10 +172,29 @@ const DetailReception = () => {
         }, {});
       const result = Object.values(groupedData);
 
+      useEffect(() => {
+        setVpays(data[0]?.id_pays);
+      }, [data[0]?.id_pays]);
+
+      console.log(vPays)
+      
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/tailleOne/${vPays}`);
+            setGetTaille(data)
+
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN,vPays]);
+
       const handleClick = async (e) => {
         e.preventDefault();
       
-        if (!data.id_pays || !data.id_couleur || !variante || !data.img || selectedData.length === 0) {
+        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
           Swal.fire({
             title: 'Erreur',
             text: 'Veuillez remplir tous les champs requis',
@@ -110,12 +214,12 @@ const DetailReception = () => {
               formData.append('id_couleur', data.id_couleur);
               formData.append('code_variant', data.code_variant);
               formData.append('img', data.img);
-              formData.append('id_produit', produitId?.id_produit);
-              formData.append('id_cible', item.id_cible);
+              formData.append('id_produit', data?.id_produit);
+              formData.append('id_cible', data.id_cible);
               formData.append('id_taille', item.id_taille);
-              formData.append('id_famille', item.id_famille);
+              formData.append('id_famille', data.id_famille);
               formData.append('stock', item.stock);
-              formData.append('prix', prix);
+              formData.append('prix', data.prix);
       
               return axios.post(`${DOMAIN}/api/produit/varianteProduitEntree`, formData, {
                 headers: {
@@ -214,6 +318,10 @@ const DetailReception = () => {
                                         <td>{dd.nombre_de_paires}</td>
                                     </tr>))}
                                 </table>
+                                <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll} style={{marginTop: '50px'}}/>
+                                <div className="btn-reception">
+                                    <button onClick={handleClick} className="btn-valide" style={{ padding: "8px 10px", background: "royalblue", border: "none", color: "#fff", fontSize:"12px", cursor:'pointer', borderRadius: "5px"}}>Envoyer</button>
+                                </div>
                             </div>
                         </div>
                     </div>))}

@@ -79,6 +79,16 @@ const columns = [
           );
         },
       },
+      {
+        title: 'Taille',
+        dataIndex: 'taille',
+        key: 'taille',
+        sorter: (a, b) => a.taille - b.taille,
+        sortDirections: ['descend', 'ascend'],
+        render: (taille) => (
+          <Tag color={'blue'}>{taille}</Tag>
+        ),
+    },
     {
       title: 'Date de réception',
       dataIndex: 'date_reception',
@@ -100,16 +110,6 @@ const columns = [
           {type_mouvement}
         </Tag>
       ),
-    },
-    {
-        title: 'Taille',
-        dataIndex: 'taille',
-        key: 'taille',
-        sorter: (a, b) => a.taille - b.taille,
-        sortDirections: ['descend', 'ascend'],
-        render: (taille) => (
-          <Tag color={'blue'}>{taille}</Tag>
-        ),
     },
 /*      {
       title: 'Action',

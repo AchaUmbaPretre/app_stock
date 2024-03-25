@@ -24,6 +24,8 @@ const DetailReception = () => {
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
     const [inventaireTotalOne, setInventaireTotalOne] = useState([]);
+    const [prix, setPrix] = useState([]);
+    const [selectedData, setSelectedData] = useState([]);
 
 
     useEffect(() => {
@@ -39,6 +41,9 @@ const DetailReception = () => {
         };
         fetchData();
       }, [DOMAIN,id]);
+
+
+       
 
     useEffect(() => {
         const fetchData = async () => {
@@ -85,7 +90,7 @@ const DetailReception = () => {
       const handleClick = async (e) => {
         e.preventDefault();
       
-        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
+        if (!data.id_pays || !data.id_couleur || !variante || !data.img || selectedData.length === 0) {
           Swal.fire({
             title: 'Erreur',
             text: 'Veuillez remplir tous les champs requis',

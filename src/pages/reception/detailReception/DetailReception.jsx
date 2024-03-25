@@ -194,7 +194,7 @@ const DetailReception = () => {
       const handleClick = async (e) => {
         e.preventDefault();
       
-        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
+        if (!data[0]?.id_pays || !data[0]?.id_couleur || !data[0]?.code_variant || !data[0]?.img || !selectedData || selectedData.length === 0) {
           Swal.fire({
             title: 'Erreur',
             text: 'Veuillez remplir tous les champs requis',
@@ -208,27 +208,22 @@ const DetailReception = () => {
           try {
             setIsLoading(true);
       
-            const requests = selectedData.map((item) => {
-              const formData = new FormData();
-              formData.append('id_pays', data.id_pays);
-              formData.append('id_couleur', data.id_couleur);
-              formData.append('code_variant', data.code_variant);
-              formData.append('img', data.img);
-              formData.append('id_produit', data?.id_produit);
-              formData.append('id_cible', data.id_cible);
-              formData.append('id_taille', item.id_taille);
-              formData.append('id_famille', data.id_famille);
-              formData.append('stock', item.stock);
-              formData.append('prix', data.prix);
+            const filteredSelectedData = selectedData.filter((item) => item.id_taille !== null && item.id_taille !== undefined);
       
-              return axios.post(`${DOMAIN}/api/produit/varianteProduitEntree`, formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
-              });
-            });
+            const requestData = {
+              id_produit: data[0]?.id_produit,
+              id_pays: data[0]?.id_pays,
+              id_couleur: data[0]?.id_couleur,
+              code_variant: data[0]?.code_variant,
+              img: data[0]?.img,
+              id_cible: data[0]?.id_cible,
+              id_famille: data[0]?.id_famille,
+              prix: data[0]?.prix
+            };
       
-            await Promise.all(requests);
+            for (const dd of filteredSelectedData) {
+              const response = await axios.post(`${DOMAIN}/api/produit/varianteProduitEntree`, { ...requestData, id_taille: dd.id_taille, stock: dd.stock });
+            }
       
             Swal.fire({
               title: 'Succès',
@@ -237,7 +232,6 @@ const DetailReception = () => {
               confirmButtonText: 'OK',
             });
       
-            navigate('/varianteProduit');
             window.location.reload();
           } catch (err) {
             Swal.fire({

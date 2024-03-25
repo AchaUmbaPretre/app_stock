@@ -81,6 +81,7 @@ import Paiement from './pages/paiement/Paiement';
 import EntreeStock from './pages/entreeStock/EntreeStock';
 import Reception from './pages/reception/Reception';
 import RapportVenteCouleurTaille from './pages/rapport/rapportVente/rapportVenteCouleur/RapportVenteCouleurTaille';
+import CatReception from './pages/reception/catReception/CatReception';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -406,7 +407,7 @@ const user = useSelector((state) => state.user?.currentUser);
         },
         {
           path: '/entreeStock',
-          element: <EntreeStock />
+          element: <CatReception />
         },
         {
           path: '/reception',

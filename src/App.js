@@ -80,6 +80,7 @@ import Dette from './pages/dette/Dette';
 import Paiement from './pages/paiement/Paiement';
 import EntreeStock from './pages/entreeStock/EntreeStock';
 import Reception from './pages/reception/Reception';
+import RapportVenteCouleurTaille from './pages/rapport/rapportVente/rapportVenteCouleur/RapportVenteCouleurTaille';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -378,6 +379,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/rapportCouleurAll/:id/:id_marque',
           element: <RapportCouleurAll/>
+        },
+        {
+          path: '/rapportVenteCouleurTaille',
+          element: <RapportVenteCouleurTaille/>
         },
         {
           path: '/rapportClientOne',

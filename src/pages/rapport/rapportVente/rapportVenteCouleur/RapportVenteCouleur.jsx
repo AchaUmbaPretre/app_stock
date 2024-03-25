@@ -3,15 +3,21 @@ import { Button, Popover, Space, Table,Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const RapportVenteCouleur = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const navigate = useNavigate()
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [taille, setTaille] = useState([]);
+
+    const showModal = (e) => {
+      navigate(`/rapportVenteCouleurTaille?taille=${e}`);
+    };
 
     
 const columns = [
@@ -60,13 +66,13 @@ const columns = [
         key: 'pointure',
         sorter: (a, b) => a.taille_plus_vendue - b.taille_plus_vendue,
         sortDirections: ['descend', 'ascend'],
-        render: (pointure) => (
+        render: (pointure,record) => (
           <Popover
             content="Cliquez ici pour voir les Informations sur les pointures les plus vendues"
             title="Pointures les plus vendues"
             trigger="hover"
           >
-            <Tag color="blue" style={{ cursor: 'pointer' }}>
+            <Tag color="blue" onClick={()=> showModal(record.taille_plus_vendue)} style={{ cursor: 'pointer' }}>
               {pointure} <InfoCircleOutlined />
             </Tag>
           </Popover>

@@ -147,7 +147,7 @@ const Mouvement = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des mouvements</h2>
+                        <h2 className="product-h2">Mouvement de stock</h2>
                         <span>Gérer vos mouvements</span>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import { CircularProgress } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const DetailReception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -26,6 +27,7 @@ const DetailReception = () => {
     const [vPays, setVpays] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
     const scroll = { x: 400 };
+    const userId = useSelector((state) => state.user.currentUser.id)
 
     const handleCheckboxChange = (id) => {
         const selectedRecord = getTaille?.find((record) => record.id_taille === id);
@@ -214,7 +216,8 @@ const DetailReception = () => {
               img: data[0]?.img,
               id_cible: data[0]?.id_cible,
               id_famille: data[0]?.id_famille,
-              prix: data[0]?.prix
+              prix: data[0]?.prix,
+              userId : userId
             };
       
             for (const dd of filteredSelectedData) {

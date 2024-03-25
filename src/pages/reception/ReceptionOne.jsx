@@ -1,5 +1,5 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Table, Tag, Space, Popover, Button } from 'antd';
+import { Table, Tag, Space, Popover, Button, Image } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';

@@ -416,9 +416,9 @@ const user = useSelector((state) => state.user?.currentUser);
           element: <Reception />
         },
         {
-          path: '/detailReception/:id',
+          path: '/detailReception/:date',
           element: <DetailReception />
-        }
+        },
         {
           path: '/receptionOne/:id',
           element: <ReceptionOne />

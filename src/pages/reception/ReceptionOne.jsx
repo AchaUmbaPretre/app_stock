@@ -50,6 +50,36 @@ const columns = [
         ),
     },
     {
+        title: 'Couleur',
+        dataIndex: 'description',
+        key: 'description',
+        render: (color) => {
+          let tagColor;
+      
+          if (color === 'Rouge') {
+            tagColor = 'red';
+          } else if (color === 'Noir') {
+            tagColor = 'black';
+          } else if (color === 'Orange') {
+            tagColor = 'orange';
+          } else if (color === 'Bleu') {
+            tagColor = 'skyblue';
+          } else if (color === 'Chocolat') {
+            tagColor = 'chocolate';
+          } else if (color === 'Vert fluo') {
+            tagColor = 'lime';
+          } else if (color === 'Rose fuchsia') {
+            tagColor = 'hotpink';
+          } else if (color === 'Beige saumon') {
+            tagColor = 'burlywood';
+          }
+      
+          return (
+            <Tag color={tagColor}>{color}</Tag>
+          );
+        },
+      },
+    {
       title: 'Date de réception',
       dataIndex: 'date_reception',
       key: 'date_reception',
@@ -81,36 +111,6 @@ const columns = [
           <Tag color={'blue'}>{taille}</Tag>
         ),
     },
-    {
-        title: 'Couleur',
-        dataIndex: 'description',
-        key: 'description',
-        render: (color) => {
-          let tagColor;
-      
-          if (color === 'Rouge') {
-            tagColor = 'red';
-          } else if (color === 'Noir') {
-            tagColor = 'black';
-          } else if (color === 'Orange') {
-            tagColor = 'orange';
-          } else if (color === 'Bleu') {
-            tagColor = 'skyblue';
-          } else if (color === 'Chocolat') {
-            tagColor = 'chocolate';
-          } else if (color === 'Vert fluo') {
-            tagColor = 'lime';
-          } else if (color === 'Rose fuchsia') {
-            tagColor = 'hotpink';
-          } else if (color === 'Beige saumon') {
-            tagColor = 'burlywood';
-          }
-      
-          return (
-            <Tag color={tagColor}>{color}</Tag>
-          );
-        },
-      },
 /*      {
       title: 'Action',
       key: 'action',

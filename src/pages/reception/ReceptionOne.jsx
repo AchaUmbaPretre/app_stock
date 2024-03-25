@@ -34,6 +34,22 @@ const columns = [
       ),
     },
     {
+        title: 'Marque',
+        dataIndex: 'nom_marque',
+        key: 'nom_marque',
+        render: (nom_marque) => (
+          <Tag color={'blue'}>{nom_marque}</Tag>
+        ),
+    },
+    {
+        title: 'Categorie',
+        dataIndex: 'nom_categorie',
+        key: 'categorie',
+        render: (categorie) => (
+          <Tag color={'blue'}>{categorie}</Tag>
+        ),
+    },
+    {
       title: 'Date de réception',
       dataIndex: 'date_reception',
       key: 'date_reception',
@@ -55,23 +71,7 @@ const columns = [
         </Tag>
       ),
     },
-     {
-      title: 'Marque',
-      dataIndex: 'nom_marque',
-      key: 'nom_marque',
-      render: (nom_marque) => (
-        <Tag color={'blue'}>{nom_marque}</Tag>
-      ),
-    },
     {
-      title: 'Categorie',
-      dataIndex: 'nom_categorie',
-      key: 'categorie',
-      render: (categorie) => (
-        <Tag color={'blue'}>{categorie}</Tag>
-      ),
-    },
-     ,{
         title: 'Taille',
         dataIndex: 'taille',
         key: 'taille',
@@ -111,7 +111,7 @@ const columns = [
           );
         },
       },
-     {
+/*      {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
@@ -124,7 +124,7 @@ const columns = [
           </Popover>
         </Space>
       ),
-    }
+    } */
 ];
 
 const HandOpen = () =>{

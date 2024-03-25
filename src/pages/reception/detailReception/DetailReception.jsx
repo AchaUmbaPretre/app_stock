@@ -1,12 +1,11 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import config from '../../../config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Rate } from 'antd';
 import moment from 'moment';
 import { FadeLoader } from 'react-spinners';
-import { Image, Table } from 'antd';
-import { CloudUploadOutlined } from '@ant-design/icons';
+import { Table } from 'antd';
 import Swal from 'sweetalert2'
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
@@ -15,17 +14,14 @@ import { CircularProgress } from '@mui/material';
 const DetailReception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
-    const [produitId, setProduitId] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [getTaille,setGetTaille] = useState([]);
-    const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [inventaire, setInventaire] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
     const [inventaireTotalOne, setInventaireTotalOne] = useState([]);
-    const [prix, setPrix] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
     const [vPays, setVpays] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
@@ -76,6 +72,7 @@ const DetailReception = () => {
           render: (record) => {
             return (
               <input
+                style={{padding: '2px 10px', outline: "none"}}
                 disabled
                 type="number"
                 className='input-timeBar'
@@ -93,6 +90,7 @@ const DetailReception = () => {
             const selectedRecord = selectedData.find((selectedRecord) => selectedRecord.id_taille === record.id_taille);
             return (
               <input
+                style={{padding: '2px 5px', outline: "none"}}
                 type="number"
                 name='stock'
                 className='input-stock'
@@ -175,8 +173,6 @@ const DetailReception = () => {
       useEffect(() => {
         setVpays(data[0]?.id_pays);
       }, [data[0]?.id_pays]);
-
-      console.log(vPays)
       
       useEffect(() => {
         const fetchData = async () => {
@@ -222,7 +218,7 @@ const DetailReception = () => {
             };
       
             for (const dd of filteredSelectedData) {
-              const response = await axios.post(`${DOMAIN}/api/produit/varianteProduitEntree`, { ...requestData, id_taille: dd.id_taille, stock: dd.stock });
+              await axios.post(`${DOMAIN}/api/produit/varianteProduitEntree`, { ...requestData, id_taille: dd.id_taille, stock: dd.stock });
             }
       
             Swal.fire({
@@ -314,7 +310,12 @@ const DetailReception = () => {
                                 </table>
                                 <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll} style={{marginTop: '50px'}}/>
                                 <div className="btn-reception">
-                                    <button onClick={handleClick} className="btn-valide" style={{ padding: "8px 10px", background: "royalblue", border: "none", color: "#fff", fontSize:"12px", cursor:'pointer', borderRadius: "5px"}}>Envoyer</button>
+                                    <button onClick={handleClick} className="btn-valide" style={{ padding: "10px 15px", background: "royalblue", border: "none", color: "#fff", fontSize:"12px", cursor:'pointer', borderRadius: "5px"}}>Envoyer</button>
+                                    {isLoading && (
+                                        <div className="loader-container loader-container-center">
+                                        <CircularProgress size={28} />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

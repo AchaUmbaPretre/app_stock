@@ -1,11 +1,11 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,UserOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
 import { Table, Tag, Space, Popover, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
 import ReceptionSelect from './ReceptionSelect';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Reception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -69,6 +69,16 @@ const columns = [
       sorter: (a, b) => a.quantite_totale - b.quantite_totale,
       render: (quantite_totale) => (
         <Tag color={quantite_totale > 0 ? 'green' : 'red'}>{quantite_totale}</Tag>
+      ),
+    },
+    {
+      title: 'Reçu par',
+      dataIndex: 'username',
+      key: 'username',
+      render: (username) => (
+        <Tag color={'green'} icon={<UserOutlined />}>
+          {username}
+        </Tag>
       ),
     },
 /*     {

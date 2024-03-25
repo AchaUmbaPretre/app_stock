@@ -5,7 +5,7 @@ import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
 import ReceptionSelect from './ReceptionSelect';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const ReceptionOne = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,6 +14,8 @@ const ReceptionOne = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const {pathname} = useLocation();
+    const id = pathname.split('/')[2];
 
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -51,24 +53,6 @@ const columns = [
         <Tag color={'green'} icon={<CheckCircleOutlined />}>
           {type_mouvement}
         </Tag>
-      ),
-    },
-    {
-      title: 'Nombre de paires',
-      dataIndex: 'nombre_paires',
-      key: 'nombre_paires',
-      sorter: (a, b) => a.nombre_paires - b.nombre_paires,
-      render: (nombre_paires) => (
-        <Tag color={'blue'}>{nombre_paires}</Tag>
-      ),
-    },
-    {
-      title: 'Quantité totale',
-      dataIndex: 'quantite_totale',
-      key: 'quantite_totale',
-      sorter: (a, b) => a.quantite_totale - b.quantite_totale,
-      render: (quantite_totale) => (
-        <Tag color={quantite_totale > 0 ? 'green' : 'red'}>{quantite_totale}</Tag>
       ),
     },
      {
@@ -150,7 +134,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/produit/reception`);
+      const { data } = await axios.get(`${DOMAIN}/api/produit/receptionOne?date=${''}`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {

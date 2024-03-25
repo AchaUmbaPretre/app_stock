@@ -5,7 +5,7 @@ import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
 import ReceptionSelect from './ReceptionSelect';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Reception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -134,7 +134,7 @@ const columns = [
           
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/detailReception/${record.date_reception}`}>
+            <Link to={`/receptionOne/${record.date_reception}`}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>

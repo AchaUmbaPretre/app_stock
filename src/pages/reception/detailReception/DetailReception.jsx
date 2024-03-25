@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import config from '../../../config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -15,6 +15,9 @@ import { CircularProgress } from '@mui/material';
 const DetailReception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
+    const [produitId, setProduitId] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [inventaire, setInventaire] = useState([]);
@@ -77,8 +80,70 @@ const DetailReception = () => {
         acc[id_produit].pointure.push(pointure);
         return acc;
         }, {});
-      
       const result = Object.values(groupedData);
+
+      const handleClick = async (e) => {
+        e.preventDefault();
+      
+        if (!data.id_pays || !data.id_couleur || !data.code_variant || !data.img || selectedData.length === 0) {
+          Swal.fire({
+            title: 'Erreur',
+            text: 'Veuillez remplir tous les champs requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
+      
+        if (Array.isArray(selectedData) && selectedData.length > 0) {
+          try {
+            setIsLoading(true);
+      
+            const requests = selectedData.map((item) => {
+              const formData = new FormData();
+              formData.append('id_pays', data.id_pays);
+              formData.append('id_couleur', data.id_couleur);
+              formData.append('code_variant', data.code_variant);
+              formData.append('img', data.img);
+              formData.append('id_produit', produitId?.id_produit);
+              formData.append('id_cible', item.id_cible);
+              formData.append('id_taille', item.id_taille);
+              formData.append('id_famille', item.id_famille);
+              formData.append('stock', item.stock);
+              formData.append('prix', prix);
+      
+              return axios.post(`${DOMAIN}/api/produit/varianteProduitEntree`, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+            });
+      
+            await Promise.all(requests);
+      
+            Swal.fire({
+              title: 'Succès',
+              text: 'Produit créé avec succès !',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            });
+      
+            navigate('/varianteProduit');
+            window.location.reload();
+          } catch (err) {
+            Swal.fire({
+              title: 'Erreur',
+              text: err.message,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } finally {
+            setIsLoading(false);
+          }
+        } else {
+          console.error('idTaille is not an array');
+        }
+      };
 
   return (
     <>

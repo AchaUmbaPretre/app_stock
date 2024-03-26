@@ -114,6 +114,15 @@ const columns = [
         </Tag>
       ),
     },
+    {
+        title: 'Quantité reçue',
+        dataIndex: 'Qte_recu',
+        key: 'Qte_recu',
+        sorter: (a, b) => a.Qte_recu - b.Qte_recu,
+        render: (Qte_recu) => (
+          <Tag color={Qte_recu > 0 ? 'green' : 'red'}>{Qte_recu}</Tag>
+        ),
+      },
 /*      {
       title: 'Action',
       key: 'action',

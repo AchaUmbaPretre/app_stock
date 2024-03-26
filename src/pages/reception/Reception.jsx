@@ -141,7 +141,6 @@ const columns = [
       title: 'Action',
       key: 'action',
       render: (text, record) => (
-          
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
             <Link to={`/receptionOne/${format(new Date(record.date_reception),'yyyy-M-dd')}`}>

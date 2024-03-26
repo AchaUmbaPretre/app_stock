@@ -78,6 +78,16 @@ const columns = [
           </Popover>
         ),
       },
+      {
+        title: 'Nombre vendu',
+        dataIndex: 'nombre_vendu',
+        key: 'nombre_vendu',
+        sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,
+        sortDirections: ['descend', 'ascend'],
+        render: (nombre_vendu) => (
+          <Tag color={nombre_vendu > 0 ? 'green' : 'red'}>{nombre_vendu}</Tag>
+        ),
+      },
      {
       title: 'Quantité vendue',
       dataIndex: 'quantite_vendue',

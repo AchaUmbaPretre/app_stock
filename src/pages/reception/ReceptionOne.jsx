@@ -15,7 +15,10 @@ const ReceptionOne = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
+    const dateId = pathname.split('/')[2];
+
+
+
 
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -134,7 +137,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/produit/receptionOne?date=${''}`);
+      const { data } = await axios.get(`${DOMAIN}/api/produit/receptionOne?dateId=${dateId}`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {

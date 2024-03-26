@@ -115,12 +115,21 @@ const columns = [
       ),
     },
     {
-        title: 'Quantité reçue',
+        title: 'Qté reçue',
         dataIndex: 'Qte_recu',
         key: 'Qte_recu',
         sorter: (a, b) => a.Qte_recu - b.Qte_recu,
         render: (Qte_recu) => (
           <Tag color={Qte_recu > 0 ? 'green' : 'red'}>{Qte_recu}</Tag>
+        ),
+      },
+      {
+        title: 'Qté en stock',
+        dataIndex: 'quantite_stock',
+        key: 'quantite_stock',
+        sorter: (a, b) => a.quantite_stock - b.quantite_stock,
+        render: (quantite_stock) => (
+          <Tag color={quantite_stock > 0 ? 'green' : 'red'}>{quantite_stock}</Tag>
         ),
       },
 /*      {

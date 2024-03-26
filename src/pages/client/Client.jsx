@@ -313,7 +313,6 @@ const Client = () => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

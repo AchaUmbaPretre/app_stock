@@ -128,7 +128,17 @@ const columns = [
       ),
     },
     {
-      title: 'Quantité en stock',
+      title: 'Nbre vendu',
+      dataIndex: 'nombre_vendu',
+      key: 'nombre_vendu', 
+      sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,
+      sortDirections: ['descend', 'ascend'],
+      render: (nombre_vendu) => (
+        <Tag color={nombre_vendu > 0 ? 'green' : 'red'}>{nombre_vendu}</Tag>
+      ),
+    },
+    {
+      title: 'Qté en stock',
       dataIndex: 'quantite_en_stock',
       key: 'quantite_en_stock', 
       sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,

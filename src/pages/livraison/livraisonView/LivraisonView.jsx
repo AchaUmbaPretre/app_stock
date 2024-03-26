@@ -108,7 +108,7 @@ const LivraisonView = () => {
           )
         },
         {
-            title: 'Qté commandée',
+            title: 'Qté en livraison',
             dataIndex: 'qte_commande',
             key: 'qte_commande',
             sorter: (a, b) => a.qte_commande - b.qte_commande,
@@ -234,11 +234,11 @@ const LivraisonView = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de détail des livraisons de commande N° {id}</h2>
+                        <h2 className="product-h2">Détail de la livraison N° {id}</h2>
                         <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
                     </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
-                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contact de {getCommande?.nom}</h2>
                       <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
                 </div>

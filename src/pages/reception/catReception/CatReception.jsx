@@ -96,7 +96,7 @@ const CatReception = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}`
+            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&itemsPerPage=${itemsPerPage}&currentPage=${startIndex}`
       
             const { data } = await axios.get(url);
             setData(data);
@@ -107,7 +107,7 @@ const CatReception = () => {
         };
       
         fetchData();
-      }, [DOMAIN, famille, marque, cible, taille]);
+      }, [DOMAIN, famille, marque, cible, taille, itemsPerPage, startIndex]);
       
   return (
     <>

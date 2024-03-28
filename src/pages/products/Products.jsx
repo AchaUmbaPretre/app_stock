@@ -3,7 +3,7 @@ import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCirc
 import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Modal} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Modal, Image} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
@@ -145,6 +145,20 @@ const Products = () => {
     
   const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
+    {
+      title: 'image',
+      dataIndex: 'img',
+      key: 'img',
+      render: (text, record) => (
+        <div className="userList">
+          <Image
+            className="userImg"
+            src="error"
+            fallback={`${DOMAIN}${record.img}`}
+          />
+        </div>
+      ),
+    },
     {
         title: 'Nom produit',
         dataIndex: 'nom_produit',

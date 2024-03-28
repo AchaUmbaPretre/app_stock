@@ -39,7 +39,7 @@ const columns = [
       ),
     },
     {
-      title: 'Nombre vendu',
+      title: 'Nombre de vente',
       dataIndex: 'nombre_vendu',
       key: 'nombre_vendu',
       sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,

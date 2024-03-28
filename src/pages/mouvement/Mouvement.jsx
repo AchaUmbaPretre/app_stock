@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,ShoppingCartOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
@@ -62,6 +62,16 @@ const Mouvement = () => {
           )
         },
         {
+          title: 'Livreur',
+          dataIndex: 'livreur',
+          key: 'livreur',
+          render : (text,record)=>(
+            <div onClick={()=> showModal(record.id_client1)} style={{cursor: 'pointer'}}>
+                <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
+            </div>
+          )
+        },
+        {
           title: 'Telephone',
           dataIndex: 'telephone',
           key: 'email',
@@ -81,7 +91,7 @@ const Mouvement = () => {
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
           sortDirections: ['descend', 'ascend'],
           render : (text,record)=>(
-              <Tag color={'green'}>{record.total_varianteproduit}</Tag>
+              <Tag color={'green'} icon={<ShoppingCartOutlined />}>{record.total_varianteproduit}</Tag>
           )
         },
         {

@@ -56,6 +56,16 @@ const Ventes = () => {
           )
         },
         {
+          title: 'Livreur',
+          dataIndex: 'username',
+          key: 'username',
+          render : (text,record)=>(
+            <div style={{cursor: 'pointer'}}>
+              <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
+            </div>
+          )
+        },
+        {
           title: 'Telephone',
           dataIndex: 'telephone',
           key: 'telephone',
@@ -69,13 +79,23 @@ const Ventes = () => {
           ),
         },
         {
-          title: 'Total produit',
+          title: 'Quantité vendue',
           dataIndex: 'total_varianteproduit',
           key: 'total_varianteproduit',
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
           sortDirections: ['descend', 'ascend'],
           render : (text,record)=>(
               <Tag color={'green'}>{record.total_varianteproduit}</Tag>
+          )
+        },
+        {
+          title: 'Nbre vendu',
+          dataIndex: 'nombre_vendu',
+          key: 'nombre_vendu',
+          sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,
+          sortDirections: ['descend', 'ascend'],
+          render : (text,record)=>(
+              <Tag color={'green'}>{record.nombre_vendu}</Tag>
           )
         },
         {

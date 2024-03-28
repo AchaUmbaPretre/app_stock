@@ -85,7 +85,7 @@ const Mouvement = () => {
           ),
         },
         {
-          title: 'Total produit',
+          title: 'Nombre vendu',
           dataIndex: 'total_varianteproduit',
           key: 'total_varianteproduit',
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,

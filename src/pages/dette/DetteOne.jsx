@@ -1,15 +1,14 @@
 import './../products/products.scss'
-import { SearchOutlined,EyeOutlined, SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import config from '../../config';
 import { useSelector } from 'react-redux';
 import DetteSelect from './DetteSelect';
 import { format } from 'date-fns';
 
-const Dette = () => {
+const DetteOne = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -23,7 +22,7 @@ const Dette = () => {
 
       const handleDelete = async (id) => {
         try {
-          await axios.delete(`${DOMAIN}/api/vente/vente/dette`);
+          await axios.delete(`${DOMAIN}/api/vente/vente/dette/${id}`);
             window.location.reload();
         } catch (err) {
           console.log(err);
@@ -158,11 +157,6 @@ const Dette = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Voir la liste de mouvement de cette commande" trigger="hover">
-                    <Link to={`/dette/${record.id_client}`}>
-                      <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                    </Link>
-                  </Popover>
                 {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
@@ -182,7 +176,7 @@ const Dette = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dette`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteOne?id_client=${''}`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -191,7 +185,6 @@ const Dette = () => {
         };
         fetchData();
       }, [DOMAIN]);
-
 
     const handleOk = async (e) => {
       setOpen(true)
@@ -239,4 +232,4 @@ const Dette = () => {
   )
 }
 
-export default Dette
+export default DetteOne

@@ -84,6 +84,7 @@ import RapportVenteCouleurTaille from './pages/rapport/rapportVente/rapportVente
 import CatReception from './pages/reception/catReception/CatReception';
 import DetailReception from './pages/reception/detailReception/DetailReception';
 import ReceptionOne from './pages/reception/ReceptionOne';
+import DetteOne from './pages/dette/DetteOne';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -402,6 +403,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/dette',
           element: <Dette />
+        },
+        {
+          path: '/dette/:id',
+          element: <DetteOne />
         },
         {
           path: '/paiement',

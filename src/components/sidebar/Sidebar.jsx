@@ -143,11 +143,11 @@ const Sidebar = () => {
         </Item>
       </SubMenu>
       <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<CarOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
-        <Item key="livraison">
+{/*         <Item key="livraison">
           <Link to="/livraison" className="sidebarLink">
             Livraison
           </Link>
-        </Item>
+        </Item> */}
         <Item key="livraison_detail">
           <Link to="/livraison_detail" className="sidebarLink">
             Détail livraison

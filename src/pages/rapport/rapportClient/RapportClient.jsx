@@ -36,6 +36,16 @@ const columns = [
       ),
     },
     {
+      title: 'Nbre de vente',
+      dataIndex: 'nombre_ventes',
+      key: 'nombre_ventes',
+      sorter: (a, b) => a.nombre_ventes - b.nombre_ventes,
+      sortDirections: ['descend', 'ascend'],
+      render: (nombre_ventes) => (
+        <Tag color={'green'}>{nombre_ventes}</Tag>
+      ),
+    },
+    {
       title: 'Vente moyenne',
       dataIndex: 'vente_moyenne',
       key: 'total_varianteproduit',

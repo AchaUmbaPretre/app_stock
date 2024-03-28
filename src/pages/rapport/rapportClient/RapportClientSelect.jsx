@@ -19,9 +19,13 @@ const RapportClientSelect = ({getProduits}) => {
       setDatas((prev) => ({ ...prev, end_date: endDate }));
     };
 
+    const handleChange = (e) => {
+      setDatas((prev) => ({ ...prev,[e.target.name]:e.target.value }));
+    };
+
   const handleClick = async (e) => {
     e.preventDefault();
-
+/* 
    if (!datas.start_date || !datas.end_date ) {
       Swal.fire({
         title: 'Error',
@@ -30,10 +34,10 @@ const RapportClientSelect = ({getProduits}) => {
         confirmButtonText: 'OK',
       });
       return;
-    }
+    } */
 
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/rapport/rapportClient/venteClient?start_date=${datas.start_date}&end_date=${datas.end_date}`);
+      const {data} = await axios.get(`${DOMAIN}/api/rapport/rapportClient/venteClient?start_date=${datas.start_date}&end_date=${datas.end_date}&qteOne=${datas.qteOne}&qteTwo=${datas.qteTwo}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({
@@ -46,6 +50,8 @@ const RapportClientSelect = ({getProduits}) => {
       console.log(err);
     }
 }
+
+console.log(datas)
 
   return (
     <>
@@ -65,6 +71,23 @@ const RapportClientSelect = ({getProduits}) => {
               name="end_date"
               style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
               onChange={handleEndDateChange}
+              placeholder='Entrer la date end'
+            />
+            <input
+              type="number"
+              className="product-input-select"
+              name="qteOne"
+              style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
+              onChange={handleChange}
+              placeholder='Entrez la quantité'
+            />
+            <input
+              type="number"
+              className="product-input-select"
+              name="qteTwo"
+              style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
+              onChange={handleChange}
+              placeholder='Entrez la quantité'
             />
                 <div className="select-btn" onClick={handleClick}>
                     <SearchOutlined className='select-search-btn' />

@@ -26,13 +26,23 @@ const columns = [
       ),
     },
     {
-      title: 'Quantité',
+      title: 'Quantité vendue',
       dataIndex: 'total_varianteproduit',
       key: 'total_varianteproduit',
       sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
       sortDirections: ['descend', 'ascend'],
       render: (total_varianteproduit) => (
         <Tag color={'green'}>{total_varianteproduit}</Tag>
+      ),
+    },
+    {
+      title: 'vente moyenne',
+      dataIndex: 'vente_moyenne',
+      key: 'total_varianteproduit',
+      sorter: (a, b) => a.vente_moyenne - b.vente_moyenne,
+      sortDirections: ['descend', 'ascend'],
+      render: (vente_moyenne) => (
+        <Tag color={'green'}>{vente_moyenne}</Tag>
       ),
     },
     {

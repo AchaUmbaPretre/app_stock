@@ -31,7 +31,6 @@ const Mouvement = () => {
 
       const showModalLivreur = (e) => {
         navigate(`/mouvementOne/${e}`)
-        console.log(e)
       };
 
       const HandOpen = () =>{
@@ -72,9 +71,11 @@ const Mouvement = () => {
           dataIndex: 'livreur',
           key: 'livreur',
           render : (text,record)=>(
-            <div style={{cursor: 'pointer'}} onClick={()=> showModalLivreur(record.id_livreur)}>
+            <Popover content={`Voir toutes les livraisons de ${text}`} placement="top">
+              <div style={{cursor: 'pointer'}} onClick={()=> showModalLivreur(record.id_livreur)}>
                 <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
-            </div>
+              </div>
+            </Popover>
           )
         },
         {
@@ -97,7 +98,7 @@ const Mouvement = () => {
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
           sortDirections: ['descend', 'ascend'],
           render : (text,record)=>(
-              <Tag color={'green'} icon={<ShoppingCartOutlined />}>{record.total_varianteproduit}</Tag>
+              <Tag color={'blue'} icon={<ShoppingCartOutlined />}>{record.total_varianteproduit}</Tag>
           )
         },
         {
@@ -201,7 +202,7 @@ const Mouvement = () => {
                       </div>
                     </div>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Vente' key={1}>
+                  <Tabs.TabPane tab='Mouvement vente' key={1}>
                      <MouvementDepart/>
                   </Tabs.TabPane>
                 </Tabs>

@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import config from '../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 const MouvementDepart = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -15,6 +16,7 @@ const MouvementDepart = () => {
     const [data, setData] = useState([]);
     const searchInput = useRef(null);
     const scroll = { x: 500 };
+    const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -164,13 +166,17 @@ const MouvementDepart = () => {
           },
         },
         {
-            title: 'Livreur',
-            dataIndex: 'livreur',
-            key: 'livreur',
-            render: (text, record) => {
-              return <Tag color={"green"}>{text}</Tag>;
-            },
-          },
+          title: 'Livreur',
+          dataIndex: 'livreur',
+          key: 'livreur',
+          render : (text,record)=>(
+            <Popover content={`Voir toutes les livraisons de ${text}`} placement="top">
+              <div style={{cursor: 'pointer'}} onClick={()=> showModalLivreur(record.id_livreur)}>
+                <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
+              </div>
+            </Popover>
+          )
+        },
         {
             title: 'Date',
             dataIndex: 'date_mouvement',
@@ -244,6 +250,10 @@ const MouvementDepart = () => {
             ),
           },
       ];
+
+      const showModalLivreur = (e) => {
+        navigate(`/mouvementOne/${e}`)
+      };
 
       useEffect(() => {
         const fetchData = async () => {

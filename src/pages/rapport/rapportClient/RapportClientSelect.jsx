@@ -51,8 +51,6 @@ const RapportClientSelect = ({getProduits}) => {
     }
 }
 
-console.log(datas)
-
   return (
     <>
         <div className="productSelects">

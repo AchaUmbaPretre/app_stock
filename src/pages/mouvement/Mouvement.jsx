@@ -2,7 +2,7 @@ import './../products/products.scss'
 import { SearchOutlined, SisternodeOutlined,EyeOutlined,ShoppingCartOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import MouvClientDetail from './mouvementClientDetail/MouvClientDetail';
@@ -16,6 +16,7 @@ const Mouvement = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -26,6 +27,11 @@ const Mouvement = () => {
       const showModal = (e) => {
         setOpen(true);
         setIdClient(e)
+      };
+
+      const showModalLivreur = (e) => {
+        navigate(`/mouvementOne/${e}`)
+        console.log(e)
       };
 
       const HandOpen = () =>{
@@ -66,7 +72,7 @@ const Mouvement = () => {
           dataIndex: 'livreur',
           key: 'livreur',
           render : (text,record)=>(
-            <div style={{cursor: 'pointer'}}>
+            <div style={{cursor: 'pointer'}} onClick={()=> showModalLivreur(record.id_livreur)}>
                 <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
             </div>
           )

@@ -85,6 +85,7 @@ import CatReception from './pages/reception/catReception/CatReception';
 import DetailReception from './pages/reception/detailReception/DetailReception';
 import ReceptionOne from './pages/reception/ReceptionOne';
 import DetteOne from './pages/dette/DetteOne';
+import MouvementLivreur from './pages/mouvement/mouvementLivreur/MouvementLivreur';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -211,6 +212,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/mouvement/:id',
           element: <MouvementView />
+        },
+        {
+          path: '/mouvementOne/:id',
+          element: <MouvementLivreur />
         },
         {
           path: '/mouvementForm',

@@ -36,7 +36,7 @@ const columns = [
       ),
     },
     {
-      title: 'vente moyenne',
+      title: 'Vente moyenne',
       dataIndex: 'vente_moyenne',
       key: 'total_varianteproduit',
       sorter: (a, b) => a.vente_moyenne - b.vente_moyenne,

@@ -131,6 +131,16 @@ const Sidebar = () => {
             Mouvement
           </Link>
         </Item>
+        <Item key="dette">
+          <Link to="/dette" className="sidebarLink">
+            Dette
+          </Link>
+        </Item>
+        <Item key="paiement">
+          <Link to="/paiement" className="sidebarLink">
+            Paiement
+          </Link>
+        </Item>
       </SubMenu>
       <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<CarOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="livraison">
@@ -197,16 +207,6 @@ const Sidebar = () => {
         <Item key="listeVariante">
           <Link to="/listeVariante" className="sidebarLink">
             Stock
-          </Link>
-        </Item>
-        <Item key="dette">
-          <Link to="/dette" className="sidebarLink">
-            Dette
-          </Link>
-        </Item>
-        <Item key="paiement">
-          <Link to="/paiement" className="sidebarLink">
-            Paiement
           </Link>
         </Item>
         <Item key="rapportdAchats">

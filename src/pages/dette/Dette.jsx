@@ -37,15 +37,12 @@ const Dette = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1},
         {
-          title: 'N° de commande',
+          title: 'Code',
           dataIndex: 'id_commande',
-          width: '40px',
           key: 'id_commande',
-          render: (text) => (
-            <Tag color={'blue'}>
-              {text}
-            </Tag>
-          )
+          render: (text, record) => (
+            <Tag color="blue">{`${new Date().getFullYear()?.toString().substring(2)}${record.id_shop?.toString().padStart(2, '0')}${record.id_commande.toString().padStart(2, '0')}`}</Tag>
+          ),
         },
         {
           title: 'Client',
@@ -75,13 +72,13 @@ const Dette = () => {
           },
           {
             title: 'Montant convenu',
-            dataIndex: 'montant_convenu',
+            dataIndex: 'montant_convenuV',
             key: 'montant_convenu',
-            sorter: (a, b) => a.montant_convenu - b.montant_convenu,
+            sorter: (a, b) => a.montant_convenuV - b.montant_convenuV,
             sortDirections: ['descend', 'ascend'],
             render: (text, record) => (
               <Tag color="blue" icon={<DollarOutlined />}>
-                {record.montant_convenu.toLocaleString('en-US', {
+                {record.montant_convenuV.toLocaleString('en-US', {
                   style: 'currency',
                   currency: 'USD',
                 })}
@@ -90,16 +87,28 @@ const Dette = () => {
           },
         {
           title: 'Montant payé',
-          dataIndex: 'montant_paye',
-          key: 'montant_paye',
-          sorter: (a, b) => a.montant_paye - b.montant_paye,
+          dataIndex: 'montant_payeV',
+          key: 'montant_payeV',
+          sorter: (a, b) => a.montant_payeV - b.montant_payeV,
           sortDirections: ['descend', 'ascend'],
           render: (text, record) => (
             <Tag color="blue" icon={<DollarOutlined />}>
-              {record.montant_paye.toLocaleString('en-US', {
+              {record.montant_payeV.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD',
               })}
+            </Tag>
+          ),
+        },
+        {
+          title: 'Nbre de dette',
+          dataIndex: 'nbre_dette',
+          key: 'nbre_dette',
+          sorter: (a, b) => a.nbre_dette - b.nbre_dette,
+          sortDirections: ['descend', 'ascend'],
+          render: (nbre_dette) => (
+            <Tag color={nbre_dette > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+              {nbre_dette}
             </Tag>
           ),
         },

@@ -167,7 +167,7 @@ const Dette = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Voir la liste de mouvement de cette commande" trigger="hover">
+                <Popover title="Voir la liste de dette de ce client" trigger="hover">
                     <Link to={`/dette/${record.id_client}`}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>

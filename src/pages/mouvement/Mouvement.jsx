@@ -201,7 +201,7 @@ const Mouvement = () => {
                       </div>
                     </div>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Départ en livraison' key={1}>
+                  <Tabs.TabPane tab='Vente' key={1}>
                      <MouvementDepart/>
                   </Tabs.TabPane>
                 </Tabs>

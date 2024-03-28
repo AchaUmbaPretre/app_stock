@@ -7,6 +7,7 @@ import config from '../../config';
 import { useSelector } from 'react-redux';
 import DetteSelect from './DetteSelect';
 import { format } from 'date-fns';
+import { useLocation } from 'react-router-dom';
 
 const DetteOne = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,6 +18,8 @@ const DetteOne = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
+    const {pathname} = useLocation();
+    const id_client = pathname.split('/')[2]
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -176,7 +179,7 @@ const DetteOne = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteOne?id_client=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteOne?id_client=${id_client}`);
             setData(data);
             setLoading(false)
           } catch (error) {

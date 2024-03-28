@@ -66,7 +66,7 @@ const Mouvement = () => {
           dataIndex: 'livreur',
           key: 'livreur',
           render : (text,record)=>(
-            <div onClick={()=> showModal(record.id_client1)} style={{cursor: 'pointer'}}>
+            <div style={{cursor: 'pointer'}}>
                 <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
             </div>
           )

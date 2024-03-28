@@ -21,7 +21,7 @@ const MouvementLivreur = () => {
     const id = pathname.split('/')[2]
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
-    const [getCommande, setGetCommande] = useState([]);
+    const [getLivreur, setGetLivreur] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -225,27 +225,7 @@ const MouvementLivreur = () => {
           render: (stock) => (
             <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
           ),
-      },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                
-              <Space size="middle">
-              {user?.role === 'admin' &&
-                <Popover title="Supprimer" trigger="hover">
-                  <Popconfirm
-                    title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id_mouvement)}
-                    okText="Oui"
-                    cancelText="Non"
-                  >
-                    <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
-                </Popover> }
-              </Space>
-            ),
-          },
+      }
       ];
 
       useEffect(() => {
@@ -253,6 +233,7 @@ const MouvementLivreur = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementLivreur?userId=${id}`);
             setData(data);
+            setGetLivreur(data[0].livreur)
             setLoading(false)
           } catch (error) {
             console.log(error);
@@ -261,17 +242,7 @@ const MouvementLivreur = () => {
         fetchData();
       }, [DOMAIN,id]);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeOne/${id}`);
-            setGetCommande(data[0]);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN,id]);
+      console.log(data)
 
    const filteredData = data?.filter((item) =>
     item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
@@ -283,12 +254,10 @@ const MouvementLivreur = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de detail de mouvement de commande n° {id}</h2>
-                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                        <h2 className="product-h2">Les mouvements de {getLivreur}</h2>
+                        <span></span>
                     </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
-                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contact de {getCommande?.nom}</h2>
-                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div>
                 </div>
                 <div className="product-bottom">

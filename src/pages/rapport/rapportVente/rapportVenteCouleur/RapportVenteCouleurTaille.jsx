@@ -14,8 +14,9 @@ const RapportVenteCouleurTaille = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const id = useLocation().pathname.split('/')[2];
-    const id_marque = useLocation().pathname.split('/')[3];
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const taille = searchParams.get('taille')
 
 
 const columns = [
@@ -157,7 +158,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteCouleurAll?id_couleur=${id}&id_marque=${id_marque}`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteCouleurTaille?taille=${taille}`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -165,7 +166,7 @@ useEffect(() => {
     }
   };
   fetchData();
-}, [DOMAIN,id,id_marque]);
+}, [DOMAIN, taille]);
 
  const filteredData = getRapport?.filter((item) =>
     item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -178,7 +179,7 @@ useEffect(() => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport des ventes de taille la plus vendues</h2>
+                        <h2 className="product-h2">Rapport des ventes des tailles les plus vendues</h2>
                         <span>Gérez votre rapport des ventes</span>
                     </div>
                 </div>
@@ -198,7 +199,7 @@ useEffect(() => {
                           </div>
                       </div>
                        {open &&
-                              <RapportCouleurSelect getProduits={setGetRapport} id={id} id_marque={id_marque}/> }
+                              <RapportCouleurSelect getProduits={setGetRapport}/> }
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Space, Table, Tag, Checkbox} from 'antd';
-import { WhatsAppOutlined ,PhoneOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined ,PhoneOutlined,CaretLeftOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -217,7 +217,7 @@ const PageCommandeVente = () => {
             <div className="pageLivreurVente-container">
               <div className="page-rows-retour" onClick={()=>navigate('/pageCommandeLivraison')}>
                   <div className="page-retour-row">
-                    retour
+                    <CaretLeftOutlined />
                   </div>
               </div>
                 <h4 className='pageH4'>Commande n° {IdCommande}</h4>

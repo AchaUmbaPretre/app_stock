@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import config from '../../../config';
 import { FadeLoader } from 'react-spinners';
+import { CaretLeftOutlined } from '@ant-design/icons';
 
 const PageRetourCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -32,7 +33,7 @@ const PageRetourCommande = () => {
         <div className="pageCommandeLivraison">
           <div className="page-rows-retour" onClick={()=>navigate('/pageLivreurVente')}>
             <div className="page-retour-row" style={{background:'#fff',border: "1px solid rgba(3, 3, 109, 0.171)", color:"rgb(3, 3, 109)",padding: '6px',width:'max-content',cursor:'pointer',borderRadius: "5px"}}>
-              retour
+              <CaretLeftOutlined />
             </div>
           </div>
         <h1>Liste de commande non livré</h1>

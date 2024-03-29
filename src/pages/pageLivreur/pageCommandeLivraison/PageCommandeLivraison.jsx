@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import config from '../../../config';
 import { FadeLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
+import { CaretLeftOutlined } from '@ant-design/icons';
 
 const PageCommandeLivraison = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -32,7 +33,9 @@ const PageCommandeLivraison = () => {
     <>
         <div className="pageCommandeLivraison">
         <div className='pageCommande-return' onClick={()=>navigate('/pageLivreurVente')}>
-          <span>Retour</span>
+          <div className="page-retour-row">
+            <CaretLeftOutlined />
+          </div>
         </div>
         <h1>Liste de commande</h1>
         { loading ? (

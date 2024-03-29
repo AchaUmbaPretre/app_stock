@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Input, Space, Table,Tag,Checkbox} from 'antd';
+import { CaretLeftOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -175,7 +176,7 @@ const PageLivraisonRetour = () => {
             <div className="pageLivreurVente-container">
               <div className="page-rows-retour" onClick={()=>navigate('/pageRetourCommande')}>
                   <div className="page-retour-row">
-                    retour
+                    <CaretLeftOutlined />
                   </div>
               </div>
             <h1>Retourne les produits restants</h1>

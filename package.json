@@ -28,6 +28,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
     "react-spinners": "^0.13.8",
+    "react-to-print": "^2.15.1",
     "redux-persist": "^6.0.0",
     "sass": "^1.69.5",
     "sweetalert2": "^11.10.1",

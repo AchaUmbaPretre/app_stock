@@ -198,8 +198,8 @@ useEffect(() => {
                               <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-                       {open &&
-                              <RapportCouleurSelect getProduits={setGetRapport}/> }
+{/*                        {open &&
+                              <RapportCouleurSelect getProduits={setGetRapport}/> } */}
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>

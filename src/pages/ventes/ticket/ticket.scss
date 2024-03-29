@@ -20,8 +20,9 @@
                 height: 120px;
             }
             .ticket-title{
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: 400;
+                color: rgba(1, 13, 48, 0.952);
             }
         }
         .ticket-contact{
@@ -71,6 +72,14 @@
                         padding: 8px;
                     }
                 }
+            }
+        }
+        .ticket-fin{
+            padding: 10px 0;
+            .ticket-desc{
+                font-size: 13px;
+                text-align: justify;
+                color: rgba(1, 13, 48, 0.952);
             }
         }
     }

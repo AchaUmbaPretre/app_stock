@@ -70,24 +70,36 @@ const Ticket = ({idTicket}) => {
                         </tr>
                         </thead>
                         <tbody>
-                        {data?.map((dd) => (
+                        {data?.map((dd, index) => (
                             <React.Fragment key={dd.id}>
                             <tr>
-                                <td>{dd.nom_marque}</td>
+                                <td>{dd.nom_produit}</td>
                                 <td>{dd.quantite}</td>
                                 <td>{dd.prix_unitaire}$</td>
-                                <td>{dd.prix_unitaire}$</td>
+                                <td>{dd.prix_unitaire * dd.quantite}$</td>
                             </tr>
-                            <tr>
+                            {index === data.length - 1 && (
+                                <tr>
                                 <td></td>
                                 <td></td>
                                 <td>Total</td>
-                                <td>{dd.prix_unitaire}$</td>
-                            </tr>
+                                <td>
+                                    {data.reduce(
+                                    (total, item) => total + item.prix_unitaire * item.quantite,
+                                    0
+                                    )}
+                                    $
+                                </td>
+                                </tr>
+                            )}
                             </React.Fragment>
                         ))}
                         </tbody>
                     </table>
+                </div>
+
+                <div className="ticket-fin">
+                    <p className="ticket-desc">Merci d'avoir choisi nos services. Nous apprécions votre soutien et espérons vous revoir bientôt. N'hésitez pas à nous contacter si vous avez des questions ou des préoccupations. Bonne journée !</p>
                 </div>
             </div>
         </div>

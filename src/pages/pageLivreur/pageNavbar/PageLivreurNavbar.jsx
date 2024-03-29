@@ -60,7 +60,7 @@ const PageLivreurNavbar = () => {
                             <Badge count={''}>
                                 <MailOutlined className='navbar-icon' />
                             </Badge>
-                            <Badge count={data.length}>
+                            <Badge count={data.length} onClick={()=>navigate("/pageCommandeLivraison")}>
                                 <BellOutlined className='navbar-icon'/>
                             </Badge>
                             <PoweroffOutlined className='navbar-icon' onClick={Logout}/>

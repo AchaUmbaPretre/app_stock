@@ -23,8 +23,15 @@ const Ticket = ({idTicket}) => {
         fetchData();
       }, [DOMAIN,idTicket]);
 
+      console.log(data)
+
   return (
-    <div>Ticket</div>
+    <>
+        <div className="ticket">
+            
+        </div>
+
+    </>
   )
 }
 

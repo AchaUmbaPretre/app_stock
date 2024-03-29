@@ -20,8 +20,13 @@
                 width: 150px;
                 height: 150px;
             }
-            .ticket-title{
+            .ticket-titles{
                 font-size: 12px;
+                font-weight: 600;
+                color: rgba(1, 13, 48, 0.952);
+            }
+            .ticket-title{
+                font-size: 11px;
                 font-weight: 400;
                 color: rgba(1, 13, 48, 0.952);
             }

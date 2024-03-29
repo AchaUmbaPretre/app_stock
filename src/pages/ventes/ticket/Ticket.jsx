@@ -35,10 +35,9 @@ const Ticket = ({idTicket}) => {
             <div className="ticket-wrapper">
                 <div className="ticket-logo">
                     <img src={logo} alt="" className='ticket-img'/>
-                    <h1 className='ticket-title'>Ndoé boutique</h1>
-                    <h1 className='ticket-title'>+243 817 001 002 | Rdc kinsahsa</h1>
+                    <h1 className='ticket-titles'>Ndoé boutique</h1>
+                    <h1 className='ticket-title'>+243 817 001 002 | Rdc Kinshasa</h1>
                 </div>
-
                 <div className="ticket-contact">
                     <div className="ticket-contact-rows">
                     {data.length > 0 && (

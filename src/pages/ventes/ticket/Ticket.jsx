@@ -98,7 +98,6 @@ const Ticket = ({idTicket}) => {
                         </tbody>
                     </table>
                 </div>
-
                 <div className="ticket-fin">
                     <p className="ticket-desc">Merci d'avoir choisi nos services. Nous apprécions votre soutien et espérons vous revoir bientôt. N'hésitez pas à nous contacter si vous avez des questions ou des préoccupations. <b>Bonne journée !</b></p>
                 </div>

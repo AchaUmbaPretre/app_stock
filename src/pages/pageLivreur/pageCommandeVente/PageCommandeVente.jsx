@@ -262,7 +262,7 @@ const PageCommandeVente = () => {
                     <h2>{data[0]?.quantite_prix} $</h2>
                 </div>
                 <div className="pageLivreur_submit">
-                    <label htmlFor="">Dette</label>
+                    <label htmlFor="">Dette (Entrez le montant payé)</label>
                     <input type='number' min={0} className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la dette...' />
                 </div>
                 <div className="pageLivreur-form-rows">

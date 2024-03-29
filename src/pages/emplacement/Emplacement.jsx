@@ -1,9 +1,10 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {  FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import { Button, Input, Space, Table, Popover,Popconfirm,Modal} from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {  EditOutlined,DeleteOutlined} from '@ant-design/icons';
+import { Button, Space, Table, Popconfirm,Modal} from 'antd';
+import React, { useEffect, useState } from 'react';
 import './emplacement.scss'
 import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 import config from '../../config';
 import Swal from 'sweetalert2';
 import FormEmplacement from './formEmplacement/FormEmplacement';
@@ -22,6 +23,7 @@ const Emplacement = () => {
     const [searchValue, setSearchValue] = useState('');
     const id = pathname.split('/')[2]
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const showModal = (id) => {
       setOpen(true);
@@ -50,11 +52,17 @@ const Emplacement = () => {
     const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
-            title: 'Emplacement',
-            dataIndex: 'nom',
-            key: 'nom',
+            title: 'Shop',
+            dataIndex: 'shop',
+            key: 'shop',
             
         },
+        {
+          title: 'Adresse',
+          dataIndex: 'adresse',
+          key: 'adresse',
+          
+      },
         {
             title: 'Capacité disponible',
             dataIndex: 'capacite',
@@ -71,7 +79,7 @@ const Emplacement = () => {
                   <Button icon={<EditOutlined />} style={{ color: 'green' }}  onClick={()=>showModal(record.id)} />
                 <Popconfirm
                   title="Êtes-vous sûr de vouloir supprimer?"
-                  onConfirm={() => handleDelete(record.id)}
+                  onConfirm={() => handleDelete(record.id_emplacement)}
                   okText="Oui"
                   cancelText="Non"
                 >
@@ -119,16 +127,8 @@ const Emplacement = () => {
     const handleClick = async (e) => {
       e.preventDefault();
 
-      if (!data.nom ||  !data.capacite) {
-        Swal.fire({
-          title: 'Error',
-          text: 'Veuillez remplir tous les champs requis',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
-        return;
-      }
       try {
+        setIsLoading(true);
         await axios.post(`${DOMAIN}/api/produit/emplacement`,data)
           Swal.fire({
             title: 'Success',
@@ -139,7 +139,15 @@ const Emplacement = () => {
           window.location.reload();
         
       } catch (error) {
-        
+          Swal.fire({
+            title: 'Error',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+      }
+      finally {
+        setIsLoading(false);
       }
     }
 
@@ -172,9 +180,6 @@ const Emplacement = () => {
       }
   };
   
-  const filteredData = getdata?.filter((item) =>
-  item.nom.toLowerCase().includes(searchValue.toLowerCase())
-);
 
   return (
     <>
@@ -190,22 +195,26 @@ const Emplacement = () => {
                     <div className="categorie-container-left">
                         <h2 className="categorie-title">Ajouter emplacement</h2>
                         <div className="categorie-form">
-                            <label htmlFor="">Nom</label>
-                            <input type="text" className="input-form" name='nom' placeholder='Entrer le nom...' onChange={handleInputChange} />
+                            <label htmlFor="">Shop</label>
+                            <input type="text" className="input-form" name='shop' placeholder='Entrer le nom du shop' onChange={handleInputChange} />
+                        </div>
+                        <div className="categorie-form">
+                            <label htmlFor="">Adresse</label>
+                            <input type="text" className="input-form" name='adresse' placeholder="Entrez l'adresse.." onChange={handleInputChange} />
                         </div>
                         <div className="categorie-form">
                             <label htmlFor="">Capacité maximale</label>
                             <input type="number" className="input-form" name='capacite' placeholder='ex: 10' onChange={handleInputChange} />
                         </div>
-                        <button className="categorie-btn" onClick={handleClick} >Envoyer</button>
+                        <button className="categorie-btn" onClick={handleClick} disabled={isLoading} >Envoyer</button>
+                        {isLoading && (
+                            <div className="loader-container loader-container-center">
+                              <CircularProgress size={28} />
+                            </div>
+                        )}
                     </div>
                     <div className="categorie-container-right">
                         <div className="categorie-right-top">
-                            <div className="categorie-left">
-                                <FilePdfOutlined className='product-icon-pdf' />
-                                <FileExcelOutlined className='product-icon-excel'/>
-                                <PrinterOutlined className='product-icon-printer'/>
-                            </div>
                             <div className="categorie-right">
                                 <input type="search"  value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='categorie-search' />
                             </div>
@@ -222,7 +231,7 @@ const Emplacement = () => {
                             >
                               <FormEmplacement  setUpdata={setPutEmplacement} getUpdataOne={putEmplacement} OnchangePut={handleInputChange} />
                             </Modal>
-                            <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                            <Table columns={columns} dataSource={getdata} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
                         </div>
                     </div>
                 </div>

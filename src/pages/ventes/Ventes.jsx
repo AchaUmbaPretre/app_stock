@@ -236,7 +236,7 @@ const Ventes = () => {
                           centered
                           open={ticket}
                           onCancel={() => setTicket(false)}
-                          width={590}
+                          width={550}
                           footer={[]}
                         >
                          <Ticket idTicket={idTicket}/>

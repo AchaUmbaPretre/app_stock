@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Ticket = () => {
+const Ticket = ({idTicket}) => {
+    
+    
   return (
     <div>Ticket</div>
   )

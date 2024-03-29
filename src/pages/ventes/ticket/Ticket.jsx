@@ -31,7 +31,6 @@ const Ticket = ({idTicket}) => {
             <div className="ticket-wrapper">
                 
             </div>
-
         </div>
 
     </>

@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import VenteClientDetail from './venteClientDetail/VenteClientDetail';
 import { useSelector } from 'react-redux';
 import VenteSelect from './VentesSelect';
+import Ticket from './ticket/Ticket';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -19,7 +20,8 @@ const Ventes = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
-    const [ticket, setTicket] = useState({});
+    const [ticket, setTicket] = useState(false);
+    const [idTicket, setIdTicket] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -138,7 +140,7 @@ const Ventes = () => {
                     </Link>
                 </Popover>
                 <Popover title="Ticket" trigger="hover">
-                    <Link to={`/venteView/${record.id_commande}`}>
+                    <Link onClick={()=> handleTicket(record.id_commande)}>
                       <Button icon={<ReconciliationOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
@@ -178,6 +180,7 @@ const Ventes = () => {
 
     const handleTicket = async (e) => {
       setTicket(true)
+      setIdTicket(e)
     };
 
   const filteredData = data?.filter((item) =>
@@ -226,6 +229,17 @@ const Ventes = () => {
                           ]}
                         >
                          <VenteClientDetail idClients={idClient}/>
+                        </Modal>
+
+                        <Modal
+                          title="Ticket"
+                          centered
+                          open={ticket}
+                          onCancel={() => setTicket(false)}
+                          width={850}
+                          footer={[]}
+                        >
+                         <Ticket idTicket={idTicket}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

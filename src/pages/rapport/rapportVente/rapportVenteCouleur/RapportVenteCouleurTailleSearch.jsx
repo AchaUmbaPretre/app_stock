@@ -31,7 +31,7 @@ const RapportVenteCouleurTailleSearch = ({getProduits, taille}) => {
       });
       return;
     }
-    
+
     try {
       const {data} = await axios.get(`${DOMAIN}/api/rapport/rapport/venteCouleurTaille?start_date=${datas.start_date}&end_date=${datas.end_date}&taille=${taille}`);
       getProduits(data)
@@ -42,7 +42,6 @@ const RapportVenteCouleurTailleSearch = ({getProduits, taille}) => {
         icon: 'error',
         confirmButtonText: 'OK',
       });
-
       console.log(err);
     }
 }
@@ -71,7 +70,6 @@ const RapportVenteCouleurTailleSearch = ({getProduits, taille}) => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

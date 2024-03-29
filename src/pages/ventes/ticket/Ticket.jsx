@@ -28,7 +28,10 @@ const Ticket = ({idTicket}) => {
   return (
     <>
         <div className="ticket">
-            
+            <div className="ticket-wrapper">
+                
+            </div>
+
         </div>
 
     </>

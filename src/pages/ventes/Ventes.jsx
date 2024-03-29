@@ -20,7 +20,7 @@ const Ventes = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
-    const [ticket, setTicket] = useState(false);
+    const [ticket, setTicket] = useState(true);
     const [idTicket, setIdTicket] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -236,7 +236,7 @@ const Ventes = () => {
                           centered
                           open={ticket}
                           onCancel={() => setTicket(false)}
-                          width={850}
+                          width={600}
                           footer={[]}
                         >
                          <Ticket idTicket={idTicket}/>

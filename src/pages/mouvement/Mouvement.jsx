@@ -192,9 +192,7 @@ const Mouvement = () => {
                             open={open}
                             onCancel={() => setOpen(false)}
                             width={850}
-                            footer={[
-                              
-                            ]}
+                            footer={[]}
                           >
                           <MouvClientDetail idClients={idClient}/>
                           </Modal>
@@ -206,7 +204,6 @@ const Mouvement = () => {
                      <MouvementDepart/>
                   </Tabs.TabPane>
                 </Tabs>
-                
             </div>
         </div>
 

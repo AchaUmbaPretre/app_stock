@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,CloseOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,ReconciliationOutlined,CloseOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
@@ -134,6 +134,11 @@ const Ventes = () => {
                 <Popover title="Voir la liste de vante de cette commande" trigger="hover">
                     <Link to={`/venteView/${record.id_commande}`}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                    </Link>
+                </Popover>
+                <Popover title="Ticket" trigger="hover">
+                    <Link to={`/venteView/${record.id_commande}`}>
+                      <Button icon={<ReconciliationOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
                 {user?.role === 'admin' &&

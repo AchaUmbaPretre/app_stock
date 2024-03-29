@@ -19,6 +19,7 @@ const Ventes = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
+    const [ticket, setTicket] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -173,6 +174,10 @@ const Ventes = () => {
     const handleOk = async (e) => {
       setOpen(true)
       setIdClient(e)
+    };
+
+    const handleTicket = async (e) => {
+      setTicket(true)
     };
 
   const filteredData = data?.filter((item) =>

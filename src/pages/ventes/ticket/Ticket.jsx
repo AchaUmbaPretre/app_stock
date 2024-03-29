@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import config from '../../../config';
+import axios from 'axios';
 
 const Ticket = ({idTicket}) => {
 
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     
 
@@ -11,7 +13,7 @@ const Ticket = ({idTicket}) => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/${id}`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/${idTicket}`);
             setLoading(false)
             setData(data);
           } catch (error) {
@@ -19,7 +21,7 @@ const Ticket = ({idTicket}) => {
           }
         };
         fetchData();
-      }, [DOMAIN,id]);
+      }, [DOMAIN,idTicket]);
 
   return (
     <div>Ticket</div>

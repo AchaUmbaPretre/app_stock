@@ -6,6 +6,7 @@ import axios from 'axios';
 import config from '../../../../config';
 import { format } from 'date-fns';
 import RapportCouleurSelect from './RapportCouleurSelect';
+import RapportVenteCouleurTailleSearch from './RapportVenteCouleurTailleSearch';
 
 const RapportVenteCouleurTaille = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -198,8 +199,8 @@ useEffect(() => {
                               <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-{/*                        {open &&
-                              <RapportCouleurSelect getProduits={setGetRapport}/> } */}
+                        {open &&
+                              <RapportVenteCouleurTailleSearch getProduits={setGetRapport} taille={taille}/> } 
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>

@@ -109,7 +109,7 @@ const Ticket = ({idTicket}) => {
                 }}
             documentTitle='carte'
             pageStyle={'print'}
-            onAfterPrint={()=>{console.log("document printer ")}}
+            onAfterPrint={()=>{console.log("document printer")}}
             content={() => componentRef.current}
             />
         </>

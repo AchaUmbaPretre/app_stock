@@ -20,7 +20,7 @@ const Ventes = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
-    const [ticket, setTicket] = useState(true);
+    const [ticket, setTicket] = useState(false);
     const [idTicket, setIdTicket] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 

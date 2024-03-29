@@ -3,11 +3,12 @@ import './ticket.scss'
 import config from '../../../config';
 import logo from './../../../assets/logo_doe-removebg-preview.png'
 import axios from 'axios';
+import moment from 'moment';
 
 const Ticket = ({idTicket}) => {
 
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     
 
@@ -39,64 +40,57 @@ const Ticket = ({idTicket}) => {
 
                 <div className="ticket-contact">
                     <div className="ticket-contact-rows">
-                        <div className="ticket-contact-row">
-                            <p className="ticket-name">Nom :</p>
-                            <b>Elysée</b>
-                        </div>
-                        <div className="ticket-contact-row">
+                        {data?.map((dd) => (
+                        <React.Fragment key={dd.id}>
+                            <div className="ticket-contact-row">
+                            <p className="ticket-name">Nom de marque :</p>
+                            <b>{dd.nom_client}</b>
+                            </div>
+                            <div className="ticket-contact-row">
                             <p className="ticket-name">Telephone :</p>
-                            <b>+243 832222284</b>
-                        </div>
-                        <div className="ticket-contact-row">
+                            <b>{dd.telephone}</b>
+                            </div>
+                            <div className="ticket-contact-row">
                             <p className="ticket-name">Date :</p>
-                            <b>le 20-10-2024</b>
-                        </div>
+                            <b>{moment(dd.date_vente).format('DD-MM-YYYY')}</b>
+                            </div>
+                        </React.Fragment>
+                        ))}
                     </div>
                 </div>
 
                 <div className="ticket-table">
                     <table>
+                        <thead>
                         <tr>
                             <th>Nom</th>
                             <th>Quantité</th>
                             <th>Prix</th>
                             <th>Total</th>
                         </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                            <td>Germany</td>
-                            <td>Germany</td>
-                        </tr>
-                        <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
-                            <td>Mexico</td>
-                            <td>Mexico</td>
-                        </tr>
-                        <tr>
-                            <td>Ernst Handel</td>
-                            <td>Roland Mendel</td>
-                            <td>Austria</td>
-                            <td>Austria</td>
-                        </tr>
-                        <tr>
-                            <td>Laughing Bacchus Winecellars</td>
-                            <td>Yoshi Tannamuri</td>
-                            <td>Canada</td>
-                            <td>Canada</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Italy</td>
-                            <td>Italy</td>
-                        </tr>
+                        </thead>
+                        <tbody>
+                        {data?.map((dd) => (
+                            <React.Fragment key={dd.id}>
+                            <tr>
+                                <td>{dd.nom_marque}</td>
+                                <td>{dd.quantite}</td>
+                                <td>{dd.prix_unitaire}$</td>
+                                <td>{dd.prix_unitaire}$</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Total</td>
+                                <td>{dd.prix_unitaire}$</td>
+                            </tr>
+                            </React.Fragment>
+                        ))}
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
     </>
   )
 }

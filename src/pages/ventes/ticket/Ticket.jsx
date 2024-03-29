@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './ticket.scss'
 import config from '../../../config';
 import logo from './../../../assets/logo_doe-removebg-preview.png'
 import axios from 'axios';
 import moment from 'moment';
+import ReactToPrint from 'react-to-print';
+import { PrinterOutlined } from '@ant-design/icons';
 
 const Ticket = ({idTicket}) => {
 
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const componentRef = useRef(null);
     
 
 
@@ -26,11 +29,9 @@ const Ticket = ({idTicket}) => {
         fetchData();
       }, [DOMAIN,idTicket]);
 
-      console.log(data)
-
   return (
     <>
-        <div className="ticket">
+        <div className="ticket" ref={componentRef}>
             <div className="ticket-wrapper">
                 <div className="ticket-logo">
                     <img src={logo} alt="" className='ticket-img'/>
@@ -63,10 +64,10 @@ const Ticket = ({idTicket}) => {
                     <table>
                         <thead>
                         <tr>
-                            <th>Nom</th>
-                            <th>Quantité</th>
-                            <th>Prix</th>
-                            <th>Total</th>
+                            <th className='ticket-th'>Nom</th>
+                            <th className='ticket-th'>Quantité</th>
+                            <th className='ticket-th'>Prix</th>
+                            <th className='ticket-th'>Total</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -103,7 +104,16 @@ const Ticket = ({idTicket}) => {
                 </div>
             </div>
         </div>
-    </>
+        <ReactToPrint
+            trigger={() => {
+                    return <button style={{padding: "5px 8px", background :'#fff', border: 'none', marginBottom: '10px', cursor : 'pointer'}}><PrinterOutlined /> Imprimer</button>;
+                }}
+            documentTitle='carte'
+            pageStyle={'print'}
+            onAfterPrint={()=>{console.log("document printer ")}}
+            content={() => componentRef.current}
+            />
+        </>
   )
 }
 

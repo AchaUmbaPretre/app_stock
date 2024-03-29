@@ -83,7 +83,7 @@ const Ticket = ({idTicket}) => {
                                 <td></td>
                                 <td></td>
                                 <td>Total</td>
-                                <td>
+                                <td style={{color:'black'}}>
                                     {data.reduce(
                                     (total, item) => total + item.prix_unitaire * item.quantite,
                                     0

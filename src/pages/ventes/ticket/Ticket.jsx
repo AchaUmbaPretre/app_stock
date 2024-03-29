@@ -40,22 +40,22 @@ const Ticket = ({idTicket}) => {
 
                 <div className="ticket-contact">
                     <div className="ticket-contact-rows">
-                        {data?.map((dd) => (
-                        <React.Fragment key={dd.id}>
-                            <div className="ticket-contact-row">
-                            <p className="ticket-name">Nom de marque :</p>
-                            <b>{dd.nom_client}</b>
-                            </div>
-                            <div className="ticket-contact-row">
+                    {data.length > 0 && (
+                        <React.Fragment>
+                        <div className="ticket-contact-row">
+                            <p className="ticket-name">Nom :</p>
+                            <b>{data[0]?.nom_client}</b>
+                        </div>
+                        <div className="ticket-contact-row">
                             <p className="ticket-name">Telephone :</p>
-                            <b>{dd.telephone}</b>
-                            </div>
-                            <div className="ticket-contact-row">
+                            <b>{data[0]?.telephone}</b>
+                        </div>
+                        <div className="ticket-contact-row">
                             <p className="ticket-name">Date :</p>
-                            <b>{moment(dd.date_vente).format('DD-MM-YYYY')}</b>
-                            </div>
+                            <b>{moment(data[0]?.date_vente).format('DD-MM-YYYY')}</b>
+                        </div>
                         </React.Fragment>
-                        ))}
+                    )}
                     </div>
                 </div>
 

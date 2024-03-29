@@ -73,7 +73,7 @@ const Ticket = ({idTicket}) => {
                         {data?.map((dd, index) => (
                             <React.Fragment key={dd.id}>
                             <tr>
-                                <td>{dd.nom_produit}</td>
+                                <td>{dd.nom_produit} {dd.nom_marque}</td>
                                 <td>{dd.quantite}</td>
                                 <td>{dd.prix_unitaire}$</td>
                                 <td>{dd.prix_unitaire * dd.quantite}$</td>

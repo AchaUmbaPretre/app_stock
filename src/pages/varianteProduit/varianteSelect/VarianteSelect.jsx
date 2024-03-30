@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 
 const VarianteSelect = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [produit, setProduit] = useState([]);
     const [datas, setDatas] = useState({});
     const [getCategorie, setGetCategorie] = useState([]);
     const [getMarque, setGetMarque] = useState([]);
@@ -62,12 +61,14 @@ const VarianteSelect = ({getProduits}) => {
     fetchData();
   }, [DOMAIN]);
 
+  console.log(datas)
+
 
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/produit/listeVarianteProduit?nom_produit=${datas.nom_produit}&id_cat=${datas.categorie}&id_marque=${datas.id_marque}`);
+      const {data} = await axios.get(`${DOMAIN}/api/produit/listeVarianteProduit?id_cat=${datas.categorie}&id_marque=${datas.id_marque}&start_date=${datas.start_date}&end_date=${datas.end_date}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({

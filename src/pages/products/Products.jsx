@@ -231,7 +231,6 @@ const Products = () => {
       title: 'Action',
       key: 'action',
         render: (text, record) => (
-                
           <Space size="middle">
              <Popover title="Voir les details" trigger="hover">
               <Button icon={<EyeOutlined />} style={{ color: 'green' }} onClick={()=> showModal(record.id_produit)} />
@@ -283,7 +282,6 @@ const filteredData = getProduit?.filter((item) =>
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_marque?.toLowerCase().includes(searchValue.toLocaleLowerCase())
-
 );
 
   return (

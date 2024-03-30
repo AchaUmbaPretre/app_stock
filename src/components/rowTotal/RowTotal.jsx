@@ -7,6 +7,7 @@ import { useState } from 'react';
 import config from '../../config';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const RowTotal = () => {
@@ -16,6 +17,7 @@ const RowTotal = () => {
     const [depenses, setDepenses] = useState([]);
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
+    const user = useSelector((state) => state.user?.currentUser);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -82,7 +84,7 @@ const RowTotal = () => {
                         <span className="rowTotal-span">Total des achats à payer</span>
                     </div>
                 </div>
-                <div className="rowTotal">
+{/*                 <div className="rowTotal">
                     <div className="rowTotal-left" style={{background: 'rgba(0, 0, 255, 0.137)'}}>
                         <Money className='rowTotalIcon' style={{color: 'blue'}}/>
                     </div>
@@ -90,8 +92,9 @@ const RowTotal = () => {
                         <h2><CountUp end={produitTotalDuel}/>$</h2>
                         <span className="rowTotal-span">Ventes totales dues</span>
                     </div>
-                </div>
-                <div className="rowTotal">
+                </div> */}
+                { user?.role === 'admin' &&
+                  <div className="rowTotal">
                     <div className="rowTotal-left" style={{background: 'rgba(53, 52, 52, 0.137)'}}>
                         <VerticalAlignBottomOutlined  className='rowTotalIcon' style={{color: 'rgba(53, 52, 52, 0.719)'}}/>
                     </div>
@@ -99,7 +102,8 @@ const RowTotal = () => {
                         <h2><CountUp end={venteTotal}/>$</h2>
                         <span className="rowTotal-span">Montant total de la vente</span>
                     </div>
-                </div>
+                  </div>
+                }
                 <div className="rowTotal">
                     <div className="rowTotal-left" style={{background : 'rgba(255, 0, 0, 0.164)'}}>
                         <VerticalAlignTopOutlined className='rowTotalIcon' style={{color: 'red'}}/>

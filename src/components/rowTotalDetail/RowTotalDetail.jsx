@@ -5,6 +5,7 @@ import config from '../../config';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CountUp from 'react-countup';
+import { useSelector } from 'react-redux';
 
 
 const RowTotalDetail = () => {
@@ -14,6 +15,7 @@ const RowTotalDetail = () => {
     const [client, setClient] = useState([]);
     const [livreur, setLivreur] = useState([]);
     const [vente, setVente] = useState([]);
+    const user = useSelector((state) => state.user?.currentUser);
 
     useEffect(()=>{
         const fetchData = async ()=> {
@@ -94,7 +96,9 @@ const RowTotalDetail = () => {
                         <SnippetsOutlined className='rowTotalIcon'/>
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
+                {
+                  user?.role === 'admin' &&
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
                         <span className="rowTotal-span">ventes</span>
@@ -102,7 +106,8 @@ const RowTotalDetail = () => {
                     <div className="rowTotalDetail-right">
                         <ShoppingOutlined className='rowTotalIcon'/>
                     </div>
-                </div>
+                  </div>
+                }
             </div>
         </div>
     </>

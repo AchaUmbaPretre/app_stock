@@ -167,8 +167,8 @@ const ListeVariante = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Stock des chaussures</h2>
-                        <span>Gérer vos chaussures</span>
+                      <h2 className="product-h2">Stock des chaussures</h2>
+                      <span>Gérer vos chaussures</span>
                     </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
                       <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}></span>

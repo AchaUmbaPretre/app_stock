@@ -16,8 +16,6 @@ const VarianteSelect = ({getProduits}) => {
     const handleInputChange = (e) => {
         const fieldName = e.target.name;
         const fieldValue = e.target.value;
-
-        console.log(fieldValue)
       
         let updatedValue = fieldValue;
       
@@ -30,17 +28,15 @@ const VarianteSelect = ({getProduits}) => {
       setDatas((prev) => ({ ...prev, [fieldName]: updatedValue }));
       };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit`);
-        setProduit(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
+      const handleStartDateChange = (e) => {
+        const startDate = e.target.value;
+        setDatas((prev) => ({ ...prev, start_date: startDate }));
+      };
+    
+      const handleEndDateChange = (e) => {
+        const endDate = e.target.value;
+        setDatas((prev) => ({ ...prev, end_date: endDate }));
+      };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,10 +86,10 @@ const VarianteSelect = ({getProduits}) => {
             <div className="productSelects-container">
                 <Select
                     className="product-input-select"
-                    name='produit_id'
-                    options={produit?.map(item => ({ value: item.nom_produit, label: item.nom_produit }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'nom_produit', value: selectedOption.value } })}
-                    placeholder="Choisir un produit"
+                    name='id_marque'
+                    options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
+                    placeholder="Choisir une marque"
                 />
                  <Select
                     className="product-input-select"
@@ -102,12 +98,21 @@ const VarianteSelect = ({getProduits}) => {
                     onChange={selectedOption => handleInputChange({ target: { name: 'categorie', value: selectedOption.value } })}
                     placeholder="Choisir une categorie"
                 />
-                <Select
-                    className="product-input-select"
-                    name='id_marque'
-                    options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
-                    placeholder="Choisir une marque"
+                <input
+                  type="date"
+                  className="product-input-select"
+                  name="start_date"
+                  style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
+                  onChange={handleStartDateChange}
+                />
+                au
+                <input
+                  type="date"
+                  className="product-input-select"
+                  name="end_date"
+                  style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
+                  onChange={handleEndDateChange}
+                  placeholder='Entrer la date end'
                 />
                 <div className="select-btn" onClick={handleClick}>
                     <SearchOutlined className='select-search-btn' />

@@ -16,6 +16,7 @@ import axios from 'axios';
 import config from '../../config';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const { SubMenu, Item } = Menu;
 
@@ -24,6 +25,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 /*   const [errorMessage,setErrorMessage] = useState('') */
   const [currentUser, setCurrentUser] = useState('')
+  const user = useSelector((state) => state.user?.currentUser);
 
   const Logout = async () => {
     try {
@@ -183,6 +185,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
+      { user?.role === 'admin' &&
       <SubMenu key="reports" title={<span className="sidebarH3">Rapports</span>} icon={<FileTextOutlined style={{ fontSize: '19px', color: '#fafafa' }}/>}>
         <Item key="rapportVente">
           <Link to="/rapportVente" className="sidebarLink">
@@ -215,6 +218,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
+      }
       <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>} onClick={Logout}>
         <Link className="sidebarH3" style={{ color: '#fafafa'}}>
           Déconnexion

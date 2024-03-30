@@ -23,7 +23,6 @@ const { SubMenu, Item } = Menu;
 const Sidebar = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
-/*   const [errorMessage,setErrorMessage] = useState('') */
   const [currentUser, setCurrentUser] = useState('')
   const user = useSelector((state) => state.user?.currentUser);
 
@@ -36,7 +35,6 @@ const Sidebar = () => {
       navigate('/login')
       window.location.reload();
     } catch (error) {
-/*       setErrorMessage(error.response.data); */
       Swal.fire('Erreur lors de la déconnexion.', '', 'error');
     }
   };

@@ -133,7 +133,7 @@ const Sidebar = () => {
         </Item>
         <Item key="dette">
           <Link to="/dette" className="sidebarLink">
-            Dette
+            Vente en crédit
           </Link>
         </Item>
         <Item key="paiement">

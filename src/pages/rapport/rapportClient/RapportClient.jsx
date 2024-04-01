@@ -13,6 +13,7 @@ const RapportClient = () => {
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
+    const [recent, setRecent] = useState([]);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     
@@ -109,6 +110,19 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent`);
+      setRecent(data);
+      setLoading(false)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
+}, [DOMAIN]);
+
  const filteredData = getRapport?.filter((item) =>
   item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
   )
@@ -127,9 +141,9 @@ useEffect(() => {
                         {/* {`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} à ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`} */}
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '13px' }}>
-                        <p style={{display:'flex', gap:'5px', justifyContent: 'space-between'}}>Nbre d'article vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={0}/></b></p>
-                        <p style={{display:'flex', gap:'5px',justifyContent: 'space-between'}}>Nbre de vente: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={0}/></b></p>
-                        <p style={{display:'flex', gap:'5px', justifyContent: 'space-between'}}>Nbre de commande: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={0}/></b></p>
+                        <p style={{display:'flex', gap:'5px', justifyContent: 'space-between'}}>Nbre d'article vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_article_vendue}/></b></p>
+                        <p style={{display:'flex', gap:'5px',justifyContent: 'space-between'}}>Nbre de vente: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_de_vente}/></b></p>
+                        <p style={{display:'flex', gap:'5px', justifyContent: 'space-between'}}>Nbre de commande: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_commande}/></b></p>
                       </div>
                     </div>
                 </div>

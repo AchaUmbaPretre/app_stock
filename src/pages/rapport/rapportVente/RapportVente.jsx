@@ -11,10 +11,12 @@ import RapportVenteCouleur from './rapportVenteCouleur/RapportVenteCouleur';
 import RapportAjour from './rapportAjour/RapportAjour';
 import Rapport7jours from './rapport7jour/Rapport7jours';
 import Rapport30jours from './rapport30jours/Rapport30jours';
+import moment from 'moment';
 
 const RapportVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
+    const [recent, setRecent] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
@@ -180,6 +182,21 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent`);
+      setRecent(data);
+      setLoading(false)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
+}, [DOMAIN]);
+
+console.log(recent[0]?.date_plus_ancienne, recent[0]?.date_plus_recente)
+
  const filteredData = getRapport?.filter((item) =>
 item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
 item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
@@ -193,6 +210,16 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                     <div className="product-left">
                         <h2 className="product-h2">Rapport des ventes</h2>
                         <span>Gérez votre rapport des ventes</span>
+                    </div>
+                    <div className="" style={{background: '#f2f2f2', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                      <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px' }}>
+                        {`${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} à ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`}
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column',gap: '8px', fontSize: '13px' }}>
+                        <p style={{display:'flex', gap:'5px'}}>Nbre d'article vendue: <b>{recent[0]?.nbre_article_vendue}</b></p>
+                        <p>Nbre de vente: <b>{recent[0]?.nbre_de_vente}</b></p>
+                        <p>Nbre de commande: <b>{recent[0]?.nbre_commande}</b></p>
+                      </div>
                     </div>
                 </div>
                 <Tabs>

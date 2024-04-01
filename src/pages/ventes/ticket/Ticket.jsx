@@ -33,6 +33,15 @@ const Ticket = ({idTicket}) => {
     
         window.open(whatsappURL, '_blank');
       };
+
+        // Calcul du total
+  const total = data?.reduce((total, item) => total + item.prix_unitaire * item.quantite, 0);
+
+  // Calcul du solde
+  const acompte = data[0]?.acompte;
+  const solde = total - acompte;
+
+  console.log(total)
     
 
   return (
@@ -77,28 +86,36 @@ const Ticket = ({idTicket}) => {
                         </thead>
                         <tbody>
                         {data?.map((dd, index) => (
-                            <React.Fragment key={dd.id}>
+                        <React.Fragment key={dd.id}>
                             <tr>
-                                <td>{dd.nom_produit} {dd.nom_marque}</td>
-                                <td>{dd.quantite}</td>
-                                <td>{dd.prix_unitaire}$</td>
-                                <td>{dd.prix_unitaire * dd.quantite}$</td>
+                            <td>{dd.nom_produit} {dd.nom_marque}</td>
+                            <td>{dd.quantite}</td>
+                            <td>{dd.prix_unitaire}$</td>
+                            <td>{dd.prix_unitaire * dd.quantite}$</td>
                             </tr>
                             {index === data.length - 1 && (
+                            <>
                                 <tr>
                                 <td></td>
                                 <td></td>
-                                <td>Total</td>
-                                <td style={{color:'black'}}>
-                                    {data.reduce(
-                                    (total, item) => total + item.prix_unitaire * item.quantite,
-                                    0
-                                    )}
-                                    $
-                                </td>
+                                <td style={{fontSize: "10px"}}>Acompte payé</td>
+                                <td style={{fontSize: "11px"}}>{total}$</td>
                                 </tr>
+                                <tr>
+                                <td></td>
+                                <td></td>
+                                <td style={{fontSize: "10px"}}>Solde</td>
+                                <td style={{fontSize: "11px"}}>{total}$</td>
+                                </tr>
+                                <tr>
+                                <td></td>
+                                <td></td>
+                                <td style={{fontSize: "10px"}}>Reste à payer</td>
+                                <td style={{fontSize: "11px"}}>{total - data[0]?.acompte > 0 ? total - data[0]?.acompte : 0}$</td>
+                                </tr>
+                            </>
                             )}
-                            </React.Fragment>
+                        </React.Fragment>
                         ))}
                         </tbody>
                     </table>

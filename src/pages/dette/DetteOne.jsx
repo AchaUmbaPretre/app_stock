@@ -76,7 +76,7 @@ const DetteOne = () => {
             ),
           },
           {
-            title: 'Montant convenu',
+            title: 'Montant facture',
             dataIndex: 'montant_convenu',
             key: 'montant_convenu',
             sorter: (a, b) => a.montant_convenu - b.montant_convenu,

@@ -116,9 +116,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                         <span>Gérez votre rapport des ventes</span>
                     </div>
                 </div>
-                <Tabs>
-                    <Tabs.TabPane tab={<span><BarChartOutlined /> Vente par marque</span>} key={0}>
-                        <div className="product-bottom">
+                  <div className="product-bottom">
                             <div className="product-bottom-top">
                                 <div className="product-bottom-left">
                                     {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
@@ -138,12 +136,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                             <div className="rowChart-row-table">
                                 <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                             </div>
-                        </div>
-                    </Tabs.TabPane>
-                    <Tabs.TabPane tab={<span><BarChartOutlined /> Nombre total de marque en Stock</span>} key={1}>
-                        <RapportMarqueCount/>
-                    </Tabs.TabPane>
-                </Tabs>
+                  </div>
             </div>
         </div>
 

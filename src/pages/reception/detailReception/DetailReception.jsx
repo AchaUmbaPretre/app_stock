@@ -327,7 +327,7 @@ const DetailReception = () => {
                                 </table>
                                 <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll} style={{marginTop: '50px'}}/>
                                 <div className="btn-reception">
-                                    <button onClick={handleConfirm} className="btn-valide" style={{ padding: "10px 15px", background: "royalblue", border: "none", color: "#fff", fontSize:"12px", cursor:'pointer', borderRadius: "5px"}}>Envoyer</button>
+                                    <button onClick={handleConfirm} className="btn-valide" style={{ padding: "15px 25px", background: "royalblue", border: "none", color: "#fff", fontSize:"12px", cursor:'pointer', borderRadius: "5px"}}>Envoyer</button>
                                     <Modal
                                       title="Confirmation"
                                       visible={showConfirmModal}

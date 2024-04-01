@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import config from '../../../config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Rate } from 'antd';
+import { Modal, Rate } from 'antd';
 import moment from 'moment';
 import { FadeLoader } from 'react-spinners';
 import { Table } from 'antd';
@@ -28,6 +28,7 @@ const DetailReception = () => {
     const [selectedIds, setSelectedIds] = useState([]);
     const scroll = { x: 400 };
     const userId = useSelector((state) => state.user.currentUser.id)
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const handleCheckboxChange = (id) => {
         const selectedRecord = getTaille?.find((record) => record.id_taille === id);
@@ -50,6 +51,15 @@ const DetailReception = () => {
         setSelectedData(updatedData);
       };
 
+    
+      const handleConfirm = () => {
+        setShowConfirmModal(true);
+      };
+      
+      const handleCancel = () => {
+        setShowConfirmModal(false);
+      }
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,6 +74,8 @@ const DetailReception = () => {
         };
         fetchData();
       }, [DOMAIN,id]);
+
+
 
        
       const qTable = [
@@ -191,6 +203,8 @@ const DetailReception = () => {
 
       const handleClick = async (e) => {
         e.preventDefault();
+
+        setShowConfirmModal(false);
       
         if (!data[0]?.id_pays || !data[0]?.id_couleur || !data[0]?.code_variant || !data[0]?.img || !selectedData || selectedData.length === 0) {
           Swal.fire({
@@ -313,7 +327,16 @@ const DetailReception = () => {
                                 </table>
                                 <Table columns={qTable} dataSource={getTaille} className="presenceTable" loading={loading} scroll={scroll} style={{marginTop: '50px'}}/>
                                 <div className="btn-reception">
-                                    <button onClick={handleClick} className="btn-valide" style={{ padding: "10px 15px", background: "royalblue", border: "none", color: "#fff", fontSize:"12px", cursor:'pointer', borderRadius: "5px"}}>Envoyer</button>
+                                    <button onClick={handleConfirm} className="btn-valide" style={{ padding: "10px 15px", background: "royalblue", border: "none", color: "#fff", fontSize:"12px", cursor:'pointer', borderRadius: "5px"}}>Envoyer</button>
+                                    <Modal
+                                      title="Confirmation"
+                                      visible={showConfirmModal}
+                                      onOk={handleClick}
+                                      onCancel={handleCancel}
+                                      centered
+                                    >
+                                      <p>Voulez-vous vraiment effectuer cette action ?</p>
+                                    </Modal>
                                     {isLoading && (
                                         <div className="loader-container loader-container-center">
                                         <CircularProgress size={28} />

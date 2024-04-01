@@ -59,6 +59,16 @@ const columns = [
       ),
     },
     {
+      title: 'Total chaussures en stock',
+      dataIndex: 'total_chaussures_en_stock',
+      key: 'total_chaussures_en_stock',
+      sorter: (a, b) => a.total_chaussures_en_stock - b.total_chaussures_en_stock,
+      sortDirections: ['descend', 'ascend'],
+      render: (total_chaussures_en_stock) => (
+        <Tag color={total_chaussures_en_stock > 0 ? 'green' : 'red'}>{total_chaussures_en_stock}</Tag>
+      ),
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (

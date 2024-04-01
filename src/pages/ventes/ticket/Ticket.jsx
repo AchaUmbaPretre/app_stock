@@ -99,19 +99,19 @@ const Ticket = ({idTicket}) => {
                                 <td></td>
                                 <td></td>
                                 <td style={{fontSize: "10px"}}>Acompte payé</td>
-                                <td style={{fontSize: "11px"}}>{total}$</td>
+                                <td style={{fontSize: "10px"}}>{total}$</td>
                                 </tr>
                                 <tr>
                                 <td></td>
                                 <td></td>
                                 <td style={{fontSize: "10px"}}>Solde</td>
-                                <td style={{fontSize: "11px"}}>{total}$</td>
+                                <td style={{fontSize: "10px"}}>{total}$</td>
                                 </tr>
                                 <tr>
                                 <td></td>
                                 <td></td>
                                 <td style={{fontSize: "10px"}}>Reste à payer</td>
-                                <td style={{fontSize: "11px"}}>{total - data[0]?.acompte > 0 ? total - data[0]?.acompte : 0}$</td>
+                                <td style={{fontSize: "10px"}}>{total - data[0]?.acompte > 0 ? total - data[0]?.acompte : 0}$</td>
                                 </tr>
                             </>
                             )}

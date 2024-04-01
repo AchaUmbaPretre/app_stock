@@ -1,7 +1,6 @@
 import React from 'react'
 import './rowTotal.scss'
 import { CarryOutOutlined, VerticalAlignBottomOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
-import { Money } from '@mui/icons-material';
 import CountUp from 'react-countup';
 import { useState } from 'react';
 import config from '../../config';

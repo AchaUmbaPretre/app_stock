@@ -5,7 +5,8 @@ import logo from './../../../assets/logo_doe-removebg-preview.png'
 import axios from 'axios';
 import moment from 'moment';
 import ReactToPrint from 'react-to-print';
-import { PrinterOutlined } from '@ant-design/icons';
+import { PrinterOutlined,WhatsAppOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 const Ticket = ({idTicket}) => {
 
@@ -26,6 +27,14 @@ const Ticket = ({idTicket}) => {
         };
         fetchData();
       }, [DOMAIN,idTicket]);
+
+      const openWhatsApp = () => {
+        const phoneNumber = data[0]?.telephone;
+        const whatsappURL = `https://wa.me/${phoneNumber}`;
+    
+        window.open(whatsappURL, '_blank');
+      };
+    
 
   return (
     <>
@@ -109,6 +118,13 @@ const Ticket = ({idTicket}) => {
             onAfterPrint={()=>{console.log("document printer")}}
             content={() => componentRef.current}
             />
+
+        <Button
+        style={{ padding: '5px 8px', background: '#fff', border: 'none', marginBottom: '10px', cursor: 'pointer' }}
+        onClick={openWhatsApp}
+      >
+        <WhatsAppOutlined /> Partager sur WhatsApp
+      </Button>
         </>
   )
 }

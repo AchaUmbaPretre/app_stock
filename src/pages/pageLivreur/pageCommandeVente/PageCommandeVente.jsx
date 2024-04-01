@@ -275,7 +275,6 @@ const PageCommandeVente = () => {
             )}
             </div>) }
         </div>
-
     </>
   )
 }

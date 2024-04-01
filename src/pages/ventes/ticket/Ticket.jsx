@@ -13,7 +13,6 @@ const Ticket = ({idTicket}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const componentRef = useRef(null);
-    
 
 
     useEffect(() => {

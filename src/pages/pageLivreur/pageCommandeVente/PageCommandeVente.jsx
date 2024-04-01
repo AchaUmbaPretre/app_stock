@@ -161,7 +161,19 @@ const PageCommandeVente = () => {
                 montant_convenu : dd.prix,
                 montant_paye : dette
               });
+
+              await axios.post(`${DOMAIN}/api/vente/envoyer-email`, {
+                id_client: dd.id_client,
+                id_livreur: userId,
+                quantite: dd.qte_livre,
+                id_commande: dd.id_commande,
+                id_detail_commande: dd.id_detail_commande,
+                prix_unitaire: dd.prix,
+                id_varianteProduit: dd.id,
+                id_taille: dd.id_taille,
+              });
             })
+            
           );
       
           Swal.fire({

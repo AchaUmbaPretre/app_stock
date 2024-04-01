@@ -47,7 +47,7 @@ const ListeCommande = () => {
           dataIndex: 'id_commande',
           key: 'id_commande',
           render: (text, record) => (
-            <Tag color="blue">{`${new Date().getFullYear().toString().substring(2)}${record.id_shop.toString().padStart(2, '0')}${record.id_commande.toString().padStart(2, '0')}`}</Tag>
+            <Tag color="blue">{`${new Date().getFullYear().toString().substring(2)}${record.id_shop.toString().padStart(2, '0')}${record.id_commande.toString().padStart(4, '0')}`}</Tag>
           ),
         },
         {

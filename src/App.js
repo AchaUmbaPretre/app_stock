@@ -87,6 +87,7 @@ import ReceptionOne from './pages/reception/ReceptionOne';
 import DetteOne from './pages/dette/DetteOne';
 import MouvementLivreur from './pages/mouvement/mouvementLivreur/MouvementLivreur';
 import ClientAdresse from './pages/client/clientAdresse/ClientAdresse';
+import ClientTelephone from './pages/client/clientTelephone/ClientTelephone';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -321,6 +322,10 @@ const user = useSelector((state) => state.user?.currentUser);
          {
           path: '/clientAdresse',
           element: <ClientAdresse />
+        },
+        {
+          path: '/clientTelephone',
+          element: <ClientTelephone />
         },
         {
           path: '/clientEdit/:id',

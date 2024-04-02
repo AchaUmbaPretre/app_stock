@@ -17,7 +17,8 @@ const FormCommande = () => {
   const [commune, setCommune] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [adresseOne, setAdresseOne] = useState([]);
-  const [adresseId, setAdresseId] = useState([])
+  const [adresseId, setAdresseId] = useState([]);
+  const [telephone, setTelephone] = useState([])
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -147,6 +148,17 @@ const FormCommande = () => {
     fetchData();
   }, [DOMAIN,adresseId]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/client/clientTelephone/${adresseId}`);
+        setTelephone(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN,adresseId]);
 
   return (
     <>
@@ -180,6 +192,14 @@ const FormCommande = () => {
                   <Select
                     name="id_adresse"
                     options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
+                  />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Telephone</label>
+                  <Select
+                    name="id_telephone"
+                    options={telephone?.map(item => ({ value: item.id_telephone, label: item.numero }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
                   />
                 </div>

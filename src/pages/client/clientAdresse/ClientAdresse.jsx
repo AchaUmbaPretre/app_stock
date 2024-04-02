@@ -130,15 +130,19 @@ const ClientAdresse = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Telephone</label>
-                  <input type="tel" name='telephone' placeholder='+243' className="form-input" onChange={handleInputChange} required />
-                </div>
-                <div className="form-controle">
                   <label htmlFor="">Ville</label>
                   <Select
                     name="id_province"
                     options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
+                  />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Commune</label>
+                  <Select
+                    name="id_commune"
+                    options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">
@@ -148,14 +152,6 @@ const ClientAdresse = () => {
                 <div className="form-controle">
                   <label htmlFor="">Quartier</label>
                   <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Commune</label>
-                  <Select
-                    name="id_commune"
-                    options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
-                  />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">N°</label>

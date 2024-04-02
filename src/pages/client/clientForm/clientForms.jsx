@@ -230,6 +230,15 @@ const ClientForms = () => {
                     min={0}
                   />
                 </div>
+                <div className="form-controle">
+                  <label htmlFor="">Ref</label>
+                  <input
+                    type="text"
+                    name={`ref-${index}`}
+                    className="form-input"
+                    onChange={(e) => handleAddressInputChange(index, e)}
+                  />
+                </div>
                 {index > 0 && (
                   <div className="form-controle">
                     <button type="button" className="remove-btn" onClick={() => removeDeliveryAddress(index)} style={{border:'none', marginTop: "20px", padding: "10px", background:'red',color:'#fff', cursor:'pointer'}}>

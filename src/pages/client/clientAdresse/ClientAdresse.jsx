@@ -95,9 +95,11 @@ const ClientAdresse = () => {
     fetchData();
   }, [DOMAIN]);
 
+  console.log(data)
+
   useEffect(()=>{
-    setIdProvince(data?.id_province)
-  },[data?.id_province])
+    setIdProvince(data?.id_ville)
+  },[data?.id_ville])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -135,8 +137,8 @@ const ClientAdresse = () => {
                   <label htmlFor="">Ville</label>
                   <Select
                     name="id_ville"
-                    options={province?.map(item => ({ value: item.id_ville, label: item.nom_province }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
+                    options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_ville', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">
@@ -159,6 +161,10 @@ const ClientAdresse = () => {
                 <div className="form-controle">
                   <label htmlFor="">N°</label>
                   <input type="number" name="num" min={0} className="form-input" onChange={handleInputChange} />
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Ref</label>
+                  <input type="text" name="ref" placeholder='Entrer une refèrence...' className="form-input" onChange={handleInputChange} />
                 </div>
 
               </div>

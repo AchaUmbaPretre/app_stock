@@ -10,9 +10,6 @@ const ClientTelephone = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({})
   const navigate = useNavigate();
-  const [province, setProvince] = useState([]);
-  const [idProvince, setIdProvince] = useState([]);
-  const [commune, setCommune] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [getClient, setGetClient] = useState([]);
 
@@ -48,10 +45,10 @@ const ClientTelephone = () => {
 
     try{
       setIsLoading(true);
-      await axios.post(`${DOMAIN}/api/client/clientAdresse`, data)
+      await axios.post(`${DOMAIN}/api/client/clientTelephone`, data)
       Swal.fire({
         title: 'Success',
-        text: 'Client crée avec succès!',
+        text: 'Un nouveau a été ajouté avec succès!',
         icon: 'success',
         confirmButtonText: 'OK',
       });
@@ -82,20 +79,6 @@ const ClientTelephone = () => {
     };
     fetchData();
   }, [DOMAIN])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/livreur/province`);
-        setProvince(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
-
-  console.log(data)
   
   return (
     <>
@@ -120,7 +103,7 @@ const ClientTelephone = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Telephone</label>
-                  <input type="text" name="telephone" className="form-input" placeholder='+243' onChange={handleInputChange} />
+                  <input type="text" name="numero" className="form-input" placeholder='+243' onChange={handleInputChange} />
                 </div>
               </div>
 

@@ -200,7 +200,7 @@ const FormCommande = () => {
                   <Select
                     name="id_telephone"
                     options={telephone?.map(item => ({ value: item.id_telephone, label: item.numero }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_telephone', value: selectedOption.value } })}
                   />
                 </div>
                 { checkeds &&

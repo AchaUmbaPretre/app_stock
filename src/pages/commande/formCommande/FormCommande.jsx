@@ -214,7 +214,7 @@ const FormCommande = () => {
                       </div>
                     )}
                   </div>
-                </div> }
+                </div>}
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Shop</label>

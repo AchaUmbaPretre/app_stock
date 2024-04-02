@@ -119,8 +119,8 @@ const ClientTelephone = () => {
           <div className="product-container">
             <div className="product-container-top">
               <div className="product-left">
-                <h2 className="product-h2">Ajouter un nouveau client</h2>
-                <span>Créer un nouveau client</span>
+                <h2 className="product-h2">Ajouter un nouveau numero</h2>
+                <span>Créer un nouveau numero</span>
               </div>
             </div>
             <div className="product-wrapper">
@@ -131,11 +131,12 @@ const ClientTelephone = () => {
                     name="id_client"
                     options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                    placeholder= 'Sélectionnez un(e) client(e)'
                   />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Telephone</label>
-                  <input type="number" min={0} name="telephone" className="form-input" onChange={handleInputChange} />
+                  <input type="text" name="telephone" className="form-input" placeholder='+243' onChange={handleInputChange} />
                 </div>
               </div>
 

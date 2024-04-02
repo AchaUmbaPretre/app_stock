@@ -16,6 +16,8 @@ const FormCommande = () => {
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [adresseOne, setAdresseOne] = useState([]);
+  const [adresseId, setAdresseId] = useState([])
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -118,7 +120,8 @@ const FormCommande = () => {
 
   useEffect(()=>{
     setIdProvince(data?.id_province)
-  },[data?.id_province])
+    setAdresseId(data?.id_client)
+  },[data?.id_province, data?.id_client])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -131,6 +134,18 @@ const FormCommande = () => {
     };
     fetchData();
   }, [DOMAIN,idProvince]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/client/clientAdresse/${adresseId}`);
+        setAdresseOne(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN,adresseId]);
 
 
   return (
@@ -147,14 +162,14 @@ const FormCommande = () => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Client</label>
-                <Select
-                  name="id_client"
-                  options={getClient?.map(item => ({ value: item.id, label: item.nom + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Tel :' + item.telephone }))}
-                  onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
-                />
+                  <Select
+                    name="id_client"
+                    options={getClient?.map(item => ({ value: item.id, label: item.nom + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Tel :' + item.telephone }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                  />
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-                <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour ajouter un client  </label>
-                <input type="checkbox" onChange={handleCheck} />
+                  <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour ajouter un client  </label>
+                  <input type="checkbox" onChange={handleCheck} />
                 </div>
                 { checkeds &&
                 <div className="rows-client">

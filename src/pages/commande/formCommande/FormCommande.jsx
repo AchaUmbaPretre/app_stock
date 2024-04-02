@@ -87,6 +87,7 @@ const FormCommande = () => {
       });
     }
   }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -177,7 +178,7 @@ const FormCommande = () => {
                   <Select
                     placeholder = "Sélectionnez un(e) client(e)"
                     name="id_client"
-                    options={getClient?.map(item => ({ value: item.id, label: item.nom + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Tel :' + item.telephone }))}
+                    options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
                   />
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>

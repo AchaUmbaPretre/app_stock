@@ -86,6 +86,7 @@ import DetailReception from './pages/reception/detailReception/DetailReception';
 import ReceptionOne from './pages/reception/ReceptionOne';
 import DetteOne from './pages/dette/DetteOne';
 import MouvementLivreur from './pages/mouvement/mouvementLivreur/MouvementLivreur';
+import ClientAdresse from './pages/client/clientAdresse/ClientAdresse';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -317,10 +318,10 @@ const user = useSelector((state) => state.user?.currentUser);
           path: '/clientForm',
           element: <ClientForms />
         },
-/*         {
-          path: '/clientForm',
-          element: <ClientForms />
-        }, */
+         {
+          path: '/clientAdresse',
+          element: <ClientAdresse />
+        },
         {
           path: '/clientEdit/:id',
           element: <ClientEdit />

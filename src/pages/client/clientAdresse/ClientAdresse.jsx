@@ -24,11 +24,11 @@ const ClientAdresse = () => {
   
     if (fieldName === "email") {
       updatedValue = fieldValue.toLowerCase();
-    } else if (Number.isNaN(Number(fieldValue))) {
+    } else if (fieldValue && Number.isNaN(Number(fieldValue))) {
       updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
     }
   
-  setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
+    setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
   const handleClick = async (e) => {
@@ -125,7 +125,7 @@ const ClientAdresse = () => {
                   <label htmlFor="">Sélectionnez un client</label>
                   <Select
                     name="id_client"
-                    options={getClient?.map(item => ({ value: item.id_client, label: item.nom }))}
+                    options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
                   />
                 </div>
@@ -156,7 +156,7 @@ const ClientAdresse = () => {
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">N°</label>
-                  <input type="number" name="num" className="form-input" onChange={handleInputChange} />
+                  <input type="number" name="num" min={0} className="form-input" onChange={handleInputChange} />
                 </div>
 
               </div>

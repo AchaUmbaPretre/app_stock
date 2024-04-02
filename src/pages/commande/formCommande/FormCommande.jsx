@@ -166,7 +166,7 @@ const FormCommande = () => {
           <div className="product-container">
             <div className="product-container-top">
               <div className="product-left">
-                <h2 className="product-h2">Creer une nouvelle commande</h2>
+                <h2 className="product-h2">Nouvelle commande</h2>
                 <span>nouvelle commande</span>
               </div>
             </div>
@@ -175,6 +175,7 @@ const FormCommande = () => {
                 <div className="form-controle">
                   <label htmlFor="">Client</label>
                   <Select
+                    placeholder = "Sélectionnez un(e) client(e)"
                     name="id_client"
                     options={getClient?.map(item => ({ value: item.id, label: item.nom + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Tel :' + item.telephone }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}

@@ -34,7 +34,7 @@ const ClientAdresse = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     
-     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province) {
+     if (!data.id_client) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -46,7 +46,7 @@ const ClientAdresse = () => {
 
     try{
       setIsLoading(true);
-      await axios.post(`${DOMAIN}/api/client/client`, data)
+      await axios.post(`${DOMAIN}/api/client/clientAdresse`, data)
       Swal.fire({
         title: 'Success',
         text: 'Client crée avec succès!',
@@ -68,6 +68,8 @@ const ClientAdresse = () => {
       setIsLoading(false);
     }
   }
+
+  console.log(data)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,8 +134,8 @@ const ClientAdresse = () => {
                 <div className="form-controle">
                   <label htmlFor="">Ville</label>
                   <Select
-                    name="id_province"
-                    options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
+                    name="id_ville"
+                    options={province?.map(item => ({ value: item.id_ville, label: item.nom_province }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
                   />
                 </div>
@@ -142,7 +144,7 @@ const ClientAdresse = () => {
                   <Select
                     name="id_commune"
                     options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_commune', value: selectedOption.value } })}
                     placeholder = 'Sélectionnez une commune'
                   />
                 </div>

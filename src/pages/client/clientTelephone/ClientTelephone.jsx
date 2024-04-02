@@ -24,6 +24,8 @@ const ClientTelephone = () => {
   
     if (fieldName === "email") {
       updatedValue = fieldValue.toLowerCase();
+    } else if (fieldName === "telephone") {
+      updatedValue = fieldValue.replace(/[^0-9+]/g, '');
     } else if (fieldValue && Number.isNaN(Number(fieldValue))) {
       updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
     }
@@ -92,6 +94,8 @@ const ClientTelephone = () => {
     };
     fetchData();
   }, [DOMAIN]);
+
+  console.log(data)
   
   return (
     <>

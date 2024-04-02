@@ -109,7 +109,7 @@ const ClientAdresse = () => {
             <div className="product-wrapper">
               <div className="product-container-bottom">
                 <div className="form-controle">
-                  <label htmlFor="">Nom</label>
+                  <label htmlFor="">Sélectionnez un client</label>
                   <input type="text" name='nom' className="form-input" onChange={handleInputChange}  required/>
                 </div>
                 <div className="form-controle">

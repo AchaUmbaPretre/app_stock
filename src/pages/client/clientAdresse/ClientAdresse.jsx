@@ -113,20 +113,8 @@ const ClientAdresse = () => {
                   <input type="text" name='nom' className="form-input" onChange={handleInputChange}  required/>
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Raison sociale</label>
-                  <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} required>
-                    <option value="" disabled selected>Selectionnez une raison sociale</option>
-                    <option value="Client VIP">client VIP</option>
-                    <option value="Client Normal">client Normal</option>
-                  </select>
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Email</label>
-                  <input type="email" name='email' className="form-input" onChange={handleInputChange} />
-                </div>
-                <div className="form-controle">
                   <label htmlFor="">Telephone</label>
-                  <input type="tel" name='telephone' className="form-input" onChange={handleInputChange} required />
+                  <input type="tel" name='telephone' placeholder='+243' className="form-input" onChange={handleInputChange} required />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Ville</label>

@@ -171,6 +171,18 @@ const FormCommande = () => {
                   <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour ajouter un client  </label>
                   <input type="checkbox" onChange={handleCheck} />
                 </div>
+                <div className="form-controle">
+                  <label htmlFor="">Shop</label>
+                  <input type="text" name='id_shop' className="form-input" onChange={handleInputChange}/>
+                </div>
+                <div className="form-controle">
+                  <label htmlFor="">Adresse</label>
+                  <Select
+                    name="id_adresse"
+                    options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
+                  />
+                </div>
                 { checkeds &&
                 <div className="rows-client">
                   <div className="product-container-bottom">
@@ -230,14 +242,6 @@ const FormCommande = () => {
                     )}
                   </div>
                 </div>}
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Shop</label>
-                  <input type="text" name='id_shop' className="form-input" onChange={handleInputChange}/>
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Adresse</label>
-                  <input type="text" name='id_adresse' className="form-input" onChange={handleInputChange}/>
                 </div>
               </div>
               <div className="form-submit">

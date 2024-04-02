@@ -59,6 +59,16 @@ const Livraison_detail = () => {
           )
         },
         {
+          title: 'Livreur',
+          dataIndex: 'nom_livreur',
+          key: 'nom_livreur',
+          render : (text, record)=>(
+            <div>
+               <Tag color={'green'}><UserOutlined />{text}</Tag>
+            </div>
+          )
+        },
+        {
           title: 'Telephone',
           dataIndex: 'telephone',
           key: 'telephone',

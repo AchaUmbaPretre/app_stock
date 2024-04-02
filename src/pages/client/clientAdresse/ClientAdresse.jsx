@@ -143,6 +143,7 @@ const ClientAdresse = () => {
                     name="id_commune"
                     options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
+                    placeholder = 'Sélectionnez une commune'
                   />
                 </div>
                 <div className="form-controle">

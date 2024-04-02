@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 const RowTotal = () => {
     const [venteTotal, setVenteTotal] = useState([]);
     const [produitTotalAchats, setProduitTotalAchats] = useState([]);
-    const [produitTotalDuel, setProduitTotalDuel] = useState([]);
     const [depenses, setDepenses] = useState([]);
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
@@ -36,19 +35,6 @@ const RowTotal = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotal/total`);
             setProduitTotalAchats(data[0]?.montant_total_achats);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-      
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotalDuel/total`);
-            setProduitTotalDuel(data[0]?.montant_total_ventes_dues);
             setLoading(false)
           } catch (error) {
             console.log(error);

@@ -115,7 +115,6 @@ useEffect(() => {
     try {
       const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent`);
       setRecent(data);
-      setLoading(false)
     } catch (error) {
       console.log(error);
     }

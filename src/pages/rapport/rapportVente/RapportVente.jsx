@@ -188,7 +188,6 @@ useEffect(() => {
     try {
       const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent`);
       setRecent(data);
-      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -216,7 +215,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '13px' }}>
                         <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'article vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_article_vendue}/></b></p>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de vente: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_de_vente}/></b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de client(e) acheté(e): <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_de_vente}/></b></p>
                         <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_commande}/></b></p>
                       </div>
                     </div>

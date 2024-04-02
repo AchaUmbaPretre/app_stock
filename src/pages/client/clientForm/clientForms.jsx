@@ -51,22 +51,6 @@ const ClientForms = () => {
     setDeliveryAddresses(addresses);
   };
 
-
-/*   const handleInputChange = (e) => {
-    const fieldName = e.target.name;
-    const fieldValue = e.target.value;
-  
-    let updatedValue = fieldValue;
-  
-    if (fieldName === "email") {
-      updatedValue = fieldValue.toLowerCase();
-    } else if (Number.isNaN(Number(fieldValue))) {
-      updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-    }
-  
-  setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
-  }; */
-
   const handleClick = async (e) => {
     e.preventDefault();
 
@@ -147,7 +131,7 @@ const ClientForms = () => {
   
   return (
     <>
-        <div className="clientForm">
+    <div className="clientForm">
       <div className="product-container">
         <div className="product-container-top">
           <div className="product-left">

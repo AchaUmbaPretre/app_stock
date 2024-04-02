@@ -275,9 +275,15 @@ const Client = () => {
                         <h2 className="product-h2">Liste de clients</h2>
                         <span>Gérer vos clients</span>
                     </div>
-                    <div className="product-right" onClick={() =>navigate('/clientForm')}>
-                        <PlusOutlined />
-                        <span className="product-btn">Ajouter un nouveau client</span>
+                    <div style={{display:'flex', gap: '10px'}}>
+                      <div className="product-right" onClick={() =>navigate('/clientForm')}>
+                          <PlusOutlined />
+                          <span className="product-btn">Ajouter un nouveau client</span>
+                      </div>
+                      <div className="product-right" onClick={() =>navigate('/clientForm')}>
+                          <PlusOutlined />
+                          <span className="product-btn">Ajouter des adresses d'un client</span>
+                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">

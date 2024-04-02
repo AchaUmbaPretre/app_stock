@@ -220,6 +220,10 @@ const FormCommande = () => {
                   <label htmlFor="">Shop</label>
                   <input type="text" name='id_shop' className="form-input" onChange={handleInputChange}/>
                 </div>
+                <div className="form-controle">
+                  <label htmlFor="">Adresse</label>
+                  <input type="text" name='id_adresse' className="form-input" onChange={handleInputChange}/>
+                </div>
               </div>
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick}>Envoyer</button>

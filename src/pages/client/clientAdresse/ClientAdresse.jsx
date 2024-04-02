@@ -14,6 +14,7 @@ const ClientAdresse = () => {
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [getClient, setGetClient] = useState([]);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -71,6 +72,18 @@ const ClientAdresse = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const { data } = await axios.get(`${DOMAIN}/api/client`);
+        setGetClient(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const { data } = await axios.get(`${DOMAIN}/api/livreur/province`);
         setProvince(data);
       } catch (error) {
@@ -110,7 +123,11 @@ const ClientAdresse = () => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Sélectionnez un client</label>
-                  <input type="text" name='nom' className="form-input" onChange={handleInputChange}  required/>
+                  <Select
+                    name="id_client"
+                    options={getClient?.map(item => ({ value: item.id_client, label: item.nom }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                  />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Telephone</label>

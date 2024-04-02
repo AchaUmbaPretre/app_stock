@@ -33,12 +33,22 @@ const columns = [
     },
     {
       title: 'Nombre de vente',
-      dataIndex: 'nombre_ventes',
-      key: 'nombre_ventes',
-      sorter: (a, b) => a.nombre_ventes - b.nombre_ventes,
+      dataIndex: 'nombre_vente',
+      key: 'nombre_vente',
+      sorter: (a, b) => a.nombre_vente - b.nombre_vente,
         sortDirections: ['descend', 'ascend'],
-      render: (nombre_ventes) => (
-        <Tag color={'blue'}>{nombre_ventes}</Tag>
+      render: (nombre_vente) => (
+        <Tag color={'blue'}>{nombre_vente}</Tag>
+      ),
+    },
+    {
+      title: 'Quantité vendue',
+      dataIndex: 'quantite_vendue',
+      key: 'quantite_vendue',
+      sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
+        sortDirections: ['descend', 'ascend'],
+      render: (quantite_vendue) => (
+        <Tag color={'blue'}>{quantite_vendue}</Tag>
       ),
     },
     {

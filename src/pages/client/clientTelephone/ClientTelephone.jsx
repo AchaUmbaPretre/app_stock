@@ -69,8 +69,6 @@ const ClientTelephone = () => {
     }
   }
 
-  console.log(data)
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -94,24 +92,6 @@ const ClientTelephone = () => {
     };
     fetchData();
   }, [DOMAIN]);
-
-  console.log(data)
-
-  useEffect(()=>{
-    setIdProvince(data?.id_ville)
-  },[data?.id_ville])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/livreur/commune/${idProvince}`);
-        setCommune(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN,idProvince]);
   
   return (
     <>

@@ -227,6 +227,7 @@ const ClientForms = () => {
                     name={`num-${index}`}
                     className="form-input"
                     onChange={(e) => handleAddressInputChange(index, e)}
+                    min={0}
                   />
                 </div>
                 {index > 0 && (

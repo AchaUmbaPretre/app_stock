@@ -245,17 +245,17 @@ const PageCommandeVente = () => {
                     <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>Avenue : {data[0]?.avenue}</span>
                     <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>Quartier : {data[0]?.quartier}</span>
                     <span style={{borderBottom: "1px solid rgb(231, 231, 231)", padding: "10px 0", color: '#555'}}>N° : {data[0]?.num}</span>
-                    <span style={{padding: "10px 0", color: '#555'}}>Telephone : {data[0]?.telephone}</span>
+                    <span style={{padding: "10px 0", color: '#555'}}>Telephone : {data[0]?.numero}</span>
                   </div>
                 </div> }
                 <div className="pageLivreur-call">
-                    <a href={`tel:${data[0]?.telephone}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+                    <a href={`tel:${data[0]?.numero}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                         <div >
                             <PhoneOutlined className="pageLivreur-icon" />
                         </div>
                         <span style={{fontSize:"13px"}}>Appelez client</span>
                     </a>
-                    <a href={`https://wa.me/${data[0]?.telephone}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+                    <a href={`https://wa.me/${data[0]?.numero}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                         <div >
                             <WhatsAppOutlined className='pageLivreur-icon icon-whatsapp' />
                         </div>

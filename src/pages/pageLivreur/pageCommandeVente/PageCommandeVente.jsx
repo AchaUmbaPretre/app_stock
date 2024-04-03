@@ -249,8 +249,8 @@ const PageCommandeVente = () => {
                 </div> }
                 <div className="page-location">
                   <div style={{display:'flex', gap:"10px"}}>
-                    <EnvironmentOutlined style={{fontSize: '14px', color :'red'}} />
-                    <p style={{fontSize: '13px'}}>Localisation</p>
+                    <EnvironmentOutlined style={{fontSize: '16px', color :'red'}} />
+                    <p style={{fontSize: '14px'}}>Localisation</p>
                   </div>
                 </div>
                 <div className="pageLivreur-call">

@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { useLocation } from 'react-router-dom';
+import { EnvironmentOutlined } from '@ant-design/icons';
+import L from 'leaflet';
 
 const Localisation = () => {
-    const [clientAddress, setClientAddress] = useState('Kinshasa, ngaliema');
-    const [currentPosition, setCurrentPosition] = useState(null)
-    const position = [51.505, -0.09]
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const commune = searchParams.get('commune');
+    const quartier = searchParams.get('quartier');
+    const avenue = searchParams.get('avenue');
+    const num = searchParams.get('num');
+/*     const [clientAddress, setClientAddress] = useState(`Kinshasa, ${commune}, ${quartier}`); */
+    const clientAddress = `Kinshasa, ${commune}, ${quartier}, ${num}`;
+    const [currentPosition, setCurrentPosition] = useState(null);
 
 
     useEffect(() => {
@@ -34,10 +43,13 @@ const Localisation = () => {
   return (
         <div>
         {currentPosition && (
-        <MapContainer center={currentPosition} zoom={13} scrollWheelZoom={false} style={{ height: '500px' }}>
+        <MapContainer center={currentPosition} zoom={20} scrollWheelZoom={false} style={{ height: '500px' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={currentPosition}>
-            <Popup>{clientAddress}</Popup>
+            <Marker position={currentPosition} icon={L.icon({ iconUrl:  <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'black' }} /> })}>
+            <Popup>
+            <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'RED' }} />
+            {clientAddress}
+            </Popup>
             </Marker>
         </MapContainer>
         )}

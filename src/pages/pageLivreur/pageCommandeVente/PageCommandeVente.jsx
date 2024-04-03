@@ -247,7 +247,7 @@ const PageCommandeVente = () => {
                     <span style={{padding: "10px 0", color: '#555'}}>Telephone : {data[0]?.numero}</span>
                   </div>
                 </div> }
-                <div className="page-location">
+                <div className="page-location" onClick={navigate('/localisation')}>
                   <div style={{display:'flex', gap:"10px"}}>
                     <EnvironmentOutlined style={{fontSize: '16px', color :'red'}} />
                     <p style={{fontSize: '14px'}}>Localisation</p>

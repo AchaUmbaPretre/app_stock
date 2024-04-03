@@ -88,6 +88,7 @@ import DetteOne from './pages/dette/DetteOne';
 import MouvementLivreur from './pages/mouvement/mouvementLivreur/MouvementLivreur';
 import ClientAdresse from './pages/client/clientAdresse/ClientAdresse';
 import ClientTelephone from './pages/client/clientTelephone/ClientTelephone';
+import Localisation from './pages/pageLivreur/localisation/Localisation';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -472,6 +473,10 @@ const user = useSelector((state) => state.user?.currentUser);
           path: '/pageLivraisonRetour/:id',
           element: <PageLivraisonRetour />
         },
+        {
+          path: '/localisation',
+          element: <Localisation />
+        }
       ]
     },
     {

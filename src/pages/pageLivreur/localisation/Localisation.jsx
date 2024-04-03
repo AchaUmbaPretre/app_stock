@@ -46,7 +46,7 @@ const Localisation = () => {
         <MapContainer center={currentPosition} zoom={20} scrollWheelZoom={false} style={{ height: '500px' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={currentPosition} icon={L.icon({ iconUrl:  <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'black' }} /> })}>
-                <Popup>
+                <Popup autoOpen={true}>
                     <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'RED' }} />
                     {clientAddress}
                 </Popup>

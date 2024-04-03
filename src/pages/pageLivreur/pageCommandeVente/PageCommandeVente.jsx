@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Space, Table, Tag, Checkbox} from 'antd';
-import { WhatsAppOutlined ,PhoneOutlined,CaretLeftOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined ,PhoneOutlined,CaretLeftOutlined,EnvironmentOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -247,6 +247,12 @@ const PageCommandeVente = () => {
                     <span style={{padding: "10px 0", color: '#555'}}>Telephone : {data[0]?.numero}</span>
                   </div>
                 </div> }
+                <div className="page-location">
+                  <div style={{display:'flex', gap:"10px"}}>
+                    <EnvironmentOutlined style={{fontSize: '14px', color :'red'}} />
+                    <p style={{fontSize: '13px'}}>Localisation</p>
+                  </div>
+                </div>
                 <div className="pageLivreur-call">
                     <a href={`tel:${data[0]?.numero}`} className="pageLivreur-call-row" style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                         <div >

@@ -173,7 +173,6 @@ const PageCommandeVente = () => {
                 id_taille: dd.id_taille,
               });
             })
-            
           );
       
           Swal.fire({

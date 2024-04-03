@@ -233,8 +233,8 @@ const PageCommandeVente = () => {
               </div>
                 <h4 className='pageH4'>Commande n° {IdCommande}</h4>
                 <div style={{display: 'flex', alignItems: 'center', gap: '8px', marginBottom:'10px'}}>
-                <input type="checkbox" onChange={handleCheck} style={{background: 'rgb(3, 3, 109)'}} />
-                <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour voir les details </label>
+                  <input type="checkbox" onChange={handleCheck} style={{background: 'rgb(3, 3, 109)'}} />
+                  <label htmlFor="" style={{fontSize: '12px'}}>cliquez ici pour voir les details </label>
                 </div>
                 { checkeds &&
                 <div className="pageLivreur_info">

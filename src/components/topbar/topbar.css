@@ -85,15 +85,16 @@
     .topbar-icon{
         cursor: pointer;
         display: flex;
-        background: rgba(1, 35, 138, 0.952);
-        color: #fff;
+        border: 1px solid rgba(1, 35, 138, 0.952);
+        color: rgba(1, 35, 138, 0.952);
         padding: 5px 8px;
         border-radius: 5px;
     }
     .colorRed{
         display: flex;
         cursor: pointer;
-        background: red;
+        border: 1px solid red;
+        color: red;
         padding: 5px 8px;
         border-radius: 5px;
     }

@@ -1,3 +1,5 @@
+@import '../../style.scss';
+
 .categories{
     .categories-wrapper{
         .categorie-container-top{
@@ -17,10 +19,16 @@
                 .categorie-h2{
                     font-size: 1rem;
                     color: rgb(1, 35, 138);
+                    @include mobileXR{
+                        font-size: .8rem;
+                    }
                 }
                 span{
                     font-size: .8rem;
                     color: #6d6c6c;
+                    @include mobileXR{
+                        font-size: .7rem;
+                    }
                 }
             }
         }
@@ -29,6 +37,9 @@
         display: flex;
         gap: 20px;
         padding-top: 20px;
+        @include mobileXR{
+            flex-direction: column;
+        }
         .categorie-container-left{
             flex: 2.5;
             padding: 30px;
@@ -84,6 +95,9 @@
                     display: flex;
                     align-items: center;
                     gap: 12px;
+                    @include mobileXR{
+                        display: none;
+                    }
                     .product-icon-pdf{
                         color: red;
                         font-size: 20px;

@@ -19,6 +19,9 @@
                 .product-h2{
                     font-size: 1rem;
                     color: rgb(1, 35, 138);
+                    @include mobileXR{
+                        font-size: .8rem;
+                    }
 
                 }
                 span{

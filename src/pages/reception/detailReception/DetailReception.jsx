@@ -334,6 +334,11 @@ const DetailReception = () => {
                                       onOk={handleClick}
                                       onCancel={handleCancel}
                                       centered
+                                      cancelText={<span style={{ color: '#fff' }}>Annuler</span>}
+                                      okText={<span style={{ color: '#fff' }}>Oui</span>}
+                                      cancelButtonProps={{ style: { background: 'red' } }}
+                                      okButtonProps={{ style: { background: 'blue' } }}
+
                                     >
                                       <p>Voulez-vous vraiment effectuer cette action ?</p>
                                     </Modal>

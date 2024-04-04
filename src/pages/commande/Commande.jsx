@@ -167,8 +167,8 @@ const Commande = () => {
                         <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
                     </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
-                      <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
-                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
+                      <h2 style={{fontSize:'.9rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
+                      <span className="variant-name" style={{fontSize:'.7rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>
                     </div> </>
                   }
                 </div>

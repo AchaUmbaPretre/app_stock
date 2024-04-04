@@ -1,3 +1,4 @@
+@import '../../../style.scss';
 .clientForm{
     .product-container{
         .product-container-top{
@@ -17,10 +18,16 @@
                 .product-h2{
                     font-size: 1rem;
                     color: rgb(1, 35, 138);
+                    @include mobileXR{
+                        font-size: .8rem;
+                    }
                 }
                 span{
                     font-size: .8rem;
                     color: #6d6c6c;
+                    @include mobileXR{
+                        display: none;
+                    }
                 }
             }
 
@@ -29,17 +36,31 @@
             background: #fff;
             padding: 40px;
             border-radius: 5px;
+            @include mobileXR{
+                padding: 20px;
+            }
+            
         .product-container-bottom{
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+            @include mobileXR{
+                grid-template-columns: repeat(1, 1fr);
+                gap: 15px;
+            }
             .form-controle{
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
+                @include mobileXR{
+                    gap: 10px;
+                }
                 label{
                     font-size: .9rem;
                     color: #797979;
+                    @include mobileXR{
+                       font-family: .8rem;
+                    }
                 }
                 .form-input{
                     padding: 10px;

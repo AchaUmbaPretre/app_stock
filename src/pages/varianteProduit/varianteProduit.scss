@@ -17,10 +17,16 @@
                 .varianteProduit-h2{
                     font-size: 1rem;
                     color: rgb(1, 35, 138);
+                    @include mobileXR{
+                        font-size: .8rem;
+                    }
                 }
                 span{
                     font-size: .8rem;
                     color: #6d6c6c;
+                    @include mobileXR{
+                        font-size: .7rem;
+                    }
                 }
             }
         }
@@ -36,6 +42,10 @@
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
+                @include mobileXR{
+                    display: grid;
+                    grid-template-columns: repeat(2,1fr);
+                }
                 .variant-top-left{
                     display: flex;
                     align-items: center;
@@ -47,16 +57,26 @@
                         .variant-icon{
                             font-size: .9rem;
                             color: #6d6c6c;
+                            @include mobileXR{
+                                font-size: .7rem;
+                            }
+                            
                         }
                         span{
                             font-size: .9rem;
                             color: #6d6c6c;
                             font-weight: 300;
+                            @include mobileXR{
+                                font-size: .7rem;
+                            }
                         }
                     }
                     .variant-select{
                         width: 150px;
                         z-index: 999;
+                        @include mobileXR{
+                            width: 100px;
+                        }
                     }
                 }
             }

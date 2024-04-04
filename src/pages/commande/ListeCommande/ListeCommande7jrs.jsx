@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { SearchOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,10 +7,8 @@ import { format } from 'date-fns';
 import config from '../../../config';
 import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
 import { useSelector } from 'react-redux';
-import ListeCommandeSelect from './ListeCommandeSelect';
-import ListeCommande7jrs from './ListeCommande7jrs';
 
-const ListeCommande = () => {
+const ListeCommande7jrs = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -231,7 +229,7 @@ const ListeCommande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commande7`);
             setData(data);
             setLoading(false);
           } catch (error) {
@@ -259,18 +257,6 @@ const ListeCommande = () => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Liste des commandes</h2>
-                        <span>Voir les commandes</span>
-                    </div>
-                    <div className="product-right" onClick={() =>navigate('/commandeForm')}>
-                        <PlusOutlined />
-                        <span className="product-btn">Créez une commande</span>
-                    </div>
-                </div>
-                <Tabs>
-                  <Tabs.TabPane tab='Commandes' key={0}>
                   <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
@@ -287,8 +273,6 @@ const ListeCommande = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                    {opens &&
-                    <ListeCommandeSelect getProduits={setData}/> } 
                         <Modal
                           title="Information de client"
                           centered
@@ -303,15 +287,10 @@ const ListeCommande = () => {
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Commandes des 7 derniers jours' key={1}>
-                    <ListeCommande7jrs/>
-                  </Tabs.TabPane>
-                </Tabs>
             </div>
         </div>
     </>
   )
 }
 
-export default ListeCommande
+export default ListeCommande7jrs

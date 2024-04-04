@@ -272,38 +272,38 @@ const ListeCommande = () => {
                 </div>
                 <Tabs>
                   <Tabs.TabPane tab='Commandes' key={0}>
-                  <div className="product-bottom">
-                    <div className="product-bottom-top">
-                        <div className="product-bottom-left">
-                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
-                        </div>
-                        <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
-                        </div>
+                    <div className="product-bottom">
+                      <div className="product-bottom-top">
+                          <div className="product-bottom-left">
+                          {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                              <div className="product-row-search">
+                                  <SearchOutlined className='product-icon-plus'/>
+                                  <input type="search" name="" id="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
+                              </div>
+                          </div>
+                          <div className="product-bottom-right">
+                              <FilePdfOutlined className='product-icon-pdf' />
+                              <FileExcelOutlined className='product-icon-excel'/>
+                              <PrinterOutlined className='product-icon-printer'/>
+                          </div>
+                      </div>
+                      <div className="rowChart-row-table">
+                      {opens &&
+                      <ListeCommandeSelect getProduits={setData}/> } 
+                          <Modal
+                            title="Information de client"
+                            centered
+                            open={open}
+                            onCancel={() => setOpen(false)}
+                            width={850}
+                            footer={[
+                            ]}
+                          >
+                          <MouvClientDetail idClients={idClient}/>
+                          </Modal>
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                      </div>
                     </div>
-                    <div className="rowChart-row-table">
-                    {opens &&
-                    <ListeCommandeSelect getProduits={setData}/> } 
-                        <Modal
-                          title="Information de client"
-                          centered
-                          open={open}
-                          onCancel={() => setOpen(false)}
-                          width={850}
-                          footer={[
-                          ]}
-                        >
-                         <MouvClientDetail idClients={idClient}/>
-                        </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
-                    </div>
-                </div>
                   </Tabs.TabPane>
                   <Tabs.TabPane tab='Commandes du jour' key={1}>
                     <ListeCommandeJour/>

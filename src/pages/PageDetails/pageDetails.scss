@@ -1,3 +1,5 @@
+@import '../../../style.scss';
+
 .pageDetails{
     .pageDetail-wrapper{
         .pageDetail-container{
@@ -9,6 +11,9 @@
             padding: 30px;
             border-radius: 5px;
             gap: 25px;
+            @include mobileXR{
+                flex-direction: column;
+            }
             .pageDetail-left{
                 flex: 1;
                 .pageDetail-img{

@@ -1,3 +1,5 @@
+@import '../../style.scss';
+
 .products{
     .product-container{
         .product-container-top{
@@ -8,8 +10,10 @@
             background: #fff;
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-            padding: 20px;
             border-radius: 5px;
+            @include mobileXR{
+                padding: 10px;
+            }
             .product-left{
                 display: flex;
                 flex-direction: column;
@@ -17,10 +21,16 @@
                 .product-h2{
                     font-size: 1rem;
                     color: rgb(1, 35, 138);
+                    @include mobileXR{
+                        font-size: .8rem;
+                    }
                 }
                 span{
                     font-size: .8rem;
                     color: #6d6c6c;
+                    @include mobileXR{
+                        display: none;
+                    }
                 }
             }
             .product-right{
@@ -37,6 +47,9 @@
                 }
                 .product-btn{
                     font-size: .8rem;
+                    @include mobileXR{
+                        display: none;
+                    }
                 }
             }
         }
@@ -90,6 +103,9 @@
                     display: flex;
                     align-items: center;
                     gap: 20px;
+                    @include mobileXR{
+                        display: none;
+                    }
                     .product-icon-pdf{
                         color: red;
                         font-size: 22px;

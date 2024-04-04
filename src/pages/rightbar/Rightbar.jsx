@@ -5,6 +5,7 @@ import RowTotalDetail from '../../components/rowTotalDetail/RowTotalDetail'
 import './rightbar.scss'
 
 const Rightbar = () => {
+
   return (
     <>
       <div className="rightbar">

@@ -1,12 +1,11 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import './App.css';
 import Rightbar from './pages/rightbar/Rightbar';
 import { FadeLoader } from 'react-spinners';
 import Page404 from './pages/page404/Page404';
-import { AuthContext } from './context/authContext';
 import Login1 from './pages/login1/Login1';
 import Register1 from './pages/register1/Register1';
 import Products from './pages/products/Products';
@@ -16,7 +15,6 @@ import VentesForm from './pages/ventes/form/VentesForm';
 import Categories from './pages/categories/Categories';
 import Emplacement from './pages/emplacement/Emplacement';
 import Client from './pages/client/Client';
-import ClientForm from './pages/client/clientForm/ClientForm';
 import Livreur from './pages/livreur/Livreur';
 import LivreurForm from './pages/livreur/livreurForm/LivreurForm';
 import Utilisateurs from './pages/utilisateurs/Utilisateurs';
@@ -78,7 +76,6 @@ import RapportVenteCode from './pages/rapport/rapportVente/rapportVenteCodeVaria
 import RapportCouleurAll from './pages/rapport/rapportVente/rapportVenteCouleur/RapportCouleurAll';
 import Dette from './pages/dette/Dette';
 import Paiement from './pages/paiement/Paiement';
-import EntreeStock from './pages/entreeStock/EntreeStock';
 import Reception from './pages/reception/Reception';
 import RapportVenteCouleurTaille from './pages/rapport/rapportVente/rapportVenteCouleur/RapportVenteCouleurTaille';
 import CatReception from './pages/reception/catReception/CatReception';
@@ -98,8 +95,33 @@ const user = useSelector((state) => state.user?.currentUser);
 
   const Layout = () => {
 
+/*     const isOpen = useSelector((state) => state.user.isSidebarOpen); // Renommez la variable ici
+    const dispatch = useDispatch();
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+      const handleClickOutsideSidebar = (event) => {
+        if (
+          isOpen &&
+          sidebarRef.current &&
+          !sidebarRef.current.contains(event.target) &&
+          !event.target.classList.contains('sidebar-container')
+        ) {
+          dispatch(toggleSidebar());
+      
+          console.log('bonjour');
+        }
+      };
+  
+      document.addEventListener('click', handleClickOutsideSidebar);
+  
+      return () => {
+        document.removeEventListener('click', handleClickOutsideSidebar);
+      };
+    }, [isOpen, dispatch]); */
+      
     return (
-      <div>
+      <div >
         <Topbar/>
         <div className="appContainer">
           <Sidebar/>

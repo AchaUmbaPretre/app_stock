@@ -49,9 +49,12 @@
         width: 200px;
         height: 100%;
         transform: translateX(-100%);
-        transition: transform 0.3s
+        transition: transform 0.3s;
+        z-index: 999;
     }
     .visible{
+        z-index: 999;
+        position: fixed;
         transform: translateX(0);
         z-index: 999;
     }

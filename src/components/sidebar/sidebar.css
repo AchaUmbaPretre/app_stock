@@ -40,3 +40,10 @@
 .sidebarIcon{
     font-size: 20px !important;
 }
+
+@media screen and (max-width: 414px){
+    .sidebar{
+        display: none;
+    }
+    
+}

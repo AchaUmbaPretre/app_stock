@@ -1,4 +1,9 @@
+@import '../../style.scss';
+
 .rowChart{
+    @include mobileXR{
+        display: none;
+    }
     .rowChart-wrapper{
         .rowChart-title{
             padding-bottom: 20px;

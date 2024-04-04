@@ -1,4 +1,4 @@
-import { MailOutline, NotificationsNone, ShoppingCartOutlined } from '@mui/icons-material'
+import { MailOutline, NotificationsNone, ShoppingCartOutlined,CloseOutlined } from '@mui/icons-material'
 import { Avatar } from 'antd';
 import React from 'react'
 import './topbar.css'
@@ -45,8 +45,8 @@ const Topbar = () => {
             <Avatar icon={<UserOutlined />} />
             <span>{user}</span>
           </div>
-          <div className="topbar-icon" onClick={handleClick}>
-            {isSidebarOpen ? <MenuOutlined /> : <MenuOutlined />}
+          <div className={`topbar-icon ${isSidebarOpen ? 'colorRed' : ''}`} onClick={handleClick}>
+            {isSidebarOpen ? <CloseOutlined style={{color:'#fff'}}/> : <MenuOutlined /> }
           </div>
         </div>
       </div>

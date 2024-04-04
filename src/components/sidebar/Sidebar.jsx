@@ -14,13 +14,14 @@ import { FireTruckOutlined, HomeOutlined } from '@mui/icons-material';
 import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 
 const { SubMenu, Item } = Menu;
 
 const Sidebar = () => {
+  const sidebarRef = useRef(null);
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState('')
@@ -41,7 +42,7 @@ const Sidebar = () => {
   };
 
   return (
-    <Menu mode="vertical" theme="dark" className={`sidebar ${isSidebarOpen ? 'visible' : ''}`}>
+    <Menu mode="vertical" theme="dark" ref={sidebarRef}  className={`sidebar ${isSidebarOpen ? 'visible' : ''}`}>
       <div className="sidebarWrapper">
         
       </div>

@@ -83,9 +83,17 @@
         display: none;
     }
     .topbar-icon{
+        cursor: pointer;
         display: flex;
         background: rgba(1, 35, 138, 0.952);
         color: #fff;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+    .colorRed{
+        display: flex;
+        cursor: pointer;
+        background: red;
         padding: 5px 8px;
         border-radius: 5px;
     }

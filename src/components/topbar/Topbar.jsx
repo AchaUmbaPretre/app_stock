@@ -3,7 +3,7 @@ import { Avatar } from 'antd';
 import React from 'react'
 import './topbar.css'
 import logo from './../../assets/logo_doe-removebg-preview.png'
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined,MenuOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,10 +34,13 @@ const Topbar = () => {
             <MailOutline/>
             <span className="topbar-not">2</span>
           </div>
-          <div className="topbar-icons icons-user">
+          <div className="icons-user">
             {/* <img src={logo} alt="" className="topbar-imgUser"/> */}
             <Avatar icon={<UserOutlined />} />
             <span>{user}</span>
+          </div>
+          <div className="topbar-icon">
+            <MenuOutlined />
           </div>
         </div>
       </div>

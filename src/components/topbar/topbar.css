@@ -76,5 +76,7 @@
     .topbar-right{
         gap: 8px;
     }
-    
+    .topbar-icons{
+        display: none;
+    }
 }

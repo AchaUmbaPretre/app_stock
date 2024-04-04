@@ -4,14 +4,20 @@ import React from 'react'
 import './topbar.css'
 import logo from './../../assets/logo_doe-removebg-preview.png'
 import { UserOutlined,MenuOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toggleSidebar } from '../../redux/userRedux';
 
 const Topbar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const quantite = useSelector(state => state.cart.quantite);
   const user = useSelector((state) => state.user.currentUser.username);
+  const isSidebarOpen = useSelector((state) => state.user.isSidebarOpen);
 
+  const handleClick = () => {
+    dispatch(toggleSidebar());
+  };
 
   return (
     <>
@@ -39,8 +45,8 @@ const Topbar = () => {
             <Avatar icon={<UserOutlined />} />
             <span>{user}</span>
           </div>
-          <div className="topbar-icon">
-            <MenuOutlined />
+          <div className="topbar-icon" onClick={handleClick}>
+            {isSidebarOpen ? <MenuOutlined /> : <MenuOutlined />}
           </div>
         </div>
       </div>

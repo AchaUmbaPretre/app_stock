@@ -6,6 +6,7 @@ const userSlice = createSlice({
     currentUser: null,
     isFetching: false,
     error: false,
+    isSidebarOpen: false
   },
   reducers: {
     loginStart: (state) => {
@@ -19,8 +20,11 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure } = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure,toggleSidebar } = userSlice.actions;
 export default userSlice.reducer;

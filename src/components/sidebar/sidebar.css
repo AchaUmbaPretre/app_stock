@@ -43,7 +43,16 @@
 
 @media screen and (max-width: 414px){
     .sidebar{
-        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.3s
     }
-    
+    .visible{
+        transform: translateX(0);
+        z-index: 999;
+    }
 }

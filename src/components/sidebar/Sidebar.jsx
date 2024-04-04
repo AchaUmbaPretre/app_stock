@@ -25,6 +25,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState('')
   const user = useSelector((state) => state.user?.currentUser);
+  const isSidebarOpen = useSelector((state) => state.user?.isSidebarOpen);
 
   const Logout = async () => {
     try {
@@ -40,7 +41,7 @@ const Sidebar = () => {
   };
 
   return (
-    <Menu mode="vertical" theme="dark" className="sidebar">
+    <Menu mode="vertical" theme="dark" className={`sidebar ${isSidebarOpen ? 'visible' : ''}`}>
       <div className="sidebarWrapper">
         
       </div>

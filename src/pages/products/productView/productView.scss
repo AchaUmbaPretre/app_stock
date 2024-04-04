@@ -23,12 +23,18 @@
                 span{
                     font-size: .8rem;
                     color: #6d6c6c;
+                    @include mobileXR{
+                        display: none;
+                    }
                 }
             }
         }
         .product-bottom{
             display: flex;
             gap: 20px;
+            @include mobileXR{
+                flex-direction: column;
+            }
             .product-view-left{
                 flex: 4;
                 padding: 30px;
@@ -73,16 +79,25 @@
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
+                    @include mobileXR{
+                        padding: 10px 0;
+                    }
                     .product-h2{
                         font-weight: 300;
                         font-size: 1.5rem;
                         color: #797979;
                         padding-bottom: 20px;
+                        @include mobileXR{
+                            font-size: 1rem;
+                        }
                     }
                     .product_view_wrapper{
                         display: grid;
                         grid-template-columns: repeat(2,1fr);
                         gap: 10px;
+                        @include mobileXR{
+                            grid-template-columns: repeat(1,1fr);
+                        }
                         .produit-view-control{
                             display: flex;
                             flex-direction: column;

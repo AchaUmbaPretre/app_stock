@@ -27,6 +27,9 @@
                 span{
                     font-size: .8rem;
                     color: #6d6c6c;
+                    @include mobileXR{
+                        display: none;
+                    }
                 }
             }
         }
@@ -34,10 +37,18 @@
             background: #fff;
             padding: 40px;
             border-radius: 5px;
+            @include mobileXR{
+                padding: 20px;
+            }
         .product-container-bottom{
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+            @include mobileXR{
+                justify-content: center;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
             .form-controle{
                 display: flex;
                 flex-direction: column;

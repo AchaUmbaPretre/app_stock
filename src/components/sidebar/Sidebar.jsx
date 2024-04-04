@@ -225,7 +225,7 @@ const Sidebar = () => {
         </Item>
       </SubMenu>
       }
-      <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>} onClick={Logout}  onClick={handleLinkClick}>
+      <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>} onClick={Logout}>
         <Link className="sidebarH3" style={{ color: '#fafafa'}}>
           Déconnexion
         </Link>

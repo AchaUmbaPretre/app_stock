@@ -65,3 +65,16 @@
     object-fit: cover;
     border-radius: 50%;
 }
+
+@media screen and (max-width: 414px){
+    .topbar{
+        padding: 10px;
+    }
+    .logo{
+        font-size: 15px;
+    }
+    .topbar-right{
+        gap: 8px;
+    }
+    
+}

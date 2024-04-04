@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Space, Table, Tag, Checkbox} from 'antd';
+import { Space, Table, Tag, Checkbox, Modal} from 'antd';
 import { WhatsAppOutlined ,PhoneOutlined,CaretLeftOutlined,EnvironmentOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
@@ -23,6 +23,7 @@ const PageCommandeVente = () => {
     const IdCommande = pathname.split('/')[2];
     const [checkeds, setCheckeds] = useState(false);
     const [dette, setDette] = useState('');
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client) => {
         if (event.target.checked) {
@@ -141,6 +142,15 @@ const PageCommandeVente = () => {
 
       }, [DOMAIN, userId, IdCommande]);
 
+
+      const handleConfirm = () => {
+        setShowConfirmModal(true);
+      };
+      
+      const handleCancel = () => {
+        setShowConfirmModal(false);
+      }
+
       const handleClick = async (e) => {
         e.preventDefault();
         try {
@@ -217,6 +227,8 @@ const PageCommandeVente = () => {
         }
       }
 
+      
+
   return (
     <>
         <div className="pageLivreurVente">
@@ -283,8 +295,22 @@ const PageCommandeVente = () => {
                     <input type='number' min={0} className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la dette...' />
                 </div>
                 <div className="pageLivreur-form-rows">
-                    <button className='pageLivreur-btn' onClick={handleClick} disabled={isLoading}>Envoyer maintenant</button>
+                    <button className='pageLivreur-btn' onClick={handleConfirm} disabled={isLoading}>Envoyer maintenant</button>
                 </div>
+                <Modal
+                  title="Confirmation"
+                  visible={showConfirmModal}
+                  onOk={handleClick}
+                  onCancel={handleCancel}
+                  centered
+                  cancelText={<span style={{ color: '#fff' }}>Annuler</span>}
+                  okText={<span style={{ color: '#fff' }}>Oui</span>}
+                  cancelButtonProps={{ style: { background: 'red' } }}
+                  okButtonProps={{ style: { background: 'blue' } }}
+
+                >
+                  <p>Voulez-vous vraiment effectuer cette action de vente ?</p>
+                </Modal>
                 {isLoading && (
                 <div className="loader-container loader-container-center">
                   <CircularProgress size={28} />

@@ -1,5 +1,5 @@
-import { Language, MailOutline, NotificationsNone, Settings, ShoppingCartOutlined, WbSunnyOutlined, shop } from '@mui/icons-material'
-import { Avatar, Space } from 'antd';
+import { MailOutline, NotificationsNone, ShoppingCartOutlined } from '@mui/icons-material'
+import { Avatar } from 'antd';
 import React from 'react'
 import './topbar.css'
 import logo from './../../assets/logo_doe-removebg-preview.png'

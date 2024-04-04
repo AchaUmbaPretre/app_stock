@@ -307,7 +307,6 @@ const PageCommandeVente = () => {
                   okText={<span style={{ color: '#fff' }}>Oui</span>}
                   cancelButtonProps={{ style: { background: 'red' } }}
                   okButtonProps={{ style: { background: 'blue' } }}
-
                 >
                   <p>Voulez-vous vraiment effectuer cette action de vente ?</p>
                 </Modal>

@@ -16,7 +16,7 @@ const Topbar = () => {
   return (
     <>
       <div className="topbar">
-        <div className="topbar-left">
+        <div className="topbar-left" onClick={()=>navigate('/')}>
           <img src={logo} alt="" className="topbar-img" />
           <span className="logo">Ndoé Boutique</span>  
         </div>

@@ -65,6 +65,9 @@
     object-fit: cover;
     border-radius: 50%;
 }
+.topbar-icon{
+    display: none;
+}
 
 @media screen and (max-width: 414px){
     .topbar{
@@ -78,5 +81,12 @@
     }
     .topbar-icons{
         display: none;
+    }
+    .topbar-icon{
+        display: flex;
+        background: rgba(1, 35, 138, 0.952);
+        color: #fff;
+        padding: 5px 8px;
+        border-radius: 5px;
     }
 }

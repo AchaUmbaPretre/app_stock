@@ -6,10 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
-import VenteClientDetail from './venteClientDetail/VenteClientDetail';
-import { useSelector } from 'react-redux';
-import VenteSelect from './VentesSelect';
-import Ticket from './ticket/Ticket';
+import { useSelector } from 'react-redux';;
 
 const Permissions = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -213,34 +210,7 @@ const Permissions = () => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
-                    {opens &&
-                    <VenteSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
-                        <Modal
-                          title="Information du client"
-                          centered
-                          open={open}
-                          onCancel={() => setOpen(false)}
-                          width={850}
-                          footer={[
-                            <Button key="annuler" onClick={() => setOpen(false)}>
-                              Annuler
-                            </Button>
-                          ]}
-                        >
-                         <VenteClientDetail idClients={idClient}/>
-                        </Modal>
-
-                        <Modal
-                          title="Ticket"
-                          centered
-                          open={ticket}
-                          onCancel={() => setTicket(false)}
-                          width={550}
-                          footer={[]}
-                        >
-                         <Ticket idTicket={idTicket}/>
-                        </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>

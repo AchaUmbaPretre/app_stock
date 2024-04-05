@@ -86,6 +86,7 @@ import MouvementLivreur from './pages/mouvement/mouvementLivreur/MouvementLivreu
 import ClientAdresse from './pages/client/clientAdresse/ClientAdresse';
 import ClientTelephone from './pages/client/clientTelephone/ClientTelephone';
 import Localisation from './pages/pageLivreur/localisation/Localisation';
+import Permissions from './pages/permissions/Permissions';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -461,6 +462,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/receptionOne/:id',
           element: <ReceptionOne />
+        },
+        {
+          path: '/permission',
+          element: <Permissions />
         }
       ]
     }, user?.role === 'livreur' && {

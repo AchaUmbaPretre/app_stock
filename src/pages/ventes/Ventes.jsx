@@ -41,9 +41,9 @@ const Ventes = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'Utilisateur',
-          dataIndex: 'username',
-          key: 'username',
+          title: 'Client',
+          dataIndex: 'nom_client',
+          key: 'nom_client',
           render : (text,record)=>(
             <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
               <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>

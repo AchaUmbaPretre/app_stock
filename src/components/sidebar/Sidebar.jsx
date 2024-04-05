@@ -178,6 +178,12 @@ const Sidebar = () => {
             Utilisateurs
           </Link>
         </Item>
+        <Item key="permission" onClick={handleLinkClick}>
+          <Link to="/permission" className="sidebarLink">
+            Permissions
+          </Link>
+        </Item>
+        
       </SubMenu>
       <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<CreditCardOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="depenses" onClick={handleLinkClick}>

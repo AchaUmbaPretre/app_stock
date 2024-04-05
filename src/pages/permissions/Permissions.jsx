@@ -1,8 +1,7 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ReconciliationOutlined,CloseOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,CloseOutlined,UnorderedListOutlined ,EditOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
-import { Link } from 'react-router-dom';
+import { Table, Popover, Tag } from 'antd';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
@@ -17,8 +16,6 @@ const Permissions = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
-    const [ticket, setTicket] = useState(false);
-    const [idTicket, setIdTicket] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -38,17 +35,9 @@ const Permissions = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'Code',
-          dataIndex: 'id_commande',
-          key: 'id_commande',
-          render: (text, record) => (
-            <Tag color="blue">{`${new Date().getFullYear().toString().substring(2)}${record.id_shop.toString().padStart(2, '0')}${record.id_commande.toString().padStart(4, '0')}`}</Tag>
-          ),
-        },
-        {
-          title: 'Client',
-          dataIndex: 'nom_client',
-          key: 'nom_client',
+          title: 'Utilisateur',
+          dataIndex: 'username',
+          key: 'username',
           render : (text,record)=>(
             <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
               <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
@@ -56,73 +45,34 @@ const Permissions = () => {
           )
         },
         {
-          title: 'Livreur',
-          dataIndex: 'username',
-          key: 'username',
+            title: <UnorderedListOutlined  />,
+            dataIndex: 'lire',
+            key: 'lire',
+            width: '5%',
+            render : (text,record)=>(
+                <Tag color={'green'}>{record.total_varianteproduit}</Tag>
+            )
+          },
+        {
+          title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }} />,
+          dataIndex: 'edit',
+          key: 'edit',
+          width: '5%',
           render : (text,record)=>(
             <div style={{cursor: 'pointer'}}>
-              <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
+              <Tag color={'green'}>{text}</Tag>
             </div>
           )
         },
         {
-          title: 'Telephone',
-          dataIndex: 'telephone',
-          key: 'telephone',
+          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}/>,
+          dataIndex: 'phone',
+          key: 'phone',
+          width: '5%',
           render: (text) => (
-            <Popover content="Discutez avec lui sur WhatsApp" placement="top">
-              <Tag to={`https://wa.me/${text}`} color="green" style={{ cursor: 'pointer' }}>
-                <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
+              <Tag color="green" style={{ cursor: 'pointer' }}>
                 {text}
               </Tag>
-            </Popover>
-          ),
-        },
-        {
-          title: 'Quantité vendue',
-          dataIndex: 'total_varianteproduit',
-          key: 'total_varianteproduit',
-          sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
-          sortDirections: ['descend', 'ascend'],
-          render : (text,record)=>(
-              <Tag color={'green'}>{record.total_varianteproduit}</Tag>
-          )
-        },
-        {
-          title: 'Nbre vendu',
-          dataIndex: 'nombre_vendu',
-          key: 'nombre_vendu',
-          sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,
-          sortDirections: ['descend', 'ascend'],
-          render : (text,record)=>(
-              <Tag color={'green'}>{record.nombre_vendu}</Tag>
-          )
-        },
-        {
-          title: 'Total prix',
-          dataIndex: 'total_prix_vente',
-          key: 'total_prix_vente',
-          sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
-          sortDirections: ['descend', 'ascend'],
-          render: (text, record) => (
-            <Tag color="green" icon={<DollarOutlined />}>
-              {record.total_prix_vente.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              })}
-            </Tag>
-          ),
-        },
-        {
-          title: 'Date',
-          dataIndex: 'date_vente',
-          key: 'date',
-          sorter: (a, b) => a.date_vente - b.date_vente,
-          sortDirections: ['descend', 'ascend'],
-          render: (text) => (
-            <Tag color="blue" icon={<CalendarOutlined />}>
-              {format(new Date(text), 'dd-MM-yyyy')}
-            </Tag>
           ),
         }
       ];

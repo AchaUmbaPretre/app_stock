@@ -40,13 +40,13 @@ const Permissions = () => {
           dataIndex: 'username',
           key: 'username',
           render : (text,record)=>(
-            <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
-              <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
+            <div style={{cursor: 'pointer'}}>
+              <Tag color={'blue'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             </div>
           )
         },
         {
-            title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px', color: 'rgb(1, 35, 138)'}} />,
+            title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px', color: 'rgb(1, 35, 138)'}} />,
             dataIndex: 'edit',
             key: 'edit',
             width: '5%',
@@ -57,7 +57,7 @@ const Permissions = () => {
             )
           },
         {
-            title: <UnorderedListOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }} />,
+            title: <UnorderedListOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px',color: 'rgb(1, 35, 138)' }} />,
             dataIndex: 'lire',
             key: 'lire',
             width: '5%',
@@ -68,7 +68,7 @@ const Permissions = () => {
             )
           },
         {
-          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px', color: 'rgb(1, 35, 138)' }}/>,
+          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px', color: 'rgb(1, 35, 138)' }}/>,
           dataIndex: 'edit',
           key: 'edit',
           width: '5%',
@@ -79,7 +79,7 @@ const Permissions = () => {
           ),
         },
         {
-            title: <DeleteOutlineOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}/>,
+            title: <DeleteOutlineOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px',color: 'rgb(1, 35, 138)' }}/>,
             dataIndex: 'edit',
             key: 'edit',
             width: '5%',

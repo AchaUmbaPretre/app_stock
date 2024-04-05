@@ -46,7 +46,7 @@ const Permissions = () => {
           )
         },
         {
-            title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }} />,
+            title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px', color: 'rgb(1, 35, 138)'}} />,
             dataIndex: 'edit',
             key: 'edit',
             width: '5%',
@@ -57,7 +57,7 @@ const Permissions = () => {
             )
           },
         {
-            title: <UnorderedListOutlined  />,
+            title: <UnorderedListOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }} />,
             dataIndex: 'lire',
             key: 'lire',
             width: '5%',
@@ -68,7 +68,7 @@ const Permissions = () => {
             )
           },
         {
-          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}/>,
+          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px', color: 'rgb(1, 35, 138)' }}/>,
           dataIndex: 'edit',
           key: 'edit',
           width: '5%',

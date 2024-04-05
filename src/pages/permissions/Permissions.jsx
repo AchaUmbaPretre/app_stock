@@ -1,10 +1,9 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,CloseOutlined,UnorderedListOutlined ,EditOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,CheckOutlined, CloseOutlined,UnorderedListOutlined ,EditOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Table, Popover, Tag } from 'antd';
+import { Table, Tag } from 'antd';
 import axios from 'axios';
 import config from '../../config';
-import { format } from 'date-fns';
 import { useSelector } from 'react-redux';import { DeleteOutlineOutlined } from '@mui/icons-material';
 ;
 
@@ -17,7 +16,6 @@ const Permissions = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
-    const user = useSelector((state) => state.user?.currentUser);
 
 
       const handleDelete = async (id) => {
@@ -32,11 +30,24 @@ const Permissions = () => {
       const HandOpen = () => {
         setOpens(!opens);
       };
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/user/getUser`);
+            setData(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'Utilisateur',
+          title: 'Utilisateurs',
           dataIndex: 'username',
           key: 'username',
           render : (text,record)=>(
@@ -45,6 +56,18 @@ const Permissions = () => {
             </div>
           )
         },
+        {
+            title: 'Role',
+            dataIndex: 'role',
+            key: 'role',
+            render : (text,record)=>(
+              <div style={{cursor: 'pointer'}}>
+                <Tag color="green" icon={<CheckOutlined />}>
+                {text}
+                </Tag>
+              </div>
+            )
+          },
         {
             title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px', color: 'rgb(1, 35, 138)'}} />,
             dataIndex: 'edit',
@@ -92,27 +115,13 @@ const Permissions = () => {
 
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente`);
-            setData(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-
     const handleOk = async (e) => {
       setOpen(true)
       setIdClient(e)
     };
 
   const filteredData = data?.filter((item) =>
-  item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+  item.username?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (
@@ -122,7 +131,7 @@ const Permissions = () => {
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Permission des roles</h2>
-                        <span>Gérer les permissions</span>
+                        <span>Gérer les permissions des utilisateurs</span>
                     </div>
                 </div>
                 <div className="product-bottom">

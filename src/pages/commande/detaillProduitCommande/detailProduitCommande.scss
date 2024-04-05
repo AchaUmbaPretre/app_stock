@@ -1,3 +1,4 @@
+@import '../../../style.scss';
 .detailProduitCommande{
     .detailProduit-wrapper{
         .detailProduit-container-top{             display: flex;
@@ -29,13 +30,22 @@
             border-radius: 5px;
             .detail-container-rows{
                 display: flex;
+                @include mobileXR{
+                    flex-direction: column;
+                }
                 .detail-bottom-left{
                     flex:1;
                     padding: 20px 40px 10px 10px;
+                    @include mobileXR{
+                        padding-bottom: 10px;
+                    }
                     .detail-bottom-img{
                         width: 100%;
                         height: 20%;
                         object-fit: cover;
+                        @include mobileXR{
+                            width: 290px;
+                        }
                     }
                 }
                 .detail-bottom-right{
@@ -45,12 +55,18 @@
                         color: rgb(3, 3, 109);
                         font-weight: bolder;
                         font-size: 28px;
+                        @include mobileXR{
+                            font-size: 20px;
+                        }
                     }
                     .product-desc{
                         margin: 10px 0px;
                         line-height: 1.6;
                         font-weight: 300;
                         text-align: justify;
+                        @include mobileXR{
+                            margin: 8px 0px;
+                        }
                     }
                     .product-rate{
                         padding: 10px 0;
@@ -61,6 +77,9 @@
                         color: rgb(3, 3, 109);
                         font-weight: bolder;
                         font-size: 40px;
+                        @include mobileXR{
+                            font-size: 30px;
+                        }
                     }
                     .filter-products{
                         display: flex;
@@ -72,6 +91,9 @@
                             width: 100%;
                             display: flex;
                             gap: 50px;
+                            @include mobileXR{
+                                gap: 25px;
+                            }
                         }
                         .filters{
                             display: flex;
@@ -140,6 +162,14 @@
                                 padding: 6px 10px;
                                 border: 1px solid rgb(221, 221, 221);
                                 outline: none;
+                                @include mobileXR{
+                                    padding: 4px 7px;
+                                }
+                                .taille_pla{
+                                    @include mobileXR{
+                                        font-size: 5px;
+                                    }
+                                }
                             }
                         }
                         .detail_client-row{
@@ -167,6 +197,9 @@
                             gap: 40px;
                             width: 100%;
                             margin: 40px 0;
+                            @include mobileXR{
+                                margin: 25px 0;
+                            }
                             .filter{
                                 display: flex;
                                 align-items: center;
@@ -212,6 +245,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                @include mobileXR{
+                    font-size: 12px;
+                }
             }
         }
     }

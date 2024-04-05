@@ -124,37 +124,7 @@ const Permissions = () => {
               {format(new Date(text), 'dd-MM-yyyy')}
             </Tag>
           ),
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                
-              <Space size="middle">
-                <Popover title="Voir la liste de vante de cette commande" trigger="hover">
-                    <Link to={`/venteView/${record.id_commande}`}>
-                      <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                    </Link>
-                </Popover>
-                <Popover title="Ticket" trigger="hover">
-                    <Link onClick={()=> handleTicket(record.id_commande)}>
-                      <Button icon={<ReconciliationOutlined />} style={{ color: 'blue' }} />
-                    </Link>
-                </Popover>
-                {user?.role === 'admin' &&
-                <Popover title="Supprimer" trigger="hover">
-                  <Popconfirm
-                    title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id_vente)}
-                    okText="Oui"
-                    cancelText="Non"
-                  >
-                    <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
-                </Popover>}
-              </Space>
-            ),
-          },
+        }
       ];
 
       useEffect(() => {
@@ -175,11 +145,6 @@ const Permissions = () => {
       setIdClient(e)
     };
 
-    const handleTicket = async (e) => {
-      setTicket(true)
-      setIdTicket(e)
-    };
-
   const filteredData = data?.filter((item) =>
   item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
@@ -191,8 +156,8 @@ const Permissions = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de ventes</h2>
-                        <span>Gérer vos ventes</span>
+                        <h2 className="product-h2">Permission des roles</h2>
+                        <span>Gérer les permissions</span>
                     </div>
                 </div>
                 <div className="product-bottom">

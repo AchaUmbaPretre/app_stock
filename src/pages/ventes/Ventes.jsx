@@ -41,17 +41,9 @@ const Ventes = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-          title: 'Code',
-          dataIndex: 'id_commande',
-          key: 'id_commande',
-          render: (text, record) => (
-            <Tag color="blue">{`${new Date().getFullYear().toString().substring(2)}${record.id_shop.toString().padStart(2, '0')}${record.id_commande.toString().padStart(4, '0')}`}</Tag>
-          ),
-        },
-        {
-          title: 'Client',
-          dataIndex: 'nom_client',
-          key: 'nom_client',
+          title: 'Utilisateur',
+          dataIndex: 'username',
+          key: 'username',
           render : (text,record)=>(
             <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
               <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
@@ -134,7 +126,7 @@ const Ventes = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Voir la liste de vante de cette commande" trigger="hover">
+                <Popover title="Voir la liste de vente de cette commande" trigger="hover">
                     <Link to={`/venteView/${record.id_commande}`}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>

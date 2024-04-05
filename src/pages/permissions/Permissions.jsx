@@ -5,7 +5,8 @@ import { Table, Popover, Tag } from 'antd';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
-import { useSelector } from 'react-redux';;
+import { useSelector } from 'react-redux';import { DeleteOutlineOutlined } from '@mui/icons-material';
+;
 
 const Permissions = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -45,36 +46,50 @@ const Permissions = () => {
           )
         },
         {
+            title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }} />,
+            dataIndex: 'edit',
+            key: 'edit',
+            width: '5%',
+            render : (text,record)=>(
+              <div style={{cursor: 'pointer'}}>
+                    <input type="checkbox" />
+              </div>
+            )
+          },
+        {
             title: <UnorderedListOutlined  />,
             dataIndex: 'lire',
             key: 'lire',
             width: '5%',
             render : (text,record)=>(
-                <Tag color={'green'}>{record.total_varianteproduit}</Tag>
+                <div>
+                    <input type="checkbox" />
+                </div>
             )
           },
         {
-          title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }} />,
+          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}/>,
           dataIndex: 'edit',
           key: 'edit',
           width: '5%',
-          render : (text,record)=>(
-            <div style={{cursor: 'pointer'}}>
-              <Tag color={'green'}>{text}</Tag>
+          render: (text) => (
+            <div>
+                <input type="checkbox" />
             </div>
-          )
+          ),
         },
         {
-          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}/>,
-          dataIndex: 'phone',
-          key: 'phone',
-          width: '5%',
-          render: (text) => (
-              <Tag color="green" style={{ cursor: 'pointer' }}>
-                {text}
-              </Tag>
-          ),
-        }
+            title: <DeleteOutlineOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}/>,
+            dataIndex: 'edit',
+            key: 'edit',
+            width: '5%',
+            render: (text) => (
+                <div>
+                    <input type="checkbox" />
+                </div>
+            ),
+          }
+
       ];
 
       useEffect(() => {

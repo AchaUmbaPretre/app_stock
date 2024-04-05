@@ -308,7 +308,7 @@ const PageCommandeVente = () => {
                   cancelButtonProps={{ style: { background: 'red' } }}
                   okButtonProps={{ style: { background: 'blue' } }}
                 >
-                  <p>Voulez-vous vraiment effectuer cette action de vente ?</p>
+                  <p>Souhaitez-vous réellement effectuer cette vente ?</p>
                 </Modal>
                 {isLoading && (
                 <div className="loader-container loader-container-center">

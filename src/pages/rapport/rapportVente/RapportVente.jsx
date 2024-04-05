@@ -20,7 +20,7 @@ const RapportVente = () => {
     const [recent, setRecent] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
-    const scroll = { x: 400 };
+    const scroll = { x: 350 };
     const [open, setOpen] = useState(false);
 
 const columns = [

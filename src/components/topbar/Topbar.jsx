@@ -46,7 +46,7 @@ const Topbar = () => {
             <span>{user}</span>
           </div>
           <div className={`topbar-icon ${isSidebarOpen ? 'colorRed' : ''}`} onClick={handleClick}>
-            {isSidebarOpen ? <CloseOutlined style={{color:'#fff'}}/> : <MenuOutlined /> }
+            {isSidebarOpen ? <CloseOutlined style={{color:'red'}}/> : <MenuOutlined /> }
           </div>
         </div>
       </div>

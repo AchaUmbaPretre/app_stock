@@ -172,7 +172,7 @@ const PageCommandeVente = () => {
                 montant_paye : dette
               });
 
-              await axios.post(`${DOMAIN}/api/vente/envoyer-email`, {
+              await axios.post(`${DOMAIN}/api/vente/venteMail`, {
                 id_client: dd.id_client,
                 id_livreur: userId,
                 quantite: dd.qte_livre,

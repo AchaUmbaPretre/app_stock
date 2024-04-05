@@ -13,7 +13,7 @@ const Localisation = () => {
   const quartier = searchParams.get('quartier');
   const avenue = searchParams.get('avenue');
   const num = searchParams.get('num');
-  const clientAddress = `Kinshasa, ${commune}, ${quartier}, ${num}`;
+  const clientAddress = `Kinshasa, ${commune}, ${avenue}, ${num}`;
   const [currentPosition, setCurrentPosition] = useState(null);
   const [boutiquePosition, setBoutiquePosition] = useState(null);
   const [distance, setDistance] = useState(null)
@@ -81,7 +81,7 @@ const Localisation = () => {
   return (
     <div>
       {currentPosition && (
-        <MapContainer center={currentPosition} zoom={25} scrollWheelZoom={false} style={{ height: '500px' }}>
+        <MapContainer center={currentPosition} zoom={20} scrollWheelZoom={false} style={{ height: '500px' }}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -96,7 +96,7 @@ const Localisation = () => {
       {currentPosition && (
         <button onClick={handleSendLocation} style={{border:'none',padding:'10px', margin: '10px', borderRadius:'5px', display:'flex', alignItems:'center', gap:"5px",color: 'rgb(3, 3, 109)'}}>Partager la localisation en direct <WhatsAppOutlined style={{ fontSize: '15px', color: 'green' }}/></button>
       )}
-      <p style={{margin:'10px',color: 'rgb(3, 3, 109)'}}>Distance entre la boutique et le client : {distance && distance} mètres.</p>
+      {/* <p style={{margin:'10px',color: 'rgb(3, 3, 109)'}}>Distance entre la boutique et le client : {distance && distance} mètres.</p> */}
     </div>
     
   );

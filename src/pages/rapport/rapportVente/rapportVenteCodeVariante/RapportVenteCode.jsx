@@ -91,6 +91,16 @@ const columns = [
         },
       },
       {
+        title: 'Client',
+        dataIndex: 'nom_client',
+        key: 'nom_client',
+        render: (nom_client) => (
+          <Tag color="green" icon={<UserOutlined />}>
+            {nom_client}
+          </Tag>
+        ),
+      },
+      {
         title: 'Livreur',
         dataIndex: 'username',
         key: 'username',

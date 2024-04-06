@@ -6,10 +6,12 @@ import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteAllSelects from './RapportVenteAllSelects';
 import moment from 'moment';
+import CountUp from 'react-countup';
 
 const RapportVenteAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
+    const [getRap, setGetRap] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
@@ -180,6 +182,19 @@ useEffect(() => {
     fetchData();
   }, [DOMAIN,id]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteAllRap/${id}`);
+        setGetRap(data);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN,id]);
+
 const filteredData = getRapport?.filter((item) =>
   item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
@@ -193,6 +208,16 @@ const filteredData = getRapport?.filter((item) =>
                     <div className="product-left">
                         <h2 className="product-h2">Rapport de ventes de marque {marqueName}</h2>
                         <span>Gérez votre rapport de ventes de marque {marqueName}</span>
+                    </div>
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                      <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                        {`Du ${moment(getRap[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(getRap[0]?.date_plus_recente).format('DD-MM-YYYY')}`}
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '13px' }}>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'article {marqueName} vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.nbre_article_vendue}/></b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de client(e) acheté(e): <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.nbre_de_vente}/></b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.nbre_commande}/></b></p>
+                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">

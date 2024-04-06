@@ -263,7 +263,7 @@ const ListeCommande = () => {
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Liste des commandes</h2>
-                        <span>Voir les commandes</span>
+                        <span>Voir vos commandes</span>
                     </div>
                     <div className="product-right" onClick={() =>navigate('/commandeForm')}>
                         <PlusOutlined />

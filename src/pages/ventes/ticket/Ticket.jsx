@@ -37,17 +37,19 @@ const Ticket = ({idTicket}) => {
         // Calcul du total
   const total = data?.reduce((total, item) => total + item.prix_unitaire * item.quantite, 0);
 
+
+  console.log(data)
+
   // Calcul du solde
   const acompte = data[0]?.acompte;
   const solde = total - acompte;
-
-  console.log(total)
     
 
   return (
     <>
         <div className="ticket" ref={componentRef}>
             <div className="ticket-wrapper">
+                <span className="ticket-number">N° {`${new Date().getFullYear().toString().substring(2)}${data[0]?.id_shop.toString().padStart(2, '0')}${data[0]?.id_commande.toString().padStart(4, '0')}`}</span>
                 <div className="ticket-logo">
                     <img src={logo} alt="" className='ticket-img'/>
                     <h1 className='ticket-titles'>Ndoé boutique</h1>

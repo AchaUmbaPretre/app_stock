@@ -178,7 +178,7 @@ const VenteView = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des ventes de la commande N° {`${new Date().getFullYear().toString().substring(2)}${getCommande?.id_shop.toString().padStart(2, '0')}${getCommande?.id_commande.toString().padStart(4, '0')}`}</h2>
+                        <h2 className="product-h2">Liste des ventes de la commande N° {id}</h2>
                         <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
                     </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>

@@ -4,10 +4,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../config';
 import RapportRevenuSelect from './RapportRevenuSelect';
+import CountUp from 'react-countup';
 
 const RapportRevenu = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
+    const [getRap, setGetRap] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
@@ -94,6 +96,18 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapportRevenu/revenuRapDuMois`);
+      setGetRap(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
+}, [DOMAIN]);
+
 const filteredData = getRapport?.filter((item) =>
 item.mois.toLowerCase().includes(searchValue.toLowerCase())
 )
@@ -106,6 +120,16 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                     <div className="product-left">
                         <h2 className="product-h2">Rapport des revenus</h2>
                         <span>Gérez votre revenus</span>
+                    </div>
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                      <div style={{ display: 'flex', fontSize: '12px', marginBottom:'8px', fontWeight: 'bold' }}>
+                        {`Mois : ${getRap[0]?.mois}`}
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '13px' }}>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'article vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.quantite_vendue}/></b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.nombre_vente}/></b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Revenu total: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.revenu_total}/></b></p>
+                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">

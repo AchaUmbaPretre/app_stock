@@ -142,8 +142,8 @@ const Livraison_detail = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des détails livraisons</h2>
-                        <span>Voir le détail des livraisons</span>
+                        <h2 className="product-h2">Liste des détails de livraison</h2>
+                        <span>Voir les détail de livraison</span>
                     </div>
                 </div>
                 <div className="product-bottom">

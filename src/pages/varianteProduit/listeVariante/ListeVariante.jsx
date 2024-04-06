@@ -7,6 +7,7 @@ import config from '../../../config';
 import { useSelector } from 'react-redux';
 import VarianteSelect from '../varianteSelect/VarianteSelect';
 import moment from 'moment';
+import CountUp from 'react-countup';
 
 const ListeVariante = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,6 +15,7 @@ const ListeVariante = () => {
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const [searchValue, setSearchValue] = useState('');
+    const [produit, setProduit] = useState([]);
     const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
     
@@ -141,6 +143,18 @@ const ListeVariante = () => {
         fetchData();
       }, [DOMAIN]);
 
+      useEffect(()=>{
+        const fetchData = async ()=> {
+            try{
+                const res = await axios.get(`${DOMAIN}/api/produit/produitCount`);
+                setProduit(res.data)
+              }catch(error){
+                console.log(error)
+              };
+        }
+        fetchData()
+     }, [DOMAIN])
+
       const groupedData = Object.values(
         data.reduce((acc, item) => {
           const { code_variant, ...rest } = item;
@@ -170,8 +184,10 @@ const ListeVariante = () => {
                       <h2 className="product-h2">Stock des chaussures</h2>
                       <span>Gérer vos chaussures</span>
                     </div>
-                    <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
-                      <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}></span>
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '14px' }}>
+                        <p style={{display:'flex',gap:'8px', justifyContent: 'space-between'}}>Total d'articles en stock: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={produit[0]?.total}/></b></p>
+                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">

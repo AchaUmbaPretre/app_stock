@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import config from '../../../config';
 import { CircularProgress } from '@mui/material';
+import { Modal } from 'antd';
 
 const ClientEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,6 +15,7 @@ const ClientEdit = () => {
   const [commune, setCommune] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
   const id = useLocation().pathname.split('/')[2];
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -29,6 +31,14 @@ const ClientEdit = () => {
   
   setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
+
+  const handleConfirm = () => {
+    setShowConfirmModal(true);
+  };
+  
+  const handleCancel = () => {
+    setShowConfirmModal(false);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -184,7 +194,20 @@ const ClientEdit = () => {
               </div>
 
               <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick} disabled={isLoading}>Envoyer</button>
+                <button className="btn-submit" onClick={handleConfirm} disabled={isLoading}>Envoyer</button>
+                <Modal
+                  title="Confirmation"
+                  visible={showConfirmModal}
+                  onOk={handleClick}
+                  onCancel={handleCancel}
+                  centered
+                  cancelText={<span style={{ color: '#fff' }}>Non</span>}
+                  okText={<span style={{ color: '#fff' }}>Oui</span>}
+                  cancelButtonProps={{ style: { background: 'red' } }}
+                  okButtonProps={{ style: { background: 'blue' } }}
+                >
+                  <p>Voulez-vous réellement modifier les informations du client ?</p>
+                </Modal>
                 {isLoading && (
                 <div className="loader-container loader-container-center">
                   <CircularProgress size={28} />

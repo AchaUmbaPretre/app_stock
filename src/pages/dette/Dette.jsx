@@ -217,8 +217,8 @@ const Dette = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des dettes</h2>
-                        <span>Gérer vos dettes</span>
+                        <h2 className="product-h2">Liste des ventes en crédit</h2>
+                        <span>Gérer vos ventes en crédit</span>
                     </div>
                 </div>
                 <div className="product-bottom">

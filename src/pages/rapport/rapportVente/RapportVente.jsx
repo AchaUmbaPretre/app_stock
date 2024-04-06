@@ -63,19 +63,29 @@ const columns = [
         let tagColor;
       
         if (color === 'Rouge') {
-          tagColor = 'red';
+          tagColor = '#FF0000';
         } else if (color === 'Noir') {
           tagColor = 'black';
+        } else if (color === 'Noir brillant'){
+          tagColor = '#000';
         } else if (color === 'Orange') {
           tagColor = 'orange';
         } else if (color === 'Bleu') {
           tagColor = 'skyblue';
+        } else if (color === 'Bleu ciel'){
+          tagColor = '#87CEEB';
         } else if (color === 'Chocolat') {
           tagColor = 'chocolate';
         } else if (color === 'Vert fluo') {
           tagColor = 'lime';
-        } else if (color === 'Rose fuchsia') {
-          tagColor = 'hotpink';
+        } else if (color === 'Vert') {
+          tagColor = ' #008000';
+        }else if (color === 'Vert clair'){
+          tagColor = '#90EE90';
+        } else if (color === 'Rose fuschia') {
+          tagColor = '#FF00FF';
+        }else if (color === 'Rose'){
+          tagColor = '#FFC0CB';
         } else if (color === 'Beige saumon') {
           tagColor = 'burlywood';
         } else if (color === 'Jaune') {
@@ -84,7 +94,11 @@ const columns = [
           tagColor = 'gray';
         } else if (color === 'Violet') {
           tagColor = 'purple';
-        } else if (color === 'Blanc') {
+        } else if (color === 'Mauve') {
+          tagColor = '#D473D4';
+        } else if (color === 'Argente'){
+          tagColor = '#C0C0C0';
+        } else if (color === 'Blanc'){
           tagColor = 'white';
         } else {
           // Couleur par défaut si aucune correspondance n'est trouvée
@@ -207,7 +221,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Rapport des ventes</h2>
-                        <span>Gérez votre rapport des ventes</span>
+                        <span>Gérez vos rapports des ventes</span>
                     </div>
                     <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                       <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>

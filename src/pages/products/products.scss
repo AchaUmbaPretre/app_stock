@@ -141,6 +141,10 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    @include mobileXR{
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
                     .liste-row{
                         display: flex;
                         flex-direction: column;
@@ -176,6 +180,9 @@
                                 border: 1px solid rgba(1, 35, 138, 0.952);
                                 background: transparent;
                                 color: rgba(1, 35, 138, 0.952);
+                            }
+                            @include mobileXR{
+                                margin-top: 10px;
                             }
                         }
                     }

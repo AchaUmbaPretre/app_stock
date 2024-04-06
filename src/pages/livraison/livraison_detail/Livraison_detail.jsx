@@ -142,7 +142,7 @@ const Livraison_detail = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des détails des livraisons</h2>
+                        <h2 className="product-h2">Liste des détails livraisons</h2>
                         <span>Voir le détail des livraisons</span>
                     </div>
                 </div>

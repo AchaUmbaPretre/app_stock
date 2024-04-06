@@ -1,6 +1,6 @@
 import { SearchOutlined, SisternodeOutlined,UserOutlined, FilePdfOutlined,ClockCircleOutlined,FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Checkbox, Image} from 'antd';
+import { Modal, Button, Input, Space, Table, Popover,Popconfirm, Tag, Checkbox, Image} from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
@@ -29,6 +29,7 @@ const ListeDetailView = () => {
     const [totalAvecRemise, setTotalAvecRemise] = useState(totalPrice);
     const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const handleSelectionChange = (event, id, prix, quantite, id_detail) => {
       if (event.target.checked) {
@@ -51,6 +52,14 @@ const ListeDetailView = () => {
         });
       }
     };
+
+    const handleConfirm = () => {
+      setShowConfirmModal(true);
+    };
+    
+    const handleCancel = () => {
+      setShowConfirmModal(false);
+    }
 
 
     useEffect(() => {
@@ -367,7 +376,20 @@ const ListeDetailView = () => {
                         />
                         </div>
                         <div className="rows-btn">
-                          <button className="list_btn" onClick={handleClick} disabled={isLoading}>Envoyer</button>
+                          <button className="list_btn" onClick={handleConfirm} disabled={isLoading}>Envoyer</button>
+                          <Modal
+                            title="Confirmation"
+                            visible={showConfirmModal}
+                            onOk={handleClick}
+                            onCancel={handleCancel}
+                            centered
+                            cancelText={<span style={{ color: '#fff' }}>Non</span>}
+                            okText={<span style={{ color: '#fff' }}>Oui</span>}
+                            cancelButtonProps={{ style: { background: 'red' } }}
+                            okButtonProps={{ style: { background: 'blue' } }}
+                          >
+                            <p>Voulez-vous vraiment effectuer cette action ?</p>
+                          </Modal>
                           {isLoading && (
                             <div className="loader-container loader-container-center">
                               <CircularProgress size={28} />

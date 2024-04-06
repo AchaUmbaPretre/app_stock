@@ -243,7 +243,6 @@ const filteredData = getRapport?.filter((item) =>
                 </div>
             </div>
         </div>
-
     </>
   )
 }

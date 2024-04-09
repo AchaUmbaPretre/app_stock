@@ -136,7 +136,7 @@ const Mouvement = () => {
           sorter: (a, b) => (a.total_retours ?? 0) - (b.total_retours ?? 0),
           sortDirections: ['descend', 'ascend'],
           render : (text,record)=>(
-            <Popover
+          <Popover
             content="Voir le nombre des articles retournés" placement="top"
           >
             <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}}>{record.total_retours ?? 0}</Tag>

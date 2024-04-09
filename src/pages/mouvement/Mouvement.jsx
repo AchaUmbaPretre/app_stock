@@ -12,6 +12,7 @@ import MouvementSelect from './MouvementSelect';
 import MouvementDepart from './MouvementDepart';
 import MouvementAll from './MouvementAll';
 import MouvementRetour from './MouvementRetour';
+import MouvementOneVente from './MouvementOneVente';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -24,6 +25,8 @@ const Mouvement = () => {
     const [openVente, setOpenVente] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
+    const [idTypeVente, setIdTypeVente] = useState({});
+    const [idTypeVenteCommande, setIdTypeVenteCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -32,8 +35,10 @@ const Mouvement = () => {
         setIdClient(e)
       };
 
-      const showModalOneVente = (e) => {
+      const showModalOneVente = (e,id_commande) => {
         setOpenVente(true);
+        setIdTypeVente(e)
+        setIdTypeVenteCommande(id_commande)
       };
 
       const qModal = (e) => {
@@ -128,7 +133,7 @@ const Mouvement = () => {
             <Popover
               content="Voir le nombre des articles vendus" placement="top"
             >
-              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}} onClick={()=> showModalOneVente(record.id_type_mouvement)}>
+              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}} onClick={()=> showModalOneVente(record.id_type_mouvement, record.id_commande)}>
               {record.total_vendu ?? 0}
               </Tag>
             </Popover>
@@ -249,10 +254,10 @@ const Mouvement = () => {
                             centered
                             open={openVente}
                             onCancel={() => setOpenVente(false)}
-                            width={850}
+                            width={980}
                             footer={[]}
                           >
-{/*                           <MouvClientDetail idClients={idClient}/> */}
+                          <MouvementOneVente id_commande={idTypeVenteCommande} id_type={idTypeVente}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

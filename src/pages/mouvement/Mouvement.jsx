@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import MouvementSelect from './MouvementSelect';
 import MouvementDepart from './MouvementDepart';
+import MouvementAll from './MouvementAll';
+import MouvementRetour from './MouvementRetour';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -200,8 +202,14 @@ const Mouvement = () => {
                       </div>
                     </div>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Mouvement vente' key={1}>
+                  <Tabs.TabPane tab='Mouvement complet' key={1}>
+                     <MouvementAll/>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Mouvement vente' key={2}>
                      <MouvementDepart/>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Mouvement retour' key={3}>
+                     <MouvementRetour/>
                   </Tabs.TabPane>
                 </Tabs>
             </div>

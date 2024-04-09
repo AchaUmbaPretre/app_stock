@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ShoppingCartOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,ShoppingCartOutlined,ArrowLeftOutlined,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -94,13 +94,35 @@ const Mouvement = () => {
           ),
         },
         {
-          title: 'Nombre vendu',
+          title: 'Quantité',
           dataIndex: 'total_varianteproduit',
           key: 'total_varianteproduit',
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
           sortDirections: ['descend', 'ascend'],
           render : (text,record)=>(
               <Tag color={'blue'} icon={<ShoppingCartOutlined />}>{record.total_varianteproduit}</Tag>
+          )
+        },
+        {
+          title: 'Nbre vendu',
+          dataIndex: 'total_vendu',
+          key: 'total_vendu',
+          sorter: (a, b) => (a.total_vendu ?? 0) - (b.total_vendu ?? 0),
+          sortDirections: ['descend', 'ascend'],
+          render: (text, record) => (
+            <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />}>
+              {record.total_vendu ?? 0}
+            </Tag>
+          )
+        },
+        {
+          title: 'Nbre retourné',
+          dataIndex: 'total_retours',
+          key: 'total_retours',
+          sorter: (a, b) => (a.total_retours ?? 0) - (b.total_retours ?? 0),
+          sortDirections: ['descend', 'ascend'],
+          render : (text,record)=>(
+              <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>}>{record.total_retours ?? 0}</Tag>
           )
         },
         {
@@ -205,10 +227,10 @@ const Mouvement = () => {
                   <Tabs.TabPane tab='Mouvement complet' key={1}>
                      <MouvementAll/>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Mouvement vente' key={2}>
+                  <Tabs.TabPane tab='Mouvement vendu' key={2}>
                      <MouvementDepart/>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Mouvement retour' key={3}>
+                  <Tabs.TabPane tab='Mouvement retourné' key={3}>
                      <MouvementRetour/>
                   </Tabs.TabPane>
                 </Tabs>

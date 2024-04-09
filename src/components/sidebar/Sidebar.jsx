@@ -70,7 +70,7 @@ const Sidebar = () => {
         </Item>
         <Item key="varianteProduit"  onClick={handleLinkClick}>
           <Link to="/varianteProduit" className="sidebarLink">
-            Catalogues
+            Catalogue
           </Link>
         </Item>
         <Item key="categories"  onClick={handleLinkClick}>

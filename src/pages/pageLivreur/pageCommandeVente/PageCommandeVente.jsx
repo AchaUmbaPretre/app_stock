@@ -151,7 +151,7 @@ const PageCommandeVente = () => {
         setShowConfirmModal(false);
       }
 
-      const handleClick = async (e) => {
+/*       const handleClick = async (e) => {
         e.preventDefault();
         try {
           setIsLoading(true);
@@ -217,7 +217,64 @@ const PageCommandeVente = () => {
         } finally {
           setIsLoading(false);
         }
-      }
+      } */
+
+      const handleClick = async (e) => {
+        e.preventDefault();
+        try {
+          setIsLoading(true);
+      
+          const requests = selected.map((dd) => {
+            const venteRequest = axios.post(`${DOMAIN}/api/vente`, {
+              id_client: dd.id_client,
+              id_livreur: userId,
+              quantite: dd.qte_livre,
+              id_commande: dd.id_commande,
+              id_detail_commande: dd.id_detail_commande,
+              prix_unitaire: dd.prix,
+              id_varianteProduit: dd.id,
+              id_taille: dd.id_taille,
+              id_type_mouvement: 4,
+              montant_convenu: dd.prix,
+              montant_paye: dette
+            });
+      
+            const venteMailRequest = axios.post(`${DOMAIN}/api/vente/venteMail`, {
+              id_client: dd.id_client,
+              id_livreur: userId,
+              quantite: dd.qte_livre,
+              id_commande: dd.id_commande,
+              id_detail_commande: dd.id_detail_commande,
+              prix_unitaire: dd.prix,
+              id_varianteProduit: dd.id,
+              id_taille: dd.id_taille,
+            });
+      
+            return Promise.all([venteRequest, venteMailRequest]);
+          });
+      
+          await Promise.all(requests);
+      
+          Swal.fire({
+            title: 'Success',
+            text: 'La vente a été créée avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+      
+          navigate('/pageLivreurVente');
+          window.location.reload();
+        } catch (err) {
+          Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+        } finally {
+          setIsLoading(false);
+        }
+      };
 
       const handleCheck = (e) => {
         if(e.target.checked){

@@ -8,7 +8,7 @@ import { CircularProgress } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { FadeLoader } from 'react-spinners';
-
+  
 const PageCommandeVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [selected, setSelected] = useState([]);

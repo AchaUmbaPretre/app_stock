@@ -120,9 +120,13 @@ const Mouvement = () => {
           sorter: (a, b) => (a.total_vendu ?? 0) - (b.total_vendu ?? 0),
           sortDirections: ['descend', 'ascend'],
           render: (text, record) => (
-            <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}}>
+            <Popover
+              content="Voir le nombre des articles vendus" placement="top"
+            >
+              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}}>
               {record.total_vendu ?? 0}
-            </Tag>
+              </Tag>
+            </Popover>
           )
         },
         {
@@ -132,7 +136,11 @@ const Mouvement = () => {
           sorter: (a, b) => (a.total_retours ?? 0) - (b.total_retours ?? 0),
           sortDirections: ['descend', 'ascend'],
           render : (text,record)=>(
-              <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}}>{record.total_retours ?? 0}</Tag>
+            <Popover
+            content="Voir le nombre des articles retournés" placement="top"
+          >
+            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}}>{record.total_retours ?? 0}</Tag>
+          </Popover>
           )
         },
         {

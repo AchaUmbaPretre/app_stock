@@ -283,7 +283,6 @@ const MouvementOneVente = ({id_commande, id_type}) => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

@@ -21,6 +21,7 @@ const Mouvement = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openVente, setOpenVente] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
@@ -29,6 +30,10 @@ const Mouvement = () => {
       const showModal = (e) => {
         setOpen(true);
         setIdClient(e)
+      };
+
+      const showModalOneVente = (e) => {
+        setOpenVente(true);
       };
 
       const qModal = (e) => {
@@ -123,7 +128,7 @@ const Mouvement = () => {
             <Popover
               content="Voir le nombre des articles vendus" placement="top"
             >
-              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}}>
+              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}} onClick={()=> showModalOneVente(record.id_type_mouvement)}>
               {record.total_vendu ?? 0}
               </Tag>
             </Popover>
@@ -238,6 +243,17 @@ const Mouvement = () => {
                           >
                           <MouvClientDetail idClients={idClient}/>
                           </Modal>
+
+                          <Modal
+                            title="Les articles vendus"
+                            centered
+                            open={openVente}
+                            onCancel={() => setOpenVente(false)}
+                            width={850}
+                            footer={[]}
+                          >
+{/*                           <MouvClientDetail idClients={idClient}/> */}
+                          </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
                     </div>
@@ -254,7 +270,6 @@ const Mouvement = () => {
                 </Tabs>
             </div>
         </div>
-
     </>
   )
 }

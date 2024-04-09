@@ -20,7 +20,7 @@ const PageCommandeVente = () => {
     const [totalPrice, setTotalPrice] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
-    const IdCommande = pathname.split('/')[2];
+    const IdCommande = pathname.split('/')[2];  
     const [checkeds, setCheckeds] = useState(false);
     const [dette, setDette] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);

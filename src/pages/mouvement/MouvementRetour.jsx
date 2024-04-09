@@ -258,7 +258,7 @@ const MouvementRetour = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementDepart`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementRetour`);
             setData(data);
             setLoading(false)
           } catch (error) {

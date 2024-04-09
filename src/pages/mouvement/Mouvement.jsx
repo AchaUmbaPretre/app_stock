@@ -31,6 +31,10 @@ const Mouvement = () => {
         setIdClient(e)
       };
 
+      const qModal = (e) => {
+        navigate(`/mouvement/${e}`);
+      };
+
       const showModalLivreur = (e) => {
         navigate(`/mouvementOne/${e}`)
       };
@@ -99,8 +103,14 @@ const Mouvement = () => {
           key: 'total_varianteproduit',
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
           sortDirections: ['descend', 'ascend'],
-          render : (text,record)=>(
-              <Tag color={'blue'} icon={<ShoppingCartOutlined />}>{record.total_varianteproduit}</Tag>
+          render: (text, record) => (
+            <Popover
+              content="Voir les détails" placement="top"
+            >
+              <Tag color="blue" icon={<ShoppingCartOutlined />} style={{ cursor: 'pointer' }} onClick={()=>qModal(record.id_commande)}>
+                {record.total_varianteproduit}
+              </Tag>
+            </Popover>
           )
         },
         {
@@ -110,7 +120,7 @@ const Mouvement = () => {
           sorter: (a, b) => (a.total_vendu ?? 0) - (b.total_vendu ?? 0),
           sortDirections: ['descend', 'ascend'],
           render: (text, record) => (
-            <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />}>
+            <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}}>
               {record.total_vendu ?? 0}
             </Tag>
           )
@@ -122,7 +132,7 @@ const Mouvement = () => {
           sorter: (a, b) => (a.total_retours ?? 0) - (b.total_retours ?? 0),
           sortDirections: ['descend', 'ascend'],
           render : (text,record)=>(
-              <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>}>{record.total_retours ?? 0}</Tag>
+              <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}}>{record.total_retours ?? 0}</Tag>
           )
         },
         {

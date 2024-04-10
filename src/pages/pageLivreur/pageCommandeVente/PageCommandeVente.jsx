@@ -113,6 +113,8 @@ const PageCommandeVente = () => {
         }
       ];
 
+      console.log(note)
+
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -348,12 +350,12 @@ const PageCommandeVente = () => {
                     <h2>{data[0]?.quantite_prix} $</h2>
                 </div>
                 <div className="pageLivreur_submit">
-                    <label htmlFor="">Dette (Entrez le montant payé)</label>
+                    <label htmlFor="">Dette (Entrez le montant payé)<span style={{color:'red'}}>*</span></label>
                     <input type='number' min={0} className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la dette...' />
                 </div>
                 <div className="pageLivreur_submit">
-                    <label htmlFor="">Note</label>
-                    <input type='text' className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la note....' />
+                    <label htmlFor="">Note <span style={{color:'red'}}>*</span></label>
+                    <textarea type='text' className='pageLivreur_note' name= 'note' onChange={(e)=> setNote(e.target.value)} placeholder='Entrer la note....' />
                 </div>
                 <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleConfirm} disabled={isLoading}>Envoyer maintenant</button>

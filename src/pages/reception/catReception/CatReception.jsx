@@ -21,6 +21,8 @@ const CatReception = () => {
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
     const [taille, setTaille] = useState(null);
+    const [couleur, setCouleur] = useState(null);
+    const [getCouleur,setGetCouleur] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
     const groupedData = Object.values(
@@ -92,11 +94,25 @@ const CatReception = () => {
         };
         fetchData();
       }, [DOMAIN]);
+
+      console.log(couleur)
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
+            setGetCouleur(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
       
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&itemsPerPage=${itemsPerPage}&currentPage=${startIndex}`
+            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&itemsPerPage=${itemsPerPage}&currentPage=${startIndex}&id_couleur=${couleur}`
       
             const { data } = await axios.get(url);
             setData(data);
@@ -186,6 +202,22 @@ const CatReception = () => {
                               const selectedValue = selectedOption.map(option => option.value);
                               setTaille(selectedValue);
                             }}
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>Couleur</span>
+                          </div>
+                          <Select
+                            name='id_couleur'
+                            className='variant-select'
+                            options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
+                            isMulti
+                            onChange={(selectedOption) => {
+                              const selectedValue = selectedOption.map(option => option.value)
+                              setCouleur(selectedValue)}
+                            }
                           />
                         </div>
                     </div>

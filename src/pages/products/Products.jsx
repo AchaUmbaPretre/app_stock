@@ -12,6 +12,7 @@ import ProductDetail from './productDetail/ProductDetail';
 import BarReturn from '../../components/barReturn/BarReturn';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 const Products = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -212,7 +213,9 @@ const Products = () => {
       ...getColumnSearchProps('etatProduit'),
       render: (text, record) => {
         const color = record.etatProduit === 'Actif' ? 'green' : 'red';
-        return <Tag color={color}>{text}</Tag>;
+        return <Tag color={color} onClick={()=> handleOk(record.id_produit)}>
+                {text}
+              </Tag>;
       },
     },
     {
@@ -276,6 +279,28 @@ useEffect(() => {
 const showModal = (e) => {
   setOpen(true);
   setIdProduit(e)
+};
+
+const handleOk = async (e) => {
+  try{
+    await axios.put(`${DOMAIN}/api/produit/${e}`)
+
+    Swal.fire({
+      title: 'Success',
+      text: "La matière a été modifiée avec succès!",
+      icon: 'success',
+      confirmButtonText: 'OK',
+    });
+    window.location.reload();
+
+  }catch(err) {
+    Swal.fire({
+      title: 'Error',
+      text: err.message,
+      icon: 'error',
+      confirmButtonText: 'OK',
+    });
+  }
 };
 
 const filteredData = getProduit?.filter((item) => 

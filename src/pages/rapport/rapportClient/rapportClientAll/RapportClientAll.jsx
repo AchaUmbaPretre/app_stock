@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,UserOutlined,DollarOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,UserOutlined,DollarOutlined} from '@ant-design/icons';
 import { Table, Tag, Image } from 'antd';
 import { CalendarOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
@@ -91,25 +91,50 @@ const RapportClientAll = () => {
             key: 'description',
             render: (color) => {
               let tagColor;
-          
+            
               if (color === 'Rouge') {
-                tagColor = 'red';
+                tagColor = '#FF0000';
               } else if (color === 'Noir') {
                 tagColor = 'black';
+              } else if (color === 'Noir brillant'){
+                tagColor = '#000';
               } else if (color === 'Orange') {
                 tagColor = 'orange';
               } else if (color === 'Bleu') {
                 tagColor = 'skyblue';
+              } else if (color === 'Bleu ciel'){
+                tagColor = '#87CEEB';
               } else if (color === 'Chocolat') {
                 tagColor = 'chocolate';
               } else if (color === 'Vert fluo') {
                 tagColor = 'lime';
-              } else if (color === 'Rose fuchsia') {
-                tagColor = 'hotpink';
+              } else if (color === 'Vert') {
+                tagColor = ' #008000';
+              }else if (color === 'Vert clair'){
+                tagColor = '#90EE90';
+              } else if (color === 'Rose fuschia') {
+                tagColor = '#FF00FF';
+              }else if (color === 'Rose'){
+                tagColor = '#FFC0CB';
               } else if (color === 'Beige saumon') {
                 tagColor = 'burlywood';
+              } else if (color === 'Jaune') {
+                tagColor = 'yellow';
+              } else if (color === 'Gris') {
+                tagColor = 'gray';
+              } else if (color === 'Violet') {
+                tagColor = 'purple';
+              } else if (color === 'Mauve') {
+                tagColor = '#D473D4';
+              } else if (color === 'Argente'){
+                tagColor = '#C0C0C0';
+              } else if (color === 'Blanc'){
+                tagColor = 'white';
+              } else {
+                // Couleur par défaut si aucune correspondance n'est trouvée
+                tagColor = 'default';
               }
-          
+            
               return (
                 <Tag color={tagColor}>{color}</Tag>
               );

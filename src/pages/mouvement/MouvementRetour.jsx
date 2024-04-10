@@ -266,7 +266,7 @@ const MouvementRetour = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
   
    const filteredData = data?.filter((item) =>
     item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())

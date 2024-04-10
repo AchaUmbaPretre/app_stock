@@ -121,7 +121,6 @@ const PageCommandeVente = () => {
                 id_commande: IdCommande
               }
             });
-      
             // Utiliser un ensemble (Set) pour éliminer les doublons
             const uniqueData = Array.from(new Set(data.map(item => item.id_varianteProduit))).map(id => {
               return data.find(item => item.id_varianteProduit === id);

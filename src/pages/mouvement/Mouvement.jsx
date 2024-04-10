@@ -116,7 +116,7 @@ const Mouvement = () => {
           ),
         },
         {
-          title: 'Quantité',
+          title: 'Détail',
           dataIndex: 'total_varianteproduit',
           key: 'total_varianteproduit',
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
@@ -157,7 +157,7 @@ const Mouvement = () => {
           <Popover
             content="Voir le nombre des articles retournés" placement="top"
           >
-            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}} onClick={()=> showModalOneRetour(record.id_type_mouvement, record.id_commande)}>{record.total_retours ?? 0}</Tag>
+            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}} onClick={()=> showModalOneRetour(record.id_retours, record.id_commande)}>{record.total_retours ?? 0}</Tag>
           </Popover>
           )
         },

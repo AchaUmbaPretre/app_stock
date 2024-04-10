@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined,UserOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,CalendarOutlined, SisternodeOutlined,EyeOutlined,UserOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import { Button, Space, Table, Popover,Tag, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -7,6 +7,7 @@ import config from '../../../config';
 import RapportClientAll from './rapportClientAll/RapportClientAll';
 import RapportClientSelect from './RapportClientSelect';
 import CountUp from 'react-countup';
+import moment from 'moment';
 
 const RapportClient = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -66,6 +67,18 @@ const columns = [
         render: (total_prix_vente) => (
           <Tag color="blue" icon={<DollarOutlined />}>
             {total_prix_vente.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </Tag>
+        ),
+      },
+      {
+        title: 'Derniére date',
+        dataIndex: 'derniere_date_achat',
+        key: 'derniere_date_achat',
+        sorter: (a, b) => moment(a.derniere_date_achat) - moment(b.derniere_date_achat),
+        sortDirections: ['descend', 'ascend'],
+        render: (text) => (
+          <Tag icon={<CalendarOutlined />} color="blue">
+            {moment(text).format('DD-MM-yyyy')}
           </Tag>
         ),
       },

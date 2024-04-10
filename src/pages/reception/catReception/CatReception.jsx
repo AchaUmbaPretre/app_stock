@@ -101,7 +101,6 @@ const CatReception = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
             setGetCouleur(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -123,7 +122,7 @@ const CatReception = () => {
         };
       
         fetchData();
-      }, [DOMAIN, famille, marque, cible, taille, itemsPerPage, startIndex]);
+      }, [DOMAIN, famille, marque, cible, taille, itemsPerPage, startIndex, couleur]);
       
   return (
     <>

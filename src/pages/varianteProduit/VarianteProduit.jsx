@@ -17,6 +17,8 @@ const VarianteProduit = () => {
     const [getMarque,setGetMarque] = useState([]);
     const [getCible,setGetCible] = useState([]);
     const [getTaille,setGetTaille] = useState([]);
+    const [getCouleur,setGetCouleur] = useState([]);
+    const [couleur, setCouleur] = useState(null);
     const navigate = useNavigate();
     const [famille, setFamille] = useState(null);
     const [marque, setMarque] = useState(null);
@@ -165,11 +167,23 @@ const VarianteProduit = () => {
       
         fetchData();
       }, [DOMAIN, famille]); */
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
+            setGetCouleur(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
       
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}`
+            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&id_couleur=${couleur}`
       
             const { data } = await axios.get(url);
             setData(data);
@@ -180,7 +194,7 @@ const VarianteProduit = () => {
         };
       
         fetchData();
-      }, [DOMAIN, famille, marque, cible, taille]);
+      }, [DOMAIN, famille, marque, cible, taille, couleur]);
       
   return (
     <>
@@ -197,7 +211,7 @@ const VarianteProduit = () => {
                         <div className="variant-top-left">
                           <div className="variant-top-row">
                             <FilterOutlined className='variant-icon'/>
-                            <span>Categorie</span>
+                            <span>Type d'article</span>
                           </div>
                           <Select
                             name='id_famille'
@@ -263,6 +277,22 @@ const VarianteProduit = () => {
                               const selectedValue = selectedOption.map(option => option.value);
                               setTaille(selectedValue);
                             }}
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>Couleur</span>
+                          </div>
+                          <Select
+                            name='id_couleur'
+                            className='variant-select'
+                            options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
+                            isMulti
+                            onChange={(selectedOption) => {
+                              const selectedValue = selectedOption.map(option => option.value)
+                              setCouleur(selectedValue)}
+                            }
                           />
                         </div>
                     </div>

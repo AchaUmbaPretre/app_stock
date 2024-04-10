@@ -125,7 +125,6 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
             setGetCouleur(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }

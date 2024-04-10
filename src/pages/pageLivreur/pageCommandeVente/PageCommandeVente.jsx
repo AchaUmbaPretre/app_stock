@@ -23,6 +23,7 @@ const PageCommandeVente = () => {
     const IdCommande = pathname.split('/')[2];  
     const [checkeds, setCheckeds] = useState(false);
     const [dette, setDette] = useState('');
+    const [note, setNote] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const handleSelectionChange = (event, id,id_commande,id_detail_commande,id_detail_livraison,qte_livre,prix,id_taille,id_client) => {
@@ -350,6 +351,10 @@ const PageCommandeVente = () => {
                 <div className="pageLivreur_submit">
                     <label htmlFor="">Dette (Entrez le montant payé)</label>
                     <input type='number' min={0} className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la dette...' />
+                </div>
+                <div className="pageLivreur_submit">
+                    <label htmlFor="">Note</label>
+                    <input type='text' className='pageLivreur_dette' name= 'montant_convenu' onChange={(e)=> setDette(e.target.value)} placeholder='Entrer la note....' />
                 </div>
                 <div className="pageLivreur-form-rows">
                     <button className='pageLivreur-btn' onClick={handleConfirm} disabled={isLoading}>Envoyer maintenant</button>

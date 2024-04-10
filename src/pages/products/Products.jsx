@@ -213,7 +213,7 @@ const Products = () => {
       ...getColumnSearchProps('etatProduit'),
       render: (text, record) => {
         const color = record.etatProduit === 'Actif' ? 'green' : 'red';
-        return <Tag color={color} onClick={()=> handleOk(record.id_produit)}>
+        return <Tag color={color} onClick={()=> handleOk(record.id_produit)} style={{cursor:'pointer'}}>
                 {text}
               </Tag>;
       },
@@ -287,7 +287,7 @@ const handleOk = async (e) => {
 
     Swal.fire({
       title: 'Success',
-      text: "La matière a été modifiée avec succès!",
+      text: "L'état des produits a été modifié avec succès.",
       icon: 'success',
       confirmButtonText: 'OK',
     });

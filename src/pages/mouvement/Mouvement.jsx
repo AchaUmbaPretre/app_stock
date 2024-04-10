@@ -13,6 +13,7 @@ import MouvementDepart from './MouvementDepart';
 import MouvementAll from './MouvementAll';
 import MouvementRetour from './MouvementRetour';
 import MouvementOneVente from './MouvementOneVente';
+import MouvementOneRetour from './MouvementOneRetour';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -23,6 +24,7 @@ const Mouvement = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [openVente, setOpenVente] = useState(false);
+    const [openRetour, setOpenRetour] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const [idTypeVente, setIdTypeVente] = useState({});
@@ -37,6 +39,12 @@ const Mouvement = () => {
 
       const showModalOneVente = (e,id_commande) => {
         setOpenVente(true);
+        setIdTypeVente(e)
+        setIdTypeVenteCommande(id_commande)
+      };
+
+      const showModalOneRetour = (e,id_commande) => {
+        setOpenRetour(true);
         setIdTypeVente(e)
         setIdTypeVenteCommande(id_commande)
       };
@@ -149,7 +157,7 @@ const Mouvement = () => {
           <Popover
             content="Voir le nombre des articles retournés" placement="top"
           >
-            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}}>{record.total_retours ?? 0}</Tag>
+            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}} onClick={()=> showModalOneRetour(record.id_type_mouvement, record.id_commande)}>{record.total_retours ?? 0}</Tag>
           </Popover>
           )
         },
@@ -258,6 +266,17 @@ const Mouvement = () => {
                             footer={[]}
                           >
                           <MouvementOneVente id_commande={idTypeVenteCommande} id_type={idTypeVente}/>
+                          </Modal>
+
+                          <Modal
+                            title="Les articles retournés"
+                            centered
+                            open={openRetour}
+                            onCancel={() => setOpenRetour(false)}
+                            width={980}
+                            footer={[]}
+                          >
+                          <MouvementOneRetour id_commande={idTypeVenteCommande} id_type={idTypeVente}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

@@ -141,7 +141,7 @@ const Sidebar = () => {
         </Item>
         <Item key="dette" onClick={handleLinkClick}>
           <Link to="/dette" className="sidebarLink">
-            Vente en crédit
+            Vente à crédit
           </Link>
         </Item>
         <Item key="paiement" onClick={handleLinkClick}>

@@ -227,7 +227,7 @@ const Mouvement = () => {
                     </div>
                 </div>
                 <Tabs>
-                  <Tabs.TabPane tab='Mouvement par client' key={0}>
+                  <Tabs.TabPane tab='Mouvement par commande' key={0}>
                     <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">

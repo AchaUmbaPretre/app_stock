@@ -165,7 +165,7 @@ const Sidebar = () => {
       </SubMenu>
       <Item key="/echangeForm" icon={<SwapOutlined style={{ fontSize: '22px', color: '#fafafa' }} />}  onClick={handleLinkClick}>
         <Link to="/echangeForm" className="sidebarH3" style={{fontSize: "14px", color: '#fafafa'}}>
-          Echange
+          Echanges
         </Link>
       </Item>
       <SubMenu key="clients" title={<span className="sidebarH3">Membres</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>

@@ -8,7 +8,8 @@ import {
   DollarCircleOutlined,
   AppstoreOutlined,
   CreditCardOutlined,
-  CarOutlined
+  CarOutlined,
+  SwapOutlined
 } from '@ant-design/icons';
 import { FireTruckOutlined, HomeOutlined } from '@mui/icons-material';
 import './sidebar.css'
@@ -162,6 +163,11 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
+      <Item key="/" icon={<SwapOutlined style={{ fontSize: '22px', color: '#fafafa' }} />}  onClick={handleLinkClick}>
+        <Link to="/" className="sidebarH3" style={{fontSize: "14px", color: '#fafafa'}}>
+          Echange
+        </Link>
+      </Item>
       <SubMenu key="clients" title={<span className="sidebarH3">Membres</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="clients" onClick={handleLinkClick}>
           <Link to="/clients" className="sidebarLink">

@@ -48,15 +48,20 @@ const EchangeForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/peuple`);
-        setClient(data);
-        setLoading(false)
+        const { data } = await axios.get(`${DOMAIN}/api/commande`);
+        setData(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchData();
-  }, []);
+  
+    const timeoutId = setTimeout(fetchData, 4000);
+  
+    return () => clearTimeout(timeoutId);
+  }, [DOMAIN]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -96,31 +101,11 @@ const EchangeForm = () => {
             <div className="product-wrapper">
               <div className="product-container-bottom">
                 <div className="form-controle">
-                  <label htmlFor="">Client</label>
+                  <label htmlFor="">Commande</label>
                   <Select
-                    name="client_id"
-                    options={client?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'client_id', value: selectedOption.value } })}
-                  />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Produit</label>
-                  <Select
-                      name="produit_id"
-                      options={produit?.map(item => ({ value: item.produit_id, label: `${item.nom_produit} de couleur ${item.couleur}` }))}
-                      onChange={selectedOption => handleInputChange({ target: { name: 'produit_id', value: selectedOption.value } })}
-                  />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Quantité</label>
-                  <input type="number" name='quantite' className="form-input" placeholder='ex: 2' onChange={handleInputChange}  />
-                </div>
-                <div className="form-controle">
-                  <label htmlFor="">Produit échange</label>
-                  <Select
-                      name="produit_echange_id "
-                      options={produit?.map(item => ({ value: item.produit_id, label: `${item.nom_produit} de couleur ${item.couleur}` }))}
-                      onChange={selectedOption => handleInputChange({ target: { name: 'produit_echange_id', value: selectedOption.value } })}
+                    name="id_commande"
+                    options={data?.map(item => ({ value: item.id, label: item.nom + " Commande N° "+item.id_commande }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_commande', value: selectedOption.value } })}
                   />
                 </div>
               </div>

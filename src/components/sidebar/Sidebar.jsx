@@ -105,7 +105,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      <SubMenu key="reception" title={<span className="sidebarH3">Réception</span>} icon={<FireTruckOutlined style={{ fontSize: '19px', color: '#fafafa' }} />}>
+      <SubMenu key="reception" title={<span className="sidebarH3">Réceptions</span>} icon={<FireTruckOutlined style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="entreeStock" onClick={handleLinkClick}>
           <Link to="/entreeStock" className="sidebarLink">
             Entrée de stock
@@ -117,7 +117,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      <SubMenu key="commande" title={<span className="sidebarH3">Commande</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
+      <SubMenu key="commande" title={<span className="sidebarH3">Commandes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="commandeForm" onClick={handleLinkClick}>
           <Link to="/commandeForm" className="sidebarLink">
             Nouvelle commande
@@ -137,7 +137,7 @@ const Sidebar = () => {
         </Item>
         <Item key="mouvement" onClick={handleLinkClick}>
           <Link to="/mouvement" className="sidebarLink">
-            Mouvement
+            Mouvements
           </Link>
         </Item>
         <Item key="dette" onClick={handleLinkClick}>
@@ -151,7 +151,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      <SubMenu key="Livraison" title={<span className="sidebarH3">Livraison</span>} icon={<CarOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
+      <SubMenu key="Livraison" title={<span className="sidebarH3">Livraisons</span>} icon={<CarOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
 {/*         <Item key="livraison">
           <Link to="/livraison" className="sidebarLink">
             Livraison

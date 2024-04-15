@@ -211,7 +211,7 @@ const VarianteProduit = () => {
                         <div className="variant-top-left">
                           <div className="variant-top-row">
                             <FilterOutlined className='variant-icon'/>
-                            <span>Type d'article</span>
+                            <span>Categorie</span>
                           </div>
                           <Select
                             name='id_famille'

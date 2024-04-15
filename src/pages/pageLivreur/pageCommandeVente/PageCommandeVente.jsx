@@ -223,6 +223,10 @@ const PageCommandeVente = () => {
 
       const handleClick = async (e) => {
         e.preventDefault();
+
+        if (isLoading) {
+          return; // Ne rien faire si le traitement est déjà en cours
+        }
         try {
           setIsLoading(true);
       

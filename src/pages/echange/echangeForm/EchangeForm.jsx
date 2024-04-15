@@ -206,9 +206,12 @@ const EchangeForm = () => {
               </div>
             </div>
           </div>
+          {
+            getCommande.length !== 0 && 
           <div className="rowChart-row-table">
-              <Table columns={columns} dataSource={getCommande} scroll={scroll} pagination={{ pageSize: 10}} />
-            </div>
+            <Table columns={columns} dataSource={getCommande} scroll={scroll} pagination={{ pageSize: 10}} />
+          </div>
+          }
         </div>
 
     </>

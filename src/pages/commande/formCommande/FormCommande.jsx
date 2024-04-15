@@ -267,7 +267,7 @@ const FormCommande = () => {
                 </div>
               </div>
               <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick}>Envoyer</button>
+                <button className="btn-submit" onClick={handleClick} disabled={isLoading}>Envoyer</button>
                 <button className="btn-submit btn-annuler" onClick={()=> window.location.reload()}>Annuler</button>
                 {isLoading && (
                 <div className="loader-container loader-container-center">

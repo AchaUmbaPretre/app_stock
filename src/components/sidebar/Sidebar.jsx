@@ -163,8 +163,8 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      <Item key="/" icon={<SwapOutlined style={{ fontSize: '22px', color: '#fafafa' }} />}  onClick={handleLinkClick}>
-        <Link to="/" className="sidebarH3" style={{fontSize: "14px", color: '#fafafa'}}>
+      <Item key="/echangeForm" icon={<SwapOutlined style={{ fontSize: '22px', color: '#fafafa' }} />}  onClick={handleLinkClick}>
+        <Link to="/echangeForm" className="sidebarH3" style={{fontSize: "14px", color: '#fafafa'}}>
           Echange
         </Link>
       </Item>

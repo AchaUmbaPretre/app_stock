@@ -113,8 +113,6 @@ const PageCommandeVente = () => {
         }
       ];
 
-      console.log(note)
-
       useEffect(() => {
         const fetchData = async () => {
           try {

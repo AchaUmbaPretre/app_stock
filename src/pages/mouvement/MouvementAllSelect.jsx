@@ -9,7 +9,6 @@ const MouvementAllSelect = ({ getProduits }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [datas, setDatas] = useState({});
   const [getMarque, setGetMarque] = useState([]);
-  const [couleur, setCouleur] = useState([]);
   const [taille, setTaille] = useState([])
 
   const handleInputChange = (e) => {

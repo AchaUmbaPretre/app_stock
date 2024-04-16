@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from './../../config';
@@ -7,7 +8,35 @@ import Swal from 'sweetalert2';
 const MouvementSelect = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [datas, setDatas] = useState({});
+    const [getMarque, setGetMarque] = useState([]);
     
+
+    const handleInputChange = (e) => {
+      const fieldName = e.target.name;
+      const fieldValue = e.target.value;
+  
+      let updatedValue = fieldValue;
+  
+      if (fieldName === 'contact_email') {
+        updatedValue = fieldValue.toLowerCase();
+      } else if (Number.isNaN(Number(fieldValue))) {
+        updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+      }
+  
+      setDatas((prev) => ({ ...prev, [fieldName]: updatedValue }));
+    };
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
+          setGetMarque(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
 
     const handleStartDateChange = (e) => {
       const startDate = e.target.value;
@@ -32,7 +61,11 @@ const MouvementSelect = ({getProduits}) => {
       return;
     }
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/produit/mouvement?start_date=${datas.start_date}&end_date=${datas.end_date}`);
+      const marqueIds = Array.isArray(datas.id_marque)
+        ? datas.id_marque.join(',')
+        : datas.id_marque;
+        
+      const {data} = await axios.get(`${DOMAIN}/api/produit/mouvement?start_date=${datas.start_date}&end_date=${datas.end_date}&marque_id=${marqueIds}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({
@@ -50,6 +83,20 @@ const MouvementSelect = ({getProduits}) => {
     <>
         <div className="productSelects">
             <div className="productSelects-container">
+            <Select
+            className="product-input-select"
+            name="id_marque"
+            options={getMarque?.map((item) => ({
+              value: item.id_marque,
+              label: item.nom,
+            }))}
+            onChange={(selectedOption) =>
+              handleInputChange({
+                target: { name: 'id_marque', value: selectedOption?.value },
+              })
+            }
+            placeholder="Choisir une marque"
+          />
               <input
               type="date"
               className="product-input-select"

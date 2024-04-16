@@ -28,6 +28,7 @@ const Mouvement = () => {
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const [idTypeVente, setIdTypeVente] = useState({});
+    const [idTypeRetour, setIdTypeRetour] = useState({});
     const [idTypeVenteCommande, setIdTypeVenteCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -45,7 +46,7 @@ const Mouvement = () => {
 
       const showModalOneRetour = (e,id_commande) => {
         setOpenRetour(true);
-        setIdTypeVente(e)
+        setIdTypeRetour(e)
         setIdTypeVenteCommande(id_commande)
       };
 
@@ -141,7 +142,7 @@ const Mouvement = () => {
             <Popover
               content="Voir le nombre des articles vendus" placement="top"
             >
-              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}} onClick={()=> showModalOneVente(record.id_type_mouvement, record.id_commande)}>
+              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}} onClick={()=> showModalOneVente(record.id_vente, record.id_commande)}>
               {record.total_vendu ?? 0}
               </Tag>
             </Popover>
@@ -262,10 +263,10 @@ const Mouvement = () => {
                             centered
                             open={openVente}
                             onCancel={() => setOpenVente(false)}
-                            width={980}
+                            width={990}
                             footer={[]}
                           >
-                          <MouvementOneVente id_commande={idTypeVenteCommande} id_type={idTypeVente}/>
+                            <MouvementOneVente id_commande={idTypeVenteCommande} id_type={idTypeVente}/>
                           </Modal>
 
                           <Modal
@@ -273,10 +274,10 @@ const Mouvement = () => {
                             centered
                             open={openRetour}
                             onCancel={() => setOpenRetour(false)}
-                            width={980}
+                            width={990}
                             footer={[]}
                           >
-                          <MouvementOneRetour id_commande={idTypeVenteCommande} id_type={idTypeVente}/>
+                          <MouvementOneRetour id_commande={idTypeVenteCommande} id_type={idTypeRetour}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

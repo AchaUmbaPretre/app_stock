@@ -266,7 +266,7 @@ const MouvementOneVente = ({id_commande, id_type}) => {
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN, id_commande,id_type]);
   
    const filteredData = data?.filter((item) =>
     item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())

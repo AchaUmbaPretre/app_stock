@@ -98,7 +98,9 @@ const columns = [
           tagColor = '#D473D4';
         } else if (color === 'Argente'){
           tagColor = '#C0C0C0';
-        } else if (color === 'Blanc'){
+        } else if (color === 'Dorée'){
+          tagColor = '#C0C0C0';
+        }else if (color === 'Blanc'){
           tagColor = 'white';
         } else {
           // Couleur par défaut si aucune correspondance n'est trouvée

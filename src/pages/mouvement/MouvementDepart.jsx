@@ -1,4 +1,4 @@
-import { SearchOutlined, UserOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,CalendarOutlined,SisternodeOutlined,CloseOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
@@ -7,12 +7,14 @@ import config from '../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import MouvementDepartSelect from './MouvementDepartSelect';
 
 const MouvementDepart = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
+    const [opens, setOpens] = useState(false);
     const [data, setData] = useState([]);
     const searchInput = useRef(null);
     const scroll = { x: 500 };
@@ -131,6 +133,10 @@ const MouvementDepart = () => {
           } catch (err) {
             console.log(err);
           }
+        };
+
+        const HandOpen = () =>{
+          setOpens(!opens)
         };
     
       const columns = [
@@ -266,7 +272,7 @@ const MouvementDepart = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
   
    const filteredData = data?.filter((item) =>
     item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
@@ -279,6 +285,7 @@ const MouvementDepart = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
+                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                               <SearchOutlined className='product-icon-plus'/>
                               <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -290,6 +297,8 @@ const MouvementDepart = () => {
                             <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
+                    {opens &&
+                              <MouvementDepartSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>

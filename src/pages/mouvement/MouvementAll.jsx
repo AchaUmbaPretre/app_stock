@@ -291,9 +291,9 @@ const MouvementAll = () => {
                               <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
-                        {opens &&
-                              <MouvementAllSelect getProduits={setData}/> }
                     </div>
+                    {opens &&
+                              <MouvementAllSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

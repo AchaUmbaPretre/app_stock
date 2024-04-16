@@ -1,4 +1,4 @@
-import { SearchOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined,SisternodeOutlined,CloseOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
@@ -7,6 +7,7 @@ import config from '../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import MouvementAllSelect from './MouvementAllSelect';
 
 const MouvementAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,6 +15,7 @@ const MouvementAll = () => {
     const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [opens, setOpens] = useState(false);
     const searchInput = useRef(null);
     const scroll = { x: 500 };
     const navigate = useNavigate();
@@ -251,6 +253,10 @@ const MouvementAll = () => {
           },
       ];
 
+      const HandOpen = () =>{
+        setOpens(!opens)
+      };
+
       const showModalLivreur = (e) => {
         navigate(`/mouvementOne/${e}`)
       };
@@ -269,7 +275,7 @@ const MouvementAll = () => {
       }, []);
   
    const filteredData = data?.filter((item) =>
-    item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
+    item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())
     )
   
     return (
@@ -279,11 +285,14 @@ const MouvementAll = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
+                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                               <SearchOutlined className='product-icon-plus'/>
                               <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
+                        {opens &&
+                              <MouvementAllSelect getProduits={setData}/> }
                     </div>
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />

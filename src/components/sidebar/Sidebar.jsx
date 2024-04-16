@@ -15,7 +15,7 @@ import { FireTruckOutlined, HomeOutlined } from '@mui/icons-material';
 import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../redux/userRedux';
@@ -27,7 +27,8 @@ const Sidebar = () => {
   const sidebarRef = useRef(null);
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState('')
+  const [currentUser, setCurrentUser] = useState('');
+  const [optons, setOptions] = useState([]);
   const user = useSelector((state) => state.user?.currentUser);
   const isSidebarOpen = useSelector((state) => state.user?.isSidebarOpen);
 
@@ -43,6 +44,19 @@ const Sidebar = () => {
       Swal.fire('Erreur lors de la déconnexion.', '', 'error');
     }
   };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/vente/options/side`);
+        setOptions(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN]);
 
   const handleLinkClick = () => {
     dispatch(toggleSidebar());

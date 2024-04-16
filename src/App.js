@@ -87,6 +87,7 @@ import ClientAdresse from './pages/client/clientAdresse/ClientAdresse';
 import ClientTelephone from './pages/client/clientTelephone/ClientTelephone';
 import Localisation from './pages/pageLivreur/localisation/Localisation';
 import Permissions from './pages/permissions/Permissions';
+import Options from './components/sidebar/Options';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */

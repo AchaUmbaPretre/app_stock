@@ -110,7 +110,7 @@ const PageLivraisonRetour = () => {
         fetchData();
       }, [DOMAIN, userId, IdCommande]);
 
-      const handleClick = async (e) => {
+/*       const handleClick = async (e) => {
         e.preventDefault();
         try {
           setIsLoading(true);
@@ -163,8 +163,59 @@ const PageLivraisonRetour = () => {
         finally {
           setIsLoading(false);
         }
-      }
+      } */
 
+      const handleClick = async (e) => {
+        e.preventDefault();
+        try {
+          setIsLoading(true);
+          for (const dd of selected) {
+            await axios.post(`${DOMAIN}/api/vente/retour`, {
+              id_client: dd.id_client,
+              id_livreur: userId,
+              quantite: dd.qte_livre,
+              id_commande: dd.id_commande,
+              id_detail_commande: dd.id_detail_commande,
+              prix_unitaire: dd.prix,
+              id_varianteProduit: dd.id,
+              id_taille: dd.id_taille,
+              id_type_mouvement: 5,
+              description: desc
+            });
+          }
+      
+          Swal.fire({
+            title: 'Success',
+            text: 'Le produit est retourné avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+          navigate('/pageLivreurVente');
+          window.location.reload();
+        } catch (err) {
+          const errorResponse = err.response;
+          if (errorResponse && errorResponse.status === 400) {
+            const errorMessage = errorResponse.data.error;
+      
+            Swal.fire({
+              title: 'Error',
+              text: errorMessage,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: err,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          }
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      
   return (
     <>
         <div className="pageLivreurVente">

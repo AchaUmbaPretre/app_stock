@@ -288,8 +288,6 @@ const PageCommandeVente = () => {
         }
       }
 
-      
-
   return (
     <>
         <div className="pageLivreurVente">

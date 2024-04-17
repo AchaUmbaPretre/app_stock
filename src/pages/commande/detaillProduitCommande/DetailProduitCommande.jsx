@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -184,7 +184,8 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                 <div className="detail-container-bottom">
                     <div className="detail-container-rows">
                         <div className="detail-bottom-left">
-                        <Image src={`${DOMAIN}${dd.img}`} alt="" className="detail-bottom-img" />
+                          <Image src={`${DOMAIN}${dd.img}`} alt="" className="detail-bottom-img" />
+                          <Link to={`/listeDetailView/${idCommande}`} style={{padding: "10px"}}>Rétourne dans la commande</Link>
                         </div>
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">{dd?.nom_produit}</h1>

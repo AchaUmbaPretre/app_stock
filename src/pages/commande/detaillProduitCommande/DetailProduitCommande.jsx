@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { ArrowRightOutlined } from '@ant-design/icons';
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
 import './detailProduitCommande.scss'
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { addProduct } from '../../../redux/cartRedux'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
@@ -185,7 +186,6 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                     <div className="detail-container-rows">
                         <div className="detail-bottom-left">
                           <Image src={`${DOMAIN}${dd.img}`} alt="" className="detail-bottom-img" />
-                          <Link to={`/listeDetailView/${idCommande}`} style={{padding: "10px"}}>Rétourne dans la commande</Link>
                         </div>
                         <div className="detail-bottom-right">
                             <h1 className="product-titre">{dd?.nom_produit}</h1>
@@ -232,6 +232,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                                         )}
                                     </div>
                                 </div>
+                                <Link to={`/listeDetailView/${idCommande}`} style={{padding: "10px", textDecoration:'underline'}}>Retournez à la commande <ArrowRightOutlined /></Link>
                             </div>
                         </div>
                     </div>

@@ -295,7 +295,6 @@ const Commande = () => {
                           open={open}
                           onCancel={() => {
                             setOpen(false)
-                            window.location.reload();
                           }}
                           width={950}
                           footer={[

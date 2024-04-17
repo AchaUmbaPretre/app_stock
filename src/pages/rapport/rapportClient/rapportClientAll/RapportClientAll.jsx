@@ -212,9 +212,6 @@ useEffect(() => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            {/* <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/> */}
                         </div>
                     </div>
                      {open &&

@@ -239,7 +239,7 @@ const ListeDetailView = () => {
         fetchData();
       }, [DOMAIN]);
 
-      const handleClick = (e) => {
+/*       const handleClick = (e) => {
         e.preventDefault();
         setIsLoading(true);
         if (livreur.length === 0 || selected.length === 0) {
@@ -290,7 +290,7 @@ const ListeDetailView = () => {
               confirmButtonText: 'OK',
             });
           });
-      };
+      }; */
 
       useEffect(() => {
         const fetchData = async () => {
@@ -303,6 +303,66 @@ const ListeDetailView = () => {
         };
         fetchData();
       }, [DOMAIN,id]);
+
+
+      const handleClick = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+      
+        if (livreur.length === 0 || selected.length === 0) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez remplir le champ requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          setIsLoading(false); // Réinitialisez isLoading à false ici
+          return;
+        }
+      
+        let isSending = false; // Variable de contrôle pour éviter les doublons
+      
+        Promise.all(
+          selected.map((dd, index) =>
+            axios.post(`${DOMAIN}/api/livraison/livraisonDetail`, {
+              id_commande: id,
+              quantite_prix: totalAvecRemise,
+              id_varianteProduit: dd.id,
+              qte_livre: Object.values(quantities)[index],
+              qte_commande: dd.quantite,
+              prix: dd.prix,
+              id_livreur: livreur,
+              id_detail_commande: dd.id_detail,
+              user_cr: userId,
+              quantite: dd.quantite,
+              id_user_cr: userId,
+              id_type_mouvement: 12
+            })
+          )
+        )
+          .then(() => {
+            if (!isSending) {
+              isSending = true; // Définissez la variable de contrôle sur true pour éviter les doublons
+              Swal.fire({
+                title: 'Success',
+                text: 'Livraison créée avec succès!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+              });
+              setIsLoading(false);
+              navigate('/listeCommande');
+              window.location.reload();
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: 'Error',
+              text: err.response.data.error,
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          });
+      };
 
   return (
     <>
@@ -333,9 +393,6 @@ const ListeDetailView = () => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-{/*                             <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/> */}
                         </div>
                     </div>
                     <div className="rowChart-row-table">

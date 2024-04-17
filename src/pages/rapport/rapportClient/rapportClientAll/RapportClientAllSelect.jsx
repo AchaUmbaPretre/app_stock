@@ -9,6 +9,7 @@ const RapportClientAllSelect = ({ getProduits }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [datas, setDatas] = useState({});
   const [getClient, setGetClient] = useState([]);
+  const [getMarque, setGetMarque] = useState([]);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -30,6 +31,18 @@ const RapportClientAllSelect = ({ getProduits }) => {
       try {
         const { data } = await axios.get(`${DOMAIN}/api/client`);
         setGetClient(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
+        setGetMarque(data);
       } catch (error) {
         console.log(error);
       }
@@ -75,6 +88,20 @@ const RapportClientAllSelect = ({ getProduits }) => {
     <>
       <div className="productSelects">
         <div className="productSelects-container">
+          <Select
+            className="product-input-select"
+            name="id_marque"
+            options={getMarque?.map((item) => ({
+              value: item.id_marque,
+              label: item.nom,
+            }))}
+            onChange={(selectedOption) =>
+              handleInputChange({
+                target: { name: 'id_marque', value: selectedOption?.value },
+              })
+            }
+            placeholder="Choisir une marque"
+          />
           <Select
             className="product-input-select"
             name="id_marque"

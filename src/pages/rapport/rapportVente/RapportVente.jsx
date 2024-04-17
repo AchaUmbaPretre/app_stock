@@ -100,6 +100,14 @@ const columns = [
           tagColor = '#C0C0C0';
         } else if (color === 'Dorée'){
           tagColor = '#C0C0C0';
+        }else if (color === 'Rouge Bordeau'){
+          tagColor = '#6D071A';
+        }else if (color === 'Beige'){
+          tagColor = '#F5F5DC';
+        }else if (color === 'Marron fonce'){
+          tagColor = '#800000';
+        }else if (color === 'Marron'){
+          tagColor = '#A52A2A';
         }else if (color === 'Blanc'){
           tagColor = 'white';
         } else {
@@ -248,9 +256,9 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
+                            <FilePdfOutlined className='product-icon-pdf' />
+                            <FileExcelOutlined className='product-icon-excel'/>
+                            <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
                       {open &&

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Select from 'react-select';
 import { useEffect } from 'react';
 import axios from 'axios';
-import config from '../../../config';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { Checkbox, Space, Table, Tag } from 'antd';
+import config from '../../../config';
 
 const EchangeForm = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -28,9 +28,9 @@ const EchangeForm = () => {
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  const handleSelectionChange = (event, id_commande,id_detail_commande,prix_unitaire,id_taille,id_client, id_varianteProduit) => {
+  const handleSelectionChange = (event,id_vente, id_commande,id_detail_commande,prix_unitaire,id_taille,id_client, id_varianteProduit) => {
     if (event.target.checked) {
-      const updatedSelected = [...selected, { id_commande,id_detail_commande,prix_unitaire,id_taille,id_client,id_varianteProduit}]
+      const updatedSelected = [...selected, { id_vente,id_commande,id_detail_commande,prix_unitaire,id_taille,id_client,id_varianteProduit}]
       setSelected(updatedSelected);
     } else {
       setSelected(selected.filter((row) => row.id_detail_commande !== id_detail_commande));
@@ -47,7 +47,7 @@ const EchangeForm = () => {
           <Checkbox
             checked={selected.some((item) => item.id_detail_commande === record.id_detail_commande)}
             onChange={(event) =>
-              handleSelectionChange(event,record.id_commande, record.id_detail_commande, record.prix_unitaire,record.id_taille,record.id_client,record.id_varianteProduit)
+              handleSelectionChange(event,record.id_vente,record.id_commande, record.id_detail_commande, record.prix_unitaire,record.id_taille,record.id_client,record.id_varianteProduit)
             }
           />
         </div>
@@ -152,32 +152,8 @@ const EchangeForm = () => {
     fetchData();
   }, [DOMAIN,value]);
 
-  const handleClick = async (e) => {
-    e.preventDefault();
 
-    try{
-      await axios.post(`${DOMAIN}/api/vente/echange`, data)
-      Swal.fire({
-        title: 'Success',
-        text: 'Retour créé avec succès!',
-        icon: 'success',
-        confirmButtonText: 'OK',
-      });
-
-      navigate('/echange')
-      window.location.reload();
-
-    }catch(err) {
-      Swal.fire({
-        title: 'Error',
-        text: err.message,
-        icon: 'error',
-        confirmButtonText: 'OK',
-      });
-    }
-  }
-
-
+console.log(selected)
 
   return (
     <>
@@ -200,16 +176,17 @@ const EchangeForm = () => {
                   />
                 </div>
               </div>
-              <div className="form-submit">
-                <button className="btn-submit" onClick={handleClick}>Soumetre</button>
-              </div>
             </div>
           </div>
           {
-            getCommande.length !== 0 && 
+            getCommande.length !== 0 && <>
           <div className="rowChart-row-table">
             <Table columns={columns} dataSource={getCommande} scroll={scroll} pagination={{ pageSize: 10}} />
           </div>
+          <div className="form-submit">
+            <button className="btn-submit" onClick={()=>navigate(`/echange/${value}`)}>Echange</button>
+          </div>
+          </>
           }
         </div>
     </>

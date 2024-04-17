@@ -88,6 +88,7 @@ import ClientTelephone from './pages/client/clientTelephone/ClientTelephone';
 import Localisation from './pages/pageLivreur/localisation/Localisation';
 import Permissions from './pages/permissions/Permissions';
 import Options from './components/sidebar/Options';
+import EchangeCat from './pages/echange/echangeCat/EchangeCat';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -329,8 +330,8 @@ const user = useSelector((state) => state.user?.currentUser);
           element: <Echange/>
         },
         {
-          path: '/echange/:id',
-          element: <Echange/>
+          path: 'echange/:id',
+          element: <EchangeCat/>
         },
         {
           path: '/echangeForm',

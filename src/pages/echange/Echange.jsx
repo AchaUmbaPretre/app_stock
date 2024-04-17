@@ -271,7 +271,6 @@ const Echange = () => {
         }
     };
 
-    console.log(getEchange)
 
   return (
     <>

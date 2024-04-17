@@ -118,8 +118,6 @@ const EchangeForm = () => {
     setValue(data?.id_commande)
   }, [data?.id_commande])
 
-  console.log(selected)
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -151,9 +149,6 @@ const EchangeForm = () => {
     };
     fetchData();
   }, [DOMAIN,value]);
-
-
-console.log(selected)
 
   return (
     <>

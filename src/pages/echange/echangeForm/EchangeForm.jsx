@@ -184,7 +184,9 @@ console.log(selected)
             <Table columns={columns} dataSource={getCommande} scroll={scroll} pagination={{ pageSize: 10}} />
           </div>
           <div className="form-submit">
-            <button className="btn-submit" onClick={()=>navigate(`/echange/${value}`)}>Echange</button>
+          { selected.map((dd)=>(
+            <button className="btn-submit" onClick={()=>navigate(`/echange/${value}?id_detail=${dd.id_detail_commande}`)}>Echange</button>
+          ))}
           </div>
           </>
           }

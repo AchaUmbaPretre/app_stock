@@ -10,6 +10,7 @@ import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate'
 import DetailProduitCommande from '../../commande/detaillProduitCommande/DetailProduitCommande'
 import config from '../../../config'
+import EchangeCommande from '../echangeCommande/EchangeCommande'
 
 const EchangeCat = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -298,7 +299,7 @@ const EchangeCat = () => {
                           footer={[
                           ]}
                         >
-                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande}/>
+                         <EchangeCommande idVariant={idVariante} idCommande={idCommande}/>
                         </Modal>
                       </div>  )}
                       <ReactPaginate

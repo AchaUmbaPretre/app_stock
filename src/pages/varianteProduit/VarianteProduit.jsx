@@ -308,7 +308,7 @@ const VarianteProduit = () => {
                           <div className="cercle"></div>
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                           <div className="info-products">
-                              <Link to={`/pageDetail/${dd.id_varianteProduit}`}>
+                              <Link to={`/pageDetailEdit/${dd.id_varianteProduit}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
                           </div>

@@ -1,7 +1,7 @@
 import './../products/products.scss'
 import { SearchOutlined,EyeOutlined, SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Tabs } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import config from '../../config';
@@ -10,11 +10,8 @@ import DetteSelect from './DetteSelect';
 import { format } from 'date-fns';
 import CountUp from 'react-countup';
 import moment from 'moment';
-import DetteJour from './DetteJour';
-import DetteJour7 from './DetteJour7';
-import DetteJours30 from './DetteJours30';
 
-const Dette = () => {
+const DetteJour7 = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -106,18 +103,6 @@ const Dette = () => {
             </Tag>
           ),
         },
-        {
-          title: 'Nbre de dette',
-          dataIndex: 'nbre_dette',
-          key: 'nbre_dette',
-          sorter: (a, b) => a.nbre_dette - b.nbre_dette,
-          sortDirections: ['descend', 'ascend'],
-          render: (nbre_dette) => (
-            <Tag color={nbre_dette > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
-              {nbre_dette}
-            </Tag>
-          ),
-        },
           {
             title: 'Montant restant',
             dataIndex: 'montant_restant',
@@ -173,11 +158,6 @@ const Dette = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title={`Voir la liste de vente en crédit de Mme ${record.nom}`} trigger="hover">
-                    <Link to={`/dette/${record.id_client}`}>
-                      <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                    </Link>
-                  </Popover>
                 {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
@@ -197,7 +177,7 @@ const Dette = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dette`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteJour7`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -233,59 +213,28 @@ const Dette = () => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Liste des ventes à crédit</h2>
-                        <span>Gérer vos ventes à crédit</span>
+                <div className="product-bottom">
+                    <div className="product-bottom-top">
+                        <div className="product-bottom-left">
+                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                            <div className="product-row-search">
+                                <SearchOutlined className='product-icon-plus'/>
+                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
+                            </div>
+                        </div>
+                        <div className="product-bottom-right">
+                        </div>
                     </div>
-                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
-                      <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
-                      Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total restant : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de client(e) : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
-                      </div>
+                    {opens &&
+                    <DetteSelect getProduits={setData}/> }
+                    <div className="rowChart-row-table">
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
-                <Tabs>
-                  <Tabs.TabPane tab='Dettes' key={0}>
-                    <div className="product-bottom">
-                      <div className="product-bottom-top">
-                          <div className="product-bottom-left">
-                          {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                              <div className="product-row-search">
-                                  <SearchOutlined className='product-icon-plus'/>
-                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                              </div>
-                          </div>
-                          <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
-                          </div>
-                      </div>
-                      {opens &&
-                      <DetteSelect getProduits={setData}/> }
-                      <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
-                      </div>
-                    </div> 
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Dettes du jour' key={1}>
-                    <DetteJour/>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Dettes des 7 derniers jours' key={2}>
-                    <DetteJour7/>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Dettes des 30 derniers jours' key={3}>
-                    <DetteJours30/>
-                  </Tabs.TabPane>
-                </Tabs>
             </div>
         </div>
     </>
   )
 }
 
-export default Dette
+export default DetteJour7

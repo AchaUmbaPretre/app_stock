@@ -89,6 +89,7 @@ import Localisation from './pages/pageLivreur/localisation/Localisation';
 import Permissions from './pages/permissions/Permissions';
 import Options from './components/sidebar/Options';
 import EchangeCat from './pages/echange/echangeCat/EchangeCat';
+import PageDetailEdit from './pages/PageDetails/PageDetailEdit/PageDetailEdit';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -192,6 +193,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/pageDetail/:id',
           element: <PageDetails />
+        },
+        {
+          path: '/pageDetailEdit/:id',
+          element: <PageDetailEdit />
         },
         {
           path: '/categories',

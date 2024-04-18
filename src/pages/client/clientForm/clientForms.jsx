@@ -74,7 +74,8 @@ const ClientForms = () => {
             avenue: item.avenue,
             quartier: item.quartier,
             commune : item.commune,
-            num: item.num
+            num: item.num,
+            id_commune :item.commune
           })
         )
       )

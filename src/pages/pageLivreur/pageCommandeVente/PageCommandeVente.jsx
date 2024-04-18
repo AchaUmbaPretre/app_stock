@@ -151,8 +151,12 @@ const PageCommandeVente = () => {
         setShowConfirmModal(false);
       }
 
-/*       const handleClick = async (e) => {
+       const handleClick = async (e) => {
         e.preventDefault();
+        if (isLoading) {
+          return; // Ne rien faire si le traitement est déjà en cours
+        }
+        
         try {
           setIsLoading(true);
 
@@ -170,17 +174,6 @@ const PageCommandeVente = () => {
                 id_type_mouvement : 4,
                 montant_convenu : dd.prix,
                 montant_paye : dette
-              });
-
-              await axios.post(`${DOMAIN}/api/vente/venteMail`, {
-                id_client: dd.id_client,
-                id_livreur: userId,
-                quantite: dd.qte_livre,
-                id_commande: dd.id_commande,
-                id_detail_commande: dd.id_detail_commande,
-                prix_unitaire: dd.prix,
-                id_varianteProduit: dd.id,
-                id_taille: dd.id_taille,
               });
             })
           );
@@ -217,9 +210,9 @@ const PageCommandeVente = () => {
         } finally {
           setIsLoading(false);
         }
-      } */
+      }
 
-      const handleClick = async (e) => {
+/*       const handleClick = async (e) => {
         e.preventDefault();
 
         if (isLoading) {
@@ -278,7 +271,7 @@ const PageCommandeVente = () => {
         } finally {
           setIsLoading(false);
         }
-      };
+      }; */
 
       const handleCheck = (e) => {
         if(e.target.checked){

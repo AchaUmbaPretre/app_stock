@@ -203,7 +203,6 @@ const VarianteProduit = () => {
                 <div className="varianteProduit-container-top">
                     <div className="varianteProduit-left">
                         <h2 className="varianteProduit-h2">Notre catalogue</h2>
-{/*                         <span>Voir nos catalogues</span> */}
                     </div>
                 </div>
                 <div className="variant-container-bottom">

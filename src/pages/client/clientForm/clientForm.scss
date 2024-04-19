@@ -124,6 +124,9 @@
                 background:rgb(1, 35, 138);
                 border-radius: 5px;
                 cursor: pointer;
+                &:hover{
+                    background:rgb(3, 58, 223);
+                }
             }
             .btn-annuler{
                 background: #464444;

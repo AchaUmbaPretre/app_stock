@@ -11,7 +11,6 @@ const ClientTelephone = ({idClients}) => {
   const [data, setData] = useState({})
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [getClient, setGetClient] = useState([]);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -33,7 +32,7 @@ const ClientTelephone = ({idClients}) => {
   const handleClick = async (e) => {
     e.preventDefault();
     
-     if (!data.id_client) {
+     if (!data) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -45,7 +44,10 @@ const ClientTelephone = ({idClients}) => {
 
     try{
       setIsLoading(true);
-      await axios.post(`${DOMAIN}/api/client/clientTelephone`, data)
+      await axios.post(`${DOMAIN}/api/client/clientTelephone`,{
+        ...data,
+        id_client : idClients
+      })
       Swal.fire({
         title: 'Success',
         text: 'Un nouveau a été ajouté avec succès!',
@@ -75,7 +77,7 @@ const ClientTelephone = ({idClients}) => {
             <div className="product-wrapper" >
               <div className="product-container-bottom">
                 <div className="form-controle" >
-                  <label htmlFor="">Telephone</label>
+                  <label htmlFor="">Telephone <span style={{color:'red'}}>*</span></label>
                   <input type="text" name="numero" className="form-input" placeholder='+243' onChange={handleInputChange} />
                 </div>
               </div>

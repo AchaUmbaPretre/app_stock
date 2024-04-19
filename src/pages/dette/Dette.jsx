@@ -244,7 +244,7 @@ const Dette = () => {
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
                         <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total restant : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de client(e) : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de débiteur : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
                       </div>
                     </div>
                 </div>

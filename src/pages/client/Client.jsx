@@ -1,5 +1,5 @@
 import './client.scss'
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,MailOutlined,EnvironmentOutlined,EyeOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,PhoneOutlined,EnvironmentOutlined,EyeOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
@@ -155,21 +155,6 @@ const Client = () => {
               return <Tag color={'green'}>{text}</Tag>;
             }
         },
-        {
-          title: 'Email',
-          dataIndex: 'email',
-          key: 'email',
-          render: (text) => (
-            <Popover content="Cliquez pour ouvrir Gmail" trigger="hover">
-              <Tag color="yellow">
-                <a href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">
-                  <MailOutlined style={{ marginRight: '5px' }} />
-                  {text}
-                </a>
-              </Tag>
-            </Popover>
-          ),
-        },
           {
             title: 'Telephone',
             dataIndex: 'telephone',
@@ -213,6 +198,9 @@ const Client = () => {
             render: (text, record) => (
                 
               <Space size="middle">
+                <Popover title={`Ajouter un nouveau numero de Mme ${record.nom}`} trigger="hover">
+                  <Button icon={<PhoneOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
+                </Popover>
                 <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
                 </Popover>

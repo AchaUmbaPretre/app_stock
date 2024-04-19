@@ -6,7 +6,7 @@ import Select from 'react-select';
 import config from '../../../config';
 import { CircularProgress } from '@mui/material';
 
-const ClientAdresse = () => {
+const ClientAdresse = ({idClients}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({})
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const ClientAdresse = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     
-     if (!data.id_client) {
+     if (!data) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -46,7 +46,10 @@ const ClientAdresse = () => {
 
     try{
       setIsLoading(true);
-      await axios.post(`${DOMAIN}/api/client/clientAdresse`, data)
+      await axios.post(`${DOMAIN}/api/client/clientAdresse`, {
+        ...data,
+        id_client : idClients
+      })
       Swal.fire({
         title: 'Success',
         text: 'Client crée avec succès!',
@@ -68,8 +71,6 @@ const ClientAdresse = () => {
       setIsLoading(false);
     }
   }
-
-  console.log(data)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -117,22 +118,8 @@ const ClientAdresse = () => {
     <>
         <div className="clientForm">
           <div className="product-container">
-            <div className="product-container-top">
-              <div className="product-left">
-                <h2 className="product-h2">Ajouter un nouveau client</h2>
-                <span>Créer un nouveau client</span>
-              </div>
-            </div>
             <div className="product-wrapper">
               <div className="product-container-bottom">
-                <div className="form-controle">
-                  <label htmlFor="">Sélectionnez un client</label>
-                  <Select
-                    name="id_client"
-                    options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
-                  />
-                </div>
                 <div className="form-controle">
                   <label htmlFor="">Ville</label>
                   <Select

@@ -9,6 +9,7 @@ import axios from 'axios';
 import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetail';
 import { useSelector } from 'react-redux';
 import ClientTelephone from './clientTelephone/ClientTelephone';
+import ClientAdresse from './clientAdresse/ClientAdresse';
 
 const Client = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -22,6 +23,7 @@ const Client = () => {
     const [searchValue, setSearchValue] = useState('');
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openAdresse, setOpenAdresse] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -139,6 +141,11 @@ const Client = () => {
         setOpens(true);
         setIdClient(e)
       };
+
+      const showModalAdresse = (e) => {
+        setOpenAdresse(true);
+        setIdClient(e)
+      };
           
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -193,9 +200,11 @@ const Client = () => {
             title: 'Commune',
             dataIndex: 'nom_commune',
             key: 'nom_commune',
-            render : (text)=>(
+            render : (text,record)=>(
               <div>
-                 <Tag color={'blue'}><EnvironmentOutlined style={{ marginRight: '5px' }} />{text}</Tag>
+                <Popover content={`Ajouter une nouvelle adresse de Mme ${record.nom} `} placement="top">
+                  <Tag color={'blue'} onClick={()=> showModalAdresse(record.id)}><EnvironmentOutlined style={{ marginRight: '5px' }} />{text}</Tag>
+                </Popover>
               </div>
             )
         },
@@ -278,10 +287,6 @@ const Client = () => {
                           <PlusOutlined />
                           <span className="product-btn">Ajouter des adresses d'un client</span>
                       </div>
-                      <div className="product-right" onClick={() =>navigate('/clientTelephone')}>
-                          <PlusOutlined />
-                          <span className="product-btn">Ajouter un nouveau numero d'un client</span>
-                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">
@@ -323,6 +328,18 @@ const Client = () => {
                           ]}
                         >
                          <ClientTelephone idClients={idClient}/>
+                        </Modal>
+                        <Modal
+                          title="Ajouter une nouvelle adresse"
+                          centered
+                          open={openAdresse}
+                          onCancel={() => setOpenAdresse(false)}
+                          width={800}
+                          footer={[
+                            
+                          ]}
+                        >
+                         <ClientAdresse idClients={idClient}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>

@@ -171,11 +171,11 @@ const ProductForm = () => {
             <div className="product-wrapper">
               <div className="product-container-bottom">
                 <div className="form-controle">
-                  <label htmlFor="">Nom du produit</label>
+                  <label htmlFor="">Nom du produit <span style={{color:'red'}}>*</span></label>
                   <input type="text" name='nom_produit' className="form-input" placeholder='Entrer le nom...' onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Catégorie</label>
+                  <label htmlFor="">Catégorie <span style={{color:'red'}}>*</span></label>
                   <Select
                       name="id_categorie"
                       options={getCategorie?.map(item => ({ value: item.id_categorie, label: item.nom_categorie }))}
@@ -183,7 +183,7 @@ const ProductForm = () => {
                     />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Marque</label>
+                  <label htmlFor="">Marque <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_marque"
                     options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
@@ -191,7 +191,7 @@ const ProductForm = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Matière</label>
+                  <label htmlFor="">Matière <span style={{color:'red'}}>*</span></label>
                   <Select
                     name='id_matiere'
                     options={getMatiere?.map(item => ({ value: item.id_matiere, label: item.nom_matiere }))}
@@ -199,7 +199,7 @@ const ProductForm = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Cible</label>
+                  <label htmlFor="">Cible <span style={{color:'red'}}>*</span></label>
                   <Select
                     name='matiere'
                     options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
@@ -207,25 +207,25 @@ const ProductForm = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Prix</label>
+                  <label htmlFor="">Prix <span style={{color:'red'}}>*</span></label>
                   <input type="number" name='prix' placeholder='ex: 10$' className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Code variant</label>
+                  <label htmlFor="">Code variant <span style={{color:'red'}}>*</span></label>
                   <input type="text" name='code_variante' placeholder='ex: P329' className="form-input" onChange={handleInputChange} />
                   {variantExists && <p className="error-message" style={{color:"red", fontSize:"13px"}}>Cette variante existe déjà.</p>}
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Date d'entrant</label>
+                  <label htmlFor="">Date d'entrant <span style={{color:'red'}}>*</span></label>
                   <input type="date" name='date_entrant' value={dateEntrant} onChange={handleInputChange} className="form-input" />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Date de mis à jour</label>
+                  <label htmlFor="">Date de mis à jour <span style={{color:'red'}}>*</span></label>
                   <input type="date" name='date_MisAjour' value={dateMiseAJour} onChange={handleInputChange}
                    className="form-input" />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Etat du produit</label>
+                  <label htmlFor="">Etat du produit <span style={{color:'red'}}>*</span></label>
                   <div className='form-radio'>
                     <input type="radio" id="Actif" name="etatProduit" value="Actif" checked={getEtatProduit === 'Actif'} onChange={handleInputChange1}/>
                     <label for="Actif">Actif</label>

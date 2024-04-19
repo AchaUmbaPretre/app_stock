@@ -113,7 +113,6 @@ const ClientForms = () => {
     fetchData();
   }, [DOMAIN]);
 
-
   useEffect(()=>{
     setIdProvince(clientInfo?.id_province)
   },[clientInfo?.id_province])

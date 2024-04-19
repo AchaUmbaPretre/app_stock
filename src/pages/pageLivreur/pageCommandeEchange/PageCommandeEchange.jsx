@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import './pageCommandeLivraison.scss'
 import { List } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -37,7 +36,7 @@ const PageCommandeEchange = () => {
             <CaretLeftOutlined />
           </div>
         </div>
-        <h1>Liste de commande</h1>
+        <h1>Liste de commande à échanger</h1>
         { loading ? (
             <div className="spinner-container">
               <FadeLoader color={'#36D7B7'} loading={loading} />
@@ -53,7 +52,7 @@ const PageCommandeEchange = () => {
                   <List.Item>
                       <List.Item.Meta 
                       className='pageCommande-list'
-                      title={<a href={`pageCommandeVentes/${item.id_commande}`} >{`Ligne ${lineNumber}: Commande n° ${item.id_commande} de ${item.nom}`}</a>}
+                      title={<a href={`pageEchange/${item.id_commande}`} >{`Ligne ${lineNumber}: Commande n° ${item.id_commande} de ${item.nom}`}</a>}
                       description={`Adresse de la livraison : C/${item.nom_commune} Q/${item.quartier} Av/${item.avenue} N°${item.num}`}
                       />
                   </List.Item>

@@ -91,6 +91,7 @@ import Options from './components/sidebar/Options';
 import EchangeCat from './pages/echange/echangeCat/EchangeCat';
 import PageDetailEdit from './pages/PageDetails/PageDetailEdit/PageDetailEdit';
 import PageCommandeEchange from './pages/pageLivreur/pageCommandeEchange/PageCommandeEchange';
+import PageEchange from './pages/pageLivreur/pageEchange/PageEchange';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -511,6 +512,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/pageCommandeEchange',
           element: <PageCommandeEchange />
+        },
+        {
+          path: '/pageEchange/:id',
+          element: <PageEchange />
         },
         {
           path: '/localisation',

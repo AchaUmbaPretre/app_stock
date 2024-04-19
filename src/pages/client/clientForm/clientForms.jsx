@@ -143,7 +143,7 @@ const ClientForms = () => {
         <div className="product-wrapper">
           <div className="product-container-bottom">
             <div className="form-controle">
-              <label htmlFor="">Nom</label>
+              <label htmlFor="">Nom <span style={{color:'red'}}>*</span></label>
               <input
                 type="text"
                 name="nom"
@@ -154,7 +154,7 @@ const ClientForms = () => {
               />
             </div>
             <div className="form-controle">
-              <label htmlFor="">Raison sociale</label>
+              <label htmlFor="">Raison sociale <span style={{color:'red'}}>*</span></label>
               <select
                 className="form-input"
                 name="raison_sociale"
@@ -170,7 +170,7 @@ const ClientForms = () => {
               </select>
             </div>
             <div className="form-controle">
-              <label htmlFor="">Email</label>
+              <label htmlFor="">Email <span style={{color:'red'}}>*</span></label>
               <input
                 type="email"
                 name="email"
@@ -180,11 +180,11 @@ const ClientForms = () => {
               />
             </div>
             <div className="form-controle">
-                  <label htmlFor="">Telephone</label>
+                  <label htmlFor="">Telephone <span style={{color:'red'}}>*</span></label>
                   <input type="tel" name='telephone' className="form-input" onChange={handleInputChange} required />
             </div>
             <div className="form-controle">
-                <label htmlFor="">Ville</label>
+                <label htmlFor="">Ville <span style={{color:'red'}}>*</span></label>
                 <Select
                     name="id_province"
                     options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
@@ -196,7 +196,7 @@ const ClientForms = () => {
             {deliveryAddresses.map((address, index) => (
               <div key={index}>
                 <div className="form-controle">
-                  <label htmlFor="">Avenue</label>
+                  <label htmlFor="">Avenue <span style={{color:'red'}}>*</span></label>
                   <input
                     type="text"
                     name={`avenue-${index}`}
@@ -205,7 +205,7 @@ const ClientForms = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Quartier</label>
+                  <label htmlFor="">Quartier <span style={{color:'red'}}>*</span></label>
                   <input
                     type="text"
                     name={`quartier-${index}`}
@@ -214,7 +214,7 @@ const ClientForms = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Commune</label>
+                  <label htmlFor="">Commune <span style={{color:'red'}}>*</span></label>
                   <Select
                       name={`commune-${index}`}
                       options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
@@ -222,7 +222,7 @@ const ClientForms = () => {
                     />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">N°</label>
+                  <label htmlFor="">N° <span style={{color:'red'}}>*</span></label>
                   <input
                     type="text"
                     name={`num-${index}`}
@@ -232,7 +232,7 @@ const ClientForms = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Ref</label>
+                  <label htmlFor="">Ref <span style={{color:'red'}}>*</span></label>
                   <input
                     type="text"
                     name={`ref-${index}`}

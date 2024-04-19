@@ -168,13 +168,12 @@ const FormCommande = () => {
             <div className="product-container-top">
               <div className="product-left">
                 <h2 className="product-h2">Nouvelle commande</h2>
-                <span>nouvelle commande</span>
               </div>
             </div>
             <div className="product-wrapper">
               <div className="product-container-bottom">
                 <div className="form-controle">
-                  <label htmlFor="">Client</label>
+                  <label htmlFor="">Client <span style={{color:'red'}}>*</span></label>
                   <Select
                     placeholder = "Sélectionnez un(e) client(e)"
                     name="id_client"
@@ -186,11 +185,11 @@ const FormCommande = () => {
                   <input type="checkbox" onChange={handleCheck} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Shop</label>
+                  <label htmlFor="">Shop <span style={{color:'red'}}>*</span></label>
                   <input type="text" name='id_shop' className="form-input" onChange={handleInputChange}/>
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Adresse</label>
+                  <label htmlFor="">Adresse <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_adresse"
                     options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/'+ item.nom_commune  + ' Av/'+ item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
@@ -198,7 +197,7 @@ const FormCommande = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Telephone</label>
+                  <label htmlFor="">Telephone <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_telephone"
                     options={telephone?.map(item => ({ value: item.id_telephone, label: item.numero }))}

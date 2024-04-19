@@ -121,7 +121,7 @@ const ClientAdresse = ({idClients}) => {
             <div className="product-wrapper">
               <div className="product-container-bottom">
                 <div className="form-controle">
-                  <label htmlFor="">Ville</label>
+                  <label htmlFor="">Ville <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_ville"
                     options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
@@ -129,7 +129,7 @@ const ClientAdresse = ({idClients}) => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Commune</label>
+                  <label htmlFor="">Commune <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_commune"
                     options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
@@ -138,19 +138,19 @@ const ClientAdresse = ({idClients}) => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Avenue</label>
+                  <label htmlFor="">Avenue <span style={{color:'red'}}>*</span></label>
                   <input type="text" name="avenue" className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Quartier</label>
+                  <label htmlFor="">Quartier <span style={{color:'red'}}>*</span></label>
                   <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">N°</label>
+                  <label htmlFor="">N° <span style={{color:'red'}}>*</span></label>
                   <input type="number" name="num" min={0} className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Ref</label>
+                  <label htmlFor="">Ref <span style={{color:'red'}}>*</span></label>
                   <input type="text" name="ref" placeholder='Entrer une refèrence...' className="form-input" onChange={handleInputChange} />
                 </div>
 

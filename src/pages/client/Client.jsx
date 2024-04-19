@@ -283,10 +283,6 @@ const Client = () => {
                           <PlusOutlined />
                           <span className="product-btn">Ajouter un nouveau client</span>
                       </div>
-                      <div className="product-right" onClick={() =>navigate('/clientAdresse')}>
-                          <PlusOutlined />
-                          <span className="product-btn">Ajouter des adresses d'un client</span>
-                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">

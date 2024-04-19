@@ -150,8 +150,6 @@ const EchangeForm = () => {
     fetchData();
   }, [DOMAIN,value]);
 
-  console.log(selected)
-
   return (
     <>
         <div className="retourForm">

@@ -163,7 +163,7 @@ const EchangeForm = () => {
             <div className="product-wrapper">
               <div className="product-container-bottom">
                 <div className="form-controle">
-                  <label htmlFor="">Commande</label>
+                  <label htmlFor="">Sélectionnez une commande <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_commande"
                     options={commande?.map(item => ({ value: item.id_commande, label: item.nom + " Commande N° "+item.id_commande }))}

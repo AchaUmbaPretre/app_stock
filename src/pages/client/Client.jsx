@@ -8,6 +8,7 @@ import config from '../../config';
 import axios from 'axios';
 import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetail';
 import { useSelector } from 'react-redux';
+import ClientTelephone from './clientTelephone/ClientTelephone';
 
 const Client = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -20,6 +21,7 @@ const Client = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -132,6 +134,11 @@ const Client = () => {
         setOpen(true);
         setIdClient(e)
       };
+
+      const showModalPhone = (e) => {
+        setOpens(true);
+        setIdClient(e)
+      };
           
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -199,7 +206,7 @@ const Client = () => {
                 
               <Space size="middle">
                 <Popover title={`Ajouter un nouveau numero de Mme ${record.nom}`} trigger="hover">
-                  <Button icon={<PhoneOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
+                  <Button icon={<PhoneOutlined />} style={{ color: 'green' }} onClick={()=> showModalPhone(record.id)} />
                 </Popover>
                 <Popover title="Modifier" trigger="hover">
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
@@ -248,10 +255,9 @@ const Client = () => {
       };
 
   const filteredData = getClient?.filter((item) =>
-  item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_province?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase())
-
+    item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_province?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (
@@ -305,6 +311,18 @@ const Client = () => {
                           ]}
                         >
                          <MouvClientDetail idClients={idClient}/>
+                        </Modal>
+                        <Modal
+                          title="Ajouter un nouveau numero"
+                          centered
+                          open={opens}
+                          onCancel={() => setOpens(false)}
+                          width={600}
+                          footer={[
+                            
+                          ]}
+                        >
+                         <ClientTelephone idClients={idClient}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>

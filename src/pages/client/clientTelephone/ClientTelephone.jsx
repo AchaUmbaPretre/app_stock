@@ -2,11 +2,11 @@ import React, { useEffect,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Select from 'react-select';
 import config from '../../../config';
 import { CircularProgress } from '@mui/material';
+import './clientTelephone.scss'
 
-const ClientTelephone = () => {
+const ClientTelephone = ({idClients}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({})
   const navigate = useNavigate();
@@ -67,46 +67,18 @@ const ClientTelephone = () => {
       setIsLoading(false);
     }
   }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/client`);
-        setGetClient(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN])
   
   return (
     <>
-        <div className="clientForm">
+        <div className="clientFormTel">
           <div className="product-container">
-            <div className="product-container-top">
-              <div className="product-left">
-                <h2 className="product-h2">Ajouter un nouveau numero</h2>
-                <span>Créer un nouveau numero</span>
-              </div>
-            </div>
-            <div className="product-wrapper">
+            <div className="product-wrapper" >
               <div className="product-container-bottom">
-                <div className="form-controle">
-                  <label htmlFor="">Sélectionnez un client</label>
-                  <Select
-                    name="id_client"
-                    options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
-                    placeholder= 'Sélectionnez un(e) client(e)'
-                  />
-                </div>
-                <div className="form-controle">
+                <div className="form-controle" >
                   <label htmlFor="">Telephone</label>
                   <input type="text" name="numero" className="form-input" placeholder='+243' onChange={handleInputChange} />
                 </div>
               </div>
-
               <div className="form-submit">
                 <button className="btn-submit" onClick={handleClick} disabled={isLoading}>Envoyer</button>
                 {isLoading && (

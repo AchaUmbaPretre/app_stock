@@ -1,5 +1,6 @@
 import iconRetour from './../../../assets/return-box_2649277.png'
 import iconLivraison from './../../../assets/delivery_1350253.png'
+import iconEchange from './../../../assets/exchange_12565431.png'
 import './pageLivreurVente.scss'
 import { useNavigate } from 'react-router-dom';
 
@@ -19,6 +20,10 @@ const PageLivreurVente = () => {
                 <div className="page-row-top" onClick={()=>navigate("/pageRetourCommande")}>
                   <img src={iconRetour} alt="" className='page-icon'/>
                   <span className="page-top-desc">Retour</span>
+                </div>
+                <div className="page-row-top" onClick={()=>navigate("/pageCommandeEchange")}>
+                  <img src={iconEchange} alt="" className='page-icon'/>
+                  <span className="page-top-desc">Echange</span>
                 </div>
               </div>
             </div>

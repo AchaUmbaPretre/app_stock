@@ -224,7 +224,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                                     </div>
                                     {taille && quantite > stock && <div style={{color:'red', fontSize:"12px"}}>Il ya que {stock} dans le stock pour cette pointure</div>}
                                     <div className="filter">
-                                        <button className="filter-btn" onClick={handleClick} disabled={taille && quantite > stock ? true : false}>Ajouter au panier</button>
+                                        <button className="filter-btn" onClick={handleClick} disabled={isLoading || taille && quantite > stock ? true : false}>Envoyer</button>
                                         {isLoading && (
                                             <div className="loader-container loader-container-center">
                                               <CircularProgress size={28} />

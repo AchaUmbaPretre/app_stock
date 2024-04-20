@@ -182,14 +182,14 @@ const EchangeCommande = ({idVariant, idCommande}) => {
             id_detail_commande: idDetail
           });
       
-          await axios.post(`${DOMAIN}/api/commande/detail-commande`, {
+/*           await axios.post(`${DOMAIN}/api/commande/detail-commande`, {
             id_commande: idCommande, 
             id_varianteProduit: idVarianteProduit, 
             quantite: quantite, 
             prix: prix, 
             id_taille: taille, 
             user_cr: userId
-          });
+          }); */
       
           Swal.fire({
             title: 'Succès',

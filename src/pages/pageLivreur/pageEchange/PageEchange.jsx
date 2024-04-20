@@ -19,7 +19,9 @@ const PageEchange = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [desc, setDesc] = useState(null);
-    const [getCommandes, setGetCommandes] = ([]);
+    const [getCommande, setGetCommande] = useState([]);
+    const [idEchangeDetail, setIdEchangeDetail] = useState([]);
+    const [idDetail, setIdDetail] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
     const IdCommande = pathname.split('/')[2];
@@ -34,7 +36,7 @@ const PageEchange = () => {
 
       const handleSelectionChanges = (event,id_vente, id_commande,id_detail_commande,prix_unitaire,id_taille,id_client, id_varianteProduit) => {
         if (event.target.checked) {
-          const updatedSelected = [...selected, { id_vente,id_commande,id_detail_commande,prix_unitaire,id_taille,id_client,id_varianteProduit}]
+          const updatedSelected = [...selecteds, { id_vente,id_commande,id_detail_commande,prix_unitaire,id_taille,id_client,id_varianteProduit}]
           setSelecteds(updatedSelected);
         } else {
           setSelecteds(selected.filter((row) => row.id_detail_commande !== id_detail_commande));
@@ -105,7 +107,7 @@ const PageEchange = () => {
           render: (text, record) => (
             <div>
               <Checkbox
-                checked={selected.some((item) => item.id_detail_commande === record.id_detail_commande)}
+                checked={selecteds.some((item) => item.id_detail_commande === record.id_detail_commande)}
                 onChange={(event) =>
                   handleSelectionChanges(event,record.id_vente,record.id_commande, record.id_detail_commande, record.prix_unitaire,record.id_taille,record.id_client,record.id_varianteProduit)
                 }
@@ -202,8 +204,7 @@ const PageEchange = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/echanges/${IdCommande}`);
-            console.log(data)
-            setGetCommandes(data);
+            setGetCommande(data);
           } catch (error) {
             console.log(error);
           }
@@ -211,31 +212,25 @@ const PageEchange = () => {
         fetchData();
       }, [DOMAIN,IdCommande]);
 
-      console.log(getCommandes)
+       useEffect(()=> {
+        setIdEchangeDetail(selecteds[0]?.id_detail_commande)
+        setIdDetail(selected[0]?.id_detail_commande)
+
+      },[selecteds[0]?.id_detail_commande,selected[0]?.id_detail_commande])
+
+      console.log(idEchangeDetail)
+      console.log(idDetail)
 
 
       const handleClick = async (e) => {
         e.preventDefault();
         try {
           setIsLoading(true);
-          for (const dd of selected) {
-            await axios.post(`${DOMAIN}/api/vente/retour`, {
-              id_client: dd.id_client,
-              id_livreur: userId,
-              quantite: dd.qte_livre,
-              id_commande: dd.id_commande,
-              id_detail_commande: dd.id_detail_commande,
-              prix_unitaire: dd.prix,
-              id_varianteProduit: dd.id,
-              id_taille: dd.id_taille,
-              id_type_mouvement: 5,
-              description: desc
-            });
-          }
+            await axios.put(`${DOMAIN}/api/vente/echange/${idEchangeDetail}/${idDetail}`);
       
           Swal.fire({
             title: 'Success',
-            text: 'Le produit est retourné avec succès!',
+            text: "L'échange a été fait avec succès !",
             icon: 'success',
             confirmButtonText: 'OK',
           });
@@ -281,7 +276,7 @@ const PageEchange = () => {
               </div>
                 <div className="rowChart-row-table">
                     <h1>Sélectionnez le produit à échanger</h1>
-                    <Table columns={columnsEchange} dataSource={getCommandes} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
+                    <Table columns={columnsEchange} dataSource={getCommande} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                 </div>
                 <div className="rowChart-row-table">
                     <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />

@@ -22,6 +22,8 @@ const PageEchange = () => {
     const [getCommande, setGetCommande] = useState([]);
     const [idEchangeDetail, setIdEchangeDetail] = useState([]);
     const [idDetail, setIdDetail] = useState([]);
+    const [idVariant, setIdVariant] = useState([]);
+    const [quantite, setQuantite] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
     const {pathname} = useLocation();
     const IdCommande = pathname.split('/')[2];
@@ -215,18 +217,20 @@ const PageEchange = () => {
        useEffect(()=> {
         setIdEchangeDetail(selecteds[0]?.id_detail_commande)
         setIdDetail(selected[0]?.id_detail_commande)
+        setQuantite(selected[0]?.qte_commande)
+        setIdVariant(selected[0]?.id_varianteProduit)
 
       },[selecteds[0]?.id_detail_commande,selected[0]?.id_detail_commande])
 
-      console.log(idEchangeDetail)
-      console.log(idDetail)
+      console.log(selected)
+      console.log(selected)
 
 
       const handleClick = async (e) => {
         e.preventDefault();
         try {
           setIsLoading(true);
-            await axios.put(`${DOMAIN}/api/vente/echange/${idEchangeDetail}/${idDetail}`);
+            await axios.put(`${DOMAIN}/api/vente/echange/${idEchangeDetail}/${idDetail}?quantite=${quantite}&id_variant=${idVariant}`);
       
           Swal.fire({
             title: 'Success',

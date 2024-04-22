@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ShoppingCartOutlined,ArrowLeftOutlined,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,ShoppingCartOutlined,ArrowLeftOutlined,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -172,7 +172,7 @@ const Mouvement = () => {
           <Popover
             content="Afficher le nombre d'articles échangés" placement="top"
           >
-            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}} onClick={()=> showModalOneRetour(record.id_retours, record.id_commande)}>{record.total_retours ?? 0}</Tag>
+            <Tag color={'blue'} icon={<SwapOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}}>{record.total_echange ?? 0}</Tag>
           </Popover>
           )
         },

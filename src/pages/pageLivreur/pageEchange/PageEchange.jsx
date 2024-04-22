@@ -218,16 +218,15 @@ const PageEchange = () => {
         setIdEchangeDetail(selecteds[0]?.id_detail_commande)
         setIdDetail(selected[0]?.id_detail_commande)
         setQuantite(selected[0]?.qte_commande)
-        setIdVariant(selected[0]?.id_varianteProduit)
+        setIdVariant(selected[0]?.id)
 
-      },[selecteds[0]?.id_detail_commande,selected[0]?.id_detail_commande])
-
+      },[selecteds[0]?.id_detail_commande,selected[0]?.id_detail_commande,selected[0]?.id_varianteProduit,selected[0]?.qte_commande])
 
       const handleClick = async (e) => {
         e.preventDefault();
         try {
           setIsLoading(true);
-            await axios.put(`${DOMAIN}/api/vente/echange/${idEchangeDetail}/${idDetail}?quantite=${quantite}&id_variant=${idVariant}`);
+            await axios.put(`${DOMAIN}/api/vente/echange/${idEchangeDetail}/${idDetail}/${idVariant}`);
       
           Swal.fire({
             title: 'Success',

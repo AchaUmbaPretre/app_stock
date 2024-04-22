@@ -1,10 +1,10 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,CheckOutlined, CloseOutlined,UnorderedListOutlined ,EditOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,CheckOutlined, CloseOutlined,UnorderedListOutlined ,EditOutlined,FilePdfOutlined,UserOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Table, Tag } from 'antd';
 import axios from 'axios';
 import config from '../../config';
-import { useSelector } from 'react-redux';import { DeleteOutlineOutlined } from '@mui/icons-material';
+import { DeleteOutlineOutlined } from '@mui/icons-material';
 ;
 
 const Permissions = () => {

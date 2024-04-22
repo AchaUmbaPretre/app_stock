@@ -222,9 +222,6 @@ const PageEchange = () => {
 
       },[selecteds[0]?.id_detail_commande,selected[0]?.id_detail_commande])
 
-      console.log(selected)
-      console.log(selected)
-
 
       const handleClick = async (e) => {
         e.preventDefault();

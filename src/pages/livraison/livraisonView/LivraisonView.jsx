@@ -148,7 +148,7 @@ const LivraisonView = () => {
             },
         },
         {
-          title: 'Modifier par',
+          title: 'Modifié par',
           dataIndex: 'modifier',
           key: 'modifier',
           render: (text) => (

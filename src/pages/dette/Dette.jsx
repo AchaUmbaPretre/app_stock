@@ -22,6 +22,7 @@ const Dette = () => {
     const scroll = { x: 450 };
     const [open, setOpen] = useState(false);
     const [recent, setRecent] = useState([]);
+    const [recentPaiement, setRecentPaiement] = useState([]);
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
@@ -210,6 +211,18 @@ const Dette = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dettePaiement`);
+            setRecentPaiement(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
             const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapport`);
             setRecent(data);
           } catch (error) {
@@ -237,6 +250,15 @@ const Dette = () => {
                     <div className="product-left">
                         <h2 className="product-h2">Liste des ventes à crédit</h2>
                         <span>Gérer vos ventes à crédit</span>
+                    </div>
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                      <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                        Paiement du jour
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant payé : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.montant}/> $</b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nombre de clients ayant effectué un paiement. : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.nombre_clients}/></b></p>
+                      </div>
                     </div>
                     <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                       <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>

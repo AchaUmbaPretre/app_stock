@@ -57,21 +57,24 @@ const FormPaiement = () => {
       }
   }
 
+  console.log(data)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/client`);
+        const { data } = await axios.get(`${DOMAIN}/api/commande`);
         setGetClient(data);
-        setLoading(false)
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchData();
   }, [DOMAIN]);
   
 
   return (
+
     <>
         <div className="formCatDepense">
           <div className="product-container">
@@ -79,10 +82,15 @@ const FormPaiement = () => {
                 <div className="form-controle-desc">
                   <label htmlFor="">Client(e)</label>
                   <Select
-                      name="id_client"
-                      options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
-                      onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
-                    />
+                    name="id_commande"
+                    options={getClient?.map(item => ({ value: item.id_commande, label: `${item.nom}/ commande N°${item.id_commande}`}))}
+                    onChange={selectedOption => {
+                      const selectedIdCommande = selectedOption.value;
+                      const selectedIdClient = getClient.find(item => item.id_commande === selectedIdCommande)?.id_client;
+                      handleInputChange({ target: { name: 'id_commande', value: selectedIdCommande } });
+                      handleInputChange({ target: { name: 'id_client', value: selectedIdClient } });
+                    }}
+                  />
                 </div>
                 <div className="form-controle-desc">
                   <label htmlFor="">Montant</label>

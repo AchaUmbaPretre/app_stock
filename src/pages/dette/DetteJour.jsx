@@ -186,7 +186,7 @@ const DetteJour = () => {
         };
         fetchData();
       }, [DOMAIN]);
-
+      
       useEffect(() => {
         const fetchData = async () => {
           try {

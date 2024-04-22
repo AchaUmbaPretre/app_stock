@@ -180,7 +180,7 @@ const EchangeForm = () => {
           </div>
           <div className="form-submit">
           { selected.map((dd)=>(
-            <button className="btn-submit" onClick={()=>navigate(`/echange/${value}?id_detail=${dd.id_detail_commande}`)}>Echange</button>
+            <button className="btn-submit" style={{padding:'10px 15px', background:'rgba(1, 35, 138, 0.952)', color:'#fff', border:'none'}} onClick={()=>navigate(`/echange/${value}?id_detail=${dd.id_detail_commande}`)}>Echange</button>
           ))}
           </div>
           </>

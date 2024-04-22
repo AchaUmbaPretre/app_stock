@@ -163,6 +163,20 @@ const Mouvement = () => {
           )
         },
         {
+          title: "Nbre d'échange",
+          dataIndex: 'total_echange',
+          key: 'total_echange',
+          sorter: (a, b) => (a.total_echange ?? 0) - (b.total_echange ?? 0),
+          sortDirections: ['descend', 'ascend'],
+          render : (text,record)=>(
+          <Popover
+            content="Afficher le nombre d'articles échangés" placement="top"
+          >
+            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}} onClick={()=> showModalOneRetour(record.id_retours, record.id_commande)}>{record.total_retours ?? 0}</Tag>
+          </Popover>
+          )
+        },
+        {
             title: 'Date',
             dataIndex: 'date_mouvement',
             key: 'date_mouvement',

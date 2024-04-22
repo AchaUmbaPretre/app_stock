@@ -13,19 +13,8 @@ const Permissions = () => {
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
-    const [idClient, setIdClient] = useState({});
 
-
-      const handleDelete = async (id) => {
-        try {
-          await axios.delete(`${DOMAIN}/api/vente/${id}`);
-            window.location.reload();
-        } catch (err) {
-          console.log(err);
-        }
-      };
 
       const HandOpen = () => {
         setOpens(!opens);
@@ -114,11 +103,6 @@ const Permissions = () => {
           }
 
       ];
-
-    const handleOk = async (e) => {
-      setOpen(true)
-      setIdClient(e)
-    };
 
   const filteredData = data?.filter((item) =>
   item.username?.toLowerCase().includes(searchValue.toLowerCase())

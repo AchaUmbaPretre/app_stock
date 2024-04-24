@@ -4,16 +4,13 @@ import config from "../../../../config";
 
 const LivraisonClientDetail = ({idClients}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [idClient, setIdClient] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/client/${idClients}`);
             setData(data);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -63,7 +60,6 @@ const LivraisonClientDetail = ({idClients}) => {
                 </div>
             </div>
         </div>
-        
     </>
   )
 }

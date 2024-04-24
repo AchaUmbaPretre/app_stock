@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,UserOutlined,CloseOutlined,WhatsAppOutlined, DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,WhatsAppOutlined, DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
 import axios from 'axios';
@@ -27,10 +27,6 @@ const PaiementJour30 = () => {
         } catch (err) {
           console.log(err);
         }
-      };
-
-      const HandOpen = () => {
-        setOpens(!opens);
       };
     
       const columns = [
@@ -145,8 +141,6 @@ const PaiementJour30 = () => {
                           <div className="product-bottom-right">
                           </div>
                       </div>
-                      {opens &&
-                      <PaiementSelect getProduits={setData}/> }
                       <div className="rowChart-row-table">
                       <Modal
                             centered

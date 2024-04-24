@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { ArrowRightOutlined } from '@ant-design/icons';
+import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'

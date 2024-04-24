@@ -272,7 +272,7 @@ const MouvementAll = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [DOMAIN]);
   
    const filteredData = data?.filter((item) =>
     item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())

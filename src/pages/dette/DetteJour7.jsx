@@ -114,7 +114,7 @@ const DetteJour7 = () => {
               } else if (record.montant_restant < 0) {
                 icon = <ArrowDownOutlined />;
               } else {
-                icon = null; // Ne pas afficher d'icône si le montant restant est égal à zéro
+                icon = null;
               }
           
               return (

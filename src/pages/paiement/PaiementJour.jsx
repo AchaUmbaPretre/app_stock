@@ -28,10 +28,6 @@ const PaiementJour = () => {
           console.log(err);
         }
       };
-
-      const HandOpen = () => {
-        setOpens(!opens);
-      };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -126,10 +122,6 @@ const PaiementJour = () => {
       }, [DOMAIN]);
 
 
-    const handleOk = async (e) => {
-      setOpen(true)
-    };
-
   const filteredData = data?.filter((item) =>
     item.nom?.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -141,7 +133,6 @@ const PaiementJour = () => {
                 <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
-                          {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                               <div className="product-row-search">
                                   <SearchOutlined className='product-icon-plus'/>
                                   <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -150,8 +141,6 @@ const PaiementJour = () => {
                           <div className="product-bottom-right">
                           </div>
                       </div>
-                      {opens &&
-                      <PaiementSelect getProduits={setData}/> }
                       <div className="rowChart-row-table">
                       <Modal
                             centered

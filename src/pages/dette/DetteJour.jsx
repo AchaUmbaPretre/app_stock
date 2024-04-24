@@ -20,7 +20,7 @@ const DetteJour = () => {
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
-    
+
       const handleDelete = async (id) => {
         try {
           await axios.delete(`${DOMAIN}/api/vente/vente/dette`);
@@ -215,15 +215,15 @@ const DetteJour = () => {
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
+                              <SearchOutlined className='product-icon-plus'/>
+                              <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                     </div>
                     {opens &&
                     <DetteSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

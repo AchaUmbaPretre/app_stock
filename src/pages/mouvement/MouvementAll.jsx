@@ -295,7 +295,7 @@ const MouvementAll = () => {
                     {opens &&
                       <MouvementAllSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

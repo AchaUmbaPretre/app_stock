@@ -1,15 +1,12 @@
 import './../products/products.scss'
-import { SearchOutlined,EyeOutlined, SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined,SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,CloseCircleOutlined, CheckCircleOutlined,DollarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import config from '../../config';
 import { useSelector } from 'react-redux';
 import DetteSelect from './DetteSelect';
 import { format } from 'date-fns';
-import CountUp from 'react-countup';
-import moment from 'moment';
 
 const DetteJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -23,7 +20,7 @@ const DetteJour = () => {
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
-
+    
       const handleDelete = async (id) => {
         try {
           await axios.delete(`${DOMAIN}/api/vente/vente/dette`);

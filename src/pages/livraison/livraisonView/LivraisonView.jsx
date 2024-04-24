@@ -164,11 +164,6 @@ const LivraisonView = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-{/*                 <Popover title="Voir la liste de cette commande" trigger="hover">
-                  <Link to={`/livraisonView/${record.id_commande}`}>
-                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                  </Link>
-                </Popover> */}
                 {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm

@@ -42,7 +42,6 @@ const DetteSelect = ({getProduits}) => {
         icon: 'error',
         confirmButtonText: 'OK',
       });
-
       console.log(err);
     }
 }
@@ -52,12 +51,12 @@ const DetteSelect = ({getProduits}) => {
         <div className="productSelects">
             <div className="productSelects-container">
               <input
-              type="date"
-              className="product-input-select"
-              name="start_date"
-              style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
-              onChange={handleStartDateChange}
-            />
+                type="date"
+                className="product-input-select"
+                name="start_date"
+                style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
+                onChange={handleStartDateChange}
+              />
             au
             <input
               type="date"

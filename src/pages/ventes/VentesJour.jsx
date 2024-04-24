@@ -191,7 +191,6 @@ const VentesJour = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
                                 <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -200,8 +199,6 @@ const VentesJour = () => {
                         <div className="product-bottom-right">
                         </div>
                     </div>
-                    {opens &&
-                    <VenteSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
                         <Modal
                           title="Information du client"

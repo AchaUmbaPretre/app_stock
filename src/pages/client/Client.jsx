@@ -175,11 +175,15 @@ const Client = () => {
             key: 'email',
             render: (text) => (
               <Popover content="Discutez avec lui sur WhatsApp" placement="top">
-                <Tag to={`https://wa.me/${text}`} color="green" style={{ cursor: 'pointer' }}>
-                  <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
-                  {text}
-                </Tag>
-              </Popover>
+              <Tag
+                onClick={() => window.open(`https://wa.me/${text}`, '_blank')}
+                color="green"
+                style={{ cursor: 'pointer' }}
+              >
+                <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
+                {text}
+              </Tag>
+            </Popover>
             ),
           },
           {

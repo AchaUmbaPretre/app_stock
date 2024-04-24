@@ -17,7 +17,6 @@ const PaiementJour30 = () => {
     const [open, setOpen] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 
-
       const handleDelete = async (id) => {
       try {
           await axios.delete(`${DOMAIN}/api/vente/vente/paiement/${id}`);

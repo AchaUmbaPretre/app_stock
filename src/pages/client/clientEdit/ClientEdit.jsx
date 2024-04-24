@@ -50,7 +50,7 @@ const ClientEdit = () => {
       }
     };
     fetchData();
-  }, [DOMAIN]);
+  }, [DOMAIN,id]);
 
   const handleClick = async (e) => {
     e.preventDefault();

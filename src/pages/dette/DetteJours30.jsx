@@ -1,15 +1,12 @@
 import './../products/products.scss'
-import { SearchOutlined,EyeOutlined, SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined,SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import config from '../../config';
 import { useSelector } from 'react-redux';
 import DetteSelect from './DetteSelect';
 import { format } from 'date-fns';
-import CountUp from 'react-countup';
-import moment from 'moment';
 
 const DetteJours30 = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;

@@ -184,7 +184,7 @@ const DetteOne = () => {
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN, id_client]);
 
     const handleOk = async (e) => {
       setOpen(true)
@@ -192,8 +192,8 @@ const DetteOne = () => {
     };
 
   const filteredData = data?.filter((item) =>
-  item.nom?.toLowerCase().includes(searchValue.toLowerCase())
-);
+    item.nom?.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <>
@@ -223,7 +223,7 @@ const DetteOne = () => {
                     {opens &&
                     <DetteSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

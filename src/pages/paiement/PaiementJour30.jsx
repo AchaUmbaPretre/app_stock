@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import config from '../../config';
 import moment from 'moment';
 import FormPaiement from './formPaiement/FormPaiement';
-import PaiementSelect from './PaiementSelect';
 
 const PaiementJour30 = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,7 +15,6 @@ const PaiementJour30 = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 
 

@@ -18,7 +18,6 @@ const PageEchange = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [desc, setDesc] = useState(null);
     const [getCommande, setGetCommande] = useState([]);
     const [idEchangeDetail, setIdEchangeDetail] = useState([]);
     const [idDetail, setIdDetail] = useState([]);
@@ -282,11 +281,11 @@ const PageEchange = () => {
                     <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 8}} />
                 </div>
                <div className="pageLivreur-form-rows">
-                    <div className="pageLivreur-form-row">
+{/*                     <div className="pageLivreur-form-row">
                       <label htmlFor="">Description</label>
                       <textarea name="description" id="" cols="20" rows="8" onChange={(e)=>setDesc(e.target.value)}>
                       </textarea>
-                    </div>
+                    </div> */}
                     <button className='pageLivreur-btn' onClick={handleClick} disabled={isLoading}>Envoyer maintenant</button>
                     {isLoading && (
                   <div className="loader-container loader-container-center">

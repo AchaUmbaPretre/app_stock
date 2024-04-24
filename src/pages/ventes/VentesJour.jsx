@@ -1,7 +1,7 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ReconciliationOutlined,CloseOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,ReconciliationOutlined,CloseOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
@@ -10,9 +10,8 @@ import VenteClientDetail from './venteClientDetail/VenteClientDetail';
 import { useSelector } from 'react-redux';
 import VenteSelect from './VentesSelect';
 import Ticket from './ticket/Ticket';
-import VentesJour from './VentesJour';
 
-const Ventes = () => {
+const VentesJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -156,7 +155,7 @@ const Ventes = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/venteDuJour`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -185,12 +184,6 @@ const Ventes = () => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Liste de ventes</h2>
-                        <span>Gérer vos ventes</span>
-                    </div>
-                </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
@@ -201,16 +194,11 @@ const Ventes = () => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
                     {opens &&
                     <VenteSelect getProduits={setData}/> }
-                    <Tabs>
-                      <Tabs.TabPane tab='Ventes' key={1}>
-                      <div className="rowChart-row-table">
+                    <div className="rowChart-row-table">
                         <Modal
                           title="Information du client"
                           centered
@@ -238,11 +226,6 @@ const Ventes = () => {
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
-                      </Tabs.TabPane>  
-                      <Tabs.TabPane tab='Ventes du jour' key={2}>
-                        <VentesJour/>
-                      </Tabs.TabPane>        
-                    </Tabs>
                 </div>
             </div>
         </div>
@@ -250,4 +233,4 @@ const Ventes = () => {
   )
 }
 
-export default Ventes
+export default VentesJour

@@ -2,7 +2,7 @@ import { PlusOutlined, SearchOutlined, SisternodeOutlined, FilePdfOutlined, File
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
 import EchangeEdit from './echangeEdit/EchangeEdit';

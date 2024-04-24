@@ -1,18 +1,15 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined,CloseOutlined,WhatsAppOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,UserOutlined,CloseOutlined,WhatsAppOutlined, DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import config from '../../config';
 import moment from 'moment';
 import FormPaiement from './formPaiement/FormPaiement';
 import PaiementSelect from './PaiementSelect';
-import PaiementJour from './PaiementJour';
-import PaiementJour7 from './PaiementJour7';
-import PaiementJour30 from './PaiementJour30';
 
-const Paiement = () => {
+const PaiementJour30 = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -118,7 +115,7 @@ const Paiement = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiement`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJour30`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -129,10 +126,6 @@ const Paiement = () => {
       }, [DOMAIN]);
 
 
-    const handleOk = async (e) => {
-      setOpen(true)
-    };
-
   const filteredData = data?.filter((item) =>
     item.nom?.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -141,19 +134,7 @@ const Paiement = () => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Liste des paiements</h2>
-                        <span>Gérer vos paiements</span>
-                    </div>
-                    <div className="product-right" onClick={handleOk}>
-                        <PlusOutlined className='product-icon'/>
-                        <span className="product-btn">Ajouter un paiement</span>
-                    </div>
-                </div>
-                <Tabs>
-                  <Tabs.TabPane tab='Paiements' key={0}>
-                    <div className="product-bottom">
+                <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
                           {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
@@ -163,9 +144,6 @@ const Paiement = () => {
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
                       {opens &&
@@ -186,22 +164,11 @@ const Paiement = () => {
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
-                    </div>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Paiements du jour' key={1}>
-                    <PaiementJour/>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Paiements des 7 derniers jours' key={2}>
-                    <PaiementJour7/>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Paiements des 30 derniers jours' key={3}>
-                    <PaiementJour30/>
-                  </Tabs.TabPane>
-                </Tabs>
+                </div>
             </div>
         </div>
     </>
   )
 }
 
-export default Paiement
+export default PaiementJour30

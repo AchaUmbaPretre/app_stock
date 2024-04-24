@@ -1,7 +1,7 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,PlusOutlined,UserOutlined,CloseOutlined,WhatsAppOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,WhatsAppOutlined, DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import config from '../../config';

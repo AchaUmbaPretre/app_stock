@@ -3,7 +3,7 @@ import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,Phone
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
 import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetail';
@@ -11,12 +11,13 @@ import { useSelector } from 'react-redux';
 import ClientTelephone from './clientTelephone/ClientTelephone';
 import ClientAdresse from './clientAdresse/ClientAdresse';
 
-const Client = () => {
+const ClientView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
-    const [getClient, setGetClient] = useState();
     const [loading, setLoading] = useState(true);
+    const [adresseOne, setAdresseOne] = useState([]);
+    const id_client = useLocation().pathname.split('/')[2]
     const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
@@ -26,116 +27,6 @@ const Client = () => {
     const [openAdresse, setOpenAdresse] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-
-
-      const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Search
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Reset
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
-
-      const showModal = (e) => {
-        setOpen(true);
-        setIdClient(e)
-      };
 
       const showModalPhone = (e) => {
         setOpens(true);
@@ -150,47 +41,47 @@ const Client = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
         {
-            title: 'Nom',
-            dataIndex: 'nom',
-            key: 'nom',
-            ...getColumnSearchProps('nom'),
-            render : (text,record)=>(
-              <div>
-                 <Tag color={'green'} onClick={()=> showModal(record.id)} style={{cursor: "pointer"}}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
-              </div>
-            )
-        },
-        {
-            title: 'Raison sociale',
-            dataIndex: 'raison_sociale',
-            key: 'raison_sociale',
-            ...getColumnSearchProps('raison_sociale'),
-            render: (text)=> {
-              return <Tag color={'green'}>{text}</Tag>;
-            }
-        },
-          {
-            title: 'Telephone',
-            dataIndex: 'telephone',
-            key: 'email',
+            title: 'Avenue',
+            dataIndex: 'avenue',
+            key: 'avenue',
             render: (text) => (
-              <Popover content="Discutez avec lui sur WhatsApp" placement="top">
-              <Tag
-                onClick={() => window.open(`https://wa.me/${text}`, '_blank')}
-                color="green"
-                style={{ cursor: 'pointer' }}
-              >
-                <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />
-                {text}
-              </Tag>
-            </Popover>
+              <div>
+                <Tag color="blue">
+                  <EnvironmentOutlined style={{ marginRight: '5px' }} />
+                  {text}
+                </Tag>
+              </div>
+            ),
+          },
+          {
+            title: 'Quartier',
+            dataIndex: 'quartier',
+            key: 'quartier',
+            render: (text) => (
+              <div>
+                <Tag color="blue">
+                  <EnvironmentOutlined style={{ marginRight: '5px' }} />
+                  {text}
+                </Tag>
+              </div>
+            ),
+          },
+          {
+            title: 'N°',
+            dataIndex: 'num',
+            key: 'num',
+            render: (text) => (
+              <div>
+                <Tag color="blue">
+                  {text}
+                </Tag>
+              </div>
             ),
           },
           {
             title: 'Ville',
             dataIndex: 'nom_province',
             key: 'nom_province',
-            ...getColumnSearchProps('nom_province'),
             render: (text) => (
               <div>
                 <Tag color="blue">
@@ -216,16 +107,9 @@ const Client = () => {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
-                
               <Space size="middle">
-                <Popover title={`Ajouter un nouveau numero de Mme ${record.nom}`} trigger="hover">
-                  <Button icon={<PhoneOutlined />} style={{ color: 'green' }} onClick={()=> showModalPhone(record.id)} />
-                </Popover>
-                <Popover title="Modifier" trigger="hover">
-                  <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
-                </Popover>
-                <Popover title="Afficher les détails des adresses." trigger="hover">
-                  <Button icon={<EyeOutlined />} style={{ color: 'blue', cursor: 'pointer' }} onClick={()=> navigate(`/clientView/${record.id}`)} />
+                <Popover title="Voir la localisation" trigger="hover">
+                  <Button icon={<EnvironmentOutlined />} style={{ color: 'green' }} onClick={()=> navigate(`/clientLocalisation?avenue=${record.avenue}&commune=${record.nom_commune}&num=${record.num}`)} />
                 </Popover>
                   {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
@@ -246,15 +130,15 @@ const Client = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/client`);
-            setGetClient(data);
+            const { data } = await axios.get(`${DOMAIN}/api/client/clientAdresse/${id_client}`);
+            setAdresseOne(data);
             setLoading(false)
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN,id_client]);
 
       const handleEdit = (id) => {
         navigate(`/clientEdit/${id}`);
@@ -269,10 +153,10 @@ const Client = () => {
         } 
       };
 
-  const filteredData = getClient?.filter((item) =>
-    item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  const filteredData = adresseOne?.filter((item) =>
+    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) ||
     item.nom_province?.toLowerCase().includes(searchValue.toLowerCase()) ||
-    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase())
+    item.avenue?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (
@@ -281,29 +165,20 @@ const Client = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de clients</h2>
-                        <span>Gérer vos clients</span>
+                        <h2 className="product-h2">Information</h2>
                     </div>
                     <div style={{display:'flex', gap: '10px'}}>
-                      <div className="product-right" onClick={() =>navigate('/clientForm')}>
-                          <PlusOutlined />
-                          <span className="product-btn">Ajouter un nouveau client</span>
-                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
                                 <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)}  placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
                     <div className="rowChart-row-table">
@@ -352,4 +227,4 @@ const Client = () => {
   )
 }
 
-export default Client
+export default ClientView

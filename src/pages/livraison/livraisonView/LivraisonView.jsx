@@ -162,7 +162,6 @@ const LivraisonView = () => {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
-                
               <Space size="middle">
                 {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">

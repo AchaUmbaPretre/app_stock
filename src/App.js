@@ -92,6 +92,8 @@ import EchangeCat from './pages/echange/echangeCat/EchangeCat';
 import PageDetailEdit from './pages/PageDetails/PageDetailEdit/PageDetailEdit';
 import PageCommandeEchange from './pages/pageLivreur/pageCommandeEchange/PageCommandeEchange';
 import PageEchange from './pages/pageLivreur/pageEchange/PageEchange';
+import ClientView from './pages/client/ClientView';
+import ClientLocation from './pages/client/clientLocation/ClientLocation';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -363,6 +365,14 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/clientEdit/:id',
           element: <ClientEdit />
+        },
+        {
+          path: '/clientView/:id',
+          element: <ClientView />
+        },
+        {
+          path: '/clientLocalisation',
+          element: <ClientLocation />
         },
         {
           path: '/livreur',

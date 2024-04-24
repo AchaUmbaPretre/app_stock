@@ -28,10 +28,6 @@ const PaiementJour7 = () => {
           console.log(err);
         }
       };
-
-      const HandOpen = () => {
-        setOpens(!opens);
-      };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -125,11 +121,6 @@ const PaiementJour7 = () => {
         fetchData();
       }, [DOMAIN]);
 
-
-    const handleOk = async (e) => {
-      setOpen(true)
-    };
-
   const filteredData = data?.filter((item) =>
     item.nom?.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -149,8 +140,6 @@ const PaiementJour7 = () => {
                           <div className="product-bottom-right">
                           </div>
                       </div>
-                      {opens &&
-                      <PaiementSelect getProduits={setData}/> }
                       <div className="rowChart-row-table">
                       <Modal
                             centered

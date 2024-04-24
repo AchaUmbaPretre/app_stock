@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Select from 'react-select';
 import { useEffect } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { Checkbox, Space, Table, Tag } from 'antd';
 import config from '../../../config';
@@ -14,7 +13,6 @@ const EchangeForm = () => {
   const scroll = { x: 450 };
   const [commande, setCommande] = useState([]);
   const [getCommande, setGetCommande] = useState([]);
-  const [loading, setLoading] = useState([]);
   const [value, setValue] = useState(null);
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();

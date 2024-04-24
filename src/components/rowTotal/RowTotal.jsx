@@ -22,7 +22,6 @@ const RowTotal = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/total`);
             setVenteTotal(data[0]?.montant_total_vente);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -35,7 +34,6 @@ const RowTotal = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotal/total`);
             setProduitTotalAchats(data[0]?.montant_total_achats);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }
@@ -48,7 +46,6 @@ const RowTotal = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseCount`);
             setDepenses(data[0]?.total_depense);
-            setLoading(false)
           } catch (error) {
             console.log(error);
           }

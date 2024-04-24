@@ -9,8 +9,6 @@ const MouvementDepartSelect = ({ getProduits }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [datas, setDatas] = useState({});
   const [getMarque, setGetMarque] = useState([]);
-  const [couleur, setCouleur] = useState([]);
-  const [taille, setTaille] = useState([])
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -33,18 +31,6 @@ const MouvementDepartSelect = ({ getProduits }) => {
       try {
         const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
         setGetMarque(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [DOMAIN]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
-        setTaille(data);
       } catch (error) {
         console.log(error);
       }

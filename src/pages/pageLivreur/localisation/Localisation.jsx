@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Popup } from 'react-leaflet';
 import { useLocation } from 'react-router-dom';
-import { EnvironmentOutlined,WhatsAppOutlined } from '@ant-design/icons';
+import { EnvironmentOutlined,WhatsAppOutlined,UserOutlined  } from '@ant-design/icons';
 import L from 'leaflet';
 import { getDistance } from 'geolib';
 
@@ -17,11 +17,30 @@ const Localisation = () => {
   const [currentPosition, setCurrentPosition] = useState(null);
   const [boutiquePosition, setBoutiquePosition] = useState(null);
   const [distance, setDistance] = useState(null)
+  const [userPosition, setUserPosition] = useState(null);
 
   const boutiqueCommune = 'Ngaliema';
   const boutiqueQuartier = 'Lalu';
   const boutiqueAvenue = 'kinshasa';
   const boutiqueAddress = `Kinshasa, ${boutiqueCommune}, ${boutiqueQuartier}, ${boutiqueAvenue}`;
+
+
+  useEffect(() => {
+    const watchUserPosition = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserPosition([latitude, longitude]);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de la position de l\'utilisateur:', error);
+      }
+    );
+  
+    return () => {
+      // Arrête de suivre la position de l'utilisateur lorsque le composant est démonté
+      navigator.geolocation.clearWatch(watchUserPosition);
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -70,35 +89,31 @@ const Localisation = () => {
   }, [boutiquePosition, currentPosition]);
 
 
-  const handleSendLocation = () => {
-    // Ouvrir l'application WhatsApp avec la localisation pré-remplie dans le message
-    const message = `Voici la localisation trouvée : ${currentPosition}`;
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodedMessage}`;
-    window.open(whatsappUrl);
-  };
-
   return (
     <div>
       {currentPosition && (
-        <MapContainer center={currentPosition} zoom={20} scrollWheelZoom={false} style={{ height: '500px' }}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-          <Popup position={currentPosition} autoPan={false}>
-            <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'red' }} />
-            {clientAddress}
-          </Popup>
+        <MapContainer center={userPosition || currentPosition} zoom={20} scrollWheelZoom={false} style={{ height: '500px' }}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {userPosition && (
+            <Popup position={userPosition} autoPan={false}>
+              <UserOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'blue' }} />
+              Position de l'utilisateur
+            </Popup>
+          )}
+          {currentPosition && (
+            <Popup position={currentPosition} autoPan={false}>
+              <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'red' }} />
+              {clientAddress}
+            </Popup>
+          )}
         </MapContainer>
       )}
-
-      {currentPosition && (
-        <button onClick={handleSendLocation} style={{border:'none',padding:'10px', margin: '10px', borderRadius:'5px', display:'flex', alignItems:'center', gap:"5px",color: 'rgb(3, 3, 109)'}}>Partager la localisation en direct <WhatsAppOutlined style={{ fontSize: '15px', color: 'green' }}/></button>
-      )}
+  
       {/* <p style={{margin:'10px',color: 'rgb(3, 3, 109)'}}>Distance entre la boutique et le client : {distance && distance} mètres.</p> */}
     </div>
-    
   );
 };
 

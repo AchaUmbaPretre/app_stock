@@ -1,8 +1,7 @@
 import './client.scss'
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,PhoneOutlined,EnvironmentOutlined,EyeOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
+import { SearchOutlined,EnvironmentOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Button, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
@@ -13,12 +12,9 @@ import ClientAdresse from './clientAdresse/ClientAdresse';
 
 const ClientView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [adresseOne, setAdresseOne] = useState([]);
     const id_client = useLocation().pathname.split('/')[2]
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
@@ -28,10 +24,6 @@ const ClientView = () => {
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
-      const showModalPhone = (e) => {
-        setOpens(true);
-        setIdClient(e)
-      };
 
       const showModalAdresse = (e) => {
         setOpenAdresse(true);
@@ -139,10 +131,6 @@ const ClientView = () => {
         };
         fetchData();
       }, [DOMAIN,id_client]);
-
-      const handleEdit = (id) => {
-        navigate(`/clientEdit/${id}`);
-      };
     
       const handleDelete = async (id) => {
       try {

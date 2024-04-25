@@ -1,6 +1,6 @@
-import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
+import { SearchOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';

@@ -1,13 +1,12 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,UserOutlined,CloseOutlined,WhatsAppOutlined,DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,WhatsAppOutlined,DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import config from '../../config';
 import moment from 'moment';
 import FormPaiement from './formPaiement/FormPaiement';
-import PaiementSelect from './PaiementSelect';
 
 const PaiementJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,12 +15,11 @@ const PaiementJour = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
 
 
       const handleDelete = async (id) => {
-      try {
+        try {
           await axios.delete(`${DOMAIN}/api/vente/vente/paiement/${id}`);
             window.location.reload();
         } catch (err) {

@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { EnvironmentOutlined,WhatsAppOutlined,UserOutlined  } from '@ant-design/icons';
 import L from 'leaflet';
 import { getDistance } from 'geolib';
+import { useSelector } from 'react-redux';
 
 const Localisation = () => {
   const location = useLocation();
@@ -18,6 +19,8 @@ const Localisation = () => {
   const [boutiquePosition, setBoutiquePosition] = useState(null);
   const [distance, setDistance] = useState(null)
   const [userPosition, setUserPosition] = useState(null);
+  const [isUserPopupOpen, setIsUserPopupOpen] = useState(true);
+  const user = useSelector((state) => state.user.currentUser.username);
 
   const boutiqueCommune = 'Ngaliema';
   const boutiqueQuartier = 'Lalu';
@@ -76,26 +79,30 @@ const Localisation = () => {
 
   return (
     <div>
-      {currentPosition && (
-        <MapContainer center={userPosition || currentPosition} zoom={20} scrollWheelZoom={false} style={{ height: '500px' }}>
+      {currentPosition ? (
+        <MapContainer center={userPosition || currentPosition} zoom={17} scrollWheelZoom={false} style={{ height: '500px' }}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {userPosition && (
-            <Popup position={userPosition} autoPan={false}>
-              <UserOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'blue' }} />
-              Position de l'utilisateur
+            <Popup position={userPosition} autoPan={isUserPopupOpen}>
+              <UserOutlined style={{ fontSize: '20px',marginRight: '8px', color: 'red' }} />
+              {user}
             </Popup>
           )}
           {currentPosition && (
-            <Popup position={currentPosition} autoPan={false}>
+          <Marker position={currentPosition} icon={L.icon({ iconUrl: 'path/vers/icone.png', iconSize: [20, 20] })}>
+            <Popup position={currentPosition} autoPan={isUserPopupOpen}>
               <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'red' }} />
               {clientAddress}
             </Popup>
+          </Marker>
         )}
         </MapContainer>
-      )}
+      ) : <div style={{height: "100vh", display: 'flex', alignItems:'center', justifyContent:'center', padding:'20px', fontSize:'13px'}}>
+        Aucune localisation n'a été définie sur la carte pour ce client. Souhaitez-vous  en ajouter une ?
+      </div> }
   
       {/* <p style={{margin:'10px',color: 'rgb(3, 3, 109)'}}>Distance entre la boutique et le client : {distance && distance} mètres.</p> */}
     </div>

@@ -17,7 +17,7 @@ import { CircularProgress } from '@mui/material'
 
 
 
-const DetailProduitCommande = ({idVariant, idCommande}) => {
+const DetailProduitCommande = ({idVariant, idCommande, tailles }) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const { Option } = Select;
     const [data, setData] = useState([]);
@@ -25,7 +25,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
     const id = location.pathname.split('/')[2];
     const id_commande = location.pathname.split('/')[3];
     const [quantite, setQuantite] = useState(1);
-    const [taille, setTaille] = useState(null);
+    const [taille, setTaille] = useState(tailles);
     const [getTaille, setGetTaille] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
@@ -36,6 +36,8 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
     const [getCommande, setGetCommande] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const userId = useSelector((state) => state.user.currentUser.id)
+
+
 
         useEffect(() => {
         const fetchData = async () => {
@@ -187,6 +189,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
           icon: 'success',
           confirmButtonText: 'OK',
         });
+        window.location.reload();
     
       } catch (err) {
         Swal.fire({
@@ -199,7 +202,7 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
         setIsLoading(false);
       }
     };
-    
+
   return (
     <>
         <div className="detailProduitCommande">

@@ -12,7 +12,6 @@ import { FadeLoader } from 'react-spinners';
 import DetailProduitCommande from './detaillProduitCommande/DetailProduitCommande'
 import ReactPaginate from 'react-paginate'
 
-
 const Commande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
@@ -51,6 +50,7 @@ const Commande = () => {
     const endIndex = startIndex + itemsPerPage;
     const firstDataArray = groupedData.map(obj => obj.data[0]);
     const currentData = firstDataArray?.slice(startIndex, endIndex);
+    const [tailleDetail, setTailleDetail] = useState([]);
 
       const handlePageChange = (selectedPage) => {
         setCurrentPage(selectedPage.selected);
@@ -300,7 +300,7 @@ const Commande = () => {
                           footer={[
                           ]}
                         >
-                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande}/>
+                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande} tailles={tailleDetail}/>
                         </Modal>
                       </div>  )}
                       <ReactPaginate

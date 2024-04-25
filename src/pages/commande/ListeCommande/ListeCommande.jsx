@@ -42,7 +42,7 @@ const ListeCommande = () => {
       setIdClient(e)
     };
     
-      const columns = [
+    const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
           title: 'Code',
@@ -227,7 +227,7 @@ const ListeCommande = () => {
               </Space>
             ),
           },
-      ];
+    ];
 
       useEffect(() => {
         const fetchData = async () => {

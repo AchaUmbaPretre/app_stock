@@ -371,7 +371,7 @@ const ListeDetailView = () => {
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Liste de commande N° {id}</h2>
-                        <span>de Mme {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
+                        <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
                     </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
                       <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contact de Mn {getCommande?.nom}</h2>

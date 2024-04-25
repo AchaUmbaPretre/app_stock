@@ -80,9 +80,9 @@ const Localisation = () => {
   return (
     <div>
       {currentPosition ? (
-        <MapContainer center={userPosition || currentPosition} zoom={17} scrollWheelZoom={false} style={{ height: '580px' }}>
+        <MapContainer center={userPosition || currentPosition} zoom={17} scrollWheelZoom={false} style={{ height: '590px' }}>
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {userPosition && (

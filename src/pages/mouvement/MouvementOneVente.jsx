@@ -267,10 +267,7 @@ const MouvementOneVente = ({id_commande, id_type}) => {
         };
         fetchData();
       }, [DOMAIN, id_commande,id_type]);
-  
-   const filteredData = data?.filter((item) =>
-    item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
-    )
+
   
     return (
     <>
@@ -278,7 +275,7 @@ const MouvementOneVente = ({id_commande, id_type}) => {
             <div className="product-container">
                 <div className="product-bottom">
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

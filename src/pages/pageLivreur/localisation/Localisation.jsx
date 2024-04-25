@@ -45,21 +45,6 @@ const Localisation = () => {
 
   useEffect(() => {
     const geocodeAddress = async () => {
-        if (boutiqueAddress) {
-            try {
-              const boutiqueResponse = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent('Kinshasa', 'ngaliema', 'lula','40')}`);
-              const boutiqueData = await boutiqueResponse.json();
-    
-              if (boutiqueData.length > 0) {
-                const { lat, lon } = boutiqueData[0];
-                setBoutiquePosition({ latitude: parseFloat(lat), longitude: parseFloat(lon) });
-              } else {
-                console.log('Aucun résultat de géocodage trouvé pour l\'adresse de la boutique spécifiée.');
-              }
-            } catch (error) {
-              console.error('Erreur lors du géocodage de l\'adresse de la boutique:', error);
-            }
-        }
     
       if (clientAddress) {
         try {
@@ -79,14 +64,14 @@ const Localisation = () => {
     };
 
     geocodeAddress();
-  }, [clientAddress,boutiqueAddress]);
+  }, [clientAddress]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (boutiquePosition && currentPosition) {
       const calculatedDistance = getDistance(boutiquePosition, currentPosition);
       setDistance(calculatedDistance);
     }
-  }, [boutiquePosition, currentPosition]);
+  }, [boutiquePosition, currentPosition]); */
 
 
   return (

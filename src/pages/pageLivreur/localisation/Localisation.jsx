@@ -100,8 +100,8 @@ const Localisation = () => {
           </Marker>
         )}
         </MapContainer>
-      ) : <div style={{height: "100vh", display: 'flex', alignItems:'center', justifyContent:'center', padding:'20px', fontSize:'13px'}}>
-        Aucune localisation n'a été définie sur la carte pour ce client. Souhaitez-vous  en ajouter une ?
+      ) : <div style={{height: "95vh", display: 'flex', alignItems:'center', justifyContent:'center', padding:'20px', fontSize:'13px'}}>
+        <span style={{textAlign:'center'}}> Aucune localisation n'a été définie sur la carte pour ce client. Souhaitez-vous  en ajouter une ?</span>
       </div> }
   
       {/* <p style={{margin:'10px',color: 'rgb(3, 3, 109)'}}>Distance entre la boutique et le client : {distance && distance} mètres.</p> */}

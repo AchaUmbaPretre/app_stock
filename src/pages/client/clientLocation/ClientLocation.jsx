@@ -40,7 +40,7 @@ const ClientLocation = () => {
 
   return (
     <div>
-      {currentPosition && (
+      {currentPosition ? (
         <MapContainer center={currentPosition} zoom={19} scrollWheelZoom={false} style={{ height: '550px' }}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a>'
@@ -51,7 +51,10 @@ const ClientLocation = () => {
             {clientAddress}
           </Popup>
         </MapContainer>
-      )}
+      ) : <div style={{height: "100vh", display: 'flex', alignItems:'center', justifyContent:'center', padding:'20px', fontSize:'13px'}}>
+            <span style={{textAlign:'center'}}> Aucune localisation n'a été définie sur la carte pour ce client. Souhaitez-vous  en ajouter une ?</span>
+        </div>
+      }
     </div>
     
   );

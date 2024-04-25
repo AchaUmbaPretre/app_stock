@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ReconciliationOutlined,CloseOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, EyeOutlined,ReconciliationOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,6 @@ import config from '../../config';
 import { format } from 'date-fns';
 import VenteClientDetail from './venteClientDetail/VenteClientDetail';
 import { useSelector } from 'react-redux';
-import VenteSelect from './VentesSelect';
 import Ticket from './ticket/Ticket';
 
 const VentesJour = () => {
@@ -18,7 +17,6 @@ const VentesJour = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
     const [ticket, setTicket] = useState(false);
     const [idTicket, setIdTicket] = useState(false);
@@ -32,10 +30,6 @@ const VentesJour = () => {
         } catch (err) {
           console.log(err);
         }
-      };
-
-      const HandOpen = () => {
-        setOpens(!opens);
       };
     
       const columns = [

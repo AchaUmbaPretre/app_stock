@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet';
 import { useLocation } from 'react-router-dom';
 import { EnvironmentOutlined,WhatsAppOutlined,UserOutlined  } from '@ant-design/icons';
 import L from 'leaflet';
@@ -93,7 +93,7 @@ const Localisation = () => {
               <EnvironmentOutlined style={{ fontSize: '20px', marginRight: '8px', color: 'red' }} />
               {clientAddress}
             </Popup>
-          )}
+        )}
         </MapContainer>
       )}
   

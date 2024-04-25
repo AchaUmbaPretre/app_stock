@@ -142,12 +142,10 @@ const Echange = () => {
             icon: 'success',
             confirmButtonText: 'OK',
           });
-    
           setTimeout(() => {
           setOpen(false);
       }, 2000);
           window.location.reload();
-  
         }catch(err) {
           Swal.fire({
             title: 'Error',

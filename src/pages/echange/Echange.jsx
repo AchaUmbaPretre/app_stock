@@ -1,7 +1,6 @@
 import { PlusOutlined, SearchOutlined, SisternodeOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
@@ -11,123 +10,14 @@ import { format, parseISO } from 'date-fns';
 
 const Echange = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [echange, setEchange] = useState([]);
     const [getEchange, setGetEchange] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-
-      const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-    
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Search
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Reset
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
 
     useEffect(() => {
       const fetchData = async () => {
@@ -140,7 +30,7 @@ const Echange = () => {
         }
       };
       fetchData();
-    }, []);
+    }, [DOMAIN]);
 
     useEffect(() => {
       const fetchData = async () => {
@@ -152,7 +42,7 @@ const Echange = () => {
         }
       };
       fetchData();
-    }, [id]);
+    }, [DOMAIN,id]);
     
     const handleDelete = async (id) => {
      try {
@@ -173,8 +63,7 @@ const Echange = () => {
         {
             title: 'Client',
             dataIndex: 'nom',
-            key: 'nom',
-            ...getColumnSearchProps('nom'),
+            key: 'nom'
         },
         {
             title: 'Produit',
@@ -254,10 +143,8 @@ const Echange = () => {
             confirmButtonText: 'OK',
           });
     
-          setConfirmLoading(true);
           setTimeout(() => {
           setOpen(false);
-          setConfirmLoading(false);
       }, 2000);
           window.location.reload();
   

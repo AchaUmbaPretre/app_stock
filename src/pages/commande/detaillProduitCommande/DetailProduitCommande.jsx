@@ -11,13 +11,15 @@ import { useSelector } from 'react-redux'
 import { addProduct } from '../../../redux/cartRedux'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
-import { Image, Rate } from 'antd'
+import { Image, Rate, Select } from 'antd'
 import Swal from 'sweetalert2'
 import { CircularProgress } from '@mui/material'
 
 
+
 const DetailProduitCommande = ({idVariant, idCommande}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const { Option } = Select;
     const [data, setData] = useState([]);
     const location = useLocation();
     const id = location.pathname.split('/')[2];
@@ -109,19 +111,32 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
       setPrix(totalPrice);
     });
 
-    useEffect(()=> {
+    useEffect(() => {
       const fetchData = async () => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/commande/idVariantproduit/${variante}/${taille}`);
-          setIdVarianteProduit(data[0].id_varianteProduit);
-          setStock(data[0].stock);
-          setLoading(false)
+          const requests = taille.map(async (dd) => {
+            const { data } = await axios.get(`${DOMAIN}/api/commande/idVariantproduit/${variante}/${dd}`);
+            return {
+              idVarianteProduit: data.map((dd) => dd.id_varianteProduit),
+              stock: data[0].stock
+            };
+          });
+    
+          const results = await Promise.all(requests);
+    
+          const idVarianteProduitArray = results.flatMap((result) => result.idVarianteProduit);
+          const stockArray = results.map((result) => result.stock);
+    
+          setIdVarianteProduit(idVarianteProduitArray);
+          setStock(stockArray[0]);
+          setLoading(false);
         } catch (error) {
           console.log(error);
         }
       };
+    
       fetchData();
-    },[DOMAIN,variante,taille])
+    }, [DOMAIN, variante, taille]);
 
     useEffect(() => {
       const fetchData = async () => {
@@ -138,8 +153,8 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
 
     const handleClick = async (e) => {
       e.preventDefault();
-  
-      if (!taille) {
+    
+      if (!taille || taille.length === 0) {
         Swal.fire({
           title: 'Error',
           text: 'Veuillez choisir une pointure',
@@ -148,29 +163,43 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
         });
         return;
       }
-      try{
+    
+      try {
         setIsLoading(true);
-        await axios.post(`${DOMAIN}/api/commande/detail-commande`, {id_commande:idCommande, id_varianteProduit:idVarianteProduit, quantite: quantite, prix: prix, id_taille: taille, user_cr: userId})
+    
+        for (let i = 0; i < taille.length; i++) {
+          const dd = taille[i];
+          const idVarianteProduitValue = idVarianteProduit[i];
+    
+          await axios.post(`${DOMAIN}/api/commande/detail-commande`, {
+            id_commande: idCommande,
+            id_varianteProduit: idVarianteProduitValue,
+            quantite: quantite,
+            prix: prix,
+            id_taille: dd,
+            user_cr: userId
+          });
+        }
+    
         Swal.fire({
           title: 'Success',
           text: 'Commande créée avec succès!',
           icon: 'success',
           confirmButtonText: 'OK',
         });
-  
-      }catch(err) {
+    
+      } catch (err) {
         Swal.fire({
           title: 'Error',
           text: err.message,
           icon: 'error',
           confirmButtonText: 'OK',
         });
-      }
-      finally {
+      } finally {
         setIsLoading(false);
       }
-    }
-      
+    };
+    
   return (
     <>
         <div className="detailProduitCommande">
@@ -208,12 +237,18 @@ const DetailProduitCommande = ({idVariant, idCommande}) => {
                                     </div>
                                     <div className="filters">
                                         <span className="filter-titre">Taille</span>
-                                        <select name="id_taille" id="" className='select-filter' onChange={(e) => setTaille(e.target.value)}>
-                                          <option className='taille_pla'>Sélectionnez une pointure</option>
+                                        <Select
+                                          placeholder="Sélectionnez une pointure"
+                                          style={{ width: "200px" }}
+                                          className="filter-titre"
+                                          mode="multiple"
+                                          onChange={(selectedValues) => setTaille(selectedValues)}
+                                        >
+                                          <Option className="taille_pla" disabled>Sélectionnez une pointure</Option>
                                           {getTaille?.sort((a, b) => a.taille - b.taille).map((s) => (
-                                            <option value={s.id_taille} key={s.id_taille}>{s.taille}</option>
+                                            <Option value={s.id_taille} key={s.id_taille}>{s.taille}</Option>
                                           ))}
-                                        </select>
+                                        </Select>
                                     </div>
                                 </div>                             
                                 <div className="filter-product">

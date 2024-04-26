@@ -101,10 +101,11 @@ const Localisation = () => {
         )}
         </MapContainer>
       ) : <div style={{height: "95vh", display: 'flex', alignItems:'center', justifyContent:'center', padding:'20px', fontSize:'13px'}}>
-        <span style={{textAlign:'center'}}> Aucune localisation n'a été définie sur la carte pour ce client. Souhaitez-vous  en ajouter une ?</span>
+        <span style={{textAlign:'center'}}>Aucune localisation n'a été définie sur la carte pour ce client. Souhaitez-vous  en ajouter une ?</span>
       </div> }
   
       {/* <p style={{margin:'10px',color: 'rgb(3, 3, 109)'}}>Distance entre la boutique et le client : {distance && distance} mètres.</p> */}
+      <button style={{background:'rgb(1, 35, 138)', color:'#fff', padding:'10px 10px', margin:'20px 10px', border:'none'}}>Envoyer la localisation</button>
     </div>
   );
 };

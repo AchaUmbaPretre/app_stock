@@ -16,17 +16,9 @@ const Localisation = () => {
   const num = searchParams.get('num');
   const clientAddress = `Kinshasa, ${commune}, ${avenue}, ${num}`;
   const [currentPosition, setCurrentPosition] = useState(null);
-  const [boutiquePosition, setBoutiquePosition] = useState(null);
-  const [distance, setDistance] = useState(null)
   const [userPosition, setUserPosition] = useState(null);
   const [isUserPopupOpen, setIsUserPopupOpen] = useState(true);
   const user = useSelector((state) => state.user.currentUser.username);
-
-  const boutiqueCommune = 'Ngaliema';
-  const boutiqueQuartier = 'Lalu';
-  const boutiqueAvenue = 'kinshasa';
-  const boutiqueAddress = `Kinshasa, ${boutiqueCommune}, ${boutiqueQuartier}, ${boutiqueAvenue}`;
-
 
   useEffect(() => {
     const watchUserPosition = navigator.geolocation.watchPosition(
@@ -68,6 +60,8 @@ const Localisation = () => {
 
     geocodeAddress();
   }, [clientAddress]);
+
+  console.log(currentPosition)
 
 /*   useEffect(() => {
     if (boutiquePosition && currentPosition) {

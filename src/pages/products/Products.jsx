@@ -370,39 +370,39 @@ const filteredData = getProduit?.filter((item) =>
                         <ProductDetail idProduit={idProduit}/>
                         </Modal>
                         <Modal
-                      title="Etat produit"
-                      visible={modalVisible}
-                      onCancel={() => setModalVisible(false)}
-                      onOk={async () => {
-                        try {
-                          await axios.put(`${DOMAIN}/api/produit/${selectedProductId}`);
-                          setModalVisible(false); // Ferme le modal après la requête réussie
+                          title="Etat produit"
+                          visible={modalVisible}
+                          onCancel={() => setModalVisible(false)}
+                          onOk={async () => {
+                            try {
+                              await axios.put(`${DOMAIN}/api/produit/${selectedProductId}`);
+                              setModalVisible(false);
 
-                          Swal.fire({
-                            title: 'Success',
-                            text: "L'état des produits a été modifié avec succès.",
-                            icon: 'success',
-                            confirmButtonText: 'OK',
-                          });
+                              Swal.fire({
+                                title: 'Success',
+                                text: "L'état des produits a été modifié avec succès.",
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                              });
 
-                          window.location.reload();
-                        } catch (err) {
-                          Swal.fire({
-                            title: 'Error',
-                            text: err.message,
-                            icon: 'error',
-                            confirmButtonText: 'OK',
-                          });
-                        }
-                      }}
-                      centered
-                      cancelText={<span style={{ color: '#fff' }}>Annuler</span>}
-                      okText={<span style={{ color: '#fff' }}>Oui</span>}
-                      cancelButtonProps={{ style: { background: 'red' } }}
-                      okButtonProps={{ style: { background: 'blue' } }}
-                    >
-                      <p>Souhaitez-vous réellement désactiver ou réactiver ?</p>
-                    </Modal>
+                              window.location.reload();
+                            } catch (err) {
+                              Swal.fire({
+                                title: 'Error',
+                                text: err.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                              });
+                            }
+                          }}
+                          centered
+                          cancelText={<span style={{ color: '#fff' }}>Annuler</span>}
+                          okText={<span style={{ color: '#fff' }}>Oui</span>}
+                          cancelButtonProps={{ style: { background: 'red' } }}
+                          okButtonProps={{ style: { background: 'blue' } }}
+                      >
+                        <p>Souhaitez-vous réellement désactiver ou réactiver ?</p>
+                      </Modal>
                     <div className="rowChart-row-table">
                       <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
                     </div>

@@ -24,8 +24,6 @@ const ListeCommandeSelect = ({getProduits}) => {
       setDatas((prev) => ({ ...prev, end_date: endDate }));
     };
 
-      console.log(datas)
-
       useEffect(() => {
         const fetchData = async () => {
           try {

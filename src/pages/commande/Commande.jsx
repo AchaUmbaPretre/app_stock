@@ -132,6 +132,7 @@ const Commande = () => {
         fetchData();
       }, [DOMAIN]);
 
+
 /*       useEffect(() => {
         const fetchData = async () => {
           try {

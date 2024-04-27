@@ -28,7 +28,9 @@ const Products = () => {
     const [open, setOpen] = useState(false);
     const [idProduit, setIdProduit] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState(null);
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -263,6 +265,11 @@ const HandOpen = () =>{
   setOpens(!opens)
 }
 
+const handleModalClose = () => {
+  // Ferme le modal
+  setModalVisible(false);
+};
+
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -282,6 +289,13 @@ const showModal = (e) => {
 };
 
 const handleOk = async (e) => {
+  setSelectedProductId(e); // Stocke l'ID du produit sélectionné
+  setModalVisible(true); // Affiche le modal
+  // Le reste du code reste inchangé
+};
+
+/* const handleOk = async (e) => {
+  setModalVisible(true)
   try{
     await axios.put(`${DOMAIN}/api/produit/${e}`)
 
@@ -301,7 +315,7 @@ const handleOk = async (e) => {
       confirmButtonText: 'OK',
     });
   }
-};
+}; */
 
 const filteredData = getProduit?.filter((item) => 
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -355,6 +369,40 @@ const filteredData = getProduit?.filter((item) =>
                         >
                         <ProductDetail idProduit={idProduit}/>
                         </Modal>
+                        <Modal
+                      title="Etat produit"
+                      visible={modalVisible}
+                      onCancel={() => setModalVisible(false)}
+                      onOk={async () => {
+                        try {
+                          await axios.put(`${DOMAIN}/api/produit/${selectedProductId}`);
+                          setModalVisible(false); // Ferme le modal après la requête réussie
+
+                          Swal.fire({
+                            title: 'Success',
+                            text: "L'état des produits a été modifié avec succès.",
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                          });
+
+                          window.location.reload();
+                        } catch (err) {
+                          Swal.fire({
+                            title: 'Error',
+                            text: err.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                          });
+                        }
+                      }}
+                      centered
+                      cancelText={<span style={{ color: '#fff' }}>Annuler</span>}
+                      okText={<span style={{ color: '#fff' }}>Oui</span>}
+                      cancelButtonProps={{ style: { background: 'red' } }}
+                      okButtonProps={{ style: { background: 'blue' } }}
+                    >
+                      <p>Souhaitez-vous réellement désactiver ou réactiver ?</p>
+                    </Modal>
                     <div className="rowChart-row-table">
                       <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
                     </div>

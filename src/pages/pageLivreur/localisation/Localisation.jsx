@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { EnvironmentOutlined,WhatsAppOutlined,UserOutlined  } from '@ant-design/icons';
 import L from 'leaflet';
-import { getDistance } from 'geolib';
 import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import config from '../../../config';
 
 const Localisation = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const commune = searchParams.get('commune');
@@ -19,11 +22,17 @@ const Localisation = () => {
   const [userPosition, setUserPosition] = useState(null);
   const [isUserPopupOpen, setIsUserPopupOpen] = useState(true);
   const user = useSelector((state) => state.user.currentUser.username);
+  const [iSLoading, setIsLoading] = useState(false)
+  const [lat, setLat] = useState(null)
+  const [lon, setLon] = useState(null)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const watchUserPosition = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        setLat(latitude)
+        setLon(longitude)
         setUserPosition([latitude, longitude]);
       },
       (error) => {
@@ -36,6 +45,9 @@ const Localisation = () => {
       navigator.geolocation.clearWatch(watchUserPosition);
     };
   }, []);
+
+  console.log(lat)
+  console.log(lon)
 
 
   useEffect(() => {
@@ -61,7 +73,6 @@ const Localisation = () => {
     geocodeAddress();
   }, [clientAddress]);
 
-  console.log(currentPosition)
 
 /*   useEffect(() => {
     if (boutiquePosition && currentPosition) {
@@ -70,6 +81,32 @@ const Localisation = () => {
     }
   }, [boutiquePosition, currentPosition]); */
 
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    try{
+      setIsLoading(true);
+      await axios.put(`${DOMAIN}/api/client/clientLocation`)
+      Swal.fire({
+        title: 'Success',
+        text: 'Localisation a été enregistrée avec succès!',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+      window.location.reload();
+
+    }catch(err) {
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    }
+    finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div>
@@ -99,7 +136,7 @@ const Localisation = () => {
       </div> }
   
       {/* <p style={{margin:'10px',color: 'rgb(3, 3, 109)'}}>Distance entre la boutique et le client : {distance && distance} mètres.</p> */}
-      <button style={{background:'rgb(1, 35, 138)', color:'#fff', padding:'10px 10px', margin:'20px 10px', border:'none'}}>Envoyer la localisation</button>
+      <button style={{background:'rgb(1, 35, 138)', color:'#fff', padding:'10px 10px', margin:'20px 10px', border:'none'}} onClick={handleClick}>Envoyer la localisation</button>
     </div>
   );
 };

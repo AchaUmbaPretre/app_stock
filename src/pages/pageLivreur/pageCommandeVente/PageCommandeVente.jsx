@@ -311,7 +311,7 @@ const PageCommandeVente = () => {
                     <span style={{padding: "10px 0", color: '#555'}}>Telephone : {data[0]?.numero}</span>
                   </div>
                 </div> }
-                <div className="page-location" onClick={()=> navigate(`/localisation?commune=${data[0]?.nom_commune}&quartier=${data[0]?.quartier}&avenue=${data[0]?.avenue}&num=${data[0]?.num}`)}>
+                <div className="page-location" onClick={()=> navigate(`/localisation?commune=${data[0]?.nom_commune}&quartier=${data[0]?.quartier}&avenue=${data[0]?.avenue}&num=${data[0]?.num}&id_adresse=${data[0].id_adresse}`)}>
                   <div style={{display:'flex', gap:"10px"}}>
                     <EnvironmentOutlined style={{fontSize: '16px', color :'red'}} />
                     <p style={{fontSize: '14px'}}>Localisation</p>

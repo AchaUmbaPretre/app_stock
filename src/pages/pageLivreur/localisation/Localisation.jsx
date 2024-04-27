@@ -13,6 +13,7 @@ const Localisation = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const id_adresse = searchParams.get('id_adresse');
   const commune = searchParams.get('commune');
   const quartier = searchParams.get('quartier');
   const avenue = searchParams.get('avenue');
@@ -86,7 +87,10 @@ const Localisation = () => {
 
     try{
       setIsLoading(true);
-      await axios.put(`${DOMAIN}/api/client/clientLocation`)
+      await axios.put(`${DOMAIN}/api/client/clientLocation/${id_adresse}`,{
+        lat : lat,
+        lon: lon
+      })
       Swal.fire({
         title: 'Success',
         text: 'Localisation a été enregistrée avec succès!',

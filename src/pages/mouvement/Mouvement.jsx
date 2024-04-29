@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ShoppingCartOutlined,ArrowLeftOutlined,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,ArrowDownOutlined,ShoppingCartOutlined ,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -130,7 +130,7 @@ const Mouvement = () => {
             <Popover
               content="Voir les détails" placement="top"
             >
-              <Tag color="blue" icon={<ShoppingCartOutlined />} style={{ cursor: 'pointer' }} onClick={()=>qModal(record.id_commande)}>
+              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }} onClick={()=>qModal(record.id_commande)}>
                 {record.total_varianteproduit}
               </Tag>
             </Popover>
@@ -146,7 +146,7 @@ const Mouvement = () => {
             <Popover
               content="Voir le nombre des articles vendus" placement="top"
             >
-              <Tag color="green" icon={<ArrowUpOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}} onClick={()=> showModalOneVente(record.id_vente, record.id_commande)}>
+              <Tag color="green" icon={<ShoppingCartOutlined style={{paddingRight: "5px"}} />} style={{cursor: "pointer"}} onClick={()=> showModalOneVente(record.id_vente, record.id_commande)}>
               {record.total_vendu ?? 0}
               </Tag>
             </Popover>
@@ -162,7 +162,7 @@ const Mouvement = () => {
           <Popover
             content="Voir le nombre des articles retournés" placement="top"
           >
-            <Tag color={'red'} icon={<ArrowLeftOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}} onClick={()=> showModalOneRetour(record.id_retours, record.id_commande)}>{record.total_retours ?? 0}</Tag>
+            <Tag color={'red'} icon={<ArrowDownOutlined style={{paddingRight: "8px"}}/>} style={{cursor: "pointer"}} onClick={()=> showModalOneRetour(record.id_retours, record.id_commande)}>{record.total_retours ?? 0}</Tag>
           </Popover>
           )
         },
@@ -181,17 +181,17 @@ const Mouvement = () => {
           )
         },
         {
-            title: 'Date',
-            dataIndex: 'date_mouvement',
-            key: 'date_mouvement',
-            sorter: (a, b) => a.date_mouvement - b.date_mouvement,
-            sortDirections: ['descend', 'ascend'],
-              render: (text) => (
-                <Tag color={'blue'} icon={<CalendarOutlined />}>
-                  {moment(text).format('DD-MM-yyyy')}
-                </Tag>
-              ),
-          },
+          title: 'Date & Heure',
+          dataIndex: 'date_mouvement',
+          key: 'date_mouvement',
+          sorter: (a, b) => a.date_mouvement - b.date_mouvement,
+          sortDirections: ['descend', 'ascend'],
+          render: (text) => (
+            <Tag color={'blue'} icon={<CalendarOutlined />}>
+              {moment(text).format('DD-MM-yyyy HH:mm')}
+            </Tag>
+          ),
+        },
         {
             title: 'Action',
             key: 'action',

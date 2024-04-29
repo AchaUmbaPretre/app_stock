@@ -246,10 +246,10 @@ const Mouvement = () => {
                     </div>
                 </div>
                 <Tabs>
-                  <Tabs.TabPane tab='Vendus' key={2}>
+                  <Tabs.TabPane tab='Vendus' key={0}>
                      <MouvementDepart/>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Mouvement par commande' key={0}>
+                  <Tabs.TabPane tab='Commandes' key={1}>
                     <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
@@ -304,11 +304,13 @@ const Mouvement = () => {
                       </div>
                     </div>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Mouvement complet' key={1}>
+                  <Tabs.TabPane tab='Tous' key={2}>
                      <MouvementAll/>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Mouvement retourné' key={3}>
+                  <Tabs.TabPane tab='Retournés' key={3}>
                      <MouvementRetour/>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Echanges' key={4}>
                   </Tabs.TabPane>
                 </Tabs>
             </div>

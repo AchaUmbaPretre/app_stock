@@ -120,7 +120,7 @@ const EchangeForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/commande`);
+        const { data } = await axios.get(`${DOMAIN}/api/commande/commandeEchange`);
         setCommande(data);
       } catch (error) {
         console.log(error);

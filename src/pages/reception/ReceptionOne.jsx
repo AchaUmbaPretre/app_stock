@@ -1,11 +1,11 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Table, Tag, Space, Popover, Button, Image } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { Table, Tag, Image } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
 import ReceptionSelect from './ReceptionSelect';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const ReceptionOne = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -131,21 +131,7 @@ const columns = [
         render: (quantite_stock) => (
           <Tag color={quantite_stock > 0 ? 'green' : 'red'}>{quantite_stock}</Tag>
         ),
-      },
-/*      {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteV/${record.code_variant}`}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    } */
+      }
 ];
 
 const HandOpen = () =>{
@@ -163,7 +149,7 @@ useEffect(() => {
     }
   };
   fetchData();
-}, [DOMAIN]);
+}, [DOMAIN,dateId]);
 
 /*  const filteredData = getRapport?.filter((item) =>
 item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||

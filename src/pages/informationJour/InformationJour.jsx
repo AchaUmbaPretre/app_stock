@@ -7,6 +7,7 @@ const InformationJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const [commande, setCommande] = useState([]);
+    const [livraison, setLivraison] = useState([]);
     
 
 
@@ -39,6 +40,18 @@ const InformationJour = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreJour`);
+            setLivraison(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
 
   return (
     <>
@@ -53,7 +66,7 @@ const InformationJour = () => {
             </div>
             <div className="info-row">
                 <span>Nbre de livraison : </span>
-                <span>10</span>
+                <span>{livraison[0]?.total_produit === null ? 0 : livraison[0]?.total_produit}</span>
             </div>
         </div>
 

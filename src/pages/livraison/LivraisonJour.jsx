@@ -33,10 +33,6 @@ const LivraisonJour = () => {
         setIdClient(e)
       };
 
-      const HandOpen = () => {
-        setOpens(!opens);
-      };
-
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {

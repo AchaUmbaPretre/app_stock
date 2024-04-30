@@ -142,7 +142,7 @@ useEffect(() => {
                       <Tabs.TabPane tab='Réceptions du jour' key={1}>
                         <ReceptionJour/>
                       </Tabs.TabPane>
-                      <Tabs.TabPane tab='Réceptions de 7 derniers jours' key={2}>
+                      <Tabs.TabPane tab='Réceptions des 7 derniers jours' key={2}>
                         <Reception7Jour/>
                       </Tabs.TabPane>
                     </Tabs>

@@ -168,6 +168,14 @@ const MouvementAll = () => {
           },
         },
         {
+          title: 'Commune',
+          dataIndex: 'nom_commune',
+          key: 'nom_commune',
+          render: (text, record) => {
+            return <Tag color={"green"}>{text}</Tag>;
+          },
+        },
+        {
           title: 'Livreur',
           dataIndex: 'livreur',
           key: 'livreur',
@@ -180,19 +188,17 @@ const MouvementAll = () => {
           )
         },
         {
-            title: 'Date',
-            dataIndex: 'date_mouvement',
-            key: 'date_mouvement',
-            sorter: (a, b) => a.date_mouvement - b.date_mouvement,
-            sortDirections: ['descend', 'ascend'],
-              render: (text) => (
-                <span>
-                  <Tag color={'blue'} icon={<CalendarOutlined />}>
-                    {moment(text).format('DD-MM-yyyy')}
-                  </Tag>
-                </span>
-              ),
-          },
+          title: 'Date & Heure',
+          dataIndex: 'date_mouvement',
+          key: 'date_mouvement',
+          sorter: (a, b) => a.date_mouvement - b.date_mouvement,
+          sortDirections: ['descend', 'ascend'],
+          render: (text) => (
+            <Tag color={'blue'} icon={<CalendarOutlined />}>
+              {moment(text).format('DD-MM-yyyy HH:mm')}
+            </Tag>
+          ),
+        },
           {
             title: 'Type mouvement',
             dataIndex: 'type_mouvement',
@@ -275,7 +281,9 @@ const MouvementAll = () => {
       }, [DOMAIN]);
   
    const filteredData = data?.filter((item) =>
-    item.nom_marque.toLowerCase().includes(searchValue.toLowerCase())
+    item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_commune.toLowerCase().includes(searchValue.toLowerCase()) || 
+    item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
     )
   
     return (

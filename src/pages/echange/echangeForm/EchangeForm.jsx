@@ -94,11 +94,66 @@ const EchangeForm = () => {
       title: 'Couleur',
       dataIndex: 'description',
       key: 'description',
-      render: (description) => (
-        <Space>
-          <Tag color="green">{description}</Tag>
-        </Space>
-      ),
+      render: (color) => {
+        let tagColor;
+      
+        if (color === 'Rouge') {
+          tagColor = '#FF0000';
+        } else if (color === 'Noir') {
+          tagColor = 'black';
+        } else if (color === 'Noir brillant'){
+          tagColor = '#000';
+        } else if (color === 'Orange') {
+          tagColor = 'orange';
+        } else if (color === 'Bleu') {
+          tagColor = 'skyblue';
+        } else if (color === 'Bleu ciel'){
+          tagColor = '#87CEEB';
+        } else if (color === 'Chocolat') {
+          tagColor = 'chocolate';
+        } else if (color === 'Vert fluo') {
+          tagColor = 'lime';
+        } else if (color === 'Vert') {
+          tagColor = ' #008000';
+        }else if (color === 'Vert clair'){
+          tagColor = '#90EE90';
+        } else if (color === 'Rose fuschia') {
+          tagColor = '#FF00FF';
+        }else if (color === 'Rose'){
+          tagColor = '#FFC0CB';
+        } else if (color === 'Beige saumon') {
+          tagColor = 'burlywood';
+        } else if (color === 'Jaune') {
+          tagColor = 'yellow';
+        } else if (color === 'Gris') {
+          tagColor = 'gray';
+        } else if (color === 'Violet') {
+          tagColor = 'purple';
+        } else if (color === 'Mauve') {
+          tagColor = '#D473D4';
+        } else if (color === 'Argente'){
+          tagColor = '#C0C0C0';
+        } else if (color === 'Dorée'){
+          tagColor = '#C0C0C0';
+        }else if (color === 'Rouge Bordeau'){
+          tagColor = '#6D071A';
+        }else if (color === 'Beige'){
+          tagColor = '#F5F5DC';
+        }else if (color === 'Marron fonce'){
+          tagColor = '#800000';
+        }else if (color === 'Marron'){
+          tagColor = '#A52A2A';
+        }else if (color === 'Blanc'){
+          tagColor = 'white';
+        } else {
+          // Couleur par défaut si aucune correspondance n'est trouvée
+          tagColor = 'default';
+        }
+      
+        return (
+          <Tag color={tagColor}>{color}</Tag>
+        );
+      },
     },
     {
       title: 'Qté',

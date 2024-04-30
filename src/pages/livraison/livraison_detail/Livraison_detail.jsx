@@ -1,9 +1,8 @@
-import { SearchOutlined, SisternodeOutlined,ArrowUpOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EnvironmentOutlined,ArrowUpOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { format } from 'date-fns';
 import config from '../../../config';
 import LivraisonClientDetail from './livraisonClientDetail/LivraisonClientDetail';
 import { useSelector } from 'react-redux';
@@ -57,6 +56,16 @@ const Livraison_detail = () => {
           render : (text, record)=>(
             <div onClick={()=> showModal(record.id_client)} style={{cursor: 'pointer'}}>
                <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} />{text}</Tag>
+            </div>
+          )
+        },
+        {
+          title: 'Commune',
+          dataIndex: 'nom_commune',
+          key: 'nom_commune',
+          render : (text, record)=>(
+            <div>
+               <Tag color={'green'}><EnvironmentOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             </div>
           )
         },

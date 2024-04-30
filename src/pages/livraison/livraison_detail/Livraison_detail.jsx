@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,ArrowUpOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
@@ -67,6 +67,21 @@ const Livraison_detail = () => {
             <div>
                <Tag color={'green'}><UserOutlined />{text}</Tag>
             </div>
+          )
+        },{
+          title: 'Détail',
+          dataIndex: 'total_varianteproduit',
+          key: 'total_varianteproduit',
+          sorter: (a, b) => a.quant - b.quant,
+          sortDirections: ['descend', 'ascend'],
+          render: (text, record) => (
+            <Popover
+              content="Voir les détails" placement="top"
+            >
+              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}>
+                {record.quant}
+              </Tag>
+            </Popover>
           )
         },
         {

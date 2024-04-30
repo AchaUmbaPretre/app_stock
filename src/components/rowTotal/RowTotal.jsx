@@ -2,7 +2,7 @@ import React from 'react'
 import './rowTotal.scss'
 import { CarryOutOutlined, VerticalAlignBottomOutlined, VerticalAlignTopOutlined, FileDoneOutlined  } from '@ant-design/icons';
 import CountUp from 'react-countup';
-import { Button, Input, Space, Table, Popover,Popconfirm, Modal, Image} from 'antd';
+import { Modal } from 'antd';
 import { useState } from 'react';
 import config from '../../config';
 import { useEffect } from 'react';
@@ -114,7 +114,7 @@ const RowTotal = () => {
           centered
           open={open}
           onCancel={() => setOpen(false)}
-          width={800}
+          width={750}
           footer={[]}
         >
           <InformationJour/>

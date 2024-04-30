@@ -6,10 +6,8 @@ import config from '../../config';
 import { format } from 'date-fns';
 import ReceptionSelect from './ReceptionSelect';
 import { Link } from 'react-router-dom';
-import ReceptionJour from './ReceptionJour';
-import Reception7Jour from './Reception7Jour';
 
-const Reception = () => {
+const ReceptionJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -91,7 +89,7 @@ const HandOpen = () =>{
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/produit/reception`);
+      const { data } = await axios.get(`${DOMAIN}/api/produit/receptionJour`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -109,18 +107,9 @@ useEffect(() => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Réception</h2>
-                        <span>Gérez vos réceptions</span>
-                    </div>
-                </div>
-                    <Tabs>
-                      <Tabs.TabPane tab='Réceptions' key={0}>
                         <div className="product-bottom">
                         <div className="product-bottom-top">
                             <div className="product-bottom-left">
-                                {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                                 <div className="product-row-search">
                                     <SearchOutlined className='product-icon-plus'/>
                                     <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
@@ -138,14 +127,6 @@ useEffect(() => {
                             <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                         </div>
                         </div>
-                      </Tabs.TabPane>
-                      <Tabs.TabPane tab='Réceptions du jour' key={1}>
-                        <ReceptionJour/>
-                      </Tabs.TabPane>
-                      <Tabs.TabPane tab='Réceptions de 7 derniers jours' key={2}>
-                        <Reception7Jour/>
-                      </Tabs.TabPane>
-                    </Tabs>
             </div>
         </div>
 
@@ -153,4 +134,4 @@ useEffect(() => {
   )
 }
 
-export default Reception
+export default ReceptionJour

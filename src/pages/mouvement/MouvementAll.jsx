@@ -1,4 +1,4 @@
-import { SearchOutlined,SisternodeOutlined,CloseOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined,SisternodeOutlined,CloseOutlined,EnvironmentOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
@@ -171,9 +171,11 @@ const MouvementAll = () => {
           title: 'Commune',
           dataIndex: 'nom_commune',
           key: 'nom_commune',
-          render: (text, record) => {
-            return <Tag color={"green"}>{text}</Tag>;
-          },
+          render : (text,record)=>(
+            <div>
+                <Tag color={'green'}><EnvironmentOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
+            </div>
+          )
         },
         {
           title: 'Livreur',

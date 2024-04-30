@@ -164,8 +164,9 @@ const Livraison_detail = () => {
       }, [DOMAIN]);
 
     const filteredData = data?.filter((item) =>
-      item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) || 
-      item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase()) 
+    item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase())
     );
 
   return (

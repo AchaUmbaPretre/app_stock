@@ -1,4 +1,4 @@
-import { SearchOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined } from '@ant-design/icons';
+import { SearchOutlined, FilePdfOutlined,EnvironmentOutlined,ArrowUpOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
 import LivraisonClientDetail from './livraison_detail/livraisonClientDetail/LivraisonClientDetail';
 import config from '../../config';
+import moment from 'moment';
 
 const LivraisonJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -54,12 +55,12 @@ const LivraisonJour = () => {
           )
         },
         {
-          title: 'Livreur',
-          dataIndex: 'nom_livreur',
-          key: 'nom_livreur',
+          title: 'Commune',
+          dataIndex: 'nom_commune',
+          key: 'nom_commune',
           render : (text, record)=>(
             <div>
-               <Tag color={'green'}><UserOutlined />{text}</Tag>
+               <Tag color={'green'}><EnvironmentOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             </div>
           )
         },
@@ -81,15 +82,41 @@ const LivraisonJour = () => {
           ),
         },
         {
-            title: 'Date création',
-            dataIndex: 'date_creation',
-            key: 'date_creation',
-            render: (text) => {
-              const formattedDate = format(new Date(text), 'dd-MM-yyyy');
-              return <Tag color={'green'} icon={<CalendarOutlined />}>
-                      {formattedDate}
-                     </Tag>;
-            },
+          title: 'Livreur',
+          dataIndex: 'nom_livreur',
+          key: 'nom_livreur',
+          render : (text, record)=>(
+            <div>
+               <Tag color={'green'}><UserOutlined />{text}</Tag>
+            </div>
+          )
+        },{
+          title: 'Quantité',
+          dataIndex: 'quant',
+          key: 'quant',
+          sorter: (a, b) => a.quant - b.quant,
+          sortDirections: ['descend', 'ascend'],
+          render: (text, record) => (
+            <Popover
+              content="Voir les détails" placement="top"
+            >
+              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}>
+                {record.quant}
+              </Tag>
+            </Popover>
+          )
+        },
+        {
+          title: 'Date & Heure',
+          dataIndex: 'date_creation',
+          key: 'date_creation',
+          sorter: (a, b) => a.date_creation - b.date_creation,
+          sortDirections: ['descend', 'ascend'],
+          render: (text) => (
+            <Tag color={'blue'} icon={<CalendarOutlined />}>
+              {moment(text).format('DD-MM-yyyy HH:mm')}
+            </Tag>
+          ),
         },
         {
             title: 'Action',
@@ -132,7 +159,9 @@ const LivraisonJour = () => {
       }, [DOMAIN]);
 
       const filteredData = data?.filter((item) =>
-      item.nom_client?.toLowerCase().includes(searchValue.toLowerCase())
+      item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase())
     );
 
   return (

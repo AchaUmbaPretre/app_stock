@@ -3,6 +3,7 @@ import { Avatar } from 'antd';
 import React from 'react'
 import './topbar.css'
 import logo from './../../assets/logo_doe-removebg-preview.png'
+import rdc from './../../assets/stock-vector.jpg'
 import { UserOutlined,MenuOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -34,16 +35,15 @@ const Topbar = () => {
           </div>}
           <div className="topbar-icons">
             <NotificationsNone/>
-            <span className="topbar-not">2</span>
+{/*             <span className="topbar-not">2</span> */}
           </div>
-          <div className="topbar-icons">
-            <MailOutline/>
-            <span className="topbar-not">2</span>
+          <div className="topbar-icons" style={{border: "1px solid #c2c2c2bb", background:'#f2f2f2'}}>
+          <img src={rdc} alt="" className="topbar-imgUser"/> 
           </div>
           <div className="icons-user">
             {/* <img src={logo} alt="" className="topbar-imgUser"/> */}
             <Avatar icon={<UserOutlined />} />
-            <span>{user}</span>
+            <span className='username'>{user}</span>
           </div>
           <div className={`topbar-icon ${isSidebarOpen ? 'colorRed' : ''}`} onClick={handleClick}>
             {isSidebarOpen ? <CloseOutlined style={{color:'red'}}/> : <MenuOutlined /> }

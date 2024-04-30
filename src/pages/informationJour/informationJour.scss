@@ -8,14 +8,15 @@
 
     .info-row{
         padding: 20px;
-        background: #f8f8f8;
+        background: #fcfcfc;
         display: flex;
         justify-content: space-between;
         border-radius: 20px;
+        border: 1px solid #c2c2c2bb;
         span{
             font-size: 15px;
-            font-weight: 800;
-            color: rgb(27, 27, 27);
+            font-weight: 700;
+            color: rgba(1, 35, 138, 0.952);
         }
     }
 }

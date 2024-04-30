@@ -1,4 +1,4 @@
-import { SearchOutlined, UserOutlined,EnvironmentOutlined,CalendarOutlined,SisternodeOutlined,CloseOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined,SisternodeOutlined,CloseOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
@@ -7,15 +7,15 @@ import config from '../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import MouvementDepartSelect from './MouvementDepartSelect';
+import MouvementEchangeSelect from './MouvementEchangeSelect';
 
-const MouvementDepart = () => {
+const MouvementEchange = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
-    const [opens, setOpens] = useState(false);
     const [data, setData] = useState([]);
+    const [opens, setOpens] = useState(false);
     const searchInput = useRef(null);
     const scroll = { x: 500 };
     const navigate = useNavigate();
@@ -27,10 +27,12 @@ const MouvementDepart = () => {
         setSearchText(selectedKeys[0]);
         setSearchedColumn(dataIndex);
       };
+
       const handleReset = (clearFilters) => {
         clearFilters();
         setSearchText('');
       };
+
       const getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
           <div
@@ -134,10 +136,6 @@ const MouvementDepart = () => {
             console.log(err);
           }
         };
-
-        const HandOpen = () =>{
-          setOpens(!opens)
-        };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -175,11 +173,9 @@ const MouvementDepart = () => {
           title: 'Commune',
           dataIndex: 'nom_commune',
           key: 'nom_commune',
-          render : (text,record)=>(
-            <div>
-                <Tag color={'green'}><EnvironmentOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
-            </div>
-          )
+          render: (text, record) => {
+            return <Tag color={"green"}>{text}</Tag>;
+          },
         },
         {
           title: 'Livreur',
@@ -265,6 +261,10 @@ const MouvementDepart = () => {
           },
       ];
 
+      const HandOpen = () =>{
+        setOpens(!opens)
+      };
+
       const showModalLivreur = (e) => {
         navigate(`/mouvementOne/${e}`)
       };
@@ -272,7 +272,7 @@ const MouvementDepart = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementDepart`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementEchange`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -283,10 +283,9 @@ const MouvementDepart = () => {
       }, [DOMAIN]);
   
    const filteredData = data?.filter((item) =>
-      item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.nom_commune.toLowerCase().includes(searchValue.toLowerCase()) || 
-      item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
+    item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_commune.toLowerCase().includes(searchValue.toLowerCase()) || 
+    item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
     )
   
     return (
@@ -302,23 +301,17 @@ const MouvementDepart = () => {
                               <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                             </div>
                         </div>
-                        <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
-                        </div>
                     </div>
                     {opens &&
-                              <MouvementDepartSelect getProduits={setData}/> }
+                      <MouvementEchangeSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>
         </div>
-
     </>
   )
 }
 
-export default MouvementDepart
+export default MouvementEchange

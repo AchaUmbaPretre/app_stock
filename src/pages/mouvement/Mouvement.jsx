@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ArrowDownOutlined,ShoppingCartOutlined ,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
+import { SearchOutlined,EnvironmentOutlined, SisternodeOutlined,EyeOutlined,ArrowDownOutlined,ShoppingCartOutlined ,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ import MouvementAll from './MouvementAll';
 import MouvementRetour from './MouvementRetour';
 import MouvementOneVente from './MouvementOneVente';
 import MouvementOneRetour from './MouvementOneRetour';
+import MouvementEchange from './MouvementEchange';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -88,6 +89,16 @@ const Mouvement = () => {
           render : (text,record)=>(
             <div onClick={()=> showModal(record.id_client1)} style={{cursor: 'pointer'}}>
                 <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
+            </div>
+          )
+        },
+        {
+          title: 'Commune',
+          dataIndex: 'nom_commune',
+          key: 'nom_commune',
+          render : (text,record)=>(
+            <div>
+                <Tag color={'green'}><EnvironmentOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
             </div>
           )
         },
@@ -314,6 +325,7 @@ const Mouvement = () => {
                      <MouvementRetour/>
                   </Tabs.TabPane>
                   <Tabs.TabPane tab='Echanges' key={4}>
+                    <MouvementEchange/>
                   </Tabs.TabPane>
                 </Tabs>
             </div>

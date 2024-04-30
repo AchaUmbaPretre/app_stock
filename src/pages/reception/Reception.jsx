@@ -99,10 +99,9 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
-/*  const filteredData = getRapport?.filter((item) =>
-item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
-) */
+  const filteredData = getRapport?.filter((item) =>
+  item.username.toLowerCase().includes(searchValue.toLowerCase())
+  )
 
   return (
     <>
@@ -111,7 +110,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Réception</h2>
-                        <span>Gérez vos nouveaux produits</span>
+                        <span>Gérez vos réceptions</span>
                     </div>
                 </div>
                     <div className="product-bottom">
@@ -132,7 +131,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                        {open &&
                               <ReceptionSelect getProduits={setGetRapport}/> }
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
                     </div>
             </div>

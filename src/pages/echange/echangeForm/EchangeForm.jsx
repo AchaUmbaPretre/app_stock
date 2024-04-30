@@ -40,6 +40,7 @@ const EchangeForm = () => {
       title: '',
       dataIndex: 'id_detail',
       key: 'selected',
+      width :'60px',
       render: (text, record) => (
         <div>
           <Checkbox

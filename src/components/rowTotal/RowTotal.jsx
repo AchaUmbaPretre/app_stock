@@ -8,6 +8,7 @@ import config from '../../config';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import InformationJour from '../../pages/informationJour/InformationJour';
 
 
 const RowTotal = () => {
@@ -116,8 +117,7 @@ const RowTotal = () => {
           width={1000}
           footer={[]}
         >
-          aaa
-{/*                         <ProductDetail idProduit={idProduit}/> */}
+          <InformationJour/>
         </Modal>
     </>
   )

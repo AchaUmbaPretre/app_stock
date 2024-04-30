@@ -1,0 +1,19 @@
+@import '../../style.scss';
+
+.informationJour{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+
+    .info-row{
+        padding: 10px;
+        background: #fdfdfd;
+        display: flex;
+        justify-content: space-between;
+        span{
+            font-size: 15px;
+            font-weight: 800;
+        }
+    }
+}

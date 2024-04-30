@@ -1,6 +1,6 @@
 import React from 'react'
 import './rowTotal.scss'
-import { CarryOutOutlined, VerticalAlignBottomOutlined, VerticalAlignTopOutlined } from '@ant-design/icons';
+import { CarryOutOutlined, VerticalAlignBottomOutlined, VerticalAlignTopOutlined, FileDoneOutlined  } from '@ant-design/icons';
 import CountUp from 'react-countup';
 import { useState } from 'react';
 import config from '../../config';
@@ -14,7 +14,6 @@ const RowTotal = () => {
     const [produitTotalAchats, setProduitTotalAchats] = useState([]);
     const [depenses, setDepenses] = useState([]);
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [loading, setLoading] = useState(true);
     const user = useSelector((state) => state.user?.currentUser);
 
     useEffect(() => {
@@ -93,6 +92,11 @@ const RowTotal = () => {
                     <div className="rowTotal-right">
                         <h2><CountUp end={depenses}/>$</h2>
                         <span className="rowTotal-span">Montant total des dépenses</span>
+                    </div>
+                </div>
+                <div className="rowTotals">
+                    <div className="rowTotal-left">
+                        <FileDoneOutlined className='rowTotalIcon' style={{color: 'blue', fontSize:"25px"}}/>
                     </div>
                 </div>
             </div>

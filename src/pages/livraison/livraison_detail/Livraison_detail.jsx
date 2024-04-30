@@ -9,6 +9,7 @@ import LivraisonClientDetail from './livraisonClientDetail/LivraisonClientDetail
 import { useSelector } from 'react-redux';
 import Livraison_detailSelect from './Livraison_detailSelect';
 import LivraisonJour from '../LivraisonJour';
+import moment from 'moment';
 
 const Livraison_detail = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -60,31 +61,6 @@ const Livraison_detail = () => {
           )
         },
         {
-          title: 'Livreur',
-          dataIndex: 'nom_livreur',
-          key: 'nom_livreur',
-          render : (text, record)=>(
-            <div>
-               <Tag color={'green'}><UserOutlined />{text}</Tag>
-            </div>
-          )
-        },{
-          title: 'Détail',
-          dataIndex: 'total_varianteproduit',
-          key: 'total_varianteproduit',
-          sorter: (a, b) => a.quant - b.quant,
-          sortDirections: ['descend', 'ascend'],
-          render: (text, record) => (
-            <Popover
-              content="Voir les détails" placement="top"
-            >
-              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}>
-                {record.quant}
-              </Tag>
-            </Popover>
-          )
-        },
-        {
           title: 'Telephone',
           dataIndex: 'telephone',
           key: 'email',
@@ -102,15 +78,41 @@ const Livraison_detail = () => {
           ),
         },
         {
-            title: 'Date création',
-            dataIndex: 'date_creation',
-            key: 'date_creation',
-            render: (text) => {
-              const formattedDate = format(new Date(text), 'dd-MM-yyyy');
-              return <Tag color={'green'} icon={<CalendarOutlined />}>
-                      {formattedDate}
-                     </Tag>;
-            },
+          title: 'Livreur',
+          dataIndex: 'nom_livreur',
+          key: 'nom_livreur',
+          render : (text, record)=>(
+            <div>
+               <Tag color={'green'}><UserOutlined />{text}</Tag>
+            </div>
+          )
+        },{
+          title: 'Quantité',
+          dataIndex: 'quant',
+          key: 'quant',
+          sorter: (a, b) => a.quant - b.quant,
+          sortDirections: ['descend', 'ascend'],
+          render: (text, record) => (
+            <Popover
+              content="Voir les détails" placement="top"
+            >
+              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}>
+                {record.quant}
+              </Tag>
+            </Popover>
+          )
+        },
+        {
+          title: 'Date & Heure',
+          dataIndex: 'date_creation',
+          key: 'date_creation',
+          sorter: (a, b) => a.date_creation - b.date_creation,
+          sortDirections: ['descend', 'ascend'],
+          render: (text) => (
+            <Tag color={'blue'} icon={<CalendarOutlined />}>
+              {moment(text).format('DD-MM-yyyy HH:mm')}
+            </Tag>
+          ),
         },
         {
             title: 'Action',

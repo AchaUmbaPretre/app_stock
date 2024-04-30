@@ -114,7 +114,7 @@ const RowTotal = () => {
           centered
           open={open}
           onCancel={() => setOpen(false)}
-          width={1000}
+          width={800}
           footer={[]}
         >
           <InformationJour/>

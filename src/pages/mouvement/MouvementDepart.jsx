@@ -172,6 +172,14 @@ const MouvementDepart = () => {
           },
         },
         {
+          title: 'Commune',
+          dataIndex: 'nom_commune',
+          key: 'nom_commune',
+          render: (text, record) => {
+            return <Tag color={"green"}>{text}</Tag>;
+          },
+        },
+        {
           title: 'Livreur',
           dataIndex: 'livreur',
           key: 'livreur',

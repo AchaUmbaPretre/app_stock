@@ -69,7 +69,7 @@ const EchangeForm = () => {
       key: 'pointure',
       render: (text) => (
         <Space>
-          <Tag color="green">{text}</Tag>
+          <Tag color="blue">{text}</Tag>
         </Space>
       ),
     },
@@ -81,7 +81,7 @@ const EchangeForm = () => {
       sortDirections: ['descend', 'ascend'],
       render: (text) => (
         <span>
-        <Tag color={'green'}>
+        <Tag color={'blue'}>
           {parseFloat(text).toLocaleString('fr-FR', {
             style: 'currency',
             currency: 'USD',
@@ -161,7 +161,7 @@ const EchangeForm = () => {
       key: 'quantite',
       render: (text) => (
         <Space>
-          <Tag color="green">{text}</Tag>
+          <Tag color="blue">{text}</Tag>
         </Space>
       ),
     }

@@ -1,5 +1,5 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,UserOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Table, Tag, Space, Popover, Button, Tabs } from 'antd';
+import { SearchOutlined,CheckCircleOutlined,UserOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { Table, Tag, Space, Popover, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
@@ -82,9 +82,6 @@ const columns = [
     }
 ];
 
-const HandOpen = () =>{
-  setOpen(!open)
-}
 
 useEffect(() => {
   const fetchData = async () => {
@@ -121,8 +118,6 @@ useEffect(() => {
                                 <PrinterOutlined className='product-icon-printer'/>
                             </div>
                         </div>
-                        {open &&
-                                <ReceptionSelect getProduits={setGetRapport}/> }
                         <div className="rowChart-row-table">
                             <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                         </div>

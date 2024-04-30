@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
 import LivraisonClientDetail from './livraison_detail/livraisonClientDetail/LivraisonClientDetail';
 import config from '../../config';
@@ -15,7 +14,6 @@ const LivraisonJour = () => {
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [opens, setOpens] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);

@@ -115,8 +115,8 @@ useEffect(() => {
                         <span>Gérez vos réceptions</span>
                     </div>
                 </div>
-                    <Tabs>
-                      <Tabs.TabPane tab='Réceptions' key={0}>
+                  <Tabs>
+                    <Tabs.TabPane tab='Réceptions' key={0}>
                         <div className="product-bottom">
                         <div className="product-bottom-top">
                             <div className="product-bottom-left">
@@ -138,14 +138,14 @@ useEffect(() => {
                             <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                         </div>
                         </div>
-                      </Tabs.TabPane>
-                      <Tabs.TabPane tab='Réceptions du jour' key={1}>
-                        <ReceptionJour/>
-                      </Tabs.TabPane>
-                      <Tabs.TabPane tab='Réceptions des 7 derniers jours' key={2}>
-                        <Reception7Jour/>
-                      </Tabs.TabPane>
-                    </Tabs>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab='Réceptions du jour' key={1}>
+                      <ReceptionJour/>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab='Réceptions des 7 derniers jours' key={2}>
+                      <Reception7Jour/>
+                    </Tabs.TabPane>
+                  </Tabs>
             </div>
         </div>
 

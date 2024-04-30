@@ -163,7 +163,7 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                 <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Réception</h2>
-                        <span>Gérez vos nouveaux produits</span>
+                        <span>Gérez vos réceptions</span>
                     </div>
                 </div>
                     <div className="product-bottom">

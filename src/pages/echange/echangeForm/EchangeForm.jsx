@@ -1,11 +1,13 @@
 import React from 'react'
+import { SwapOutlined} from '@ant-design/icons';
 import { useState } from 'react';
 import Select from 'react-select';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Checkbox, Space, Table, Tag } from 'antd';
+import { Checkbox, Space, Table, Tabs, Tag } from 'antd';
 import config from '../../../config';
+import MouvementEchange from '../../mouvement/MouvementEchange';
 
 const EchangeForm = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -212,18 +214,25 @@ const EchangeForm = () => {
                 <span>Créer un nouveau échange</span>
               </div>
             </div>
-            <div className="product-wrapper">
-              <div className="product-container-bottom">
-                <div className="form-controle">
-                  <label htmlFor="">Sélectionnez une commande <span style={{color:'red'}}>*</span></label>
-                  <Select
-                    name="id_commande"
-                    options={commande?.map(item => ({ value: item.id_commande, label: item.nom + " Commande N° "+item.id_commande }))}
-                    onChange={selectedOption => handleInputChange({ target: { name: 'id_commande', value: selectedOption.value } })}
-                  />
-                </div>
-              </div>
-            </div>
+              <Tabs>
+                <Tabs.TabPane tab='Echange' key={0}>
+                  <div className="product-wrapper">
+                    <div className="product-container-bottom">
+                      <div className="form-controle">
+                        <label htmlFor="">Sélectionnez une commande <span style={{color:'red'}}>*</span></label>
+                        <Select
+                          name="id_commande"
+                          options={commande?.map(item => ({ value: item.id_commande, label: item.nom + " Commande N° "+item.id_commande }))}
+                          onChange={selectedOption => handleInputChange({ target: { name: 'id_commande', value: selectedOption.value } })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="Liste d'Echanges" key={1}>
+                  <MouvementEchange/>
+                </Tabs.TabPane>
+              </Tabs>
           </div>
           {
             getCommande.length !== 0 && <>
@@ -232,7 +241,7 @@ const EchangeForm = () => {
           </div>
           <div className="form-submit">
           { selected.map((dd)=>(
-            <button className="btn-submit" style={{padding:'10px 15px', background:'rgba(1, 35, 138, 0.952)', color:'#fff', border:'none'}} onClick={()=>navigate(`/echange/${value}?id_detail=${dd.id_detail_commande}`)}>Echange</button>
+            <button className="btn-submit" style={{padding:'10px 15px', background:'rgba(1, 35, 138, 0.952)', color:'#fff', border:'none', display:'flex', alignItems:'center', cursor:'pointer'}} onClick={()=>navigate(`/echange/${value}?id_detail=${dd.id_detail_commande}`)}>Changer <SwapOutlined style={{paddingLeft: "6px"}}/></button>
           ))}
           </div>
           </>

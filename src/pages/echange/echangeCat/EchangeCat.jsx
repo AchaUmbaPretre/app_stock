@@ -179,6 +179,9 @@ const EchangeCat = () => {
                         <h2 className="varianteProduit-h2">La commande N° {id}</h2>
                         <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
                     </div>
+                    <div style={{background:'rgba(1, 35, 138, 0.952)', padding:'10px', borderRadius:'10px'}}>
+                      <h2 style={{color:'#fff', fontSize:'18px'}}>Echange</h2>
+                    </div>
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
                       <h2 style={{fontSize:'.9rem', color:'rgb(1, 35, 138)'}}>Contactez de {getCommande?.nom}</h2>
                       <span className="variant-name" style={{fontSize:'.7rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>

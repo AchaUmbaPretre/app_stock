@@ -2,6 +2,7 @@ import React from 'react'
 import './rowTotal.scss'
 import { CarryOutOutlined, VerticalAlignBottomOutlined, VerticalAlignTopOutlined, FileDoneOutlined  } from '@ant-design/icons';
 import CountUp from 'react-countup';
+import { Button, Input, Space, Table, Popover,Popconfirm, Modal, Image} from 'antd';
 import { useState } from 'react';
 import config from '../../config';
 import { useEffect } from 'react';
@@ -15,6 +16,11 @@ const RowTotal = () => {
     const [depenses, setDepenses] = useState([]);
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const user = useSelector((state) => state.user?.currentUser);
+    const [open, setOpen] = useState(false);
+
+    const showModal = () => {
+      setOpen(true);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -94,14 +100,25 @@ const RowTotal = () => {
                         <span className="rowTotal-span">Montant total des dépenses</span>
                     </div>
                 </div>
-                <div className="rowTotals">
+                <div className="rowTotals" onClick={()=> showModal()}>
                     <div className="rowTotal-left">
                         <FileDoneOutlined className='rowTotalIcon' style={{color: 'blue', fontSize:"25px"}}/>
                     </div>
                 </div>
             </div>
         </div>
-
+        
+        <Modal
+          title="Information du jour"
+          centered
+          open={open}
+          onCancel={() => setOpen(false)}
+          width={1000}
+          footer={[]}
+        >
+          aaa
+{/*                         <ProductDetail idProduit={idProduit}/> */}
+        </Modal>
     </>
   )
 }

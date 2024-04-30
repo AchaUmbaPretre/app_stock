@@ -17,20 +17,6 @@ const Reception = () => {
 
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
-/*     {
-      title: 'image',
-      dataIndex: 'img',
-      key: 'img',
-      render: (text, record) => (
-        <div className="userList">
-          <Image
-            className="userImg"
-            src="error"
-            fallback={`${DOMAIN}${record.img}`}
-          />
-        </div>
-      ),
-    }, */
     {
       title: 'Date de réception',
       dataIndex: 'date_reception',
@@ -81,62 +67,6 @@ const columns = [
         </Tag>
       ),
     },
-/*     {
-      title: 'Marque',
-      dataIndex: 'nom_marque',
-      key: 'nom_marque',
-      render: (nom_marque) => (
-        <Tag color={'blue'}>{nom_marque}</Tag>
-      ),
-    },
-    {
-      title: 'Categorie',
-      dataIndex: 'nom_categorie',
-      key: 'categorie',
-      render: (categorie) => (
-        <Tag color={'blue'}>{categorie}</Tag>
-      ),
-    }, */
-/*     ,{
-        title: 'Taille',
-        dataIndex: 'taille',
-        key: 'taille',
-        sorter: (a, b) => a.taille - b.taille,
-        sortDirections: ['descend', 'ascend'],
-        render: (taille) => (
-          <Tag color={'blue'}>{taille}</Tag>
-        ),
-    }, */
-/*     {
-        title: 'Couleur',
-        dataIndex: 'description',
-        key: 'description',
-        render: (color) => {
-          let tagColor;
-      
-          if (color === 'Rouge') {
-            tagColor = 'red';
-          } else if (color === 'Noir') {
-            tagColor = 'black';
-          } else if (color === 'Orange') {
-            tagColor = 'orange';
-          } else if (color === 'Bleu') {
-            tagColor = 'skyblue';
-          } else if (color === 'Chocolat') {
-            tagColor = 'chocolate';
-          } else if (color === 'Vert fluo') {
-            tagColor = 'lime';
-          } else if (color === 'Rose fuchsia') {
-            tagColor = 'hotpink';
-          } else if (color === 'Beige saumon') {
-            tagColor = 'burlywood';
-          }
-      
-          return (
-            <Tag color={tagColor}>{color}</Tag>
-          );
-        },
-      }, */
      {
       title: 'Action',
       key: 'action',

@@ -23,6 +23,7 @@ const Register1 = () => {
       setIsLoading(true);
       await register(dispatch, { username, email, password });
       navigate('/register')
+      window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {

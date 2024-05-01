@@ -101,11 +101,12 @@ const RowTotal = () => {
                         <span className="rowTotal-span">Montant total des dépenses</span>
                     </div>
                 </div>
+                { user?.role === 'admin' && 
                 <div className="rowTotals" onClick={()=> showModal()}>
                     <div className="rowTotal-left">
                         <FileDoneOutlined className='rowTotalIcon' style={{color: 'blue', fontSize:"25px"}}/>
                     </div>
-                </div>
+                </div> }
             </div>
         </div>
         

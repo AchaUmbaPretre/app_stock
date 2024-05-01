@@ -56,9 +56,10 @@
     box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
     border-radius: 50px;
     height: 35px;
-    width: 100px;
+    width: 150px;
+    overflow: hidden;
     .username{
-        font-size: 13px;
+        font-size: 11px;
         color: rgba(1, 35, 138, 0.952);
         padding-right: 10px;
         letter-spacing: 2px;

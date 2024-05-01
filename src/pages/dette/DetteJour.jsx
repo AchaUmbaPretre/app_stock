@@ -21,7 +21,6 @@ const DetteJour = () => {
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-    const [recentPaiement, setRecentPaiement] = useState([]);
 
 
       const handleDelete = async (id) => {
@@ -202,18 +201,6 @@ const DetteJour = () => {
         fetchData();
       }, [DOMAIN]);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dettePaiementJour`);
-            setRecentPaiement(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-
 
     const handleOk = async (e) => {
       setOpen(true)
@@ -235,15 +222,6 @@ const DetteJour = () => {
                     </div>
                     <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                       <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
-                        Paiement du jour
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant payé : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.montant}/> $</b></p>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nombre de clients ayant effectué un paiement. : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.nombre_clients}/></b></p>
-                      </div>
-                    </div>
-                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
-                      <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
                       {recent[0]?.date_derniere_dette && (
                         <span>
                           Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
@@ -259,7 +237,7 @@ const DetteJour = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                        <SisternodeOutlined className='product-icon' onClick={HandOpen} />
                             <div className="product-row-search">
                               <SearchOutlined className='product-icon-plus'/>
                               <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />

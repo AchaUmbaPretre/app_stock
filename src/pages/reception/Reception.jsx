@@ -8,6 +8,7 @@ import ReceptionSelect from './ReceptionSelect';
 import { Link } from 'react-router-dom';
 import ReceptionJour from './ReceptionJour';
 import Reception7Jour from './Reception7Jour';
+import moment from 'moment/moment';
 
 const Reception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -20,14 +21,14 @@ const Reception = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'Date de réception',
+      title: 'Date & Heure',
       dataIndex: 'date_reception',
       key: 'date_reception',
       sorter: (a, b) => a.date_reception - b.date_reception,
       sortDirections: ['descend', 'ascend'],
       render: (text) => (
-        <Tag color="blue" icon={<CalendarOutlined />}>
-          {format(new Date(text), 'dd-MM-yyyy')}
+        <Tag color={'blue'} icon={<CalendarOutlined />}>
+          {moment(text).format('DD-MM-yyyy HH:mm')}
         </Tag>
       ),
     },

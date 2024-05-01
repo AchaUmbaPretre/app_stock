@@ -83,6 +83,10 @@ const UtilisateurEdit = () => {
       label : "Client",
       id : "client"
     },
+    {
+      label : "Vendeur",
+      id : "vendeur"
+    },
   ]
   return (
     <>

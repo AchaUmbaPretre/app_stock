@@ -177,11 +177,13 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
+      { user?.role === 'admin' && 
       <Item key="/echangeForm" icon={<SwapOutlined style={{ fontSize: '22px', color: '#fafafa' }} />}  onClick={handleLinkClick}>
         <Link to="/echangeForm" className="sidebarH3" style={{fontSize: "14px", color: '#fafafa'}}>
           Echanges
         </Link>
-      </Item>
+      </Item>  }
+      { user?.role === 'admin' || user?.role === 'secretaire' && 
       <SubMenu key="clients" title={<span className="sidebarH3">Membres</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="clients" onClick={handleLinkClick}>
           <Link to="/clients" className="sidebarLink">
@@ -204,7 +206,8 @@ const Sidebar = () => {
           </Link>
         </Item>
         
-      </SubMenu>
+      </SubMenu> }
+      { user?.role === 'admin' || user?.role === 'secretaire' &&
       <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<CreditCardOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="depenses" onClick={handleLinkClick}>
           <Link to="/depenses" className="sidebarLink">
@@ -216,7 +219,7 @@ const Sidebar = () => {
             Categorie de dépenses
           </Link>
         </Item>
-      </SubMenu>
+      </SubMenu> }
       { user?.role === 'admin' &&
       <SubMenu key="reports" title={<span className="sidebarH3">Rapports</span>} icon={<FileTextOutlined style={{ fontSize: '19px', color: '#fafafa' }}/>}>
         <Item key="rapportVente"  onClick={handleLinkClick}>

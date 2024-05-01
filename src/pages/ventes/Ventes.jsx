@@ -183,7 +183,7 @@ const Ventes = () => {
   const filteredData = data?.filter((item) =>
   item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+  item.username?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (
@@ -213,7 +213,8 @@ const Ventes = () => {
                     </div>
                     {opens &&
                     <VenteSelect getProduits={setData}/> }
-                    <Tabs>
+                </div>
+                <Tabs>
                       <Tabs.TabPane tab='Ventes' key={1}>
                       <div className="rowChart-row-table">
                         <Modal
@@ -248,7 +249,6 @@ const Ventes = () => {
                         <VentesJour/>
                       </Tabs.TabPane>        
                     </Tabs>
-                </div>
             </div>
         </div>
     </>

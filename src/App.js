@@ -162,7 +162,7 @@ const user = useSelector((state) => state.user?.currentUser);
   };
 
   const router = createBrowserRouter([
-    (user?.role === 'admin' || user?.role === 'secretaire') && {
+    (user?.role === 'admin' || user?.role === 'secretaire' || user?.role === 'vendeur') && {
       path: '/',
       element: <SecuriteRoute><Layout /></SecuriteRoute>,
       children: [

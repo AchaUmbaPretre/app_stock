@@ -195,7 +195,7 @@ const DetteJour7 = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapport`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapport7jours`);
             setRecent(data);
           } catch (error) {
             console.log(error);

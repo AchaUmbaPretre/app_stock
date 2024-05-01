@@ -207,7 +207,7 @@ const DetteJour7 = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dettePaiement`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dettePaiement7`);
             setRecentPaiement(data);
           } catch (error) {
             console.log(error);

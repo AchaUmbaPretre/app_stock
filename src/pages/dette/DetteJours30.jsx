@@ -191,22 +191,23 @@ const DetteJours30 = () => {
         fetchData();
       }, [DOMAIN]);
 
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapport30jours`);
+            setRecent(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
     const handleOk = async (e) => {
       setOpen(true)
       setIdClient(e)
     };
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dettePaiement`);
-          setRecentPaiement(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, [DOMAIN]);
 
   const filteredData = data?.filter((item) =>
   item.nom?.toLowerCase().includes(searchValue.toLowerCase())
@@ -216,20 +217,10 @@ const DetteJours30 = () => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-bottom">
-                    <div className="product-container-top">
+                <div className="product-container-top">
                         <div className="product-left">
                             <h2 className="product-h2">Liste des ventes à crédit</h2>
                             <span>Gérer vos ventes à crédit</span>
-                        </div>
-                        <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
-                          <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
-                            Paiement du jour
-                          </div>
-                          <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                            <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant payé : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.montant}/> $</b></p>
-                            <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nombre de clients ayant effectué un paiement. : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.nombre_clients}/></b></p>
-                          </div>
                         </div>
                         <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                           <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
@@ -240,7 +231,8 @@ const DetteJours30 = () => {
                             <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de débiteur : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
                           </div>
                         </div>
-                    </div>
+                  </div>
+                <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}

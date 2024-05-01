@@ -172,6 +172,18 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent7jours`);
+      setRecent(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
+}, [DOMAIN]);
+
  const filteredData = getRapport?.filter((item) =>
     item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
     item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())

@@ -244,38 +244,38 @@ const Dette = () => {
 
   const filteredData = data?.filter((item) =>
   item.nom?.toLowerCase().includes(searchValue.toLowerCase())
-);
+    );
 
   return (
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Liste des ventes à crédit</h2>
-                        <span>Gérer vos ventes à crédit</span>
-                    </div>
-                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
-                      <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
-                        Paiement du jour
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant payé : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.montant}/> $</b></p>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nombre de clients ayant effectué un paiement. : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.nombre_clients}/></b></p>
-                      </div>
-                    </div>
-                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
-                      <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
-                      Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total restant : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de débiteur : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
-                      </div>
-                    </div>
-                </div>
                 <Tabs>
                   <Tabs.TabPane tab='Dettes' key={0}>
+                    <div className="product-container-top">
+                      <div className="product-left">
+                          <h2 className="product-h2">Liste des ventes à crédit</h2>
+                          <span>Gérer vos ventes à crédit</span>
+                      </div>
+                      <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                        <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                          Paiement du jour
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant payé : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.montant}/> $</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nombre de clients ayant effectué un paiement. : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recentPaiement[0]?.nombre_clients}/></b></p>
+                        </div>
+                      </div>
+                      <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                        <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                        Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total restant : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de débiteur : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
+                        </div>
+                      </div>
+                    </div>
                     <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">

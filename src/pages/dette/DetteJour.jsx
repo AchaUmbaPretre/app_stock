@@ -202,6 +202,18 @@ const DetteJour = () => {
         fetchData();
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/dettePaiement`);
+            setRecentPaiement(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
 
     const handleOk = async (e) => {
       setOpen(true)
@@ -216,7 +228,7 @@ const DetteJour = () => {
     <>
         <div className="products">
             <div className="product-container">
-            <div className="product-container-top">
+                <div className="product-container-top">
                     <div className="product-left">
                         <h2 className="product-h2">Liste des ventes à crédit</h2>
                         <span>Gérer vos ventes à crédit</span>

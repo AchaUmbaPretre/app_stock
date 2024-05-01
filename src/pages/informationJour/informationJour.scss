@@ -1,22 +1,44 @@
 @import '../../style.scss';
 
-.informationJour{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 0;
-
-    .info-row{
-        padding: 20px;
-        background: #fcfcfc;
+.rowTotalDetail{
+    width: 100%;
+    .rowTotalDetail-wrapper{
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        border-radius: 20px;
-        border: 1px solid #c2c2c2bb;
-        span{
-            font-size: 15px;
-            font-weight: 700;
-            color: rgba(1, 35, 138, 0.952);
+        gap: 20px;
+        flex-wrap: wrap;
+        @include mobileXR{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+        }
+        .rowTotalDetail-row{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            padding: 20px;
+            color: #fff;
+            cursor: pointer;
+            .rowTotalDetail-left{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                .rowTotal-h2{
+                    font-size: 2rem;
+                }
+                .rowTotal-span{
+                    font-size: 1rem;
+                }
+            }
+            .rowTotalDetail-right{
+                .rowTotalIcon{
+                    font-size: 2.5rem;
+                }
+            }
         }
     }
 }

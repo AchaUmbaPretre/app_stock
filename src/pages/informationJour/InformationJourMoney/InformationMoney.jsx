@@ -1,19 +1,14 @@
 import React from 'react'
-import './rowTotal.scss'
 import { CarryOutOutlined, VerticalAlignBottomOutlined, VerticalAlignTopOutlined, FileDoneOutlined  } from '@ant-design/icons';
 import CountUp from 'react-countup';
-import { Modal } from 'antd';
 import { useState } from 'react';
-import config from '../../config';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import InformationJour from '../../pages/informationJour/InformationJour';
-import InformationMoney from '../../pages/informationJour/InformationJourMoney/InformationMoney';
-import InformationGeneral from '../informationGeneral/InformationGeneral';
+import config from '../../../config';
 
 
-const RowTotal = () => {
+const InformationMoney = () => {
     const [venteTotal, setVenteTotal] = useState([]);
     const [produitTotalAchats, setProduitTotalAchats] = useState([]);
     const [depenses, setDepenses] = useState([]);
@@ -103,28 +98,10 @@ const RowTotal = () => {
                         <span className="rowTotal-span">Montant total des dépenses</span>
                     </div>
                 </div>
-                { user?.role === 'admin' && 
-                <div className="rowTotals" onClick={()=> showModal()}>
-                    <div className="rowTotal-left">
-                        <FileDoneOutlined className='rowTotalIcon' style={{color: 'blue', fontSize:"25px"}}/>
-                    </div>
-                </div> }
             </div>
         </div>
-        
-        <Modal
-          title="Information du jour"
-          centered
-          open={open}
-          onCancel={() => setOpen(false)}
-          width={1050}
-          footer={[]}
-        >
-{/*           <InformationJour/> */}
-          <InformationGeneral/>
-        </Modal>
     </>
   )
 }
 
-export default RowTotal
+export default InformationMoney

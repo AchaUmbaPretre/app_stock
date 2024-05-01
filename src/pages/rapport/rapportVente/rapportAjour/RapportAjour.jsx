@@ -204,12 +204,14 @@ useEffect(() => {
             <div className="product-container">
                 <div className="product-container-top">
                       <div className="product-left">
-                          <h2 className="product-h2">Rapport des ventes</h2>
-                          <span>Gérez vos rapports des ventes</span>
+                          <h2 className="product-h2">Ventes du jour</h2>
+                          <span></span>
                       </div>
                       <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                         <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
-                          {`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`}
+                          {recent[0]?.date_plus_ancienne && (
+                            <span>{`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`}</span>
+                          )}
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'article vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_article_vendue}/></b></p>

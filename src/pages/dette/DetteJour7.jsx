@@ -224,7 +224,11 @@ const DetteJour7 = () => {
                     </div>
                     <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                       <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
-                      Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
+                      {recent[0]?.date_derniere_dette && (
+                        <span>
+                          Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
+                        </span>
+                      )}
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
                         <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total restant : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>

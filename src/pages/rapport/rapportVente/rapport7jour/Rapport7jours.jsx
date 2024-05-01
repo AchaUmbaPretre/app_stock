@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import { format } from 'date-fns';
+import moment from 'moment';
 
 const Rapport7jours = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -11,6 +12,7 @@ const Rapport7jours = () => {
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
+    const [recent, setRecent] = useState([]);
 
     
 const columns = [

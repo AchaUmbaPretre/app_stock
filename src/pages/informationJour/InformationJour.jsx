@@ -5,7 +5,7 @@ import config from '../../config';
 import CountUp from 'react-countup';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { UsergroupAddOutlined, UserOutlined, SnippetsOutlined,ShoppingOutlined } from '@ant-design/icons';
+import { SyncOutlined,CarOutlined, UserOutlined,CarryOutOutlined, ShoppingCartOutlined ,ShoppingOutlined } from '@ant-design/icons';
 
 const InformationJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -63,11 +63,60 @@ const InformationJour = () => {
       }, [DOMAIN]);
 
 
+      console.log(data)
+
+
       return (
         <>
             <div className="rowTotalDetail" style={{margin: '20px 0'}}>
             <div className="rowTotalDetail-wrapper">
-                <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
+                <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={data[0]?.nombre_vendu}/></h2>
+                        <span className="rowTotal-span">ventes</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                        <ShoppingOutlined className='rowTotalIcon'/>
+                    </div>
+                </div>
+                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/livreur')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={livreur[0]?.total}/></h2>
+                        <span className="rowTotal-span">commandes</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                    <ShoppingCartOutlined className='rowTotalIcon'/>
+                    </div>
+                </div>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/ventes')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
+                        <span className="rowTotal-span">Livraisons</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                        <CarOutlined className='rowTotalIcon'/>
+                    </div>
+                  </div>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
+                        <span className="rowTotal-span">Mouvement en cours</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                        <SyncOutlined className='rowTotalIcon'/>
+                        
+                    </div>
+                  </div>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
+                        <span className="rowTotal-span">Mouvement vendu</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                        <CarryOutOutlined className='rowTotalIcon'/>
+                    </div>
+                  </div>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
                         <span className="rowTotal-span">Clients</span>
@@ -76,63 +125,6 @@ const InformationJour = () => {
                     <UserOutlined className='rowTotalIcon' />
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/livreur')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={livreur[0]?.total}/></h2>
-                        <span className="rowTotal-span">Livreurs</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                    <UsergroupAddOutlined className='rowTotalIcon'/>
-                    </div>
-                </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/ListeVariante')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={produit[0]?.total}/></h2>
-                        <span className="rowTotal-span">Articles</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <SnippetsOutlined className='rowTotalIcon'/>
-                    </div>
-                </div>
-                {
-                  user?.role === 'admin' &&
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
-                        <span className="rowTotal-span">ventes</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <ShoppingOutlined className='rowTotalIcon'/>
-                    </div>
-                  </div>
-                }
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
-                        <span className="rowTotal-span">ventes</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <ShoppingOutlined className='rowTotalIcon'/>
-                    </div>
-                  </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
-                        <span className="rowTotal-span">ventes</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <ShoppingOutlined className='rowTotalIcon'/>
-                    </div>
-                  </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
-                        <span className="rowTotal-span">ventes</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <ShoppingOutlined className='rowTotalIcon'/>
-                    </div>
-                  </div>
             </div>
         </div>
         </>

@@ -60,7 +60,7 @@ const InformationMoney = () => {
     <>
         <div className="rowTotals">
             <div className="rowTotal-wrapper">
-                <div className="rowTotal">
+{/*                 <div className="rowTotal">
                     <div className="rowTotal-left">
                         <CarryOutOutlined className='rowTotalIcon' style={{color: 'orange'}}/>
                     </div>
@@ -68,7 +68,7 @@ const InformationMoney = () => {
                         <h2><CountUp end={produitTotalAchats}/>$</h2>
                         <span className="rowTotal-span">Total des achats à payer</span>
                     </div>
-                </div>
+                </div> */}
 {/*                 <div className="rowTotal">
                     <div className="rowTotal-left" style={{background: 'rgba(0, 0, 255, 0.137)'}}>
                         <Money className='rowTotalIcon' style={{color: 'blue'}}/>

@@ -153,7 +153,7 @@ const columns = [
       ),
     },
     {
-      title: 'Quantité en stock',
+      title: 'Qté en stock',
       dataIndex: 'quantite_en_stock',
       key: 'quantite_en_stock', 
       sorter: (a, b) => a.quantite_en_stock - b.quantite_en_stock,

@@ -145,7 +145,7 @@ const columns = [
         ),
       },
      {
-      title: 'Quantité vendue',
+      title: 'Qté vendue',
       dataIndex: 'quantite_vendue',
       key: 'quantite_vendue', 
       sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,

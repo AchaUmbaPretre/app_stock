@@ -63,8 +63,6 @@ const InformationJour = () => {
       }, [DOMAIN]);
 
 
-      console.log(data)
-
 
       return (
         <>
@@ -81,7 +79,7 @@ const InformationJour = () => {
                 </div>
                 <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/livreur')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={livreur[0]?.total}/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={commande[0]?.nbre}/></h2>
                         <span className="rowTotal-span">commandes</span>
                     </div>
                     <div className="rowTotalDetail-right">

@@ -1,4 +1,4 @@
-import { SearchOutlined, CheckCircleOutlined,UserOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CheckCircleOutlined,UserOutlined,EyeOutlined,CalendarOutlined,RedoOutlined } from '@ant-design/icons';
 import { Table, Tag, Space, Popover, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -94,6 +94,11 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
+
+const Rafraichir = () =>{
+    window.location.reload();
+  }
+
   const filteredData = getRapport?.filter((item) =>
   item.username.toLowerCase().includes(searchValue.toLowerCase())
   )
@@ -111,9 +116,7 @@ useEffect(() => {
                                 </div>
                             </div>
                             <div className="product-bottom-right">
-                                <FilePdfOutlined className='product-icon-pdf' />
-                                <FileExcelOutlined className='product-icon-excel'/>
-                                <PrinterOutlined className='product-icon-printer'/>
+                                <RedoOutlined className='product-icon-printer' onClick={Rafraichir}/>
                             </div>
                         </div>
                         <div className="rowChart-row-table">

@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,UserOutlined,EyeOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,RedoOutlined,UserOutlined,EyeOutlined,CalendarOutlined } from '@ant-design/icons';
 import { Table, Tag, Space, Popover, Button, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -89,6 +89,10 @@ const HandOpen = () =>{
   setOpen(!open)
 }
 
+const Rafraichir = () =>{
+  window.location.reload();
+}
+
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -128,9 +132,7 @@ useEffect(() => {
                                 </div>
                             </div>
                             <div className="product-bottom-right">
-                                <FilePdfOutlined className='product-icon-pdf' />
-                                <FileExcelOutlined className='product-icon-excel'/>
-                                <PrinterOutlined className='product-icon-printer'/>
+                                <RedoOutlined className='product-icon-printer' onClick={Rafraichir}/>
                             </div>
                         </div>
                         {open &&

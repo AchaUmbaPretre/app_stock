@@ -5,6 +5,8 @@ import InformationMoney from '../../pages/informationJour/InformationJourMoney/I
 import './informationGeneral.scss'
 import Information7Jours from '../../pages/informationJour/Information7jours';
 import Information7joursMoney from '../../pages/informationJour/InformationJourMoney/Information7joursMoney';
+import Information30joursMoney from '../../pages/informationJour/InformationJourMoney/Information30joursMoney';
+import Information30Jours from '../../pages/informationJour/Information30jours';
 
 const InformationGeneral = () => {
   return (
@@ -20,6 +22,8 @@ const InformationGeneral = () => {
                 <Information7Jours/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='Rapport des 30 derniers jours' key={2}>
+                <Information30joursMoney/>
+                <Information30Jours/>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Rapport d'un an" key={3}>
             </Tabs.TabPane>

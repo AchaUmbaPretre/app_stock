@@ -19,7 +19,7 @@ const Information7joursMoney = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour7`);
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/vente7Jour`);
             setVenteTotal(data[0]?.montant_total_vente);
           } catch (error) {
             console.log(error);

@@ -1,13 +1,15 @@
 @import '../../style.scss';
 
-.rowTotalDetail{
+.rowTotalDetails{
     width: 100%;
     .rowTotalDetail-wrapper{
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
         align-items: center;
         justify-content: space-between;
         gap: 20px;
         flex-wrap: wrap;
+        flex-basis: calc(25% - 20px);
         @include mobileXR{
             display: grid;
             grid-template-columns: repeat(2,1fr);

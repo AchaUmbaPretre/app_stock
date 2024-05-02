@@ -99,7 +99,7 @@ const Information30Jours = () => {
 
       return (
         <>
-            <div className="rowTotalDetail" style={{margin: '20px 0'}}>
+            <div className="rowTotalDetails" style={{margin: '20px 0'}}>
             <div className="rowTotalDetail-wrapper">
                 <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
                     <div className="rowTotalDetail-left">

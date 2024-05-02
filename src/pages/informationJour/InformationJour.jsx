@@ -13,12 +13,9 @@ const InformationJour = () => {
     const [commande, setCommande] = useState([]);
     const [livraison, setLivraison] = useState([]);
     const navigate = useNavigate();
-    const [produit, setProduit] = useState([]);
     const [client, setClient] = useState([]);
-    const [livreur, setLivreur] = useState([]);
+    const [mouvementEncours, setMouvementEncours] = useState([]);
     const [vente, setVente] = useState([]);
-    const user = useSelector((state) => state.user?.currentUser);
-    
 
 
     useEffect(() => {
@@ -74,6 +71,18 @@ const InformationJour = () => {
         fetchData();
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour`);
+            setMouvementEncours(data[0].nbre_client);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
 
 
       return (
@@ -107,17 +116,16 @@ const InformationJour = () => {
                         <CarOutlined className='rowTotalIcon'/>
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'yellow'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/ventes')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
                         <span className="rowTotal-span">Mouvement en cours</span>
                     </div>
                     <div className="rowTotalDetail-right">
                         <SyncOutlined className='rowTotalIcon'/>
-                        
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(41, 41, 41, 0.801)'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/ventes')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
                         <span className="rowTotal-span">Mouvement vendu</span>

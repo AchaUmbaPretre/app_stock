@@ -33,7 +33,7 @@ const Information7Jours = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commande7`);
             setCommande(data);
           } catch (error) {
             console.log(error);

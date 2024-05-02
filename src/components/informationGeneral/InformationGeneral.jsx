@@ -3,6 +3,8 @@ import { Button, Space, Table, Popover, Tag, Image, Tabs } from 'antd';
 import InformationJour from '../../pages/informationJour/InformationJour'
 import InformationMoney from '../../pages/informationJour/InformationJourMoney/InformationMoney'
 import './informationGeneral.scss'
+import Information7Jours from '../../pages/informationJour/Information7jours';
+import Information7joursMoney from '../../pages/informationJour/InformationJourMoney/Information7joursMoney';
 
 const InformationGeneral = () => {
   return (
@@ -14,6 +16,8 @@ const InformationGeneral = () => {
                 <InformationJour/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='Rapport des 7 derniers jours' key={1}>
+                <Information7joursMoney/>
+                <Information7Jours/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='Rapport des 30 derniers jours' key={2}>
             </Tabs.TabPane>

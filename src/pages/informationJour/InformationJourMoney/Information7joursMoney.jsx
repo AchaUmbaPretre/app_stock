@@ -14,16 +14,12 @@ const Information7joursMoney = () => {
     const [depenses, setDepenses] = useState([]);
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const user = useSelector((state) => state.user?.currentUser);
-    const [open, setOpen] = useState(false);
 
-    const showModal = () => {
-      setOpen(true);
-    };
 
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour7`);
             setVenteTotal(data[0]?.montant_total_vente);
           } catch (error) {
             console.log(error);

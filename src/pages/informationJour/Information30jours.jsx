@@ -49,7 +49,7 @@ const Information30Jours = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJour30`);
             setLivraison(data);
           } catch (error) {
             console.log(error);

@@ -21,7 +21,7 @@ const Information1an = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteDuJour7`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/venteDuJour1an`);
             setData(data);
           } catch (error) {
             console.log(error);
@@ -33,7 +33,7 @@ const Information1an = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commande7`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commande1an`);
             setCommande(data);
           } catch (error) {
             console.log(error);

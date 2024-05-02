@@ -8,6 +8,7 @@ import Information7joursMoney from '../../pages/informationJour/InformationJourM
 import Information30joursMoney from '../../pages/informationJour/InformationJourMoney/Information30joursMoney';
 import Information30Jours from '../../pages/informationJour/Information30jours';
 import Information1an from '../../pages/informationJour/Information1an';
+import Information1anMoney from '../../pages/informationJour/InformationJourMoney/Informatique1anMoney';
 
 const InformationGeneral = () => {
   return (
@@ -27,7 +28,7 @@ const InformationGeneral = () => {
                 <Information30Jours/>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Rapport d'un an" key={3}>
-                <Information30joursMoney/>
+                <Information1anMoney/>
                 <Information1an/>
             </Tabs.TabPane>
         </Tabs>

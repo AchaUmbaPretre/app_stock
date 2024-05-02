@@ -66,7 +66,7 @@ const Information7Jours = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour7`);
             setClient(data[0].nbre_client);
           } catch (error) {
             console.log(error);

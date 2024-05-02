@@ -50,7 +50,7 @@ const InformationJour = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJour`);
             setLivraison(data);
           } catch (error) {
             console.log(error);

@@ -23,7 +23,7 @@ const Information30joursMoney = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour30`);
             setVenteTotal(data[0]?.montant_total_vente);
           } catch (error) {
             console.log(error);

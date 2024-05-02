@@ -111,7 +111,7 @@ const InformationJour = () => {
                         <ShoppingOutlined className='rowTotalIcon'/>
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/livreur')}>
+                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/listeCommande')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={commande[0]?.nbre}/></h2>
                         <span className="rowTotal-span">commandes</span>
@@ -120,7 +120,7 @@ const InformationJour = () => {
                     <ShoppingCartOutlined className='rowTotalIcon'/>
                     </div>
                 </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/livraison_detail')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={livraison[0]?.nbre_livraison}/></h2>
                         <span className="rowTotal-span">Livraisons</span>
@@ -129,7 +129,7 @@ const InformationJour = () => {
                         <CarOutlined className='rowTotalIcon'/>
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvement')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={mouvementEncours}/></h2>
                         <span className="rowTotal-span">Mouvement en cours</span>
@@ -138,7 +138,7 @@ const InformationJour = () => {
                         <SyncOutlined className='rowTotalIcon'/>
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/mouvement')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={mouvementVente}/></h2>
                         <span className="rowTotal-span">Mouvement vendu</span>

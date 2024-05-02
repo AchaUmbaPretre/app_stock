@@ -117,10 +117,9 @@ const RowTotal = () => {
           centered
           open={open}
           onCancel={() => setOpen(false)}
-          width={1050}
+          width={1100}
           footer={[]}
         >
-{/*           <InformationJour/> */}
           <InformationGeneral/>
         </Modal>
     </>

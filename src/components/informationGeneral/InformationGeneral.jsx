@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Space, Table, Popover, Tag, Image, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import InformationJour from '../../pages/informationJour/InformationJour'
 import InformationMoney from '../../pages/informationJour/InformationJourMoney/InformationMoney'
 import './informationGeneral.scss'

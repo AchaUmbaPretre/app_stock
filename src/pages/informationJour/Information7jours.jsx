@@ -21,7 +21,7 @@ const Information7Jours = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteDuJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/venteDuJour7`);
             setData(data);
           } catch (error) {
             console.log(error);

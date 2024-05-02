@@ -82,7 +82,7 @@ const Information1an = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours1an`);
             setMouvementEncours(data[0]?.nbre_mouvement_encours);
             setMouvementVente(data[0]?.nbre_mouvement_vente);
           } catch (error) {

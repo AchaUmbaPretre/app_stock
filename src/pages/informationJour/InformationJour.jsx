@@ -15,7 +15,7 @@ const InformationJour = () => {
     const navigate = useNavigate();
     const [client, setClient] = useState([]);
     const [mouvementEncours, setMouvementEncours] = useState([]);
-    const [vente, setVente] = useState([]);
+    const [mouvementVente, setMouvementVente] = useState([]);
 
 
     useEffect(() => {
@@ -57,6 +57,10 @@ const InformationJour = () => {
           }
         };
         fetchData();
+
+        const timeoutId = setTimeout(fetchData, 4000);
+      
+        return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
       useEffect(() => {
@@ -69,18 +73,27 @@ const InformationJour = () => {
           }
         };
         fetchData();
+
+        const timeoutId = setTimeout(fetchData, 4000);
+      
+        return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour`);
-            setMouvementEncours(data[0].nbre_client);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours`);
+            setMouvementEncours(data[0]?.nbre_mouvement_encours);
+            setMouvementVente(data[0]?.nbre_mouvement_vente);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
+
+        const timeoutId = setTimeout(fetchData, 4000);
+      
+        return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
 
@@ -118,7 +131,7 @@ const InformationJour = () => {
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/ventes')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={mouvementEncours}/></h2>
                         <span className="rowTotal-span">Mouvement en cours</span>
                     </div>
                     <div className="rowTotalDetail-right">
@@ -127,7 +140,7 @@ const InformationJour = () => {
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/ventes')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={vente}/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={mouvementVente}/></h2>
                         <span className="rowTotal-span">Mouvement vendu</span>
                     </div>
                     <div className="rowTotalDetail-right">

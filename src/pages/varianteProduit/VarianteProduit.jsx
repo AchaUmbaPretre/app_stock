@@ -10,8 +10,10 @@ import config from '../../config';
 import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
 
+
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const [emptyArraysCount, setEmptyArraysCount] = useState(0);
     const [data, setData] = useState([]);
     const [getFamille,setGetFamille] = useState([]);
     const [getMarque,setGetMarque] = useState([]);
@@ -195,6 +197,10 @@ const VarianteProduit = () => {
       
         fetchData();
       }, [DOMAIN, famille, marque, cible, taille, couleur]);
+
+
+      
+      
       
   return (
     <>

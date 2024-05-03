@@ -285,9 +285,10 @@ const MouvementEchange = () => {
       }, [DOMAIN]);
   
    const filteredData = data?.filter((item) =>
-    item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-    item.nom_commune.toLowerCase().includes(searchValue.toLowerCase()) || 
-    item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
+    item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) || 
+    item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.livreur?.toLowerCase().includes(searchValue.toLowerCase())
     )
   
     return (

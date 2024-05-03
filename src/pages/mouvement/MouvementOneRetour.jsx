@@ -269,7 +269,10 @@ const MouvementOneRetour = ({id_commande, id_type}) => {
       }, [DOMAIN, id_commande, id_type]);
   
    const filteredData = data?.filter((item) =>
-    item.type_mouvement.toLowerCase().includes(searchValue.toLowerCase())
+    item.type_mouvement?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.livreur?.toLowerCase().includes(searchValue.toLowerCase())
     )
   
     return (

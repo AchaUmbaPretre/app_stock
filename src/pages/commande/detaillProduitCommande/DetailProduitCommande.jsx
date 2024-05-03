@@ -189,7 +189,8 @@ const DetailProduitCommande = ({idVariant, idCommande, tailles }) => {
           icon: 'success',
           confirmButtonText: 'OK',
         });
-        window.location.reload();
+
+        setTaille([]);
     
       } catch (err) {
         Swal.fire({

@@ -111,7 +111,7 @@ const Information7Jours = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapport7jours`);
-            setDette(data);
+            setDette(data[0]?.montant_total_restant);
           } catch (error) {
             console.log(error);
           }
@@ -119,6 +119,17 @@ const Information7Jours = () => {
         fetchData();
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJourMontant7`);
+            setPaiement(data[0]?.montant_total);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
 
 
       return (
@@ -181,7 +192,7 @@ const Information7Jours = () => {
                 </div>
                 <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/></h2>
                         <span className="rowTotal-span">Paiements dettes</span>
                     </div>
                     <div className="rowTotalDetail-right">

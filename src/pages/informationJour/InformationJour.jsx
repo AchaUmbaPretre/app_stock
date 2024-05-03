@@ -117,6 +117,18 @@ const InformationJour = () => {
         fetchData();
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJourMontant`);
+            setPaiement(data[0]?.montant_total);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
 
 
       return (
@@ -171,7 +183,7 @@ const InformationJour = () => {
                   <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/></h2>
-                        <span className="rowTotal-span">Dettes totals</span>
+                        <span className="rowTotal-span">Dettes non payées</span>
                     </div>
                     <div className="rowTotalDetail-right">
                         <img src={detteIcon} alt="" className='rowTotalIcon' />
@@ -179,8 +191,8 @@ const InformationJour = () => {
                 </div>
                 <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
-                        <span className="rowTotal-span">Paiements dettes</span>
+                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/></h2>
+                        <span className="rowTotal-span">Paiements des dettes</span>
                     </div>
                     <div className="rowTotalDetail-right">
                         <img src={paiementIcon} alt="" className='rowTotalIcon' />

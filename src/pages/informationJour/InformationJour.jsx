@@ -57,7 +57,7 @@ const InformationJour = () => {
           }
         };
         fetchData();
-        
+
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
@@ -147,6 +147,24 @@ const InformationJour = () => {
                         <CarryOutOutlined className='rowTotalIcon'/>
                     </div>
                   </div>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                        <span className="rowTotal-span">Dettes totals</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                    <UserOutlined className='rowTotalIcon' />
+                    </div>
+                </div>
+                <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                        <span className="rowTotal-span">Paiements dettes</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                    <UserOutlined className='rowTotalIcon' />
+                    </div>
+                </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>

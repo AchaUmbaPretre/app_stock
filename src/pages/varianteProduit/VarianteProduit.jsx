@@ -198,10 +198,6 @@ const VarianteProduit = () => {
         fetchData();
       }, [DOMAIN, famille, marque, cible, taille, couleur]);
 
-
-      
-      
-      
   return (
     <>
         <div className="varianteProduit">

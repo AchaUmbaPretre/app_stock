@@ -7,6 +7,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 20px;
+        @include mobileSE{
+            width: 100%;
+            justify-content: center;
+        }
         @include mobileXR{
             display: grid;
             grid-template-columns: repeat(2,1fr);

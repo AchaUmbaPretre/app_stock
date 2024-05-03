@@ -113,7 +113,7 @@ const RowTotal = () => {
         </div>
         
         <Modal
-          title="Information du jour"
+          title="Rapport"
           centered
           open={open}
           onCancel={() => setOpen(false)}

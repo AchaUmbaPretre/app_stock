@@ -88,37 +88,44 @@ const Sidebar = () => {
             Catalogue
           </Link>
         </Item>
+        {(user?.role === 'admin' || user?.role === 'secretaire') &&
         <Item key="categories"  onClick={handleLinkClick}>
           <Link to="/categories" className="sidebarLink">
             Categories
           </Link>
-        </Item>
+        </Item> }
+        {(user?.role === 'admin' || user?.role === 'secretaire') &&
         <Item key="emplacement"  onClick={handleLinkClick}>
           <Link to="/emplacement" className="sidebarLink">
             Emplacements
           </Link>
-        </Item>
+        </Item>}
+        {(user?.role === 'admin' || user?.role === 'secretaire') &&
         <Item key="matiere" onClick={handleLinkClick}>
           <Link to="/matiere" className="sidebarLink">
             Matières
           </Link>
-        </Item>
+        </Item>}
+        {(user?.role === 'admin' || user?.role === 'secretaire') &&
         <Item key="marques" onClick={handleLinkClick}>
           <Link to="/marque" className="sidebarLink">
             Marques
           </Link>
-        </Item>
+        </Item>}
+        {(user?.role === 'admin' || user?.role === 'secretaire') &&
         <Item key="couleur" onClick={handleLinkClick}>
           <Link to="/couleur" className="sidebarLink">
             Couleur
           </Link>
-        </Item>
+        </Item>}
+        {(user?.role === 'admin' || user?.role === 'secretaire') &&
         <Item key="typeMouvement" onClick={handleLinkClick}>
           <Link to="/typeMouvement" className="sidebarLink">
             Type des mouvements
           </Link>
-        </Item>
+        </Item>}
       </SubMenu>
+      {(user?.role === 'admin' || user?.role === 'secretaire') &&
       <SubMenu key="reception" title={<span className="sidebarH3">Réceptions</span>} icon={<FireTruckOutlined style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="entreeStock" onClick={handleLinkClick}>
           <Link to="/entreeStock" className="sidebarLink">
@@ -130,7 +137,7 @@ const Sidebar = () => {
             Liste des Réceptions
           </Link>
         </Item>
-      </SubMenu>
+      </SubMenu> }
       <SubMenu key="commande" title={<span className="sidebarH3">Commandes</span>} icon={<ShoppingCartOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="commandeForm" onClick={handleLinkClick}>
           <Link to="/commandeForm" className="sidebarLink">
@@ -143,6 +150,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
+      { user?.role === 'admin' &&  
       <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<DollarCircleOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="ventes" onClick={handleLinkClick}>
           <Link to="/ventes" className="sidebarLink">
@@ -164,13 +172,8 @@ const Sidebar = () => {
             Paiement
           </Link>
         </Item>
-      </SubMenu>
+    </SubMenu> }
       <SubMenu key="Livraison" title={<span className="sidebarH3">Livraisons</span>} icon={<CarOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
-{/*         <Item key="livraison">
-          <Link to="/livraison" className="sidebarLink">
-            Livraison
-          </Link>
-        </Item> */}
         <Item key="livraison_detail" onClick={handleLinkClick}>
           <Link to="/livraison_detail" className="sidebarLink">
             Détail livraison
@@ -208,6 +211,7 @@ const Sidebar = () => {
         </Item> }
         
       </SubMenu>
+      { user?.role === 'admin' &&
       <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<CreditCardOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="depenses" onClick={handleLinkClick}>
           <Link to="/depenses" className="sidebarLink">
@@ -219,7 +223,7 @@ const Sidebar = () => {
             Categorie de dépenses
           </Link>
         </Item>
-      </SubMenu>
+      </SubMenu> }
       { user?.role === 'admin' &&
       <SubMenu key="reports" title={<span className="sidebarH3">Rapports</span>} icon={<FileTextOutlined style={{ fontSize: '19px', color: '#fafafa' }}/>}>
         <Item key="rapportVente"  onClick={handleLinkClick}>

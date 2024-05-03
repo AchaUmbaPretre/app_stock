@@ -57,7 +57,7 @@ const InformationJour = () => {
           }
         };
         fetchData();
-
+        
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);

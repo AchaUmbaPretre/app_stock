@@ -4,7 +4,7 @@
     width: 100%;
     .rowTotalDetail-wrapper{
         display: grid;
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(4,1fr);
         align-items: center;
         justify-content: space-between;
         gap: 20px;
@@ -33,7 +33,7 @@
                     font-size: 2rem;
                 }
                 .rowTotal-span{
-                    font-size: 1rem;
+                    font-size: .9rem;
                 }
             }
             .rowTotalDetail-right{

@@ -132,27 +132,6 @@ const Commande = () => {
         fetchData();
       }, [DOMAIN]);
 
-
-/*       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            let url = `${DOMAIN}/api/produit/varianteProduit`;
-      
-            if ((marque || famillesSelectionnees) && taille.length > 0) {
-              url = `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}`;
-            }
-      
-            const { data } = await axios.get(url);
-            setLoading(false)
-            setData(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-      
-        fetchData();
-      }, [DOMAIN, taille, marque, famillesSelectionnees]); */
-
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -170,6 +149,14 @@ const Commande = () => {
         setIdVariante(e)
         setIdCommande(f)
       };
+
+      useEffect(() => {
+        if (!open) {
+          setTailleDetail([]);
+        }
+      }, [open]);
+
+      console.log(tailleDetail)
       
   return (
     <>
@@ -301,7 +288,7 @@ const Commande = () => {
                           footer={[
                           ]}
                         >
-                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande} tailles={tailleDetail}/>
+                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande} taille={tailleDetail} setTaille={setTailleDetail}/>
                         </Modal>
                       </div>  )}
                       <ReactPaginate

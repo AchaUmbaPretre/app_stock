@@ -17,7 +17,7 @@ import { CircularProgress } from '@mui/material'
 
 
 
-const DetailProduitCommande = ({idVariant, idCommande, tailles }) => {
+const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const { Option } = Select;
     const [data, setData] = useState([]);
@@ -25,7 +25,7 @@ const DetailProduitCommande = ({idVariant, idCommande, tailles }) => {
     const id = location.pathname.split('/')[2];
     const id_commande = location.pathname.split('/')[3];
     const [quantite, setQuantite] = useState(1);
-    const [taille, setTaille] = useState(tailles);
+  /*   const [taille, setTaille] = useState(tailles); */
     const [getTaille, setGetTaille] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);

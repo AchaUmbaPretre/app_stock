@@ -24,6 +24,8 @@ const Information7Jours = () => {
     const [client, setClient] = useState([]);
     const [mouvementEncours, setMouvementEncours] = useState([]);
     const [mouvementVente, setMouvementVente] = useState([]);
+    const [dette, setDette] = useState([]);
+    const [paiement, setPaiement] = useState([])
 
 
     useEffect(() => {
@@ -105,6 +107,19 @@ const Information7Jours = () => {
       }, [DOMAIN]);
 
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapport7jours`);
+            setDette(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
+
 
       return (
         <>
@@ -157,7 +172,7 @@ const Information7Jours = () => {
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/></h2>
                         <span className="rowTotal-span">Dettes totals</span>
                     </div>
                     <div className="rowTotalDetail-right">

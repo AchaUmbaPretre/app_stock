@@ -25,6 +25,8 @@ const Information1an = () => {
     const [client, setClient] = useState([]);
     const [mouvementEncours, setMouvementEncours] = useState([]);
     const [mouvementVente, setMouvementVente] = useState([]);
+    const [dette, setDette] = useState([]);
+    const [paiement, setPaiement] = useState([])
 
 
     useEffect(() => {

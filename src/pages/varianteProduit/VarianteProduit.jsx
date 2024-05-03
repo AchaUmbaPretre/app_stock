@@ -306,12 +306,9 @@ const VarianteProduit = () => {
                         currentData?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id} onClick={()=>navigate(`/pageDetail/${dd.id_varianteProduit}`)}>
                           <div className="cercle"></div>
+{/*                               <Link to={`/pageDetailEdit/${dd.id_varianteProduit}`}>
+                              </Link> */}
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
-                          <div className="info-products">
-                              <Link to={`/pageDetailEdit/${dd.id_varianteProduit}`}>
-                                <div className="icon-products"><SearchOutlined className='icon'/></div>
-                              </Link>
-                          </div>
                         </div>
                         ))}
                       </div>)}

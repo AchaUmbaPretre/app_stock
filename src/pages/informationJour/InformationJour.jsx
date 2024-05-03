@@ -143,7 +143,7 @@ const InformationJour = () => {
                         <span className="rowTotal-span">Mouvement en cours</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                        <img src={commandeIcon} alt="" className='rowTotalIcon' />
+                        <img src={mouvementEncoursIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/mouvement')}>
@@ -152,7 +152,7 @@ const InformationJour = () => {
                         <span className="rowTotal-span">Mouvement vendu</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                        <img src={commandeIcon} alt="" className='rowTotalIcon' />
+                        <img src={mouvementVenduIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>

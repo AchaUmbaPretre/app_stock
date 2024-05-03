@@ -6,6 +6,15 @@ import CountUp from 'react-countup';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SyncOutlined,CarOutlined, UserOutlined,CarryOutOutlined, ShoppingCartOutlined ,ShoppingOutlined } from '@ant-design/icons';
+import venteIcon from './../../assets/remove-from-cart_5733278.png'
+import commandeIcon from './../../assets/check-box_6399627.png'
+import livraisonIcon from './../../assets/delivery_1350151.png'
+import mouvementEncoursIcon from './../../assets/production_9784534.png'
+import mouvementVenduIcon from './../../assets/package_755832.png'
+import detteIcon from './../../assets/money_12831139.png'
+import paiementIcon from './../../assets/payment-method_10747694.png'
+import clientIcon from './../../assets/customer_3126649.png'
+
 
 const Information1an = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -108,52 +117,70 @@ const Information1an = () => {
                         <span className="rowTotal-span">ventes</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                        <ShoppingOutlined className='rowTotalIcon'/>
+                        <img src={venteIcon} alt="" className='rowTotalIcon' />
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/livreur')}>
+                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/listeCommande')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={commande[0]?.nbre}/></h2>
                         <span className="rowTotal-span">commandes</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                    <ShoppingCartOutlined className='rowTotalIcon'/>
+                        <img src={commandeIcon} alt="" className='rowTotalIcon' />
                     </div>
                 </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/livraison_detail')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={livraison[0]?.nbre_livraison}/></h2>
                         <span className="rowTotal-span">Livraisons</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                        <CarOutlined className='rowTotalIcon'/>
+                        <img src={livraisonIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvement')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={mouvementEncours}/></h2>
                         <span className="rowTotal-span">Mouvement en cours</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                        <SyncOutlined className='rowTotalIcon'/>
+                        <img src={mouvementEncoursIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/ventes')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/mouvement')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={mouvementVente}/></h2>
                         <span className="rowTotal-span">Mouvement vendu</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                        <CarryOutOutlined className='rowTotalIcon'/>
+                        <img src={mouvementVenduIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
+                  <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                        <span className="rowTotal-span">Dettes totals</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                        <img src={detteIcon} alt="" className='rowTotalIcon' />
+                    </div>
+                </div>
+                <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
+                    <div className="rowTotalDetail-left">
+                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                        <span className="rowTotal-span">Paiements dettes</span>
+                    </div>
+                    <div className="rowTotalDetail-right">
+                        <img src={paiementIcon} alt="" className='rowTotalIcon' />
+                    </div>
+                </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
                         <span className="rowTotal-span">Clients</span>
                     </div>
                     <div className="rowTotalDetail-right">
-                    <UserOutlined className='rowTotalIcon' />
+                        <img src={clientIcon} alt="" className='rowTotalIcon' />
                     </div>
                 </div>
             </div>

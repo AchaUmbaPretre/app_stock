@@ -18,6 +18,7 @@ const ListeVariante = () => {
     const [produit, setProduit] = useState([]);
     const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
+    const [produitTotalAchats, setProduitTotalAchats] = useState([]);
     
       const handleDelete = async (id) => {
       try {
@@ -173,6 +174,8 @@ const ListeVariante = () => {
         fetchData();
       }, [DOMAIN]);
 
+
+
       useEffect(()=>{
         const fetchData = async ()=> {
             try{
@@ -184,6 +187,18 @@ const ListeVariante = () => {
         }
         fetchData()
      }, [DOMAIN])
+
+     useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotal/total`);
+          setProduitTotalAchats(data[0]?.montant_total_achats);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
 
 /*       const groupedData = Object.values(
         data.reduce((acc, item) => {
@@ -216,7 +231,8 @@ const ListeVariante = () => {
                     </div>
                     <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                       <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '14px' }}>
-                        <p style={{display:'flex',gap:'8px', justifyContent: 'space-between'}}>Total d'articles en stock: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={produit[0]?.total}/></b></p>
+                        <p style={{display:'flex',gap:'8px', justifyContent: 'space-between'}}>Total d'articles en stock : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={produit[0]?.total}/></b></p>
+                        <p style={{display:'flex',gap:'8px', justifyContent: 'space-between'}}>Montant total : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={produitTotalAchats}/>$</b></p>
                       </div>
                     </div>
                 </div>

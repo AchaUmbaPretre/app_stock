@@ -149,14 +149,6 @@ const Commande = () => {
         setIdVariante(e)
         setIdCommande(f)
       };
-
-      useEffect(() => {
-        if (!open) {
-          setTailleDetail([]);
-        }
-      }, [open]);
-
-      console.log(tailleDetail)
       
   return (
     <>
@@ -268,7 +260,7 @@ const Commande = () => {
                         currentData?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id}>
                           <div className="cercle"></div>
-                          <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
+                          <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" onClick={()=> showModal(dd.id_varianteProduit,id)} />
                           <div className="info-products">
                             <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
                               <Link onClick={()=> showModal(dd.id_varianteProduit,id)}>
@@ -283,12 +275,13 @@ const Commande = () => {
                           open={open}
                           onCancel={() => {
                             setOpen(false)
+                            setTailleDetail([])
                           }}
                           width={950}
                           footer={[
                           ]}
                         >
-                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande} taille={tailleDetail} setTaille={setTailleDetail}/>
+                         <DetailProduitCommande idVariant={idVariante} idCommande={idCommande} tailles={tailleDetail} setTailles={setTailleDetail}/>
                         </Modal>
                       </div>  )}
                       <ReactPaginate

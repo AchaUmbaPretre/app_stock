@@ -215,7 +215,6 @@ const DetailProduitCommande = ({idVariant, idCommande, tailles, setTailles}) => 
             ) : (
               <div className="detailProduit-wrapper">
                 {result.map((dd)=>(
-
                 <div className="detail-container-bottom">
                     <div className="detail-container-rows">
                         <div className="detail-bottom-left">

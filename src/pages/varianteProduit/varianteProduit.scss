@@ -113,6 +113,9 @@
                             height: 75%;
                             z-index: 2;
                             object-fit: cover;
+                            &:hover{
+                                transform: scale(1.1);
+                            }
                         }
                     }
                 }

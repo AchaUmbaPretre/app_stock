@@ -80,6 +80,16 @@ const ListeVariante = () => {
           )
         },
         {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          key: 'taille',
+          render: (text) => (
+            <Tag color={"blue"}>
+              {text}
+            </Tag>
+          )
+        },
+        {
           title: "Date d'entrée",
           dataIndex: 'created_at',
           key: 'created_at',
@@ -92,6 +102,26 @@ const ListeVariante = () => {
                 </Tag>
               </span>
             ),
+        },
+        {
+          title: 'Code variante',
+          dataIndex: 'code_variant',
+          key: 'code_variant',
+          render: (text) => (
+            <Tag color={"green"}>
+              {text}
+            </Tag>
+          )
+        },
+        {
+          title: 'Montant total',
+          dataIndex: 'total',
+          key: 'total',
+          render: (text) => (
+            <Tag color={"blue"}>
+              {`${text} $`}
+            </Tag>
+          )
         },
         {
           title: 'Quantité en stock',
@@ -155,7 +185,7 @@ const ListeVariante = () => {
         fetchData()
      }, [DOMAIN])
 
-      const groupedData = Object.values(
+/*       const groupedData = Object.values(
         data.reduce((acc, item) => {
           const { code_variant, ...rest } = item;
           if (acc[code_variant]) {
@@ -166,10 +196,10 @@ const ListeVariante = () => {
           return acc;
         }, {})
       );
-      const firstDataArray = groupedData.map(obj => obj.data[0]);
+      const firstDataArray = groupedData.map(obj => obj.data[0]); */
 
 
-    const filteredData = firstDataArray?.filter((item) =>
+    const filteredData = data?.filter((item) =>
       item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
     );
@@ -208,7 +238,7 @@ const ListeVariante = () => {
                     <div className="rowChart-row-table">
                     {opens &&
                     <VarianteSelect getProduits={setData}/> } 
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>
             </div>

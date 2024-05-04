@@ -17,7 +17,7 @@ import { CircularProgress } from '@mui/material'
 
 
 
-const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
+const DetailProduitCommande = ({idVariant, idCommande, tailles, setTailles}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const { Option } = Select;
     const [data, setData] = useState([]);
@@ -57,15 +57,16 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/inventaire/${variante}`);
-            const tailles = data?.map(item => ({ id_taille: item.id_taille, taille: item.taille }));
-            setGetTaille(tailles)
-            setLoading(false)
+            const filteredData = data.filter(item => item.nombre_de_paires !== 0);
+            const tailles = filteredData?.map(item => ({ id_taille: item.id_taille, taille: item.taille }));
+            setGetTaille(tailles);
+            setLoading(false);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [DOMAIN,variante]);
+      }, [DOMAIN, variante]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -116,7 +117,7 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const requests = taille.map(async (dd) => {
+          const requests = tailles.map(async (dd) => {
             const { data } = await axios.get(`${DOMAIN}/api/commande/idVariantproduit/${variante}/${dd}`);
             return {
               idVarianteProduit: data.map((dd) => dd.id_varianteProduit),
@@ -138,7 +139,7 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
       };
     
       fetchData();
-    }, [DOMAIN, variante, taille]);
+    }, [DOMAIN, variante, tailles]);
 
     useEffect(() => {
       const fetchData = async () => {
@@ -156,7 +157,7 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
     const handleClick = async (e) => {
       e.preventDefault();
     
-      if (!taille || taille.length === 0) {
+      if (!tailles || tailles.length === 0) {
         Swal.fire({
           title: 'Error',
           text: 'Veuillez choisir une pointure',
@@ -169,8 +170,8 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
       try {
         setIsLoading(true);
     
-        for (let i = 0; i < taille.length; i++) {
-          const dd = taille[i];
+        for (let i = 0; i < tailles.length; i++) {
+          const dd = tailles[i];
           const idVarianteProduitValue = idVarianteProduit[i];
     
           await axios.post(`${DOMAIN}/api/commande/detail-commande`, {
@@ -190,7 +191,7 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
           confirmButtonText: 'OK',
         });
 
-        setTaille([]);
+        setTailles([]);
     
       } catch (err) {
         Swal.fire({
@@ -246,7 +247,7 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
                                           style={{ width: "200px" }}
                                           className="filter-titre"
                                           mode="multiple"
-                                          onChange={(selectedValues) => setTaille(selectedValues)}
+                                          onChange={(selectedValues) => setTailles(selectedValues)}
                                         >
                                           <Option className="taille_pla" disabled>Sélectionnez une pointure</Option>
                                           {getTaille?.sort((a, b) => a.taille - b.taille).map((s) => (
@@ -261,9 +262,9 @@ const DetailProduitCommande = ({idVariant, idCommande, taille, setTaille}) => {
                                         <span className="filter-nb">{quantite}</span>
                                         <RemoveOutlinedIcon className="filter-icon" onClick={()=>handleQuantity('desc')}/>
                                     </div>
-                                    {taille && quantite > stock && <div style={{color:'red', fontSize:"12px"}}>Il ya que {stock} dans le stock pour cette pointure</div>}
+                                    {tailles && quantite > stock && <div style={{color:'red', fontSize:"12px"}}>Il ya que {stock} dans le stock pour cette pointure</div>}
                                     <div className="filter">
-                                        <button className="filter-btn" onClick={handleClick} disabled={isLoading || taille && quantite > stock ? true : false}>Envoyer</button>
+                                        <button className="filter-btn" onClick={handleClick} disabled={isLoading || tailles && quantite > stock ? true : false}>Envoyer</button>
                                         {isLoading && (
                                             <div className="loader-container loader-container-center">
                                               <CircularProgress size={28} />

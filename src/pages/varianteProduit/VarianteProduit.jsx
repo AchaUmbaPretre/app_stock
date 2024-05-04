@@ -215,7 +215,6 @@ const VarianteProduit = () => {
                           <Select
                             name='id_famille'
                             className='variant-select'
-                            placeholder=''
                             options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
                             isMulti
                             onChange={(selectedOption) =>{
@@ -232,7 +231,6 @@ const VarianteProduit = () => {
                           <Select
                             name='id_marque'
                             className='variant-select'
-                            placeholder=''
                             isMulti
                             options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
                             onChange={(selectedOption) =>{

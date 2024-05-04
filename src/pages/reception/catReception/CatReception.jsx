@@ -233,9 +233,9 @@ const CatReception = () => {
                           <div className="cercle"></div>
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                           <div className="info-products">
-                              <Link to={`/detailReception/${dd.id_varianteProduit}`}>
+{/*                               <Link to={`/detailReception/${dd.id_varianteProduit}`}>
                                 <div className="icon-products"><SearchOutlined className='icon'/></div>
-                              </Link>
+                              </Link> */}
                           </div>
                         </div>
                         ))}

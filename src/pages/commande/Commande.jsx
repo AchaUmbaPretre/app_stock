@@ -20,6 +20,8 @@ const Commande = () => {
     const [getCible,setGetCible] = useState([]);
     const [getCouleur,setGetCouleur] = useState([]);
     const [couleur, setCouleur] = useState(null);
+    const [getMatiere,setGetMatiere] = useState([]);
+    const [matiere,setMatiere] = useState(null);
     const {pathname} = useLocation();
     const id = pathname.split('/')[2];
     const [marque, setMarque] = useState(null);
@@ -71,13 +73,13 @@ const Commande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famillesSelectionnees}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&id_couleur=${couleur}`
+            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famillesSelectionnees}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&id_couleur=${couleur}&id_matiere=${matiere}`
       
             const { data } = await axios.get(url);
             setData(data);
             setLoading(false)
 
-            if (data.length === 0) {
+             if (data.length === 0) {
 
               window.location.reload();
             }
@@ -87,7 +89,7 @@ const Commande = () => {
         };
       
         fetchData();
-      }, [DOMAIN, famillesSelectionnees, marque, cible, taille, couleur]);
+      }, [DOMAIN, famillesSelectionnees, marque, cible, taille, couleur, matiere]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -148,6 +150,18 @@ const Commande = () => {
         };
         fetchData();
       }, [DOMAIN,id]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/matiere`);
+            setGetMatiere(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
       
       const showModal = (e,f) => {
         setOpen(true);
@@ -250,6 +264,22 @@ const Commande = () => {
                             onChange={(selectedOption) => {
                               const selectedValue = selectedOption.map(option => option.value)
                               setCouleur(selectedValue)}
+                            }
+                          />
+                        </div>
+                        <div className="variant-top-left">
+                          <div className="variant-top-row">
+                            <FilterOutlined className='variant-icon'/>
+                            <span>Matiere</span>
+                          </div>
+                          <Select
+                            name='id_matiere'
+                            className='variant-select'
+                            options={getMatiere?.map(item => ({ value: item.id_matiere, label: item.nom_matiere }))}
+                            isMulti
+                            onChange={(selectedOption) => {
+                              const selectedValue = selectedOption.map(option => option.value)
+                              setMatiere(selectedValue)}
                             }
                           />
                         </div>

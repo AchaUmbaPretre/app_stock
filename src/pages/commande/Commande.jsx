@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import Select from 'react-select';
 import './commande.scss'
-import {FilterOutlined,ShoppingCartOutlined,SearchOutlined,HeartOutlined} from '@ant-design/icons';
+import {FilterOutlined } from '@ant-design/icons';
 import { Modal} from 'antd';
 import config from '../../config'
 import { FadeLoader } from 'react-spinners';

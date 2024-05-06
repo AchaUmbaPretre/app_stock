@@ -9,25 +9,30 @@ import Information30joursMoney from '../../pages/informationJour/InformationJour
 import Information30Jours from '../../pages/informationJour/Information30jours';
 import Information1an from '../../pages/informationJour/Information1an';
 import Information1anMoney from '../../pages/informationJour/InformationJourMoney/Informatique1anMoney';
+import InformationHier from '../../pages/informationJour/InformationHier';
 
 const InformationGeneral = () => {
   return (
     <>
         <div className='informationGeneral'>
         <Tabs>
-            <Tabs.TabPane tab='Rapport du jour' key={0}>
+            <Tabs.TabPane tab="Aujourd'hui" key={0}>
+                <InformationMoney/>
+                <InformationHier/>
+            </Tabs.TabPane>
+            <Tabs.TabPane tab='Hier' key={1}>
                 <InformationMoney/>
                 <InformationJour/>
             </Tabs.TabPane>
-            <Tabs.TabPane tab='Rapport des 7 derniers jours' key={1}>
+            <Tabs.TabPane tab='7 derniers jours' key={2}>
                 <Information7joursMoney/>
                 <Information7Jours/>
             </Tabs.TabPane>
-            <Tabs.TabPane tab='Rapport des 30 derniers jours' key={2}>
+            <Tabs.TabPane tab='30 derniers jours' key={3}>
                 <Information30joursMoney/>
                 <Information30Jours/>
             </Tabs.TabPane>
-            <Tabs.TabPane tab="Rapport d'un an" key={3}>
+            <Tabs.TabPane tab="1an" key={4}>
                 <Information1anMoney/>
                 <Information1an/>
             </Tabs.TabPane>

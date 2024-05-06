@@ -10,6 +10,7 @@ import Information30Jours from '../../pages/informationJour/Information30jours';
 import Information1an from '../../pages/informationJour/Information1an';
 import Information1anMoney from '../../pages/informationJour/InformationJourMoney/Informatique1anMoney';
 import InformationHier from '../../pages/informationJour/InformationHier';
+import InformationHierMoney from '../../pages/informationJour/InformationJourMoney/InformationHierMoney';
 
 const InformationGeneral = () => {
   return (
@@ -21,7 +22,7 @@ const InformationGeneral = () => {
                 <InformationJour/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='Hier' key={1}>
-                <InformationMoney/>
+                <InformationHierMoney/>
                 <InformationHier/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='7 derniers jours' key={2}>

@@ -50,6 +50,7 @@ const RapportCaisse = () => {
   return (
     <>
         <div className='rapportCaisse'>
+            <h1 className='rapport-h1'>Rapport de caisse</h1>
             <div className="rapportCaisse-rows">
                 <div className="productSelects-container">
                     <input

@@ -1,11 +1,50 @@
 .rapportCaisse{
+    width: 100%;
+    padding: 20px 0;
+    z-index: 999;
+    .rapport-h1{
+        font-size: 22px;
+        font-weight: bold;
+        color: rgba(1, 35, 138, 0.952);
+        padding: 0 20px 20px 0px;
+        text-transform: uppercase;
+    }
     .rapportCaisse-rows{
+        width: 100%;
+        width: 100%;
+        padding: 20px;
+        z-index: 999;
+        background: #fff;
+        margin-bottom: 20px;
         .productSelects-container{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 10px;
             .product-input-select{
-
+                width: 100%;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                background: #fff;
+                z-index: 888;
+                &:focus{
+                    outline: 1px solid rgba(63, 108, 241, 0.527);
+                }
             }
             .select-btn{
-                
+                color: #fff;
+                background:rgb(1, 35, 138);
+                padding: 8px;
+                border-radius: 5px;
+                transition: .5s;
+                cursor: pointer;
+                &:hover{
+                    background:rgb(10, 68, 243);
+                }
+                .select-search-btn{
+                    font-size: 1.2rem;
+                }
             }
         }
     }

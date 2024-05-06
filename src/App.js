@@ -94,6 +94,7 @@ import PageCommandeEchange from './pages/pageLivreur/pageCommandeEchange/PageCom
 import PageEchange from './pages/pageLivreur/pageEchange/PageEchange';
 import ClientView from './pages/client/ClientView';
 import ClientLocation from './pages/client/clientLocation/ClientLocation';
+import RapportCaisse from './pages/rapport/rapportCaisse/RapportCaisse';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -485,6 +486,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/permission',
           element: <Permissions />
+        },
+        {
+          path: '/caisse',
+          element: <RapportCaisse/>
         }
       ]
     }, user?.role === 'livreur' && {

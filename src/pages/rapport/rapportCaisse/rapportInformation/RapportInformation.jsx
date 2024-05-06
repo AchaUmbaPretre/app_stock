@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import './informationJour.scss'
 import axios from 'axios';
-import config from '../../config';
 import CountUp from 'react-countup';
 import { useNavigate } from 'react-router-dom';
-import venteIcon from './../../assets/remove-from-cart_5733278.png'
-import commandeIcon from './../../assets/check-box_6399627.png'
-import livraisonIcon from './../../assets/delivery_1350151.png'
-import mouvementEncoursIcon from './../../assets/production_9784534.png'
-import mouvementVenduIcon from './../../assets/package_755832.png'
-import detteIcon from './../../assets/money_12831139.png'
-import paiementIcon from './../../assets/payment-method_10747694.png'
-import clientIcon from './../../assets/customer_3126649.png'
+import venteIcon from './../../../../assets/remove-from-cart_5733278.png'
+import commandeIcon from './../../../../assets/check-box_6399627.png'
+import livraisonIcon from './../../../../assets/delivery_1350151.png'
+import mouvementEncoursIcon from './../../../../assets/production_9784534.png'
+import mouvementVenduIcon from './../../../../assets/package_755832.png'
+import detteIcon from './../../../../assets/money_12831139.png'
+import paiementIcon from './../../../../assets/payment-method_10747694.png'
+import clientIcon from './../../../../assets/customer_3126649.png'
+import config from '../../../../config';
 
-
-const InformationHier = () => {
+const RapportInformation = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const [commande, setCommande] = useState([]);
@@ -24,13 +22,13 @@ const InformationHier = () => {
     const [mouvementEncours, setMouvementEncours] = useState([]);
     const [mouvementVente, setMouvementVente] = useState([]);
     const [dette, setDette] = useState([]);
-    const [paiement, setPaiement] = useState([])
+    const [paiement, setPaiement] = useState([]);
 
 
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteDhier`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/venteNbreJour`);
             setData(data);
           } catch (error) {
             console.log(error);
@@ -42,7 +40,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeHier`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeJour`);
             setCommande(data);
           } catch (error) {
             console.log(error);
@@ -59,7 +57,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDHier`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJours`);
             setLivraison(data);
           } catch (error) {
             console.log(error);
@@ -75,7 +73,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countHier`);
+            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour`);
             setClient(data[0].nbre_client);
           } catch (error) {
             console.log(error);
@@ -91,7 +89,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountHier`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours`);
             setMouvementEncours(data[0]?.nbre_mouvement_encours);
             setMouvementVente(data[0]?.nbre_mouvement_vente);
           } catch (error) {
@@ -105,10 +103,11 @@ const InformationHier = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
+
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapportHier`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapportJour`);
             setDette(data[0]?.montant_total_restant);
           } catch (error) {
             console.log(error);
@@ -117,11 +116,10 @@ const InformationHier = () => {
         fetchData();
       }, [DOMAIN]);
 
-
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementHier`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJourMontant`);
             setPaiement(data[0]?.montant_total);
           } catch (error) {
             console.log(error);
@@ -129,6 +127,7 @@ const InformationHier = () => {
         };
         fetchData();
       }, [DOMAIN]);
+
 
 
       return (
@@ -182,7 +181,7 @@ const InformationHier = () => {
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/> $</h2>
                         <span className="rowTotal-span">Montant à credit</span>
                     </div>
                     <div className="rowTotalDetail-right">
@@ -191,7 +190,7 @@ const InformationHier = () => {
                 </div>
                 <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/> $</h2>
                         <span className="rowTotal-span">Remboursement</span>
                     </div>
                     <div className="rowTotalDetail-right">
@@ -213,4 +212,4 @@ const InformationHier = () => {
       )
 }
 
-export default InformationHier
+export default RapportInformation

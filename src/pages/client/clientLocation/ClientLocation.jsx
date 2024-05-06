@@ -43,7 +43,7 @@ const ClientLocation = () => {
   return (
     <div>
       {currentPosition ? (
-        <MapContainer center={currentPosition} zoom={19} scrollWheelZoom={false} style={{ height: '550px' }}>
+        <MapContainer center={currentPosition} zoom={18} scrollWheelZoom={false} style={{ height: '550px' }}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

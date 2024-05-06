@@ -267,11 +267,9 @@ const Commande = () => {
                           <div className="cercle"></div>
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" onClick={()=> showModal(dd.id_varianteProduit,id)} />
                           <div className="info-products">
-                            <div className="icon-products"><ShoppingCartOutlined className='icon'/></div>
+{/*                             <div className="icon-products"><ShoppingCartOutlined className='icon'/></div> */}
                               <Link onClick={()=> showModal(dd.id_varianteProduit,id)}>
-                                <div className="icon-products"><SearchOutlined className='icon'/></div>
                               </Link>
-                            <div className="icon-products"><HeartOutlined className='icon1'/></div>
                           </div>
                         </div>
                         ))}

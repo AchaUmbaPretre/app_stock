@@ -3,7 +3,6 @@ import './informationJour.scss'
 import axios from 'axios';
 import config from '../../config';
 import CountUp from 'react-countup';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import venteIcon from './../../assets/remove-from-cart_5733278.png'
 import commandeIcon from './../../assets/check-box_6399627.png'
@@ -183,7 +182,7 @@ const InformationHier = () => {
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/></h2>
                         <span className="rowTotal-span">Montant à credit</span>
                     </div>
                     <div className="rowTotalDetail-right">

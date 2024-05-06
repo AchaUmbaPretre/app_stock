@@ -241,6 +241,11 @@ const Sidebar = () => {
             Clients
           </Link>
         </Item>
+        <Item key="rapportCaisse"  onClick={handleLinkClick}>
+          <Link to="/rapportCaisse" className="sidebarLink">
+            Caisse
+          </Link>
+        </Item>
           <Item key="rapportRevenu" onClick={handleLinkClick}>
           <Link to="/rapportRevenu" className="sidebarLink">
             Revenus

@@ -92,7 +92,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours1an`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountHier`);
             setMouvementEncours(data[0]?.nbre_mouvement_encours);
             setMouvementVente(data[0]?.nbre_mouvement_vente);
           } catch (error) {
@@ -106,11 +106,23 @@ const InformationHier = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapport30jours`);
+            setDette(data[0]?.montant_total_restant);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
 
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJourMontant1an`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementHier`);
             setPaiement(data[0]?.montant_total);
           } catch (error) {
             console.log(error);

@@ -18,11 +18,11 @@ const InformationGeneral = () => {
         <Tabs>
             <Tabs.TabPane tab="Aujourd'hui" key={0}>
                 <InformationMoney/>
-                <InformationHier/>
+                <InformationJour/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='Hier' key={1}>
                 <InformationMoney/>
-                <InformationJour/>
+                <InformationHier/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='7 derniers jours' key={2}>
                 <Information7joursMoney/>

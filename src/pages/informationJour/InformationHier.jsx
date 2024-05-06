@@ -43,7 +43,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commande1an`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeHier`);
             setCommande(data);
           } catch (error) {
             console.log(error);
@@ -60,7 +60,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJour1an`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDHier`);
             setLivraison(data);
           } catch (error) {
             console.log(error);
@@ -76,7 +76,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/count1an`);
+            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countHier`);
             setClient(data[0].nbre_client);
           } catch (error) {
             console.log(error);

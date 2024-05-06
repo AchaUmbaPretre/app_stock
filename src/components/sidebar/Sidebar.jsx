@@ -150,7 +150,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      { user?.role === 'admin' &&  
+      { (user?.role === 'admin' || user?.role === 'secretaire') &&  
       <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<DollarCircleOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="ventes" onClick={handleLinkClick}>
           <Link to="/ventes" className="sidebarLink">

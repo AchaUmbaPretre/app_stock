@@ -76,6 +76,11 @@ const Commande = () => {
             const { data } = await axios.get(url);
             setData(data);
             setLoading(false)
+
+            if (data.length === 0) {
+
+              window.location.reload();
+            }
           } catch (error) {
             console.log(error);
           }

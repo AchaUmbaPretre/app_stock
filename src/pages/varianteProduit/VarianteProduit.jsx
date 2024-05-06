@@ -183,11 +183,17 @@ const VarianteProduit = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&id_couleur=${couleur}`
+            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&id_couleur=${couleur}`;
       
             const { data } = await axios.get(url);
             setData(data);
-            setLoading(false)
+            setLoading(false);
+      
+            // Vérifier si data est un tableau vide
+            if (data.length === 0) {
+              // Actualiser la page
+              window.location.reload();
+            }
           } catch (error) {
             console.log(error);
           }

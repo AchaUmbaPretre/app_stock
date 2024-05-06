@@ -182,8 +182,8 @@ const InformationJour = () => {
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/></h2>
-                        <span className="rowTotal-span">Dettes non payées</span>
+                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/> $</h2>
+                        <span className="rowTotal-span">Montant à credit</span>
                     </div>
                     <div className="rowTotalDetail-right">
                         <img src={detteIcon} alt="" className='rowTotalIcon' />
@@ -191,8 +191,8 @@ const InformationJour = () => {
                 </div>
                 <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/></h2>
-                        <span className="rowTotal-span">Paiements des dettes</span>
+                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/> $</h2>
+                        <span className="rowTotal-span">Remboursement</span>
                     </div>
                     <div className="rowTotalDetail-right">
                         <img src={paiementIcon} alt="" className='rowTotalIcon' />

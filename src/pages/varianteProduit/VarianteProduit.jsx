@@ -188,10 +188,9 @@ const VarianteProduit = () => {
             const { data } = await axios.get(url);
             setData(data);
             setLoading(false);
-      
-            // Vérifier si data est un tableau vide
+
             if (data.length === 0) {
-              // Actualiser la page
+              
               window.location.reload();
             }
           } catch (error) {

@@ -63,7 +63,7 @@ const RowTotalDetail = () => {
               };
         }
         fetchData()
-     }, [])
+     }, [DOMAIN])
 
   return (
     <>

@@ -1,10 +1,10 @@
 import React from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
 import Select from 'react-select';
-import {FilterOutlined,SearchOutlined} from '@ant-design/icons';
+import {FilterOutlined} from '@ant-design/icons';
 import config from '../../../config';
 import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';

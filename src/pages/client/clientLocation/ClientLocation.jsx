@@ -10,6 +10,8 @@ const ClientLocation = () => {
   const commune = searchParams.get('commune');
   const avenue = searchParams.get('avenue');
   const num = searchParams.get('num');
+  const lat = searchParams.get('lat');
+  const lon = searchParams.get('lon');
   const clientAddress = `Kinshasa, ${commune}, ${avenue}, ${num}`;
   const [currentPosition, setCurrentPosition] = useState(null);
 
@@ -19,11 +21,11 @@ const ClientLocation = () => {
     
       if (clientAddress) {
         try {
-          const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(clientAddress)}`);
-          const data = await response.json();
+          /* const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(clientAddress)}`); */
+/*           const data = await response.json(); */
 
-          if (data.length > 0) {
-            const { lat, lon } = data[0];
+          if (lat.length > 0) {
+/*             const { lat, lon } = data[0]; */
             setCurrentPosition([parseFloat(lat), parseFloat(lon)]);
           } else {
             console.log('Aucun résultat de géocodage trouvé pour l\'adresse spécifiée.');

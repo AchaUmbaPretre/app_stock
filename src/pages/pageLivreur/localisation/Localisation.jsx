@@ -56,7 +56,8 @@ const Localisation = () => {
     
       if (clientAddress) {
         try {
-          const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(clientAddress)}`);
+/*           const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(clientAddress)}`); */
+          const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(userPosition)}`);
           const data = await response.json();
 
           if (data.length > 0) {

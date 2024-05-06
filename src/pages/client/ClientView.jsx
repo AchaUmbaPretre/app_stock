@@ -101,7 +101,7 @@ const ClientView = () => {
             render: (text, record) => (
               <Space size="middle">
                 <Popover title="Voir la localisation" trigger="hover">
-                  <Button icon={<EnvironmentOutlined />} style={{ color: 'green' }} onClick={()=> navigate(`/clientLocalisation?avenue=${record.avenue}&commune=${record.nom_commune}&num=${record.num}`)} />
+                  <Button icon={<EnvironmentOutlined />} style={{ color: 'green' }} onClick={()=> navigate(`/clientLocalisation?avenue=${record.avenue}&commune=${record.nom_commune}&num=${record.num}&lat=${record.lat}&lon=${record.lon}`)} />
                 </Popover>
                   {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
@@ -131,6 +131,8 @@ const ClientView = () => {
         };
         fetchData();
       }, [DOMAIN,id_client]);
+
+      console.log(adresseOne)
     
       const handleDelete = async (id) => {
       try {
@@ -146,6 +148,7 @@ const ClientView = () => {
     item.nom_province?.toLowerCase().includes(searchValue.toLowerCase()) ||
     item.avenue?.toLowerCase().includes(searchValue.toLowerCase())
 );
+
 
   return (
     <>

@@ -3,7 +3,6 @@ import axios from 'axios';
 import config from '../../config';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
 const FormDepenses = () => {
@@ -85,14 +84,14 @@ const FormDepenses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/livreur`);
+        const { data } = await axios.get(`${DOMAIN}/api/user/getUser`);
         setLivreur(data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
+  }, [DOMAIN]);
 
   console.log(data)
   return (
@@ -101,7 +100,7 @@ const FormDepenses = () => {
         <div className="product-container">
           <div className="product-wrapper">
             <div className="form-controle-desc">
-              <label htmlFor="">Livreur</label>
+              <label htmlFor="">Personnels</label>
               <Select
                 name="id_livreur"
                 options={livreur?.map((item) => ({
@@ -113,7 +112,7 @@ const FormDepenses = () => {
                     target: { name: 'id_livreur', value: selectedOption.value },
                   })
                 }
-                placeholder="Sélectionnez un livreur..."
+                placeholder="Sélectionnez un agent..."
               />
             </div>
             <div className="form-controle-desc">

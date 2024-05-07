@@ -146,7 +146,7 @@ const Depenses = () => {
                     </div>
                     <div className="product-right" onClick={handleOk}>
                         <PlusOutlined className='product-icon'/>
-                        <span className="product-btn">Ajouter une nouvelle dépense</span>
+                        <span className="product-btn">Nouvelle dépense</span>
                     </div>
                 </div>
                 <div className="product-bottom">

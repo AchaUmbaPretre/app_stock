@@ -40,7 +40,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeJour?date_start=${''}&date_end=${''}`);
             setCommande(data);
           } catch (error) {
             console.log(error);
@@ -57,7 +57,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJours`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJours?date_start=${''}&date_end=${''}`);
             setLivraison(data);
           } catch (error) {
             console.log(error);
@@ -73,7 +73,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour?date_start=${''}&date_end=${''}`);
             setClient(data[0].nbre_client);
           } catch (error) {
             console.log(error);
@@ -89,7 +89,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours?date_start=${''}&date_end=${''}`);
             setMouvementEncours(data[0]?.nbre_mouvement_encours);
             setMouvementVente(data[0]?.nbre_mouvement_vente);
           } catch (error) {
@@ -107,7 +107,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapportJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapportJour?date_start=${''}&date_end=${''}`);
             setDette(data[0]?.montant_total_restant);
           } catch (error) {
             console.log(error);
@@ -119,7 +119,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJourMontant`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJourMontant?date_start=${''}&date_end=${''}`);
             setPaiement(data[0]?.montant_total);
           } catch (error) {
             console.log(error);

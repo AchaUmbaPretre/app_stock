@@ -23,7 +23,7 @@ const RapportMoney = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour?date_start=${''}&date_end=${''}`);
             setVenteTotal(data[0]?.montant_total_vente);
           } catch (error) {
             console.log(error);
@@ -35,7 +35,7 @@ const RapportMoney = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotal/total`);
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotal/total?date_start=${''}&date_end=${''}`);
             setProduitTotalAchats(data[0]?.montant_total_achats);
           } catch (error) {
             console.log(error);
@@ -47,7 +47,7 @@ const RapportMoney = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseCount`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseCount?date_start=${''}&date_end=${''}`);
             setDepenses(data[0]?.total_depense);
           } catch (error) {
             console.log(error);

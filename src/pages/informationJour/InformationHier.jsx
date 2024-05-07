@@ -183,7 +183,7 @@ const InformationHier = () => {
                   </div>
                   <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/> $</h2>
                         <span className="rowTotal-span">Montant à credit</span>
                     </div>
                     <div className="rowTotalDetail-right">
@@ -192,7 +192,7 @@ const InformationHier = () => {
                 </div>
                 <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
                     <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/></h2>
+                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/> $</h2>
                         <span className="rowTotal-span">Remboursement</span>
                     </div>
                     <div className="rowTotalDetail-right">

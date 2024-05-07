@@ -74,7 +74,7 @@ const RapportInformation = ({start_date, end_date}) => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseClientCount?start_date=${start_date}&end_date=${end_date}`);
-            setClient(data[0].nbre_client);
+            setClient(data);
           } catch (error) {
             console.log(error);
           }

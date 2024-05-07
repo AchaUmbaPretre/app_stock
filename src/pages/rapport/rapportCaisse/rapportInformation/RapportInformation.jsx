@@ -128,7 +128,6 @@ const RapportInformation = ({start_date, end_date}) => {
         fetchData();
       }, [DOMAIN,start_date,end_date]);
 
-
       return (
         <>
             <div className="rowTotalDetails" style={{margin: '20px 0'}}>

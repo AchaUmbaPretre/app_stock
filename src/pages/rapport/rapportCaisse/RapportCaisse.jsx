@@ -74,8 +74,8 @@ const RapportCaisse = () => {
                     </div>
                 </div>
             </div>
-            <RapportMoney date_start={setDate_start} date_end={setDate_start}/>
-            <RapportInformation date_start={setDate_start} date_end={setDate_start}/>
+            <RapportMoney date_start={setDate_start} date_end={setDate_end}/>
+            <RapportInformation date_start={setDate_start} date_end={setDate_end}/>
         </div>
 
     </>

@@ -93,7 +93,6 @@ const FormDepenses = () => {
     fetchData();
   }, [DOMAIN]);
 
-  console.log(data)
   return (
     <>
       <div className="formCatDepense">

@@ -103,6 +103,7 @@ const InformationHier = () => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
+
       }, [DOMAIN]);
 
       useEffect(() => {
@@ -121,7 +122,7 @@ const InformationHier = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementHier`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementHierMontant`);
             setPaiement(data[0]?.montant_total);
           } catch (error) {
             console.log(error);

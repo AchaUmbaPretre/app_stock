@@ -150,7 +150,7 @@ const FormDepenses = () => {
               <label htmlFor="">Montant en USD</label>
               <input
                 type="number"
-                name="montant"
+                name="montant_usb"
                 style={{
                   padding: '8px 10px',
                   border: '1px solid #c5c5c5',
@@ -165,7 +165,7 @@ const FormDepenses = () => {
               <label htmlFor="">Montant en FRANC</label>
               <input
                 type="number"
-                name="montant"
+                name="montant_franc"
                 style={{
                   padding: '8px 10px',
                   border: '1px solid #c5c5c5',

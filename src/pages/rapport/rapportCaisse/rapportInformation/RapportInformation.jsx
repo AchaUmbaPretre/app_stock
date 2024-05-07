@@ -52,7 +52,7 @@ const RapportInformation = ({start_date, end_date}) => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -68,7 +68,7 @@ const RapportInformation = ({start_date, end_date}) => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -84,7 +84,7 @@ const RapportInformation = ({start_date, end_date}) => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -101,7 +101,7 @@ const RapportInformation = ({start_date, end_date}) => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
 
       useEffect(() => {
@@ -114,7 +114,7 @@ const RapportInformation = ({start_date, end_date}) => {
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -126,7 +126,7 @@ const RapportInformation = ({start_date, end_date}) => {
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
 
       return (
@@ -135,7 +135,7 @@ const RapportInformation = ({start_date, end_date}) => {
                 <div className="rowTotalDetail-wrapper">
                     <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
                         <div className="rowTotalDetail-left">
-                            <h2 className="rowTotal-h2"><CountUp end={data[0]?.nombre_vendu}/></h2>
+                            <h2 className="rowTotal-h2"><CountUp end={data[0]?.total}/></h2>
                             <span className="rowTotal-span">ventes</span>
                         </div>
                         <div className="rowTotalDetail-right">

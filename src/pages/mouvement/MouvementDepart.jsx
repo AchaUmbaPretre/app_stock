@@ -164,7 +164,15 @@ const MouvementDepart = () => {
           },
         },
         {
-          title: 'Client',
+          title: 'Pointure',
+          dataIndex: 'taille',
+          key: 'taille',
+          render: (text, record) => {
+            return <Tag color={"green"}>{text}</Tag>;
+          },
+        },
+        {
+          title: 'Client(e)',
           dataIndex: 'nom_client',
           key: 'nom_client',
           render: (text, record) => {
@@ -213,14 +221,6 @@ const MouvementDepart = () => {
             render: (text, record) => {
               const color = record.id_type_mouvement === 5 ? 'red' : 'green';
               return <Tag color={color}>{text}</Tag>;
-            },
-          },
-          {
-            title: 'Pointure',
-            dataIndex: 'taille',
-            key: 'taille',
-            render: (text, record) => {
-              return <Tag color={"green"}>{text}</Tag>;
             },
           },
           {

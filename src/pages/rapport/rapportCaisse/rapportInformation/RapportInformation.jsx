@@ -133,81 +133,81 @@ const RapportInformation = () => {
       return (
         <>
             <div className="rowTotalDetails" style={{margin: '20px 0'}}>
-            <div className="rowTotalDetail-wrapper">
-                <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={data[0]?.nombre_vendu}/></h2>
-                        <span className="rowTotal-span">ventes</span>
+                <div className="rowTotalDetail-wrapper">
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={data[0]?.nombre_vendu}/></h2>
+                            <span className="rowTotal-span">ventes</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={venteIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={venteIcon} alt="" className='rowTotalIcon' />
+                    <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/listeCommande')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={commande[0]?.nbre}/></h2>
+                            <span className="rowTotal-span">commandes</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={commandeIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
-                </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/listeCommande')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={commande[0]?.nbre}/></h2>
-                        <span className="rowTotal-span">commandes</span>
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/livraison_detail')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={livraison[0]?.nbre_livraison}/></h2>
+                            <span className="rowTotal-span">Livraisons</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={livraisonIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={commandeIcon} alt="" className='rowTotalIcon' />
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvement')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={mouvementEncours}/></h2>
+                            <span className="rowTotal-span">Mouvement en cours</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={mouvementEncoursIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
-                </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/livraison_detail')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={livraison[0]?.nbre_livraison}/></h2>
-                        <span className="rowTotal-span">Livraisons</span>
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/mouvement')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={mouvementVente}/></h2>
+                            <span className="rowTotal-span">Mouvement vendu</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={mouvementVenduIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={livraisonIcon} alt="" className='rowTotalIcon' />
+                    <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/> $</h2>
+                            <span className="rowTotal-span">Montant à credit</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={detteIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
-                  </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvement')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={mouvementEncours}/></h2>
-                        <span className="rowTotal-span">Mouvement en cours</span>
+                    <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/> $</h2>
+                            <span className="rowTotal-span">Remboursement</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={paiementIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={mouvementEncoursIcon} alt="" className='rowTotalIcon' />
-                    </div>
-                  </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(1, 1, 223, 0.582)'}} onClick={()=>navigate('/mouvement')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={mouvementVente}/></h2>
-                        <span className="rowTotal-span">Mouvement vendu</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={mouvementVenduIcon} alt="" className='rowTotalIcon' />
-                    </div>
-                  </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/> $</h2>
-                        <span className="rowTotal-span">Montant à credit</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={detteIcon} alt="" className='rowTotalIcon' />
-                    </div>
-                </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/> $</h2>
-                        <span className="rowTotal-span">Remboursement</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={paiementIcon} alt="" className='rowTotalIcon' />
-                    </div>
-                </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
-                    <div className="rowTotalDetail-left">
-                        <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
-                        <span className="rowTotal-span">Clients</span>
-                    </div>
-                    <div className="rowTotalDetail-right">
-                        <img src={clientIcon} alt="" className='rowTotalIcon' />
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
+                        <div className="rowTotalDetail-left">
+                            <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
+                            <span className="rowTotal-span">Clients</span>
+                        </div>
+                        <div className="rowTotalDetail-right">
+                            <img src={clientIcon} alt="" className='rowTotalIcon' />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </>
       )
 }

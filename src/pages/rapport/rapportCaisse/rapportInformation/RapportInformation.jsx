@@ -28,7 +28,7 @@ const RapportInformation = ({start_date, end_date}) => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseVenteCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseVenteCount?start_date=${start_date}&end_date=${end_date}`);
             setData(data);
           } catch (error) {
             console.log(error);
@@ -40,7 +40,7 @@ const RapportInformation = ({start_date, end_date}) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseCommandeCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseCommandeCount?start_date=${start_date}&end_date=${end_date}`);
             setCommande(data);
           } catch (error) {
             console.log(error);
@@ -57,7 +57,7 @@ const RapportInformation = ({start_date, end_date}) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseLivraisonCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseLivraisonCount?start_date=${start_date}&end_date=${end_date}`);
             setLivraison(data);
           } catch (error) {
             console.log(error);
@@ -73,7 +73,7 @@ const RapportInformation = ({start_date, end_date}) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseClientCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseClientCount?start_date=${start_date}&end_date=${end_date}`);
             setClient(data[0].nbre_client);
           } catch (error) {
             console.log(error);
@@ -89,7 +89,7 @@ const RapportInformation = ({start_date, end_date}) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseMouvementCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseMouvementCount?start_date=${start_date}&end_date=${end_date}`);
             setMouvementEncours(data[0]?.nbre_mouvement_encours);
             setMouvementVente(data[0]?.nbre_mouvement_vente);
           } catch (error) {
@@ -107,7 +107,7 @@ const RapportInformation = ({start_date, end_date}) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseDetteCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseDetteCount?start_date=${start_date}&end_date=${end_date}`);
             setDette(data[0]?.montant_total_restant);
           } catch (error) {
             console.log(error);
@@ -119,7 +119,7 @@ const RapportInformation = ({start_date, end_date}) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/caissePaiementCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caissePaiementCount?start_date=${start_date}&end_date=${end_date}`);
             setPaiement(data[0]?.montant_total);
           } catch (error) {
             console.log(error);

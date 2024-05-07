@@ -147,7 +147,7 @@ const FormDepenses = () => {
               />
             </div>
             <div className="form-controle-desc">
-              <label htmlFor="">Montant</label>
+              <label htmlFor="">Montant en USD</label>
               <input
                 type="number"
                 name="montant"
@@ -162,7 +162,22 @@ const FormDepenses = () => {
               />
             </div>
             <div className="form-controle-desc">
-              <label htmlFor="">Montant en dollars</label>
+              <label htmlFor="">Montant en FRANC</label>
+              <input
+                type="number"
+                name="montant"
+                style={{
+                  padding: '8px 10px',
+                  border: '1px solid #c5c5c5',
+                  outline: 'none',
+                  borderRadius: '5px',
+                }}
+                min={0}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-controle-desc">
+              <label htmlFor="">Francs convertis en dollars</label>
               <input
                 type="number"
                 name="device"

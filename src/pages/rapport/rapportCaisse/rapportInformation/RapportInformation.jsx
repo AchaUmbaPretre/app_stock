@@ -28,7 +28,7 @@ const RapportInformation = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteNbreJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/venteNbreJour?date_start=${''}&date_end=${''}`);
             setData(data);
           } catch (error) {
             console.log(error);

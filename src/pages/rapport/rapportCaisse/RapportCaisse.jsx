@@ -7,17 +7,19 @@ import './rapportCaisse.scss'
 
 const RapportCaisse = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [datas, setDatas] = useState({});
+    const [data, setData] = useState({});
+    const [date_start, setDate_start] = useState(null);
+    const [date_end, setDate_end ] = useState(null);
 
 
     const handleStartDateChange = (e) => {
         const startDate = e.target.value;
-        setDatas((prev) => ({ ...prev, start_date: startDate }));
+        setDate_start((prev) => ({ ...prev, start_date: startDate }));
       };
     
       const handleEndDateChange = (e) => {
         const endDate = e.target.value;
-        setDatas((prev) => ({ ...prev, end_date: endDate }));
+        setDate_end((prev) => ({ ...prev, end_date: endDate }));
       };
 
       const handleClick = async (e) => {
@@ -72,8 +74,8 @@ const RapportCaisse = () => {
                     </div>
                 </div>
             </div>
-            <RapportMoney/>
-            <RapportInformation/>
+            <RapportMoney date_start={setDate_start} date_end={setDate_start}/>
+            <RapportInformation date_start={setDate_start} date_end={setDate_start}/>
         </div>
 
     </>

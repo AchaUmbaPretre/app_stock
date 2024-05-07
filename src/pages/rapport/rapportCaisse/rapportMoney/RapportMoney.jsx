@@ -8,13 +8,15 @@ import { useSelector } from 'react-redux';
 import config from '../../../../config';
 
 
-const RapportMoney = () => {
+const RapportMoney = ({start_date, end_date}) => {
     const [venteTotal, setVenteTotal] = useState([]);
     const [produitTotalAchats, setProduitTotalAchats] = useState([]);
     const [depenses, setDepenses] = useState([]);
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const user = useSelector((state) => state.user?.currentUser);
     const [open, setOpen] = useState(false);
+
+    console.log(start_date, end_date)
 
     const showModal = () => {
       setOpen(true);
@@ -23,16 +25,16 @@ const RapportMoney = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour?start_date=${start_date}&end_date=${end_date}`);
             setVenteTotal(data[0]?.montant_total_vente);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
-      useEffect(() => {
+/*       useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotal/total?date_start=${''}&date_end=${''}`);
@@ -42,19 +44,19 @@ const RapportMoney = () => {
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN]); */
 
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseCount?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseCount?date_start=${start_date}&date_end=${end_date}`);
             setDepenses(data[0]?.total_depense);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
   return (
     <>

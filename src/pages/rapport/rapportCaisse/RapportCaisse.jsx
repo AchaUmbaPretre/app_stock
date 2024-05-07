@@ -7,47 +7,19 @@ import './rapportCaisse.scss'
 
 const RapportCaisse = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [data, setData] = useState({});
-    const [date_start, setDate_start] = useState(null);
-    const [date_end, setDate_end ] = useState(null);
+    const [start_date, setStart_date] = useState(null);
+    const [end_date, setEnd_date ] = useState(null);
 
 
     const handleStartDateChange = (e) => {
         const startDate = e.target.value;
-        setDate_start((prev) => ({ ...prev, start_date: startDate }));
+        setStart_date(startDate);
       };
-    
-      const handleEndDateChange = (e) => {
+      
+    const handleEndDateChange = (e) => {
         const endDate = e.target.value;
-        setDate_end((prev) => ({ ...prev, end_date: endDate }));
+        setEnd_date(endDate);
       };
-
-      const handleClick = async (e) => {
-        e.preventDefault();
-    
-    /*     if (!datas.id_marque || !datas.categorie ) {
-          Swal.fire({
-            title: 'Error',
-            text: 'Veuillez remplir tous les champs requis',
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-          return;
-        } */
-        /* try {
-          const {data} = await axios.get(`${DOMAIN}/api/commande?date_start=${datas.start_date}&date_end=${datas.end_date}`);
-          getProduits(data)
-        } catch (err) {
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
-    
-          console.log(err);
-        } */
-    }
 
   return (
     <>
@@ -69,15 +41,11 @@ const RapportCaisse = () => {
                     style={{ border: '1px solid #c7c7c7', cursor: 'pointer' }}
                     onChange={handleEndDateChange}
                     />
-                    <div className="select-btn" onClick={handleClick}>
-                        <SearchOutlined className='select-search-btn'/>
-                    </div>
                 </div>
             </div>
-            <RapportMoney date_start={setDate_start} date_end={setDate_end}/>
-            <RapportInformation date_start={setDate_start} date_end={setDate_end}/>
+            <RapportMoney start_date={start_date} end_date={end_date}/>
+            <RapportInformation start_date={start_date} end_date={end_date}/>
         </div>
-
     </>
   )
 }

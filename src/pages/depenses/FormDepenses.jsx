@@ -176,7 +176,7 @@ const FormDepenses = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-controle-desc">
+{/*             <div className="form-controle-desc">
               <label htmlFor="">Francs convertis en dollars</label>
               <input
                 type="number"
@@ -191,7 +191,7 @@ const FormDepenses = () => {
                 value={data.montant}
                 disabled
               />
-            </div>
+            </div> */}
             <div className="form-controle-desc">
               <label htmlFor="">Description</label>
               <textarea

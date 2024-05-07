@@ -16,8 +16,6 @@ const RapportMoney = ({start_date, end_date}) => {
     const user = useSelector((state) => state.user?.currentUser);
     const [open, setOpen] = useState(false);
 
-    console.log(start_date, end_date)
-
     const showModal = () => {
       setOpen(true);
     };
@@ -25,7 +23,7 @@ const RapportMoney = ({start_date, end_date}) => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/totalJour?start_date=${start_date}&end_date=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/venteTotal/total?start_date=${start_date}&end_date=${end_date}`);
             setVenteTotal(data[0]?.montant_total_vente);
           } catch (error) {
             console.log(error);

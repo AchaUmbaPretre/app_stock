@@ -12,7 +12,7 @@ import paiementIcon from './../../../../assets/payment-method_10747694.png'
 import clientIcon from './../../../../assets/customer_3126649.png'
 import config from '../../../../config';
 
-const RapportInformation = () => {
+const RapportInformation = ({start_date, end_date}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const [commande, setCommande] = useState([]);
@@ -28,19 +28,19 @@ const RapportInformation = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteNbreJour?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseVenteCount?date_start=${start_date}&date_end=${end_date}`);
             setData(data);
           } catch (error) {
             console.log(error);
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN, start_date, end_date]);
 
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeJour?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseCommandeCount?date_start=${start_date}&date_end=${end_date}`);
             setCommande(data);
           } catch (error) {
             console.log(error);
@@ -57,7 +57,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonNbreDuJours?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseLivraisonCount?date_start=${start_date}&date_end=${end_date}`);
             setLivraison(data);
           } catch (error) {
             console.log(error);
@@ -73,7 +73,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/client/clientCount/countJour?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseClientCount?date_start=${start_date}&date_end=${end_date}`);
             setClient(data[0].nbre_client);
           } catch (error) {
             console.log(error);
@@ -89,7 +89,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementCountJourEnCours?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseMouvementCount?date_start=${start_date}&date_end=${end_date}`);
             setMouvementEncours(data[0]?.nbre_mouvement_encours);
             setMouvementVente(data[0]?.nbre_mouvement_vente);
           } catch (error) {
@@ -107,7 +107,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteRapportJour?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseDetteCount?date_start=${start_date}&date_end=${end_date}`);
             setDette(data[0]?.montant_total_restant);
           } catch (error) {
             console.log(error);
@@ -119,7 +119,7 @@ const RapportInformation = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiementJourMontant?date_start=${''}&date_end=${''}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caissePaiementCount?date_start=${start_date}&date_end=${end_date}`);
             setPaiement(data[0]?.montant_total);
           } catch (error) {
             console.log(error);
@@ -127,7 +127,6 @@ const RapportInformation = () => {
         };
         fetchData();
       }, [DOMAIN]);
-
 
 
       return (

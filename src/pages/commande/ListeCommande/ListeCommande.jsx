@@ -253,7 +253,7 @@ const ListeCommande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeRapportTopbar?start_date=${start_date}&end_date=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeRapportTopbar?start_date=${start_date}&end_date=${end_date}&searchValue=${searchValue}`);
             setRapportMoney(data);
           } catch (error) {
             console.log(error);
@@ -265,9 +265,7 @@ const ListeCommande = () => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN,start_date,end_date]);
-
-      console.log(start_date, end_date)
+      }, [DOMAIN,start_date,end_date,searchValue]);
 
 
       const HandOpen = () =>{
@@ -293,11 +291,21 @@ const ListeCommande = () => {
                          {/*  {`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`} */}
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes en attente : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.commande_Enattente}</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes en cours : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.commande_Encours}</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande livré : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.commande_livre}$</b></p>
+                        </div>
+                    </div>
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                        <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                         {/*  {`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`} */}
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.nbre_commande}</b></p>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'articles: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.nbre_articles}</b></p>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total de la commande : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.montant_total}$</b></p>
                         </div>
-                      </div>
+                    </div>
                     <div className="product-right" onClick={() =>navigate('/commandeForm')}>
                         <PlusOutlined />
                         <span className="product-btn">Nouvelle commande</span>

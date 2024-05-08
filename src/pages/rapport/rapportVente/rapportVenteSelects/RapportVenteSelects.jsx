@@ -5,7 +5,7 @@ import config from '../../../../config';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 
-const RapportVenteSelects = ({ getProduits }) => {
+const RapportVenteSelects = ({ getProduits, start_date, end_date}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [datas, setDatas] = useState({});
   const [getMarque, setGetMarque] = useState([]);
@@ -67,11 +67,13 @@ const RapportVenteSelects = ({ getProduits }) => {
   const handleStartDateChange = (e) => {
     const startDate = e.target.value;
     setDatas((prev) => ({ ...prev, start_date: startDate }));
+    start_date(startDate)
   };
 
   const handleEndDateChange = (e) => {
     const endDate = e.target.value;
     setDatas((prev) => ({ ...prev, end_date: endDate }));
+    end_date(endDate)
   };
 
   const handleClick = async (e) => {

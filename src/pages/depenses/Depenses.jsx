@@ -7,12 +7,16 @@ import { useSelector } from 'react-redux';
 import FormDepenses from './FormDepenses';
 import config from '../../config';
 import moment from 'moment';
+import { useLocation } from 'react-router-dom';
 
 const Depenses = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const dateId = searchParams.get('date');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
@@ -125,7 +129,7 @@ const Depenses = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseOne?dateId=${dateId}`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -133,7 +137,7 @@ const Depenses = () => {
           }
         };
         fetchData();
-      }, [DOMAIN]);
+      }, [DOMAIN, dateId]);
 
 
     const handleOk = async (e) => {

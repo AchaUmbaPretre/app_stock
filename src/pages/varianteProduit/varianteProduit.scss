@@ -58,10 +58,10 @@
                         align-items: center;
                         gap: 3px;
                         .variant-icon{
-                            font-size: .8rem;
+                            font-size: .7rem;
                             color: #6d6c6c;
                             @include mobileXR{
-                                font-size: .7rem;
+                                font-size: .6rem;
                             }
                             
                         }

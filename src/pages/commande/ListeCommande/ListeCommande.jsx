@@ -272,7 +272,7 @@ const ListeCommande = () => {
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'articles: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre total de commandes : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total de la commandes : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
                         </div>
                       </div>
                     <div className="product-right" onClick={() =>navigate('/commandeForm')}>

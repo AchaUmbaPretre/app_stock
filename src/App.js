@@ -95,6 +95,7 @@ import PageEchange from './pages/pageLivreur/pageEchange/PageEchange';
 import ClientView from './pages/client/ClientView';
 import ClientLocation from './pages/client/clientLocation/ClientLocation';
 import RapportCaisse from './pages/rapport/rapportCaisse/RapportCaisse';
+import DepensesAll from './pages/depenses/DepensesAll';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -402,6 +403,10 @@ const user = useSelector((state) => state.user?.currentUser);
         {
           path: '/utilisateurEdit/:id',
           element: <UtilisateurEdit/>
+        },
+        {
+          path: '/depensesAll',
+          element: <DepensesAll/>
         },
         {
           path: '/depenses',

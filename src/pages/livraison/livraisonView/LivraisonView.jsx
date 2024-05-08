@@ -262,7 +262,7 @@ const LivraisonView = () => {
                             
                           ]}
                         >
-                         <LivraisonViewPrix prixTotal={prix} idDetail={idClient} userUpdate={user.id}/> 
+                         <LivraisonViewPrix prixTotal={prix} idDetail={idClient} userUpdate={user.id} idLivraison={id} /> 
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

@@ -5,7 +5,7 @@ import config from '../../../config';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 
-const LivraisonViewPrix = ({prixTotal,idDetail,userUpdate}) => {
+const LivraisonViewPrix = ({prixTotal,idDetail,userUpdate,idLivraison}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const navigate  = useNavigate();
     const [getPrix,setGetPrix] = useState('');
@@ -28,7 +28,7 @@ const LivraisonViewPrix = ({prixTotal,idDetail,userUpdate}) => {
             icon: 'success',
             confirmButtonText: 'OK',
           });
-          navigate('/livraison_detail')
+          navigate(`/livraisonView/${idLivraison}`)
           window.location.reload();
     
         }catch(err) {

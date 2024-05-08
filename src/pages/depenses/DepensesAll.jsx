@@ -32,6 +32,18 @@ const DepensesAll = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
+            title: 'Jour',
+            dataIndex: 'jour',
+            key: 'jour',
+            sorter: (a, b) => a.jour - b.jour,
+            sortDirections: ['descend', 'ascend'],
+            render: (text, record) => (
+              <Tag color="blue" icon={<CalendarOutlined />}>
+                {record.jour ? record.jour + ' $' : '0'}
+              </Tag>
+            ),
+          },
+        {
             title: 'Date',
             dataIndex: 'date_depense',
             key: 'date_depens',
@@ -76,9 +88,9 @@ const DepensesAll = () => {
                 {user?.role === 'admin' &&
                 <>
                     <Popover title="Voir les détails" trigger="hover">
-                    <Link to={`/receptionOne/${format(new Date(record.date_reception),'yyyy-MM-dd')}`}>
-                        <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                    </Link>
+                        <Link to={`/depenses?date=${format(new Date(record?.date_depense),'yyyy-MM-dd')}`}>
+                            <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                        </Link>
                     </Popover>
                     <Popover title="Supprimer" trigger="hover">
                     <Popconfirm

@@ -31,7 +31,7 @@ const DepensesAll = () => {
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
-        {
+       {
             title: 'Jour',
             dataIndex: 'jour',
             key: 'jour',
@@ -39,15 +39,15 @@ const DepensesAll = () => {
             sortDirections: ['descend', 'ascend'],
             render: (text, record) => (
               <Tag color="blue" icon={<CalendarOutlined />}>
-                {record.jour ? record.jour + ' $' : '0'}
+                {record.jour}
               </Tag>
             ),
           },
-        {
+          {
             title: 'Date',
-            dataIndex: 'date_depense',
-            key: 'date_depens',
-            sorter: (a, b) => moment(a.date_depense) - moment(b.date_depense),
+            dataIndex: 'date',
+            key: 'date',
+            sorter: (a, b) => moment(a.date) - moment(b.date),
             sortDirections: ['descend', 'ascend'],
             render: (text) => (
               <Tag icon={<CalendarOutlined />} color="blue">
@@ -55,27 +55,49 @@ const DepensesAll = () => {
               </Tag>
             ),
           },
-          {
-            title: 'Total en dollars',
-            dataIndex: 'montant',
-            key: 'montant',
-            sorter: (a, b) => a.montant - b.montant,
+           {
+            title: 'Montant total dollars',
+            dataIndex: 'montant_total_dollars',
+            key: 'montant_total_dollars',
+            sorter: (a, b) => a.montant_total_dollars - b.montant_total_dollars,
             sortDirections: ['descend', 'ascend'],
             render: (text, record) => (
-              <Tag color={record.montant !== null ? 'green' : 'red'} icon={<DollarOutlined />}>
-                {record.montant ? record.montant + ' $' : '0'}
+              <Tag color={record.montant_total_dollars !== null ? 'green' : 'red'} icon={<DollarOutlined />}>
+                {record.montant_total_dollars ? record.montant_total_dollars + ' $' : '0' + ' $'}
+              </Tag>
+            ),
+          },
+           {
+            title: 'Montant total francs',
+            dataIndex: 'montant_total_francs',
+            key: 'montant_total_francs',
+            sorter: (a, b) => a.montant_total_francs - b.montant_total_francs,
+            sortDirections: ['descend', 'ascend'],
+            render: (text, record) => (
+              <Tag color={record.montant_total_francs !== null ? 'green' : 'red'}>
+                {record.montant_total_francs !== null ? record.montant_total_francs + ' fc' : '0' + ' fc'}
               </Tag>
             ),
           },
           {
-            title: 'Total en franc',
-            dataIndex: 'montant_franc',
-            key: 'montant',
-            sorter: (a, b) => a.montant_franc - b.montant_franc,
+            title: 'Montant total',
+            dataIndex: 'montant_total_combine',
+            key: 'montant_total_combine',
+            sorter: (a, b) => a.montant_total_combine - b.montant_total_combine,
             sortDirections: ['descend', 'ascend'],
             render: (text, record) => (
-              <Tag color={record.montant_franc !== null ? 'green' : 'red'}>
-                {record.montant_franc !== null ? record.montant_franc + ' fc' : '0' + ' fc'}
+              <Tag color={record.montant_total_combine !== null ? 'green' : 'red'} icon={<DollarOutlined />}>
+                {record.montant_total_combine ? record.montant_total_combine + ' $' : '0' + ' $'}
+              </Tag>
+            ),
+          },
+          {
+            title: 'Crée par',
+            dataIndex: 'createur',
+            key: 'createur',
+            render: (text) => (
+              <Tag color="blue">
+                {text}
               </Tag>
             ),
           },
@@ -88,7 +110,7 @@ const DepensesAll = () => {
                 {user?.role === 'admin' &&
                 <>
                     <Popover title="Voir les détails" trigger="hover">
-                        <Link to={`/depenses?date=${format(new Date(record?.date_depense),'yyyy-MM-dd')}`}>
+                        <Link to={`/depenses?date=${format(new Date(record?.date),'yyyy-MM-dd')}`}>
                             <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                         </Link>
                     </Popover>
@@ -127,8 +149,10 @@ const DepensesAll = () => {
       setOpen(true)
     };
 
+    console.log(data)
+
   const filteredData = data?.filter((item) =>
-  item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase())
+  item.jour?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (
@@ -155,9 +179,7 @@ const DepensesAll = () => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            
                         </div>
                     </div>
                     <div className="rowChart-row-table">

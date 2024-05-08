@@ -4,6 +4,7 @@ import config from '../../config';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import { CircularProgress } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const FormDepenses = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -12,6 +13,7 @@ const FormDepenses = () => {
   const [catDepenses, setCatDepenses] = useState([]);
   const [livreur, setLivreur] = useState([]);
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const userId = useSelector((state) => state.user?.currentUser.id);
 
   const handleDateChange = (e) => {
     setDate(e.target.value);
@@ -49,6 +51,7 @@ const FormDepenses = () => {
       await axios.post(`${DOMAIN}/api/depenses`, {
         ...data,
         date_depense: date,
+        user_cr: userId
       });
       Swal.fire({
         title: 'Success',
@@ -161,7 +164,7 @@ const FormDepenses = () => {
               />
             </div>
             <div className="form-controle-desc">
-              <label htmlFor="">Montant en FRANC</label>
+              <label htmlFor="">Montant en francs</label>
               <input
                 type="number"
                 name="montant_franc"

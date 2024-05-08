@@ -34,7 +34,7 @@ const Depenses = () => {
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
-            title: 'Livreur',
+            title: 'Nom',
             dataIndex: 'username',
             key: 'username',
             render: (text, record) => (

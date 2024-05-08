@@ -23,7 +23,8 @@ const ListeCommande = () => {
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
     const [rapportMoney, setRapportMoney] = useState([]);
-
+    const [start_date, setStart_date] = useState('');
+    const [end_date, setEnd_date] = useState('');
     
       const handleDelete = async (id) => {
       try {
@@ -252,7 +253,7 @@ const ListeCommande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeRapportTopbar`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeRapportTopbar?start_date=${start_date}&end_date=${end_date}`);
             setRapportMoney(data);
           } catch (error) {
             console.log(error);
@@ -264,9 +265,10 @@ const ListeCommande = () => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN]);
+      }, [DOMAIN,start_date,end_date]);
 
-      console.log(rapportMoney)
+      console.log(start_date, end_date)
+
 
       const HandOpen = () =>{
         setOpens(!opens)
@@ -298,7 +300,7 @@ const ListeCommande = () => {
                       </div>
                     <div className="product-right" onClick={() =>navigate('/commandeForm')}>
                         <PlusOutlined />
-                        <span className="product-btn">Créez une commande</span>
+                        <span className="product-btn">Nouvelle commande</span>
                     </div>
                 </div>
                 <Tabs>
@@ -320,7 +322,7 @@ const ListeCommande = () => {
                       </div>
                       <div className="rowChart-row-table">
                       {opens &&
-                      <ListeCommandeSelect getProduits={setData}/> } 
+                      <ListeCommandeSelect getProduits={setData} start_date={setStart_date} end_date={setEnd_date} /> } 
                           <Modal
                             title="Information de client"
                             centered

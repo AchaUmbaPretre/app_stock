@@ -31,12 +31,12 @@ const FormDepenses = () => {
       }
     }
 
-    // Convertir le montant en dollars
+/*     // Convertir le montant en dollars
     if (fieldName === "montant") {
       const tauxDeChange = 0.00036364; // Remplacez par le taux de change franc-dollar actuel
       const montantEnDollars = fieldValue * tauxDeChange;
       updatedValue = montantEnDollars.toFixed(2); // Arrondir à deux décimales en dollars
-    }
+    } */
 
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
@@ -149,7 +149,7 @@ const FormDepenses = () => {
               <label htmlFor="">Montant en USD</label>
               <input
                 type="number"
-                name="montant_usb"
+                name="montant"
                 style={{
                   padding: '8px 10px',
                   border: '1px solid #c5c5c5',

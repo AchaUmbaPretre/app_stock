@@ -67,17 +67,26 @@ const Depenses = () => {
             ),
           },
           {
-            title: 'Montant',
+            title: 'Montant en dollars',
             dataIndex: 'montant',
             key: 'montant',
             sorter: (a, b) => a.montant - b.montant,
             sortDirections: ['descend', 'ascend'],
             render: (text, record) => (
-              <Tag color="green" icon={<DollarOutlined />}>
-                {record.montant.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
+              <Tag color={record.montant !== null ? 'green' : 'red'} icon={<DollarOutlined />}>
+                {record.montant ? record.montant + ' $' : '0'}
+              </Tag>
+            ),
+          },
+          {
+            title: 'Montant en franc',
+            dataIndex: 'montant_franc',
+            key: 'montant',
+            sorter: (a, b) => a.montant_franc - b.montant_franc,
+            sortDirections: ['descend', 'ascend'],
+            render: (text, record) => (
+              <Tag color={record.montant_franc !== null ? 'green' : 'red'}>
+                {record.montant_franc !== null ? record.montant_franc + ' fc' : '0' + ' fc'}
               </Tag>
             ),
           },

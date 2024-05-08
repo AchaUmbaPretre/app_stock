@@ -265,6 +265,16 @@ const ListeCommande = () => {
                         <h2 className="product-h2">Liste des commandes</h2>
                         <span>Voir vos commandes</span>
                     </div>
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                        <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                         {/*  {`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`} */}
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'articles: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre total de commandes : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
+                        </div>
+                      </div>
                     <div className="product-right" onClick={() =>navigate('/commandeForm')}>
                         <PlusOutlined />
                         <span className="product-btn">Créez une commande</span>

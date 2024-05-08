@@ -101,7 +101,7 @@ const CatDepenses = () => {
                     </div>
                     <div className="product-right" onClick={handleOk}>
                         <PlusOutlined className='product-icon'/>
-                        <span className="product-btn">Ajouter une catégorie de dépenses</span>
+                        <span className="product-btn">Nouvelle catégorie</span>
                     </div>
                 </div>
                 <div className="product-bottom">

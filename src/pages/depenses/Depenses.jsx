@@ -49,7 +49,7 @@ const Depenses = () => {
             )
           },
         {
-            title: 'Nom catégorie',
+            title: 'Type de dépenses',
             dataIndex: 'nom_categorie',
             key: 'nom_categorie',
             render : (text,record)=>(

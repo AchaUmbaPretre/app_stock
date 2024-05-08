@@ -22,6 +22,7 @@ const ListeCommande = () => {
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
+    const [rapportMoney, setRapportMoney] = useState([]);
 
     
       const handleDelete = async (id) => {
@@ -247,6 +248,26 @@ const ListeCommande = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeRapportTopbar`);
+            setRapportMoney(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchData();
+      
+        const timeoutId = setTimeout(fetchData, 4000);
+      
+        return () => clearTimeout(timeoutId);
+      }, [DOMAIN]);
+
+      console.log(rapportMoney)
+
       const HandOpen = () =>{
         setOpens(!opens)
       }
@@ -270,9 +291,9 @@ const ListeCommande = () => {
                          {/*  {`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`} */}
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'articles: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total de la commandes : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.nbre_commande}</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'articles: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.nbre_articles}</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total de la commande : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.montant_total}$</b></p>
                         </div>
                       </div>
                     <div className="product-right" onClick={() =>navigate('/commandeForm')}>

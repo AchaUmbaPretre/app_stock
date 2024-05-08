@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from './../../../config';
-import Select from 'react-select';
 import Swal from 'sweetalert2';
-import { DatePicker } from 'antd';
 
 const ListeCommandeSelect = ({getProduits,start_date,end_date}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;

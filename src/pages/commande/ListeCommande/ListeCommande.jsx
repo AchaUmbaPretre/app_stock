@@ -293,7 +293,7 @@ const ListeCommande = () => {
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes en attente : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.commande_Enattente}</b></p>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commandes en cours : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.commande_Encours}</b></p>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande livré : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.commande_livre}$</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande livrée : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}>{rapportMoney?.commande_livre}</b></p>
                         </div>
                     </div>
                     <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>

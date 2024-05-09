@@ -47,7 +47,7 @@ const RapportMoney = ({start_date, end_date}) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseCount?date_start=${start_date}&date_end=${end_date}`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/caisseDepenseCount?date_start=${start_date}&date_end=${end_date}`);
             setDepenses(data[0]?.total_depense);
           } catch (error) {
             console.log(error);

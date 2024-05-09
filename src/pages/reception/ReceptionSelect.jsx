@@ -6,23 +6,23 @@ import Swal from 'sweetalert2';
 
 const ReceptionSelect = ({getProduits}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [datas, setDatas] = useState({});
-    
+    const [start_date, setStart_date] = useState('');
+    const [end_date, setEnd_date ] = useState('');
 
     const handleStartDateChange = (e) => {
       const startDate = e.target.value;
-      setDatas((prev) => ({ ...prev, start_date: startDate }));
+      setStart_date(startDate);
     };
   
     const handleEndDateChange = (e) => {
       const endDate = e.target.value;
-      setDatas((prev) => ({ ...prev, end_date: endDate }));
+      setEnd_date(endDate);
     };
 
   const handleClick = async (e) => {
     e.preventDefault();
 
-   if (!datas.start_date || !datas.end_date ) {
+/*    if (!datas.start_date || !datas.end_date ) {
       Swal.fire({
         title: 'Error',
         text: 'Veuillez remplir tous les champs requis',
@@ -30,9 +30,9 @@ const ReceptionSelect = ({getProduits}) => {
         confirmButtonText: 'OK',
       });
       return;
-    }
+    } */
     try {
-      const {data} = await axios.get(`${DOMAIN}/api/produit/reception?start_date=${datas.start_date}&end_date=${datas.end_date}`);
+      const {data} = await axios.get(`${DOMAIN}/api/produit/reception?start_date=${start_date}&end_date=${end_date}`);
       getProduits(data)
     } catch (err) {
       Swal.fire({

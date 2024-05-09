@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom';
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import './App.css';
@@ -49,7 +49,7 @@ import EditCommande from './pages/commande/editCommande/EditCommande';
 import ListeDetailView from './pages/commande/listeDetailView/ListeDetailView';
 import Livraison from './pages/livraison/Livraison';
 import Livraison_detail from './pages/livraison/livraison_detail/Livraison_detail';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LivraisonForm from './pages/livraison/livraisonForm/LivraisonForm';
 import PageLivreur from './pages/pageLivreur/PageLivreur';
 import PageLivreurDetail from './pages/pageLivreur/pageLivreurDetail/PageLivreurDetail';
@@ -96,12 +96,35 @@ import ClientView from './pages/client/ClientView';
 import ClientLocation from './pages/client/clientLocation/ClientLocation';
 import RapportCaisse from './pages/rapport/rapportCaisse/RapportCaisse';
 import DepensesAll from './pages/depenses/DepensesAll';
+import axios from 'axios';
+import config from './config';
+import { fetchDataRequest, fetchDataFailure, fetchDataSuccess } from "./redux/userRedux";
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
+const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+const dispatch = useDispatch();
 const user = useSelector((state) => state.user?.currentUser);
+const loading = useSelector((state) => state.user?.loading);
 
-  const [loading, setLoading] = useState(false);
+/*   const [loading, setLoading] = useState(false); */
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(fetchDataRequest());
+
+        const res = await axios.get(`${DOMAIN}/api/produit/produitCount`);
+        dispatch(fetchDataSuccess(res.data));
+
+      } catch (error) {
+        console.log(error);
+        dispatch(fetchDataFailure());
+      }
+    };
+
+    fetchData();
+  }, [DOMAIN]);
 
   const Layout = () => {
 
@@ -565,7 +588,7 @@ const user = useSelector((state) => state.user?.currentUser);
     <div>
       {loading ? (
       <div className="spinnerContainer">
-        <FadeLoader color="rgba(54, 215, 183, 1)" loading={loading} height={15} radius={2} margin={2} />
+        <FadeLoader color="rgba(1, 35, 138, 0.952)" loading={loading} height={15} radius={2} margin={2} />
       </div>
       ) : (
         <RouterProvider router={router} />

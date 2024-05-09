@@ -588,7 +588,7 @@ const loading = useSelector((state) => state.user?.loading);
     <div>
       {loading ? (
       <div className="spinnerContainer">
-        <FadeLoader color="rgba(1, 35, 138, 0.952)" loading={loading} height={15} radius={2} margin={2} />
+        <FadeLoader color="rgb(131, 159, 241)" loading={loading} height={15} radius={2} margin={2} />
       </div>
       ) : (
         <RouterProvider router={router} />

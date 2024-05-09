@@ -33,7 +33,7 @@ const InformationGeneral = () => {
                 <Information30joursMoney/>
                 <Information30Jours/>
             </Tabs.TabPane>
-            <Tabs.TabPane tab="1an" key={4}>
+            <Tabs.TabPane tab="1 an" key={4}>
                 <Information1anMoney/>
                 <Information1an/>
             </Tabs.TabPane>

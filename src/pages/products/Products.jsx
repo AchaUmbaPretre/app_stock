@@ -334,7 +334,7 @@ const filteredData = getProduit?.filter((item) =>
                     </div>
                     <div className="product-right" onClick={() =>navigate('/productForm')}>
                         <PlusOutlined className='product-icon'/>
-                        <span className="product-btn">Ajouter un nouveau produit</span>
+                        <span className="product-btn">Un nouveau produit</span>
                     </div>
                 </div>
                 <div className="product-bottom">

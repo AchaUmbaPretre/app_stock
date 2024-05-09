@@ -8,7 +8,6 @@ import './detailProduitCommande.scss'
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useSelector } from 'react-redux'
-import { addProduct } from '../../../redux/cartRedux'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { Image, Rate, Select } from 'antd'
@@ -196,7 +195,7 @@ const DetailProduitCommande = ({idVariant, idCommande, tailles, setTailles}) => 
       } catch (err) {
         Swal.fire({
           title: 'Error',
-          text: err.message,
+          text: err.response.data,
           icon: 'error',
           confirmButtonText: 'OK',
         });

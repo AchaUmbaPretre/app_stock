@@ -172,7 +172,7 @@ const Client = () => {
           {
             title: 'Telephone',
             dataIndex: 'telephone',
-            key: 'email',
+            key: 'telephone',
             render: (text) => (
               <Popover content="Discutez avec lui sur WhatsApp" placement="top">
               <Tag
@@ -272,7 +272,8 @@ const Client = () => {
   const filteredData = getClient?.filter((item) =>
     item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
     item.nom_province?.toLowerCase().includes(searchValue.toLowerCase()) ||
-    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase())
+    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase())||
+    item.telephone?.toLowerCase().includes(searchValue.toLowerCase())
 );
 
   return (

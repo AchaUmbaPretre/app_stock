@@ -266,7 +266,7 @@ useEffect(() => {
                           </div>
                       </div>
                       {open &&
-                              <RapportVenteSelects getProduits={setGetRapport} start_date={setStart_date} end_date={setEnd_date} /> }
+                              <RapportVenteSelects getProduits={setGetRapport} setStart_date={setStart_date} setEnd_date={setEnd_date} start_date={start_date} end_date={end_date} /> }
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>

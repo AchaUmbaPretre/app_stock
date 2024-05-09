@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined,RedoOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -273,6 +273,10 @@ const ListeCommande = () => {
         setOpens(!opens)
       }
 
+      const Rafraichir = () =>{
+        window.location.reload();
+      }
+
   const filteredData = data?.filter((item) =>
   item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_statut?.toLowerCase().includes(searchValue.toLowerCase())
@@ -323,9 +327,9 @@ const ListeCommande = () => {
                               </div>
                           </div>
                           <div className="product-bottom-right">
-{/*                               <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/> */}
+                            <Popover content={'Actualiser cette page'}>
+                              <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                            </Popover>
                           </div>
                       </div>
                       <div className="rowChart-row-table">

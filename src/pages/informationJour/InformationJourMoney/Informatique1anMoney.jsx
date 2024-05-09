@@ -43,7 +43,7 @@ const Information1anMoney = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseCount`);
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/depense1an`);
             setDepenses(data[0]?.total_depense);
           } catch (error) {
             console.log(error);

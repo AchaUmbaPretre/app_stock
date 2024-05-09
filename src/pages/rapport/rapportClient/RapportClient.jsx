@@ -17,6 +17,9 @@ const RapportClient = () => {
     const [recent, setRecent] = useState([]);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [start_date, setStart_date] = useState('');
+    const [end_date, setEnd_date ] = useState('');
+
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -126,14 +129,14 @@ useEffect(() => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent?start_date=${start_date}&end_date=${end_date}&searchValue=${searchValue}`);
       setRecent(data);
     } catch (error) {
       console.log(error);
     }
   };
   fetchData();
-}, [DOMAIN]);
+}, [DOMAIN,start_date,end_date,searchValue]);
 
  const filteredData = getRapport?.filter((item) =>
   item.nom_client.toLowerCase().includes(searchValue.toLowerCase())
@@ -177,7 +180,7 @@ useEffect(() => {
                           </div>
                       </div>
                     {open &&
-                      <RapportClientSelect getProduits={setGetRapport}/> }
+                      <RapportClientSelect getProduits={setGetRapport}  setStart_date={setStart_date} setEnd_date={setEnd_date} start_date={start_date} end_date={end_date}/> }
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

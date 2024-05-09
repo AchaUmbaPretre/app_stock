@@ -132,7 +132,9 @@ useEffect(() => {
                                 </div>
                             </div>
                             <div className="product-bottom-right">
-                                <RedoOutlined className='product-icon-printer' onClick={Rafraichir}/>
+                              <Popover content={'Actualiser cette page'}>
+                                <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                              </Popover>
                             </div>
                         </div>
                         {open &&

@@ -34,7 +34,7 @@ const ClientForm = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     
-     if (!data.nom || !data.raison_sociale || !data.telephone || !data.id_province) {
+     if (!data.nom || !data.telephone || !data.id_province) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez remplir tous les champs requis',
@@ -57,12 +57,22 @@ const ClientForm = () => {
       window.location.reload();
 
     }catch(err) {
-      Swal.fire({
-        title: 'Error',
-        text: err.message,
-        icon: 'error',
-        confirmButtonText: 'OK',
-      });
+      if (err.response && err.response.status === 400 && err.response.data && err.response.data.message) {
+        const errorMessage = `Le client ${data.nom} existe déjà avec ce numéro de téléphone`;
+        Swal.fire({
+          title: 'Erreur',
+          text: errorMessage,
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      } else {
+        Swal.fire({
+          title: 'Erreur',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      }
     }
     finally {
       setIsLoading(false);
@@ -103,18 +113,18 @@ const ClientForm = () => {
           <div className="product-container">
             <div className="product-container-top">
               <div className="product-left">
-                <h2 className="product-h2">Ajouter un nouveau client</h2>
+                <h2 className="product-h2">Un nouveau client</h2>
                 <span>Créer un nouveau client</span>
               </div>
             </div>
             <div className="product-wrapper">
               <div className="product-container-bottom">
                 <div className="form-controle">
-                  <label htmlFor="">Nom</label>
+                  <label htmlFor="">Nom <span style={{color:'red'}}>*</span></label>
                   <input type="text" name='nom' className="form-input" onChange={handleInputChange}  required/>
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Raison sociale</label>
+                  <label htmlFor="">Raison sociale <span style={{color:'red'}}>*</span></label>
                   <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} required>
                     <option value="" disabled selected>Selectionnez une raison sociale</option>
                     <option value="Client VIP">client VIP</option>
@@ -122,15 +132,15 @@ const ClientForm = () => {
                   </select>
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Email</label>
+                  <label htmlFor="">Email <span style={{color:'red'}}>*</span></label>
                   <input type="email" name='email' className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Telephone</label>
+                  <label htmlFor="">Telephone <span style={{color:'red'}}>*</span></label>
                   <input type="tel" name='telephone' className="form-input" onChange={handleInputChange} required />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Ville</label>
+                  <label htmlFor="">Ville <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_province"
                     options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
@@ -138,15 +148,15 @@ const ClientForm = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Avenue</label>
+                  <label htmlFor="">Avenue <span style={{color:'red'}}>*</span></label>
                   <input type="text" name="avenue" className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Quartier</label>
+                  <label htmlFor="">Quartier <span style={{color:'red'}}>*</span></label>
                   <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">Commune</label>
+                  <label htmlFor="">Commune <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_commune"
                     options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
@@ -154,10 +164,9 @@ const ClientForm = () => {
                   />
                 </div>
                 <div className="form-controle">
-                  <label htmlFor="">N°</label>
+                  <label htmlFor="">N° <span style={{color:'red'}}>*</span></label>
                   <input type="number" name="num" className="form-input" onChange={handleInputChange} />
                 </div>
-
               </div>
 
               <div className="form-submit">

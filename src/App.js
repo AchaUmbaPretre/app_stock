@@ -99,6 +99,7 @@ import DepensesAll from './pages/depenses/DepensesAll';
 import axios from 'axios';
 import config from './config';
 import { fetchDataRequest, fetchDataFailure, fetchDataSuccess } from "./redux/userRedux";
+import ClientForm from './pages/client/clientForm/ClientForm';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -377,7 +378,7 @@ const loading = useSelector((state) => state.user?.loading);
         },
          {
           path: '/clientForm',
-          element: <ClientForms />
+          element: <ClientForm />
         },
          {
           path: '/clientAdresse',

@@ -219,7 +219,9 @@ const LivraisonView = () => {
 
       const filteredData = data?.filter((item) =>
       item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+      item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.pointure?.toLowerCase().includes(searchValue.toLowerCase())
     );
 
   return (

@@ -7,11 +7,11 @@ import { Rate } from 'antd';
 import moment from 'moment';
 import { FadeLoader } from 'react-spinners';
 
-const PageDetails = () => {
+const PageDetails = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
+/*     const {pathname} = useLocation();
+    const id = pathname.split('/')[2]; */
     const [inventaire, setInventaire] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);

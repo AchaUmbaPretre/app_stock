@@ -9,6 +9,8 @@ import {FilterOutlined} from '@ant-design/icons';
 import config from '../../config';
 import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
+import { Modal } from 'antd'
+import PageDetails from '../PageDetails/PageDetails'
 
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -45,7 +47,8 @@ const VarianteProduit = () => {
     const endIndex = startIndex + itemsPerPage;
     const firstDataArray = groupedData.map(obj => obj.data[0]);
     const currentData = firstDataArray?.slice(startIndex, endIndex);
-
+    const [opens, setOpens] = useState(false);
+    const [idVariant, setvariant] = useState({});
     const handlePageChange = (selectedPage) => {
       setCurrentPage(selectedPage.selected);
     };
@@ -61,6 +64,11 @@ const VarianteProduit = () => {
       };
       fetchData();
     }, [DOMAIN]);
+
+    const showModalPhone = (e) => {
+      setOpens(true);
+      setvariant(e)
+    };
 
     useEffect(() => {
       const fetchData = async () => {
@@ -335,14 +343,28 @@ const VarianteProduit = () => {
                       <div className="variante-top-rows">
                       {
                         currentData?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id} onClick={()=>navigate(`/pageDetail/${dd.id_varianteProduit}`)}>
+                        <div className="variante-top-row" key={dd.id} onClick={()=>showModalPhone(dd.id_varianteProduit)}>
                           <div className="cercle"></div>
 {/*                               <Link to={`/pageDetailEdit/${dd.id_varianteProduit}`}>
                               </Link> */}
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                         </div>
                         ))}
-                      </div>)}
+                      </div>
+                      
+                      )}
+                      <Modal
+                          title=""
+                          centered
+                          open={opens}
+                          onCancel={() => setOpens(false)}
+                          width={1070}
+                          footer={[
+                            
+                          ]}
+                        >
+                          <PageDetails id={idVariant}/>
+                        </Modal>
                     {loading === false &&  <ReactPaginate
                         pageCount={totalPages}
                         marginPagesDisplayed={2}

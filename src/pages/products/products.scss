@@ -93,10 +93,17 @@
                         border: 1px solid #c7c7c7;
                         border-radius: 5px;
                         padding: 7px 10px;
+                        @include mobileXR{
+                            padding: 6px 9px;
+                        }
                         .product-search{
                             border: none;
                             outline: none;
                             padding-left: 10px;
+                            @include mobileXR{
+                                width: 110px;
+                                padding-left: 8px;
+                            }
                         }
                     }
                 }

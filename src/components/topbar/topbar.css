@@ -142,6 +142,10 @@
     .topbar{
         padding: 10px;
     }
+    .topbar-img{
+        height: 60px;
+        width: 60px;
+    }
     .logo{
         font-size: 12px;
     }
@@ -152,11 +156,12 @@
         display: none;
     }
     .icons-user{
-        width: 100px;
-        height: 30px;
+        width: 90px;
+        height: 25px;
+        overflow: hidden;
     }
     .username{
-        font-size: 10px;
+        font-size: 9px;
         padding-left: 5px;
     }
     .topbar-icon{
@@ -164,15 +169,18 @@
         display: flex;
         border: 1px solid rgba(1, 35, 138, 0.952);
         color: rgba(1, 35, 138, 0.952);
-        padding: 5px 8px;
+        padding: 5px;
         border-radius: 5px;
+    }
+    .close-icon{
+        font-size: 9px;
     }
     .colorRed{
         display: flex;
         cursor: pointer;
         border: 1px solid red;
         color: red;
-        padding: 5px 8px;
+        padding: 5px;
         border-radius: 5px;
     }
 }

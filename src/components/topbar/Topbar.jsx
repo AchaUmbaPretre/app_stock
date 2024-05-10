@@ -38,7 +38,7 @@ const Topbar = () => {
 {/*             <span className="topbar-not">2</span> */}
           </div>
           <div className="topbar-icons" style={{border: "1px solid #c2c2c2bb", background:'#f2f2f2'}}>
-          <img src={rdc} alt="" className="topbar-imgUser"/> 
+            <img src={rdc} alt="" className="topbar-imgUser"/> 
           </div>
           <div className="icons-user">
             {/* <img src={logo} alt="" className="topbar-imgUser"/> */}
@@ -46,7 +46,7 @@ const Topbar = () => {
             <span className='username'>{user}</span>
           </div>
           <div className={`topbar-icon ${isSidebarOpen ? 'colorRed' : ''}`} onClick={handleClick}>
-            {isSidebarOpen ? <CloseOutlined style={{color:'red'}}/> : <MenuOutlined /> }
+            {isSidebarOpen ? <CloseOutlined style={{color:'red'}} className='close-icon'/> : <MenuOutlined /> }
           </div>
         </div>
       </div>

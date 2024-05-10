@@ -253,17 +253,17 @@ const Mouvement = () => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Mouvement de stock</h2>
-                        <span>Gérer vos mouvements</span>
-                    </div>
-                </div>
                 <Tabs>
                   <Tabs.TabPane tab='Vendus' key={0}>
                      <MouvementDepart/>
                   </Tabs.TabPane>
                   <Tabs.TabPane tab='Commandes' key={1}>
+                    <div className="product-container-top">
+                      <div className="product-left">
+                          <h2 className="product-h2">Mouvement de stock</h2>
+                          <span>Gérer vos mouvements</span>
+                      </div>
+                    </div>
                     <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">

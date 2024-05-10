@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import MouvementDepartSelect from './MouvementDepartSelect';
+import CountUp from 'react-countup';
 
 const MouvementDepart = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -302,6 +303,20 @@ const MouvementDepart = () => {
     <>
         <div className="products">
             <div className="product-container">
+                <div div className="product-container-top">
+                      <div className="product-left">
+                          <h2 className="product-h2">Mouvement de stock</h2>
+                          <span>Gérer vos mouvements</span>
+                      </div>
+                      <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                        <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de ventes : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={0}/></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={0}/></b></p>
+                        </div>
+                    </div>
+                    </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">

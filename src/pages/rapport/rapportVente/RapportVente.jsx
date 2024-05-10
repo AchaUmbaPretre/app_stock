@@ -1,6 +1,6 @@
 import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover, Tag, Image, Tabs } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined,RedoOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { Button, Space, Table, Popover, Tag, Image, Tabs, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -13,6 +13,7 @@ import Rapport7jours from './rapport7jour/Rapport7jours';
 import Rapport30jours from './rapport30jours/Rapport30jours';
 import moment from 'moment';
 import CountUp from 'react-countup';
+import RapportVenteCode from './rapportVenteCodeVariante/RapportVenteCode';
 
 const RapportVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -22,8 +23,10 @@ const RapportVente = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
     const [start_date, setStart_date] = useState('');
     const [end_date, setEnd_date] = useState('');
+    const [codeVariant, setCodeVariant] = useState('');
 
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -183,7 +186,7 @@ const columns = [
           
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteV/${record.code_variant}`}>
+            <Link onClick={()=>HandRapportOpen(record.code_variant)}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>
@@ -194,6 +197,15 @@ const columns = [
 
 const HandOpen = () =>{
   setOpen(!open)
+}
+
+const HandRapportOpen = (e) =>{
+  setOpens(!opens)
+  setCodeVariant(e)
+}
+
+const Rafraichir = () =>{
+  window.location.reload();
 }
 
 useEffect(() => {
@@ -260,9 +272,9 @@ useEffect(() => {
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            <Popover content={'Actualiser cette page'}>
+                              <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                            </Popover>
                           </div>
                       </div>
                       {open &&
@@ -271,6 +283,17 @@ useEffect(() => {
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>
                     </div>
+
+                    <Modal
+                      title=""
+                      centered
+                      open={opens}
+                      onCancel={() => setOpens(false)}
+                      width={1200}
+                      footer={[]}
+                    >
+                      <RapportVenteCode id={codeVariant}/>
+                    </Modal>
                   </Tabs.TabPane>
                   <Tabs.TabPane tab='Vente du jour' key={1}>
                     <RapportAjour/>

@@ -7,14 +7,14 @@ import config from '../../../../config';
 import moment from 'moment';
 import RapportVenteCodeSelect from './RapportVenteCodeSelect';
 
-const RapportVenteCode = () => {
+const RapportVenteCode = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
+/*     const {pathname} = useLocation();
+    const id = pathname.split('/')[2]; */
     const [open, setOpen] = useState(false);
 
     

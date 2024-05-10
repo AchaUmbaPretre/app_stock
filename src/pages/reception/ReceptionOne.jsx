@@ -1,21 +1,18 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,CalendarOutlined } from '@ant-design/icons';
 import { Table, Tag, Image } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
 import ReceptionSelect from './ReceptionSelect';
-import { useLocation } from 'react-router-dom';
 
-const ReceptionOne = () => {
+const ReceptionOne = ({dateId}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const {pathname} = useLocation();
-    const dateId = pathname.split('/')[2];
 
 
 
@@ -151,21 +148,17 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN,dateId]);
 
-/*  const filteredData = getRapport?.filter((item) =>
-item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
-) */
+ const filteredData = getRapport?.filter((item) =>
+  item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.description?.toLowerCase().includes(searchValue.toLowerCase())
+
+)
 
   return (
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Réception</h2>
-                        <span>Gérez vos réceptions</span>
-                    </div>
-                </div>
                     <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
@@ -176,15 +169,12 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
-                       {open &&
-                              <ReceptionSelect getProduits={setGetRapport}/> }
+{/*                        {open &&
+                              <ReceptionSelect getProduits={setGetRapport}/> } */}
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
                     </div>
             </div>

@@ -1,5 +1,5 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,RedoOutlined,UserOutlined,EyeOutlined,CalendarOutlined } from '@ant-design/icons';
-import { Table, Tag, Space, Popover, Button, Tabs } from 'antd';
+import { Table, Tag, Space, Popover, Button, Tabs, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import ReceptionJour from './ReceptionJour';
 import Reception7Jour from './Reception7Jour';
 import moment from 'moment/moment';
+import ReceptionOne from './ReceptionOne';
 
 const Reception = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,6 +18,8 @@ const Reception = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
+    const [date, setDate] = useState('');
 
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -76,7 +79,7 @@ const columns = [
       render: (text, record) => (
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/receptionOne/${format(new Date(record.date_reception),'yyyy-MM-dd')}`}>
+            <Link onClick={()=>showModal(format(new Date(record.date_reception),'yyyy-MM-dd'))}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>
@@ -88,6 +91,12 @@ const columns = [
 const HandOpen = () =>{
   setOpen(!open)
 }
+
+const showModal = (e) => {
+  setOpens(true);
+  setDate(e)
+};
+
 
 const Rafraichir = () =>{
   window.location.reload();
@@ -107,7 +116,7 @@ useEffect(() => {
 }, [DOMAIN]);
 
   const filteredData = getRapport?.filter((item) =>
-  item.username.toLowerCase().includes(searchValue.toLowerCase())
+    item.username.toLowerCase().includes(searchValue.toLowerCase())
   )
 
   return (
@@ -139,9 +148,19 @@ useEffect(() => {
                         </div>
                         {open &&
                                 <ReceptionSelect getProduits={setGetRapport}/> }
-                        <div className="rowChart-row-table">
-                            <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
-                        </div>
+                          <div className="rowChart-row-table">
+                              <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          </div>
+                          <Modal
+                            title={ date && `Receptions de ${format(new Date(date), 'dd-MM-yyyy')}`}
+                            centered
+                            open={opens}
+                            onCancel={() => setOpens(false)}
+                            width={1200}
+                            footer={[]}
+                          >
+                           <ReceptionOne dateId={date}/>
+                          </Modal>
                         </div>
                     </Tabs.TabPane>
                     <Tabs.TabPane tab='Réceptions du jour' key={1}>

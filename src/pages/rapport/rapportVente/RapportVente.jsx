@@ -224,14 +224,14 @@ useEffect(() => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent?start_date=${start_date}&end_date=${end_date}`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent?start_date=${start_date}&end_date=${end_date}&searchValue=${searchValue}`);
       setRecent(data);
     } catch (error) {
       console.log(error);
     }
   };
   fetchData();
-}, [DOMAIN,start_date,end_date]);
+}, [DOMAIN,start_date,end_date,searchValue]);
 
  const filteredData = getRapport?.filter((item) =>
   item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -270,6 +270,9 @@ useEffect(() => {
                                   <SearchOutlined className='product-icon-plus'/>
                                   <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
                               </div>
+                          </div>
+                          <div>
+                            
                           </div>
                           <div className="product-bottom-right">
                             <Popover content={'Actualiser cette page'}>

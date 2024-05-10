@@ -10,15 +10,15 @@ import config from '../../../config';
 import { useSelector } from 'react-redux';
 import { FadeLoader } from 'react-spinners';
 
-const ListeDetailView = () => {
+const ListeDetailView = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
+/*     const {pathname} = useLocation();
+    const id = pathname.split('/')[2] */
     const [selected, setSelected] = useState([]);
     const [getLivreur, setGetLivreur] = useState([]);
     const [quantities, setQuantities] = useState([]);

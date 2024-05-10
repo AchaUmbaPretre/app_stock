@@ -168,7 +168,15 @@ const MouvementDepart = () => {
           dataIndex: 'taille',
           key: 'taille',
           render: (text, record) => {
-            return <Tag color={"green"}>{text}</Tag>;
+            return <Tag color={"blue"}>{text}</Tag>;
+          },
+        },
+        {
+          title: 'Prix',
+          dataIndex: 'prix',
+          key: 'prix',
+          render: (text, record) => {
+            return <Tag color={"blue"}>{`${text} $`}</Tag>;
           },
         },
         {
@@ -176,7 +184,7 @@ const MouvementDepart = () => {
           dataIndex: 'nom_client',
           key: 'nom_client',
           render: (text, record) => {
-            return <Tag color={"green"}>{text}</Tag>;
+            return <Tag color={"blue"}>{text}</Tag>;
           },
         },
         {
@@ -196,7 +204,7 @@ const MouvementDepart = () => {
           render : (text,record)=>(
             <Popover content={`Voir toutes les livraisons de ${text}`} placement="top">
               <div style={{cursor: 'pointer'}} onClick={()=> showModalLivreur(record.id_livreur)}>
-                <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
+                <Tag color={'blue'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
               </div>
             </Popover>
           )

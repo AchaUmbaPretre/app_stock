@@ -1,20 +1,17 @@
 import { SearchOutlined, SisternodeOutlined,FilePdfOutlined,CalendarOutlined,CloseOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import VenteViewSelect from './VenteViewSelect';
 
-const VenteView = () => {
+const VenteView = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
     const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
     const [opens, setOpens] = useState(false);

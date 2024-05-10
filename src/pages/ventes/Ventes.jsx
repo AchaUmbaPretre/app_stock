@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import VenteSelect from './VentesSelect';
 import Ticket from './ticket/Ticket';
 import VentesJour from './VentesJour';
+import VenteView from './venteView/VenteView';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -20,6 +21,8 @@ const Ventes = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openVente, setOpenVente] = useState(false);
+    const [iDcommande, setIdCommande] = useState('');
     const [idClient, setIdClient] = useState({});
     const [ticket, setTicket] = useState(false);
     const [idTicket, setIdTicket] = useState(false);
@@ -37,6 +40,11 @@ const Ventes = () => {
 
       const HandOpen = () => {
         setOpens(!opens);
+      };
+
+      const HandVenteOpen = (e) => {
+        setOpenVente(!openVente);
+        setIdCommande(e)
       };
     
       const columns = [
@@ -132,7 +140,7 @@ const Ventes = () => {
                 
               <Space size="middle">
                 <Popover title="Voir la liste de vente de cette commande" trigger="hover">
-                    <Link to={`/venteView/${record.id_commande}`}>
+                    <Link onClick={()=> HandVenteOpen(record.id_commande)}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
@@ -241,6 +249,17 @@ const Ventes = () => {
                           footer={[]}
                         >
                          <Ticket idTicket={idTicket}/>
+                        </Modal>
+
+                        <Modal
+                          title=""
+                          centered
+                          open={openVente}
+                          onCancel={() => setOpenVente(false)}
+                          width={1150}
+                          footer={[]}
+                        >
+                         <VenteView id={iDcommande}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

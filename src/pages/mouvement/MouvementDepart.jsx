@@ -22,6 +22,10 @@ const MouvementDepart = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
+    const [start_date, setStart_date] = useState('');
+    const [end_date, setEnd_date] = useState('');
+    const [rapport, setRapport] = useState([]);
+
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -290,6 +294,23 @@ const MouvementDepart = () => {
         };
         fetchData();
       }, [DOMAIN]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementDepartRapport?start_date=${start_date}&end_date=${end_date}&searchValue=${searchValue}`);
+            setRapport(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchData();
+      
+        const timeoutId = setTimeout(fetchData, 4000);
+      
+        return () => clearTimeout(timeoutId);
+      }, [DOMAIN,start_date,end_date,searchValue]);
   
    const filteredData = data?.filter((item) =>
       item.type_mouvement?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -312,8 +333,8 @@ const MouvementDepart = () => {
                         <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de ventes : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={0}/></b></p>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={0}/></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de ventes : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={rapport[0]?.nbre_vente}/></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={rapport[0]?.prix}/> $</b></p>
                         </div>
                     </div>
                     </div>

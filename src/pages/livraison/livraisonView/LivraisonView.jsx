@@ -1,20 +1,17 @@
 import { SearchOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image} from 'antd';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
 import LivraisonViewPrix from './LivraisonViewPrix';
 import { useSelector } from 'react-redux';
 
-const LivraisonView = () => {
+const LivraisonView = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
     const [open, setOpen] = useState(false);
     const [idClient, setIdClient] = useState({});
     const [prix, setPrix] = useState({});

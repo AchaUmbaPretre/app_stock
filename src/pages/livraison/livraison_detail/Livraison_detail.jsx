@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Livraison_detailSelect from './Livraison_detailSelect';
 import LivraisonJour from '../LivraisonJour';
 import moment from 'moment';
+import LivraisonView from '../livraisonView/LivraisonView';
 
 const Livraison_detail = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,8 +18,10 @@ const Livraison_detail = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openInfo, setOpenInfo] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
+    const [id_commande, setId_commande] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
     
       const handleDelete = async (id) => {
@@ -130,7 +133,7 @@ const Livraison_detail = () => {
                 
               <Space size="middle">
                 <Popover title="Voir la liste de cette commande" trigger="hover">
-                  <Link to={`/livraisonView/${record.id_commande}`}>
+                  <Link onClick={()=>handInfo(record.id_commande) }>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover>
@@ -150,6 +153,11 @@ const Livraison_detail = () => {
           },
       ];
 
+      const handInfo = (e) =>{
+        setId_commande(e)
+        setOpenInfo(true)
+      }
+
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -164,9 +172,9 @@ const Livraison_detail = () => {
       }, [DOMAIN]);
 
     const filteredData = data?.filter((item) =>
-    item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
-    item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) ||
-    item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase())
+      item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase())
     );
 
   return (
@@ -191,9 +199,9 @@ const Livraison_detail = () => {
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
+                              {/* <FilePdfOutlined className='product-icon-pdf' />
                               <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
+                              <PrinterOutlined className='product-icon-printer'/> */}
                           </div>
                       </div>
                       {opens &&
@@ -211,7 +219,17 @@ const Livraison_detail = () => {
                               </Button>
                             ]}
                           >
-                          <LivraisonClientDetail idClients={idClient}/>
+                            <LivraisonClientDetail idClients={idClient}/>
+                          </Modal>
+                          <Modal
+                            title=""
+                            centered
+                            open={openInfo}
+                            onCancel={() => setOpenInfo(false)}
+                            width={1150}
+                            footer={[]}
+                          >
+                             <LivraisonView id={id_commande}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

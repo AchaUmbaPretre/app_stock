@@ -184,3 +184,25 @@
         border-radius: 5px;
     }
 }
+
+@media screen and (max-width: 568px){
+    .topbar-icon{
+        cursor: pointer;
+        display: flex;
+        border: 1px solid rgba(1, 35, 138, 0.952);
+        color: rgba(1, 35, 138, 0.952);
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .close-icon{
+        font-size: 9px;
+    }
+    .colorRed{
+        display: flex;
+        cursor: pointer;
+        border: 1px solid red;
+        color: red;
+        padding: 5px;
+        border-radius: 5px;
+    }
+}

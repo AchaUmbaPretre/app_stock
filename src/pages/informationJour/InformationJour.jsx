@@ -41,7 +41,7 @@ const InformationJour = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeJour`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande/commandeJourCount`);
             setCommande(data);
           } catch (error) {
             console.log(error);
@@ -54,6 +54,8 @@ const InformationJour = () => {
       
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
+
+      console.log(commande)
 
       useEffect(() => {
         const fetchData = async () => {

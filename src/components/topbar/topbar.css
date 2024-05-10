@@ -186,6 +186,12 @@
 }
 
 @media screen and (max-width: 568px){
+    .logo{
+        font-size: 14px;
+    }
+    .topbar-icons{
+        display: none;
+    }
     .topbar-icon{
         cursor: pointer;
         display: flex;

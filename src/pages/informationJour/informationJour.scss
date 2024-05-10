@@ -31,16 +31,25 @@
                 gap: 5px;
                 .rowTotal-h2{
                     font-size: 2rem;
+                    @include miniTablette{
+                        font-size: 1.5rem;
+                    }
                 }
                 .rowTotal-span{
                     font-size: .9rem;
+                    @include miniTablette{
+                        font-size: .7rem;
+                    }
                 }
             }
             .rowTotalDetail-right{
                 .rowTotalIcon{
                     height: 40px;
                     width: 40px;
-                    /* font-size: 2.5rem; */
+                    @include miniTablette{
+                        height: 35px;
+                        width: 35px;
+                    }
                 }
             }
         }

@@ -55,8 +55,6 @@ const InformationJour = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN]);
 
-      console.log(commande)
-
       useEffect(() => {
         const fetchData = async () => {
           try {

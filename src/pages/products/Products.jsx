@@ -320,8 +320,10 @@ const handleOk = async (e) => {
 const filteredData = getProduit?.filter((item) => 
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_marque?.toLowerCase().includes(searchValue.toLocaleLowerCase())
-);
+  item.nom_marque?.toLowerCase().includes(searchValue.toLocaleLowerCase()) || 
+  item.etatProduit?.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+  item.nom_famille?.toLowerCase().includes(searchValue.toLocaleLowerCase())
+)
 
   return (
     <>

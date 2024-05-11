@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,CalendarOutlined, CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,RedoOutlined,CalendarOutlined, CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image } from 'antd';
 import { Link } from 'react-router-dom';
@@ -31,6 +31,10 @@ const ListeVariante = () => {
 
       const HandOpen = () =>{
         setOpens(!opens)
+      }
+
+      const Rafraichir = () =>{
+        window.location.reload();
       }
     
       const columns = [
@@ -247,9 +251,9 @@ const ListeVariante = () => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                          <Popover content={'Actualiser cette page'}>
+                            <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                          </Popover>
                         </div>
                     </div>
                     <div className="rowChart-row-table">

@@ -15,6 +15,7 @@ import MouvementRetour from './MouvementRetour';
 import MouvementOneVente from './MouvementOneVente';
 import MouvementOneRetour from './MouvementOneRetour';
 import MouvementEchange from './MouvementEchange';
+import MouvementView from './mouvementView/MouvementView';
 
 const Mouvement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -24,19 +25,26 @@ const Mouvement = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openLivraison, setOpenLivraison] = useState(false);
     const [openVente, setOpenVente] = useState(false);
     const [openRetour, setOpenRetour] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
+    const [idTypeEnLivraison, setIdTypeEnLivraison] = useState({});
     const [idTypeVente, setIdTypeVente] = useState({});
     const [idTypeRetour, setIdTypeRetour] = useState({});
     const [idTypeVenteCommande, setIdTypeVenteCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
 
-
       const showModal = (e) => {
         setOpen(true);
         setIdClient(e)
+      };
+
+      const showModalEnLivraison = (e,id_commande) => {
+        setOpenLivraison(true);
+        setIdTypeEnLivraison(e)
+        setIdTypeVenteCommande(id_commande)
       };
 
       const showModalOneVente = (e,id_commande) => {
@@ -141,7 +149,7 @@ const Mouvement = () => {
             <Popover
               content="Voir les détails" placement="top"
             >
-              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }} onClick={()=>qModal(record.id_commande)}>
+              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }} onClick={()=>showModalEnLivraison(record.id_commande)}>
                 {record.total_varianteproduit}
               </Tag>
             </Popover>
@@ -294,7 +302,18 @@ const Mouvement = () => {
                             width={850}
                             footer={[]}
                           >
-                          <MouvClientDetail idClients={idClient}/>
+                            <MouvClientDetail idClients={idClient}/>
+                          </Modal>
+
+                          <Modal
+                            title=""
+                            centered
+                            open={openLivraison}
+                            onCancel={() => setOpenLivraison(false)}
+                            width={1200}
+                            footer={[]}
+                          >
+                            <MouvementView id={idTypeEnLivraison}/>
                           </Modal>
 
                           <Modal

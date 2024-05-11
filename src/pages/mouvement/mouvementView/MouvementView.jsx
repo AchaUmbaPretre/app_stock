@@ -8,7 +8,7 @@ import config from '../../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 
-const MouvementView = () => {
+const MouvementView = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -17,8 +17,8 @@ const MouvementView = () => {
     const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
+/*     const {pathname} = useLocation();
+    const id = pathname.split('/')[2] */
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [getCommande, setGetCommande] = useState([]);
@@ -259,7 +259,7 @@ const MouvementView = () => {
           }
         };
         fetchData();
-      }, [id]);
+      }, [DOMAIN,id]);
 
       useEffect(() => {
         const fetchData = async () => {

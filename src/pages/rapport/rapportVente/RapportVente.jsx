@@ -224,7 +224,7 @@ useEffect(() => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecent?start_date=${start_date}&end_date=${end_date}&searchValue=${searchValue}`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecentMarque?start_date=${start_date}&end_date=${end_date}&searchValue=${searchValue}`);
       setRecent(data);
     } catch (error) {
       console.log(error);

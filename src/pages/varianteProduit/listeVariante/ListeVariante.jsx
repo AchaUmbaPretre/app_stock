@@ -1,6 +1,6 @@
 import { SearchOutlined, SisternodeOutlined,RedoOutlined,CalendarOutlined, CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Image } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Image, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import VarianteSelect from '../varianteSelect/VarianteSelect';
 import moment from 'moment';
 import CountUp from 'react-countup';
+import PageDetails from '../../PageDetails/PageDetails';
 
 const ListeVariante = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,8 @@ const ListeVariante = () => {
     const scroll = { x: 400 };
     const [searchValue, setSearchValue] = useState('');
     const [produit, setProduit] = useState([]);
+    const [idVariant, setvariant] = useState({});
+    const [opensVariant, setOpensVariant] = useState(false);
     const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
     const [produitTotalAchats, setProduitTotalAchats] = useState([]);
@@ -32,6 +35,11 @@ const ListeVariante = () => {
       const HandOpen = () =>{
         setOpens(!opens)
       }
+
+      const showModalPhone = (e) => {
+        setOpensVariant(true);
+        setvariant(e)
+      };
 
       const Rafraichir = () =>{
         window.location.reload();
@@ -145,7 +153,7 @@ const ListeVariante = () => {
                 
               <Space size="middle">
                  <Popover title="Voir les détails" trigger="hover">
-                  <Link to={`/pageDetail/${record.id_varianteProduit}`}>
+                  <Link onClick={()=>showModalPhone(record.id_varianteProduit)} >
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover>
@@ -256,6 +264,16 @@ const ListeVariante = () => {
                           </Popover>
                         </div>
                     </div>
+                    <Modal
+                      title=""
+                      centered
+                      open={opensVariant}
+                      onCancel={() => setOpensVariant(false)}
+                      width={1100}
+                      footer={[]}
+                    >
+                      <PageDetails id={idVariant}/>
+                    </Modal>
                     <div className="rowChart-row-table">
                     {opens &&
                     <VarianteSelect getProduits={setData}/> } 

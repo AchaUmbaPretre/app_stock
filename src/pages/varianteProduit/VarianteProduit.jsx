@@ -358,7 +358,7 @@ const VarianteProduit = () => {
                           centered
                           open={opens}
                           onCancel={() => setOpens(false)}
-                          width={1070}
+                          width={1100}
                           footer={[
                             
                           ]}

@@ -192,7 +192,6 @@ useEffect(() => {
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
-
                       
                       <Modal
                         title=""

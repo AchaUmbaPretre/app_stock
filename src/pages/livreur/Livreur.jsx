@@ -1,7 +1,6 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,UserOutlined,CarOutlined, FilePdfOutlined,MailOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,RedoOutlined, UserOutlined,CarOutlined, FilePdfOutlined,MailOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect,useState } from 'react';
 import { Button,Space, Table, Popover,Popconfirm, Tag} from 'antd';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 
@@ -10,7 +9,7 @@ const Livreur = () => {
     const [getLivreur, setGetLivreur] = useState([]);
     const [loading, setLoading] = useState(true);
     const scroll = { x: 400 };
-    const navigate = useNavigate();
+    const [searchValue, setSearchValue] = useState('');
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -99,6 +98,14 @@ const Livreur = () => {
          }
        };
 
+       const Rafraichir = () =>{
+        window.location.reload();
+      }
+
+       const filteredData = getLivreur?.filter((item) =>
+        item.username?.toLowerCase().includes(searchValue.toLowerCase())
+      )
+
   return (
     <>
         <div className="products">
@@ -108,10 +115,10 @@ const Livreur = () => {
                         <h2 className="product-h2">Liste de livreurs</h2>
                         <span>Gérer vos livreurs</span>
                     </div>
-                    <div className="product-right" onClick={() =>navigate('/livreurForm')}>
+{/*                     <div className="product-right" onClick={() =>navigate('/livreurForm')}>
                         <PlusOutlined />
                         <span className="product-btn">Ajouter un nouveau livreur</span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
@@ -119,17 +126,17 @@ const Livreur = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            <Popover content={'Actualiser cette page'}>
+                              <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                            </Popover>
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={getLivreur} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

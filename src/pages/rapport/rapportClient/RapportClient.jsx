@@ -1,5 +1,5 @@
 import { SearchOutlined, CloseOutlined,CalendarOutlined, SisternodeOutlined,EyeOutlined,UserOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Tabs } from 'antd';
+import { Button, Space, Table, Popover,Tag, Tabs, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import RapportClientAll from './rapportClientAll/RapportClientAll';
 import RapportClientSelect from './RapportClientSelect';
 import CountUp from 'react-countup';
 import moment from 'moment';
+import RapportClientVenteOne from './RapportClientVenteOne';
 
 const RapportClient = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,9 +18,16 @@ const RapportClient = () => {
     const [recent, setRecent] = useState([]);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
+    const [idClient, setIdClient] = useState({});
     const [start_date, setStart_date] = useState('');
     const [end_date, setEnd_date ] = useState('');
 
+
+    const HandClient = (e) => {
+      setOpens(true)
+      setIdClient(e)
+    }
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -100,7 +108,7 @@ const columns = [
           
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportClientOne?client=${record.id_client}`}>
+            <Link onClick={()=>HandClient(record.id_client)}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>
@@ -184,6 +192,18 @@ useEffect(() => {
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
+
+                      
+                      <Modal
+                        title=""
+                        centered
+                        open={opens}
+                        onCancel={() => setOpens(false)}
+                        width={1200}
+                        footer={[]}
+                      >
+                        <RapportClientVenteOne id={idClient}/>
+                      </Modal>
                     </div>
                   </Tabs.TabPane>
                   <Tabs.TabPane tab='Vente complet' key={1}>

@@ -8,15 +8,15 @@ import config from '../../../config';
 import moment from 'moment';
 import RapportClientVenteOneSelect from './RapportClientVenteOneSelect';
 
-const RapportClientVenteOne = () => {
+const RapportClientVenteOne = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const location = useLocation();
+/*     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const id = searchParams.get('client');
+    const id = searchParams.get('client'); */
     const [open, setOpen] = useState(false);
     const [marqueName,setMarqueName] = useState('');
     

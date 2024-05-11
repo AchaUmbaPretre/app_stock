@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined,EnvironmentOutlined,ArrowUpOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EnvironmentOutlined,RedoOutlined,ArrowUpOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
@@ -108,7 +108,7 @@ const Livraison_detail = () => {
             <Popover
               content="Voir les détails" placement="top"
             >
-              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}>
+              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}  onClick={()=>handInfo(record.id_commande) }>
                 {record.quant}
               </Tag>
             </Popover>
@@ -171,6 +171,10 @@ const Livraison_detail = () => {
         fetchData();
       }, [DOMAIN]);
 
+      const Rafraichir = () =>{
+        window.location.reload();
+      }
+
     const filteredData = data?.filter((item) =>
       item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -199,9 +203,9 @@ const Livraison_detail = () => {
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                              {/* <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/> */}
+                            <Popover content={'Actualiser cette page'}>
+                              <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                            </Popover>
                           </div>
                       </div>
                       {opens &&

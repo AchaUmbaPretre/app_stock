@@ -212,7 +212,7 @@ const Livraison_detail = () => {
                             centered
                             open={open}
                             onCancel={() => setOpen(false)}
-                            width={850}
+                            width={1150}
                             footer={[
                               <Button key="annuler" onClick={() => setOpen(false)}>
                                 Annuler
@@ -226,7 +226,7 @@ const Livraison_detail = () => {
                             centered
                             open={openInfo}
                             onCancel={() => setOpenInfo(false)}
-                            width={1150}
+                            width={1200}
                             footer={[]}
                           >
                              <LivraisonView id={id_commande}/>

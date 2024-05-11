@@ -299,7 +299,7 @@ const Mouvement = () => {
                             centered
                             open={open}
                             onCancel={() => setOpen(false)}
-                            width={850}
+                            width={900}
                             footer={[]}
                           >
                             <MouvClientDetail idClients={idClient}/>

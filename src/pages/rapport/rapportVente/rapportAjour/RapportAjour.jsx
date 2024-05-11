@@ -1,5 +1,5 @@
-import { SearchOutlined,CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Table, Tag, Image } from 'antd';
+import { SearchOutlined,CalendarOutlined, RedoOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { Table, Tag, Image, Popover } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
@@ -167,6 +167,10 @@ const columns = [
     },
 ];
 
+const Rafraichir = () =>{
+  window.location.reload();
+}
+
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -229,9 +233,9 @@ useEffect(() => {
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
+                            <Popover content={'Actualiser cette page'}>
+                              <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                            </Popover>
                           </div>
                       </div>
 {/*                       {open &&

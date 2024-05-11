@@ -10,11 +10,11 @@ import { useSelector } from 'react-redux';
 import ClientTelephone from './clientTelephone/ClientTelephone';
 import ClientAdresse from './clientAdresse/ClientAdresse';
 
-const ClientView = () => {
+const ClientView = ({id_client}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [adresseOne, setAdresseOne] = useState([]);
-    const id_client = useLocation().pathname.split('/')[2]
+/*     const id_client = useLocation().pathname.split('/')[2] */
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
@@ -23,7 +23,6 @@ const ClientView = () => {
     const [openAdresse, setOpenAdresse] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-
 
       const showModalAdresse = (e) => {
         setOpenAdresse(true);

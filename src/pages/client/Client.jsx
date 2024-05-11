@@ -10,6 +10,7 @@ import MouvClientDetail from '../mouvement/mouvementClientDetail/MouvClientDetai
 import { useSelector } from 'react-redux';
 import ClientTelephone from './clientTelephone/ClientTelephone';
 import ClientAdresse from './clientAdresse/ClientAdresse';
+import ClientView from './ClientView';
 
 const Client = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -24,6 +25,7 @@ const Client = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [openAdresse, setOpenAdresse] = useState(false);
+    const [openDetailAdresse, setOpenDetailAdresse] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -146,6 +148,11 @@ const Client = () => {
         setOpenAdresse(true);
         setIdClient(e)
       };
+
+      const showModalDetailAdresse = (e) => {
+        setOpenDetailAdresse(true);
+        setIdClient(e)
+      };
           
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -225,7 +232,7 @@ const Client = () => {
                   <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
                 </Popover>
                 <Popover title="Afficher les détails des adresses." trigger="hover">
-                  <Button icon={<EyeOutlined />} style={{ color: 'blue', cursor: 'pointer' }} onClick={()=> navigate(`/clientView/${record.id}`)} />
+                  <Button icon={<EyeOutlined />} style={{ color: 'blue', cursor: 'pointer' }} onClick={()=> showModalDetailAdresse(record.id)}/>
                 </Popover>
                   {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
@@ -343,6 +350,19 @@ const Client = () => {
                           ]}
                         >
                          <ClientAdresse idClients={idClient}/>
+                        </Modal>
+
+                        <Modal
+                          title="Détail"
+                          centered
+                          open={openDetailAdresse}
+                          onCancel={() => setOpenDetailAdresse(false)}
+                          width={1200}
+                          footer={[
+                            
+                          ]}
+                        >
+                         <ClientView id_client={idClient}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>

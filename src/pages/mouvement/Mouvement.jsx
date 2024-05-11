@@ -302,7 +302,7 @@ const Mouvement = () => {
                             centered
                             open={openVente}
                             onCancel={() => setOpenVente(false)}
-                            width={990}
+                            width={1200}
                             footer={[]}
                           >
                             <MouvementOneVente id_commande={idTypeVenteCommande} id_type={idTypeVente}/>
@@ -313,10 +313,10 @@ const Mouvement = () => {
                             centered
                             open={openRetour}
                             onCancel={() => setOpenRetour(false)}
-                            width={990}
+                            width={1200}
                             footer={[]}
                           >
-                          <MouvementOneRetour id_commande={idTypeVenteCommande} id_type={idTypeRetour}/>
+                            <MouvementOneRetour id_commande={idTypeVenteCommande} id_type={idTypeRetour}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>

@@ -1,10 +1,11 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Tabs } from 'antd';
+import { Button, Space, Table, Popover,Tag, Tabs, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteMSelect from './RapportVenterMSelect';
+import RapportVenteAll from '../rapportVenteAll/RapportVenteAll';
 
 const RapportVenteMarque = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -13,6 +14,8 @@ const RapportVenteMarque = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
+    const [idMarque, setIdMarque] = useState({});
     
     
 const columns = [
@@ -74,7 +77,7 @@ const columns = [
           
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link to={`/rapportVenteAll/${record.id_marque}`}>
+            <Link onClick={()=> showModal(record.id_marque)}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>
@@ -86,6 +89,12 @@ const columns = [
 const HandOpen = () =>{
   setOpen(!open)
 }
+
+
+const showModal = (e) => {
+  setOpens(true);
+  setIdMarque(e)
+};
 
 useEffect(() => {
   const fetchData = async () => {
@@ -136,6 +145,17 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                                 <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                             </div>
                   </div>
+                  <Modal
+                    title=""
+                    centered
+                    open={opens}
+                    onCancel={() => setOpens(false)}
+                    width={1200}
+                    footer={[
+                            ]}
+                  >
+                    <RapportVenteAll id={idMarque}/>
+                </Modal>
             </div>
         </div>
 

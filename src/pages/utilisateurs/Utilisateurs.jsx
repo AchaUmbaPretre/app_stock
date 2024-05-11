@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined, SisternodeOutlined,MailOutlined,FilePdfOutlined,UserOutlined,CheckOutlined,LockOutlined,FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, SisternodeOutlined,MailOutlined,RedoOutlined,FilePdfOutlined,UserOutlined,CheckOutlined,LockOutlined,FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag} from 'antd';
@@ -14,6 +14,7 @@ const Utilisateurs = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
+    const [searchValue, setSearchValue] = useState('');
     const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
@@ -126,7 +127,7 @@ const Utilisateurs = () => {
 
       const handleEdit = (id) => {
         navigate(`/utilisateurEdit/${id}`);
-    };
+      };
     
     const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -223,6 +224,15 @@ const Utilisateurs = () => {
        }
      };
 
+     const Rafraichir = () =>{
+      window.location.reload();
+    }
+
+     const filteredData = data?.filter((item) =>
+      item.username?.toLowerCase().includes(searchValue.toLowerCase()) || 
+     item.role?.toLowerCase().includes(searchValue.toLowerCase())
+    )
+
   return (
     <>
         <div className="products">
@@ -243,17 +253,17 @@ const Utilisateurs = () => {
                             <SisternodeOutlined className='product-icon' />
                             <div className="product-row-search">
                                 <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
+                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                          <Popover content={'Actualiser cette page'}>
+                            <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                          </Popover>
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>
             </div>

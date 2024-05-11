@@ -53,7 +53,7 @@ const ListeVariante = () => {
             title: 'Description',
             dataIndex: 'nom_produit',
             width: "5%",
-            key: 'nom_nom_produit',
+            key: 'nom_produit',
             render: (text) => (
               <Tag color={"blue"}>
                 {text}
@@ -216,7 +216,8 @@ const ListeVariante = () => {
 
     const filteredData = data?.filter((item) =>
       item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+      item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) || 
+      item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase())
     );
 
 
@@ -254,7 +255,7 @@ const ListeVariante = () => {
                     <div className="rowChart-row-table">
                     {opens &&
                     <VarianteSelect getProduits={setData}/> } 
-                        <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>
             </div>

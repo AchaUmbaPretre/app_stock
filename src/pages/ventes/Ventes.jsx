@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,ReconciliationOutlined,CloseOutlined,FilePdfOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, SisternodeOutlined,EyeOutlined,RedoOutlined, ReconciliationOutlined,CloseOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined,DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link } from 'react-router-dom';
@@ -46,6 +46,10 @@ const Ventes = () => {
         setOpenVente(!openVente);
         setIdCommande(e)
       };
+
+      const Rafraichir = () =>{
+        window.location.reload();
+      }
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -214,9 +218,9 @@ const Ventes = () => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                          <Popover content={'Actualiser cette page'}>
+                            <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                          </Popover>
                         </div>
                     </div>
                     {opens &&

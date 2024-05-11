@@ -1,4 +1,4 @@
-import { SearchOutlined, UserOutlined,EnvironmentOutlined,CalendarOutlined,SisternodeOutlined,CloseOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,RedoOutlined, EnvironmentOutlined,CalendarOutlined,SisternodeOutlined,CloseOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
@@ -143,6 +143,10 @@ const MouvementDepart = () => {
         const HandOpen = () =>{
           setOpens(!opens)
         };
+             
+      const Rafraichir = () =>{
+        window.location.reload();
+      }
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -348,9 +352,9 @@ const MouvementDepart = () => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                          <Popover content={'Actualiser cette page'}>
+                            <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                          </Popover>
                         </div>
                     </div>
                     {opens &&

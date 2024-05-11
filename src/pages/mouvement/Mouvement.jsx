@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined,EnvironmentOutlined, SisternodeOutlined,EyeOutlined,ArrowDownOutlined,ShoppingCartOutlined ,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
+import { SearchOutlined,EnvironmentOutlined, SisternodeOutlined,RedoOutlined, EyeOutlined,ArrowDownOutlined,ShoppingCartOutlined ,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -241,6 +241,10 @@ const Mouvement = () => {
         fetchData();
       }, [DOMAIN]);
 
+      const Rafraichir = () =>{
+        window.location.reload();
+      }
+
    const filteredData = data?.filter((item) =>
     item.type_mouvement?.toLowerCase().includes(searchValue.toLowerCase()) ||
     item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -274,9 +278,9 @@ const Mouvement = () => {
                               </div>
                           </div>
                           <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
+                            <Popover content={'Actualiser cette page'}>
+                              <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                            </Popover>
                           </div>
                       </div>
                       {opens &&

@@ -275,8 +275,8 @@ const Dette = () => {
                         Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant du: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de débiteur : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant dû : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'spacre-between'}}>Nbre de débiteurs enregistrés. : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Crédit en cours : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_dettes_encours}/></b></p>
                         </div>
                       </div>

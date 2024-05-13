@@ -226,7 +226,9 @@ useEffect(() => {
 }, [DOMAIN]);
 
  const filteredData = getRapportDachat?.filter((item) =>
-  item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()))
+  item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) || 
+ item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase())
+) 
 
   return (
     <>

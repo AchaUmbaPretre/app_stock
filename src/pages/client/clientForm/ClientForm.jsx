@@ -46,7 +46,10 @@ const ClientForm = () => {
 
     try{
       setIsLoading(true);
-      await axios.post(`${DOMAIN}/api/client/client`, data)
+      await axios.post(`${DOMAIN}/api/client/client`,{
+        ...data,
+        id_commune : data.commune
+      })
       Swal.fire({
         title: 'Success',
         text: 'Client crée avec succès!',

@@ -11,7 +11,6 @@ import ListeCommandeSelect from './ListeCommandeSelect';
 import ListeCommande7jrs from './ListeCommande7jrs';
 import ListeCommandeJour from './ListeCommandeJour';
 import CountUp from 'react-countup';
-import ListeDetailView from '../listeDetailView/ListeDetailView';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;

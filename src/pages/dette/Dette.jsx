@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined,EyeOutlined, SisternodeOutlined,RedoOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined,EyeOutlined, SisternodeOutlined,RedoOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, DollarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Tabs } from 'antd';
 import axios from 'axios';
@@ -247,8 +247,8 @@ const Dette = () => {
     };
 
   const filteredData = data?.filter((item) =>
-  item.nom?.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    item.nom?.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <>
@@ -275,8 +275,9 @@ const Dette = () => {
                         Du {moment(recent[0]?.date_derniere_dette).format('DD-MM-YYYY')} au {moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total restant : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant du: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total_restant}/> $</b></p>
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de débiteur : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_total_clients_dette}/></b></p>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Crédit en cours : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nombre_dettes_encours}/></b></p>
                         </div>
                       </div>
                     </div>

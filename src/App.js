@@ -128,31 +128,6 @@ const loading = useSelector((state) => state.user?.loading);
   }, [DOMAIN]);
 
   const Layout = () => {
-
-/*     const isOpen = useSelector((state) => state.user.isSidebarOpen); // Renommez la variable ici
-    const dispatch = useDispatch();
-    const sidebarRef = useRef(null);
-
-    useEffect(() => {
-      const handleClickOutsideSidebar = (event) => {
-        if (
-          isOpen &&
-          sidebarRef.current &&
-          !sidebarRef.current.contains(event.target) &&
-          !event.target.classList.contains('sidebar-container')
-        ) {
-          dispatch(toggleSidebar());
-      
-          console.log('bonjour');
-        }
-      };
-  
-      document.addEventListener('click', handleClickOutsideSidebar);
-  
-      return () => {
-        document.removeEventListener('click', handleClickOutsideSidebar);
-      };
-    }, [isOpen, dispatch]); */
       
     return (
       <div >

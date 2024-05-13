@@ -62,7 +62,6 @@ const Options = () => {
     dispatch(toggleSidebar());
   };
 
-  console.log(options)
   return (
     <Menu mode="vertical" theme="dark" ref={sidebarRef}  className={`sidebar ${isSidebarOpen ? 'visible' : ''}`}>
       <div className="sidebarWrapper">

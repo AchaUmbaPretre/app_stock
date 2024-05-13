@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined,RedoOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined,RedoOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, EditOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,8 +21,6 @@ const ListeCommande = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
-    const [opensCommande, setOpensCommande] = useState(false);
-    const [idCommande, setIdCommande] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
@@ -48,10 +46,6 @@ const ListeCommande = () => {
       setIdClient(e)
     };
     
-    const HandCommande = (e) => {
-      setOpensCommande(true)
-      setIdCommande(e)
-    }
     const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
@@ -210,11 +204,13 @@ const ListeCommande = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Modifier" trigger="hover">
-                  <Button icon={<EditOutlined />} style={{ color: 'green' }}  onClick={()=> handleEdit(record.id_commande)} />
-                </Popover>
+{/*                 <Popover title="Modifier" trigger="hover">
+                  <Link>
+                    <Button icon={<EditOutlined />} style={{ color: 'green' }}  onClick={()=> handleEdit(record.id_commande)} />
+                  </Link>
+                </Popover> */}
                 <Popover  title="Voir la liste de cette commande" trigger="hover">
-                  <Link onClick={()=>HandCommande(record.id_commande)}>
+                  <Link to={`/listeDetailView/${record.id_commande}`}>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover>
@@ -285,9 +281,9 @@ const ListeCommande = () => {
       }
 
   const filteredData = data?.filter((item) =>
-  item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.nom_statut?.toLowerCase().includes(searchValue.toLowerCase())
-)
+    item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.nom_statut?.toLowerCase().includes(searchValue.toLowerCase())
+  )
 
   return (
     <>
@@ -352,18 +348,6 @@ const ListeCommande = () => {
                             ]}
                           >
                             <MouvClientDetail idClients={idClient}/>
-                          </Modal>
-
-                          <Modal
-                            title=""
-                            centered
-                            open={opensCommande}
-                            onCancel={() => setOpensCommande(false)}
-                            width={1200}
-                            footer={[
-                            ]}
-                          >
-                            <ListeDetailView id={idCommande}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>

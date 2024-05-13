@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import { FadeLoader } from 'react-spinners';
+import CountUp from 'react-countup';
 
 const ListeDetailView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -373,6 +374,16 @@ const ListeDetailView = () => {
                         <h2 className="product-h2">Liste de commande N° {id}</h2>
                         <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
                     </div>
+
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                        <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                          
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total de cette commande : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={totalAvecRemise}/> $</b></p>
+                        </div>
+                    </div>
+
                     <div className="varianteProduit-right" style={{display:'flex', flexDirection:'column'}}>
                       <h2 style={{fontSize:'1rem', color:'rgb(1, 35, 138)'}}>Contact de Mn {getCommande?.nom}</h2>
                       <span className="variant-name" style={{fontSize:'.8rem', color:'#6d6c6c'}}>{getCommande?.telephone}</span>

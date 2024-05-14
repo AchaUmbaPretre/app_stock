@@ -310,7 +310,7 @@ const EchangeCat = () => {
                       <div className="variante-top-rows">
                       {
                         currentData?.map((dd)=>(
-                        <div className="variante-top-row" key={dd.id}>
+                        <div className="variante-top-row" key={dd.id} onClick={()=> showModal(dd.id_varianteProduit,id)}>
                           <div className="cercle"></div>
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                           <div className="info-products">

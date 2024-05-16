@@ -45,9 +45,9 @@ const DepensesAll = () => {
           },
           {
             title: 'Date',
-            dataIndex: 'date',
+            dataIndex: 'date_depense',
             key: 'date',
-            sorter: (a, b) => moment(a.date) - moment(b.date),
+            sorter: (a, b) => moment(a.date_depense) - moment(b.date_depense),
             sortDirections: ['descend', 'ascend'],
             render: (text) => (
               <Tag icon={<CalendarOutlined />} color="blue">
@@ -107,13 +107,13 @@ const DepensesAll = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                {user?.role === 'admin' &&
                 <>
                     <Popover title="Voir les détails" trigger="hover">
-                        <Link to={`/depenses?date=${format(new Date(record?.date),'yyyy-MM-dd')}`}>
+                        <Link to={`/depenses?date=${format(new Date(record?.date_depense),'yyyy-MM-dd')}`}>
                             <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                         </Link>
-                    </Popover>
+                    </Popover> 
+                    {user?.role === 'admin' &&
                     <Popover title="Supprimer" trigger="hover">
                     <Popconfirm
                         title="Êtes-vous sûr de vouloir supprimer?"
@@ -123,9 +123,8 @@ const DepensesAll = () => {
                     >
                         <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
                     </Popconfirm>
-                    </Popover>
+                    </Popover>  }
                 </>
-                }
               </Space>
             ),
           },

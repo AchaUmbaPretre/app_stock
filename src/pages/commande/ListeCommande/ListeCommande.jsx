@@ -288,30 +288,6 @@ const ListeCommande = () => {
               );
             },
         },
-/*         {
-            title: 'Paie',
-            dataIndex: 'paye',
-            key: 'paye',
-            render: (text) => {
-              let tagColor = '';
-              let textValue = '';
-        
-              if (text === 0) {
-                tagColor = 'red';
-                textValue= 'Non-payé'
-              } 
-              else if (text === 1) {
-                tagColor = 'green';
-                textValue = 'Payé';
-              }
-        
-              return (
-                <Tag color={tagColor}>
-                   {textValue}
-                </Tag>
-              );
-            },
-        }, */
         {
             title: 'Action',
             key: 'action',
@@ -330,7 +306,7 @@ const ListeCommande = () => {
                 </Popover>
                 <Popover title="Voir des produits" trigger="hover">
                     <Link to={`/commandes/${record.id_commande}`}>
-                        <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
+                        <Button icon={<PlusCircleOutlined />} style={{ color: 'green' }} />
                     </Link>
                 </Popover>
                 {user?.role === 'admin' &&

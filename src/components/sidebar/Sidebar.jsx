@@ -180,7 +180,7 @@ const Sidebar = () => {
           </Link>
         </Item>
       </SubMenu>
-      { user?.role === 'admin' && 
+      { (user?.role === 'admin' || user?.role === 'secretaire') && 
       <Item key="/echangeForm" icon={<SwapOutlined style={{ fontSize: '22px', color: '#fafafa' }} />}  onClick={handleLinkClick}>
         <Link to="/echangeForm" className="sidebarH3" style={{fontSize: "14px", color: '#fafafa'}}>
           Echanges
@@ -211,7 +211,7 @@ const Sidebar = () => {
         </Item> }
         
       </SubMenu>
-      { user?.role === 'admin' &&
+      { (user?.role === 'admin' || user?.role === 'secretaire') &&
       <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<CreditCardOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="depenses" onClick={handleLinkClick}>
           <Link to="/depensesAll" className="sidebarLink">

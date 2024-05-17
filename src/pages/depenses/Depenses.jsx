@@ -61,7 +61,7 @@ const Depenses = () => {
           {
             title: 'Date',
             dataIndex: 'date_depense',
-            key: 'date_depens',
+            key: 'date_depense',
             sorter: (a, b) => moment(a.date_depense) - moment(b.date_depense),
             sortDirections: ['descend', 'ascend'],
             render: (text) => (

@@ -147,10 +147,6 @@ const ListeCommande = () => {
         }
       };
 
-      const handleEdit = (id) => {
-        navigate(`/Editcommande/${id}`);
-    };
-
     const showModal = (e) => {
       setOpen(true);
       setIdClient(e)

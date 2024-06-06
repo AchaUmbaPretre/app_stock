@@ -178,22 +178,7 @@ const FormDepenses = () => {
                 onChange={handleInputChange}
               />
             </div>
-{/*             <div className="form-controle-desc">
-              <label htmlFor="">Francs convertis en dollars</label>
-              <input
-                type="number"
-                name="device"
-                style={{
-                  padding: '8px 10px',
-                  border: '1px solid #c5c5c5',
-                  outline: 'none',
-                  borderRadius: '5px',
-                }}
-                min={0}
-                value={data.montant}
-                disabled
-              />
-            </div> */}
+
             <div className="form-controle-desc">
               <label htmlFor="">Description</label>
               <textarea

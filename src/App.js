@@ -100,6 +100,7 @@ import axios from 'axios';
 import config from './config';
 import { fetchDataRequest, fetchDataFailure, fetchDataSuccess } from "./redux/userRedux";
 import ClientForm from './pages/client/clientForm/ClientForm';
+import PasswordForgot from './pages/passewordForgot/PasswordForgot';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -549,6 +550,10 @@ const loading = useSelector((state) => state.user?.loading);
     {
       path: '/register',
       element: <Register1 />
+    },
+    {
+      path: '/forgot',
+      element: <PasswordForgot />
     },
     user?.role === null && {
       path: '/*',

@@ -77,6 +77,9 @@ const Login1 = () => {
             <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/register')}>
                 S'inscrire
             </button>
+            <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/register')}>
+                Mot de passe oublié
+            </button>
             {isLoading && (
               <div className="loader-container loader-container-center">
                 <CircularProgress size={24} />

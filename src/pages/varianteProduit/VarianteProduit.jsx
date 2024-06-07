@@ -9,7 +9,7 @@ import {FilterOutlined} from '@ant-design/icons';
 import config from '../../config';
 import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
-import { Modal } from 'antd'
+import { Modal, Skeleton } from 'antd'
 import PageDetails from '../PageDetails/PageDetails'
 
 const VarianteProduit = () => {
@@ -336,9 +336,17 @@ const VarianteProduit = () => {
                     </div>
                     <div className="variant_bottom">
                     { loading ? (
-                      <div className="spinner-container">
-                        <FadeLoader color={'#36D7B7'} loading={loading} />
+                      <div className="skeleton-container">
+                        {[...Array(4)].map((_, index) => (
+                          <div key={index} className="skeleton-group">
+                            {[...Array(3)].map((_, innerIndex) => (
+                          <div key={innerIndex} className="skeleton-item">
+                            <Skeleton.Image style={{ width: 350, height: 350 }} />
+                          </div>
+                        ))}
                       </div>
+                    ))}
+                  </div>
                     ) : (
                       <div className="variante-top-rows">
                       {

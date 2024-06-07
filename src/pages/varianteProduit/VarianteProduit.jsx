@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -7,7 +6,6 @@ import Select from 'react-select';
 import './varianteProduit.scss'
 import {FilterOutlined} from '@ant-design/icons';
 import config from '../../config';
-import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
 import { Modal, Skeleton } from 'antd'
 import PageDetails from '../PageDetails/PageDetails'
@@ -23,7 +21,6 @@ const VarianteProduit = () => {
     const [getMatiere,setGetMatiere] = useState([]);
     const [matiere,setMatiere] = useState(null);
     const [couleur, setCouleur] = useState(null);
-    const navigate = useNavigate();
     const [famille, setFamille] = useState(null);
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);

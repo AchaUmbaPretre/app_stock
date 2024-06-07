@@ -24,7 +24,6 @@ const DetailProduitCommande = ({idVariant, idCommande, tailles, setTailles}) => 
     const id = location.pathname.split('/')[2];
     const id_commande = location.pathname.split('/')[3];
     const [quantite, setQuantite] = useState(1);
-  /*   const [taille, setTaille] = useState(tailles); */
     const [getTaille, setGetTaille] = useState([]);
     const [loading, setLoading] = useState(true);
     const [variante, setVariante] = useState([]);
@@ -36,9 +35,7 @@ const DetailProduitCommande = ({idVariant, idCommande, tailles, setTailles}) => 
     const [isLoading, setIsLoading] = useState(false);
     const userId = useSelector((state) => state.user.currentUser.id)
 
-
-
-        useEffect(() => {
+      useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/varianteDetail/${idVariant}`);
@@ -99,12 +96,6 @@ const DetailProduitCommande = ({idVariant, idCommande, tailles, setTailles}) => 
       }, {});
       
       const result = Object.values(groupedData);
-
-/*       const handleClick = () =>{
-        dispatch(
-            addProduct({ ...result, quantite, id_taille: taille, id_varianteProduit: id })
-        )
-    } */
 
 
     useEffect(() => {

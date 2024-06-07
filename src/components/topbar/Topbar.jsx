@@ -1,4 +1,4 @@
-import { MailOutline, NotificationsNone, ShoppingCartOutlined,CloseOutlined } from '@mui/icons-material'
+import { NotificationsNone, ShoppingCartOutlined,CloseOutlined } from '@mui/icons-material'
 import { Avatar } from 'antd';
 import React from 'react'
 import './topbar.css'

@@ -140,11 +140,11 @@
 
 @media screen and (max-width: 414px){
     .topbar{
-        padding: 10px;
+        padding: 15px;
     }
     .topbar-img{
-        height: 60px;
-        width: 60px;
+        height: 65px;
+        width: 65px;
     }
     .logo{
         font-size: 12px;
@@ -192,6 +192,14 @@
     .topbar-icons{
         display: none;
     }
+    .icons-user{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .icon_ant{
+        display: none;
+    }
     .topbar-icon{
         cursor: pointer;
         display: flex;
@@ -203,6 +211,7 @@
     .close-icon{
         font-size: 9px;
     }
+
     .colorRed{
         display: flex;
         cursor: pointer;

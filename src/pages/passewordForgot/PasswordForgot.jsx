@@ -3,7 +3,6 @@ import logo from './../../assets/logo doe.jpg'
 import { FacebookOutlined, Instagram, LockOutlined, MailLockOutlined, MailOutlined, PersonOutline, Twitter, WhatsApp } from '@mui/icons-material'
 import { CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../redux/apiCalls'
 import { useNavigate } from 'react-router-dom'
 import config from '../../config';
 import axios from 'axios';
@@ -14,6 +13,7 @@ const PasswordForgot = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isFetching } = useSelector((state) => state.user);
@@ -31,6 +31,23 @@ const PasswordForgot = () => {
         } else {
             toast.error('Aucun utilisateur trouvé.');
         }
+    } catch (error) {
+        console.error(error);
+        toast.error(error.response?.data?.message || 'Une erreur est survenue');
+    } finally {
+        setIsLoading(false);
+    }
+};
+
+const handleClickNew = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+         await axios.put(`${DOMAIN}/api/user/password_reset/${user.id}?password=${password}`);
+         toast.success('Mot de passe a été changé avec succès!');
+         navigate('/login');
+        window.location.reload();
     } catch (error) {
         console.error(error);
         toast.error(error.response?.data?.message || 'Une erreur est survenue');
@@ -78,9 +95,9 @@ const PasswordForgot = () => {
             <span className="login_label">Email : {user.email}</span>
             <div class="input-field">
                 <MailOutlined className='icon-login'/>
-              <input type="password" placeholder="Entrer votre new password.. " onChange={(e) => setEmail(e.target.value)} />
+              <input type="password" placeholder="Entrer votre new password.. " onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <input type="submit" value="Envoyer" class="btn solid" onClick={handleClick} disabled={isFetching} />
+            <input type="submit" value="Envoyer" class="btn solid" onClick={handleClickNew} disabled={isFetching} />
             <p class="social-text">Connectez-vous avec les plateformes sociales</p>
             <div class="social-media">
               <a href="#" class="social-icon">

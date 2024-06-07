@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 're
 import React, { useEffect, useState} from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Rightbar from './pages/rightbar/Rightbar';
 import { FadeLoader } from 'react-spinners';
@@ -567,6 +569,7 @@ const loading = useSelector((state) => state.user?.loading);
 
   return (
     <div>
+    <ToastContainer />
       {loading ? (
       <div className="spinnerContainer">
         <FadeLoader color="rgb(131, 159, 241)" loading={loading} height={15} radius={2} margin={2} />

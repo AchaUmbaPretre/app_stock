@@ -42,7 +42,7 @@ const Topbar = () => {
           </div>
           <div className="icons-user">
             {/* <img src={logo} alt="" className="topbar-imgUser"/> */}
-            <Avatar icon={<UserOutlined />} />
+            <Avatar icon={<UserOutlined />} className='icon_ant'/>
             <span className='username'>{user}</span>
           </div>
           <div className={`topbar-icon ${isSidebarOpen ? 'colorRed' : ''}`} onClick={handleClick}>

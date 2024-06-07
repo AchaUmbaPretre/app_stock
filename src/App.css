@@ -148,3 +148,20 @@ li{
 .rapport-vente-selects.open {
   max-height: 500px; /* Hauteur maximale souhaitée */
 }
+
+
+.skeleton-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.skeleton-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.skeleton-item {
+  flex: 1;
+}

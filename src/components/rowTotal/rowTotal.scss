@@ -20,7 +20,7 @@
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             padding: 20px;
             @include mobileXR{
-                width: 330px;
+                width: 100%
             }
             .rowTotal-left{
                 display: flex;

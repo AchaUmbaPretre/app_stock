@@ -71,13 +71,10 @@ const Login1 = () => {
         <div class="panel left-panel">
           <div class="content">
             <h3>Voulez-vous créer un compte ?</h3>
-            <p>
-                Nous vous invitons à créer un compte pour profiter de tous les avantages de notre plateforme.
-            </p>
             <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/register')}>
                 S'inscrire
             </button>
-            <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/register')}>
+            <button class="btn transparent" id="sign-up-btn" onClick={()=>navigate('/forgot')}>
                 Mot de passe oublié
             </button>
             {isLoading && (

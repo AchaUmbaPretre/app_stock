@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import VenteClientDetail from './venteClientDetail/VenteClientDetail';
 import { useSelector } from 'react-redux';
 import Ticket from './ticket/Ticket';
+import VenteView from './venteView/VenteView';
 
 const VentesJour = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -21,7 +22,8 @@ const VentesJour = () => {
     const [ticket, setTicket] = useState(false);
     const [idTicket, setIdTicket] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
-
+    const [openVente, setOpenVente] = useState(false);
+    const [iDcommande, setIdCommande] = useState('');
 
       const handleDelete = async (id) => {
         try {
@@ -31,6 +33,12 @@ const VentesJour = () => {
           console.log(err);
         }
       };
+
+      const HandVenteOpen = (e) => {
+        setOpenVente(!openVente);
+        setIdCommande(e)
+      };
+
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -125,7 +133,7 @@ const VentesJour = () => {
                 
               <Space size="middle">
                 <Popover title="Voir la liste de vente de cette commande" trigger="hover">
-                    <Link to={`/venteView/${record.id_commande}`}>
+                    <Link onClick={()=> HandVenteOpen(record.id_commande)}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
@@ -218,6 +226,17 @@ const VentesJour = () => {
                           footer={[]}
                         >
                          <Ticket idTicket={idTicket}/>
+                        </Modal>
+
+                        <Modal
+                          title=""
+                          centered
+                          open={openVente}
+                          onCancel={() => setOpenVente(false)}
+                          width={1150}
+                          footer={[]}
+                        >
+                         <VenteView id={iDcommande}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

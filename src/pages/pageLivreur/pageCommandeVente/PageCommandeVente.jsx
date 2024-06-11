@@ -209,7 +209,6 @@ const PageCommandeVente = () => {
         <>
             <div className="pageLivreurVente">
             <ToastContainer position="center-center"/>
-            <button onClick={() => toast.success('Test toast!')}>Show Test Toast</button>
                 {loading ? (
                     <div className="spinner-container">
                         <FadeLoader color={'#36D7B7'} loading={loading} />

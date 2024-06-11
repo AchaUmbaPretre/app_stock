@@ -16,16 +16,13 @@ const ClientLocation = () => {
   const [currentPosition, setCurrentPosition] = useState(null);
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     const geocodeAddress = async () => {
     
       if (clientAddress) {
         try {
-          /* const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(clientAddress)}`); */
-/*           const data = await response.json(); */
 
           if (lat.length > 0) {
-/*             const { lat, lon } = data[0]; */
             setCurrentPosition([parseFloat(lat), parseFloat(lon)]);
           } else {
             console.log('Aucun résultat de géocodage trouvé pour l\'adresse spécifiée.');
@@ -37,7 +34,26 @@ const ClientLocation = () => {
     };
 
     geocodeAddress();
-  }, [clientAddress]);
+  }, [clientAddress]); */
+
+  useEffect(() => {
+    const geocodeAddress = async () => {
+    
+      if (clientAddress) {
+        try {
+          if (!isNaN(parseFloat(lat)) && !isNaN(parseFloat(lon))) { // Vérifier si lat et lon sont des nombres valides
+            setCurrentPosition([parseFloat(lat), parseFloat(lon)]);
+          } else {
+            console.log('Les coordonnées de latitude ou de longitude ne sont pas valides.');
+          }
+        } catch (error) {
+          console.error('Erreur lors du géocodage:', error);
+        }
+      }
+    };
+
+    geocodeAddress();
+  }, [clientAddress, lat, lon]); // Ajoutez lat et lon à la liste des dépendances du hook useEffect
 
 
   return (

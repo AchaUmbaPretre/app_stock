@@ -353,7 +353,7 @@ const Client = () => {
                         </Modal>
 
                         <Modal
-                          title="Détail"
+                          title=""
                           centered
                           open={openDetailAdresse}
                           onCancel={() => setOpenDetailAdresse(false)}

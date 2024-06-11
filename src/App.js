@@ -1,19 +1,18 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Rightbar from './pages/rightbar/Rightbar';
-import { FadeLoader } from 'react-spinners';
+import { FadeLoader, HashLoader } from 'react-spinners';
 import Page404 from './pages/page404/Page404';
 import Login1 from './pages/login1/Login1';
 import Register1 from './pages/register1/Register1';
 import Products from './pages/products/Products';
 import ProductForm from './pages/products/form/ProductForm';
 import Ventes from './pages/ventes/Ventes';
-import VentesForm from './pages/ventes/form/VentesForm';
 import Categories from './pages/categories/Categories';
 import Emplacement from './pages/emplacement/Emplacement';
 import Client from './pages/client/Client';
@@ -319,10 +318,6 @@ const loading = useSelector((state) => state.user?.loading);
           element: <VenteView />
         },
         {
-          path: '/ventesForm',
-          element: <VentesForm />
-        },
-        {
           path: '/ventes/:id',
           element: <Ventes />
         },
@@ -572,7 +567,7 @@ const loading = useSelector((state) => state.user?.loading);
     <ToastContainer />
       {loading ? (
       <div className="spinnerContainer">
-        <FadeLoader color="rgb(131, 159, 241)" loading={loading} height={15} radius={2} margin={2} />
+        <HashLoader color="rgb(131, 159, 241)" loading={loading} height={15} radius={2} margin={2} />
       </div>
       ) : (
         <RouterProvider router={router} />

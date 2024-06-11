@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import Select from 'react-select';
 import './varianteProduit.scss'
-import {FilterOutlined} from '@ant-design/icons';
+import {FilterOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import config from '../../config';
 import ReactPaginate from 'react-paginate';
 import { Modal, Skeleton } from 'antd'
@@ -169,23 +169,6 @@ const VarianteProduit = () => {
         };
         fetchData();
       }, [DOMAIN]);
-
-/*       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const url = famille.length > 0
-              ? `${DOMAIN}/api/produit/varianteFiltre/${famille}`
-              : `${DOMAIN}/api/produit/varianteProduit`;
-      
-            const { data } = await axios.get(url);
-            setData(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-      
-        fetchData();
-      }, [DOMAIN, famille]); */
 
       useEffect(() => {
         const fetchData = async () => {
@@ -370,17 +353,19 @@ const VarianteProduit = () => {
                         >
                           <PageDetails id={idVariant}/>
                         </Modal>
-                    {loading === false &&  <ReactPaginate
-                        pageCount={totalPages}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageChange}
-                        previousLabel={'Précédent'}
-                        nextLabel={'Suivant'}
-                        containerClassName={'pagination'}
-                        activeClassName={'active'}
-                        itemClass={'pointer-cursor'}
-                      /> }
+                        {!loading && (
+                        <ReactPaginate
+                          pageCount={totalPages}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={5}
+                          onPageChange={handlePageChange}
+                          previousLabel={<LeftOutlined />}
+                          nextLabel={<RightOutlined />}
+                          containerClassName={'pagination'}
+                          activeClassName={'active'}
+                          itemClass={'pointer-cursor'}
+                        />
+                      )}
                     </div>
                 </div>
             </div>

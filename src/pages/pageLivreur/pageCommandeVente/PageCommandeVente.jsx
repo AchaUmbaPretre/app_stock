@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Table, Tag, Checkbox, Modal } from 'antd';
+import { Space, Table, Tag, Checkbox, Modal, Image } from 'antd'; // Importez Image depuis 'antd'
 import { WhatsAppOutlined, PhoneOutlined, CaretLeftOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import config from '../../../config';
@@ -12,6 +12,8 @@ import { toast, ToastContainer } from 'react-toastify';
 const PageCommandeVente = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [selected, setSelected] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(''); // Nouvel état pour stocker l'image sélectionnée
+    const [selectedPointure, setSelectedPointure] = useState(''); // Nouvel état pour stocker la pointure sélectionnée
     const scroll = { x: 450 };
     const [loading, setLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -26,14 +28,18 @@ const PageCommandeVente = () => {
     const [note, setNote] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-    const handleSelectionChange = (event, id, id_commande, id_detail_commande, id_detail_livraison, qte_livre, prix, id_taille, id_client) => {
+    const handleSelectionChange = (event, id, id_commande, id_detail_commande, id_detail_livraison, qte_livre, prix, id_taille, id_client, img, pointure) => {
         if (event.target.checked) {
             const updatedSelected = [...selected, { id, id_commande, id_detail_commande, id_detail_livraison, qte_livre, prix, id_taille, id_client }];
             setSelected(updatedSelected);
+            setSelectedImage(img); // Mettre à jour l'image sélectionnée
+            setSelectedPointure(pointure); // Mettre à jour la pointure sélectionnée
             const totalPrice = updatedSelected.reduce((acc, item) => acc + item.prix, 0);
             setTotalPrice(totalPrice);
         } else {
             setSelected(selected.filter((row) => row.id !== id));
+            setSelectedImage(''); // Réinitialiser l'image sélectionnée
+            setSelectedPointure(''); // Réinitialiser la pointure sélectionnée
         }
     };
 
@@ -47,7 +53,7 @@ const PageCommandeVente = () => {
                     <Checkbox
                         checked={selected.some((item) => item.id_detail_livraison === record.id_detail_livraison)}
                         onChange={(event) =>
-                            handleSelectionChange(event, record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.id_detail_livraison, record.qte_livre, record.prix, record.id_taille, record.id_client)
+                            handleSelectionChange(event, record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.id_detail_livraison, record.qte_livre, record.prix, record.id_taille, record.id_client, record.img, record.pointure)
                         }
                     />
                 </div>
@@ -208,7 +214,7 @@ const PageCommandeVente = () => {
     return (
         <>
             <div className="pageLivreurVente">
-            <ToastContainer position="center-center"/>
+                <ToastContainer position="center-center"/>
                 {loading ? (
                     <div className="spinner-container">
                         <FadeLoader color={'#36D7B7'} loading={loading} />
@@ -290,6 +296,13 @@ const PageCommandeVente = () => {
                             okButtonProps={{ style: { background: 'blue' } }}
                         >
                             <p>Souhaitez-vous réellement effectuer cette vente ?</p>
+                            {selectedImage && <Image src={`${DOMAIN}${selectedImage}`} style={{height:"50px"}} />}
+                            {selectedPointure && <p>Pointure : {selectedPointure}</p>}
+                            {isLoading && (
+                            <div className="loader-container loader-container-center">
+                                <CircularProgress size={28} />
+                            </div>
+                        )}
                         </Modal>
                         {isLoading && (
                             <div className="loader-container loader-container-center">

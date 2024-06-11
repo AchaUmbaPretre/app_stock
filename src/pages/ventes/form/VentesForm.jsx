@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './ventesForm.scss'
-import { Divider, Radio, Table } from 'antd';
 import Select from 'react-select';
 import { useEffect } from 'react';
 import config from '../../../config';

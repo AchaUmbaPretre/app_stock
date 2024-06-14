@@ -144,6 +144,8 @@ const Depenses = () => {
       setOpen(true)
     };
 
+    console.log(data)
+
   const filteredData = data?.filter((item) =>
   item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase())
 );

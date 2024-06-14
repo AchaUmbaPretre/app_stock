@@ -9,14 +9,14 @@ import config from '../../config';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 
-const Depenses = () => {
+const Depenses = ({dateId}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-    const location = useLocation();
+/*     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const dateId = searchParams.get('date');
+    const dateId = searchParams.get('date'); */
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);

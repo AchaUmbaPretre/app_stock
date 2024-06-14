@@ -113,7 +113,7 @@ const DepensesAll = () => {
                 <>
                     <Popover title="Voir les détails" trigger="hover">
 {/*                         <Link to={`/depenses?date=${format(new Date(record?.date_depense),'yyyy-MM-dd')}`}> */}
-                        <Link onClick={handleOkDetail}>
+                        <Link onClick={() => handleOkDetail(record.date_depense)}>
                             <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                         </Link>
                     </Popover> 
@@ -154,7 +154,10 @@ const DepensesAll = () => {
 
     const handleOkDetail = async (e) => {
       setOpenDetail(true)
+      setDateData(e)
     };
+
+    console.log(dateData)
 
   const filteredData = data?.filter((item) =>
   item.jour?.toLowerCase().includes(searchValue.toLowerCase())
@@ -209,11 +212,11 @@ const DepensesAll = () => {
                           onCancel={() => {
                             setOpenDetail(false)
                           }}
-                          width={850}
+                          width={1000}
                           footer={[
                           ]}
                         >
-                            <Depenses date = {''}/>
+                          <Depenses dateId = {dateData}/>
                         </Modal>
 
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />

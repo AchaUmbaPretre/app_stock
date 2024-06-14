@@ -9,6 +9,7 @@ import FormDepenses from './FormDepenses';
 import config from '../../config';
 import moment from 'moment';
 import { format } from 'date-fns';
+import Depenses from './Depenses';
 
 const DepensesAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,6 +18,8 @@ const DepensesAll = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [openDetail, setOpenDetail] = useState(false);
+    const [dateData, setDateData] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
 
 
@@ -109,7 +112,8 @@ const DepensesAll = () => {
               <Space size="middle">
                 <>
                     <Popover title="Voir les détails" trigger="hover">
-                        <Link to={`/depenses?date=${format(new Date(record?.date_depense),'yyyy-MM-dd')}`}>
+{/*                         <Link to={`/depenses?date=${format(new Date(record?.date_depense),'yyyy-MM-dd')}`}> */}
+                        <Link onClick={handleOkDetail}>
                             <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                         </Link>
                     </Popover> 
@@ -148,7 +152,9 @@ const DepensesAll = () => {
       setOpen(true)
     };
 
-    console.log(data)
+    const handleOkDetail = async (e) => {
+      setOpenDetail(true)
+    };
 
   const filteredData = data?.filter((item) =>
   item.jour?.toLowerCase().includes(searchValue.toLowerCase())
@@ -195,6 +201,21 @@ const DepensesAll = () => {
                         >
                             <FormDepenses/>
                         </Modal>
+
+                        <Modal
+                          centered
+                          title=''
+                          open={openDetail}
+                          onCancel={() => {
+                            setOpenDetail(false)
+                          }}
+                          width={850}
+                          footer={[
+                          ]}
+                        >
+                            <Depenses date = {''}/>
+                        </Modal>
+
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
                 </div>

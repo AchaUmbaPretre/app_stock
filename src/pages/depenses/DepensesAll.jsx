@@ -96,7 +96,7 @@ const DepensesAll = () => {
             dataIndex: 'createur',
             key: 'createur',
             render: (text) => (
-              <Tag color="blue">
+              <Tag color="blue" icon={<UserOutlined />}>
                 {text}
               </Tag>
             ),
@@ -129,8 +129,6 @@ const DepensesAll = () => {
             ),
           },
       ];
-
-      console.log(data)
 
       useEffect(() => {
         const fetchData = async () => {

@@ -20,7 +20,6 @@ const BarReturn = () => {
                 ]}
             />
         </div>
-
     </>
   )
 }

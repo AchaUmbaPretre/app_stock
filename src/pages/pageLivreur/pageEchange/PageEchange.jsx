@@ -72,6 +72,16 @@ const PageEchange = () => {
             )
         },
         {
+          title: 'Pointure',
+          dataIndex: 'pointure',
+          key: 'pointure',
+          render: (text) => (
+              <Space>
+                  <Tag color="green">{text}</Tag>
+              </Space>
+          ),
+      },
+        {
           title: 'Qté',
           dataIndex: 'qte_livre',
           key: 'qte_livre',

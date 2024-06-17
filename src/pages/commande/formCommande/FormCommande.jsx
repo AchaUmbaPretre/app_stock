@@ -7,6 +7,7 @@ import { CircularProgress } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal, Button } from 'antd';
+import './formCommande.css'
 
 const FormCommande = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -170,9 +171,10 @@ const FormCommande = () => {
         onCancel={handleCancel}
         okText="Confirmer"
         cancelText="Annuler"
+        className="confirmation-modal"
       >
-        <p>Êtes-vous sûr de vouloir soumettre cette commande avec les informations suivantes ?</p>
-        <ul>
+        <p className="modal-text">Êtes-vous sûr de vouloir soumettre cette commande avec les informations suivantes ?</p>
+        <ul className="modal-data">
           <li>Client: {getClient.find(client => client.id === data.id_client)?.nom || 'N/A'}</li>
           <li>Shop: {data.id_shop || 'N/A'}</li>
           <li>Adresse: {adresseOne.find(adresse => adresse.id_adresse === data.id_adresse)?.nom_province || 'N/A'}</li>

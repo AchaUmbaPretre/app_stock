@@ -164,7 +164,7 @@ const FormCommande = () => {
   return (
     <>
       <ToastContainer />
-      <Modal
+        <Modal
         title="Confirmer la commande"
         visible={confirmVisible}
         onOk={handleOk}
@@ -177,10 +177,11 @@ const FormCommande = () => {
         <ul className="modal-data">
           <li>Client: {getClient.find(client => client.id === data.id_client)?.nom || 'N/A'}</li>
           <li>Shop: {data.id_shop || 'N/A'}</li>
-          <li>Adresse: {adresseOne.find(adresse => adresse.id_adresse === data.id_adresse)?.nom_province || 'N/A'}</li>
+          <li>Adresse: {adresseOne.find(adresse => adresse.id_adresse === data.id_adresse)?.nom_province}, {adresseOne.find(adresse => adresse.id_adresse === data.id_adresse)?.nom_commune || 'N/A'}</li>
           <li>Téléphone: {telephone.find(tel => tel.id_telephone === data.id_telephone)?.numero || 'N/A'}</li>
         </ul>
       </Modal>
+
       <div className="clientForm">
         <div className="product-container">
           <div className="product-container-top">

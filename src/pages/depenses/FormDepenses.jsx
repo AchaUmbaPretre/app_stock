@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import config from '../../config';
-import Swal from 'sweetalert2';
 import Select from 'react-select';
 import { CircularProgress } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { Modal, Button, notification } from 'antd';
+import { ToastContainer } from 'react-toastify';
 
 const FormDepenses = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -13,6 +14,7 @@ const FormDepenses = () => {
   const [catDepenses, setCatDepenses] = useState([]);
   const [livreur, setLivreur] = useState([]);
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [confirmVisible, setConfirmVisible] = useState(false);
   const userId = useSelector((state) => state.user?.currentUser.id);
 
   const handleDateChange = (e) => {
@@ -33,19 +35,10 @@ const FormDepenses = () => {
       }
     }
 
-/*     // Convertir le montant en dollars
-    if (fieldName === "montant") {
-      const tauxDeChange = 0.00036364; // Remplacez par le taux de change franc-dollar actuel
-      const montantEnDollars = fieldValue * tauxDeChange;
-      updatedValue = montantEnDollars.toFixed(2); // Arrondir à deux décimales en dollars
-    } */
-
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-
+  const handleConfirm = async () => {
     try {
       setLoading(true);
       await axios.post(`${DOMAIN}/api/depenses`, {
@@ -53,23 +46,29 @@ const FormDepenses = () => {
         date_depense: date,
         user_cr: userId
       });
-      Swal.fire({
-        title: 'Success',
-        text: 'La categorie de dépenses a été enregistrée avec succès.!',
-        icon: 'success',
-        confirmButtonText: 'OK',
+      notification.success({
+        message: 'Success',
+        description: 'La categorie de dépenses a été enregistrée avec succès!',
       });
+      setConfirmVisible(false);
       window.location.reload();
     } catch (err) {
-      Swal.fire({
-        title: 'Error',
-        text: err.message,
-        icon: 'error',
-        confirmButtonText: 'OK',
+      notification.error({
+        message: 'Error',
+        description: `Erreur: ${err.message}`,
       });
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setConfirmVisible(true);
+  };
+
+  const handleCancel = () => {
+    setConfirmVisible(false);
   };
 
   useEffect(() => {
@@ -178,7 +177,6 @@ const FormDepenses = () => {
                 onChange={handleInputChange}
               />
             </div>
-
             <div className="form-controle-desc">
               <label htmlFor="">Description</label>
               <textarea
@@ -188,7 +186,7 @@ const FormDepenses = () => {
               ></textarea>
             </div>
             <div className="form-submit">
-              <button className="btn-submit" onClick={handleClick}>
+              <button className="btn-submit" onClick={handleSubmit}>
                 Envoyer
               </button>
               <button
@@ -206,6 +204,26 @@ const FormDepenses = () => {
           </div>
         </div>
       </div>
+      <Modal
+        title="Confirmer la commande"
+        visible={confirmVisible}
+        onOk={handleConfirm}
+        onCancel={handleCancel}
+        okText="Confirmer"
+        cancelText="Annuler"
+        className="confirmation-modal"
+      >
+        <p className="modal-text">Êtes-vous sûr de vouloir soumettre cette commande avec les informations suivantes ?</p>
+        <ul className="modal-data">
+          <li>Personnels: {livreur.find(item => item.id === data.id_livreur)?.username || 'N/A'}</li>
+          <li>Catégorie de dépenses: {catDepenses.find(item => item.id_catDepense === data.id_catDepense)?.nom || 'N/A'}</li>
+          <li>Date: {date}</li>
+          <li>Montant en USD: {data.montant || 'N/A'}</li>
+          <li>Montant en francs: {data.montant_franc || 'N/A'}</li>
+          <li>Description: {data.description || 'N/A'}</li>
+        </ul>
+      </Modal>
+      <ToastContainer />
     </>
   );
 };

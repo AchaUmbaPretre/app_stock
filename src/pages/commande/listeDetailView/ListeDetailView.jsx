@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Input, Space, Table, Tag, Checkbox, Image, Button } from 'antd';
+import { Modal, Input, Space, Table, Tag, Checkbox, Image, Button, Popover, Popconfirm } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
@@ -190,24 +190,19 @@ const ListeDetailView = () => {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
+          
         <Space size="middle">
           {user?.role === 'admin' &&
-            <Button
-              type="danger"
-              onClick={() =>
-                Modal.confirm({
-                  title: 'Supprimer',
-                  icon: <DeleteOutlined />,
-                  content: 'Êtes-vous sûr de vouloir supprimer ?',
-                  okText: 'Oui',
-                  cancelText: 'Non',
-                  onOk: () => handleDelete(record.id_detail),
-                })
-              }
+          <Popover title="Supprimer" trigger="hover">
+            <Popconfirm
+              title="Êtes-vous sûr de vouloir supprimer?"
+              onConfirm={() => handleDelete(record.id_detail)}
+              okText="Oui"
+              cancelText="Non"
             >
-              Supprimer
-            </Button>
-          }
+              <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
+            </Popconfirm>
+          </Popover> }
         </Space>
       ),
     },
@@ -386,7 +381,7 @@ const ListeDetailView = () => {
                           <ul>
                             {selected.map((item) => (
                               <li key={item.id_detail}>
-                                {item.quantite} x {item.prix} $ = {item.quantite * item.prix} $
+                              {item.quantite} x {item.prix} $ = {item.quantite * item.prix} $
                               </li>
                             ))}
                           </ul>

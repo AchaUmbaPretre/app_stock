@@ -6,6 +6,7 @@ import config from '../../../config';
 import { CircularProgress } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Modal, Button } from 'antd';
 
 const FormCommande = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -21,25 +22,37 @@ const FormCommande = () => {
   const [adresseId, setAdresseId] = useState([]);
   const [telephone, setTelephone] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [confirmVisible, setConfirmVisible] = useState(false);
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
-  
+
     let updatedValue = fieldValue;
-  
+
     if (fieldName === "contact_email") {
       updatedValue = fieldValue.toLowerCase();
     } else if (Number.isNaN(Number(fieldValue))) {
       updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
     }
-  
+
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
-  const handleClick = async (e) => {
-    e.preventDefault();
+  const handleConfirm = () => {
+    setConfirmVisible(true);
+  };
 
+  const handleOk = async () => {
+    setConfirmVisible(false);
+    handleSubmit();
+  };
+
+  const handleCancel = () => {
+    setConfirmVisible(false);
+  };
+
+  const handleSubmit = async () => {
     if (isSubmitting) return; // Empêche l'envoi multiple
 
     setIsSubmitting(true);
@@ -56,7 +69,7 @@ const FormCommande = () => {
       setIsLoading(false);
       setIsSubmitting(false);
     }
-  }
+  };
 
   const handleClick2 = async (e) => {
     e.preventDefault();
@@ -76,7 +89,7 @@ const FormCommande = () => {
     } finally {
       setIsSubmitting(false);
     }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,7 +117,7 @@ const FormCommande = () => {
 
   const handleCheck = (e) => {
     setCheckeds(e.target.checked);
-  }
+  };
 
   useEffect(() => {
     setIdProvince(data?.id_province);
@@ -150,6 +163,22 @@ const FormCommande = () => {
   return (
     <>
       <ToastContainer />
+      <Modal
+        title="Confirmer la commande"
+        visible={confirmVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="Confirmer"
+        cancelText="Annuler"
+      >
+        <p>Êtes-vous sûr de vouloir soumettre cette commande avec les informations suivantes ?</p>
+        <ul>
+          <li>Client: {getClient.find(client => client.id === data.id_client)?.nom || 'N/A'}</li>
+          <li>Shop: {data.id_shop || 'N/A'}</li>
+          <li>Adresse: {adresseOne.find(adresse => adresse.id_adresse === data.id_adresse)?.nom_province || 'N/A'}</li>
+          <li>Téléphone: {telephone.find(tel => tel.id_telephone === data.id_telephone)?.numero || 'N/A'}</li>
+        </ul>
+      </Modal>
       <div className="clientForm">
         <div className="product-container">
           <div className="product-container-top">
@@ -160,100 +189,100 @@ const FormCommande = () => {
           <div className="product-wrapper">
             <div className="product-container-bottom">
               <div className="form-controle">
-                <label htmlFor="">Client <span style={{color:'red'}}>*</span></label>
+                <label htmlFor="">Client <span style={{ color: 'red' }}>*</span></label>
                 <Select
                   placeholder="Sélectionnez un(e) client(e)"
                   name="id_client"
                   options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
                 />
-                <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-                  <label htmlFor="" style={{fontSize: '12px'}}>Cliquez ici pour ajouter un client</label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <label htmlFor="" style={{ fontSize: '12px' }}>Cliquez ici pour ajouter un client</label>
                   <input type="checkbox" onChange={handleCheck} />
                 </div>
               </div>
               <div className="form-controle">
-                <label htmlFor="">Shop <span style={{color:'red'}}>*</span></label>
-                <input type="text" name='id_shop' className="form-input" onChange={handleInputChange}/>
+                <label htmlFor="">Shop <span style={{ color: 'red' }}>*</span></label>
+                <input type="text" name='id_shop' className="form-input" onChange={handleInputChange} />
               </div>
               <div className="form-controle">
-                <label htmlFor="">Adresse <span style={{color:'red'}}>*</span></label>
+                <label htmlFor="">Adresse <span style={{ color: 'red' }}>*</span></label>
                 <Select
                   name="id_adresse"
-                  options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/' + item.nom_commune  + ' Av/' + item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
+                  options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/' + item.nom_commune + ' Av/' + item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
                 />
               </div>
               <div className="form-controle">
-                <label htmlFor="">Téléphone <span style={{color:'red'}}>*</span></label>
+                <label htmlFor="">Téléphone <span style={{ color: 'red' }}>*</span></label>
                 <Select
                   name="id_telephone"
                   options={telephone?.map(item => ({ value: item.id_telephone, label: item.numero }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_telephone', value: selectedOption.value } })}
                 />
               </div>
-              { checkeds &&
-              <div className="rows-client">
-                <div className="product-container-bottom">
-                  <div className="form-controle">
-                    <label htmlFor="">Nom</label>
-                    <input type="text" name='nom' className="form-input" onChange={handleInputChange} required />
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">Raison sociale</label>
-                    <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} required>
-                      <option value="" disabled selected>Selectionnez une raison sociale</option>
-                      <option value="Client VIP">Client VIP</option>
-                      <option value="Client Normal">Client Normal</option>
-                    </select>
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">Email</label>
-                    <input type="email" name='email' className="form-input" onChange={handleInputChange} />
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">Téléphone</label>
-                    <input type="tel" name='telephone' className="form-input" onChange={handleInputChange} required />
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">Ville</label>
-                    <Select
-                      name="id_province"
-                      options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
-                      onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
-                    />
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">Commune</label>
-                    <Select
-                      name="id_commune"
-                      options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
-                      onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
-                    />
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">Avenue</label>
-                    <input type="text" name="avenue" className="form-input" onChange={handleInputChange} />
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">Quartier</label>
-                    <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
-                  </div>
-                  <div className="form-controle">
-                    <label htmlFor="">N°</label>
-                    <input type="number" name="num" className="form-input" onChange={handleInputChange} />
-                  </div>
-                  <button className="btn-submit" onClick={handleClick2} style={{border: 'none', height: "50px", marginTop: '35px', background:'rgb(1, 35, 138)', color:'#fff', borderRadius: '5px', cursor:'pointer'}}>Envoyer</button>
-                  {isLoading && (
-                    <div className="loader-container loader-container-center">
-                      <CircularProgress size={28} />
+              {checkeds &&
+                <div className="rows-client">
+                  <div className="product-container-bottom">
+                    <div className="form-controle">
+                      <label htmlFor="">Nom</label>
+                      <input type="text" name='nom' className="form-input" onChange={handleInputChange} required />
                     </div>
-                  )}
-                </div>
-              </div>}
+                    <div className="form-controle">
+                      <label htmlFor="">Raison sociale</label>
+                      <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} required>
+                        <option value="" disabled selected>Selectionnez une raison sociale</option>
+                        <option value="Client VIP">Client VIP</option>
+                        <option value="Client Normal">Client Normal</option>
+                      </select>
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Email</label>
+                      <input type="email" name='email' className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Téléphone</label>
+                      <input type="tel" name='telephone' className="form-input" onChange={handleInputChange} required />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Ville</label>
+                      <Select
+                        name="id_province"
+                        options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
+                        onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
+                      />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Commune</label>
+                      <Select
+                        name="id_commune"
+                        options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
+                        onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
+                      />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Avenue</label>
+                      <input type="text" name="avenue" className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">Quartier</label>
+                      <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <div className="form-controle">
+                      <label htmlFor="">N°</label>
+                      <input type="number" name="num" className="form-input" onChange={handleInputChange} />
+                    </div>
+                    <button className="btn-submit" onClick={handleClick2} style={{ border: 'none', height: "50px", marginTop: '35px', background: 'rgb(1, 35, 138)', color: '#fff', borderRadius: '5px', cursor: 'pointer' }}>Envoyer</button>
+                    {isLoading && (
+                      <div className="loader-container loader-container-center">
+                        <CircularProgress size={28} />
+                      </div>
+                    )}
+                  </div>
+                </div>}
             </div>
             <div className="form-submit">
-              <button className="btn-submit" onClick={handleClick} disabled={isLoading || isSubmitting}>Envoyer</button>
+              <button className="btn-submit" onClick={handleConfirm} disabled={isLoading || isSubmitting}>Envoyer</button>
               <button className="btn-submit btn-annuler" onClick={() => window.location.reload()}>Annuler</button>
               {isLoading && (
                 <div className="loader-container loader-container-center">

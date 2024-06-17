@@ -294,10 +294,17 @@ const PageCommandeVente = () => {
                             okText={<span style={{ color: '#fff' }}>Oui</span>}
                             cancelButtonProps={{ style: { background: 'red' } }}
                             okButtonProps={{ style: { background: 'blue' } }}
+                            className="confirmation-modal"
                         >
-                            <p>Souhaitez-vous réellement effectuer cette vente ?</p>
-                            {selectedImage && <Image src={`${DOMAIN}${selectedImage}`} style={{height:"50px"}} />}
-                            {selectedPointure && <p>Pointure : {selectedPointure}</p>}
+                            <p className="modal-text">Souhaitez-vous réellement effectuer cette vente ?</p>
+                            {
+                                data.map((dd)=> (
+                                    <div>
+                                        <Image src={`${DOMAIN}${dd.img}`} style={{height:"50px"}} />
+                                        <p>Pointure : {dd.pointure}</p>
+                                    </div>
+                                ))
+                            }
                             {isLoading && (
                             <div className="loader-container loader-container-center">
                                 <CircularProgress size={28} />

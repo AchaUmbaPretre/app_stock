@@ -373,6 +373,7 @@ const ListeDetailView = () => {
                       okText={<span style={{ color: '#fff' }}>Oui</span>}
                       cancelButtonProps={{ style: { background: 'red' } }}
                       okButtonProps={{ style: { background: 'blue' } }}
+                      className="confirmation-modal"
                     >
                       <p>Voulez-vous vraiment effectuer cette action ?</p>
                       {selected.length > 0 && (

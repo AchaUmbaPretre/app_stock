@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Button, Input, Space, Table, Popover, Popconfirm, Tag, Checkbox, Image } from 'antd';
+import { Modal, Input, Space, Table, Tag, Checkbox, Image, Button } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
@@ -192,16 +192,22 @@ const ListeDetailView = () => {
       render: (text, record) => (
         <Space size="middle">
           {user?.role === 'admin' &&
-            <Popover title="Supprimer" trigger="hover">
-              <Popconfirm
-                title="Êtes-vous sûr de vouloir supprimer?"
-                onConfirm={() => handleDelete(record.id_detail)}
-                okText="Oui"
-                cancelText="Non"
-              >
-                <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-              </Popconfirm>
-            </Popover>}
+            <Button
+              type="danger"
+              onClick={() =>
+                Modal.confirm({
+                  title: 'Supprimer',
+                  icon: <DeleteOutlined />,
+                  content: 'Êtes-vous sûr de vouloir supprimer ?',
+                  okText: 'Oui',
+                  cancelText: 'Non',
+                  onOk: () => handleDelete(record.id_detail),
+                })
+              }
+            >
+              Supprimer
+            </Button>
+          }
         </Space>
       ),
     },
@@ -361,7 +367,7 @@ const ListeDetailView = () => {
                     />
                   </div>
                   <div className="rows-btn">
-                    <button className="list_btn" onClick={handleConfirm} disabled={isLoading}>Envoyer</button>
+                    <button className="list_btn" onClick={handleConfirm} disabled={isLoading}>Envoyer maintenant</button>
                     <Modal
                       title="Confirmation"
                       visible={showConfirmModal}
@@ -374,11 +380,23 @@ const ListeDetailView = () => {
                       okButtonProps={{ style: { background: 'blue' } }}
                     >
                       <p>Voulez-vous vraiment effectuer cette action ?</p>
+                      {selected.length > 0 && (
+                        <div>
+                          <h4>Produits sélectionnés :</h4>
+                          <ul>
+                            {selected.map((item) => (
+                              <li key={item.id_detail}>
+                                {item.quantite} x {item.prix} $ = {item.quantite * item.prix} $
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                       {isLoading && (
-                      <div className="loader-container loader-container-center">
-                        <CircularProgress size={28} />
-                      </div>
-                    )}
+                        <div className="loader-container loader-container-center">
+                          <CircularProgress size={28} />
+                        </div>
+                      )}
                     </Modal>
                     {isLoading && (
                       <div className="loader-container loader-container-center">

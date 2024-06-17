@@ -301,7 +301,7 @@ const EchangeCommande = ({idVariant, idCommande}) => {
                 cancelText="Annuler"
                 className="confirmation-modal"
             >
-                <h2 className="modal-text">Détails de la commande</h2>
+                <h2 className="modal-text">Détails de la commande d'échange</h2>
                 <p>Produit : {result[0]?.nom_produit}</p>
                 <p>Quantité : {quantite}</p>
                 <p>Taille : {taille}</p>

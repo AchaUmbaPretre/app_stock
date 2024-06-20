@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Rightbar from './pages/rightbar/Rightbar';
-import { FadeLoader, HashLoader } from 'react-spinners';
+import { HashLoader } from 'react-spinners';
 import Page404 from './pages/page404/Page404';
 import Login1 from './pages/login1/Login1';
 import Register1 from './pages/register1/Register1';

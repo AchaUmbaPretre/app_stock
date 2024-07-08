@@ -17,6 +17,18 @@ const PageLivreurNavbar = () => {
     const user = useSelector((state) => state.user.currentUser.username);
     const userId = useSelector((state) => state.user.currentUser.id);
 
+    const playNotificationSound = () => {
+      const audio = new Audio('/Sonnerie.mp3');
+      audio.play();
+  };
+
+  const vibrateDevice = () => {
+    if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]); // Modèle de vibration (durée en ms)
+    }
+};
+  
+
     const Logout = async () => {
       try {
         await axios.post(`${DOMAIN}/api/auth/logout`);
@@ -35,6 +47,11 @@ const PageLivreurNavbar = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison-user/${userId}`);
           setData(data);
+
+          if (data.length > 0) {
+            playNotificationSound();
+            vibrateDevice();
+        }
         } catch (error) {
           console.log(error);
         }

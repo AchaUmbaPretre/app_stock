@@ -135,7 +135,7 @@ const InformationJour = () => {
         <>
             <div className="rowTotalDetails" style={{margin: '20px 0'}}>
             <div className="rowTotalDetail-wrapper">
-                <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
+                <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/venteRapport')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={data[0]?.nombre_vendu}/></h2>
                         <span className="rowTotal-span">ventes</span>
@@ -144,7 +144,7 @@ const InformationJour = () => {
                         <img src={venteIcon} alt="" className='rowTotalIcon' />
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/listeCommande')}>
+                <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/commandeRapport')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={commande[0]?.nbre}/></h2>
                         <span className="rowTotal-span">commandes</span>
@@ -153,7 +153,7 @@ const InformationJour = () => {
                         <img src={commandeIcon} alt="" className='rowTotalIcon' />
                     </div>
                 </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/livraison_detail')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/livraisonRapport')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={livraison[0]?.nbre_livraison}/></h2>
                         <span className="rowTotal-span">Livraisons</span>

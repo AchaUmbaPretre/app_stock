@@ -102,6 +102,9 @@ import config from './config';
 import { fetchDataRequest, fetchDataFailure, fetchDataSuccess } from "./redux/userRedux";
 import ClientForm from './pages/client/clientForm/ClientForm';
 import PasswordForgot from './pages/passewordForgot/PasswordForgot';
+import VenteRapport from './pages/ventes/venteRapport/VenteRapport';
+import CommandeRapport from './pages/commande/commandeRapport/CommandeRapport';
+import LivraisonRapport from './pages/livraison/livraisonRapport/LivraisonRapport';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -282,6 +285,10 @@ const loading = useSelector((state) => state.user?.loading);
          element: <ListeCommande /> 
         },
         {
+          path: '/commandeRapport',
+         element: <CommandeRapport /> 
+        },
+        {
           path: '/listeDetailCommande',
          element: <ListeDetailCommande /> 
         },
@@ -310,6 +317,10 @@ const loading = useSelector((state) => state.user?.loading);
           element: <LivraisonView/> 
         },
         {
+          path: '/livraisonRapport',
+          element: <LivraisonRapport/> 
+        },
+        {
           path: '/ventes',
           element: <Ventes />
         },
@@ -320,6 +331,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/ventes/:id',
           element: <Ventes />
+        },
+        {
+          path: '/venteRapport',
+          element: <VenteRapport />
         },
         {
           path: '/retour',

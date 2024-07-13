@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import VenteView from './../venteView/VenteView';
 const { Option } = Select;
 
-
 const VenteRapport = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
@@ -161,11 +160,6 @@ const VenteRapport = () => {
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
-                <Popover title="Ticket" trigger="hover">
-                    <Link onClick={()=> handleTicket(record.id_commande)}>
-                      <Button icon={<ReconciliationOutlined />} style={{ color: 'blue' }} />
-                    </Link>
-                </Popover>
                 {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
@@ -182,27 +176,10 @@ const VenteRapport = () => {
           },
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/venteDuJour`);
-            setData(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
 
     const handleOk = async (e) => {
       setOpen(true)
       setIdClient(e)
-    };
-
-    const handleTicket = async (e) => {
-      setTicket(true)
-      setIdTicket(e)
     };
 
   const filteredData = data?.filter((item) =>
@@ -221,7 +198,7 @@ const VenteRapport = () => {
                                 <h2 className="product-h2">Rapport de ventes</h2>
                             </div>
                         </div>
-                        <div className="product-bottom-right">
+                        <div className="product-bottom-rights">
                         <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
                             <Option value="today">Aujourd'hui</Option>
                             <Option value="yesterday">Hier</Option>

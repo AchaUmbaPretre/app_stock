@@ -1,12 +1,14 @@
 import { SearchOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
-import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Select} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
 import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
 import { useSelector } from 'react-redux';
+const { Option } = Select;
+
 
 const CommandeRapport = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -19,16 +21,30 @@ const CommandeRapport = () => {
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-
+    const [dateFilter, setDateFilter] = useState('today');
     
-      const handleDelete = async (id) => {
-      try {
-          await axios.delete(`${DOMAIN}/api/commande/commande/${id}`);
-            window.location.reload();
-        } catch (err) {
-          console.log(err);
+    
+    const fetchData = useCallback(async (filter) => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/commande/commande_rapport`, { params: { filter } });
+          setData(data);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setLoading(false);
         }
+      }, [DOMAIN]);
+
+
+    const handleDateFilterChange = (value) => {
+        setDateFilter(value);
+        fetchData(value);
       };
+
+      useEffect(() => {
+        fetchData(dateFilter);
+      }, [fetchData,dateFilter]);
+      
 
       const handleEdit = (id) => {
         navigate(`/Editcommande/${id}`);
@@ -119,30 +135,6 @@ const CommandeRapport = () => {
             );
           },
         },
-/*         {
-          title: 'Paiement',
-          dataIndex: 'id_paiement',
-          key: 'id_paiement',
-          render: (text) => {
-            let tagColor = '';
-            let textValue = '';
-      
-            if (text === 0) {
-              tagColor = 'red';
-              textValue= 'Non-payé'
-            } 
-            else if (text === 1) {
-              tagColor = 'green';
-              textValue = 'Payé';
-            }
-      
-            return (
-              <Tag color={tagColor}>
-                 {textValue}
-              </Tag>
-            );
-          },
-        }, */
         {
             title: 'Shop',
             dataIndex: 'id_shop',
@@ -167,30 +159,6 @@ const CommandeRapport = () => {
               );
             },
         },
-/*         {
-            title: 'Paie',
-            dataIndex: 'paye',
-            key: 'paye',
-            render: (text) => {
-              let tagColor = '';
-              let textValue = '';
-        
-              if (text === 0) {
-                tagColor = 'red';
-                textValue= 'Non-payé'
-              } 
-              else if (text === 1) {
-                tagColor = 'green';
-                textValue = 'Payé';
-              }
-        
-              return (
-                <Tag color={tagColor}>
-                   {textValue}
-                </Tag>
-              );
-            },
-        }, */
         {
             title: 'Action',
             key: 'action',
@@ -210,39 +178,10 @@ const CommandeRapport = () => {
                         <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
                     </Link>
                 </Popover>
-                {user?.role === 'admin' &&
-                <Popover title="Supprimer" trigger="hover">
-                  <Popconfirm
-                    title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id_commande)}
-                    okText="Oui"
-                    cancelText="Non"
-                  >
-                    <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
-                </Popover> }
               </Space>
             ),
           },
       ];
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande/commande7`);
-            setData(data);
-            setLoading(false);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-    
-        fetchData();
-      
-        const timeoutId = setTimeout(fetchData, 4000);
-      
-        return () => clearTimeout(timeoutId);
-      }, [DOMAIN]);
 
       const HandOpen = () =>{
         setOpens(!opens)
@@ -267,9 +206,13 @@ const CommandeRapport = () => {
                             </div>
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
+                                <Option value="today">Aujourd'hui</Option>
+                                <Option value="yesterday">Hier</Option>
+                                <Option value="last7days">7 derniers jours</Option>
+                                <Option value="last30days">30 derniers jours</Option>
+                                <Option value="last1year">1 an</Option>
+                            </Select>
                         </div>
                     </div>
                     <div className="rowChart-row-table">

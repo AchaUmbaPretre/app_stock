@@ -1,4 +1,4 @@
-import { EyeOutlined,ReconciliationOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { EyeOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal,Select } from 'antd';
 import { Link } from 'react-router-dom';
@@ -18,8 +18,6 @@ const VenteRapport = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const [idClient, setIdClient] = useState({});
-    const [ticket, setTicket] = useState(false);
-    const [idTicket, setIdTicket] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
     const [openVente, setOpenVente] = useState(false);
     const [iDcommande, setIdCommande] = useState('');

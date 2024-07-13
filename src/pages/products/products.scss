@@ -106,6 +106,14 @@
                         @include mobileXR{
                             padding: 6px 9px;
                         }
+                        .product-h2{
+                            color: rgb(1, 35, 138);
+                            font-size: 1.5rem;
+                            font-weight: 300;
+                            @include mobileXR{
+                                font-size: .7rem;
+                            }
+                        }
                         .product-search{
                             border: none;
                             outline: none;

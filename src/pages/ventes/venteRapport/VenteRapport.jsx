@@ -27,7 +27,7 @@ const VenteRapport = () => {
 
     const fetchData = useCallback(async (filter) => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/vente/venteRapport`, { params: { filter } });
+          const { data } = await axios.get(`${DOMAIN}/api/vente/vente_rapport/rapport`, { params: { filter } });
           setData(data);
           setLoading(false);
         } catch (error) {
@@ -121,20 +121,21 @@ const VenteRapport = () => {
           )
         },
         {
-          title: 'Total prix',
-          dataIndex: 'total_prix_vente',
-          key: 'total_prix_vente',
-          sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
-          sortDirections: ['descend', 'ascend'],
-          render: (text, record) => (
-            <Tag color="green" icon={<DollarOutlined />}>
-              {record.total_prix_vente.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              })}
-            </Tag>
-          ),
-        },
+            title: 'Total prix',
+            dataIndex: 'total_prix_vente',
+            key: 'total_prix_vente',
+            sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
+            sortDirections: ['descend', 'ascend'],
+            render: (text, record) => (
+              <Tag color="green" icon={<DollarOutlined />}>
+                {record.total_prix_vente ? record.total_prix_vente.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                }) : 'N/A'}
+              </Tag>
+            ),
+          },
+          
         {
           title: 'Date',
           dataIndex: 'date_vente',

@@ -1,6 +1,6 @@
 import { SearchOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Select} from 'antd';
+import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Select, Input} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
@@ -199,13 +199,16 @@ const CommandeRapport = () => {
                   <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                       {/*  {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />} */}
+                            <Input
+                                type="search"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                placeholder="Recherche..."
+                                className="product-search"
+                            />
                         </div>
-                        <div className="product-bottom-right">
+                        <div className="product-bottom-rights">
                             <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
                                 <Option value="today">Aujourd'hui</Option>
                                 <Option value="yesterday">Hier</Option>

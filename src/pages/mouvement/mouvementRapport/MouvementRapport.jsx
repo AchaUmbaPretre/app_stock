@@ -1,12 +1,13 @@
 import { SearchOutlined, UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image, Select} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+const { Option } = Select;
 
 const MouvementRapport = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -229,27 +230,7 @@ const MouvementRapport = () => {
           render: (stock) => (
             <Tag color={stock > 0 ? 'green' : 'red'}>{stock}</Tag>
           ),
-      },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                
-              <Space size="middle">
-              {user?.role === 'admin' &&
-                <Popover title="Supprimer" trigger="hover">
-                  <Popconfirm
-                    title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id_mouvement)}
-                    okText="Oui"
-                    cancelText="Non"
-                  >
-                    <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
-                </Popover> }
-              </Space>
-            ),
-          },
+      }
       ];
 
       const showModalLivreur = (e) => {
@@ -282,7 +263,33 @@ const MouvementRapport = () => {
     <>
         <div className="products">
             <div className="product-container">
+                <div className="product-container-top">
+                    <div className="product-left">
+                        <h2 className="product-h2">Rapport de Livraison encours</h2>
+                        <span></span>
+                    </div>
+                </div>
                 <div className="product-bottom">
+                <div className="product-bottom-top">
+                          <div className="product-bottom-left">
+                            <Input
+                                type="search"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                placeholder="Recherche..."
+                                className="product-search"
+                            />
+                          </div>
+                          <div className="product-bottom-rights">
+                            <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
+                                <Option value="today">Aujourd'hui</Option>
+                                <Option value="yesterday">Hier</Option>
+                                <Option value="last7days">7 derniers jours</Option>
+                                <Option value="last30days">30 derniers jours</Option>
+                                <Option value="last1year">1 an</Option>
+                            </Select>
+                          </div>
+                      </div>
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

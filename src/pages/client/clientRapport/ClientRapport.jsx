@@ -1,7 +1,7 @@
 import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,PhoneOutlined,EnvironmentOutlined,EyeOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal} from 'antd';
+import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal, Select} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../config';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import ClientTelephone from '../clientTelephone/ClientTelephone';
 import ClientAdresse from '../clientAdresse/ClientAdresse';
 import ClientView from '../ClientView';
+const { Option } = Select;
 
 const ClientRapport = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -27,7 +28,7 @@ const ClientRapport = () => {
     const [openDetailAdresse, setOpenDetailAdresse] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-
+    const [dateFilter, setDateFilter] = useState('today');
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -152,6 +153,26 @@ const ClientRapport = () => {
         setOpenDetailAdresse(true);
         setIdClient(e)
       };
+
+      const fetchData = useCallback(async (filter) => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/client/client_rapport`, { params: { filter } });
+          setGetClient(data);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setLoading(false);
+        }
+      }, [DOMAIN]);
+    
+      const handleDateFilterChange = (value) => {
+        setDateFilter(value);
+        fetchData(value);
+      };
+
+      useEffect(() => {
+        fetchData(dateFilter);
+      }, [fetchData,dateFilter]);
           
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -249,18 +270,6 @@ const ClientRapport = () => {
           },
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/client`);
-            setGetClient(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
 
       const handleEdit = (id) => {
         navigate(`/clientEdit/${id}`);
@@ -288,29 +297,31 @@ const ClientRapport = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste de clients</h2>
-                        <span>Gérer vos clients</span>
+                        <h2 className="product-h2">Rapport des clients</h2>
+                        <span></span>
                     </div>
                     <div style={{display:'flex', gap: '10px'}}>
-                      <div className="product-right" onClick={() =>navigate('/clientForm')}>
-                          <PlusOutlined />
-                          <span className="product-btn">Ajouter un nouveau client</span>
-                      </div>
                     </div>
                 </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)}  placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input
+                                type="search"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                placeholder="Recherche..."
+                                className="product-search"
+                            />
                         </div>
-                        <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                        <div className="product-bottom-rights">
+                            <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
+                                <Option value="today">Aujourd'hui</Option>
+                                <Option value="yesterday">Hier</Option>
+                                <Option value="last7days">7 derniers jours</Option>
+                                <Option value="last30days">30 derniers jours</Option>
+                                <Option value="last1year">1 an</Option>
+                            </Select>
                         </div>
                     </div>
                     <div className="rowChart-row-table">

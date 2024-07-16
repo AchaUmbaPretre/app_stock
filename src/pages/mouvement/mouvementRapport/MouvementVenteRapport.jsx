@@ -4,7 +4,6 @@ import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Tag, Image, Select} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
-import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 const { Option } = Select;
@@ -19,7 +18,6 @@ const MouvementVenteRapport = () => {
     const scroll = { x: 500 };
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
-    const user = useSelector((state) => state.user?.currentUser);
     const [dateFilter, setDateFilter] = useState('today');
     
       const handleSearch = (selectedKeys, confirm, dataIndex) => {

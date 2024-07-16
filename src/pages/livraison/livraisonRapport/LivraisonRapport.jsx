@@ -1,12 +1,15 @@
-import { SearchOutlined, FilePdfOutlined,EnvironmentOutlined,ArrowUpOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { EnvironmentOutlined,RedoOutlined,ArrowUpOutlined,EyeOutlined, CalendarOutlined, UserOutlined, WhatsAppOutlined, DeleteOutlined } from '@ant-design/icons';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal,Input, Select} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import LivraisonClientDetail from './../livraison_detail/livraisonClientDetail/LivraisonClientDetail';
 import config from '../../../config';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
+import LivraisonView from '../livraisonView/LivraisonView';
+import LivraisonClientDetail from '../livraison_detail/livraisonClientDetail/LivraisonClientDetail';
+const { Option } = Select;
+
 
 const LivraisonRapport = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,10 +17,14 @@ const LivraisonRapport = () => {
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
+    const [openInfo, setOpenInfo] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
+    const [id_commande, setId_commande] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
-    
+    const [dateFilter, setDateFilter] = useState('today');
+
       const handleDelete = async (id) => {
         try {
             await axios.delete(`${DOMAIN}/api/livraison/livraisonDeleteDetail/${id}`);
@@ -26,10 +33,35 @@ const LivraisonRapport = () => {
             console.log(err);
           }
         };
+
+
+        const fetchData = useCallback(async (filter) => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraison_rapport`, { params: { filter } });
+            setData(data);
+            setLoading(false);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setLoading(false);
+          }
+        }, [DOMAIN]);
+      
+        const handleDateFilterChange = (value) => {
+          setDateFilter(value);
+          fetchData(value);
+        };
+
+        useEffect(() => {
+          fetchData(dateFilter);
+        }, [fetchData,dateFilter]);
     
       const showModal = (e) => {
         setOpen(true);
         setIdClient(e)
+      };
+
+      const HandOpen = () => {
+        setOpens(!opens);
       };
 
       const columns = [
@@ -98,7 +130,7 @@ const LivraisonRapport = () => {
             <Popover
               content="Voir les détails" placement="top"
             >
-              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}>
+              <Tag color="blue" icon={<ArrowUpOutlined />} style={{ cursor: 'pointer' }}  onClick={()=>handInfo(record.id_commande) }>
                 {record.quant}
               </Tag>
             </Popover>
@@ -123,7 +155,7 @@ const LivraisonRapport = () => {
                 
               <Space size="middle">
                 <Popover title="Voir la liste de cette commande" trigger="hover">
-                  <Link to={`/livraisonView/${record.id_commande}`}>
+                  <Link onClick={()=>handInfo(record.id_commande) }>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>
                 </Popover>
@@ -143,43 +175,48 @@ const LivraisonRapport = () => {
           },
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetailJour`);
-            setData(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
+      const handInfo = (e) =>{
+        setId_commande(e)
+        setOpenInfo(true)
+      }
 
-      const filteredData = data?.filter((item) =>
-        item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.pointure?.toLowerCase().includes(searchValue.toLowerCase())
-      );
+    const filteredData = data?.filter((item) =>
+      item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_commune?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.nom_livreur?.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
   return (
     <>
         <div className="products">
             <div className="product-container">
+                <div className="product-container-top">
+                    <div className="product-left">
+                        <h2 className="product-h2">Rapport Livraison</h2>
+                        <span></span>
+                    </div>
+                </div>
                 <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
-                              <div className="product-row-search">
-                                  <SearchOutlined className='product-icon-plus'/>
-                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                              </div>
+                            <Input
+                                type="search"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                placeholder="Recherche..."
+                                className="product-search"
+                            />
                           </div>
-                          <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
+                          <div className="product-bottom-rights">
+                            <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
+                                <Option value="today">Aujourd'hui</Option>
+                                <Option value="yesterday">Hier</Option>
+                                <Option value="last7days">7 derniers jours</Option>
+                                <Option value="last30days">30 derniers jours</Option>
+                                <Option value="last1year">1 an</Option>
+                            </Select>
                           </div>
+                          
                       </div>
                       <div className="rowChart-row-table">
                           <Modal
@@ -187,18 +224,28 @@ const LivraisonRapport = () => {
                             centered
                             open={open}
                             onCancel={() => setOpen(false)}
-                            width={850}
+                            width={1150}
                             footer={[
                               <Button key="annuler" onClick={() => setOpen(false)}>
                                 Annuler
                               </Button>
                             ]}
                           >
-                          <LivraisonClientDetail idClients={idClient}/>
+                            <LivraisonClientDetail idClients={idClient}/>
+                          </Modal>
+                          <Modal
+                            title=""
+                            centered
+                            open={openInfo}
+                            onCancel={() => setOpenInfo(false)}
+                            width={1200}
+                            footer={[]}
+                          >
+                             <LivraisonView id={id_commande}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
-                    </div>
+                </div>
             </div>
         </div>
     </>

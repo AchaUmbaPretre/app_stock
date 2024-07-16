@@ -1,6 +1,6 @@
-import { SearchOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined, FilePdfOutlined, FileExcelOutlined,EditOutlined, PrinterOutlined, DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { EyeOutlined,CalendarOutlined,UserOutlined,PlusCircleOutlined,EditOutlined, ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button,Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Select, Input} from 'antd';
+import { Button,Space, Table, Popover, Tag, Modal, Select, Input} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
@@ -197,6 +197,7 @@ const CommandeRapport = () => {
         <div className="products">
             <div className="product-container">
                   <div className="product-bottom">
+                  <h1 style={{fontSize:"15px", padding:"10px 0", color:'rgb(1, 35, 138)'}}>Rapport commande</h1>
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                        {/*  {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />} */}

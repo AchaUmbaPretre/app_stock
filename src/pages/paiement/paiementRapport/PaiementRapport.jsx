@@ -16,7 +16,6 @@ const PaiementRapport = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
-    const [opens, setOpens] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
     const [dateFilter, setDateFilter] = useState('today');
 
@@ -28,10 +27,6 @@ const PaiementRapport = () => {
         } catch (err) {
           console.log(err);
         }
-      };
-
-      const HandOpen = () => {
-        setOpens(!opens);
       };
     
       const columns = [
@@ -117,18 +112,26 @@ const PaiementRapport = () => {
           },
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiement`);
-            setData(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
+
+      const fetchData = useCallback(async (filter) => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/vente/vente/paiement_rapport`, { params: { filter } });
+          setData(data);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setLoading(false);
+        }
       }, [DOMAIN]);
+    
+      const handleDateFilterChange = (value) => {
+        setDateFilter(value);
+        fetchData(value);
+      };
+
+      useEffect(() => {
+        fetchData(dateFilter);
+      }, [fetchData,dateFilter]);
 
 
     const handleOk = async (e) => {

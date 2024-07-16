@@ -270,6 +270,10 @@ const loading = useSelector((state) => state.user?.loading);
           element: <MouvementRapport />
         },
         {
+          path: '/mouvementVente_rapport',
+          element: <MouvementRapport />
+        },
+        {
           path: '/commandes/:id',
          element: <Commande /> 
         },

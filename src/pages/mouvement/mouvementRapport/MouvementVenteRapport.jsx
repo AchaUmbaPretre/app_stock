@@ -230,7 +230,7 @@ const MouvementVenteRapport = () => {
 
       const fetchData = useCallback(async (filter) => {
         try {
-          const { data } = await axios.get(`${DOMAIN}/api/produit/mouvement_rapportEncours`, { params: { filter } });
+          const { data } = await axios.get(`${DOMAIN}/api/produit/mouvement_rapportVente`, { params: { filter } });
           setData(data);
           setLoading(false);
         } catch (error) {

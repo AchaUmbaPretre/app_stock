@@ -106,6 +106,7 @@ import VenteRapport from './pages/ventes/venteRapport/VenteRapport';
 import CommandeRapport from './pages/commande/commandeRapport/CommandeRapport';
 import LivraisonRapport from './pages/livraison/livraisonRapport/LivraisonRapport';
 import MouvementRapport from './pages/mouvement/mouvementRapport/MouvementRapport';
+import MouvementVenteRapport from './pages/mouvement/mouvementRapport/MouvementVenteRapport';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -271,7 +272,7 @@ const loading = useSelector((state) => state.user?.loading);
         },
         {
           path: '/mouvementVente_rapport',
-          element: <MouvementRapport />
+          element: <MouvementVenteRapport />
         },
         {
           path: '/commandes/:id',

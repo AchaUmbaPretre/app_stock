@@ -248,41 +248,14 @@ const ClientRapport = () => {
                 <Popover title={`Ajouter un nouveau numero de Mme ${record.nom}`} trigger="hover">
                   <Button icon={<PhoneOutlined />} style={{ color: 'green' }} onClick={()=> showModalPhone(record.id)} />
                 </Popover>
-                <Popover title="Modifier" trigger="hover">
-                  <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
-                </Popover>
                 <Popover title="Afficher les détails des adresses." trigger="hover">
                   <Button icon={<EyeOutlined />} style={{ color: 'blue', cursor: 'pointer' }} onClick={()=> showModalDetailAdresse(record.id)}/>
                 </Popover>
-                  {user?.role === 'admin' &&
-                <Popover title="Supprimer" trigger="hover">
-                  <Popconfirm
-                    title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={() => handleDelete(record.id)}
-                    okText="Oui"
-                    cancelText="Non"
-                  >
-                    <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
-                  </Popconfirm>
-                </Popover>}
               </Space>
             ),
           },
       ];
 
-
-      const handleEdit = (id) => {
-        navigate(`/clientEdit/${id}`);
-      };
-    
-      const handleDelete = async (id) => {
-      try {
-          await axios.put(`${DOMAIN}/api/client/clientDelete/${id}`);
-            window.location.reload();
-        } catch (err) {
-          console.log(err);
-        } 
-      };
 
   const filteredData = getClient?.filter((item) =>
     item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||

@@ -1,7 +1,7 @@
-import { SearchOutlined, UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,CalendarOutlined } from '@ant-design/icons';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image, Select} from 'antd';
+import { Button, Input, Space, Table, Popover,Tag, Image, Select} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
@@ -125,15 +125,6 @@ const MouvementRapport = () => {
             text
           ),
       });
-    
-      const handleDelete = async (id) => {
-        try {
-            await axios.delete(`${DOMAIN}/api/produit/mouvementDelete/${id}`);
-              window.location.reload();
-          } catch (err) {
-            console.log(err);
-          }
-        };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},

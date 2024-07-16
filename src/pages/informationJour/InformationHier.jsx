@@ -163,7 +163,7 @@ const InformationHier = () => {
                         <img src={livraisonIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvement')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvementEncours')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={mouvementEncours}/></h2>
                         <span className="rowTotal-span">Mouvement en cours</span>

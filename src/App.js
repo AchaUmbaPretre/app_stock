@@ -105,6 +105,7 @@ import PasswordForgot from './pages/passewordForgot/PasswordForgot';
 import VenteRapport from './pages/ventes/venteRapport/VenteRapport';
 import CommandeRapport from './pages/commande/commandeRapport/CommandeRapport';
 import LivraisonRapport from './pages/livraison/livraisonRapport/LivraisonRapport';
+import MouvementRapport from './pages/mouvement/mouvementRapport/MouvementRapport';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -263,6 +264,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/mouvementForm',
           element: <FormMouvement />
+        },
+        {
+          path: '/mouvementEncours',
+          element: <MouvementRapport />
         },
         {
           path: '/commandes/:id',

@@ -3,9 +3,7 @@ import './informationJour.scss'
 import axios from 'axios';
 import config from '../../config';
 import CountUp from 'react-countup';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { SyncOutlined,CarOutlined, UserOutlined,CarryOutOutlined, ShoppingCartOutlined ,ShoppingOutlined } from '@ant-design/icons';
 import venteIcon from './../../assets/remove-from-cart_5733278.png'
 import commandeIcon from './../../assets/check-box_6399627.png'
 import livraisonIcon from './../../assets/delivery_1350151.png'
@@ -163,7 +161,7 @@ const Information7Jours = () => {
                         <img src={livraisonIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvement')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgba(124, 3, 3, 0.575)'}} onClick={()=>navigate('/mouvementEncours')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={mouvementEncours}/></h2>
                         <span className="rowTotal-span">Mouvement en cours</span>

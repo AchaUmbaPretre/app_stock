@@ -107,6 +107,7 @@ import MouvementRapport from './pages/mouvement/mouvementRapport/MouvementRappor
 import MouvementVenteRapport from './pages/mouvement/mouvementRapport/MouvementVenteRapport';
 import ClientRapport from './pages/client/clientRapport/ClientRapport';
 import DetteRapport from './pages/dette/detteRapport/DetteRapport';
+import PaiementRapport from './pages/paiement/paiementRapport/PaiementRapport';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -501,6 +502,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/paiement',
           element: <Paiement />
+        },
+        {
+          path: '/paiement_rapport',
+          element: <PaiementRapport />
         },
         {
           path: '/entreeStock',

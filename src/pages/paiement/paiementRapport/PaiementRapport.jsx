@@ -1,12 +1,11 @@
-import './../products/products.scss'
-import { PlusOutlined,UserOutlined,WhatsAppOutlined,DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
+import { UserOutlined,WhatsAppOutlined,DollarOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Select, Input } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import config from '../../config';
+import config from './../../../config';
 import moment from 'moment';
-import FormPaiement from './formPaiement/FormPaiement';
+import FormPaiement from './../formPaiement/FormPaiement';
 const { Option } = Select;
 
 const PaiementRapport = () => {
@@ -133,14 +132,9 @@ const PaiementRapport = () => {
         fetchData(dateFilter);
       }, [fetchData,dateFilter]);
 
-
-    const handleOk = async (e) => {
-      setOpen(true)
-    };
-
-  const filteredData = data?.filter((item) =>
-    item.nom?.toLowerCase().includes(searchValue.toLowerCase())
-  );
+        const filteredData = data?.filter((item) =>
+            item.nom?.toLowerCase().includes(searchValue.toLowerCase())
+        );
 
   return (
     <>
@@ -148,12 +142,11 @@ const PaiementRapport = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des paiements</h2>
-                        <span>Gérer vos paiements</span>
+                        <h2 className="product-h2">Rapport paiement</h2>
+                        <span></span>
                     </div>
-                    <div className="product-right" onClick={handleOk}>
-                        <PlusOutlined className='product-icon'/>
-                        <span className="product-btn">Ajouter un paiement</span>
+                    <div className="product-rights">
+                        
                     </div>
                 </div>
                     <div className="product-bottom">

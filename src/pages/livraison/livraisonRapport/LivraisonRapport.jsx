@@ -216,7 +216,6 @@ const LivraisonRapport = () => {
                                 <Option value="last1year">1 an</Option>
                             </Select>
                           </div>
-                          
                       </div>
                       <div className="rowChart-row-table">
                           <Modal

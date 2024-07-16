@@ -64,7 +64,6 @@ import PageRetourCommande from './pages/pageLivreur/pageRetourCommande/PageRetou
 import PageLivraisonRetour from './pages/pageLivreur/pageRetourCommande/PageLivraisonRetour';
 import LivraisonView from './pages/livraison/livraisonView/LivraisonView';
 import Couleur from './pages/couleur/Couleur';
-import ClientForms from './pages/client/clientForm/clientForms';
 import ListeVariante from './pages/varianteProduit/listeVariante/ListeVariante';
 import RapportVenteAll from './pages/rapport/rapportVente/rapportVenteAll/RapportVenteAll';
 import RapportClient from './pages/rapport/rapportClient/RapportClient';
@@ -88,7 +87,6 @@ import ClientAdresse from './pages/client/clientAdresse/ClientAdresse';
 import ClientTelephone from './pages/client/clientTelephone/ClientTelephone';
 import Localisation from './pages/pageLivreur/localisation/Localisation';
 import Permissions from './pages/permissions/Permissions';
-import Options from './components/sidebar/Options';
 import EchangeCat from './pages/echange/echangeCat/EchangeCat';
 import PageDetailEdit from './pages/PageDetails/PageDetailEdit/PageDetailEdit';
 import PageCommandeEchange from './pages/pageLivreur/pageCommandeEchange/PageCommandeEchange';
@@ -108,6 +106,7 @@ import LivraisonRapport from './pages/livraison/livraisonRapport/LivraisonRappor
 import MouvementRapport from './pages/mouvement/mouvementRapport/MouvementRapport';
 import MouvementVenteRapport from './pages/mouvement/mouvementRapport/MouvementVenteRapport';
 import ClientRapport from './pages/client/clientRapport/ClientRapport';
+import DetteRapport from './pages/dette/detteRapport/DetteRapport';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -375,10 +374,6 @@ const loading = useSelector((state) => state.user?.loading);
           path: '/clients',
           element: <Client />
         },
-        {
-          path: '/client_rapport',
-          element: <ClientRapport />
-        },
          {
           path: '/clientForm',
           element: <ClientForm />
@@ -402,6 +397,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/clientLocalisation',
           element: <ClientLocation />
+        },
+        {
+          path: '/client_rapport',
+          element: <ClientRapport />
         },
         {
           path: '/livreur',
@@ -494,6 +493,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/dette/:id',
           element: <DetteOne />
+        },
+        {
+          path: '/dette_rapport',
+          element: <DetteRapport />
         },
         {
           path: '/paiement',

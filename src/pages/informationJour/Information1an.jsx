@@ -3,9 +3,7 @@ import './informationJour.scss'
 import axios from 'axios';
 import config from '../../config';
 import CountUp from 'react-countup';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { SyncOutlined,CarOutlined, UserOutlined,CarryOutOutlined, ShoppingCartOutlined ,ShoppingOutlined } from '@ant-design/icons';
 import venteIcon from './../../assets/remove-from-cart_5733278.png'
 import commandeIcon from './../../assets/check-box_6399627.png'
 import livraisonIcon from './../../assets/delivery_1350151.png'
@@ -183,7 +181,7 @@ const Information1an = () => {
                         <img src={mouvementVenduIcon} alt="" className='rowTotalIcon' />
                     </div>
                   </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/dette')}>
+                  <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/dette_rapport')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/> $</h2>
                         <span className="rowTotal-span">Montant à credit</span>
@@ -192,7 +190,7 @@ const Information1an = () => {
                         <img src={detteIcon} alt="" className='rowTotalIcon' />
                     </div>
                 </div>
-                <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/paiement')}>
+                <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/paiement_rapport')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/> $</h2>
                         <span className="rowTotal-span">Remboursement</span>

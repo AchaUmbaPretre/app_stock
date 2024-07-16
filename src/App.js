@@ -107,6 +107,7 @@ import CommandeRapport from './pages/commande/commandeRapport/CommandeRapport';
 import LivraisonRapport from './pages/livraison/livraisonRapport/LivraisonRapport';
 import MouvementRapport from './pages/mouvement/mouvementRapport/MouvementRapport';
 import MouvementVenteRapport from './pages/mouvement/mouvementRapport/MouvementVenteRapport';
+import ClientRapport from './pages/client/clientRapport/ClientRapport';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -373,6 +374,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/clients',
           element: <Client />
+        },
+        {
+          path: '/client_rapport',
+          element: <ClientRapport />
         },
          {
           path: '/clientForm',

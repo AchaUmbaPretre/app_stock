@@ -201,7 +201,7 @@ const Information1an = () => {
                         <img src={paiementIcon} alt="" className='rowTotalIcon' />
                     </div>
                 </div>
-                  <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
+                <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/client_rapport')}>
                     <div className="rowTotalDetail-left">
                         <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
                         <span className="rowTotal-span">Clients</span>

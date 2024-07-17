@@ -129,8 +129,6 @@ const InformationJour = () => {
         fetchData();
       }, [DOMAIN]);
 
-
-
       return (
         <>
             <div className="rowTotalDetails" style={{margin: '20px 0'}}>

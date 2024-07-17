@@ -13,7 +13,6 @@ import detteIcon from './../../assets/money_12831139.png'
 import paiementIcon from './../../assets/payment-method_10747694.png'
 import clientIcon from './../../assets/customer_3126649.png'
 
-
 const Information1an = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);

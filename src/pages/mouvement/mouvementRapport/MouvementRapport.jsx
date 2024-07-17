@@ -239,7 +239,6 @@ const MouvementRapport = () => {
         }
       }, [DOMAIN]);
 
-
       const handleDateFilterChange = (value) => {
         setDateFilter(value);
         fetchData(value);

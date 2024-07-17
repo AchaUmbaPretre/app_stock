@@ -236,30 +236,6 @@ const ListeCommande = () => {
             );
           },
         },
-/*         {
-          title: 'Paiement',
-          dataIndex: 'id_paiement',
-          key: 'id_paiement',
-          render: (text) => {
-            let tagColor = '';
-            let textValue = '';
-      
-            if (text === 0) {
-              tagColor = 'red';
-              textValue= 'Non-payé'
-            } 
-            else if (text === 1) {
-              tagColor = 'green';
-              textValue = 'Payé';
-            }
-      
-            return (
-              <Tag color={tagColor}>
-                 {textValue}
-              </Tag>
-            );
-          },
-        }, */
         {
             title: 'Shop',
             dataIndex: 'id_shop',
@@ -399,10 +375,11 @@ const ListeCommande = () => {
                           <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total de la commande : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={rapportMoney?.montant_total}/>$</b></p>
                         </div>
                     </div>
-                    <div className="product-right" onClick={() =>navigate('/commandeForm')}>
+                    <Popover title="Ajoutez une commande" trigger="hover">
+                      <div className="product-right" onClick={() =>navigate('/commandeForm')}>
                         <PlusOutlined />
-                        <span className="product-btn">Nouvelle commande</span>
-                    </div>
+                      </div>
+                    </Popover>
                 </div>
                 <Tabs>
                   <Tabs.TabPane tab='Commandes' key={0}>
@@ -410,10 +387,13 @@ const ListeCommande = () => {
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
                           {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                              <div className="product-row-search">
-                                  <SearchOutlined className='product-icon-plus'/>
-                                  <input type="search" name="" id="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                              </div>
+                          <Input
+                            type="search"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="Recherche..."
+                            className="product-search"
+                          />
                           </div>
                           <div className="product-bottom-right">
                             <Popover content={'Actualiser cette page'}>

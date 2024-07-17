@@ -1,6 +1,6 @@
 import { EyeOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal,Select } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal,Select, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
@@ -190,14 +190,24 @@ const VenteRapport = () => {
     <>
         <div className="products">
             <div className="product-container">
+              <div className="product-container-top">
+                <div className="product-left">
+                  <h2 className="product-h2">Rapport Vente</h2>
+                  <span></span>
+                </div>
+                </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <div className="product-row-search">
-                                <h2 className="product-h2">Rapport de ventes</h2>
-                            </div>
+                          <Input
+                            type="search"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="Recherche..."
+                            className="product-search"
+                          />
                         </div>
-                        <div className="product-bottom-rights">
+                      <div className="product-bottom-rights">
                         <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
                             <Option value="today">Aujourd'hui</Option>
                             <Option value="yesterday">Hier</Option>

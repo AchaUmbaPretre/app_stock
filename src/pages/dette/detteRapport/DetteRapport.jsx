@@ -199,7 +199,7 @@ const DetteRapport = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2" style={{fontSize: '22px'}}>Rapport ventes à crédit</h2>
+                        <h2 className="product-h2" style={{fontSize: '22px'}}>Rapport des ventes à crédit</h2>
                         <span></span>
                     </div>
                     <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>

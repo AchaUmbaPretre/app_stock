@@ -197,7 +197,7 @@ const CommandeRapport = () => {
         <div className="products">
             <div className="product-container">
                   <div className="product-bottom">
-                  <h1 style={{fontSize:"15px", padding:"10px 0", color:'rgb(1, 35, 138)'}}>Rapport commande</h1>
+                  <h1 style={{fontSize:"15px", padding:"10px 0", color:'rgb(1, 35, 138)'}}>Rapport de commande</h1>
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                        {/*  {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />} */}

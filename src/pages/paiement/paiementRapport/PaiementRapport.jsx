@@ -142,7 +142,7 @@ const PaiementRapport = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport paiement</h2>
+                        <h2 className="product-h2">Rapport de paiement</h2>
                         <span></span>
                     </div>
                     <div className="product-rights">

@@ -1,7 +1,7 @@
 import { EnvironmentOutlined,RedoOutlined,ArrowUpOutlined,EyeOutlined, CalendarOutlined, UserOutlined, WhatsAppOutlined, DeleteOutlined } from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal,Input, Select} from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
@@ -23,7 +23,9 @@ const LivraisonRapport = () => {
     const [idClient, setIdClient] = useState({});
     const [id_commande, setId_commande] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
 
       const handleDelete = async (id) => {
         try {

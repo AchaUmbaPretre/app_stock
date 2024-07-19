@@ -1,7 +1,7 @@
 import { EyeOutlined,CalendarOutlined,UserOutlined,PlusCircleOutlined,EditOutlined, ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button,Space, Table, Popover, Tag, Modal, Select, Input} from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
@@ -21,7 +21,9 @@ const CommandeRapport = () => {
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
     
     
     const fetchData = useCallback(async (filter) => {

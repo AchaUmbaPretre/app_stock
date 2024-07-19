@@ -6,7 +6,7 @@ import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 const { Option } = Select;
 
 const MouvementRapport = () => {
@@ -20,7 +20,9 @@ const MouvementRapport = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
     
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();

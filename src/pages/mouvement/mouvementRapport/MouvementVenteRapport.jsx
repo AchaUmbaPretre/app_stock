@@ -5,7 +5,7 @@ import { Button, Input, Space, Table, Popover,Tag, Image, Select} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 const { Option } = Select;
 
 const MouvementVenteRapport = () => {
@@ -18,7 +18,9 @@ const MouvementVenteRapport = () => {
     const scroll = { x: 500 };
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
     
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import config from './../../../config';
 import moment from 'moment';
 import FormPaiement from './../formPaiement/FormPaiement';
+import { useLocation } from 'react-router-dom';
 const { Option } = Select;
 
 const PaiementRapport = () => {
@@ -16,7 +17,9 @@ const PaiementRapport = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
 
 
       const handleDelete = async (id) => {

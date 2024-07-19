@@ -5,6 +5,7 @@ import axios from 'axios';
 import config from './../../../config';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
+import { useLocation } from 'react-router-dom';
 const { Option } = Select;
 
 const DetteRapport = () => {
@@ -17,7 +18,9 @@ const DetteRapport = () => {
     const [opens, setOpens] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
 
       const handleDelete = async (id) => {
         try {

@@ -18,24 +18,24 @@ const InformationGeneral = () => {
         <div className='informationGeneral'>
         <Tabs>
             <Tabs.TabPane tab="Aujourd'hui" key={0}>
-                <InformationMoney/>
-                <InformationJour/>
+                <InformationMoney period="today"/>
+                <InformationJour period="today"/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='Hier' key={1}>
-                <InformationHierMoney/>
-                <InformationHier/>
+                <InformationHierMoney period="yesterday"/>
+                <InformationHier period="yesterday"/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='7 derniers jours' key={2}>
-                <Information7joursMoney/>
-                <Information7Jours/>
+                <Information7joursMoney period="last7days"/>
+                <Information7Jours period="last7days"/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='30 derniers jours' key={3}>
-                <Information30joursMoney/>
-                <Information30Jours/>
+                <Information30joursMoney tab='30 derniers jours'/>
+                <Information30Jours tab='30 derniers jours'/>
             </Tabs.TabPane>
             <Tabs.TabPane tab="1 an" key={4}>
-                <Information1anMoney/>
-                <Information1an/>
+                <Information1anMoney period="last1year"/>
+                <Information1an period="last1year"/>
             </Tabs.TabPane>
         </Tabs>
         </div>

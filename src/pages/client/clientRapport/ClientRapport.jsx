@@ -2,7 +2,7 @@ import { PlusOutlined, SearchOutlined, SisternodeOutlined,WhatsAppOutlined,Phone
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popconfirm, Popover, Tag, Modal, Select} from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../../../config';
 import axios from 'axios';
 import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
@@ -28,7 +28,9 @@ const ClientRapport = () => {
     const [openDetailAdresse, setOpenDetailAdresse] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();

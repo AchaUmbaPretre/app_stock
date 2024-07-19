@@ -1,7 +1,7 @@
 import { EyeOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal,Select, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { format } from 'date-fns';
@@ -21,7 +21,9 @@ const VenteRapport = () => {
     const user = useSelector((state) => state.user?.currentUser);
     const [openVente, setOpenVente] = useState(false);
     const [iDcommande, setIdCommande] = useState('');
-    const [dateFilter, setDateFilter] = useState('today');
+    const location = useLocation();
+    const period = new URLSearchParams(location.search).get('period');
+    const [dateFilter, setDateFilter] = useState(period);
 
 
 

@@ -22,8 +22,8 @@ const PermissionOne = () => {
       setLoading(true);
       try {
         const [optionsRes, permissionsRes] = await Promise.all([
-          axios.get(`${DOMAIN}/api/inventaire/menuAll`),
-          axios.get(`${DOMAIN}/api/inventaire/permissions?userId=${userId}`)
+          axios.get(`${DOMAIN}/api/inventaire/menuAll/add`),
+          axios.get(`${DOMAIN}/api/inventaire/permissions/One?userId=${userId}`)
         ]);
 
         setOptions(optionsRes.data);

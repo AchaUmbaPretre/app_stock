@@ -15,7 +15,7 @@ import { FireTruckOutlined, HomeOutlined } from '@mui/icons-material';
 import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../redux/userRedux';
@@ -29,8 +29,9 @@ const Options = () => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState('');
   const [options, setOptions] = useState([]);
-  const user = useSelector((state) => state.user?.currentUser);
+  const userId = useSelector((state) => state.user?.currentUser.id);
   const isSidebarOpen = useSelector((state) => state.user?.isSidebarOpen);
+  const [data, setData] = useState([]);
 
   const Logout = async () => {
     try {
@@ -46,17 +47,18 @@ const Options = () => {
   };
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/vente/options/side`);
-        setOptions(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+  const fetchMenu = useCallback(async () => {
+    try {
+      const { data } = await axios.get(`${DOMAIN}/api/inventaire/menuAll?userId=${userId}`);
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
   }, [DOMAIN]);
+
+  useEffect(() => {
+    fetchMenu();
+  }, [fetchMenu]);
 
   const handleLinkClick = () => {
     dispatch(toggleSidebar());

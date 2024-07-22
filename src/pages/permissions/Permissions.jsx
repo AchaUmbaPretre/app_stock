@@ -1,10 +1,10 @@
 import './../products/products.scss'
 import { SearchOutlined, SisternodeOutlined,EyeOutlined,CheckOutlined, CloseOutlined,UnorderedListOutlined ,EditOutlined,FilePdfOutlined,UserOutlined,FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Table, Tag } from 'antd';
+import { Button, Popover, Space, Table, Tag } from 'antd';
 import axios from 'axios';
 import config from '../../config';
-import { DeleteOutlineOutlined } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 ;
 
 const Permissions = () => {
@@ -57,51 +57,20 @@ const Permissions = () => {
               </div>
             )
           },
-        {
-            title: <EyeOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px', color: 'rgb(1, 35, 138)'}} />,
-            dataIndex: 'edit',
-            key: 'edit',
-            width: '5%',
-            render : (text,record)=>(
-              <div style={{cursor: 'pointer'}}>
-                    <input type="checkbox" />
-              </div>
-            )
-          },
-        {
-            title: <UnorderedListOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px',color: 'rgb(1, 35, 138)' }} />,
-            dataIndex: 'lire',
-            key: 'lire',
-            width: '5%',
-            render : (text,record)=>(
-                <div>
-                    <input type="checkbox" />
-                </div>
-            )
-          },
-        {
-          title: <EditOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px', color: 'rgb(1, 35, 138)' }}/>,
-          dataIndex: 'edit',
-          key: 'edit',
-          width: '5%',
-          render: (text) => (
-            <div>
-                <input type="checkbox" />
-            </div>
-          ),
-        },
-        {
-            title: <DeleteOutlineOutlined style={{ marginRight: '5px',display: 'flex', alignItems:'center', justifyContent:'center', fontSize:'19px',color: 'rgb(1, 35, 138)' }}/>,
-            dataIndex: 'edit',
-            key: 'edit',
-            width: '5%',
-            render: (text) => (
-                <div>
-                    <input type="checkbox" />
-                </div>
+          {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => (
+                
+              <Space size="middle">
+                <Popover title={`Voir la liste de vente en crédit de Mme ${record.nom}`} trigger="hover">
+                  <Link to={`/permissionOne?userId=${record.id}`}>
+                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                  </Link>
+                </Popover>
+              </Space>
             ),
-          }
-
+          },
       ];
 
   const filteredData = data?.filter((item) =>

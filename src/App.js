@@ -108,6 +108,7 @@ import MouvementVenteRapport from './pages/mouvement/mouvementRapport/MouvementV
 import ClientRapport from './pages/client/clientRapport/ClientRapport';
 import DetteRapport from './pages/dette/detteRapport/DetteRapport';
 import PaiementRapport from './pages/paiement/paiementRapport/PaiementRapport';
+import PermissionOne from './pages/permissions/permissionOne/PermissionOne';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -526,6 +527,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/permission',
           element: <Permissions />
+        },
+        {
+          path: '/permissionOne',
+          element: <PermissionOne />
         },
         {
           path: '/caisse',

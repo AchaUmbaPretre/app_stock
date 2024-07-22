@@ -151,7 +151,7 @@ const Sidebar = () => {
         </Item>
       </SubMenu>
       { (user?.role === 'admin' || user?.role === 'secretaire') &&  
-      <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<DollarCircleOutlined  style={{ fontSize: '19px', color: '#fafafa' }} />}>
+      <SubMenu key="ventes" title={<span className="sidebarH3">Ventes</span>} icon={<DollarCircleOutlined style={{ fontSize: '19px', color: '#fafafa' }} />}>
         <Item key="ventes" onClick={handleLinkClick}>
           <Link to="/ventes" className="sidebarLink">
             Liste des ventes
@@ -186,7 +186,7 @@ const Sidebar = () => {
           Echanges
         </Link>
       </Item>  }
-      <SubMenu key="clients" title={<span className="sidebarH3">Membres</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
+      <SubMenu key="clients" title={<span className="sidebarH3">Personnels</span>} icon={<UsergroupAddOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="clients" onClick={handleLinkClick}>
           <Link to="/clients" className="sidebarLink">
             Clients
@@ -215,7 +215,7 @@ const Sidebar = () => {
       <SubMenu key="depenses" title={<span className="sidebarH3">Dépenses</span>} icon={<CreditCardOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>}>
         <Item key="depenses" onClick={handleLinkClick}>
           <Link to="/depensesAll" className="sidebarLink">
-            Dépenses
+            Liste des dépenses
           </Link>
         </Item>
         <Item key="catDepenses" onClick={handleLinkClick}>
@@ -246,7 +246,7 @@ const Sidebar = () => {
             Caisse
           </Link>
         </Item>
-          <Item key="rapportRevenu" onClick={handleLinkClick}>
+        <Item key="rapportRevenu" onClick={handleLinkClick}>
           <Link to="/rapportRevenu" className="sidebarLink">
             Revenus
           </Link>

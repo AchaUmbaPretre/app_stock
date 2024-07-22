@@ -63,7 +63,7 @@ const Permissions = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title={`Voir la liste de vente en crédit de Mme ${record.nom}`} trigger="hover">
+                <Popover title={`Voir les permissions`} trigger="hover">
                   <Link to={`/permissionOne?userId=${record.id}`}>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                   </Link>

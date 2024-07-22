@@ -22,8 +22,8 @@ const PermissionOne = () => {
       setLoading(true);
       try {
         const [optionsRes, permissionsRes] = await Promise.all([
-          axios.get(`${DOMAIN}/menu/menuAll`),
-          axios.get(`${DOMAIN}/menu/permissions?userId=${userId}`)
+          axios.get(`${DOMAIN}/api/inventaire/menuAll`),
+          axios.get(`${DOMAIN}/api/inventaire/permissions?userId=${userId}`)
         ]);
 
         setOptions(optionsRes.data);
@@ -66,7 +66,7 @@ const PermissionOne = () => {
 
     setPermissions(updatedPermissions);
 
-    axios.put(`${DOMAIN}/menu/${userId}/permissions/${optionId}`, finalPermissions)
+    axios.put(`${DOMAIN}/api/inventaire/${userId}/permissions/${optionId}`, finalPermissions)
       .then(() => {
         message.success('Autorisations mises à jour avec succès');
       })

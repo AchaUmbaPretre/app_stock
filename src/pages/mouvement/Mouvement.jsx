@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined,EnvironmentOutlined, SisternodeOutlined,RedoOutlined, EyeOutlined,ArrowDownOutlined,ShoppingCartOutlined ,ArrowUpOutlined, FilePdfOutlined,WhatsAppOutlined,UserOutlined, CloseOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
+import { SearchOutlined,EnvironmentOutlined, SisternodeOutlined,RedoOutlined, EyeOutlined,ArrowDownOutlined,ShoppingCartOutlined ,ArrowUpOutlined, WhatsAppOutlined,UserOutlined, CloseOutlined, DeleteOutlined, CalendarOutlined,SwapOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';

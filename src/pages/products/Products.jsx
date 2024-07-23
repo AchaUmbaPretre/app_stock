@@ -28,7 +28,6 @@ const Products = () => {
     const [open, setOpen] = useState(false);
     const [idProduit, setIdProduit] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);
 

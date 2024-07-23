@@ -16,6 +16,7 @@ const PermissionOne = () => {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(true);
   const [opens, setOpens] = useState(false);
+  const scroll = { x: 400 };
 
   useEffect(() => {
     const fetchOptionsAndPermissions = async () => {
@@ -93,7 +94,7 @@ const PermissionOne = () => {
       ),
     },
     {
-      title: <span style={{ color: '#52c41a' }}><EyeOutlined /> Lire</span>,
+      title: <span style={{ color: '#52c41a' }}><EyeOutlined /></span>,
       dataIndex: 'can_read',
       key: 'can_read',
       render: (text, record) => (
@@ -104,7 +105,7 @@ const PermissionOne = () => {
       )
     },
     {
-      title: <span style={{ color: '#1890ff' }}><EditOutlined /> Modifier</span>,
+      title: <span style={{ color: '#1890ff' }}><EditOutlined /></span>,
       dataIndex: 'can_edit',
       key: 'can_edit',
       render: (text, record) => (
@@ -115,7 +116,7 @@ const PermissionOne = () => {
       )
     },
     {
-      title: <span style={{ color: '#ff4d4f' }}><DeleteOutlined /> Supprimer</span>,
+      title: <span style={{ color: '#ff4d4f' }}><DeleteOutlined /></span>,
       dataIndex: 'can_delete',
       key: 'can_delete',
       render: (text, record) => (
@@ -156,6 +157,7 @@ const PermissionOne = () => {
                         <Table
                             dataSource={loading ? [] : options}
                             columns={columns}
+                            scroll={scroll}
                             rowKey="id"
                             pagination={false}
                             loading={loading}

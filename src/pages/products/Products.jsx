@@ -264,11 +264,6 @@ const HandOpen = () =>{
   setOpens(!opens)
 }
 
-const handleModalClose = () => {
-  // Ferme le modal
-  setModalVisible(false);
-};
-
 useEffect(() => {
   const fetchData = async () => {
     try {

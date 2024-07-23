@@ -5,7 +5,6 @@ import { EyeOutlined, EditOutlined, CloseOutlined, SisternodeOutlined, DeleteOut
 import config from '../../../config';
 import { useLocation } from 'react-router-dom';
 
-
 const PermissionOne = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const location = useLocation();
@@ -141,7 +140,7 @@ const PermissionOne = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                        {opens ?<CloseOutlined className='product-icon2'/> : <SisternodeOutlined className='product-icon' />}
+                        <SisternodeOutlined className='product-icon' />
                         <Input
                             type="search"
                             value={searchValue}

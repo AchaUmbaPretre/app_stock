@@ -2,11 +2,12 @@ import './rowProduit.scss'
 import { SearchOutlined,MoreOutlined } from '@ant-design/icons';
 import React, { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover } from 'antd';
+import { Button, Input, Space, Table, Popover, Modal } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
 import config from '../../config';
+import PageDetails from '../../pages/PageDetails/PageDetails';
 
 const RowProduit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,6 +18,8 @@ const RowProduit = () => {
   const searchInput = useRef(null);
   const navigate = useNavigate();
   const scroll = { x: 400 };
+  const [opens, setOpens] = useState(false);
+  const [idVariant, setvariant] = useState({});
 
   const content = (
     <div className='popOverSous' style={{display: 'flex', flexDirection: "column", gap: "10px"}}>
@@ -130,6 +133,11 @@ const RowProduit = () => {
       ),
   });
 
+  const showModalPhone = (e) => {
+    setOpens(true);
+    setvariant(e)
+  };
+
   const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
@@ -137,7 +145,7 @@ const RowProduit = () => {
       dataIndex: 'img',
       key: 'img',
       render: (text, record) => (
-        <div className="userList" onClick={()=>navigate(`/pageDetail/${record.id_varianteProduit}`)}>
+        <div className="userList" onClick={()=>showModalPhone(record.id_varianteProduit)}>
           <img src={`${DOMAIN}${record.img}`} alt="" className="userImg"  />
         </div>
       )
@@ -195,6 +203,19 @@ const RowProduit = () => {
                   <Table columns={columns} dataSource={produit} loading={loading} scroll={scroll} pagination={{ pageSize: 3}} />
                 </div>
             </div>
+
+                        <Modal
+                          title=""
+                          centered
+                          open={opens}
+                          onCancel={() => setOpens(false)}
+                          width={1100}
+                          footer={[
+                            
+                          ]}
+                        >
+                          <PageDetails id={idVariant}/>
+                        </Modal>
         </div>
     </>
   )

@@ -109,6 +109,7 @@ import ClientRapport from './pages/client/clientRapport/ClientRapport';
 import DetteRapport from './pages/dette/detteRapport/DetteRapport';
 import PaiementRapport from './pages/paiement/paiementRapport/PaiementRapport';
 import PermissionOne from './pages/permissions/permissionOne/PermissionOne';
+import Options from './components/sidebar/Options';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -142,7 +143,7 @@ const loading = useSelector((state) => state.user?.loading);
       <div >
         <Topbar/>
         <div className="appContainer">
-          <Sidebar/>
+          <Options/>
           <div className="appOutlet">
             <Outlet />
           </div>

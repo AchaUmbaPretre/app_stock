@@ -39,46 +39,83 @@ const Options = () => {
       setCurrentUser(null);
       localStorage.setItem('persist:root', JSON.stringify(currentUser));
       Swal.fire('Déconnexion réussie !', '', 'success');
-      navigate('/login')
+      navigate('/login');
       window.location.reload();
     } catch (error) {
       Swal.fire('Erreur lors de la déconnexion.', '', 'error');
     }
   };
 
-
   const fetchMenu = useCallback(async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/inventaire/menuAll?userId=${userId}`);
+      const { data } = await axios.get(`${DOMAIN}/api/inventaire/menuAll/addOne?userId=${userId}`);
       setData(data);
     } catch (error) {
       console.log(error);
     }
-  }, [DOMAIN]);
+  }, [DOMAIN, userId]);
 
   useEffect(() => {
     fetchMenu();
   }, [fetchMenu]);
+
+  const getMenuIcon = (icon) => {
+    switch (icon) {
+      case 'FireTruckOutlined':
+        return <FireTruckOutlined className="sidebarLink" style={{ fontSize: '30px', color: '#fafafa' }} />;
+      case 'ShoppingCartOutlined':
+        return <ShoppingCartOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }} />;
+      case 'CarOutlined':
+        return <CarOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }} />;
+      case 'FileTextOutlined':
+        return <FileTextOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }} />;
+      case 'UsergroupAddOutlined':
+        return <UsergroupAddOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }} />;
+      case 'DollarCircleOutlined':
+        return <DollarCircleOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }} />;
+      case 'AppstoreOutlined':
+        return <AppstoreOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }} />;
+      case 'HomeOutlined':
+        return <HomeOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }}/>;
+      case 'SwapOutlined':
+        return <SwapOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }}/>;
+      case 'CreditCardOutlined':
+        return <CreditCardOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }}/>;
+      default:
+        return null;
+    }
+  };
 
   const handleLinkClick = () => {
     dispatch(toggleSidebar());
   };
 
   return (
-    <Menu mode="vertical" theme="dark" ref={sidebarRef}  className={`sidebar ${isSidebarOpen ? 'visible' : ''}`}>
+    <Menu mode="vertical" theme="dark" ref={sidebarRef} className={`sidebar ${isSidebarOpen ? 'visible' : ''}`}>
       <div className="sidebarWrapper">
-        
       </div>
-      {options.map((dd)=>(
-        <Item key="/" icon={<HomeOutlined style={{ fontSize: '22px', color: '#fafafa' }} />}  onClick={handleLinkClick}>
-            <Link to="/" className="sidebarH3" style={{fontSize: "14px", color: '#fafafa'}}>
-                {dd.nom_options}
-            </Link>
-        </Item>
+      <Item key="/" icon={<HomeOutlined style={{ fontSize: '22px', color: '#fafafa' }} />} onClick={handleLinkClick}>
+        <Link to="/" className="sidebarH3" style={{ fontSize: "14px", color: '#fafafa' }}>
+          Accueil
+        </Link>
+      </Item>
+      {data.map(menuItem => (
+        <SubMenu
+          key={menuItem.menu_id}
+          icon={getMenuIcon(menuItem.menu_icon)}
+          title={<span className="sidebarH3">{menuItem.menu_title}</span>}
+        >
+          {menuItem.subMenus && menuItem.subMenus.map(subMenu => (
+            <Item key={subMenu.submenu_id}>
+              <Link to={subMenu.submenu_url} className="sidebarLink" onClick={handleLinkClick}>
+                {subMenu.submenu_title}
+              </Link>
+            </Item>
+          ))}
+        </SubMenu>
       ))}
-      
-      <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa'}}/>} onClick={Logout}>
-        <Link className="sidebarH3" style={{ color: '#fafafa'}}>
+      <Item key="logout" icon={<LogoutOutlined style={{ fontSize: '19px', color: '#fafafa' }} />} onClick={Logout}>
+        <Link className="sidebarH3" style={{ color: '#fafafa' }}>
           Déconnexion
         </Link>
       </Item>

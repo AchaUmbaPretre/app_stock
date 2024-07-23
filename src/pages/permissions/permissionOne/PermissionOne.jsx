@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Switch, message, Tag, Input } from 'antd';
-import { ReadOutlined, EditOutlined, CloseOutlined, SisternodeOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, CloseOutlined, SisternodeOutlined, DeleteOutlined } from '@ant-design/icons';
 import config from '../../../config';
 import { useLocation } from 'react-router-dom';
 
@@ -56,17 +56,17 @@ const PermissionOne = () => {
         [permType]: value
       }
     };
-
+  
     const finalPermissions = {
       ...updatedPermissions[optionId],
       can_read: updatedPermissions[optionId].can_read ?? false,
       can_edit: updatedPermissions[optionId].can_edit ?? false,
       can_delete: updatedPermissions[optionId].can_delete ?? false,
     };
-
+  
     setPermissions(updatedPermissions);
-
-    axios.put(`${DOMAIN}/api/inventaire/${userId}/permissions/${optionId}`, finalPermissions)
+  
+    axios.put(`${DOMAIN}/api/inventaire/inventaireUpdate/${userId}/permissions/add/${optionId}`, finalPermissions)
       .then(() => {
         message.success('Autorisations mises à jour avec succès');
       })
@@ -74,6 +74,7 @@ const PermissionOne = () => {
         message.error('Échec de la mise à jour des autorisations');
       });
   };
+  
 
   const columns = [
     { 
@@ -92,7 +93,7 @@ const PermissionOne = () => {
       ),
     },
     {
-      title: <span style={{ color: '#52c41a' }}><ReadOutlined /> Lire</span>,
+      title: <span style={{ color: '#52c41a' }}><EyeOutlined /> Lire</span>,
       dataIndex: 'can_read',
       key: 'can_read',
       render: (text, record) => (

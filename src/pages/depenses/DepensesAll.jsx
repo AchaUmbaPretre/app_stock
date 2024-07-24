@@ -157,8 +157,6 @@ const DepensesAll = () => {
       setDateData(e)
     };
 
-    console.log(dateData)
-
   const filteredData = data?.filter((item) =>
   item.jour?.toLowerCase().includes(searchValue.toLowerCase())
 );

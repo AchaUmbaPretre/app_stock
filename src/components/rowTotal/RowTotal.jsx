@@ -1,6 +1,6 @@
 import React from 'react'
 import './rowTotal.scss'
-import { CarryOutOutlined, VerticalAlignBottomOutlined, VerticalAlignTopOutlined, FileDoneOutlined  } from '@ant-design/icons';
+import { CarryOutOutlined, VerticalAlignBottomOutlined, AreaChartOutlined, VerticalAlignTopOutlined, FileDoneOutlined  } from '@ant-design/icons';
 import CountUp from 'react-countup';
 import { Modal } from 'antd';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import InformationJour from '../../pages/informationJour/InformationJour';
 import InformationMoney from '../../pages/informationJour/InformationJourMoney/InformationMoney';
 import InformationGeneral from '../informationGeneral/InformationGeneral';
+import { Link } from 'react-router-dom';
 
 
 const RowTotal = () => {
@@ -65,6 +66,14 @@ const RowTotal = () => {
     <>
         <div className="rowTotals">
             <div className="rowTotal-wrapper">
+              { user?.role === 'admin' && 
+                <Link to='https://fin.loginsmart-cd.com/'>
+                  <div className="rowTotals">
+                      <div className="rowTotal-left">
+                          <AreaChartOutlined className='rowTotalIcon' style={{color: 'blue', fontSize:"25px"}}/>
+                      </div>
+                  </div>
+                </Link> }
                 <div className="rowTotal">
                     <div className="rowTotal-left">
                         <CarryOutOutlined className='rowTotalIcon' style={{color: 'orange'}}/>

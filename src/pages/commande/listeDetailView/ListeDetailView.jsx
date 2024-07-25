@@ -113,6 +113,14 @@ const ListeDetailView = () => {
       ),
     },
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width: "3%" },
+    { title: 'code',
+      dataIndex: 'id', 
+      key: 'id', 
+      render: (text, record, index) => (
+        <div>
+           <Tag color="blue">{`${new Date().getFullYear().toString().substring(2)}${record.id_detail.toString().padStart(4, '0')}`}</Tag>
+        </div>
+      ), width: "3%" },
     {
       title: 'image',
       dataIndex: 'img',

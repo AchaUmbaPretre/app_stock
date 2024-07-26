@@ -47,7 +47,10 @@ const PermissionOne = () => {
     fetchOptionsAndPermissions();
   }, [userId, DOMAIN]);
 
-  const handlePermissionChange = (optionId, permType, value) => {
+  const handlePermissionChange = (id, permType, value, isSubmenu = false) => {
+    const prefix = isSubmenu ? 'submenu-' : '';
+    const optionId = `${prefix}${id}`;
+
     const updatedPermissions = {
       ...permissions,
       [optionId]: {
@@ -65,7 +68,7 @@ const PermissionOne = () => {
 
     setPermissions(updatedPermissions);
 
-    axios.put(`${DOMAIN}/api/inventaire/inventaireUpdate/${userId}/permissions/add/${optionId}`, finalPermissions)
+    axios.put(`${DOMAIN}/api/inventaire/inventaireUpdate/${userId}/permissions/add/${id}`, finalPermissions)
       .then(() => {
         message.success('Autorisations mises à jour avec succès');
       })
@@ -139,8 +142,8 @@ const PermissionOne = () => {
         key: 'can_read',
         render: (text, subRecord) => (
           <Switch
-            checked={permissions[subRecord.submenu_id]?.can_read || false}
-            onChange={value => handlePermissionChange(subRecord.submenu_id, 'can_read', value)}
+            checked={permissions[`submenu-${subRecord.submenu_id}`]?.can_read || false}
+            onChange={value => handlePermissionChange(subRecord.submenu_id, 'can_read', value, true)}
           />
         )
       },
@@ -150,8 +153,8 @@ const PermissionOne = () => {
         key: 'can_edit',
         render: (text, subRecord) => (
           <Switch
-            checked={permissions[subRecord.submenu_id]?.can_edit || false}
-            onChange={value => handlePermissionChange(subRecord.submenu_id, 'can_edit', value)}
+            checked={permissions[`submenu-${subRecord.submenu_id}`]?.can_edit || false}
+            onChange={value => handlePermissionChange(subRecord.submenu_id, 'can_edit', value, true)}
           />
         )
       },
@@ -161,8 +164,8 @@ const PermissionOne = () => {
         key: 'can_delete',
         render: (text, subRecord) => (
           <Switch
-            checked={permissions[subRecord.submenu_id]?.can_delete || false}
-            onChange={value => handlePermissionChange(subRecord.submenu_id, 'can_delete', value)}
+            checked={permissions[`submenu-${subRecord.submenu_id}`]?.can_delete || false}
+            onChange={value => handlePermissionChange(subRecord.submenu_id, 'can_delete', value, true)}
           />
         )
       }

@@ -17,7 +17,6 @@ const MouvementOneVente = ({id_commande, id_type}) => {
     const searchInput = useRef(null);
     const scroll = { x: 500 };
     const navigate = useNavigate();
-    const [searchValue, setSearchValue] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
 
       const handleSearch = (selectedKeys, confirm, dataIndex) => {

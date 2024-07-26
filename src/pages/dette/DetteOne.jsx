@@ -1,7 +1,7 @@
 import './../products/products.scss'
 import { SearchOutlined, SisternodeOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, FileExcelOutlined,DollarOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Input } from 'antd';
 import axios from 'axios';
 import config from '../../config';
 import { useSelector } from 'react-redux';
@@ -213,10 +213,13 @@ const DetteOne = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                          <Input
+                            type="search"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="Recherche..."
+                            className="product-search"
+                          />
                         </div>
                         <div className="product-bottom-right">
                             <FilePdfOutlined className='product-icon-pdf' />

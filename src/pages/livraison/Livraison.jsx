@@ -1,6 +1,6 @@
 import { PlusOutlined, SearchOutlined, SisternodeOutlined, FilePdfOutlined,EyeOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
@@ -94,10 +94,11 @@ const Livraison = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                             <SisternodeOutlined className='product-icon' />
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input
+                              type="search"
+                              placeholder="Recherche..."
+                              className="product-search"
+                            />
                         </div>
                         <div className="product-bottom-right">
                             <FilePdfOutlined className='product-icon-pdf' />

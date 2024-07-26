@@ -1,6 +1,6 @@
 import { SearchOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image, Input} from 'antd';
 import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
@@ -239,10 +239,13 @@ const LivraisonView = ({id}) => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
 {/*                             <SisternodeOutlined className='product-icon' /> */}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                        <Input
+                            type="search"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="Recherche..."
+                            className="product-search"
+                        /> 
                         </div>
                         <div className="product-bottom-right">
                             <FilePdfOutlined className='product-icon-pdf' />

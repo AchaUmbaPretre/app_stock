@@ -22,6 +22,7 @@ const PageEchange = () => {
     const [idEchangeDetail, setIdEchangeDetail] = useState([]);
     const [idDetail, setIdDetail] = useState([]);
     const [idVariant, setIdVariant] = useState([]);
+    const [prixOne, setPrixOne] = useState([]);
     const userId = useSelector((state) => state.user.currentUser.id);
     const { pathname } = useLocation();
     const IdCommande = pathname.split('/')[2];
@@ -226,6 +227,7 @@ const PageEchange = () => {
         setIdEchangeDetail(selecteds[0]?.id_detail_commande);
         setIdDetail(selected[0]?.id_detail_commande);
         setIdVariant(selected[0]?.id);
+        setPrixOne(selected[0]?.prix)
     }, [selecteds[0]?.id_detail_commande, selected[0]?.id_detail_commande, selected[0]?.id_varianteProduit]);
 
     const showModal = () => {
@@ -236,7 +238,7 @@ const PageEchange = () => {
         setIsModalVisible(false);
         setIsLoading(true);
         try {
-            await axios.put(`${DOMAIN}/api/vente/echange/${idEchangeDetail}/${idDetail}/${idVariant}`);
+            await axios.put(`${DOMAIN}/api/vente/echange/${idEchangeDetail}/${idDetail}/${idVariant}/${prixOne}`);
             Swal.fire({
                 title: 'Success',
                 text: "L'échange a été fait avec succès !",

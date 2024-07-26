@@ -8,7 +8,6 @@ import {FilterOutlined,ShoppingCartOutlined,SearchOutlined,HeartOutlined} from '
 import { Modal} from 'antd';
 import { FadeLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate'
-import DetailProduitCommande from '../../commande/detaillProduitCommande/DetailProduitCommande'
 import config from '../../../config'
 import EchangeCommande from '../echangeCommande/EchangeCommande'
 
@@ -132,26 +131,6 @@ const EchangeCat = () => {
         };
         fetchData();
       }, [DOMAIN]);
-
-/*       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            let url = `${DOMAIN}/api/produit/varianteProduit`;
-      
-            if ((marque || famillesSelectionnees) && taille.length > 0) {
-              url = `${DOMAIN}/api/produit/varianteFiltreTaille/${taille}`;
-            }
-      
-            const { data } = await axios.get(url);
-            setLoading(false)
-            setData(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-      
-        fetchData();
-      }, [DOMAIN, taille, marque, famillesSelectionnees]); */
 
       useEffect(() => {
         const fetchData = async () => {

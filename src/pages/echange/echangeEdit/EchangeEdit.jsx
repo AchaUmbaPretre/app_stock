@@ -1,20 +1,14 @@
 import React from 'react'
 import { useState } from 'react';
-import Select from 'react-select';
 import { useEffect } from 'react';
 import axios from 'axios';
 import config from '../../../config';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 
 const EchangeEdit = ({getEchange, setGetEchange}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [data, setData] = useState({})
-  const [getCategorie, setGetCategorie] = useState([]);
   const [client, setClient] = useState([]);
   const [produit, setProduit] = useState([]);
   const [loading, setLoading] = useState([]);
-  const navigate = useNavigate();
 
   const handleInputChange = async (e) => {
     const fieldName = e.target.name;

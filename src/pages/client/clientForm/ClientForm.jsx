@@ -199,6 +199,7 @@ const ClientForm = () => {
         onCancel={handleCancel}
         okText="Confirmer"
         cancelText="Annuler"
+        className="confirmation-modal"
       >
         <p className="modal-text">Êtes-vous sûr de vouloir enregistrer ces informations ?</p>
         <div className="modal-data">

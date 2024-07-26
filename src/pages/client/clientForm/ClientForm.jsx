@@ -65,7 +65,7 @@ const ClientForm = () => {
           text: err.message,
           icon: 'error',
           confirmButtonText: 'OK',
-        });
+        }); 
       }
     } finally {
       setIsLoading(false);

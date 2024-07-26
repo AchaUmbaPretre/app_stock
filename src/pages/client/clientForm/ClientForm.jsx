@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './clientForm.scss';
+import './../../../modalStyle.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config';
 import { CircularProgress } from '@mui/material';
-import { Modal } from 'antd';
+import { Modal, Row, Col } from 'antd';
 
 const ClientForm = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -21,15 +22,15 @@ const ClientForm = () => {
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
-  
+
     let updatedValue = fieldValue;
-  
+
     if (fieldName === "email") {
       updatedValue = fieldValue.toLowerCase();
     } else if (Number.isNaN(Number(fieldValue))) {
       updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
     }
-  
+
     setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
@@ -199,15 +200,38 @@ const ClientForm = () => {
         okText="Confirmer"
         cancelText="Annuler"
       >
-        <p><strong>Nom:</strong> {data.nom}</p>
-        <p><strong>Raison sociale:</strong> {data.raison_sociale}</p>
-        <p><strong>Email:</strong> {data.email}</p>
-        <p><strong>Telephone:</strong> {data.telephone}</p>
-        <p><strong>Ville:</strong> {province.find(item => item.id_province === data.id_province)?.nom_province}</p>
-        <p><strong>Avenue:</strong> {data.avenue}</p>
-        <p><strong>Quartier:</strong> {data.quartier}</p>
-        <p><strong>Commune:</strong> {commune.find(item => item.id_commune === data.commune)?.nom_commune}</p>
-        <p><strong>N°:</strong> {data.num}</p>
+        <p className="modal-text">Êtes-vous sûr de vouloir enregistrer ces informations ?</p>
+        <div className="modal-data">
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <p><strong>Nom:</strong> {data.nom}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>Raison sociale:</strong> {data.raison_sociale}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>Email:</strong> {data.email}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>Téléphone:</strong> {data.telephone}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>Ville:</strong> {province.find(item => item.id_province === data.id_province)?.nom_province}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>Avenue:</strong> {data.avenue}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>Quartier:</strong> {data.quartier}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>Commune:</strong> {commune.find(item => item.id_commune === data.commune)?.nom_commune}</p>
+            </Col>
+            <Col span={12}>
+              <p><strong>N°:</strong> {data.num}</p>
+            </Col>
+          </Row>
+        </div>
       </Modal>
     </>
   );

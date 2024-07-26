@@ -1,0 +1,21 @@
+.modal-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-data {
+    font-size: 14px;
+  }
+  
+  .modal-data p {
+    margin: 0;
+    padding: 4px 0;
+  }
+  
+  .loader-container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  

@@ -291,10 +291,13 @@ const MouvementRetour = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <div className="product-row-search">
-                              <SearchOutlined className='product-icon-plus'/>
-                              <input type="search" name="" onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                          <Input
+                              type="search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              placeholder="Recherche..."
+                              className="product-search"
+                          />  
                         </div>
                         <div className="product-bottom-right">
                         </div>

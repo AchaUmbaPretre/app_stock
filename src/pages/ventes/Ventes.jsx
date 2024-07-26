@@ -1,7 +1,7 @@
 import './../products/products.scss'
 import { SearchOutlined, SisternodeOutlined,EyeOutlined,RedoOutlined, ReconciliationOutlined,CloseOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined,DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Input} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
@@ -212,10 +212,13 @@ const Ventes = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                        <Input
+                          type="search"
+                          value={searchValue}
+                          onChange={(e) => setSearchValue(e.target.value)}
+                          placeholder="Recherche..."
+                          className="product-search"
+                        /> 
                         </div>
                         <div className="product-bottom-right">
                           <Popover content={'Actualiser cette page'}>

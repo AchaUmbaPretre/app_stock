@@ -1,5 +1,5 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,RedoOutlined,UserOutlined,EyeOutlined,CalendarOutlined } from '@ant-design/icons';
-import { Table, Tag, Space, Popover, Button, Tabs, Modal } from 'antd';
+import { Table, Tag, Space, Popover, Button, Tabs, Modal, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../config';
@@ -135,10 +135,13 @@ useEffect(() => {
                         <div className="product-bottom-top">
                             <div className="product-bottom-left">
                                 {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                                <div className="product-row-search">
-                                    <SearchOutlined className='product-icon-plus'/>
-                                    <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                                </div>
+                                <Input
+                                  type="search"
+                                  value={searchValue}
+                                  onChange={(e) => setSearchValue(e.target.value)}
+                                  placeholder="Recherche..."
+                                  className="product-search"
+                                />
                             </div>
                             <div className="product-bottom-right">
                               <Popover content={'Actualiser cette page'}>

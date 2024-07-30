@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Switch, message, Tag, Input } from 'antd';
-import { EyeOutlined, EditOutlined, CloseOutlined, SisternodeOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, SisternodeOutlined, DeleteOutlined } from '@ant-design/icons';
 import config from '../../../config';
 import { useLocation } from 'react-router-dom';
 
@@ -14,7 +14,6 @@ const PermissionOne = () => {
   const [searchValue, setSearchValue] = useState('');
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(true);
-  const [opens, setOpens] = useState(false);
   const scroll = { x: 400 };
 
   useEffect(() => {

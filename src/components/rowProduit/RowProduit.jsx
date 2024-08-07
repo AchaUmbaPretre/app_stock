@@ -204,18 +204,16 @@ const RowProduit = () => {
                 </div>
             </div>
 
-                        <Modal
-                          title=""
-                          centered
-                          open={opens}
-                          onCancel={() => setOpens(false)}
-                          width={1100}
-                          footer={[
-                            
-                          ]}
-                        >
-                          <PageDetails id={idVariant}/>
-                        </Modal>
+              <Modal
+                title=""
+                centered
+                open={opens}
+                onCancel={() => setOpens(false)}
+                width={1100}
+                footer={[]}
+              >
+                <PageDetails id={idVariant}/>
+            </Modal>
         </div>
     </>
   )

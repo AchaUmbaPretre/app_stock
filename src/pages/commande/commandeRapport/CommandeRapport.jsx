@@ -239,7 +239,7 @@ const CommandeRapport = () => {
                         </Modal>
 
                         <Modal
-                          title="Information de client"
+                          title=""
                           centered
                           open={openInfo}
                           onCancel={() => setOpenInfo(false)}

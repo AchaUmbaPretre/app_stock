@@ -9,7 +9,8 @@ import {
   AppstoreOutlined,
   CreditCardOutlined,
   CarOutlined,
-  SwapOutlined
+  SwapOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 import { FireTruckOutlined, HomeOutlined } from '@mui/icons-material';
 import './sidebar.css'
@@ -81,6 +82,8 @@ const Options = () => {
         return <SwapOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }}/>;
       case 'CreditCardOutlined':
         return <CreditCardOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }}/>;
+      case 'SettingOutlined':
+          return <SettingOutlined className="sidebarLink" style={{ fontSize: '19px', color: '#fafafa' }}/>;
       default:
         return null;
     }

@@ -170,9 +170,6 @@ const CommandeRapport = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title="Modifier" trigger="hover">
-                  <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id_commande)} />
-                </Popover>
                 <Popover title="Voir la liste de cette commande" trigger="hover">
                   <Link to={`/listeDetailView/${record.id_commande}`}>
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />

@@ -1,5 +1,5 @@
 import './products.scss'
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined,CalendarOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined,CalendarOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
 import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
@@ -283,33 +283,10 @@ const showModal = (e) => {
 };
 
 const handleOk = async (e) => {
-  setSelectedProductId(e); // Stocke l'ID du produit sélectionné
-  setModalVisible(true); // Affiche le modal
-  // Le reste du code reste inchangé
+  setSelectedProductId(e);
+  setModalVisible(true);
 };
 
-/* const handleOk = async (e) => {
-  setModalVisible(true)
-  try{
-    await axios.put(`${DOMAIN}/api/produit/${e}`)
-
-    Swal.fire({
-      title: 'Success',
-      text: "L'état des produits a été modifié avec succès.",
-      icon: 'success',
-      confirmButtonText: 'OK',
-    });
-    window.location.reload();
-
-  }catch(err) {
-    Swal.fire({
-      title: 'Error',
-      text: err.message,
-      icon: 'error',
-      confirmButtonText: 'OK',
-    });
-  }
-}; */
 
 const filteredData = getProduit?.filter((item) => 
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -346,9 +323,7 @@ const filteredData = getProduit?.filter((item) =>
                             />
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+
                         </div>
                     </div>
                     <BarReturn/>

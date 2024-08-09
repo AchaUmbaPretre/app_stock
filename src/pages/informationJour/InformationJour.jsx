@@ -25,7 +25,7 @@ const InformationJour = ({ period }) => {
     const [dette, setDette] = useState([]);
     const [paiement, setPaiement] = useState([]);
 
-
+    console.log(period)
     useEffect(() => {
         const fetchData = async () => {
           try {

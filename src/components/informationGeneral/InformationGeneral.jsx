@@ -30,8 +30,8 @@ const InformationGeneral = () => {
                 <Information7Jours period="last7days"/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='30 derniers jours' key={3}>
-                <Information30joursMoney tab='30 derniers jours'/>
-                <Information30Jours tab='30 derniers jours'/>
+                <Information30joursMoney period='30 derniers jours'/>
+                <Information30Jours period='30 derniers jours'/>
             </Tabs.TabPane>
             <Tabs.TabPane tab="1 an" key={4}>
                 <Information1anMoney period="last1year"/>

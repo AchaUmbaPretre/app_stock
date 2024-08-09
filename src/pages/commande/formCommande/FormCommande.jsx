@@ -54,7 +54,7 @@ const FormCommande = () => {
   };
 
   const handleSubmit = async () => {
-    if (isSubmitting) return; // Empêche l'envoi multiple
+    if (isSubmitting) return;
 
     setIsSubmitting(true);
 
@@ -63,7 +63,6 @@ const FormCommande = () => {
       await axios.post(`${DOMAIN}/api/commande/commandePost`, data);
       toast.success('Commande créée avec succès!');
       navigate('/listeCommande');
-      window.location.reload();
     } catch (err) {
       toast.error(`Erreur: ${err.message}`);
     } finally {
@@ -84,7 +83,6 @@ const FormCommande = () => {
       toast.success('Client créé avec succès!');
       setCheckeds(false);
       navigate('/commandeForm');
-      window.location.reload();
     } catch (err) {
       toast.error(`Erreur: ${err.message}`);
     } finally {

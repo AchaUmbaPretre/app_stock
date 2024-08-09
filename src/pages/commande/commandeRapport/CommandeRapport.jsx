@@ -156,26 +156,7 @@ const CommandeRapport = () => {
                 </Tag>
               );
             },
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                
-              <Space size="middle">
-                <Popover title="Voir la liste de cette commande" trigger="hover">
-                  <Link to={`/listeDetailView/${record.id_commande}`}>
-                    <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                  </Link>
-                </Popover>
-                <Popover title="Voir des produits" trigger="hover">
-                    <Link to={`/commandes/${record.id_commande}`}>
-                        <Button icon={<PlusCircleOutlined />} style={{ color: 'blue' }} />
-                    </Link>
-                </Popover>
-              </Space>
-            ),
-          },
+        }
       ];
 
       const handInfo = (e) =>{

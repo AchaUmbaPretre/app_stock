@@ -34,6 +34,12 @@ const ListeCommande = () => {
     const [id_commande, setId_commande] = useState('');
     const [openInfo, setOpenInfo] = useState(false);
 
+    const content = (e) => (
+      <div className='popOverSous' style={{display: 'flex', flexDirection: "column", gap: "10px"}}>
+        <Link>{e} vente(s)</Link>
+      </div>
+    )
+
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
       confirm();
       setSearchText(selectedKeys[0]);
@@ -191,7 +197,7 @@ const ListeCommande = () => {
             dataIndex: 'nom_statut',
             key: 'nom_statut',
             ...getColumnSearchProps('nom_statut'),
-            render: (text) => {
+            render: (text, record) => {
               let tagColor = '';
               let icon = null;
         
@@ -204,9 +210,11 @@ const ListeCommande = () => {
               }
         
               return (
-                <Tag color={tagColor}>
-                  {icon} {text}
-                </Tag>
+                <Popover content={content(record.nbre_vente)}>
+                  <Tag color={tagColor}>
+                    {icon} {text}
+                  </Tag>
+                </Popover>
               );
             },
           },

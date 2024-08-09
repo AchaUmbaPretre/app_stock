@@ -1,4 +1,4 @@
-import { SearchOutlined, FilePdfOutlined,FileExcelOutlined,PrinterOutlined,UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { FilePdfOutlined,FileExcelOutlined,PrinterOutlined,UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image, Input} from 'antd';
 import axios from 'axios';
@@ -248,9 +248,7 @@ const LivraisonView = ({id}) => {
                         /> 
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            
                         </div>
                     </div>
                     <div className="rowChart-row-table">

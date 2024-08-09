@@ -6,6 +6,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
 import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
+import LivraisonView from '../../livraison/livraisonView/LivraisonView';
 const { Option } = Select;
 
 
@@ -22,7 +23,9 @@ const CommandeRapport = () => {
     const location = useLocation();
     const period = new URLSearchParams(location.search).get('period');
     const [dateFilter, setDateFilter] = useState(period);
-    
+    const [id_commande, setId_commande] = useState('');
+    const [openInfo, setOpenInfo] = useState(false);
+
     
     const fetchData = useCallback(async (filter) => {
         try {
@@ -129,9 +132,11 @@ const CommandeRapport = () => {
             }
       
             return (
-              <Tag color={tagColor}>
-                {textValue}
-              </Tag>
+              <Popover title="Voir les details de cette livraison" trigger="hover">
+                <Tag color={tagColor} onClick={()=>handInfo(record.id_commande) }>
+                  {textValue}
+                </Tag>
+              </Popover>
             );
           },
         },
@@ -183,8 +188,9 @@ const CommandeRapport = () => {
           },
       ];
 
-      const HandOpen = () =>{
-        setOpens(!opens)
+      const handInfo = (e) =>{
+        setId_commande(e)
+        setOpenInfo(true)
       }
 
   const filteredData = data?.filter((item) =>
@@ -231,6 +237,19 @@ const CommandeRapport = () => {
                         >
                          <MouvClientDetail idClients={idClient}/>
                         </Modal>
+
+                        <Modal
+                          title="Information de client"
+                          centered
+                          open={openInfo}
+                          onCancel={() => setOpenInfo(false)}
+                          width={900}
+                          footer={[
+                          ]}
+                        >
+                         <LivraisonView id={id_commande}/>
+                        </Modal>
+
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>

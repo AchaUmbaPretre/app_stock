@@ -21,6 +21,7 @@ const ListeDetailView = () => {
   const [getLivreur, setGetLivreur] = useState([]);
   const [quantities, setQuantities] = useState([]);
   const [livreur, setLivreur] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const userId = useSelector((state) => state.user.currentUser.id);
   const [remise, setRemise] = useState(0);
@@ -291,6 +292,7 @@ const ListeDetailView = () => {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="products">
@@ -323,11 +325,6 @@ const ListeDetailView = () => {
             <>
               <div className="product-bottom-top">
                 <div className="product-bottom-left">
-                  <SisternodeOutlined className='product-icon' />
-                  <div className="product-row-search">
-                    <SearchOutlined className='product-icon-plus' />
-                    <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
-                  </div>
                 </div>
                 <div className="product-bottom-right">
                 </div>

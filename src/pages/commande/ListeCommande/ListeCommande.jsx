@@ -12,6 +12,7 @@ import ListeCommandeSelect from './ListeCommandeSelect';
 import ListeCommande7jrs from './ListeCommande7jrs';
 import ListeCommandeJour from './ListeCommandeJour';
 import CountUp from 'react-countup';
+import LivraisonView from '../../livraison/livraisonView/LivraisonView';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -30,7 +31,8 @@ const ListeCommande = () => {
     const [rapportMoney, setRapportMoney] = useState([]);
     const [start_date, setStart_date] = useState('');
     const [end_date, setEnd_date] = useState('');
-
+    const [id_commande, setId_commande] = useState('');
+    const [openInfo, setOpenInfo] = useState(false);
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
       confirm();
@@ -213,7 +215,7 @@ const ListeCommande = () => {
           dataIndex: 'id_livraison',
           key: 'id_livraison',
           ...getColumnSearchProps('id_livraison'),
-          render: (text) => {
+          render: (text, record) => {
             let tagColor = '';
             let textValue = '';
       
@@ -230,9 +232,11 @@ const ListeCommande = () => {
             }
       
             return (
-              <Tag color={tagColor}>
-                 {textValue}
-              </Tag>
+              <Popover title="Voir les details de cette livraison" trigger="hover">
+                <Tag color={tagColor} onClick={()=>handInfo(record.id_commande) }>
+                  {textValue}
+                </Tag>
+              </Popover>
             );
           },
         },
@@ -296,6 +300,11 @@ const ListeCommande = () => {
             ),
           },
     ];
+
+    const handInfo = (e) =>{
+      setId_commande(e)
+      setOpenInfo(true)
+    }
 
       useEffect(() => {
         const fetchData = async () => {
@@ -414,6 +423,18 @@ const ListeCommande = () => {
                             ]}
                           >
                             <MouvClientDetail idClients={idClient}/>
+                          </Modal>
+
+                          <Modal
+                            title=""
+                            centered
+                            open={openInfo}
+                            onCancel={() => setOpenInfo(false)}
+                            width={900}
+                            footer={[
+                            ]}
+                          >
+                          <LivraisonView id={id_commande}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>

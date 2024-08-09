@@ -1,7 +1,7 @@
 import { EyeOutlined,CalendarOutlined,UserOutlined,PlusCircleOutlined, ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button,Space, Table, Popover, Tag, Modal, Select, Input} from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
@@ -14,7 +14,6 @@ const CommandeRapport = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
@@ -46,10 +45,6 @@ const CommandeRapport = () => {
         fetchData(dateFilter);
       }, [fetchData,dateFilter]);
       
-
-      const handleEdit = (id) => {
-        navigate(`/Editcommande/${id}`);
-    };
 
     const showModal = (e) => {
       setOpen(true);
@@ -244,7 +239,6 @@ const CommandeRapport = () => {
                         >
                          <LivraisonView id={id_commande}/>
                         </Modal>
-
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>

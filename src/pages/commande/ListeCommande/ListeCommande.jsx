@@ -430,11 +430,11 @@ const ListeCommande = () => {
                             centered
                             open={openInfo}
                             onCancel={() => setOpenInfo(false)}
-                            width={900}
+                            width={1000}
                             footer={[
                             ]}
                           >
-                          <LivraisonView id={id_commande}/>
+                            <LivraisonView id={id_commande}/>
                           </Modal>
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>

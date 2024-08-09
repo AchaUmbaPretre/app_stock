@@ -6,7 +6,6 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import config from '../../../config';
 import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDetail';
-import { useSelector } from 'react-redux';
 const { Option } = Select;
 
 
@@ -20,7 +19,6 @@ const CommandeRapport = () => {
     const [opens, setOpens] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
-    const user = useSelector((state) => state.user?.currentUser);
     const location = useLocation();
     const period = new URLSearchParams(location.search).get('period');
     const [dateFilter, setDateFilter] = useState(period);
@@ -114,7 +112,7 @@ const CommandeRapport = () => {
           title: 'Livraison',
           dataIndex: 'id_livraison',
           key: 'id_livraison',
-          render: (text) => {
+          render: (text, record) => {
             let tagColor = '';
             let textValue = '';
       
@@ -132,7 +130,7 @@ const CommandeRapport = () => {
       
             return (
               <Tag color={tagColor}>
-                 {textValue}
+                {textValue}
               </Tag>
             );
           },

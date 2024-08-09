@@ -2,7 +2,7 @@ import './../products/products.scss'
 import { SearchOutlined, SisternodeOutlined,DollarOutlined, PlusOutlined,UserOutlined, FilePdfOutlined, FileExcelOutlined,CalendarOutlined, PrinterOutlined, DeleteOutlined, EyeOutlined,} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Input} from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import FormDepenses from './FormDepenses';
@@ -59,7 +59,7 @@ const DepensesAll = () => {
             ),
           },
            {
-            title: 'Montant total dollars',
+            title: '# Dollars',
             dataIndex: 'montant_total_dollars',
             key: 'montant_total_dollars',
             sorter: (a, b) => a.montant_total_dollars - b.montant_total_dollars,
@@ -71,7 +71,7 @@ const DepensesAll = () => {
             ),
           },
            {
-            title: 'Montant total francs',
+            title: '# Francs',
             dataIndex: 'montant_total_francs',
             key: 'montant_total_francs',
             sorter: (a, b) => a.montant_total_francs - b.montant_total_francs,
@@ -179,10 +179,13 @@ const DepensesAll = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                             <SisternodeOutlined className='product-icon' />
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input
+                              type="search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              placeholder="Recherche..."
+                              className="product-search"
+                            />
                         </div>
                         <div className="product-bottom-right">
                             

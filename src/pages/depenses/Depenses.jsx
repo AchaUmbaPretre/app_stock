@@ -71,7 +71,7 @@ const Depenses = ({dateId}) => {
             ),
           },
           {
-            title: 'Montant en dollars',
+            title: 'En dollars',
             dataIndex: 'montant',
             key: 'montant',
             sorter: (a, b) => a.montant - b.montant,
@@ -83,7 +83,7 @@ const Depenses = ({dateId}) => {
             ),
           },
           {
-            title: 'Montant en franc',
+            title: 'En franc',
             dataIndex: 'montant_franc',
             key: 'montant',
             sorter: (a, b) => a.montant_franc - b.montant_franc,

@@ -1,4 +1,4 @@
-import { EyeOutlined,CalendarOutlined,UserOutlined,PlusCircleOutlined,EditOutlined, ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { EyeOutlined,CalendarOutlined,UserOutlined,PlusCircleOutlined, ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button,Space, Table, Popover, Tag, Modal, Select, Input} from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -9,7 +9,6 @@ import MouvClientDetail from '../../mouvement/mouvementClientDetail/MouvClientDe
 import LivraisonView from '../../livraison/livraisonView/LivraisonView';
 const { Option } = Select;
 
-
 const CommandeRapport = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
@@ -17,7 +16,6 @@ const CommandeRapport = () => {
     const scroll = { x: 400 };
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    const [opens, setOpens] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const location = useLocation();

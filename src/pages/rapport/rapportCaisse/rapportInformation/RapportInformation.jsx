@@ -141,7 +141,7 @@ const RapportInformation = ({start_date, end_date}) => {
                             <img src={venteIcon} alt="" className='rowTotalIcon' />
                         </div>
                     </div>
-                    <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate('/listeCommande')}>
+                    <div className="rowTotalDetail-row" style={{background: 'rgb(131, 159, 241)'}} onClick={()=>navigate(`/listeCommande?start_date=${start_date}&end_date=${end_date}`)}>
                         <div className="rowTotalDetail-left">
                             <h2 className="rowTotal-h2"><CountUp end={commande[0]?.nbre}/></h2>
                             <span className="rowTotal-span">commandes</span>
@@ -150,7 +150,7 @@ const RapportInformation = ({start_date, end_date}) => {
                             <img src={commandeIcon} alt="" className='rowTotalIcon' />
                         </div>
                     </div>
-                    <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate('/livraison_detail')}>
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(53, 52, 52, 0.719)'}} onClick={()=>navigate(`/livraison_detail?start_date=${start_date}&end_date=${end_date}`)}>
                         <div className="rowTotalDetail-left">
                             <h2 className="rowTotal-h2"><CountUp end={livraison[0]?.nbre_livraison}/></h2>
                             <span className="rowTotal-span">Livraisons</span>
@@ -177,7 +177,7 @@ const RapportInformation = ({start_date, end_date}) => {
                             <img src={mouvementVenduIcon} alt="" className='rowTotalIcon' />
                         </div>
                     </div>
-                    <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate('/clients')}>
+                    <div className="rowTotalDetail-row" style={{background: 'rgb(112,128,144)'}} onClick={()=>navigate(`/dette?start_date=${start_date}&end_date=${end_date}`)}>
                         <div className="rowTotalDetail-left">
                             <h2 className="rowTotal-h2"><CountUp end={dette ? dette : 0 }/> $</h2>
                             <span className="rowTotal-span">Montant à credit</span>
@@ -186,7 +186,7 @@ const RapportInformation = ({start_date, end_date}) => {
                             <img src={detteIcon} alt="" className='rowTotalIcon' />
                         </div>
                     </div>
-                    <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate('/clients')}>
+                    <div className="rowTotalDetail-row" style={{background: 'rgb(128,0,0)'}} onClick={()=>navigate(`/paiement?start_date=${start_date}&end_date=${end_date}`)}>
                         <div className="rowTotalDetail-left">
                             <h2 className="rowTotal-h2"><CountUp end={paiement ? paiement : 0 }/> $</h2>
                             <span className="rowTotal-span">Remboursement</span>
@@ -195,7 +195,7 @@ const RapportInformation = ({start_date, end_date}) => {
                             <img src={paiementIcon} alt="" className='rowTotalIcon' />
                         </div>
                     </div>
-                    <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate('/clients')}>
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(255, 166, 0, 0.932)'}} onClick={()=>navigate(`/clients?start_date=${start_date}&end_date=${end_date}`)}>
                         <div className="rowTotalDetail-left">
                             <h2 className="rowTotal-h2"><CountUp end={client ? client : 0 }/></h2>
                             <span className="rowTotal-span">Clients</span>

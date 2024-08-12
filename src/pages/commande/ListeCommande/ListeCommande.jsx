@@ -1,7 +1,7 @@
 import { PlusOutlined, SearchOutlined,RedoOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined,DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button,Space,Input, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Highlighter from 'react-highlight-words';
 import axios from 'axios';
 import { format } from 'date-fns';
@@ -23,6 +23,10 @@ const ListeCommande = () => {
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const startDate = queryParams.get('start_date');
+    const endDate = queryParams.get('end_date');
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -317,7 +321,7 @@ const ListeCommande = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande?date_start=${startDate}&date_end=${endDate}`);
             setData(data);
             setLoading(false);
           } catch (error) {

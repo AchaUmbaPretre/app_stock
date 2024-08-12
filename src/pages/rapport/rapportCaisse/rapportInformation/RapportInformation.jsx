@@ -132,7 +132,7 @@ const RapportInformation = ({start_date, end_date}) => {
         <>
             <div className="rowTotalDetails" style={{margin: '20px 0'}}>
                 <div className="rowTotalDetail-wrapper">
-                    <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate('/ventes')}>
+                    <div className="rowTotalDetail-row" style={{background: 'rgba(0, 128, 0, 0.74)'}} onClick={()=>navigate(`/ventes?start_date=${start_date}&end_date=${end_date}`)}>
                         <div className="rowTotalDetail-left">
                             <h2 className="rowTotal-h2"><CountUp end={data[0]?.total}/></h2>
                             <span className="rowTotal-span">ventes</span>

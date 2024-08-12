@@ -2,7 +2,7 @@ import './../products/products.scss'
 import { SisternodeOutlined,EyeOutlined,RedoOutlined, ReconciliationOutlined,CloseOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined,DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Input} from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
@@ -15,6 +15,10 @@ import VenteView from './venteView/VenteView';
 
 const Ventes = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const startDate = queryParams.get('start_date');
+    const endDate = queryParams.get('end_date');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
@@ -172,7 +176,7 @@ const Ventes = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente?start_date=${startDate}&end_date=${endDate}`);
             setData(data);
             setLoading(false)
           } catch (error) {

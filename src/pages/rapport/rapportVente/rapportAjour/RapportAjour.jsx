@@ -1,5 +1,5 @@
 import { SearchOutlined,CalendarOutlined, RedoOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Table, Tag, Image, Popover } from 'antd';
+import { Table, Tag, Image, Popover, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
@@ -227,10 +227,13 @@ useEffect(() => {
                 <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
-                              <div className="product-row-search">
-                                  <SearchOutlined className='product-icon-plus'/>
-                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                              </div>
+                            <Input
+                                type="search"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                placeholder="Recherche..."
+                                className="product-search"
+                            /> 
                           </div>
                           <div className="product-bottom-right">
                             <Popover content={'Actualiser cette page'}>
@@ -238,10 +241,8 @@ useEffect(() => {
                             </Popover>
                           </div>
                       </div>
-{/*                       {open &&
-                              <RapportVenteSelects getProduits={setGetRapport}/> } */}
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
                 </div>
             </div>

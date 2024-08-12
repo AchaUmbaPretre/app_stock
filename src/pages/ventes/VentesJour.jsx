@@ -3,6 +3,7 @@ import { SearchOutlined, EyeOutlined,ReconciliationOutlined,WhatsAppOutlined,Use
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
 import { Link } from 'react-router-dom';
+import CountUp from 'react-countup';
 import axios from 'axios';
 import config from '../../config';
 import { format } from 'date-fns';
@@ -24,6 +25,7 @@ const VentesJour = () => {
     const user = useSelector((state) => state.user?.currentUser);
     const [openVente, setOpenVente] = useState(false);
     const [iDcommande, setIdCommande] = useState('');
+    const [recent, setRecent] = useState([]);
 
       const handleDelete = async (id) => {
         try {
@@ -38,7 +40,6 @@ const VentesJour = () => {
         setOpenVente(!openVente);
         setIdCommande(e)
       };
-
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -80,7 +81,7 @@ const VentesJour = () => {
             ),
           },
         {
-          title: 'Quantité vendue',
+          title: 'Qté vendue',
           dataIndex: 'total_varianteproduit',
           key: 'total_varianteproduit',
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
@@ -100,7 +101,7 @@ const VentesJour = () => {
           )
         },
         {
-          title: 'Total prix',
+          title: '# Prix',
           dataIndex: 'total_prix_vente',
           key: 'total_prix_vente',
           sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
@@ -171,6 +172,18 @@ const VentesJour = () => {
         fetchData();
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteRecentJour`);
+            setRecent(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
     const handleOk = async (e) => {
       setOpen(true)
       setIdClient(e)
@@ -190,6 +203,20 @@ const VentesJour = () => {
     <>
         <div className="products">
             <div className="product-container">
+              <div className="product-container-top">
+                  <div className="product-left">
+                    <h2 className="product-h2">Liste de ventes du jour</h2>
+                    <span>Gérer vos ventes du jour</span>
+                  </div>
+                  <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                    <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                      <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'article vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_article_vendue}/></b></p>
+                      <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de client(e) acheté(e): <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_de_vente}/></b></p>
+                      <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.nbre_commande}/></b></p>
+                      <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.montant_total}/></b></p>
+                    </div>
+                  </div>
+                </div>
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">

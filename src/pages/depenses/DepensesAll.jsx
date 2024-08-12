@@ -82,7 +82,7 @@ const DepensesAll = () => {
             ),
           },
           {
-            title: 'Montant total',
+            title: '# Total',
             dataIndex: 'montant_total_combine',
             key: 'montant_total_combine',
             sorter: (a, b) => a.montant_total_combine - b.montant_total_combine,

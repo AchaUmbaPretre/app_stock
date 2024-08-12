@@ -1,5 +1,5 @@
 import './../products/products.scss'
-import { SearchOutlined, SisternodeOutlined,EyeOutlined,RedoOutlined, ReconciliationOutlined,CloseOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined,DollarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SisternodeOutlined,EyeOutlined,RedoOutlined, ReconciliationOutlined,CloseOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined,DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Input} from 'antd';
 import { Link } from 'react-router-dom';
@@ -91,7 +91,7 @@ const Ventes = () => {
           ),
         },
         {
-          title: 'Quantité vendue',
+          title: 'Qté vendue',
           dataIndex: 'total_varianteproduit',
           key: 'total_varianteproduit',
           sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
@@ -111,7 +111,7 @@ const Ventes = () => {
           )
         },
         {
-          title: 'Total prix',
+          title: '# Prix',
           dataIndex: 'total_prix_vente',
           key: 'total_prix_vente',
           sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
@@ -202,35 +202,35 @@ const Ventes = () => {
     <>
         <div className="products">
             <div className="product-container">
-                <div className="product-container-top">
-                    <div className="product-left">
-                        <h2 className="product-h2">Liste de ventes</h2>
-                        <span>Gérer vos ventes</span>
-                    </div>
-                </div>
-                <div className="product-bottom">
-                    <div className="product-bottom-top">
-                        <div className="product-bottom-left">
-                        {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                        <Input
-                          type="search"
-                          value={searchValue}
-                          onChange={(e) => setSearchValue(e.target.value)}
-                          placeholder="Recherche..."
-                          className="product-search"
-                        /> 
+                <Tabs>
+                      <Tabs.TabPane tab='Ventes' key={1}>
+                      <div className="product-container-top">
+                        <div className="product-left">
+                            <h2 className="product-h2">Liste de ventes</h2>
+                            <span>Gérer vos ventes</span>
                         </div>
-                        <div className="product-bottom-right">
-                          <Popover content={'Actualiser cette page'}>
-                            <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
-                          </Popover>
+                      </div>
+                      <div className="product-bottom">
+                        <div className="product-bottom-top">
+                          <div className="product-bottom-left">
+                            {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                            <Input
+                              type="search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              placeholder="Recherche..."
+                              className="product-search"
+                            /> 
+                          </div>
+                          <div className="product-bottom-right">
+                            <Popover content={'Actualiser cette page'}>
+                              <RedoOutlined className='product-icon-raf' onClick={Rafraichir}/>
+                            </Popover>
+                          </div>
                         </div>
-                    </div>
                     {opens &&
                     <VenteSelect getProduits={setData}/> }
                 </div>
-                <Tabs>
-                      <Tabs.TabPane tab='Ventes' key={1}>
                       <div className="rowChart-row-table">
                         <Modal
                           title="Information du client"

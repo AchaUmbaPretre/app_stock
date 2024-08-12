@@ -174,7 +174,7 @@ const Depenses = ({dateId}) => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                    <Modal
+                      <Modal
                           centered
                           title='Ajouter une dépense'
                           open={open}

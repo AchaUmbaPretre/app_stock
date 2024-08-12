@@ -2,6 +2,7 @@ import './../products/products.scss'
 import { SisternodeOutlined,DollarOutlined, PlusOutlined,UserOutlined, CalendarOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import CountUp from 'react-countup';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Input} from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -20,7 +21,7 @@ const DepensesAll = () => {
     const [openDetail, setOpenDetail] = useState(false);
     const [dateData, setDateData] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
-
+    const [recent, setRecent] = useState([]);
 
       const handleDelete = async (id) => {
       try {
@@ -146,6 +147,19 @@ const DepensesAll = () => {
         fetchData();
       }, [DOMAIN]);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseRapportChiffre`);
+            setRecent(data);
+            setLoading(false)
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [DOMAIN]);
+
 
     const handleOk = async (e) => {
       setOpen(true)
@@ -169,6 +183,16 @@ const DepensesAll = () => {
                         <h2 className="product-h2">Liste des dépenses</h2>
                         <span>Gérer vos dépenses</span>
                     </div>
+                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                        <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
+                          {recent[0]?.date_plus_ancienne && (
+                            <span>{`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`}</span>
+                          )}
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
+                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.total_depense}/> $</b></p>
+                        </div>
+                      </div>
                     <div className="product-right" onClick={handleOk}>
                         <PlusOutlined className='product-icon'/>
                         <span className="product-btn">Nouvelle dépense</span>

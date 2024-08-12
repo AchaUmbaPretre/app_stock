@@ -32,17 +32,6 @@ const RapportMoney = ({start_date, end_date}) => {
         fetchData();
       }, [DOMAIN,start_date,end_date]);
 
-/*       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/rapport/achatsTotal/total?date_start=${''}&date_end=${''}`);
-            setProduitTotalAchats(data[0]?.montant_total_achats);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]); */
 
       useEffect(() => {
         const fetchData = async () => {

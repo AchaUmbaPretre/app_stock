@@ -1,5 +1,5 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined, ArrowUpOutlined, ArrowDownOutlined,FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Table, Tag } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined, ArrowUpOutlined, ArrowDownOutlined,DollarOutlined } from '@ant-design/icons';
+import { Input, Table, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../config';
@@ -34,7 +34,7 @@ const columns = [
       ),
     },
     {
-      title: 'Nombre de vente',
+      title: 'Nbre vente',
       dataIndex: 'nombre_vente',
       key: 'nombre_vente',
       sorter: (a, b) => a.nombre_vente - b.nombre_vente,
@@ -44,7 +44,7 @@ const columns = [
       ),
     },
     {
-      title: 'Quantité vendue',
+      title: 'Qté vendue',
       dataIndex: 'quantite_vendue',
       key: 'quantite_vendue',
       sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
@@ -136,21 +136,22 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                             {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input.Search
+                              type="search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              placeholder="Recherche..."
+                              className="product-search"
+                            />
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            
                         </div>
                     </div>
                     {open &&
                     <RapportRevenuSelect getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 5}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
                     </div>
                 </div>
             </div>

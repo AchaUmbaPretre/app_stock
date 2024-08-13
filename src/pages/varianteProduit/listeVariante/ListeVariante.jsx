@@ -1,6 +1,6 @@
 import { SearchOutlined, SisternodeOutlined,RedoOutlined,CalendarOutlined, CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Image, Modal } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Image, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
@@ -212,20 +212,6 @@ const ListeVariante = () => {
       fetchData();
     }, [DOMAIN]);
 
-/*       const groupedData = Object.values(
-        data.reduce((acc, item) => {
-          const { code_variant, ...rest } = item;
-          if (acc[code_variant]) {
-            Object.assign(acc[code_variant], { data: [...acc[code_variant].data, rest] });
-          } else {
-            acc[code_variant] = { code_variant, data: [rest] };
-          }
-          return acc;
-        }, {})
-      );
-      const firstDataArray = groupedData.map(obj => obj.data[0]); */
-
-
     const filteredData = data?.filter((item) =>
       item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) || 
@@ -253,10 +239,13 @@ const ListeVariante = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input
+                              type="search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              placeholder="Recherche..."
+                              className="product-search"
+                            />
                         </div>
                         <div className="product-bottom-right">
                           <Popover content={'Actualiser cette page'}>

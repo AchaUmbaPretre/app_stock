@@ -62,10 +62,12 @@ const Dette = () => {
           key: 'nom',
           render : (text,record)=>(
             <div onClick={()=> handleOk(record.id_client)} style={{cursor: 'pointer'}}>
+            <Popover title={`Voir les détails de ${text}`} trigger="hover">
               <Tag color={'blue'}>
-              <UserOutlined style={{ marginRight: "5px" }} />
-              {text}
+                <UserOutlined style={{ marginRight: "5px" }} />
+                {text}
               </Tag>
+            </Popover>
             </div>
           )
         },

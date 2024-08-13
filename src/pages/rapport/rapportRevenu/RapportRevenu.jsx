@@ -169,7 +169,7 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                       <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '13px' }}>
                         <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre d'article vendue: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.quantite_vendue}/></b></p>
                         <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Nbre de commande: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.nombre_vente}/></b></p>
-                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Revenu total: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.revenu_total}/></b></p>
+                        <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Revenu total: <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={getRap[0]?.revenu_total}/> $</b></p>
                       </div>
                     </div>
                 </div>

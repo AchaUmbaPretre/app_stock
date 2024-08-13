@@ -11,20 +11,9 @@ const DetailPointure = ({idVariant}) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
-    const [open, setOpen] = useState(false);
-    const [idClient, setIdClient] = useState({});
     const [searchValue, setSearchValue] = useState('');
-    const user = useSelector((state) => state.user?.currentUser);
     const [pointure, setPointure] = useState('')
     
-      const handleDelete = async (id) => {
-      try {
-          await axios.delete(`${DOMAIN}/api/livraison/livraisonDeleteDetail/${id}`);
-            window.location.reload();
-        } catch (err) {
-          console.log(err);
-        }
-      };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},

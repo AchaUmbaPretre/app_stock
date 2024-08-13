@@ -1,5 +1,5 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined, ArrowUpOutlined, ArrowDownOutlined,DollarOutlined } from '@ant-design/icons';
-import { Input, Table, Tag } from 'antd';
+import { CalendarOutlined, ArrowUpOutlined, ArrowDownOutlined,DollarOutlined } from '@ant-design/icons';
+import { Table, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../config';
@@ -8,9 +8,7 @@ import RapportRevenuSelect from './RapportRevenuSelect';
 const RapportRevenuDays = ({month}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
-    const [getRap, setGetRap] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     
@@ -21,7 +19,7 @@ const columns = [
       dataIndex: 'date_vente',
       key: 'date_vente',
       render: (text) => (
-        <Tag color={'blue'}>{text}</Tag>
+        <Tag color={'blue'} icon={<CalendarOutlined />}>{text}</Tag>
       ),
     },
     {

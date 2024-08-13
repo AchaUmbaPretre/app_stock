@@ -1,6 +1,6 @@
 import './rapportVente.scss'
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined,RedoOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover, Tag, Image, Tabs, Modal } from 'antd';
+import { Button, Space, Table, Popover, Tag, Image, Tabs, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -266,10 +266,13 @@ useEffect(() => {
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
                               {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                              <div className="product-row-search">
-                                  <SearchOutlined className='product-icon-plus'/>
-                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                              </div>
+                              <Input
+                                  type="search"
+                                  value={searchValue}
+                                  onChange={(e) => setSearchValue(e.target.value)}
+                                  placeholder="Recherche..."
+                                  className="product-search"
+                              /> 
                           </div>
                           <div>
                             

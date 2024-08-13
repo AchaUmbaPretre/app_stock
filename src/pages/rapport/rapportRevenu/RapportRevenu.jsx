@@ -17,10 +17,34 @@ const RapportRevenu = () => {
     const [open, setOpen] = useState(false);
     const [month, setMonth] = useState('');
 
-    const HandOpen = (e) =>{
-      setOpen(!open)
-      setMonth(e)
-    }
+    // Fonction pour convertir le mois en numéro
+const monthToNumber = (month) => {
+  const months = {
+    'Janvier': '01',
+    'Février': '02',
+    'Mars': '03',
+    'Avril': '04',
+    'Mai': '05',
+    'Juin': '06',
+    'Juillet': '07',
+    'Août': '08',
+    'Septembre': '09',
+    'Octobre': '10',
+    'Novembre': '11',
+    'Décembre': '12',
+  };
+  return months[month] || '01';
+};
+
+const HandOpen = (mois, annee) => {
+  // Convertir le mois en numéro
+  const moisNumero = monthToNumber(mois);
+  const formattedDate = `${annee}-${moisNumero}`;
+  setMonth(formattedDate);
+  setOpen(!open);
+};
+
+    
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -28,9 +52,9 @@ const columns = [
       title: 'Mois',
       dataIndex: 'mois',
       key: 'mois',
-      render: (mois) => (
-        <Popover title={`Voir le detail de ${mois}`} trigger="hover">
-          <Tag color={'blue'} onClick={()=>HandOpen(mois) }>{mois}</Tag>
+      render: (text, record) => (
+        <Popover title={`Voir le detail de ${text}`} trigger="hover">
+          <Tag color={'blue'} onClick={()=>HandOpen(text, record.annee) }>{text}</Tag>
         </Popover>      
       ),
     },

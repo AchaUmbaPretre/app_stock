@@ -17,19 +17,11 @@ const RapportRevenuDays = ({month}) => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'Mois',
-      dataIndex: 'mois',
-      key: 'mois',
-      render: (mois) => (
-        <Tag color={'blue'}>{mois}</Tag>
-      ),
-    },
-    {
-      title: 'Année',
-      dataIndex: 'annee',
-      key: 'annee',
-      render: (annee) => (
-        <Tag color={'green'}>{annee}</Tag>
+      title: 'Date vente',
+      dataIndex: 'date_vente',
+      key: 'date_vente',
+      render: (text) => (
+        <Tag color={'blue'}>{text}</Tag>
       ),
     },
     {
@@ -95,9 +87,6 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN,month]);
 
-const filteredData = getRapport?.filter((item) =>
-item.mois.toLowerCase().includes(searchValue.toLowerCase())
-)
 
   return (
     <>
@@ -106,14 +95,6 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <Input.Search
-                              type="search"
-                              value={searchValue}
-                              onChange={(e) => setSearchValue(e.target.value)}
-                              placeholder="Recherche..."
-                              className="product-search"
-                            />
                         </div>
                         <div className="product-bottom-right">
                             
@@ -122,7 +103,7 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                     {open &&
                     <RapportRevenuSelect getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
+                        <Table columns={columns} dataSource={getRapport} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
                     </div>
                 </div>
             </div>

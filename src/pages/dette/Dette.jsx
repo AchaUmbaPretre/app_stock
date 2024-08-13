@@ -1,7 +1,7 @@
 import './../products/products.scss'
 import { SearchOutlined,EyeOutlined, SisternodeOutlined,RedoOutlined,CalendarOutlined,WhatsAppOutlined,UserOutlined,CloseOutlined,ArrowDownOutlined, ArrowUpOutlined,FilePdfOutlined,CloseCircleOutlined, CheckCircleOutlined, DollarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Tabs, Input } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Tabs, Input, Modal } from 'antd';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import config from '../../config';
@@ -13,6 +13,7 @@ import moment from 'moment';
 import DetteJour from './DetteJour';
 import DetteJour7 from './DetteJour7';
 import DetteJours30 from './DetteJours30';
+import DetteOne from './DetteOne';
 
 const Dette = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -116,7 +117,7 @@ const Dette = () => {
           ),
         },
         {
-          title: 'Nbre de dette',
+          title: 'Nbre dette',
           dataIndex: 'nbre_dette',
           key: 'nbre_dette',
           sorter: (a, b) => a.nbre_dette - b.nbre_dette,
@@ -183,7 +184,7 @@ const Dette = () => {
                 
               <Space size="middle">
                 <Popover title={`Voir les ventes à crédit de Mme ${record.nom}`} trigger="hover">
-                    <Link to={`/dette/${record.id_client}`}>
+                    <Link onClick={()=> handleOk(record.id_client)}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>
                   </Popover>
@@ -304,6 +305,17 @@ const Dette = () => {
                       <div className="rowChart-row-table">
                           <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                       </div>
+
+                        <Modal
+                            title=""
+                            centered
+                            open={open}
+                            onCancel={() => setOpen(false)}
+                            width={1150}
+                            footer={[]}
+                          >
+                            <DetteOne idClients={idClient}/>
+                          </Modal>
                     </div> 
                   </Tabs.TabPane>
                   <Tabs.TabPane tab='Dettes du jour' key={1}>

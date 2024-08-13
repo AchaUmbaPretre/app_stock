@@ -47,7 +47,7 @@ const DetteJour = () => {
           ),
         },
         {
-          title: 'Client',
+          title: 'NomDelaClient',
           dataIndex: 'nom',
           key: 'nom',
           render : (text,record)=>(

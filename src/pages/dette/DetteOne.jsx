@@ -9,7 +9,7 @@ import DetteSelect from './DetteSelect';
 import { format } from 'date-fns';
 import { useLocation } from 'react-router-dom';
 
-const DetteOne = () => {
+const DetteOne = ({idClients}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -180,7 +180,7 @@ const DetteOne = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteOne?id_client=${id_client}`);
+            const { data } = await axios.get(`${DOMAIN}/api/vente/vente/detteOne?id_client=${idClients}`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -188,7 +188,7 @@ const DetteOne = () => {
           }
         };
         fetchData();
-      }, [DOMAIN, id_client]);
+      }, [DOMAIN, idClients]);
 
     const handleOk = async (e) => {
       setOpen(true)
@@ -222,9 +222,6 @@ const DetteOne = () => {
                           />
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
                         </div>
                     </div>
                     {opens &&

@@ -1,8 +1,7 @@
-import { UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
+import { CalendarOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Image, Input} from 'antd';
+import { Table, Tag, Image, Input} from 'antd';
 import axios from 'axios';
-import { format } from 'date-fns';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
@@ -25,11 +24,6 @@ const DetailPointure = ({idVariant}) => {
         } catch (err) {
           console.log(err);
         }
-      };
-
-      const showModal = (e) => {
-        setOpen(true);
-        setIdClient(e);
       };
     
       const columns = [

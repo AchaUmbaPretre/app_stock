@@ -105,18 +105,21 @@ const columns = [
           </Tag>
         ),
       },
-{
-  title: 'Revenu moyen',
-  dataIndex: 'revenu_moyen_par_vente',
-  key: 'revenu_moyen_par_vente',
-  sorter: (a, b) => a.revenu_moyen_par_vente - b.revenu_moyen_par_vente,
-  sortDirections: ['descend', 'ascend'],
-  render: (revenu_moyen_par_vente) => (
-    <Tag color={revenu_moyen_par_vente > 0 ? 'green' : 'red'} icon={revenu_moyen_par_vente > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}>
-      {`$${revenu_moyen_par_vente}`}
-    </Tag>
-  ),
-}
+      {
+        title: 'Revenu moyen',
+        dataIndex: 'revenu_moyen_par_vente',
+        key: 'revenu_moyen_par_vente',
+        sorter: (a, b) => a.revenu_moyen_par_vente - b.revenu_moyen_par_vente,
+        sortDirections: ['descend', 'ascend'],
+        render: (revenu_moyen_par_vente) => {
+          const roundedRevenu = revenu_moyen_par_vente.toFixed(2);
+          return (
+            <Tag color={revenu_moyen_par_vente > 0 ? 'green' : 'red'} icon={revenu_moyen_par_vente > 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}>
+              {`$${roundedRevenu}`}
+            </Tag>
+          );
+        },
+      }      
 ];
 
 
@@ -192,7 +195,7 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
                     </div>
                     <Modal
-                      title={`Rapport du mois de ${nameMonth}`}
+                      title={`Rapport pour le mois de ${nameMonth}`}
                       centered
                       open={open}
                       onCancel={() => setOpen(false)}

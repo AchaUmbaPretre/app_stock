@@ -15,7 +15,9 @@ const RapportRevenu = () => {
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
+    const [opens, setOpens] = useState(false);
     const [month, setMonth] = useState('');
+    const [nameMonth, setNameMonth] = useState('');
 
     // Fonction pour convertir le mois en numéro
 const monthToNumber = (month) => {
@@ -42,6 +44,11 @@ const HandOpen = (mois, annee) => {
   const formattedDate = `${annee}-${moisNumero}`;
   setMonth(formattedDate);
   setOpen(!open);
+  setNameMonth(mois)
+};
+
+const HandOpens = () => {
+  setOpens(!open);
 };
 
     
@@ -142,7 +149,6 @@ const filteredData = getRapport?.filter((item) =>
 item.mois.toLowerCase().includes(searchValue.toLowerCase())
 )
 
-console.log("Filtered Data:", filteredData);
 
   return (
     <>
@@ -167,7 +173,7 @@ console.log("Filtered Data:", filteredData);
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                            {opens ?<CloseOutlined className='product-icon2' onClick={HandOpens} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
                             <Input.Search
                               type="search"
                               value={searchValue}
@@ -186,7 +192,7 @@ console.log("Filtered Data:", filteredData);
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
                     </div>
                     <Modal
-                      title="Information du client"
+                      title={`Rapport du mois de ${nameMonth}`}
                       centered
                       open={open}
                       onCancel={() => setOpen(false)}

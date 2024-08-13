@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import MouvementDepartSelect from './MouvementDepartSelect';
 import CountUp from 'react-countup';
 import PageDetails from '../PageDetails/PageDetails';
+import DetailPointure from '../ventes/detailPointureVente/DetailPointure';
 
 const MouvementDepart = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -19,6 +20,7 @@ const MouvementDepart = () => {
     const [opens, setOpens] = useState(false);
     const [idVariant, setvariant] = useState({});
     const [openVariant, setOpenVariant] = useState('');
+    const [openPointure, setOpenPointure] = useState('');
     const [data, setData] = useState([]);
     const searchInput = useRef(null);
     const scroll = { x: 500 };
@@ -27,6 +29,7 @@ const MouvementDepart = () => {
     const user = useSelector((state) => state.user?.currentUser);
     const [start_date, setStart_date] = useState('');
     const [end_date, setEnd_date] = useState('');
+    const [pointure, setPointure] = useState('');
     const [rapport, setRapport] = useState([]);
 
 
@@ -151,6 +154,12 @@ const MouvementDepart = () => {
         setOpenVariant(true);
         setvariant(e)
       };
+
+      const showModal = (e,p) => {
+        setOpenPointure(true);
+        setvariant(e)
+        setPointure(p)
+      };
              
       const Rafraichir = () =>{
         window.location.reload();
@@ -176,18 +185,30 @@ const MouvementDepart = () => {
           title: 'Marque',
           dataIndex: 'nom_marque',
           key: 'nom_marque',
-          render: (text, record) => {
-            return <Tag color={"blue"} onClick={()=>showModalPhone(record.id_varianteProduit)}>{text}</Tag>;
-          },
-        },
+          render: (text, record) => (
+            <div>
+              <Popover title={`Voir la fiche de ce produit`} trigger="hover">
+                <Tag color="blue" onClick={() => showModalPhone(record.id_varianteProduit)}>
+                  {text}
+                </Tag>
+              </Popover>
+            </div>
+          ),
+        },        
         {
           title: 'Pointure',
           dataIndex: 'taille',
           key: 'taille',
-          render: (text, record) => {
-            return <Tag color={"blue"}>{text}</Tag>;
-          },
-        },
+          render: (text, record) => (
+            <div>
+              <Popover title={`Voir l'historique de pointure ${record.taille}`} trigger="hover">
+                <Tag color="blue" onClick={() => showModal(record.id_varianteProduit, record.id_taille)}>
+                  {text}
+                </Tag>
+              </Popover>
+            </div>
+          ),
+        },        
         {
           title: 'Prix',
           dataIndex: 'prix',
@@ -249,7 +270,7 @@ const MouvementDepart = () => {
             },
           },
           {
-            title: 'Quantité',
+            title: 'Qté',
             dataIndex: 'quantite',
             key: 'quantite',
             sorter: (a, b) => a.quantite - b.quantite,
@@ -383,6 +404,17 @@ const MouvementDepart = () => {
                     >
                       <PageDetails id={idVariant}/>
                     </Modal>
+
+                    <Modal
+                          title=""
+                          centered
+                          open={openPointure}
+                          onCancel={() => setOpenPointure(false)}
+                          width={1100}
+                          footer={[]}
+                        >
+                         <DetailPointure idVariant={idVariant} idTaille={pointure}/>
+                        </Modal>
                 </div>
             </div>
         </div>

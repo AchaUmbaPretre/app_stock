@@ -173,7 +173,7 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            {opens ?<CloseOutlined className='product-icon2' onClick={HandOpens} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                            {opens ?<CloseOutlined className='product-icon2' onClick={HandOpens} /> : <SisternodeOutlined className='product-icon' onClick={HandOpens} />}
                             <Input.Search
                               type="search"
                               value={searchValue}
@@ -186,7 +186,7 @@ item.mois.toLowerCase().includes(searchValue.toLowerCase())
                             
                         </div>
                     </div>
-                    {open &&
+                    {opens &&
                     <RapportRevenuSelect getProduits={setGetRapport}/> }
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />

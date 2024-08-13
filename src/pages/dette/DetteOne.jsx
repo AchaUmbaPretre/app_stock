@@ -47,7 +47,7 @@ const DetteOne = () => {
           ),
         },
         {
-          title: 'Client',
+          title: 'NomDelaCliente',
           dataIndex: 'nom',
           key: 'nom',
           render : (text,record)=>(
@@ -205,8 +205,8 @@ const DetteOne = () => {
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Liste des dettes</h2>
-                        <span>Gérer vos dettes</span>
+                        <h2 className="product-h2">Liste des ventes à crédit</h2>
+                        <span>Gérer vos ventes à crédit</span>
                     </div>
                 </div>
                 <div className="product-bottom">

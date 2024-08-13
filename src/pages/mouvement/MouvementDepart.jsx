@@ -1,7 +1,7 @@
 import { SearchOutlined, UserOutlined,RedoOutlined, EnvironmentOutlined,CalendarOutlined,SisternodeOutlined,CloseOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image, Modal} from 'antd';
 import axios from 'axios';
 import config from '../../config';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import MouvementDepartSelect from './MouvementDepartSelect';
 import CountUp from 'react-countup';
+import PageDetails from '../PageDetails/PageDetails';
 
 const MouvementDepart = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -16,6 +17,8 @@ const MouvementDepart = () => {
     const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [opens, setOpens] = useState(false);
+    const [idVariant, setvariant] = useState({});
+    const [openVariant, setOpenVariant] = useState('');
     const [data, setData] = useState([]);
     const searchInput = useRef(null);
     const scroll = { x: 500 };
@@ -143,6 +146,11 @@ const MouvementDepart = () => {
         const HandOpen = () =>{
           setOpens(!opens)
         };
+
+        const showModalPhone = (e) => {
+          setOpenVariant(true);
+          setvariant(e)
+        };
              
       const Rafraichir = () =>{
         window.location.reload();
@@ -169,7 +177,7 @@ const MouvementDepart = () => {
           dataIndex: 'nom_marque',
           key: 'nom_marque',
           render: (text, record) => {
-            return <Tag color={"blue"}>{text}</Tag>;
+            return <Tag color={"blue"} onClick={()=>showModalPhone(record.id_varianteProduit)}>{text}</Tag>;
           },
         },
         {
@@ -365,6 +373,16 @@ const MouvementDepart = () => {
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
+                    <Modal
+                      title=""
+                      centered
+                      open={openVariant}
+                      onCancel={() => setOpenVariant(false)}
+                      width={1000}
+                      footer={[]}
+                    >
+                      <PageDetails id={idVariant}/>
+                    </Modal>
                 </div>
             </div>
         </div>

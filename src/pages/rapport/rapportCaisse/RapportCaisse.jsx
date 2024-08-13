@@ -9,7 +9,6 @@ import './rapportCaisse.scss';
 const { RangePicker } = DatePicker;
 
 const RapportCaisse = () => {
-    const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [dates, setDates] = useState(['', '']);
 
     const formatDate = (date) => date ? date.format('YYYY-MM-DD') : null;

@@ -32,7 +32,6 @@ const RapportMoney = ({start_date, end_date}) => {
         fetchData();
       }, [DOMAIN,start_date,end_date]);
 
-
       useEffect(() => {
         const fetchData = async () => {
           try {

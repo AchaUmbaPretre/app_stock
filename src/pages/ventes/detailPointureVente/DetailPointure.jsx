@@ -51,13 +51,16 @@ const DetailPointure = ({idVariant}) => {
         {
             title: 'Marque',
             dataIndex: 'nom_marque',
-            key: 'nom_marque'
+            key: 'nom_marque',
+            render: (text) => (
+                <Tag color={'green'}>{text}</Tag>
+              ),
           },
         {
-          title: 'Client',
+          title: 'NomDelaCliente',
           dataIndex: 'nom_client',
           key: 'nom_client',
-          render: (text) => (
+         render: (text) => (
             <Tag color={'green'}>{text}</Tag>
           ),
         },
@@ -80,7 +83,7 @@ const DetailPointure = ({idVariant}) => {
           ),
         },
         {
-          title: 'Prix unitaire',
+          title: 'Prix',
           dataIndex: 'total_prix_vente',
           key: 'total_prix_vente',
           sorter: (a, b) => a.prix_unitaire.length - b.prix_unitaire.length,
@@ -97,7 +100,7 @@ const DetailPointure = ({idVariant}) => {
           ),
         },
         {
-          title: 'Quantité',
+          title: 'Qté',
           dataIndex: 'nombre_vendu',
           key: 'nombre_vendu',
           sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,

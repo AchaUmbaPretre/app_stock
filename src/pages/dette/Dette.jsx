@@ -56,7 +56,7 @@ const Dette = () => {
           ),
         },
         {
-          title: 'Client',
+          title: 'NomDelaClient',
           dataIndex: 'nom',
           key: 'nom',
           render : (text,record)=>(
@@ -182,7 +182,7 @@ const Dette = () => {
             render: (text, record) => (
                 
               <Space size="middle">
-                <Popover title={`Voir la liste de vente en crédit de Mme ${record.nom}`} trigger="hover">
+                <Popover title={`Voir les ventes à crédit de Mme ${record.nom}`} trigger="hover">
                     <Link to={`/dette/${record.id_client}`}>
                       <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
                     </Link>

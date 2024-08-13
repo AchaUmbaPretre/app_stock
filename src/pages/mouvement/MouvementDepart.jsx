@@ -1,4 +1,4 @@
-import { SearchOutlined, UserOutlined,RedoOutlined, EnvironmentOutlined,CalendarOutlined,SisternodeOutlined,CloseOutlined, FilePdfOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SearchOutlined, UserOutlined,RedoOutlined, EnvironmentOutlined,CalendarOutlined,SisternodeOutlined,CloseOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image, Modal} from 'antd';
@@ -141,16 +141,16 @@ const MouvementDepart = () => {
           } catch (err) {
             console.log(err);
           }
-        };
+      };
 
-        const HandOpen = () =>{
-          setOpens(!opens)
-        };
+      const HandOpen = () =>{
+        setOpens(!opens)
+      };
 
-        const showModalPhone = (e) => {
-          setOpenVariant(true);
-          setvariant(e)
-        };
+      const showModalPhone = (e) => {
+        setOpenVariant(true);
+        setvariant(e)
+      };
              
       const Rafraichir = () =>{
         window.location.reload();

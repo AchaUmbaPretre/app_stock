@@ -1,5 +1,5 @@
 import './rapportVente.scss'
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined,RedoOutlined, CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
+import { CloseOutlined,SisternodeOutlined,EyeOutlined,RedoOutlined, CalendarOutlined, DollarOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popover, Tag, Image, Tabs, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';

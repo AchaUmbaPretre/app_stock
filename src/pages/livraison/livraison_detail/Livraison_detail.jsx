@@ -1,7 +1,7 @@
 import { SearchOutlined, SisternodeOutlined,EnvironmentOutlined,RedoOutlined,ArrowUpOutlined, FilePdfOutlined,EyeOutlined,CalendarOutlined,UserOutlined,WhatsAppOutlined, FileExcelOutlined,PrinterOutlined, DeleteOutlined, CloseOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Tabs, Input} from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import LivraisonClientDetail from './livraisonClientDetail/LivraisonClientDetail';
@@ -13,6 +13,10 @@ import LivraisonView from '../livraisonView/LivraisonView';
 
 const Livraison_detail = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const startDate = queryParams.get('start_date');
+    const endDate = queryParams.get('end_date');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const scroll = { x: 400 };
@@ -161,7 +165,7 @@ const Livraison_detail = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail?start_date=${startDate}&end_date=${endDate}`);
             setData(data);
             setLoading(false)
           } catch (error) {

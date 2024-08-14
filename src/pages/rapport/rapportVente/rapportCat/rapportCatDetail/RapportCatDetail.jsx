@@ -180,7 +180,7 @@ useEffect(() => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteAllRap/${id}`);
+        const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteAllRapCat?id_cat=${id}`);
         setGetRap(data);
 
       } catch (error) {

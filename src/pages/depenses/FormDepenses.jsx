@@ -48,7 +48,7 @@ const FormDepenses = () => {
       });
       notification.success({
         message: 'Success',
-        description: 'La categorie de dépenses a été enregistrée avec succès!',
+        description: 'La catégorie de dépenses a été enregistrée avec succès!',
       });
       setConfirmVisible(false);
       window.location.reload();
@@ -64,7 +64,9 @@ const FormDepenses = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setConfirmVisible(true);
+    if (!loading) {
+      setConfirmVisible(true);
+    }
   };
 
   const handleCancel = () => {
@@ -186,8 +188,12 @@ const FormDepenses = () => {
               ></textarea>
             </div>
             <div className="form-submit">
-              <button className="btn-submit" onClick={handleSubmit}>
-                Envoyer
+              <button
+                className="btn-submit"
+                onClick={handleSubmit}
+                disabled={loading} // Disable button when loading
+              >
+                {loading ? <CircularProgress size={24} /> : 'Envoyer'}
               </button>
               <button
                 className="btn-submit btn-annuler"
@@ -195,11 +201,6 @@ const FormDepenses = () => {
               >
                 Annuler
               </button>
-              {loading && (
-                <div className="loader-container loader-container-center">
-                  <CircularProgress size={30} />
-                </div>
-              )}
             </div>
           </div>
         </div>

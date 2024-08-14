@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportVenteAll from '../rapportVenteAll/RapportVenteAll';
+import RapportCatDetail from './rapportCatDetail/RapportCatDetail';
 
 const RapportCat = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,7 +15,7 @@ const RapportCat = () => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
-    const [idMarque, setIdMarque] = useState({});
+    const [idCat, setIdCat] = useState({});
     
     
 const columns = [
@@ -76,7 +77,7 @@ const columns = [
           
         <Space size="middle">
            <Popover title="Voir les détails" trigger="hover">
-            <Link onClick={()=> showModal(record.id_marque)}>
+            <Link onClick={()=> showModal(record.id_categorie)}>
               <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
             </Link>
           </Popover>
@@ -91,7 +92,7 @@ const HandOpen = () =>{
 
 const showModal = (e) => {
   setOpens(true);
-  setIdMarque(e)
+  setIdCat(e)
 };
 
 useEffect(() => {
@@ -151,7 +152,7 @@ const filteredData = getRapport?.filter((item) =>
                     footer={[
                             ]}
                   >
-                    <RapportVenteAll id={idMarque}/>
+                    <RapportCatDetail id={idCat}/>
                 </Modal>
             </div>
         </div>

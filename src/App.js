@@ -111,6 +111,7 @@ import PaiementRapport from './pages/paiement/paiementRapport/PaiementRapport';
 import PermissionOne from './pages/permissions/permissionOne/PermissionOne';
 import Options from './components/sidebar/Options';
 import RapportCat from './pages/rapport/rapportVente/rapportCat/RapportCat';
+import Profile from './pages/profile/Profile';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -541,6 +542,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/caisse',
           element: <RapportCaisse/>
+        },
+        {
+          path: '/profile',
+          element: <Profile/>
         }
       ]
     }, user?.role === 'livreur' && {

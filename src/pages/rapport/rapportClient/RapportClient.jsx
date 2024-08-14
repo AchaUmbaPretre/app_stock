@@ -1,5 +1,5 @@
-import { SearchOutlined, CloseOutlined,CalendarOutlined, SisternodeOutlined,EyeOutlined,UserOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined} from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Tabs, Modal } from 'antd';
+import { SearchOutlined, CloseOutlined,CalendarOutlined, SisternodeOutlined,EyeOutlined,UserOutlined,DollarOutlined} from '@ant-design/icons';
+import { Button, Space, Table, Popover,Tag, Tabs, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -32,7 +32,7 @@ const RapportClient = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'Nom client',
+      title: 'NomDelaClient(e)',
       dataIndex: 'nom_client',
       key: 'nom_client',
       render: (nom_client) => (
@@ -40,7 +40,7 @@ const columns = [
       ),
     },
     {
-      title: 'Quantité vendue',
+      title: 'Qté vendue',
       dataIndex: 'total_varianteproduit',
       key: 'total_varianteproduit',
       sorter: (a, b) => a.total_varianteproduit - b.total_varianteproduit,
@@ -50,7 +50,7 @@ const columns = [
       ),
     },
     {
-      title: 'Nbre de vente',
+      title: 'Nbre vente',
       dataIndex: 'nombre_ventes',
       key: 'nombre_ventes',
       sorter: (a, b) => a.nombre_ventes - b.nombre_ventes,
@@ -70,7 +70,7 @@ const columns = [
       ),
     },
     {
-        title: 'Montant de total de vente',
+        title: '# Tot de vente',
         dataIndex: 'total_prix_vente',
         key: 'total_prix_vente',
         sorter: (a, b) => a.total_prix_vente - b.total_prix_vente,
@@ -93,14 +93,14 @@ const columns = [
           </Tag>
         ),
       },
-    {
+/*     {
         title: 'Statut',
         dataIndex: 'statut',
         key: 'statut',
         render: (statut) => (
           <Tag color={'blue'}>{statut}</Tag>
         ),
-    },
+    }, */
     {
       title: 'Action',
       key: 'action',
@@ -176,21 +176,21 @@ useEffect(() => {
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
                               {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                              <div className="product-row-search">
-                                  <SearchOutlined className='product-icon-plus'/>
-                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                              </div>
+                              <Input.Search
+                                type="search"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                placeholder="Recherche..."
+                                className="product-search"
+                              />
                           </div>
                           <div className="product-bottom-right">
-                              <FilePdfOutlined className='product-icon-pdf' />
-                              <FileExcelOutlined className='product-icon-excel'/>
-                              <PrinterOutlined className='product-icon-printer'/>
                           </div>
                       </div>
                     {open &&
                       <RapportClientSelect getProduits={setGetRapport}  setStart_date={setStart_date} setEnd_date={setEnd_date} start_date={start_date} end_date={end_date}/> }
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                       </div>
                       
                       <Modal

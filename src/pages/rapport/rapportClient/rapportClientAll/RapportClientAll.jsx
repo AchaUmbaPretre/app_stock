@@ -1,5 +1,5 @@
 import { SearchOutlined, CloseOutlined,SisternodeOutlined,UserOutlined,DollarOutlined} from '@ant-design/icons';
-import { Table, Tag, Image } from 'antd';
+import { Table, Tag, Image, Input } from 'antd';
 import { CalendarOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -208,10 +208,13 @@ useEffect(() => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                             {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input.Search
+                              type="search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              placeholder="Recherche..."
+                              className="product-search"
+                            />
                         </div>
                         <div className="product-bottom-right">
                         </div>
@@ -219,7 +222,7 @@ useEffect(() => {
                      {open &&
                     <RapportClientAllSelect getProduits={setGetRapport} id={id}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>
                 </div>
             </div>

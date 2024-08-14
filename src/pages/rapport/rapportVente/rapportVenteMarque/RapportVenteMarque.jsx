@@ -85,14 +85,14 @@ const RapportVenteMarque = () => {
         },
     ];
 
-const HandOpen = () =>{
-  setOpen(!open)
-}
+    const HandOpen = () =>{
+      setOpen(!open)
+    }
 
-const showModal = (e) => {
-  setOpens(true);
-  setIdMarque(e)
-};
+    const showModal = (e) => {
+      setOpens(true);
+      setIdMarque(e)
+    };
 
 useEffect(() => {
   const fetchData = async () => {

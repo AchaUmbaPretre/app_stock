@@ -1,5 +1,5 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,FilePdfOutlined,FileExcelOutlined,PrinterOutlined, CalendarOutlined} from '@ant-design/icons';
-import { Table, Tag, Image } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined, CalendarOutlined} from '@ant-design/icons';
+import { Table, Tag, Image, Input } from 'antd';
 import React, { useEffect,useState } from 'react';
 import axios from 'axios';
 import config from '../../../../../config';
@@ -219,15 +219,16 @@ const filteredData = getRapport?.filter((item) =>
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                             {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                           <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input.Search
+                                type="search"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                placeholder="Recherche..."
+                                className="product-search"
+                            />
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            
                         </div>
                     </div>
                     {/* {open &&

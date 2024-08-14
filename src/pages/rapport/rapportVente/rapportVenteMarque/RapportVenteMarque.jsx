@@ -50,7 +50,7 @@ const RapportVenteMarque = () => {
           ),
         },
         {
-          title: 'Quantité vendue',
+          title: 'Qté vendue',
           dataIndex: 'quantite_vendue',
           key: 'quantite_vendue',
           sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
@@ -60,7 +60,7 @@ const RapportVenteMarque = () => {
           ),
         },
         {
-          title: 'Total chaussures en stock',
+          title: '# Chaussures en stock',
           dataIndex: 'total_chaussures_en_stock',
           key: 'total_chaussures_en_stock',
           sorter: (a, b) => a.total_chaussures_en_stock - b.total_chaussures_en_stock,

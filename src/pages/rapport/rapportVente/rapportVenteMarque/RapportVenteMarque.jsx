@@ -1,5 +1,5 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Tabs, Modal } from 'antd';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,EyeOutlined, DollarOutlined } from '@ant-design/icons';
+import { Button, Space, Table, Popover,Tag, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -90,7 +90,6 @@ const HandOpen = () =>{
   setOpen(!open)
 }
 
-
 const showModal = (e) => {
   setOpens(true);
   setIdMarque(e)
@@ -109,9 +108,9 @@ useEffect(() => {
   fetchData();
 }, [DOMAIN]);
 
- const filteredData = getRapport?.filter((item) =>
-item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
+const filteredData = getRapport?.filter((item) =>
+  item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
+  item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
 )
 
   return (
@@ -134,9 +133,6 @@ item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
                                     </div>
                                 </div>
                                 <div className="product-bottom-right">
-                                    <FilePdfOutlined className='product-icon-pdf' />
-                                    <FileExcelOutlined className='product-icon-excel'/>
-                                    <PrinterOutlined className='product-icon-printer'/>
                                 </div>
                             </div>
                             {open &&

@@ -17,74 +17,73 @@ const RapportVenteMarque = () => {
     const [opens, setOpens] = useState(false);
     const [idMarque, setIdMarque] = useState({});
     
-    
-const columns = [
-    { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
-    {
-      title: 'Marque',
-      dataIndex: 'nom_marque',
-      key: 'nom_marque',
-      render: (nom_marque) => (
-        <Tag color={'blue'}>{nom_marque}</Tag>
-      ),
-    },
-    {
-      title: 'Montant vendu',
-      dataIndex: 'montant_vendu',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.montant_vendu - b.montant_vendu,
-      sortDirections: ['descend', 'ascend'],
-      render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
-          {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-        </Tag>
-      ),
-    },
-    {
-      title: 'Nombre de vente',
-      dataIndex: 'nombre_vendu',
-      key: 'nombre_vendu',
-      sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,
-      sortDirections: ['descend', 'ascend'],
-      render: (nombre_vendu) => (
-        <Tag color={nombre_vendu > 0 ? 'green' : 'red'}>{nombre_vendu}</Tag>
-      ),
-    },
-     {
-      title: 'Quantité vendue',
-      dataIndex: 'quantite_vendue',
-      key: 'quantite_vendue',
-      sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
-      sortDirections: ['descend', 'ascend'],
-      render: (quantite_vendue) => (
-        <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
-      ),
-    },
-    {
-      title: 'Total chaussures en stock',
-      dataIndex: 'total_chaussures_en_stock',
-      key: 'total_chaussures_en_stock',
-      sorter: (a, b) => a.total_chaussures_en_stock - b.total_chaussures_en_stock,
-      sortDirections: ['descend', 'ascend'],
-      render: (total_chaussures_en_stock) => (
-        <Tag color={total_chaussures_en_stock > 0 ? 'green' : 'red'}>{total_chaussures_en_stock}</Tag>
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-          
-        <Space size="middle">
-           <Popover title="Voir les détails" trigger="hover">
-            <Link onClick={()=> showModal(record.id_marque)}>
-              <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-            </Link>
-          </Popover>
-        </Space>
-      ),
-    },
-];
+    const columns = [
+        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
+        {
+          title: 'Marque',
+          dataIndex: 'nom_marque',
+          key: 'nom_marque',
+          render: (nom_marque) => (
+            <Tag color={'blue'}>{nom_marque}</Tag>
+          ),
+        },
+        {
+          title: 'Montant vendu',
+          dataIndex: 'montant_vendu',
+          key: 'quantite_vendue',
+          sorter: (a, b) => a.montant_vendu - b.montant_vendu,
+          sortDirections: ['descend', 'ascend'],
+          render: (montant_vendu) => (
+            <Tag color={montant_vendu > 0 ? 'green' : 'red'} icon={<DollarOutlined />}>
+              {montant_vendu.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+            </Tag>
+          ),
+        },
+        {
+          title: 'Nombre de vente',
+          dataIndex: 'nombre_vendu',
+          key: 'nombre_vendu',
+          sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,
+          sortDirections: ['descend', 'ascend'],
+          render: (nombre_vendu) => (
+            <Tag color={nombre_vendu > 0 ? 'green' : 'red'}>{nombre_vendu}</Tag>
+          ),
+        },
+        {
+          title: 'Quantité vendue',
+          dataIndex: 'quantite_vendue',
+          key: 'quantite_vendue',
+          sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
+          sortDirections: ['descend', 'ascend'],
+          render: (quantite_vendue) => (
+            <Tag color={quantite_vendue > 0 ? 'green' : 'red'}>{quantite_vendue}</Tag>
+          ),
+        },
+        {
+          title: 'Total chaussures en stock',
+          dataIndex: 'total_chaussures_en_stock',
+          key: 'total_chaussures_en_stock',
+          sorter: (a, b) => a.total_chaussures_en_stock - b.total_chaussures_en_stock,
+          sortDirections: ['descend', 'ascend'],
+          render: (total_chaussures_en_stock) => (
+            <Tag color={total_chaussures_en_stock > 0 ? 'green' : 'red'}>{total_chaussures_en_stock}</Tag>
+          ),
+        },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (text, record) => (
+              
+            <Space size="middle">
+              <Popover title="Voir les détails" trigger="hover">
+                <Link onClick={()=> showModal(record.id_marque)}>
+                  <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+                </Link>
+              </Popover>
+            </Space>
+          ),
+        },
+    ];
 
 const HandOpen = () =>{
   setOpen(!open)

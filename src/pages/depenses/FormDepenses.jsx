@@ -4,13 +4,13 @@ import config from '../../config';
 import Select from 'react-select';
 import { CircularProgress } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { Modal, Button, notification } from 'antd';
+import { Modal, notification } from 'antd';
 import { ToastContainer } from 'react-toastify';
 
 const FormDepenses = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [loading, setLoading] = useState(false);
-  const [submitting, setSubmitting] = useState(false); // Track submission state
+  const [submitting, setSubmitting] = useState(false);
   const [data, setData] = useState({});
   const [catDepenses, setCatDepenses] = useState([]);
   const [livreur, setLivreur] = useState([]);
@@ -40,10 +40,10 @@ const FormDepenses = () => {
   };
 
   const handleConfirm = async () => {
-    if (submitting) return; // Prevent multiple submissions
+    if (submitting) return; 
 
     try {
-      setSubmitting(true); // Set submitting to true
+      setSubmitting(true);
       setLoading(true);
       await axios.post(`${DOMAIN}/api/depenses`, {
         ...data,

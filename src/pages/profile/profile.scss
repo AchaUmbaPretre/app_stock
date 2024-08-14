@@ -1,3 +1,5 @@
+@import '../../style.scss';
+
 .profile{
     .profile-wrapper{
         display: flex;
@@ -5,37 +7,40 @@
         .profile-left{
             flex: 1;
             padding: 20px;
+            height: max-content;
             background: #fff;
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             margin-bottom: 20px;
             border-radius: 5px;
-            ul{
-                li{
-                    font-size: 14px;
-                }
+            .profile2{
+                font-size: 18px;
+                color: rgba(1, 35, 138, 0.952);
             }
         }
         .profile-right{
             flex: 4;
-            padding: 20px;
+            padding: 25px;
             background: #fff;
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             margin-bottom: 20px;
             border-radius: 5px;
             .profile-title{
+                padding: 10px 0;
                 .profile-h2{
-
+                    color: rgba(1, 35, 138, 0.952);
                 }
             }
             .profile-img-rows{
+                border-top: 1px solid #eeeeee;
+                padding: 10px 0;
                 .profile-h4{
-
+                    color: rgba(1, 35, 138, 0.952);
                 }
                 .profile-info-rows{
-                    padding: 20px 0;
                     border-bottom: 1px solid #eeeeee;
+                    font-size: .8rem;
                     .icon_ant{
                         display: flex;
                         align-items: center;
@@ -43,6 +48,60 @@
                         font-size: 1.2rem;
                         width: 50px;
                         height: 50px;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+            .profile-bottom{
+                .product-container-bottom{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    padding: 20px 0;
+                    .form-controle{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                        .label{
+                            font-size: .9rem;
+                            color: #797979;
+                            @include mobileXR{
+                                font-size: .8rem;
+                            }
+                        }
+                        .form-input{
+                            padding: 8px 10px;
+                            border: none;
+                            outline: none;
+                            border: 1px solid #c5c5c5;
+                            border-radius: 5px;
+                            &:focus{
+                                border: 1px solid rgba(36, 36, 250, 0.418);
+                            }
+                            @include mobileXR{
+                                padding: 6px;
+                            }
+                        }
+                    }
+                    .form-submit{
+                        display: flex;
+                        gap: 10px;
+                        padding-top: 30px;
+                        .btn-submit{
+                            padding: 15px 20px;
+                            border: none;
+                            color: #fff;
+                            background:rgb(1, 35, 138);
+                            border-radius: 5px;
+                            cursor: pointer;
+                            &:hover{
+                                background:rgb(3, 58, 223);
+                            }
+                        }
+                        .btn-annuler{
+                            background: #464444;
+                            cursor: pointer;
+                        }
                     }
                 }
             }

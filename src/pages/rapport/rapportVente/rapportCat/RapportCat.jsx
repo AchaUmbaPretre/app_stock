@@ -21,7 +21,7 @@ const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
       title: 'Categorie',
-      dataIndex: 'nom_marque',
+      dataIndex: 'nom_categorie',
       key: 'nom_marque',
       render: (nom_marque) => (
         <Tag color={'blue'}>{nom_marque}</Tag>
@@ -97,7 +97,7 @@ const showModal = (e) => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/vente`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteCat`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
@@ -108,7 +108,6 @@ useEffect(() => {
 }, [DOMAIN]);
 
 const filteredData = getRapport?.filter((item) =>
-  item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
 )
 

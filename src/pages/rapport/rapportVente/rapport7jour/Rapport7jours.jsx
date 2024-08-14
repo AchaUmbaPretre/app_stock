@@ -1,5 +1,5 @@
 import { SearchOutlined,CalendarOutlined, FilePdfOutlined,DollarOutlined, FileExcelOutlined,PrinterOutlined } from '@ant-design/icons';
-import { Table, Tag, Image } from 'antd';
+import { Table, Tag, Image, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
@@ -212,10 +212,13 @@ useEffect(() => {
                 <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
-                              <div className="product-row-search">
-                                  <SearchOutlined className='product-icon-plus'/>
-                                  <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                              </div>
+                            <Input.Search
+                              type="search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              placeholder="Recherche..."
+                              className="product-search"
+                            />
                           </div>
                           <div className="product-bottom-right">
                               <FilePdfOutlined className='product-icon-pdf' />

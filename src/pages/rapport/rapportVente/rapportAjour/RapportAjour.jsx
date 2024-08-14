@@ -227,7 +227,7 @@ useEffect(() => {
                 <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
-                            <Input
+                            <Input.Search
                                 type="search"
                                 value={searchValue}
                                 onChange={(e) => setSearchValue(e.target.value)}

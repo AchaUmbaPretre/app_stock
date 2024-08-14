@@ -193,7 +193,7 @@ useEffect(() => {
 const filteredData = getRapport?.filter((item) =>
   item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
-  )
+)
 
   return (
     <>

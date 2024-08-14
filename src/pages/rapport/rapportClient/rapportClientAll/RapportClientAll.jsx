@@ -153,7 +153,7 @@ const RapportClientAll = () => {
             ),
           },
         {
-          title: 'Quantité vendue',
+          title: 'Qté vendue',
           dataIndex: 'quantite_vendue',
           key: 'quantite_vendue',
           sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
@@ -195,10 +195,9 @@ useEffect(() => {
 
  const filteredData = getRapport?.filter((item) =>
   item.nom_marque.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.description?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.nom_client?.toLowerCase().includes(searchValue.toLowerCase()) ||
   item.username?.toLowerCase().includes(searchValue.toLowerCase()) ||
-  item.taille?.toLowerCase().includes(searchValue.toLowerCase()) 
+  item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) 
   )
 
   return (

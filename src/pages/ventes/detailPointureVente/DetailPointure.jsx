@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Table, Tag, Image, Input} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
-import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 const DetailPointure = ({idVariant}) => {

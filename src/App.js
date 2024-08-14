@@ -110,6 +110,7 @@ import DetteRapport from './pages/dette/detteRapport/DetteRapport';
 import PaiementRapport from './pages/paiement/paiementRapport/PaiementRapport';
 import PermissionOne from './pages/permissions/permissionOne/PermissionOne';
 import Options from './components/sidebar/Options';
+import RapportCat from './pages/rapport/rapportVente/rapportCat/RapportCat';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -464,6 +465,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/rapportVenteMarque',
           element: <RapportVenteMarque/>
+        },
+        {
+          path: '/rapportCat',
+          element: <RapportCat/>
         },
         {
           path: '/rapportClient',

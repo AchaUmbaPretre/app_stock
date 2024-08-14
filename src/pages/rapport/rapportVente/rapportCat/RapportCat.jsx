@@ -1,10 +1,9 @@
-import { SisternodeOutlined,EyeOutlined, DollarOutlined } from '@ant-design/icons';
+import { SisternodeOutlined,EyeOutlined, DollarOutlined, CloseOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popover,Tag, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
-import RapportVenteMSelect from './RapportVenterMSelect';
 import RapportVenteAll from '../rapportVenteAll/RapportVenteAll';
 
 const RapportCat = () => {
@@ -21,7 +20,7 @@ const RapportCat = () => {
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
-      title: 'Marque',
+      title: 'Categorie',
       dataIndex: 'nom_marque',
       key: 'nom_marque',
       render: (nom_marque) => (
@@ -41,7 +40,7 @@ const columns = [
       ),
     },
     {
-      title: 'Nombre de vente',
+      title: 'Nbre de vente',
       dataIndex: 'nombre_vendu',
       key: 'nombre_vendu',
       sorter: (a, b) => a.nombre_vendu - b.nombre_vendu,
@@ -51,7 +50,7 @@ const columns = [
       ),
     },
      {
-      title: 'Quantité vendue',
+      title: 'Qté vendue',
       dataIndex: 'quantite_vendue',
       key: 'quantite_vendue',
       sorter: (a, b) => a.quantite_vendue - b.quantite_vendue,
@@ -61,7 +60,7 @@ const columns = [
       ),
     },
     {
-      title: 'Total chaussures en stock',
+      title: '# Chaussures en stock',
       dataIndex: 'total_chaussures_en_stock',
       key: 'total_chaussures_en_stock',
       sorter: (a, b) => a.total_chaussures_en_stock - b.total_chaussures_en_stock,
@@ -119,8 +118,8 @@ const filteredData = getRapport?.filter((item) =>
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">
-                        <h2 className="product-h2">Rapport des ventes par marque</h2>
-                        <span>Gérez votre rapport des ventes</span>
+                        <h2 className="product-h2">Rapport des ventes par catégorie</h2>
+                        <span>Gérez vos rapports de ventes</span>
                     </div>
                 </div>
                   <div className="product-bottom">
@@ -138,8 +137,8 @@ const filteredData = getRapport?.filter((item) =>
                                 <div className="product-bottom-right">
                                 </div>
                             </div>
-                            {open &&
-                            <RapportVenteMSelect getProduits={setGetRapport}/> }
+                            {/* {open &&
+                            <RapportVenteMSelect getProduits={setGetRapport}/> } */}
                             <div className="rowChart-row-table">
                                 <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                             </div>

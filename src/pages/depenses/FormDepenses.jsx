@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 const FormDepenses = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false); // Track submission state
   const [data, setData] = useState({});
   const [catDepenses, setCatDepenses] = useState([]);
   const [livreur, setLivreur] = useState([]);
@@ -39,7 +40,10 @@ const FormDepenses = () => {
   };
 
   const handleConfirm = async () => {
+    if (submitting) return; // Prevent multiple submissions
+
     try {
+      setSubmitting(true); // Set submitting to true
       setLoading(true);
       await axios.post(`${DOMAIN}/api/depenses`, {
         ...data,
@@ -59,6 +63,7 @@ const FormDepenses = () => {
       });
     } finally {
       setLoading(false);
+      setSubmitting(false); // Reset submitting state
     }
   };
 
@@ -213,6 +218,10 @@ const FormDepenses = () => {
         okText="Confirmer"
         cancelText="Annuler"
         className="confirmation-modal"
+        okButtonProps={{ 
+          disabled: submitting, // Disable confirm button while submitting
+          children: submitting ? <CircularProgress size={24} /> : 'Confirmer' // Show CircularProgress if submitting
+        }}
       >
         <p className="modal-text">Êtes-vous sûr de vouloir soumettre cette commande avec les informations suivantes ?</p>
         <ul className="modal-data">

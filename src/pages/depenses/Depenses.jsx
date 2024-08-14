@@ -161,7 +161,6 @@ const Depenses = ({dateId}) => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <SisternodeOutlined className='product-icon' />
                             <Input
                               type="search"
                               value={searchValue}

@@ -1,4 +1,4 @@
-import { CloseOutlined,SisternodeOutlined,EyeOutlined, DollarOutlined } from '@ant-design/icons';
+import { SisternodeOutlined,EyeOutlined, DollarOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popover,Tag, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import config from '../../../../config';
 import RapportVenteMSelect from './RapportVenterMSelect';
 import RapportVenteAll from '../rapportVenteAll/RapportVenteAll';
 
-const RapportVenteMarque = () => {
+const RapportCat = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [getRapport, setGetRapport] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -162,4 +162,4 @@ const filteredData = getRapport?.filter((item) =>
   )
 }
 
-export default RapportVenteMarque
+export default RapportCat

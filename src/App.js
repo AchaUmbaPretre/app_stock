@@ -112,6 +112,7 @@ import PermissionOne from './pages/permissions/permissionOne/PermissionOne';
 import Options from './components/sidebar/Options';
 import RapportCat from './pages/rapport/rapportVente/rapportCat/RapportCat';
 import Profile from './pages/profile/Profile';
+import RapportDepense from './pages/rapport/rapportDepense/RapportDepense';
 
 function App() {
 /*   const { currentUser } = useContext(AuthContext); */
@@ -494,6 +495,10 @@ const loading = useSelector((state) => state.user?.loading);
         {
           path: '/rapportDachats',
           element: <RapportDachats/>
+        },
+        {
+          path: '/rapportDepense',
+          element: <RapportDepense/>
         },
         {
           path: '/dette',

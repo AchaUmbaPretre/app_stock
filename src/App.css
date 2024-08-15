@@ -166,3 +166,11 @@ li{
   flex: 1;
 }
 
+/* App.css */
+.ant-tabs {
+  margin-bottom: 20px;
+}
+
+.ant-card {
+  margin-top: 20px;
+}

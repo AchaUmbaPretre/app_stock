@@ -10,7 +10,7 @@ const DepenseFilter = ({ onFilter }) => {
 
   return (
     <>
-        <div style={{ marginBottom: '20px' }}>
+        <div style={{ marginBottom: '20px', display:'flex', gap:'10px' }}>
             <RangePicker
                 onChange={(dates) => setDates(dates)}
                 format="YYYY-MM-DD"

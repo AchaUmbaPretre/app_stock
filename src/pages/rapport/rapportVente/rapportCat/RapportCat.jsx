@@ -16,7 +16,6 @@ const RapportCat = () => {
     const [opens, setOpens] = useState(false);
     const [idCat, setIdCat] = useState({});
     
-    
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {

@@ -6,11 +6,11 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const DepenseMoisChart = ({data}) => {
     const chartData = {
-        labels: data.map(item => item.mois),
+        labels: data?.map(item => item.mois),
         datasets: [
           {
             label: 'Dépenses Mensuelles',
-            data: data.map(item => item.total_mensuel),
+            data: data?.map(item => item.total_mensuel),
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
@@ -20,7 +20,7 @@ const DepenseMoisChart = ({data}) => {
 
   return (
     <div>
-        <Bar data={chartData} />;
+        <Bar data={chartData} />
     </div>
   )
 }

@@ -13,15 +13,18 @@ const DepensesType = ({data}) => {
           width: 80
         },
         {
-          title: 'Bénéficiaire',
-          dataIndex: 'beneficiaire',
-          key: 'beneficiaire',
+          title: 'Type de dépense',
+          dataIndex: 'type',
+          key: 'type',
           render: (text) => <Tag color='blue'>{text}</Tag>,
         },
         {
           title: 'Montant',
-          dataIndex: 'total_beneficiaire',
-          key: 'total_beneficiaire',
+          dataIndex: 'total_type',
+          key: 'total_type',
+          ey: 'total_type',
+          sorter: (a, b) => a.total_type - b.total_type,
+          sortDirections: ['descend', 'ascend'],
           render: (text) => <Tag color='blue'>{text} $</Tag>, // Retourner le JSX
         },
     ];

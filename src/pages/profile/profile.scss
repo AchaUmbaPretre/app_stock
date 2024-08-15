@@ -2,8 +2,13 @@
 
 .profile{
     .profile-wrapper{
+        width: 100%;
         display: flex;
         gap: 20px;
+        @include mobileXR{
+            display: flex;
+            flex-direction: column;
+        }
         .profile-left{
             flex: 1;
             padding: 20px;
@@ -33,7 +38,10 @@
                 }
             }
             .profile-img-rows{
-                border-top: 1px solid #eeeeee;
+                width: 100%;
+                display: flex;
+                flex-direction:column;
+                align-items: center;
                 padding: 10px 0;
                 .profile-h4{
                     color: rgba(1, 35, 138, 0.952);
@@ -53,6 +61,7 @@
                 }
             }
             .profile-bottom{
+                border-top: 1px solid #eeeeee;
                 .product-container-bottom{
                     display: flex;
                     flex-direction: column;

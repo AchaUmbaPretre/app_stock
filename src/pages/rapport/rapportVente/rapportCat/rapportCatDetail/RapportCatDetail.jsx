@@ -142,7 +142,7 @@ const columns = [
       sorter: (a, b) => a.montant_vendu - b.montant_vendu,
       sortDirections: ['descend', 'ascend'],
       render: (montant_vendu) => (
-        <Tag color={montant_vendu > 0 ? 'green' : 'red'}>{montant_vendu}</Tag>
+        <Tag color={montant_vendu > 0 ? 'green' : 'red'}>{montant_vendu} $</Tag>
       ),
     },
     {

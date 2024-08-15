@@ -2,7 +2,6 @@ import { Table, Tag } from 'antd';
 import React from 'react';
 
 const DepensesBeneficiaire = ({ data }) => {
-    console.log(data);
     const scroll = { x: 600 };
 
     const columns = [
@@ -11,13 +10,13 @@ const DepensesBeneficiaire = ({ data }) => {
           dataIndex: 'id', 
           key: 'id', 
           render: (text, record, index) => index + 1, 
-          width: 80 // Spécifier en pixels
+          width: 80
         },
         {
           title: 'Bénéficiaire',
           dataIndex: 'beneficiaire',
           key: 'beneficiaire',
-          render: (text) => <Tag color='blue'>{text}</Tag>, // Retourner le JSX
+          render: (text) => <Tag color='blue'>{text}</Tag>,
         },
         {
           title: 'Montant',

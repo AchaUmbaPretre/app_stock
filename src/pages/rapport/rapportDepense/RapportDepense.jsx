@@ -6,6 +6,8 @@ import DepenseFilter from './depenseFilter/DepenseFilter';
 import DepenseMoisChart from './depenseMoisChart/DepenseMoisChart';
 import DepensePeriode from './depensePeriode/DepensePeriode';
 import config from '../../../config';
+import DepensesType from './depensesType/DepensesType';
+import DepensesBeneficiaire from './depensesBeneficiaire/DepensesBeneficiaire';
 
 const { TabPane } = Tabs;
 
@@ -20,7 +22,6 @@ const RapportDepense = () => {
         totalPeriodData: []
     });
 
-    // Fonction pour récupérer les données
     const fetchData = async () => {
         try {
             const response = await axios.get(`${DOMAIN}/api/rapport/depense-rapport-global`);
@@ -87,6 +88,16 @@ const RapportDepense = () => {
                         <TabPane tab="Total sur Période" key="2">
                             <Card>
                                 <DepensePeriode data={filteredData.totalPeriodData} />
+                            </Card>
+                        </TabPane>
+                        <TabPane tab="Dépenses par type" key="3">
+                            <Card>
+                                <DepensesType data={filteredData.totalPeriodData} />
+                            </Card>
+                        </TabPane>
+                        <TabPane tab="Bénéficiaire" key="4">
+                            <Card>
+                                <DepensesBeneficiaire data={filteredData.totalPeriodData} />
                             </Card>
                         </TabPane>
                     </Tabs>

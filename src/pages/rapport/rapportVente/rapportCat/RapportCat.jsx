@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
-import RapportVenteAll from '../rapportVenteAll/RapportVenteAll';
 import RapportCatDetail from './rapportCatDetail/RapportCatDetail';
 
 const RapportCat = () => {

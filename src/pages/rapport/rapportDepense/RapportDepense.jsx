@@ -15,11 +15,15 @@ const RapportDepense = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [monthlyData, setMonthlyData] = useState([]);
     const [totalPeriodData, setTotalPeriodData] = useState([]);
-    const [loading, setLoading] = useState(true); // Initial loading state is true
+    const [typeData, setTypeData] = useState([]);
+    const [benefData, setBenefData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filteredData, setFilteredData] = useState({
         monthlyData: [],
-        totalPeriodData: []
+        totalPeriodData: [],
+        typeData : [],
+        benefData : []
     });
 
     const fetchData = async () => {
@@ -27,9 +31,13 @@ const RapportDepense = () => {
             const response = await axios.get(`${DOMAIN}/api/rapport/depense-rapport-global`);
             setMonthlyData(response.data.monthlyData);
             setTotalPeriodData(response.data.totalPeriodData);
+            setBenefData(response.beneficiaryData)
+            setTypeData(response.typeData)
             setFilteredData({
                 monthlyData: response.data.monthlyData,
-                totalPeriodData: response.data.totalPeriodData
+                totalPeriodData: response.data.totalPeriodData,
+                typeData: response.data.typeData,
+                benefData: response.data.beneficiaryData
             });
             setLoading(false);
         } catch (error) {
@@ -57,8 +65,8 @@ const RapportDepense = () => {
         })
         .then((response) => {
             setFilteredData({
-                monthlyData: response.data.monthlyData,
-                totalPeriodData: response.data.totalPeriodData
+                monthlyData: response.data?.monthlyData,
+                totalPeriodData: response.data?.totalPeriodData
             });
             setLoading(false);
         })
@@ -92,12 +100,12 @@ const RapportDepense = () => {
                         </TabPane>
                         <TabPane tab="Dépenses par type" key="3">
                             <Card>
-                                <DepensesType data={filteredData.totalPeriodData} />
+                                <DepensesType data={filteredData.typeData} />
                             </Card>
                         </TabPane>
                         <TabPane tab="Bénéficiaire" key="4">
                             <Card>
-                                <DepensesBeneficiaire data={filteredData.totalPeriodData} />
+                                <DepensesBeneficiaire data={filteredData.benefData} />
                             </Card>
                         </TabPane>
                     </Tabs>

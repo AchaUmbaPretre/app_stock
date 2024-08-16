@@ -21,7 +21,6 @@ const MouvementVenteRapport = () => {
     const [dateFilter, setDateFilter] = useState(period);
     const [pointure, setPointure] = useState('');
     const [idVariant, setvariant] = useState({});
-    const [openVariant, setOpenVariant] = useState('');
     const [openPointure, setOpenPointure] = useState('');
 
 

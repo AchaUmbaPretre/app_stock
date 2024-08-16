@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,SisternodeOutlined,CheckCircleOutlined,RedoOutlined,UserOutlined,EyeOutlined,CalendarOutlined } from '@ant-design/icons';
+import { CloseOutlined,SisternodeOutlined,CheckCircleOutlined,RedoOutlined,UserOutlined,EyeOutlined,CalendarOutlined } from '@ant-design/icons';
 import { Table, Tag, Space, Popover, Button, Tabs, Modal, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -135,7 +135,7 @@ useEffect(() => {
                         <div className="product-bottom-top">
                             <div className="product-bottom-left">
                                 {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                                <Input
+                                <Input.Search
                                   type="search"
                                   value={searchValue}
                                   onChange={(e) => setSearchValue(e.target.value)}

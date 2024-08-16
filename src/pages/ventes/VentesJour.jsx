@@ -1,7 +1,7 @@
 import './../products/products.scss'
 import { SearchOutlined, EyeOutlined,ReconciliationOutlined,WhatsAppOutlined,UserOutlined,CalendarOutlined, DollarOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Modal } from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import CountUp from 'react-countup';
 import axios from 'axios';
@@ -220,10 +220,13 @@ const VentesJour = () => {
                 <div className="product-bottom">
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' className='product-search' />
-                            </div>
+                          <Input.Search
+                            type="search"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="Recherche..."
+                            className="product-search"
+                            /> 
                         </div>
                         <div className="product-bottom-right">
                         </div>

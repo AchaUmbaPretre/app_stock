@@ -375,13 +375,13 @@ const MouvementDepart = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                        <Input.Search
+                          <Input.Search
                             type="search"
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             placeholder="Recherche..."
                             className="product-search"
-                          />  
+                          />
                         </div>
                         <div className="product-bottom-right">
                           <Popover content={'Actualiser cette page'}>

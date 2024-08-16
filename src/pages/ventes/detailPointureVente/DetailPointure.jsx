@@ -66,9 +66,9 @@ const DetailPointure = ({idVariant}) => {
         },
         {
           title: 'Prix',
-          dataIndex: 'total_prix_vente',
-          key: 'total_prix_vente',
-          sorter: (a, b) => a.prix_unitaire.length - b.prix_unitaire.length,
+          dataIndex: 'prix_vente',
+          key: 'prix_vente',
+          sorter: (a, b) => a.prix_vente.length - b.prix_vente.length,
           sortDirections: ['descend', 'ascend'],
           render: (text) => (
             <span>

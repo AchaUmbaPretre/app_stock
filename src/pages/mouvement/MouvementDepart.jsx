@@ -375,7 +375,7 @@ const MouvementDepart = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                        <Input
+                        <Input.Search
                             type="search"
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}

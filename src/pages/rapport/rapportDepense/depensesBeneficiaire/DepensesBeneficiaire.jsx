@@ -16,6 +16,8 @@ const DepensesBeneficiaire = ({ data }) => {
           title: 'Bénéficiaire',
           dataIndex: 'beneficiaire',
           key: 'beneficiaire',
+          sorter: (a, b) => a.beneficiaire - b.beneficiaire,
+          sortDirections: ['descend', 'ascend'],
           render: (text) => <Tag color='blue'>{text}</Tag>,
         },
         {

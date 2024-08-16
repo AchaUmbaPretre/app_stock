@@ -127,7 +127,7 @@ const MouvementRetour = () => {
             },
           },
           {
-            title: 'Quantité',
+            title: 'Qté',
             dataIndex: 'quantite',
             key: 'quantite',
             sorter: (a, b) => a.quantite - b.quantite,

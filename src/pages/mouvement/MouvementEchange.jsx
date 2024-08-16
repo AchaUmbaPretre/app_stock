@@ -1,12 +1,13 @@
 import { SisternodeOutlined,EnvironmentOutlined,CloseOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image, Modal} from 'antd';
 import axios from 'axios';
 import config from '../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import MouvementEchangeSelect from './MouvementEchangeSelect';
+import DetailPointure from '../ventes/detailPointureVente/DetailPointure';
 
 const MouvementEchange = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -17,7 +18,10 @@ const MouvementEchange = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
-    
+    const [pointure, setPointure] = useState('');
+    const [idVariant, setvariant] = useState({});
+    const [openPointure, setOpenPointure] = useState('');
+
       const handleDelete = async (id) => {
         try {
             await axios.delete(`${DOMAIN}/api/produit/mouvementDelete/${id}`);
@@ -25,6 +29,13 @@ const MouvementEchange = () => {
           } catch (err) {
             console.log(err);
           }
+        };
+
+
+        const showModal = (e,p) => {
+          setOpenPointure(true);
+          setvariant(e)
+          setPointure(p)
         };
     
       const columns = [
@@ -106,9 +117,15 @@ const MouvementEchange = () => {
             title: 'Pointure',
             dataIndex: 'taille',
             key: 'taille',
-            render: (text, record) => {
-              return <Tag color={"green"}>{text}</Tag>;
-            },
+            render: (text, record) => (
+              <div>
+                <Popover title={`Voir l'historique de pointure ${record.taille}`} trigger="hover">
+                  <Tag color="blue" onClick={() => showModal(record.id_varianteProduit, record.id_taille)}>
+                    {text}
+                  </Tag>
+                </Popover>
+              </div>
+            ),
           },
           {
             title: 'Quantité',
@@ -202,6 +219,16 @@ const MouvementEchange = () => {
                     <div className="rowChart-row-table">
                       <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
+                    <Modal
+                      title=""
+                      centered
+                      open={openPointure}
+                      onCancel={() => setOpenPointure(false)}
+                      width={1100}
+                      footer={[]}
+                    >
+                      <DetailPointure idVariant={idVariant} idTaille={pointure}/>
+                    </Modal>
                 </div>
             </div>
         </div>

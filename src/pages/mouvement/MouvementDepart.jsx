@@ -260,7 +260,7 @@ const MouvementDepart = () => {
           ),
         },
           {
-            title: 'Type mouvement',
+            title: 'Type mouv',
             dataIndex: 'type_mouvement',
             key: 'type_mouvement',
             ...getColumnSearchProps('type_mouvement'),

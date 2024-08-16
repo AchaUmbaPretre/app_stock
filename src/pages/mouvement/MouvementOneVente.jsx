@@ -157,7 +157,6 @@ const MouvementOneVente = ({id_commande, id_type}) => {
         };
         fetchData();
       }, [DOMAIN, id_commande,id_type]);
-
   
     return (
     <>

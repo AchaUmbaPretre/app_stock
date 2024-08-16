@@ -9,6 +9,7 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import MouvementAllSelect from './MouvementAllSelect';
 import PageDetails from '../PageDetails/PageDetails';
+import DetailPointure from '../ventes/detailPointureVente/DetailPointure';
 
 const MouvementAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -24,114 +25,19 @@ const MouvementAll = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
-
-      const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Recherche
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Supprimer
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
+    const [openPointure, setOpenPointure] = useState('');
+    const [pointure, setPointure] = useState('');
+    
 
       const showModalPhone = (e) => {
         setOpenVariant(true);
         setvariant(e)
+      };
+
+      const showModal = (e,p) => {
+        setOpenPointure(true);
+        setvariant(e)
+        setPointure(p)
       };
     
       const handleDelete = async (id) => {
@@ -167,6 +73,20 @@ const MouvementAll = () => {
             return <Tag color={"blue"} onClick={()=>showModalPhone(record.id_varianteProduit)}>{text}</Tag>;
           },
         },
+        {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          key: 'taille',
+          render: (text, record) => (
+            <div>
+              <Popover title={`Voir l'historique de pointure ${record.taille}`} trigger="hover">
+                <Tag color="blue" onClick={() => showModal(record.id_varianteProduit, record.id_taille)}>
+                  {text}
+                </Tag>
+              </Popover>
+            </div>
+          ),
+        },  
         {
           title: 'Client',
           dataIndex: 'nom_client',
@@ -210,21 +130,12 @@ const MouvementAll = () => {
           ),
         },
           {
-            title: 'Type mouvement',
+            title: 'Type mouv',
             dataIndex: 'type_mouvement',
             key: 'type_mouvement',
-            ...getColumnSearchProps('type_mouvement'),
             render: (text, record) => {
               const color = record.id_type_mouvement === 5 ? 'red' : 'green';
               return <Tag color={color}>{text}</Tag>;
-            },
-          },
-          {
-            title: 'Pointure',
-            dataIndex: 'taille',
-            key: 'taille',
-            render: (text, record) => {
-              return <Tag color={"green"}>{text}</Tag>;
             },
           },
           {
@@ -328,6 +239,17 @@ const MouvementAll = () => {
                       footer={[]}
                     >
                       <PageDetails id={idVariant}/>
+                    </Modal>
+
+                    <Modal
+                          title=""
+                          centered
+                          open={openPointure}
+                          onCancel={() => setOpenPointure(false)}
+                          width={1100}
+                          footer={[]}
+                    >
+                         <DetailPointure idVariant={idVariant} idTaille={pointure}/>
                     </Modal>
                 </div>
             </div>

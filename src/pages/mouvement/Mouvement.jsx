@@ -59,10 +59,6 @@ const Mouvement = () => {
         setIdTypeVenteCommande(id_commande)
       };
 
-      const qModal = (e) => {
-        navigate(`/mouvement/${e}`);
-      };
-
       const showModalLivreur = (e) => {
         navigate(`/mouvementOne/${e}`)
       };

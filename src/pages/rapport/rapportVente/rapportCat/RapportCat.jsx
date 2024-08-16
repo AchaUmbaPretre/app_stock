@@ -121,47 +121,50 @@ const filteredData = getRapport?.filter((item) =>
                     </div>
                 </div>
                 <Tabs>
-                <Tabs.TabPane tab='Jour' key={0}>
-                </Tabs.TabPane>
-                <Tabs.TabPane tab='7Jours' key={1}>
-                </Tabs.TabPane>
-                <Tabs.TabPane tab='Mois' key={2}>
-                </Tabs.TabPane>
-                <Tabs.TabPane tab='Année' key={2}>
-                </Tabs.TabPane>
+                  <Tabs.TabPane tab='Tous' key={0}>                  
+                    <div className="product-bottom">
+                      <div className="product-bottom-top">
+                      <div className="product-bottom-left">
+                            {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                                      <Input.Search
+                                        type="search"
+                                        value={searchValue}
+                                        onChange={(e) => setSearchValue(e.target.value)}
+                                        placeholder="Recherche..."
+                                        className="product-search"
+                                      />
+                                  </div>
+                                  <div className="product-bottom-right">
+                                  </div>
+                              </div>
+                              {/* {open &&
+                              <RapportVenteMSelect getProduits={setGetRapport}/> } */}
+                              <div className="rowChart-row-table">
+                                  <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                              </div>
+                    </div>
+                    <Modal
+                      title=""
+                      centered
+                      open={opens}
+                      onCancel={() => setOpens(false)}
+                      width={1200}
+                      footer={[
+                              ]}
+                    >
+                      <RapportCatDetail id={idCat}/>
+                    </Modal>
+
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Jour' key={1}>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='7Jours' key={2}>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Mois' key={3}>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab='Année' key={4}>
+                  </Tabs.TabPane>
                 </Tabs>
-                  <div className="product-bottom">
-                            <div className="product-bottom-top">
-                                <div className="product-bottom-left">
-                                    {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                                    <Input.Search
-                                      type="search"
-                                      value={searchValue}
-                                      onChange={(e) => setSearchValue(e.target.value)}
-                                      placeholder="Recherche..."
-                                      className="product-search"
-                                    />
-                                </div>
-                                <div className="product-bottom-right">
-                                </div>
-                            </div>
-                            {/* {open &&
-                            <RapportVenteMSelect getProduits={setGetRapport}/> } */}
-                            <div className="rowChart-row-table">
-                                <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
-                            </div>
-                  </div>
-                  <Modal
-                    title=""
-                    centered
-                    open={opens}
-                    onCancel={() => setOpens(false)}
-                    width={1200}
-                    footer={[
-                            ]}
-                  >
-                    <RapportCatDetail id={idCat}/>
-                </Modal>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-import { SearchOutlined, SisternodeOutlined,FilePdfOutlined,CalendarOutlined,CloseOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
+import { SisternodeOutlined,CalendarOutlined,CloseOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image, Modal, Input} from 'antd';
 import axios from 'axios';
@@ -224,9 +224,7 @@ const VenteView = ({id}) => {
                           />
                         </div>
                         <div className="product-bottom-right">
-                            <FilePdfOutlined className='product-icon-pdf' />
-                            <FileExcelOutlined className='product-icon-excel'/>
-                            <PrinterOutlined className='product-icon-printer'/>
+                            
                         </div>
                     </div>
                     {opens &&

@@ -1,131 +1,36 @@
 import { SearchOutlined, UserOutlined,CalendarOutlined } from '@ant-design/icons';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Tag, Image, Select} from 'antd';
+import { Button, Input, Space, Table, Popover,Tag, Image, Select, Modal} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
 import moment from 'moment';
 import { useLocation, useNavigate } from 'react-router-dom';
+import DetailPointure from '../../ventes/detailPointureVente/DetailPointure';
 const { Option } = Select;
 
 const MouvementVenteRapport = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const searchInput = useRef(null);
     const scroll = { x: 500 };
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const location = useLocation();
     const period = new URLSearchParams(location.search).get('period');
     const [dateFilter, setDateFilter] = useState(period);
-    
-      const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-      };
-      const handleReset = (clearFilters) => {
-        clearFilters();
-        setSearchText('');
-      };
-      const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-          <div
-            style={{
-              padding: 8,
-            }}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            <Input
-              ref={searchInput}
-              placeholder={`Search ${dataIndex}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              style={{
-                marginBottom: 8,
-                display: 'block',
-              }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Recherche
-              </Button>
-              <Button
-                onClick={() => clearFilters && handleReset(clearFilters)}
-                size="small"
-                style={{
-                  width: 90,
-                }}
-              >
-                Supprimer
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  confirm({
-                    closeDropdown: false,
-                  });
-                  setSearchText(selectedKeys[0]);
-                  setSearchedColumn(dataIndex);
-                }}
-              >
-                Filter
-              </Button>
-              <Button
-                type="link"
-                size="small"
-                onClick={() => {
-                  close();
-                }}
-              >
-                close
-              </Button>
-            </Space>
-          </div>
-        ),
-        filterIcon: (filtered) => (
-          <SearchOutlined
-            style={{
-              color: filtered ? '#1677ff' : undefined,
-            }}
-          />
-        ),
-        onFilter: (value, record) =>
-          record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownOpenChange: (visible) => {
-          if (visible) {
-            setTimeout(() => searchInput.current?.select(), 100);
-          }
-        },
-        render: (text) =>
-          searchedColumn === dataIndex ? (
-            <Highlighter
-              highlightStyle={{
-                backgroundColor: '#ffc069',
-                padding: 0,
-              }}
-              searchWords={[searchText]}
-              autoEscape
-              textToHighlight={text ? text.toString() : ''}
-            />
-          ) : (
-            text
-          ),
-      });
-    
+    const [pointure, setPointure] = useState('');
+    const [idVariant, setvariant] = useState({});
+    const [openVariant, setOpenVariant] = useState('');
+    const [openPointure, setOpenPointure] = useState('');
+
+
+      const showModal = (e,p) => {
+        setOpenPointure(true);
+        setvariant(e)
+        setPointure(p)
+      };  
+
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
         {
@@ -151,24 +56,26 @@ const MouvementVenteRapport = () => {
           },
         },
         {
+          title: 'Pointure',
+          dataIndex: 'taille',
+          key: 'taille',
+          render: (text, record) => (
+            <div>
+              <Popover title={`Voir l'historique de pointure ${record.taille}`} trigger="hover">
+                <Tag color="blue" onClick={() => showModal(record.id_varianteProduit, record.id_taille)}>
+                  {text}
+                </Tag>
+              </Popover>
+            </div>
+          ),
+        },
+        {
           title: 'Client',
           dataIndex: 'nom_client',
           key: 'nom_client',
           render: (text, record) => {
             return <Tag color={"green"}>{text}</Tag>;
           },
-        },
-        {
-          title: 'Livreur',
-          dataIndex: 'livreur',
-          key: 'livreur',
-          render : (text,record)=>(
-            <Popover content={`Voir toutes les livraisons de ${text}`} placement="top">
-              <div style={{cursor: 'pointer'}} onClick={()=> showModalLivreur(record.id_livreur)}>
-                <Tag color={'green'}><UserOutlined style={{ marginRight: "5px" }} /> {text}</Tag>
-              </div>
-            </Popover>
-          )
         },
         {
             title: 'Date',
@@ -185,25 +92,16 @@ const MouvementVenteRapport = () => {
               ),
           },
           {
-            title: 'Type mouvement',
+            title: 'Type mouv',
             dataIndex: 'type_mouvement',
             key: 'type_mouvement',
-            ...getColumnSearchProps('type_mouvement'),
             render: (text, record) => {
               const color = record.id_type_mouvement === 5 ? 'red' : 'green';
               return <Tag color={color}>{text}</Tag>;
             },
           },
           {
-            title: 'Pointure',
-            dataIndex: 'taille',
-            key: 'taille',
-            render: (text, record) => {
-              return <Tag color={"green"}>{text}</Tag>;
-            },
-          },
-          {
-            title: 'Quantité',
+            title: 'Qté',
             dataIndex: 'quantite',
             key: 'quantite',
             sorter: (a, b) => a.quantite - b.quantite,
@@ -223,10 +121,6 @@ const MouvementVenteRapport = () => {
           ),
       }
       ];
-
-      const showModalLivreur = (e) => {
-        navigate(`/mouvementOne/${e}`)
-      };
 
       const fetchData = useCallback(async (filter) => {
         try {
@@ -284,6 +178,16 @@ const MouvementVenteRapport = () => {
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
+                    <Modal
+                      title=""
+                      centered
+                      open={openPointure}
+                      onCancel={() => setOpenPointure(false)}
+                      width={1100}
+                      footer={[]}
+                    >
+                      <DetailPointure idVariant={idVariant} idTaille={pointure}/>
+                    </Modal>
                 </div>
             </div>
         </div>

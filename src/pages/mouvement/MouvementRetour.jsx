@@ -118,7 +118,7 @@ const MouvementRetour = () => {
           ),
         },
           {
-            title: 'Type mouvement',
+            title: 'Type mouv',
             dataIndex: 'type_mouvement',
             key: 'type_mouvement',
             render: (text, record) => {

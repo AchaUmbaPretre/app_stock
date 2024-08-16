@@ -199,6 +199,7 @@ const MouvementDepart = () => {
           title: 'Pointure',
           dataIndex: 'taille',
           key: 'taille',
+          sorter: (a, b) => a.taille.length - b.taille.length,
           render: (text, record) => (
             <div>
               <Popover title={`Voir l'historique de pointure ${record.taille}`} trigger="hover">

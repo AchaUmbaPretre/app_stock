@@ -1,11 +1,13 @@
 import { SearchOutlined, SisternodeOutlined,FilePdfOutlined,CalendarOutlined,CloseOutlined, FileExcelOutlined, PrinterOutlined, DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
+import { Button, Space, Table, Popover,Popconfirm, Tag, Image, Modal, Input} from 'antd';
 import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import VenteViewSelect from './VenteViewSelect';
+import DetailPointure from '../detailPointureVente/DetailPointure';
+import PageDetails from '../../PageDetails/PageDetails';
 
 const VenteView = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -15,6 +17,11 @@ const VenteView = ({id}) => {
     const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
     const [opens, setOpens] = useState(false);
+    const [idVariant, setvariant] = useState({});
+    const [openVariant, setOpenVariant] = useState('');
+    const [openPointure, setOpenPointure] = useState('');
+    const [pointure, setPointure] = useState('');
+    const [searchValue, setSearchValue] = useState('');
 
       const handleDelete = async (id) => {
       try {
@@ -23,6 +30,17 @@ const VenteView = ({id}) => {
         } catch (err) {
           console.log(err);
         }
+      };
+
+      const showModalPhone = (e) => {
+        setOpenVariant(true);
+        setvariant(e)
+      };
+
+      const showModal = (e,p) => {
+        setOpenPointure(true);
+        setvariant(e)
+        setPointure(p)
       };
 
       const HandOpen = () => {
@@ -48,7 +66,16 @@ const VenteView = ({id}) => {
         {
             title: 'Marque',
             dataIndex: 'nom_marque',
-            key: 'nom_marque'
+            key: 'nom_marque',
+            render: (text, record) => (
+              <div>
+                <Popover title={`Voir la fiche de ce produit`} trigger="hover">
+                  <Tag color="blue" onClick={() => showModalPhone(record.id_varianteProduit)}>
+                    {text}
+                  </Tag>
+                </Popover>
+              </div>
+            ),
           },
         {
           title: 'Client',
@@ -72,8 +99,14 @@ const VenteView = ({id}) => {
           key: 'pointure',
           sorter: (a, b) => a.pointure.length - b.pointure.length,
           sortDirections: ['descend', 'ascend'],
-          render: (text) => (
-            <Tag color={'#87d068'}>{text}</Tag>
+          render: (text, record) => (
+            <div>
+              <Popover title={`Voir l'historique de pointure ${record.taille}`} trigger="hover">
+                <Tag color="blue" onClick={() => showModal(record.id_varianteProduit, record.id_taille)}>
+                  {text}
+                </Tag>
+              </Popover>
+            </div>
           ),
         },
         {
@@ -123,11 +156,6 @@ const VenteView = ({id}) => {
             render: (text, record) => (
                 
               <Space size="middle">
-{/*                 <Popover title="Voir la liste de vante de cette commande" trigger="hover">
-                    <Link to={`/venteView/${record.id_commande}`}>
-                      <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-                    </Link>
-                </Popover> */}
                 {user?.role === 'admin' &&
                 <Popover title="Supprimer" trigger="hover">
                   <Popconfirm
@@ -187,10 +215,13 @@ const VenteView = ({id}) => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                         {opens ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" id="" placeholder='Recherche...' className='product-search' />
-                            </div>
+                        <Input.Search
+                            type="search"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="Recherche..."
+                            className="product-search"
+                          />
                         </div>
                         <div className="product-bottom-right">
                             <FilePdfOutlined className='product-icon-pdf' />
@@ -203,6 +234,28 @@ const VenteView = ({id}) => {
                     <div className="rowChart-row-table">
                         <Table columns={columns} dataSource={data} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>
+
+                    <Modal
+                      title=""
+                      centered
+                      open={openVariant}
+                      onCancel={() => setOpenVariant(false)}
+                      width={1000}
+                      footer={[]}
+                    >
+                      <PageDetails id={idVariant}/>
+                    </Modal>
+
+                    <Modal
+                      title=""
+                      centered
+                      open={openPointure}
+                      onCancel={() => setOpenPointure(false)}
+                      width={1100}
+                      footer={[]}
+                    >
+                      <DetailPointure idVariant={idVariant} idTaille={pointure}/>
+                    </Modal>
                 </div>
             </div>
         </div>

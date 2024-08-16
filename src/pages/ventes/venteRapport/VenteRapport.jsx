@@ -25,8 +25,6 @@ const VenteRapport = () => {
     const period = new URLSearchParams(location.search).get('period');
     const [dateFilter, setDateFilter] = useState(period);
 
-
-
     const fetchData = useCallback(async (filter) => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/vente/vente_rapport/rapport`, { params: { filter } });

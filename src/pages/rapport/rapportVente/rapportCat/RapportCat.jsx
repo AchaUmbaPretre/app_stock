@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportCatDetail from './rapportCatDetail/RapportCatDetail';
+import RapportCatSelect from './RapportCatSelect';
 const { Option } = Select;
 
 const RapportCat = () => {
@@ -141,7 +142,7 @@ const filteredData = getRapport?.filter((item) =>
                                     />
                                 </div>
                                 <div className="product-bottom-rights">
-                                  <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
+                                  <Select value={dateFilter || undefined} onChange={handleDateFilterChange} style={{ width: 200 }}  placeholder="Sélectionner une période">
                                     <Option value="today">Aujourd'hui</Option>
                                     <Option value="yesterday">Hier</Option>
                                     <Option value="last7days">7 derniers jours</Option>
@@ -150,8 +151,8 @@ const filteredData = getRapport?.filter((item) =>
                                   </Select>
                                 </div>
                             </div>
-                            {/* {open &&
-                            <RapportVenteMSelect getProduits={setGetRapport}/> } */}
+                          {open &&
+                            <RapportCatSelect getProduits={setGetRapport}/> }
                             <div className="rowChart-row-table">
                                 <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                             </div>
@@ -168,7 +169,6 @@ const filteredData = getRapport?.filter((item) =>
                 </Modal>
             </div>
         </div>
-
     </>
   )
 }

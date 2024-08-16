@@ -1,10 +1,11 @@
 import { SisternodeOutlined,EyeOutlined, DollarOutlined, CloseOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Modal, Input, Tabs } from 'antd';
+import { Button, Space, Table, Popover,Tag, Modal, Input, Select } from 'antd';
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../../../../config';
 import RapportCatDetail from './rapportCatDetail/RapportCatDetail';
+const { Option } = Select;
 
 const RapportCat = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -15,6 +16,7 @@ const RapportCat = () => {
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
     const [idCat, setIdCat] = useState({});
+    const [dateFilter, setDateFilter] = useState('');
     
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -93,18 +95,24 @@ const showModal = (e) => {
   setIdCat(e)
 };
 
-useEffect(() => {
-  const fetchData = async () => {
+  const fetchData = useCallback (async (filter) => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteCat`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteCat`, { params: { filter } });
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
       console.log(error);
     }
-  };
-  fetchData();
-}, [DOMAIN]);
+  }, [DOMAIN]);
+
+const handleDateFilterChange = (value) => {
+  setDateFilter(value);
+  fetchData(value);
+};
+
+useEffect(() => {
+  fetchData(dateFilter);
+}, [fetchData,dateFilter]);
 
 const filteredData = getRapport?.filter((item) =>
   item.nom_categorie.toLowerCase().includes(searchValue.toLowerCase())
@@ -120,51 +128,44 @@ const filteredData = getRapport?.filter((item) =>
                         <span>Gérez vos rapports de ventes</span>
                     </div>
                 </div>
-                <Tabs>
-                  <Tabs.TabPane tab='Tous' key={0}>                  
-                    <div className="product-bottom">
-                      <div className="product-bottom-top">
-                      <div className="product-bottom-left">
-                            {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
-                                      <Input.Search
-                                        type="search"
-                                        value={searchValue}
-                                        onChange={(e) => setSearchValue(e.target.value)}
-                                        placeholder="Recherche..."
-                                        className="product-search"
-                                      />
-                                  </div>
-                                  <div className="product-bottom-right">
-                                  </div>
-                              </div>
-                              {/* {open &&
-                              <RapportVenteMSelect getProduits={setGetRapport}/> } */}
-                              <div className="rowChart-row-table">
-                                  <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
-                              </div>
-                    </div>
-                    <Modal
-                      title=""
-                      centered
-                      open={opens}
-                      onCancel={() => setOpens(false)}
-                      width={1200}
-                      footer={[
-                              ]}
-                    >
-                      <RapportCatDetail id={idCat}/>
-                    </Modal>
-
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Jour' key={1}>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='7Jours' key={2}>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Mois' key={3}>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab='Année' key={4}>
-                  </Tabs.TabPane>
-                </Tabs>
+                  <div className="product-bottom">
+                            <div className="product-bottom-top">
+                                <div className="product-bottom-left">
+                                    {open ?<CloseOutlined className='product-icon2' onClick={HandOpen} /> : <SisternodeOutlined className='product-icon' onClick={HandOpen} />}
+                                    <Input.Search
+                                      type="search"
+                                      value={searchValue}
+                                      onChange={(e) => setSearchValue(e.target.value)}
+                                      placeholder="Recherche..."
+                                      className="product-search"
+                                    />
+                                </div>
+                                <div className="product-bottom-rights">
+                                  <Select value={dateFilter} onChange={handleDateFilterChange} style={{ width: 200 }}>
+                                    <Option value="today">Aujourd'hui</Option>
+                                    <Option value="yesterday">Hier</Option>
+                                    <Option value="last7days">7 derniers jours</Option>
+                                    <Option value="last30days">30 derniers jours</Option>
+                                    <Option value="last1year">1 an</Option>
+                                  </Select>
+                                </div>
+                            </div>
+                            {/* {open &&
+                            <RapportVenteMSelect getProduits={setGetRapport}/> } */}
+                            <div className="rowChart-row-table">
+                                <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                            </div>
+                  </div>
+                  <Modal
+                    title=""
+                    centered
+                    open={opens}
+                    onCancel={() => setOpens(false)}
+                    width={1200}
+                    footer={[]}
+                  >
+                    <RapportCatDetail id={idCat}/>
+                </Modal>
             </div>
         </div>
 

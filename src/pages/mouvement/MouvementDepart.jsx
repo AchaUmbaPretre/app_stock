@@ -406,15 +406,15 @@ const MouvementDepart = () => {
                     </Modal>
 
                     <Modal
-                          title=""
-                          centered
-                          open={openPointure}
-                          onCancel={() => setOpenPointure(false)}
-                          width={1100}
-                          footer={[]}
-                        >
-                         <DetailPointure idVariant={idVariant} idTaille={pointure}/>
-                        </Modal>
+                      title=""
+                      centered
+                      open={openPointure}
+                      onCancel={() => setOpenPointure(false)}
+                      width={1100}
+                      footer={[]}
+                    >
+                      <DetailPointure idVariant={idVariant} idTaille={pointure}/>
+                    </Modal>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { EnvironmentOutlined,RedoOutlined,ArrowUpOutlined,EyeOutlined, CalendarOutlined, UserOutlined, WhatsAppOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EnvironmentOutlined,ArrowUpOutlined,EyeOutlined, CalendarOutlined, UserOutlined, WhatsAppOutlined, DeleteOutlined } from '@ant-design/icons';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal,Input, Select} from 'antd';
 import { Link, useLocation } from 'react-router-dom';

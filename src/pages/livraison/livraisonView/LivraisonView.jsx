@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 import config from '../../../config';
 import LivraisonViewPrix from './LivraisonViewPrix';
 import { useSelector } from 'react-redux';
+import DetailPointure from '../../ventes/detailPointureVente/DetailPointure';
+import PageDetails from '../../PageDetails/PageDetails';
 
 const LivraisonView = ({id}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -18,7 +20,10 @@ const LivraisonView = ({id}) => {
     const [searchValue, setSearchValue] = useState('');
     const [getCommande, setGetCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
-
+    const [pointure, setPointure] = useState('');
+    const [idVariant, setvariant] = useState({});
+    const [openVariant, setOpenVariant] = useState('');
+    const [openPointure, setOpenPointure] = useState('');
     
       const handleDelete = async (id) => {
       try {
@@ -27,6 +32,17 @@ const LivraisonView = ({id}) => {
         } catch (err) {
           console.log(err);
         }
+      };
+
+      const showModals = (e,p) => {
+        setOpenPointure(true);
+        setvariant(e)
+        setPointure(p)
+      };
+
+      const showModalPhone = (e) => {
+        setOpenVariant(true);
+        setvariant(e)
       };
 
       const showModal = (e) => {
@@ -54,21 +70,30 @@ const LivraisonView = ({id}) => {
           title: 'Marque',
           dataIndex: 'nom_marque',
           key: 'nom_marque',
-          render: (text) => (
-            <Tag color={"green"}>
-              {text}
-            </Tag>
-          )
+          render: (text, record) => (
+            <div>
+              <Popover title={`Voir la fiche de ce produit`} trigger="hover">
+                <Tag color="blue" onClick={() => showModalPhone(record.id_varianteProduit)}>
+                  {text}
+                </Tag>
+              </Popover>
+            </div>
+          ),
         },
         {
           title: 'Pointure',
           dataIndex: 'pointure',
           key: 'pointure',
-          render: (text) => (
-            <Tag color={"#87d068"}>
-              {text}
-            </Tag>
-          )
+          sorter: (a, b) => a.pointure.length - b.pointure.length,
+          render: (text, record) => (
+            <div>
+              <Popover title={`Voir l'historique de pointure ${record.taille}`} trigger="hover">
+                <Tag color="blue" onClick={() => showModals(record.id_varianteProduit, record.id_taille)}>
+                  {text}
+                </Tag>
+              </Popover>
+            </div>
+          ),
         },
         {
           title: 'Client',
@@ -263,6 +288,28 @@ const LivraisonView = ({id}) => {
                           ]}
                         >
                          <LivraisonViewPrix prixTotal={prix} idDetail={idClient} userUpdate={user.id} idLivraison={id} /> 
+                        </Modal>
+
+                        <Modal
+                          title=""
+                          centered
+                          open={openVariant}
+                          onCancel={() => setOpenVariant(false)}
+                          width={1000}
+                          footer={[]}
+                        >
+                          <PageDetails id={idVariant}/>
+                        </Modal>
+                        
+                        <Modal
+                          title=""
+                          centered
+                          open={openPointure}
+                          onCancel={() => setOpenPointure(false)}
+                          width={1100}
+                          footer={[]}
+                        >
+                          <DetailPointure idVariant={idVariant} idTaille={pointure}/>
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
                     </div>

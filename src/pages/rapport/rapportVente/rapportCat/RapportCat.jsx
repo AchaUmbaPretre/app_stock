@@ -1,5 +1,5 @@
 import { SisternodeOutlined,EyeOutlined, DollarOutlined, CloseOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Popover,Tag, Modal, Input } from 'antd';
+import { Button, Space, Table, Popover,Tag, Modal, Input, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -120,6 +120,16 @@ const filteredData = getRapport?.filter((item) =>
                         <span>Gérez vos rapports de ventes</span>
                     </div>
                 </div>
+                <Tabs>
+                <Tabs.TabPane tab='Jour' key={0}>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab='7Jours' key={1}>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab='Mois' key={2}>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab='Année' key={2}>
+                </Tabs.TabPane>
+                </Tabs>
                   <div className="product-bottom">
                             <div className="product-bottom-top">
                                 <div className="product-bottom-left">

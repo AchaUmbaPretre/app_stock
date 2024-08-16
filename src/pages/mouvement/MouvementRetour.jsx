@@ -1,7 +1,7 @@
 import { SearchOutlined, UserOutlined,CalendarOutlined,DeleteOutlined,EnvironmentOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
+import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image, Modal} from 'antd';
 import axios from 'axios';
 import config from '../../config';
 import { useSelector } from 'react-redux';

@@ -103,7 +103,7 @@ const Mouvement = () => {
       
 
       useEffect(() => {
-        fetchData();
+        fetchData(currentPage, pageSize);
       }, [currentPage, pageSize]);
 
       const handleTableChange = (pagination) => {

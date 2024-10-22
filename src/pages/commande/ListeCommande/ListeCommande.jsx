@@ -448,7 +448,14 @@ const ListeCommande = () => {
                           >
                             <LivraisonView id={id_commande}/>
                           </Modal>
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                          <Table 
+                            columns={columns} 
+                            dataSource={filteredData} 
+                            bordered
+                            loading={loading} 
+                            scroll={scroll} 
+                            pagination={{ pageSize: 15}} 
+                          />
                       </div>
                     </div>
                   </Tabs.TabPane>

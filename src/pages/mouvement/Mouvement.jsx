@@ -35,6 +35,14 @@ const Mouvement = () => {
     const [idTypeRetour, setIdTypeRetour] = useState({});
     const [idTypeVenteCommande, setIdTypeVenteCommande] = useState([]);
     const user = useSelector((state) => state.user?.currentUser);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
+
 
       const showModal = (e) => {
         setOpen(true);
@@ -75,9 +83,52 @@ const Mouvement = () => {
           console.log(err);
         }
       };
+
+      const fetchData = async (page = currentPage, size = pageSize) => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/mouvement`, {
+            params: {
+              page: page,
+              pageSize: size,
+            },
+          });
+          setData(data.items); // Utilisez data.items
+          setTotalItems(data.total); // Utilisez data.total
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+          setLoading(false); // Assurez-vous de désactiver le chargement en cas d'erreur
+        }
+      };
+      
+
+      useEffect(() => {
+        fetchData();
+      }, [currentPage, pageSize]);
+
+      const handleTableChange = (pagination) => {
+        setCurrentPage(pagination.current);
+        setPageSize(pagination.pageSize);
+      
+        setPagination({
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+        });
+      
+        fetchData(pagination.current, pagination.pageSize);
+      };
+      
     
       const columns = [
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+        { title: '#', 
+          dataIndex: 'id', 
+          key: 'id', 
+          render: (text, record, index) => {
+            const pageSize = pagination.pageSize || 15;
+            const pageIndex = pagination.current || 1;
+            return (pageIndex - 1) * pageSize + index + 1;
+          }
+        },
         {
           title: 'Code',
           dataIndex: 'id_commande',
@@ -232,19 +283,6 @@ const Mouvement = () => {
           },
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvement`);
-            setData(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-
       const Rafraichir = () =>{
         window.location.reload();
       }
@@ -336,7 +374,20 @@ const Mouvement = () => {
                           >
                             <MouvementOneRetour id_commande={idTypeVenteCommande} id_type={idTypeRetour}/>
                           </Modal>
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          <Table
+                            columns={columns}
+                            dataSource={data}
+                            loading={loading}
+                            pagination={{
+                              current: currentPage,
+                              pageSize: pageSize,
+                              total: totalItems, // Total des éléments
+                              onChange: handleTableChange,
+                            }}
+                            scroll={scroll}
+                            onChange={handleTableChange}
+                          />
+
                       </div>
                     </div>
                   </Tabs.TabPane>

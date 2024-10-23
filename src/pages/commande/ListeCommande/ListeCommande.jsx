@@ -261,7 +261,7 @@ const ListeCommande = () => {
               let textValue = '';
         
               if (text === 1) {
-                tagColor = 'blue';
+                tagColor = 'orange';
                 textValue= 'Shop ngaliema'
               } 
               else if (text === 2) {

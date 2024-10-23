@@ -480,7 +480,13 @@ const ListeCommande = () => {
                             loading={loading} 
                             scroll={scroll} 
                             size="middle"
-                            pagination={{ pageSize: 15}} 
+                            pagination={{
+                              current: currentPage,
+                              pageSize: pageSize,
+                              total: totalItems,
+                              onChange: handleTableChange,
+                            }}
+                            onChange={handleTableChange}
                           />
                       </div>
                     </div>

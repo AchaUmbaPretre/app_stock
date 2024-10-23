@@ -331,12 +331,11 @@ const ListeCommande = () => {
       setId_commande(e)
       setOpenInfo(true)
     }
-
         const fetchData = async (page = currentPage, size = pageSize) => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/commande?date_start=${startDate}&date_end=${endDate}&page=${page}&pageSize=${size}`);
-            setData(data);
-            setTotalItems(data.total);
+            setData(data.data);
+            setTotalItems(data.totalItems);
             setLoading(false);
           } catch (error) {
             console.log(error);

@@ -1,6 +1,5 @@
-import { SearchOutlined,SisternodeOutlined,CloseOutlined,EnvironmentOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
+import { SisternodeOutlined,CloseOutlined,EnvironmentOutlined, UserOutlined,CalendarOutlined,DeleteOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image, Modal} from 'antd';
 import axios from 'axios';
 import config from '../../config';
@@ -13,14 +12,11 @@ import DetailPointure from '../ventes/detailPointureVente/DetailPointure';
 
 const MouvementAll = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
     const [idVariant, setvariant] = useState({});
     const [openVariant, setOpenVariant] = useState('');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [opens, setOpens] = useState(false);
-    const searchInput = useRef(null);
     const scroll = { x: 500 };
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
@@ -235,7 +231,7 @@ const MouvementAll = () => {
                         scroll={scroll} 
                         bordered
                         size="middle"
-                        pagination={{ pageSize: 10}} />
+                      />
                     </div>
                     <Modal
                       title=""

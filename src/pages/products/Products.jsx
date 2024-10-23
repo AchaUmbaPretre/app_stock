@@ -383,7 +383,9 @@ const filteredData = getProduit?.filter((item) =>
                         dataSource={filteredData} 
                         loading={loading} 
                         scroll={scroll} 
-                        pagination={{ pageSize: 12}} 
+                        pagination={{ pageSize: 12}}
+                        bordered
+                        size="middle" 
                       />
                     </div>
                 </div>

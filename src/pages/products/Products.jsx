@@ -37,7 +37,7 @@ const Products = () => {
       pageSize: 15,
     });
     const [totalItems, setTotalItems] = useState('');
-    
+
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
@@ -152,6 +152,17 @@ const Products = () => {
       }
     };
     
+    const handleTableChange = (pagination) => {
+      setCurrentPage(pagination.current);
+      setPageSize(pagination.pageSize);
+    
+      setPagination({
+        current: pagination.current,
+        pageSize: pagination.pageSize,
+      });
+    
+      fetchData(pagination.current, pagination.pageSize);
+    };
   const columns = [
     { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
     {
@@ -271,18 +282,24 @@ const HandOpen = () =>{
   setOpens(!opens)
 }
 
-useEffect(() => {
-  const fetchData = async () => {
+  const fetchData = async (page = currentPage, size = pageSize) => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/produit`);
+      const { data } = await axios.get(`${DOMAIN}/api/produit`,{
+        params: {
+          page: page,
+          pageSize: size,
+        },
+      });
       setGetProduit(data);
       setLoading(false)
     } catch (error) {
       console.log(error);
     }
   };
-  fetchData();
-}, [DOMAIN]);
+
+useEffect(() => {
+  fetchData(currentPage, pageSize);
+}, [currentPage, pageSize]);
 
 const showModal = (e) => {
   setOpen(true);
@@ -390,9 +407,15 @@ const filteredData = getProduit?.filter((item) =>
                         dataSource={filteredData} 
                         loading={loading} 
                         scroll={scroll} 
-                        pagination={{ pageSize: 12}}
                         bordered
                         size="middle" 
+                        pagination={{
+                          current: currentPage,
+                          pageSize: pageSize,
+                          total: totalItems,
+                          onChange: handleTableChange,
+                        }}
+                        onChange={handleTableChange}
                       />
                     </div>
                 </div>

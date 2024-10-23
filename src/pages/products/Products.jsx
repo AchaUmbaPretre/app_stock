@@ -378,7 +378,13 @@ const filteredData = getProduit?.filter((item) =>
                         <p>Souhaitez-vous réellement désactiver ou réactiver ?</p>
                       </Modal>
                     <div className="rowChart-row-table">
-                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 12}} />
+                      <Table 
+                        columns={columns} 
+                        dataSource={filteredData} 
+                        loading={loading} 
+                        scroll={scroll} 
+                        pagination={{ pageSize: 12}} 
+                      />
                     </div>
                 </div>
             </div>

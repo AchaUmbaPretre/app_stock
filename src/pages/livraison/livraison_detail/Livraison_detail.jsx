@@ -180,9 +180,9 @@ const Livraison_detail = () => {
         setOpenInfo(true)
       }
 
-        const fetchData = async () => {
+        const fetchData = async (page = currentPage, size = pageSize) => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail?start_date=${startDate}&end_date=${endDate}`);
+            const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail?start_date=${startDate}&end_date=${endDate}&page=${page}&pageSize=${size}`);
             setData(data);
             setLoading(false)
           } catch (error) {
@@ -190,9 +190,9 @@ const Livraison_detail = () => {
           }
         };
 
-        useEffect(() => {
-        fetchData();
-      }, [DOMAIN]);
+      useEffect(() => {
+        fetchData(currentPage, pageSize);
+      }, [currentPage, pageSize]);
 
       const Rafraichir = () =>{
         window.location.reload();

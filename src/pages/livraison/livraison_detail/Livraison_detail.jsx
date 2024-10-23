@@ -26,6 +26,13 @@ const Livraison_detail = () => {
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const [id_commande, setId_commande] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
     
       const handleDelete = async (id) => {
@@ -44,6 +51,17 @@ const Livraison_detail = () => {
 
       const HandOpen = () => {
         setOpens(!opens);
+      };
+
+      
+      const handleTableChange = (pagination) => {
+        setCurrentPage(pagination.current);
+        setPageSize(pagination.pageSize);
+        setPagination({
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+        });
+        fetchData(pagination.current, pagination.pageSize);
       };
 
       const columns = [
@@ -162,7 +180,6 @@ const Livraison_detail = () => {
         setOpenInfo(true)
       }
 
-      useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail?start_date=${startDate}&end_date=${endDate}`);
@@ -172,6 +189,8 @@ const Livraison_detail = () => {
             console.log(error);
           }
         };
+
+        useEffect(() => {
         fetchData();
       }, [DOMAIN]);
 
@@ -246,8 +265,16 @@ const Livraison_detail = () => {
                             columns={columns} 
                             dataSource={filteredData} 
                             loading={loading} 
-                            scroll={scroll} 
-                            pagination={{ pageSize: 10}} 
+                            pagination={{
+                              current: currentPage,
+                              pageSize: pageSize,
+                              total: totalItems,
+                              onChange: handleTableChange,
+                            }}
+                            bordered
+                            size="middle"
+                            scroll={scroll}
+                            onChange={handleTableChange}
 
                           />
                       </div>

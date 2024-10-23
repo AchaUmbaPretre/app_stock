@@ -376,7 +376,7 @@ const Mouvement = () => {
                           </Modal>
                           <Table
                             columns={columns}
-                            dataSource={data}
+                            dataSource={filteredData}
                             loading={loading}
                             pagination={{
                               current: currentPage,

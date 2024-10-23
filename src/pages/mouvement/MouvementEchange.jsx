@@ -217,7 +217,15 @@ const MouvementEchange = () => {
                     {opens &&
                       <MouvementEchangeSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
-                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                      <Table 
+                        columns={columns} 
+                        dataSource={filteredData} 
+                        loading={loading} 
+                        bordered
+                        size="middle"
+                        scroll={scroll} 
+                        pagination={{ pageSize: 10}} 
+                      />
                     </div>
                     <Modal
                       title=""

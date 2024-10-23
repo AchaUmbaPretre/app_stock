@@ -290,7 +290,8 @@ const HandOpen = () =>{
           pageSize: size,
         },
       });
-      setGetProduit(data);
+      setGetProduit(data.data);
+      setTotalItems(data.total);
       setLoading(false)
     } catch (error) {
       console.log(error);

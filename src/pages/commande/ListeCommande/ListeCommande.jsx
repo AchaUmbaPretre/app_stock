@@ -454,6 +454,7 @@ const ListeCommande = () => {
                             bordered
                             loading={loading} 
                             scroll={scroll} 
+                            size="middle"
                             pagination={{ pageSize: 15}} 
                           />
                       </div>

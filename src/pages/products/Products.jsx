@@ -30,7 +30,14 @@ const Products = () => {
     const user = useSelector((state) => state.user?.currentUser);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
+    
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);

@@ -212,7 +212,15 @@ const MouvementRetour = () => {
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table 
+                          columns={columns} 
+                          dataSource={filteredData} 
+                          loading={loading} 
+                          scroll={scroll} 
+                          bordered
+                          size="middle"
+                          pagination={{ pageSize: 10}} 
+                        />
                     </div>
                     <Modal
                       title=""

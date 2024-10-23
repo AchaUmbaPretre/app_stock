@@ -286,6 +286,8 @@ const MouvementOneRetour = ({id_commande, id_type}) => {
                           dataSource={filteredData} 
                           loading={loading} 
                           scroll={scroll} 
+                          bordered
+                          size="middle"
                           pagination={{ pageSize: 10}} 
                         />
                     </div>

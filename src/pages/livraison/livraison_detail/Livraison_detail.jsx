@@ -183,7 +183,7 @@ const Livraison_detail = () => {
         const fetchData = async (page = currentPage, size = pageSize) => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail?start_date=${startDate}&end_date=${endDate}&page=${page}&pageSize=${size}`);
-            setData(data);
+            setData(data.data);
             setTotalItems(data.total);
             setLoading(false)
           } catch (error) {

@@ -381,9 +381,11 @@ const Mouvement = () => {
                             pagination={{
                               current: currentPage,
                               pageSize: pageSize,
-                              total: totalItems, // Total des éléments
+                              total: totalItems,
                               onChange: handleTableChange,
                             }}
+                            bordered
+                            size="middle"
                             scroll={scroll}
                             onChange={handleTableChange}
                           />

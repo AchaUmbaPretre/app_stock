@@ -234,6 +234,7 @@ const MouvementAll = () => {
                         loading={loading} 
                         scroll={scroll} 
                         bordered
+                        size="middle"
                         pagination={{ pageSize: 10}} />
                     </div>
                     <Modal

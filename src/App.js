@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
-import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -120,8 +119,6 @@ const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 const dispatch = useDispatch();
 const user = useSelector((state) => state.user?.currentUser);
 const loading = useSelector((state) => state.user?.loading);
-
-/*   const [loading, setLoading] = useState(false); */
 
   useEffect(() => {
     const fetchData = async () => {

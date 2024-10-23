@@ -242,7 +242,14 @@ const Livraison_detail = () => {
                           >
                              <LivraisonView id={id_commande}/>
                           </Modal>
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          <Table 
+                            columns={columns} 
+                            dataSource={filteredData} 
+                            loading={loading} 
+                            scroll={scroll} 
+                            pagination={{ pageSize: 10}} 
+
+                          />
                       </div>
                     </div>
                   </Tabs.TabPane>

@@ -65,7 +65,15 @@ const Livraison_detail = () => {
       };
 
       const columns = [
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+        { title: '#', 
+          dataIndex: 'id', 
+          key: 'id', 
+          render: (text, record, index) => {
+            const pageSize = pagination.pageSize || 15;
+            const pageIndex = pagination.current || 1;
+            return (pageIndex - 1) * pageSize + index + 1;
+          }
+        },
         {
           title: 'Code',
           dataIndex: 'id_commande',

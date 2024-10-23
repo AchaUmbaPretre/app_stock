@@ -37,6 +37,13 @@ const ListeCommande = () => {
     const [end_date, setEnd_date] = useState('');
     const [id_commande, setId_commande] = useState('');
     const [openInfo, setOpenInfo] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
 
     const content = (e) => (
       <div className='popOverSous' style={{display: 'flex', flexDirection: "column", gap: "10px"}}>
@@ -165,7 +172,15 @@ const ListeCommande = () => {
     };
     
     const columns = [
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+      { title: '#', 
+        dataIndex: 'id', 
+        key: 'id', 
+        render: (text, record, index) => {
+          const pageSize = pagination.pageSize || 15;
+          const pageIndex = pagination.current || 1;
+          return (pageIndex - 1) * pageSize + index + 1;
+        }
+      },
         {
           title: 'Code',
           dataIndex: 'id_commande',
@@ -318,23 +333,35 @@ const ListeCommande = () => {
       setOpenInfo(true)
     }
 
-      useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (page = currentPage, size = pageSize) => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/commande?date_start=${startDate}&date_end=${endDate}`);
+            const { data } = await axios.get(`${DOMAIN}/api/commande?date_start=${startDate}&date_end=${endDate}&page=${page}&pageSize=${size}`);
             setData(data);
+            setTotalItems(data.total);
             setLoading(false);
           } catch (error) {
             console.log(error);
           }
         };
     
-        fetchData();
+        useEffect(() => {
+        fetchData(currentPage, pageSize);
       
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN]);
+      }, [currentPage, pageSize]);
+
+      const handleTableChange = (pagination) => {
+        setCurrentPage(pagination.current);
+        setPageSize(pagination.pageSize);
+      
+        setPagination({
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+        });
+        fetchData(pagination.current, pagination.pageSize);
+      };
 
 
       useEffect(() => {
@@ -346,9 +373,7 @@ const ListeCommande = () => {
             console.log(error);
           }
         };
-    
         fetchData();
-      
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);

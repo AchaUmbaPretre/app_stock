@@ -2,7 +2,7 @@ import { SearchOutlined, SisternodeOutlined,CalendarOutlined, FilePdfOutlined, F
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Tag, Image} from 'antd';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
 import { useSelector } from 'react-redux';
@@ -17,8 +17,6 @@ const MouvementView = ({id}) => {
     const searchInput = useRef(null);
     const scroll = { x: 400 };
     const navigate = useNavigate();
-/*     const {pathname} = useLocation();
-    const id = pathname.split('/')[2] */
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [getCommande, setGetCommande] = useState([]);

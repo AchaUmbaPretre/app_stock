@@ -23,7 +23,7 @@ import { toggleSidebar } from '../../redux/userRedux';
 
 const { SubMenu, Item } = Menu;
 
-const Options = () => {
+const Options = ({data}) => {
   const dispatch = useDispatch();
   const sidebarRef = useRef(null);
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -32,7 +32,7 @@ const Options = () => {
   const [options, setOptions] = useState([]);
   const userId = useSelector((state) => state.user?.currentUser.id);
   const isSidebarOpen = useSelector((state) => state.user?.isSidebarOpen);
-  const [data, setData] = useState([]);
+/*   const [data, setData] = useState([]); */
 
   const Logout = async () => {
     try {
@@ -47,7 +47,7 @@ const Options = () => {
     }
   };
 
-  const fetchMenu = useCallback(async () => {
+/*   const fetchMenu = useCallback(async () => {
     try {
       const { data } = await axios.get(`${DOMAIN}/api/inventaire/menuAll/addOne?userId=${userId}`);
       setData(data);
@@ -58,7 +58,7 @@ const Options = () => {
 
   useEffect(() => {
     fetchMenu();
-  }, [fetchMenu]);
+  }, [fetchMenu]); */
 
   const getMenuIcon = (icon) => {
     switch (icon) {

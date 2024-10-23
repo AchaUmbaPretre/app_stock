@@ -164,7 +164,15 @@ const Products = () => {
       fetchData(pagination.current, pagination.pageSize);
     };
   const columns = [
-    { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
+    { title: '#', 
+      dataIndex: 'id', 
+      key: 'id', 
+      render: (text, record, index) => {
+        const pageSize = pagination.pageSize || 15;
+        const pageIndex = pagination.current || 1;
+        return (pageIndex - 1) * pageSize + index + 1;
+      }
+    },
     {
       title: 'image',
       dataIndex: 'img',
@@ -184,6 +192,7 @@ const Products = () => {
         dataIndex: 'nom_produit',
         key: 'nom_produit',
         ...getColumnSearchProps('nom_produit'),
+        width:'9%',
         render: (text,record) => 
           <Tag color={'green'} style={{cursor:'pointer'}} onClick={()=> showModal(record.id_produit)}>
             {text}

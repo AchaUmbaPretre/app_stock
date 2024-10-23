@@ -275,7 +275,6 @@ const Livraison_detail = () => {
                             size="middle"
                             scroll={scroll}
                             onChange={handleTableChange}
-
                           />
                       </div>
                     </div>

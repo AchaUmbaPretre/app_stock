@@ -1,5 +1,5 @@
 import './products.scss'
-import { PlusOutlined, SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined,CalendarOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
+import { SearchOutlined, CloseOutlined,SisternodeOutlined,PlusCircleOutlined,CalendarOutlined, DeleteOutlined, EyeOutlined} from '@ant-design/icons';
 import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
@@ -306,7 +306,7 @@ const filteredData = getProduit?.filter((item) =>
                         <span>Gérer vos produits</span>
                     </div>
                     <div className="product-right" onClick={() =>navigate('/productForm')}>
-                        <PlusOutlined className='product-icon'/>
+                        <PlusCircleOutlined className='product-icon'/>
                         <span className="product-btn">Un nouveau produit</span>
                     </div>
                 </div>

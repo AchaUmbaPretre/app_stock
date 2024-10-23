@@ -295,7 +295,6 @@ const ListeCommande = () => {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
-                
               <Space size="middle">
 {/*                 <Popover title="Modifier" trigger="hover">
                   <Link>

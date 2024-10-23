@@ -393,7 +393,15 @@ const MouvementDepart = () => {
                     {opens &&
                               <MouvementDepartSelect getProduits={setData}/> }
                     <div className="rowChart-row-table">
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                        <Table 
+                          columns={columns} 
+                          dataSource={filteredData} 
+                          loading={loading} 
+                          scroll={scroll} 
+                          bordered
+                          size="middle"
+                          pagination={{ pageSize: 15}} 
+                        />
                     </div>
                     <Modal
                       title=""

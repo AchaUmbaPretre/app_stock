@@ -184,6 +184,7 @@ const Livraison_detail = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/livraison/livraisonDetail?start_date=${startDate}&end_date=${endDate}&page=${page}&pageSize=${size}`);
             setData(data);
+            setTotalItems(data.total);
             setLoading(false)
           } catch (error) {
             console.log(error);

@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import ClientTelephone from './clientTelephone/ClientTelephone';
 import ClientAdresse from './clientAdresse/ClientAdresse';
 import ClientView from './ClientView';
+import ClientForm from './clientForm/ClientForm';
 
 const Client = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -24,7 +25,9 @@ const Client = () => {
     const [searchValue, setSearchValue] = useState('');
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openss, setOpenss] = useState(false);
     const [openAdresse, setOpenAdresse] = useState(false);
+    const [openForm, setOpenForm] = useState(false);
     const [openDetailAdresse, setOpenDetailAdresse] = useState(false);
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
@@ -153,6 +156,10 @@ const Client = () => {
         setOpenDetailAdresse(true);
         setIdClient(e)
       };
+
+      const handleClick = () => {
+        setOpenss(!openss)
+      }
           
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
@@ -250,7 +257,6 @@ const Client = () => {
           },
       ];
 
-      useEffect(() => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/client`);
@@ -260,6 +266,8 @@ const Client = () => {
             console.log(error);
           }
         };
+      
+      useEffect(() => {
         fetchData();
       }, [DOMAIN]);
 
@@ -293,7 +301,7 @@ const Client = () => {
                         <span>Gérer vos clients</span>
                     </div>
                     <div style={{display:'flex', gap: '10px'}}>
-                      <div className="product-right" onClick={() =>navigate('/clientForm')}>
+                      <div className="product-right" onClick={handleClick}>
                           <PlusOutlined />
                           <span className="product-btn">Ajouter un nouveau client</span>
                       </div>
@@ -363,6 +371,18 @@ const Client = () => {
                           ]}
                         >
                          <ClientView id_client={idClient}/>
+                        </Modal>
+                        <Modal
+                          title=""
+                          centered
+                          open={openss}
+                          onCancel={() => setOpenss(false)}
+                          width={900}
+                          footer={[
+                            
+                          ]}
+                        >
+                         <ClientForm fetchData={fetchData} closeModal={()=> setOpenss(!openss)} />
                         </Modal>
                         <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
                     </div>

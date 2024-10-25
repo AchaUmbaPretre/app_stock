@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './clientForm.scss';
 import './../../../modalStyle.css';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
@@ -9,10 +8,9 @@ import config from '../../../config';
 import { CircularProgress } from '@mui/material';
 import { Modal, Row, Col } from 'antd';
 
-const ClientForm = () => {
+const ClientForm = ({fetchData, closeModal}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({});
-  const navigate = useNavigate();
   const [province, setProvince] = useState([]);
   const [idProvince, setIdProvince] = useState([]);
   const [commune, setCommune] = useState([]);
@@ -48,8 +46,8 @@ const ClientForm = () => {
         icon: 'success',
         confirmButtonText: 'OK',
       });
-      navigate('/clients');
-      window.location.reload();
+      fetchData();
+      closeModal()
     } catch (err) {
       if (err.response && err.response.status === 400 && err.response.data && err.response.data.message) {
         const errorMessage = `Le client ${data.nom} existe déjà avec ce numéro de téléphone`;

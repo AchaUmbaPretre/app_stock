@@ -359,7 +359,6 @@ const ListeCommande = () => {
         fetchData(pagination.current, pagination.pageSize);
       };
 
-
       useEffect(() => {
         const fetchData = async () => {
           try {
@@ -373,7 +372,7 @@ const ListeCommande = () => {
         const timeoutId = setTimeout(fetchData, 4000);
       
         return () => clearTimeout(timeoutId);
-      }, [DOMAIN,start_date,end_date,searchValue]);
+      }, [start_date,end_date,searchValue]);
 
 const handClick = () => {
   setOpenss(!openss)
@@ -382,9 +381,9 @@ const handClick = () => {
         setOpens(!opens)
       }
 
-      const Rafraichir = () =>{
-        window.location.reload();
-      }
+  const Rafraichir = () =>{
+    fetchData();
+  }
 
   const filteredData = data?.filter((item) =>
     item.nom?.toLowerCase().includes(searchValue.toLowerCase()) ||

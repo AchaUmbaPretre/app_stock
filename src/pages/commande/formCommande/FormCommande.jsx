@@ -75,7 +75,7 @@ const FormCommande = ({fetchData, closeModal}) => {
   const handleClick2 = async (e) => {
     e.preventDefault();
 
-    if (isSubmitting) return; // Empêche l'envoi multiple
+    if (isSubmitting) return;
 
     setIsSubmitting(true);
 

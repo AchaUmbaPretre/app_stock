@@ -98,7 +98,7 @@ const Livraison_detail = () => {
           key: 'nom_commune',
           render : (text, record)=>(
             <div>
-               <Tag color={'green'}><EnvironmentOutlined style={{ marginRight: "5px" }} />{text}</Tag>
+               <Tag color={'red'}><EnvironmentOutlined style={{ marginRight: "5px" }} />{text}</Tag>
             </div>
           )
         },

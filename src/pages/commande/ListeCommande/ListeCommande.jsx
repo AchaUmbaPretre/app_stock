@@ -13,6 +13,7 @@ import ListeCommande7jrs from './ListeCommande7jrs';
 import ListeCommandeJour from './ListeCommandeJour';
 import CountUp from 'react-countup';
 import LivraisonView from '../../livraison/livraisonView/LivraisonView';
+import FormCommande from '../formCommande/FormCommande';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -29,6 +30,7 @@ const ListeCommande = () => {
     const endDate = queryParams.get('end_date');
     const [open, setOpen] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openss, setOpenss] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [idClient, setIdClient] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
@@ -37,6 +39,7 @@ const ListeCommande = () => {
     const [end_date, setEnd_date] = useState('');
     const [id_commande, setId_commande] = useState('');
     const [openInfo, setOpenInfo] = useState(false);
+    const [openForm, setOpenForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(15);
     const [pagination, setPagination] = useState({
@@ -372,7 +375,9 @@ const ListeCommande = () => {
         return () => clearTimeout(timeoutId);
       }, [DOMAIN,start_date,end_date,searchValue]);
 
-
+const handClick = () => {
+  setOpenss(!openss)
+}
       const HandOpen = () =>{
         setOpens(!opens)
       }
@@ -414,7 +419,7 @@ const ListeCommande = () => {
                         </div>
                     </div>
                     <Popover title="Ajoutez une commande" trigger="hover">
-                      <div className="product-right" onClick={() =>navigate('/commandeForm')}>
+                      <div className="product-right" onClick={handClick}>
                         <PlusOutlined />
                       </div>
                     </Popover>
@@ -464,6 +469,18 @@ const ListeCommande = () => {
                             ]}
                           >
                             <LivraisonView id={id_commande}/>
+                          </Modal>
+
+                          <Modal
+                            title=""
+                            centered
+                            open={openss}
+                            onCancel={() => setOpenss(false)}
+                            width={1000}
+                            footer={[
+                            ]}
+                          >
+                            <FormCommande/>
                           </Modal>
                           <Table 
                             columns={columns} 

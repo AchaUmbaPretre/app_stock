@@ -16,6 +16,20 @@ const ClientForm = ({fetchData, closeModal}) => {
   const [commune, setCommune] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const resetForm = () => {
+    setData({
+      nom: '',
+      raison_sociale: '',
+      email: '',
+      telephone: '',
+      avenue: '',
+      quartier: '',
+      id_province: '',
+      id_commune: '',
+      num: '',
+    });
+  };
+
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -47,7 +61,9 @@ const ClientForm = ({fetchData, closeModal}) => {
         confirmButtonText: 'OK',
       });
       fetchData();
-      closeModal()
+      closeModal();
+      resetForm(); // Réinitialiser le formulaire après la soumission
+
     } catch (err) {
       if (err.response && err.response.status === 400 && err.response.data && err.response.data.message) {
         const errorMessage = `Le client ${data.nom} existe déjà avec ce numéro de téléphone`;
@@ -130,11 +146,11 @@ const ClientForm = ({fetchData, closeModal}) => {
             <div className="product-container-bottom">
               <div className="form-controle">
                 <label htmlFor="">Nom <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" name="nom" className="form-input" onChange={handleInputChange} required />
+                <input type="text" value={data.nom || ''} name="nom" className="form-input" onChange={handleInputChange} required />
               </div>
               <div className="form-controle">
                 <label htmlFor="">Raison sociale <span style={{ color: 'red' }}>*</span></label>
-                <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} required>
+                <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} value={data.raison_sociale || ''}>
                   <option value="" disabled selected>Selectionnez une raison sociale</option>
                   <option value="Client VIP">client VIP</option>
                   <option value="Client Normal">client Normal</option>
@@ -142,11 +158,11 @@ const ClientForm = ({fetchData, closeModal}) => {
               </div>
               <div className="form-controle">
                 <label htmlFor="">Email <span style={{ color: 'red' }}>*</span></label>
-                <input type="email" name="email" className="form-input" onChange={handleInputChange} />
+                <input type="email" value={data.email || ''} name="email" className="form-input" onChange={handleInputChange} />
               </div>
               <div className="form-controle">
                 <label htmlFor="">Telephone <span style={{ color: 'red' }}>*</span></label>
-                <input type="tel" name="telephone" className="form-input" onChange={handleInputChange} required />
+                <input type="tel" value={data.telephone || ''} name="telephone" className="form-input" onChange={handleInputChange} required />
               </div>
               <div className="form-controle">
                 <label htmlFor="">Ville <span style={{ color: 'red' }}>*</span></label>
@@ -158,11 +174,11 @@ const ClientForm = ({fetchData, closeModal}) => {
               </div>
               <div className="form-controle">
                 <label htmlFor="">Avenue <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" name="avenue" className="form-input" onChange={handleInputChange} />
+                <input type="text" name="avenue" value={data.avenue || ''} className="form-input" onChange={handleInputChange} />
               </div>
               <div className="form-controle">
                 <label htmlFor="">Quartier <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" name="quartier" className="form-input" onChange={handleInputChange} />
+                <input type="text" value={data.quartier || ''} name="quartier" className="form-input" onChange={handleInputChange} />
               </div>
               <div className="form-controle">
                 <label htmlFor="">Commune <span style={{ color: 'red' }}>*</span></label>
@@ -174,7 +190,7 @@ const ClientForm = ({fetchData, closeModal}) => {
               </div>
               <div className="form-controle">
                 <label htmlFor="">N° <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" name="num" className="form-input" onChange={handleInputChange} />
+                <input type="text" value={data.num || ''} name="num" className="form-input" onChange={handleInputChange} />
               </div>
             </div>
 

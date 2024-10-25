@@ -238,54 +238,52 @@ const DepensesAll = () => {
                             />
                         </div>
                         <div className="product-bottom-right">
-                            
                         </div>
                     </div>
                     <div className="rowChart-row-table">
-                    <Modal
-                          centered
-                          title='Ajouter une dépense'
-                          open={open}
-                          onCancel={() => {
-                            setOpen(false)
-                          }}
+                      <Modal
+                        centered
+                        title='Ajouter une dépense'
+                        open={open}
+                        onCancel={() => {
+                          setOpen(false)
+                        }}
                           width={650}
                           footer={[
                           ]}
-                        >
-                            <FormDepenses/>
-                        </Modal>
+                      >
+                        <FormDepenses/>
+                      </Modal>
 
-                        <Modal
-                          centered
-                          title=''
-                          open={openDetail}
-                          onCancel={() => {
-                            setOpenDetail(false)
-                          }}
+                      <Modal
+                        centered
+                        title=''
+                        open={openDetail}
+                        onCancel={() => {
+                          setOpenDetail(false)
+                        }}
                           width={1000}
                           footer={[
                           ]}
-                        >
-                          <Depenses dateId = {dateData}/>
-                        </Modal>
+                      >
+                        <Depenses dateId = {dateData}/>
+                      </Modal>
 
-                        <Table 
-                          columns={columns} 
-                          dataSource={filteredData} 
-                          bordered
-                          loading={loading} 
-                          scroll={scroll} 
-                          size="middle"
-                          pagination={{
-                              current: currentPage,
-                              pageSize: pageSize,
-                              total: totalItems,
-                              onChange: handleTableChange,
-                            }}
-                          onChange={handleTableChange}
-
-                        />
+                      <Table 
+                        columns={columns} 
+                        dataSource={filteredData} 
+                        bordered
+                        loading={loading} 
+                        scroll={scroll} 
+                        size="middle"
+                        pagination={{
+                          current: currentPage,
+                          pageSize: pageSize,
+                          total: totalItems,
+                          onChange: handleTableChange,
+                        }}
+                        onChange={handleTableChange}
+                      />
                     </div>
                 </div>
             </div>

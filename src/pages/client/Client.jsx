@@ -377,10 +377,8 @@ const Client = () => {
                           centered
                           open={openss}
                           onCancel={() => setOpenss(false)}
-                          width={900}
-                          footer={[
-                            
-                          ]}
+                          width={1000}
+                          footer={[]}
                         >
                          <ClientForm fetchData={fetchData} closeModal={()=> setOpenss(!openss)} />
                         </Modal>

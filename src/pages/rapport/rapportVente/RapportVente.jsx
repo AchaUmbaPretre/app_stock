@@ -27,9 +27,24 @@ const RapportVente = () => {
     const [start_date, setStart_date] = useState('');
     const [end_date, setEnd_date] = useState('');
     const [codeVariant, setCodeVariant] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
 
 const columns = [
-    { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
+    { title: '#', 
+      dataIndex: 'id', 
+      key: 'id', 
+      render: (text, record, index) => {
+        const pageSize = pagination.pageSize || 15;
+        const pageIndex = pagination.current || 1;
+        return (pageIndex - 1) * pageSize + index + 1;
+      }
+    },
     {
       title: 'image',
       dataIndex: 'img',
@@ -195,6 +210,17 @@ const columns = [
     },
 ];
 
+const handleTableChange = (pagination) => {
+  setCurrentPage(pagination.current);
+  setPageSize(pagination.pageSize);
+
+  setPagination({
+    current: pagination.current,
+    pageSize: pagination.pageSize,
+  });
+  fetchData(pagination.current, pagination.pageSize);
+};
+
 const HandOpen = () =>{
   setOpen(!open)
 }
@@ -208,18 +234,20 @@ const Rafraichir = () =>{
   window.location.reload();
 }
 
-useEffect(() => {
-  const fetchData = async () => {
+
+  const fetchData = async (page = currentPage, size = pageSize) => {
     try {
-      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV`);
+      const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV?page=${page}&pageSize=${size}`);
       setGetRapport(data);
       setLoading(false)
     } catch (error) {
       console.log(error);
     }
   };
-  fetchData();
-}, [DOMAIN]);
+
+useEffect(() => {
+  fetchData(currentPage, pageSize);
+}, [currentPage, pageSize]);
 
 useEffect(() => {
   const fetchData = async () => {
@@ -286,7 +314,20 @@ useEffect(() => {
                       {open &&
                               <RapportVenteSelects getProduits={setGetRapport} setStart_date={setStart_date} setEnd_date={setEnd_date} start_date={start_date} end_date={end_date} /> }
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                          <Table 
+                            columns={columns} 
+                            dataSource={filteredData} 
+                            loading={loading} 
+                            scroll={scroll} 
+                            size="middle"
+                            pagination={{
+                              current: currentPage,
+                              pageSize: pageSize,
+                              total: totalItems,
+                              onChange: handleTableChange
+                            }}
+                            onChange={handleTableChange}
+                          />
                       </div>
                     </div>
 

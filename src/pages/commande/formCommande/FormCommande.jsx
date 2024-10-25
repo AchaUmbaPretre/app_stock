@@ -6,7 +6,7 @@ import config from '../../../config';
 import { CircularProgress } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Modal, Button } from 'antd';
+import { Modal, Button, Skeleton } from 'antd';
 import './formCommande.css'
 
 const FormCommande = ({fetchData, closeModal}) => {
@@ -216,39 +216,60 @@ const FormCommande = ({fetchData, closeModal}) => {
             <div className="product-container-bottom">
               <div className="form-controle">
                 <label htmlFor="">Client <span style={{ color: 'red' }}>*</span></label>
-                <Select
-                  placeholder="Sélectionnez un(e) client(e)"
-                  name="id_client"
-                  value={data.id_client ? { value: data.id_client, label: getClient.find(client => client.id === data.id_client)?.nom } : null}
-                  options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
-                  onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
+                {getClient.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <Select
+                    placeholder="Sélectionnez un(e) client(e)"
+                    name="id_client"
+                    value={data.id_client ? { value: data.id_client, label: getClient.find(client => client.id === data.id_client)?.nom } : null}
+                    options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
                 />
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <label htmlFor="" style={{ fontSize: '12px' }}>Cliquez ici pour ajouter un client</label>
-                  <input type="checkbox" onChange={handleCheck} />
-                </div>
+                )}
+                { getClient.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <label htmlFor="" style={{ fontSize: '12px' }}>Cliquez ici pour ajouter un client</label>
+                    <input type="checkbox" onChange={handleCheck} />
+                  </div>
+                )}
+
               </div>
               <div className="form-controle">
                 <label htmlFor="">Shop <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" value={data.id_shop} name='id_shop' className="form-input" onChange={handleInputChange} />
+                { getClient.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <input type="text" value={data.id_shop} name='id_shop' className="form-input" onChange={handleInputChange} />
+                )}
               </div>
               <div className="form-controle">
                 <label htmlFor="">Adresse <span style={{ color: 'red' }}>*</span></label>
-                <Select
-                  name="id_adresse"
-                  value={data.id_adresse ? { value: data.id_adresse, label: adresseOne.find(item => item.id_adresse === data.id_adresse)?.nom_province + ' de ' + ' C/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.nom_commune + ' Av/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.avenue + ' Q/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.quartier + ' N°/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.num } : null} // Ajoutez cette ligne
-                  options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/' + item.nom_commune + ' Av/' + item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
-                  onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
-                />
+                { getClient.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <Select
+                    name="id_adresse"
+                    value={data.id_adresse ? { value: data.id_adresse, label: adresseOne.find(item => item.id_adresse === data.id_adresse)?.nom_province + ' de ' + ' C/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.nom_commune + ' Av/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.avenue + ' Q/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.quartier + ' N°/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.num } : null} // Ajoutez cette ligne
+                    options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/' + item.nom_commune + ' Av/' + item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
+                  />
+                )}
               </div>
               <div className="form-controle">
                 <label htmlFor="">Téléphone <span style={{ color: 'red' }}>*</span></label>
-                <Select
+                { getClient.length === 0 ? (
+                    <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <Select
                   name="id_telephone"
                   value={data.id_telephone ? { value: data.id_telephone, label: telephone.find(item => item.id_telephone === data.id_telephone)?.numero } : null}
                   options={telephone?.map(item => ({ value: item.id_telephone, label: item.numero }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_telephone', value: selectedOption.value } })}
                 />
+                )}
               </div>
               {checkeds &&
                 <div className="rows-client">

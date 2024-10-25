@@ -163,7 +163,7 @@ const DepensesAll = () => {
       const fetchData = async (page = currentPage, size = pageSize) => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/depenses?page=${page}&pageSize=${size}`);
-          setData(data);
+          setData(data.data);
           setLoading(false)
         }catch (error) {
           console.log(error);

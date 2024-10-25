@@ -300,7 +300,15 @@ const Ventes = () => {
                         >
                          <VenteView id={iDcommande}/>
                         </Modal>
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table 
+                          columns={columns} 
+                          dataSource={filteredData} 
+                          loading={loading} 
+                          scroll={scroll}
+                          pagination={{ pageSize: 10}}
+                          bordered 
+                          size="middle"
+                        />
                     </div>
                       </Tabs.TabPane>  
                       <Tabs.TabPane tab='Ventes du jour' key={2}>

@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom';
 import React, { useCallback, useEffect, useState } from 'react';
+import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -119,9 +120,10 @@ const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 const dispatch = useDispatch();
 const user = useSelector((state) => state.user?.currentUser);
 const userId = useSelector((state) => state.user?.currentUser?.id);
-/* const loading = useSelector((state) => state.user?.loading); */
-const [loading, setLoading] = useState(true);
 const [data, setData] = useState([]);
+/* const loading = useSelector((state) => state.user?.loading);
+ */
+const [loading, setLoading] = useState(false);
 
 /*   useEffect(() => {
     const fetchData = async () => {
@@ -141,8 +143,8 @@ const [data, setData] = useState([]);
   }, [DOMAIN]); */
 
   const fetchMenu = useCallback(async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const { data } = await axios.get(`${DOMAIN}/api/inventaire/menuAll/addOne?userId=${userId}`);
       setData(data);
     } catch (error) {
@@ -153,8 +155,12 @@ const [data, setData] = useState([]);
   }, [userId]);
 
   useEffect(() => {
-    fetchMenu();
-  }, [fetchMenu,userId]);
+    if (userId) {
+      fetchMenu();
+    } else {
+      setLoading(false);
+    }
+  }, [userId, fetchMenu]);
 
   const Layout = () => {
       
@@ -162,7 +168,7 @@ const [data, setData] = useState([]);
       <div >
         <Topbar/>
         <div className="appContainer">
-          <Options data={data} />
+          <Options data={data}/>
           <div className="appOutlet">
             <Outlet />
           </div>

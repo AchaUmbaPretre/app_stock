@@ -32,7 +32,6 @@ const Options = ({data}) => {
   const [options, setOptions] = useState([]);
   const userId = useSelector((state) => state.user?.currentUser.id);
   const isSidebarOpen = useSelector((state) => state.user?.isSidebarOpen);
-/*   const [data, setData] = useState([]); */
 
   const Logout = async () => {
     try {
@@ -46,19 +45,6 @@ const Options = ({data}) => {
       Swal.fire('Erreur lors de la déconnexion.', '', 'error');
     }
   };
-
-/*   const fetchMenu = useCallback(async () => {
-    try {
-      const { data } = await axios.get(`${DOMAIN}/api/inventaire/menuAll/addOne?userId=${userId}`);
-      setData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [DOMAIN, userId]);
-
-  useEffect(() => {
-    fetchMenu();
-  }, [fetchMenu]); */
 
   const getMenuIcon = (icon) => {
     switch (icon) {

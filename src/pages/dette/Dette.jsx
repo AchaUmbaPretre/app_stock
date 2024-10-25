@@ -305,7 +305,15 @@ const Dette = () => {
                       {opens &&
                       <DetteSelect getProduits={setData}/> }
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                          <Table 
+                            columns={columns} 
+                            dataSource={filteredData} 
+                            loading={loading} 
+                            scroll={scroll} 
+                            pagination={{ pageSize: 10}} 
+                            bordered 
+                            size="middle"
+                          />
                       </div>
 
                         <Modal

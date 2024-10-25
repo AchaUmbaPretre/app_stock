@@ -47,7 +47,7 @@ const Login1 = () => {
                 <LockOutlined className='icon-login'/>
               <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <input type="submit" value="Se connecter" class="btn solid" onClick={handleClick} disabled={isFetching} />
+            <input type="submit" value="Se connecter" class="btn solid" onClick={handleClick} />
             <p class="social-text">Connectez-vous avec les plateformes sociales</p>
             <div class="social-media">
               <a href="#" class="social-icon">

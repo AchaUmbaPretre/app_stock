@@ -320,6 +320,7 @@ useEffect(() => {
                             dataSource={filteredData} 
                             loading={loading} 
                             scroll={scroll} 
+                            bordered
                             size="middle"
                             pagination={{
                               current: currentPage,

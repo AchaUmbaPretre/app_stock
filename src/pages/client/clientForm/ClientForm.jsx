@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config';
 import { CircularProgress } from '@mui/material';
-import { Modal, Row, Col } from 'antd';
+import { Modal, Row, Col, Skeleton } from 'antd';
 
 const ClientForm = ({fetchData, closeModal}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -62,7 +62,7 @@ const ClientForm = ({fetchData, closeModal}) => {
       });
       fetchData();
       closeModal();
-      resetForm(); // Réinitialiser le formulaire après la soumission
+      resetForm();
 
     } catch (err) {
       if (err.response && err.response.status === 400 && err.response.data && err.response.data.message) {
@@ -146,51 +146,90 @@ const ClientForm = ({fetchData, closeModal}) => {
             <div className="product-container-bottom">
               <div className="form-controle">
                 <label htmlFor="">Nom <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" value={data.nom || ''} name="nom" className="form-input" onChange={handleInputChange} required />
+                { province.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <input type="text" value={data.nom || ''} name="nom" className="form-input" onChange={handleInputChange} required />
+                )}
               </div>
               <div className="form-controle">
                 <label htmlFor="">Raison sociale <span style={{ color: 'red' }}>*</span></label>
+                { province.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
                 <select id="" className="form-input" name="raison_sociale" onChange={handleInputChange} value={data.raison_sociale || ''}>
-                  <option value="" disabled selected>Selectionnez une raison sociale</option>
-                  <option value="Client VIP">client VIP</option>
-                  <option value="Client Normal">client Normal</option>
+                    <option value="" disabled selected>Selectionnez une raison sociale</option>
+                    <option value="Client VIP">client VIP</option>
+                    <option value="Client Normal">client Normal</option>
                 </select>
+                )}
               </div>
               <div className="form-controle">
                 <label htmlFor="">Email <span style={{ color: 'red' }}>*</span></label>
-                <input type="email" value={data.email || ''} name="email" className="form-input" onChange={handleInputChange} />
+                { province.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <input type="email" value={data.email || ''} name="email" className="form-input" onChange={handleInputChange} />
+                )}
               </div>
               <div className="form-controle">
                 <label htmlFor="">Telephone <span style={{ color: 'red' }}>*</span></label>
-                <input type="tel" value={data.telephone || ''} name="telephone" className="form-input" onChange={handleInputChange} required />
+                { province.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <input type="tel" value={data.telephone || ''} name="telephone" className="form-input" onChange={handleInputChange} required />
+                )}
               </div>
               <div className="form-controle">
                 <label htmlFor="">Ville <span style={{ color: 'red' }}>*</span></label>
-                <Select
-                  name="id_province"
-                  options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
-                  onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
-                />
+                { province.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <Select
+                    name="id_province"
+                    options={province?.map(item => ({ value: item.id_province, label: item.nom_province }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'id_province', value: selectedOption.value } })}
+                  />
+                )}
               </div>
               <div className="form-controle">
-                <label htmlFor="">Avenue <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" name="avenue" value={data.avenue || ''} className="form-input" onChange={handleInputChange} />
+              <label htmlFor="">Avenue <span style={{ color: 'red' }}>*</span></label>
+
+                {
+                  province.length === 0 ? (
+                    <Skeleton.Input active={true} height={40}/>
+                  ) : (
+                    <input type="text" name="avenue" value={data.avenue || ''} className="form-input" onChange={handleInputChange} />
+                  )
+                }
               </div>
               <div className="form-controle">
                 <label htmlFor="">Quartier <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" value={data.quartier || ''} name="quartier" className="form-input" onChange={handleInputChange} />
+                { province.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <input type="text" value={data.quartier || ''} name="quartier" className="form-input" onChange={handleInputChange} />
+                )}
               </div>
               <div className="form-controle">
                 <label htmlFor="">Commune <span style={{ color: 'red' }}>*</span></label>
-                <Select
-                  name="id_commune"
-                  options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
-                  onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
-                />
+                { province.length === 0 ? (
+                  <Skeleton.Input active={true} height={40}/>
+                ) : (
+                  <Select
+                    name="id_commune"
+                    options={commune?.map(item => ({ value: item.id_commune, label: item.nom_commune }))}
+                    onChange={selectedOption => handleInputChange({ target: { name: 'commune', value: selectedOption.value } })}
+                  />
+                )}
               </div>
               <div className="form-controle">
-                <label htmlFor="">N° <span style={{ color: 'red' }}>*</span></label>
+              <label htmlFor="">N° <span style={{ color: 'red' }}>*</span></label>
+              { province.length === 0 ? (
+                <Skeleton.Input active={true} height={40}/>
+              ) : (
                 <input type="text" value={data.num || ''} name="num" className="form-input" onChange={handleInputChange} />
+              )}
               </div>
             </div>
 

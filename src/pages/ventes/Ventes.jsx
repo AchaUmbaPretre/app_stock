@@ -102,7 +102,7 @@ const Ventes = () => {
             <Popover content="Discutez avec lui sur WhatsApp" placement="top">
             <Tag
               onClick={() => window.open(`https://wa.me/${text}`, '_blank')}
-              color="green"
+              color="blue"
               style={{ cursor: 'pointer' }}
             >
               <WhatsAppOutlined style={{ color: 'green', marginRight: '5px' }} />

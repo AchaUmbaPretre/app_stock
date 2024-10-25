@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Modal, Button } from 'antd';
 import './formCommande.css'
 
-const FormCommande = () => {
+const FormCommande = ({fetchData, closeModal}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({});
   const navigate = useNavigate();
@@ -62,7 +62,8 @@ const FormCommande = () => {
       setIsLoading(true);
       await axios.post(`${DOMAIN}/api/commande/commandePost`, data);
       toast.success('Commande créée avec succès!');
-      navigate('/listeCommande');
+      fetchData();
+      closeModal()
     } catch (err) {
       toast.error(`Erreur: ${err.message}`);
     } finally {

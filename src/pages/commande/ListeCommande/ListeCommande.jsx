@@ -329,7 +329,7 @@ const ListeCommande = () => {
       setId_commande(e)
       setOpenInfo(true)
     }
-        const fetchData = async (page = currentPage, size = pageSize) => {
+    const fetchData = async (page = currentPage, size = pageSize) => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/commande?date_start=${startDate}&date_end=${endDate}&page=${page}&pageSize=${size}`);
             setData(data.data);
@@ -480,7 +480,7 @@ const handClick = () => {
                             footer={[
                             ]}
                           >
-                            <FormCommande/>
+                            <FormCommande fetchData={fetchData} closeModal={()=>setOpenss(!openss)} />
                           </Modal>
                           <Table 
                             columns={columns} 

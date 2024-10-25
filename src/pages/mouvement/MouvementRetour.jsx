@@ -189,9 +189,9 @@ const MouvementRetour = () => {
       };
 
 
-        const fetchData = async () => {
+        const fetchData = async (page = currentPage, size = pageSize) => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementRetour`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementRetour?page=${page}&pageSize=${size}`);
             setData(data.data);
             setTotalItems(data.total)
             setLoading(false)
@@ -202,8 +202,8 @@ const MouvementRetour = () => {
 
 
       useEffect(() => {
-        fetchData();
-      }, [DOMAIN]);
+        fetchData(currentPage, pageSize);
+      }, [currentPage, pageSize]);
 
       const handleTableChange = (pagination) => {
         setCurrentPage(pagination.current);

@@ -149,18 +149,30 @@ const DepensesAll = () => {
           },
       ];
 
+      const handleTableChange = (pagination) => {
+        setCurrentPage(pagination.current);
+        setPageSize(pagination.pageSize);
+      
+        setPagination({
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+        });
+        fetchData(pagination.current, pagination.pageSize);
+      };
+
+      const fetchData = async (page = currentPage, size = pageSize) => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/depenses?page=${page}&pageSize=${size}`);
+          setData(data);
+          setLoading(false)
+        }catch (error) {
+          console.log(error);
+        }
+      };
+
       useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/depenses`);
-            setData(data);
-            setLoading(false)
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
+        fetchData(currentPage, pageSize);
+      }, [currentPage, pageSize]);
 
       useEffect(() => {
         const fetchData = async () => {
@@ -258,7 +270,22 @@ const DepensesAll = () => {
                           <Depenses dateId = {dateData}/>
                         </Modal>
 
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 10}} />
+                        <Table 
+                          columns={columns} 
+                          dataSource={filteredData} 
+                          bordered
+                          loading={loading} 
+                          scroll={scroll} 
+                          size="middle"
+                          pagination={{
+                              current: currentPage,
+                              pageSize: pageSize,
+                              total: totalItems,
+                              onChange: handleTableChange,
+                            }}
+                          onChange={handleTableChange}
+
+                        />
                     </div>
                 </div>
             </div>

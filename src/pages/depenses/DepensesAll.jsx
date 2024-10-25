@@ -164,6 +164,7 @@ const DepensesAll = () => {
         try {
           const { data } = await axios.get(`${DOMAIN}/api/depenses?page=${page}&pageSize=${size}`);
           setData(data.data);
+          setTotalItems(data.total)
           setLoading(false)
         }catch (error) {
           console.log(error);
@@ -210,7 +211,7 @@ const DepensesAll = () => {
                         <h2 className="product-h2">Liste des dépenses</h2>
                         <span>Gérer vos dépenses</span>
                     </div>
-                    <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                    <div className="" style={{padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                         <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
                           {recent[0]?.date_plus_ancienne && (
                             <span>{`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`}</span>

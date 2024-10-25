@@ -301,7 +301,6 @@ const ListeDetailView = () => {
             <h2 className="product-h2">Liste de commande N° {id}</h2>
             <span>de {getCommande?.nom} de la commune {getCommande?.nom_commune} Av/ {getCommande?.avenue} Q/ {getCommande?.quartier} N° {getCommande?.num}</span>
           </div>
-
           <div className="" style={{ padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)' }}>
             <div style={{ display: 'flex', fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' }}>
             </div>

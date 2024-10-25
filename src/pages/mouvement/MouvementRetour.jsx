@@ -20,6 +20,13 @@ const MouvementRetour = () => {
     const [pointure, setPointure] = useState('');
     const [openPointure, setOpenPointure] = useState('');
     const [idVariant, setvariant] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
 
 
       const handleDelete = async (id) => {
@@ -36,6 +43,7 @@ const MouvementRetour = () => {
           setvariant(e)
           setPointure(p)
         };
+
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -172,7 +180,7 @@ const MouvementRetour = () => {
         navigate(`/mouvementOne/${e}`)
       };
 
-      useEffect(() => {
+
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementRetour`);
@@ -182,8 +190,21 @@ const MouvementRetour = () => {
             console.log(error);
           }
         };
+
+
+      useEffect(() => {
         fetchData();
       }, [DOMAIN]);
+
+      const handleTableChange = (pagination) => {
+        setCurrentPage(pagination.current);
+        setPageSize(pagination.pageSize);
+        setPagination({
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+        });
+        fetchData(pagination.current, pagination.pageSize);
+      };
   
    const filteredData = data?.filter((item) =>
       item.type_mouvement?.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -219,7 +240,13 @@ const MouvementRetour = () => {
                           scroll={scroll} 
                           bordered
                           size="middle"
-                          pagination={{ pageSize: 10}} 
+                          pagination={{
+                              current: currentPage,
+                              pageSize: pageSize,
+                              total: totalItems,
+                              onChange: handleTableChange,
+                            }}
+                          onChange={handleTableChange} 
                         />
                     </div>
                     <Modal

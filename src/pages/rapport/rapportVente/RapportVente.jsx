@@ -238,7 +238,8 @@ const Rafraichir = () =>{
   const fetchData = async (page = currentPage, size = pageSize) => {
     try {
       const { data } = await axios.get(`${DOMAIN}/api/rapport/rapport/venteV?page=${page}&pageSize=${size}`);
-      setGetRapport(data);
+      setGetRapport(data.data);
+      setTotalItems(data.total)
       setLoading(false)
     } catch (error) {
       console.log(error);
@@ -278,7 +279,7 @@ useEffect(() => {
                           <h2 className="product-h2" style={{fontSize:'25px'}}>Rapport des ventes</h2>
                           <span>Gérez vos rapports des ventes</span>
                       </div>
-                      <div className="" style={{background: '#fafafa', padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
+                      <div className="" style={{padding: "10px 15px", borderRadius: '10px', boxShadow: '0px 0px 15px -10px rgba(0,0,0,0.75)'}}>
                         <div style={{ display: 'flex', fontSize: '13px', marginBottom:'8px', fontWeight: 'bold' }}>
                           {`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`}
                         </div>

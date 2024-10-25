@@ -217,8 +217,8 @@ const DepensesAll = () => {
                             <span>{`Du ${moment(recent[0]?.date_plus_ancienne).format('DD-MM-YYYY')} au ${moment(recent[0]?.date_plus_recente).format('DD-MM-YYYY')}`}</span>
                           )}
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column',gap: '6px', fontSize: '12px' }}>
-                          <p style={{display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.total_depense}/> $</b></p>
+                        <div style={{ display: 'grid', gridTemplateColumns:'repeat(2,1fr)',gap: '6px', fontSize: '12px' }}>
+                          <p style={{ display:'flex',gap:'5px', justifyContent: 'space-between'}}>Montant total : <b style={{color:'#fff', background:'rgba(1, 35, 138, 0.952)', padding: "5px", borderRadius: '10px', fontSize: '12px'}}><CountUp end={recent[0]?.total_depense}/> $</b></p>
                         </div>
                       </div>
                     <div className="product-right" onClick={handleOk}>

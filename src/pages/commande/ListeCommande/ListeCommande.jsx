@@ -14,6 +14,7 @@ import ListeCommandeJour from './ListeCommandeJour';
 import CountUp from 'react-countup';
 import LivraisonView from '../../livraison/livraisonView/LivraisonView';
 import FormCommande from '../formCommande/FormCommande';
+import { ToastContainer } from 'react-toastify';
 
 const ListeCommande = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -393,6 +394,7 @@ const handClick = () => {
   return (
     <>
         <div className="products">
+        <ToastContainer />
             <div className="product-container">
                 <div className="product-container-top">
                     <div className="product-left">

@@ -187,7 +187,6 @@ const FormCommande = ({fetchData, closeModal}) => {
 
   return (
     <>
-      <ToastContainer />
         <Modal
         title="Confirmer la commande"
         visible={confirmVisible}

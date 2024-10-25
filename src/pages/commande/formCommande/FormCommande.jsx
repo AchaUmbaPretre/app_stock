@@ -25,6 +25,29 @@ const FormCommande = ({fetchData, closeModal}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
 
+  const initialData = {
+    id_client: '',
+    id_shop: '',
+    id_adresse: '',
+    id_telephone: '',
+    nom: '',
+    raison_sociale: '',
+    email: '',
+    telephone: '',
+    id_province: '',
+    id_commune: '',
+    avenue: '',
+    quartier: '',
+    num: '',
+  };
+
+  const resetForm = () => {
+    setData(initialData);
+    setCheckeds(false);
+    setIdProvince([]);
+    setCommune([]);
+  };
+
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -63,10 +86,11 @@ const FormCommande = ({fetchData, closeModal}) => {
       await axios.post(`${DOMAIN}/api/commande/commandePost`, data);
       toast.success('Commande créée avec succès!');
       fetchData();
-      closeModal()
+      closeModal();
     } catch (err) {
       toast.error(`Erreur: ${err.message}`);
     } finally {
+      resetForm();
       setIsLoading(false);
       setIsSubmitting(false);
     }
@@ -160,6 +184,7 @@ const FormCommande = ({fetchData, closeModal}) => {
     fetchData();
   }, [DOMAIN, adresseId]);
 
+
   return (
     <>
       <ToastContainer />
@@ -195,6 +220,7 @@ const FormCommande = ({fetchData, closeModal}) => {
                 <Select
                   placeholder="Sélectionnez un(e) client(e)"
                   name="id_client"
+                  value={data.id_client ? { value: data.id_client, label: getClient.find(client => client.id === data.id_client)?.nom } : null}
                   options={getClient?.map(item => ({ value: item.id, label: item.nom }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_client', value: selectedOption.value } })}
                 />
@@ -205,12 +231,13 @@ const FormCommande = ({fetchData, closeModal}) => {
               </div>
               <div className="form-controle">
                 <label htmlFor="">Shop <span style={{ color: 'red' }}>*</span></label>
-                <input type="text" name='id_shop' className="form-input" onChange={handleInputChange} />
+                <input type="text" value={data.id_shop} name='id_shop' className="form-input" onChange={handleInputChange} />
               </div>
               <div className="form-controle">
                 <label htmlFor="">Adresse <span style={{ color: 'red' }}>*</span></label>
                 <Select
                   name="id_adresse"
+                  value={data.id_adresse ? { value: data.id_adresse, label: adresseOne.find(item => item.id_adresse === data.id_adresse)?.nom_province + ' de ' + ' C/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.nom_commune + ' Av/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.avenue + ' Q/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.quartier + ' N°/' + adresseOne.find(item => item.id_adresse === data.id_adresse)?.num } : null} // Ajoutez cette ligne
                   options={adresseOne?.map(item => ({ value: item.id_adresse, label: item.nom_province + ' de ' + ' C/' + item.nom_commune + ' Av/' + item.avenue + ' Q/' + item.quartier + ' N°/' + item.num }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_adresse', value: selectedOption.value } })}
                 />
@@ -219,6 +246,7 @@ const FormCommande = ({fetchData, closeModal}) => {
                 <label htmlFor="">Téléphone <span style={{ color: 'red' }}>*</span></label>
                 <Select
                   name="id_telephone"
+                  value={data.id_telephone ? { value: data.id_telephone, label: telephone.find(item => item.id_telephone === data.id_telephone)?.numero } : null}
                   options={telephone?.map(item => ({ value: item.id_telephone, label: item.numero }))}
                   onChange={selectedOption => handleInputChange({ target: { name: 'id_telephone', value: selectedOption.value } })}
                 />

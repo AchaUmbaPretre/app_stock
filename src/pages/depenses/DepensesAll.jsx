@@ -198,8 +198,8 @@ const DepensesAll = () => {
     };
 
   const filteredData = data?.filter((item) =>
-  item.jour?.toLowerCase().includes(searchValue.toLowerCase())
-);
+    item.jour?.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <>

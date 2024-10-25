@@ -22,6 +22,13 @@ const DepensesAll = () => {
     const [dateData, setDateData] = useState('');
     const user = useSelector((state) => state.user?.currentUser);
     const [recent, setRecent] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
 
       const handleDelete = async (id) => {
       try {
@@ -33,7 +40,15 @@ const DepensesAll = () => {
       };
     
       const columns = [
-        { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+        { title: '#', 
+          dataIndex: 'id', 
+          key: 'id', 
+          render: (text, record, index) => {
+            const pageSize = pagination.pageSize || 15;
+            const pageIndex = pagination.current || 1;
+            return (pageIndex - 1) * pageSize + index + 1;
+          }
+        },
        {
             title: 'Jour',
             dataIndex: 'jour',

@@ -176,7 +176,7 @@ const MouvementRetour = () => {
         const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/mouvementRetour`);
-            setData(data);
+            setData(data.data);
             setLoading(false)
           } catch (error) {
             console.log(error);

@@ -20,6 +20,7 @@ const ListeVariante = () => {
     const [idVariant, setvariant] = useState({});
     const [opensVariant, setOpensVariant] = useState(false);
     const [opens, setOpens] = useState(false);
+    const [openss, setOpenss] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
     const [produitTotalAchats, setProduitTotalAchats] = useState([]);
     
@@ -42,7 +43,7 @@ const ListeVariante = () => {
       };
 
       const handleEdit = (id) => {
-        console.log(id)
+        setOpenss(!openss)
       }
 
       const Rafraichir = () =>{
@@ -207,8 +208,7 @@ const ListeVariante = () => {
           },
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
+      const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/listeVarianteProduit`);
             setData(data);
@@ -217,6 +217,8 @@ const ListeVariante = () => {
             console.log(error);
           }
         };
+
+      useEffect(() => {
         fetchData();
       }, [DOMAIN]);
 
@@ -287,16 +289,6 @@ const ListeVariante = () => {
                           </Popover>
                         </div>
                     </div>
-                    <Modal
-                      title=""
-                      centered
-                      open={opensVariant}
-                      onCancel={() => setOpensVariant(false)}
-                      width={1100}
-                      footer={[]}
-                    >
-                      <PageDetails id={idVariant}/>
-                    </Modal>
                     <div className="rowChart-row-table">
                     {opens &&
                     <VarianteSelect getProduits={setData}/> } 
@@ -304,6 +296,27 @@ const ListeVariante = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+              title=""
+              centered
+              open={opensVariant}
+              onCancel={() => setOpensVariant(false)}
+              width={1100}
+              footer={[]}
+            >
+              <PageDetails id={idVariant}/>
+            </Modal>
+
+            <Modal
+              title=""
+              centered
+              open={openss}
+              onCancel={() => setOpenss(false)}
+              width={800}
+              footer={[]}
+            >
+              <div>aaaa</div>
+            </Modal>
         </div>
     </>
   )

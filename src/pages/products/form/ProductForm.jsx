@@ -186,6 +186,7 @@ const ProductForm = ({fetchData, closeOpen}) => {
                   <label htmlFor="">Catégorie <span style={{color:'red'}}>*</span></label>
                   <Select
                       name="id_categorie"
+                      value={data?.id_categorie ? { value : data.id_categorie, label : getCategorie.find(cat => cat.id_categorie === data.id_categorie).nom_categorie} : null}
                       options={getCategorie?.map(item => ({ value: item.id_categorie, label: item.nom_categorie }))}
                       onChange={selectedOption => handleInputChange({ target: { name: 'id_categorie', value: selectedOption.value } })}
                     />

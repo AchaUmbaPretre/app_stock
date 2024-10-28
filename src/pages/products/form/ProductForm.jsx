@@ -144,6 +144,11 @@ const ProductForm = ({fetchData, closeOpen}) => {
 
       fetchData();
       closeOpen();
+      setData({});
+      setDateEntrant(new Date().toISOString().split('T')[0]);
+      setDateMiseAJour(new Date().toISOString().split('T')[0]);
+      setGetEtatProduit("Actif");
+      setVariantExists(false);
 
 /*       navigate('/products')
       window.location.reload(); */

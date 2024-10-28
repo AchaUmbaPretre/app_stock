@@ -44,6 +44,23 @@ const ListeVariante = () => {
       const Rafraichir = () =>{
         window.location.reload();
       }
+
+      const columnStyles = {
+        title: {
+          maxWidth: '180px',
+          whiteSpace: 'nowrap',
+          overflowX: 'scroll', 
+          overflowY: 'hidden',
+          textOverflow: 'ellipsis',
+          scrollbarWidth: 'none',
+          '-ms-overflow-style': 'none', 
+        },
+        hideScroll: {
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+      };
     
       const columns = [
           { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -58,6 +75,7 @@ const ListeVariante = () => {
                   src="error"
                   fallback={`${DOMAIN}${record.img}`}
                 />
+
               </div>
             ),
           },
@@ -67,9 +85,9 @@ const ListeVariante = () => {
             width: "5%",
             key: 'nom_produit',
             render: (text) => (
-              <Tag color={"blue"}>
-                {text}
-              </Tag>
+              <Space style={columnStyles.title} className={columnStyles.hideScroll}>
+                <Tag color='cyan'>{text}</Tag>
+              </Space>
             )
         },
         {

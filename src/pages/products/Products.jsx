@@ -444,9 +444,9 @@ const filteredData = getProduit?.filter((item) =>
                           width={1000}
                           footer={[
                           ]}
-                        >
-                          <ProductForm/>
-                        </Modal>
+                      >
+                        <ProductForm/>
+                      </Modal>
                     <div className="rowChart-row-table">
                       <Table 
                         columns={columns} 

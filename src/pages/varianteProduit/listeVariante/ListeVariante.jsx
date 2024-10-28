@@ -144,7 +144,7 @@ const ListeVariante = () => {
             ),
         },
         {
-          title: 'Code variante',
+          title: '# variante',
           dataIndex: 'code_variant',
           key: 'code_variant',
           render: (text) => (
@@ -154,7 +154,7 @@ const ListeVariante = () => {
           )
         },
         {
-          title: 'Montant total',
+          title: 'MT total',
           dataIndex: 'total',
           key: 'total',
           render: (text) => (
@@ -164,7 +164,7 @@ const ListeVariante = () => {
           )
         },
         {
-          title: 'Quantité en stock',
+          title: 'Qté en stock',
           dataIndex: 'total_stock',
           key: 'total_stock', 
           sorter: (a, b) => a.total_stock - b.total_stock,

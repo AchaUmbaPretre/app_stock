@@ -60,6 +60,15 @@ const ListeVariante = () => {
             display: 'none',
           },
         },
+        titleDesc: {
+          maxWidth: '80px',
+          whiteSpace: 'nowrap',
+          overflowX: 'scroll', 
+          overflowY: 'hidden',
+          textOverflow: 'ellipsis',
+          scrollbarWidth: 'none',
+          '-ms-overflow-style': 'none', 
+        },
       };
     
       const columns = [
@@ -95,9 +104,9 @@ const ListeVariante = () => {
             dataIndex: 'nom_categorie',
             key: 'nom_categorie',
             render: (text) => (
-              <Tag color={"orange"}>
-                {text}
-              </Tag>
+              <Space className={columnStyles.titleDesc}>
+                <Tag color='cyan'>{text}</Tag>
+              </Space>
             )
         },
         {

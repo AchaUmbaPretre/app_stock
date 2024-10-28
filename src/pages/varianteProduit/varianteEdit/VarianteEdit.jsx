@@ -6,7 +6,7 @@ import config from '../../../config';
 
 const { Title, Text } = Typography;
 
-const VarianteEdit = ({ id }) => {
+const VarianteEdit = ({ id, closeModal, fetchData }) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
@@ -42,6 +42,8 @@ const VarianteEdit = ({ id }) => {
                 description: "La valeur du stock a été mise à jour avec succès.",
                 icon: <CheckOutlined style={{ color: "#52c41a" }} />,
             });
+            closeModal();
+            fetchData()
         } catch (error) {
             notification.error({
                 message: "Erreur de Mise à Jour",

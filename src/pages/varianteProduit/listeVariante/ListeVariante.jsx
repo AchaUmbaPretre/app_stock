@@ -61,7 +61,7 @@ const ListeVariante = () => {
           },
         },
         titleDesc: {
-          maxWidth: '80px',
+          maxWidth: '150px',
           whiteSpace: 'nowrap',
           overflowX: 'scroll', 
           overflowY: 'hidden',
@@ -104,7 +104,7 @@ const ListeVariante = () => {
             dataIndex: 'nom_categorie',
             key: 'nom_categorie',
             render: (text) => (
-              <Space className={columnStyles.titleDesc}>
+              <Space style={columnStyles.titleDesc} className={columnStyles.hideScroll}>
                 <Tag color='cyan'>{text}</Tag>
               </Space>
             )

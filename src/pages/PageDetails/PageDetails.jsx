@@ -75,8 +75,6 @@ const PageDetails = ({id}) => {
       
       const result = Object.values(groupedData);
 
-      console.log(result)
-
   return (
     <>
         <div className="pageDetails">

@@ -95,7 +95,7 @@ const ListeVariante = () => {
             dataIndex: 'nom_categorie',
             key: 'nom_categorie',
             render: (text) => (
-              <Tag color={"green"}>
+              <Tag color={"orange"}>
                 {text}
               </Tag>
             )

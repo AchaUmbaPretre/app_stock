@@ -163,6 +163,25 @@ const Products = () => {
     
       fetchData(pagination.current, pagination.pageSize);
     };
+
+    const columnStyles = {
+      title: {
+        maxWidth: '180px',
+        whiteSpace: 'nowrap',
+        overflowX: 'scroll', 
+        overflowY: 'hidden',
+        textOverflow: 'ellipsis',
+        scrollbarWidth: 'none',
+        '-ms-overflow-style': 'none', 
+      },
+      hideScroll: {
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+      },
+    };
+
+
   const columns = [
     { title: '#', 
       dataIndex: 'id', 
@@ -194,9 +213,9 @@ const Products = () => {
         ...getColumnSearchProps('nom_produit'),
         width:'9%',
         render: (text,record) => 
-          <Tag color={'green'} style={{cursor:'pointer'}} onClick={()=> showModal(record.id_produit)}>
-            {text}
-          </Tag>
+          <Space style={columnStyles.title} className={columnStyles.hideScroll} onClick={()=> showModal(record.id_produit)}>
+            <Tag color='cyan'>{text}</Tag>
+          </Space>
     },
     {
       title: 'Categorie',

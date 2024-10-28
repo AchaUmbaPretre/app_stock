@@ -445,7 +445,7 @@ const filteredData = getProduit?.filter((item) =>
                           footer={[
                           ]}
                       >
-                        <ProductForm/>
+                        <ProductForm fetchData={fetchData} closeOpen={()=> setOpenss(!openss)}/>
                       </Modal>
                     <div className="rowChart-row-table">
                       <Table 

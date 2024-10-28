@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const ProductForm = () => {
+const ProductForm = ({fetchData, closeOpen}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({})
   const [getCategorie, setGetCategorie] = useState([]);
@@ -142,8 +142,11 @@ const ProductForm = () => {
         confirmButtonText: 'OK',
       });
 
-      navigate('/products')
-      window.location.reload();
+      fetchData();
+      closeOpen();
+
+/*       navigate('/products')
+      window.location.reload(); */
 
     }catch(err) {
       Swal.fire({

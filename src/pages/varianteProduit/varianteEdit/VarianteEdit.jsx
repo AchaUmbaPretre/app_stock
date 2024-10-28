@@ -9,6 +9,7 @@ const { Title, Text } = Typography;
 const VarianteEdit = ({ id, closeModal, fetchData }) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
     const [data, setData] = useState(null);
     const [stock, setStock] = useState(null);
 
@@ -35,6 +36,7 @@ const VarianteEdit = ({ id, closeModal, fetchData }) => {
     };
 
     const handleSaveStock = async () => {
+        setIsSaving(true);
         try {
             await axios.put(`${DOMAIN}/api/produit/put_varianteProduit/${id}`, { stock });
             notification.success({
@@ -43,12 +45,14 @@ const VarianteEdit = ({ id, closeModal, fetchData }) => {
                 icon: <CheckOutlined style={{ color: "#52c41a" }} />,
             });
             closeModal();
-            fetchData()
+            fetchData();
         } catch (error) {
             notification.error({
                 message: "Erreur de Mise à Jour",
                 description: "Impossible de mettre à jour le stock.",
             });
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -91,6 +95,7 @@ const VarianteEdit = ({ id, closeModal, fetchData }) => {
             <Button
                 type="primary"
                 onClick={handleSaveStock}
+                loading={isSaving}
                 style={{ width: '100%', marginTop: '20px', borderRadius: 5 }}
             >
                 Mettre à jour le Stock

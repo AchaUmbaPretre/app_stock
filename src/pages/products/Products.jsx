@@ -13,6 +13,7 @@ import BarReturn from '../../components/barReturn/BarReturn';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import ProductForm from './form/ProductForm';
 
 const Products = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -26,6 +27,7 @@ const Products = () => {
     const navigate = useNavigate();
     const [opens, setOpens] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openss, setOpenss] = useState(false);
     const [idProduit, setIdProduit] = useState({});
     const user = useSelector((state) => state.user?.currentUser);
     const [modalVisible, setModalVisible] = useState(false);
@@ -151,6 +153,10 @@ const Products = () => {
         console.log(err);
       }
     };
+
+    const handOpen = () => {
+      setOpenss(!openss)
+    }
     
     const handleTableChange = (pagination) => {
       setCurrentPage(pagination.current);
@@ -358,7 +364,7 @@ const filteredData = getProduit?.filter((item) =>
                         <h2 className="product-h2">Liste des produits</h2>
                         <span>Gérer vos produits</span>
                     </div>
-                    <div className="product-right" onClick={() =>navigate('/productForm')}>
+                    <div className="product-right" onClick={handOpen}>
                         <PlusCircleOutlined className='product-icon'/>
                         <span className="product-btn">Un nouveau produit</span>
                     </div>
@@ -430,6 +436,17 @@ const filteredData = getProduit?.filter((item) =>
                       >
                         <p>Souhaitez-vous réellement désactiver ou réactiver ?</p>
                       </Modal>
+                      <Modal
+                          title=""
+                          centered
+                          open={openss}
+                          onCancel={() => setOpenss(false)}
+                          width={1000}
+                          footer={[
+                          ]}
+                        >
+                          <ProductForm/>
+                        </Modal>
                     <div className="rowChart-row-table">
                       <Table 
                         columns={columns} 

@@ -180,7 +180,7 @@ const ProductForm = ({fetchData, closeOpen}) => {
               <div className="product-container-bottom">
                 <div className="form-controle">
                   <label htmlFor="">Nom du produit <span style={{color:'red'}}>*</span></label>
-                  <input type="text" name='nom_produit' className="form-input" placeholder='Entrer le nom...' onChange={handleInputChange} />
+                  <input type="text" value={data?.nom_produit || ''} name='nom_produit' className="form-input" placeholder='Entrer le nom...' onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Catégorie <span style={{color:'red'}}>*</span></label>
@@ -194,6 +194,7 @@ const ProductForm = ({fetchData, closeOpen}) => {
                   <label htmlFor="">Marque <span style={{color:'red'}}>*</span></label>
                   <Select
                     name="id_marque"
+                    value={data.id_marque ? { value : data.id_marque, label: getMarque.find(marque => marque.id_marque === data.id_marque).nom} : null}
                     options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_marque', value: selectedOption.value } })}
                   />
@@ -202,6 +203,7 @@ const ProductForm = ({fetchData, closeOpen}) => {
                   <label htmlFor="">Matière <span style={{color:'red'}}>*</span></label>
                   <Select
                     name='id_matiere'
+                    value={data.id_matiere ? { value : data.id_matiere, label: getMatiere.find(matiere => matiere.id_matiere === data.id_matiere).nom_matiere} : null}
                     options={getMatiere?.map(item => ({ value: item.id_matiere, label: item.nom_matiere }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_matiere', value: selectedOption.value } })}
                   />
@@ -209,18 +211,19 @@ const ProductForm = ({fetchData, closeOpen}) => {
                 <div className="form-controle">
                   <label htmlFor="">Cible <span style={{color:'red'}}>*</span></label>
                   <Select
-                    name='matiere'
+                    name='id_cible'
+                    value={data.id_cible ? { value: data.id_cible, label: getCible.find(cible => cible.id_cible === data.id_cible).nom_cible} : null}
                     options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
                     onChange={selectedOption => handleInputChange({ target: { name: 'id_cible', value: selectedOption.value } })}
                   />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Prix <span style={{color:'red'}}>*</span></label>
-                  <input type="number" name='prix' placeholder='ex: 10$' className="form-input" onChange={handleInputChange} />
+                  <input type="number" value={data?.prix || ''} name='prix' placeholder='ex: 10$' className="form-input" onChange={handleInputChange} />
                 </div>
                 <div className="form-controle">
                   <label htmlFor="">Code variant <span style={{color:'red'}}>*</span></label>
-                  <input type="text" name='code_variante' placeholder='ex: P329' className="form-input" onChange={handleInputChange} />
+                  <input type="text" value={data?.code_variante || ''} name='code_variante' placeholder='ex: P329' className="form-input" onChange={handleInputChange} />
                   {variantExists && <p className="error-message" style={{color:"red", fontSize:"13px"}}>Cette variante existe déjà.</p>}
                 </div>
                 <div className="form-controle">

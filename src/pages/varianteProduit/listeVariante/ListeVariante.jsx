@@ -1,4 +1,4 @@
-import { SisternodeOutlined,RedoOutlined,CalendarOutlined, CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
+import { SisternodeOutlined, EditOutlined, RedoOutlined,CalendarOutlined, CloseOutlined, DeleteOutlined,EyeOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Image, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
@@ -40,6 +40,10 @@ const ListeVariante = () => {
         setOpensVariant(true);
         setvariant(e)
       };
+
+      const handleEdit = (id) => {
+        console.log(id)
+      }
 
       const Rafraichir = () =>{
         window.location.reload();
@@ -179,6 +183,9 @@ const ListeVariante = () => {
             render: (text, record) => (
                 
               <Space size="middle">
+                  <Popover title="Modifier" trigger="hover">
+                    <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id_varianteProduit)} />
+                  </Popover>
                  <Popover title="Voir les détails" trigger="hover">
                   <Link onClick={()=>showModalPhone(record.id_varianteProduit)} >
                     <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />

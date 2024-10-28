@@ -317,7 +317,7 @@ const ListeVariante = () => {
               width={500}
               footer={[]}
             >
-              <VarianteEdit id={idVariant}/>
+              <VarianteEdit id={idVariant} closeModal={()=> setOpenss(!openss)}/>
             </Modal>
         </div>
     </>

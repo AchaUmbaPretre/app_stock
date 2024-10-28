@@ -36,7 +36,7 @@ const VarianteEdit = ({ id }) => {
 
     const handleSaveStock = async () => {
         try {
-            await axios.put(`${DOMAIN}/api/produit/varianteDetail/${id}`, { stock });
+            await axios.put(`${DOMAIN}/api/produit/put_varianteProduit/${id}`, { stock });
             notification.success({
                 message: "Stock mis à jour",
                 description: "La valeur du stock a été mise à jour avec succès.",

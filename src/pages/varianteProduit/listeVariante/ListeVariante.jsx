@@ -9,6 +9,7 @@ import VarianteSelect from '../varianteSelect/VarianteSelect';
 import moment from 'moment';
 import CountUp from 'react-countup';
 import PageDetails from '../../PageDetails/PageDetails';
+import VarianteEdit from '../varianteEdit/VarianteEdit';
 
 const ListeVariante = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -44,6 +45,7 @@ const ListeVariante = () => {
 
       const handleEdit = (id) => {
         setOpenss(!openss)
+        setvariant(id)
       }
 
       const Rafraichir = () =>{
@@ -312,10 +314,10 @@ const ListeVariante = () => {
               centered
               open={openss}
               onCancel={() => setOpenss(false)}
-              width={800}
+              width={500}
               footer={[]}
             >
-              <div>aaaa</div>
+              <VarianteEdit id={idVariant}/>
             </Modal>
         </div>
     </>

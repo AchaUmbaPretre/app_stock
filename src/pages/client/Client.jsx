@@ -311,10 +311,13 @@ const Client = () => {
                     <div className="product-bottom-top">
                         <div className="product-bottom-left">
                             <SisternodeOutlined className='product-icon' />
-                            <div className="product-row-search">
-                                <SearchOutlined className='product-icon-plus'/>
-                                <input type="search" name="" value={searchValue} onChange={(e) => setSearchValue(e.target.value)}  placeholder='Recherche...' className='product-search' />
-                            </div>
+                            <Input
+                              type="search"
+                              placeholder="Recherche..."
+                              className="product-search"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                            />
                         </div>
                         <div className="product-bottom-right">
                             <FilePdfOutlined className='product-icon-pdf' />

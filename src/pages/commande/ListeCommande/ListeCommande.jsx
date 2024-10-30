@@ -40,7 +40,6 @@ const ListeCommande = () => {
     const [end_date, setEnd_date] = useState('');
     const [id_commande, setId_commande] = useState('');
     const [openInfo, setOpenInfo] = useState(false);
-    const [openForm, setOpenForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(15);
     const [pagination, setPagination] = useState({

@@ -225,10 +225,11 @@ const ListeVariante = () => {
           },
       ];
 
-      const fetchData = async () => {
+      const fetchData = async (page = currentPage, size = pageSize) => {
           try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/listeVarianteProduit`);
+            const { data } = await axios.get(`${DOMAIN}/api/produit/listeVarianteProduit?page=${page}&pageSize=${size}`);
             setData(data);
+            setTotalItems(data.totalItems);
             setLoading(false)
           } catch (error) {
             console.log(error);
@@ -236,10 +237,8 @@ const ListeVariante = () => {
         };
 
       useEffect(() => {
-        fetchData();
-      }, [DOMAIN]);
-
-
+        fetchData(currentPage, pageSize);
+      }, [currentPage, pageSize]);
 
       useEffect(()=>{
         const fetchData = async ()=> {

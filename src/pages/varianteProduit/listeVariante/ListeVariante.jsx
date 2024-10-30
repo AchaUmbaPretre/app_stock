@@ -325,6 +325,7 @@ const ListeVariante = () => {
                         loading={loading} 
                         scroll={scroll} 
                         size="middle"
+                        bordered
                         pagination={{
                           current: currentPage,
                           pageSize: pageSize,

@@ -459,7 +459,7 @@ const filteredData = getProduit?.filter((item) =>
                           current: currentPage,
                           pageSize: pageSize,
                           total: totalItems,
-                          onChange: handleTableChange,
+                          onChange: handleTableChange
                         }}
                         onChange={handleTableChange}
                       />

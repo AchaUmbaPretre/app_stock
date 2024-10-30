@@ -16,7 +16,7 @@ import { FireTruckOutlined, HomeOutlined } from '@mui/icons-material';
 import './sidebar.css'
 import axios from 'axios';
 import config from '../../config';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../redux/userRedux';

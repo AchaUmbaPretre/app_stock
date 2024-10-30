@@ -4,7 +4,7 @@ import ProductSelects from './productSelects/ProductSelects';
 import React, { useEffect, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Popover,Popconfirm, Modal, Image} from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
 import { Tag } from 'antd';
@@ -24,7 +24,6 @@ const Products = () => {
     const searchInput = useRef(null);
     const [searchValue, setSearchValue] = useState('');
     const scroll = { x: 400 };
-    const navigate = useNavigate();
     const [opens, setOpens] = useState(false);
     const [open, setOpen] = useState(false);
     const [openss, setOpenss] = useState(false);
@@ -345,7 +344,6 @@ const handleOk = async (e) => {
   setSelectedProductId(e);
   setModalVisible(true);
 };
-
 
 const filteredData = getProduit?.filter((item) => 
   item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) ||

@@ -228,8 +228,8 @@ const ListeVariante = () => {
       const fetchData = async (page = currentPage, size = pageSize) => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/listeVarianteProduit?page=${page}&pageSize=${size}`);
-            setData(data.data);
-            setTotalItems(data.totalItems);
+            setData(data?.data);
+            setTotalItems(data?.totalItems);
             setLoading(false)
           } catch (error) {
             console.log(error);

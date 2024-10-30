@@ -294,7 +294,13 @@ const ListeVariante = () => {
                     <div className="rowChart-row-table">
                     {opens &&
                     <VarianteSelect getProduits={setData}/> } 
-                        <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                        <Table 
+                          columns={columns} 
+                          dataSource={filteredData} 
+                          loading={loading} 
+                          scroll={scroll} 
+                          pagination={{ pageSize: 15}} 
+                        />
                     </div>
                 </div>
             </div>

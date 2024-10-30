@@ -325,7 +325,14 @@ const ListeVariante = () => {
                           dataSource={filteredData} 
                           loading={loading} 
                           scroll={scroll} 
-                          pagination={{ pageSize: 15}} 
+                          size="middle"
+                          pagination={{
+                            current: currentPage,
+                            pageSize: pageSize,
+                            total: totalItems,
+                            onChange: handleTableChange,
+                          }}
+                          onChange={handleTableChange}
                         />
                     </div>
                 </div>

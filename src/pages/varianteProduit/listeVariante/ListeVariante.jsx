@@ -24,7 +24,14 @@ const ListeVariante = () => {
     const [openss, setOpenss] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
     const [produitTotalAchats, setProduitTotalAchats] = useState([]);
-    
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 15,
+    });
+    const [totalItems, setTotalItems] = useState('');
+
       const handleDelete = async (id) => {
       try {
           await axios.delete(`${DOMAIN}/api/livraison/livraisonDeleteDetail/${id}`);
@@ -79,7 +86,15 @@ const ListeVariante = () => {
       };
     
       const columns = [
-          { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
+          { title: '#', 
+            dataIndex: 'id', 
+            key: 'id', 
+            render: (text, record, index) => {
+              const pageSize = pagination.pageSize || 15;
+              const pageIndex = pagination.current || 1;
+              return (pageIndex - 1) * pageSize + index + 1;
+            }
+          },
           {
             title: 'image',
             dataIndex: 'img',
@@ -249,6 +264,17 @@ const ListeVariante = () => {
       };
       fetchData();
     }, [DOMAIN]);
+
+    const handleTableChange = (pagination) => {
+      setCurrentPage(pagination.current);
+      setPageSize(pagination.pageSize);
+    
+      setPagination({
+        current: pagination.current,
+        pageSize: pagination.pageSize,
+      });
+      fetchData(pagination.current, pagination.pageSize);
+    };
 
     const filteredData = data?.filter((item) =>
       item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||

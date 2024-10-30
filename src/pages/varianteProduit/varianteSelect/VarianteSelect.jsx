@@ -74,12 +74,12 @@ const VarianteSelect = ({ getProduits }) => {
         }
     };
 
-    // Utiliser useEffect pour déclencher handleClick lorsque id_marque change
+    // Déclencher handleClick chaque fois que id_marque ou categorie change
     useEffect(() => {
-        if (datas.id_marque) {
+        if (datas.id_marque || datas.categorie) {
             handleClick();
         }
-    }, [datas.id_marque, datas.id_categorie]);
+    }, [datas.id_marque, datas.categorie]);
 
     return (
         <>

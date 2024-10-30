@@ -320,20 +320,20 @@ const ListeVariante = () => {
                     <div className="rowChart-row-table">
                     {opens &&
                     <VarianteSelect getProduits={setData}/> } 
-                        <Table 
-                          columns={columns} 
-                          dataSource={filteredData} 
-                          loading={loading} 
-                          scroll={scroll} 
-                          size="middle"
-                          pagination={{
-                            current: currentPage,
-                            pageSize: pageSize,
-                            total: totalItems,
-                            onChange: handleTableChange,
-                          }}
-                          onChange={handleTableChange}
-                        />
+                      <Table 
+                        columns={columns} 
+                        dataSource={filteredData} 
+                        loading={loading} 
+                        scroll={scroll} 
+                        size="middle"
+                        pagination={{
+                          current: currentPage,
+                          pageSize: pageSize,
+                          total: totalItems,
+                          onChange: handleTableChange,
+                        }}
+                        onChange={handleTableChange}
+                      />
                     </div>
                 </div>
             </div>

@@ -14,8 +14,6 @@ import { Image, Rate, Select } from 'antd'
 import Swal from 'sweetalert2'
 import { CircularProgress } from '@mui/material'
 
-
-
 const DetailProduitCommande = ({idVariant, idCommande, tailles, setTailles}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const { Option } = Select;

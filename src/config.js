@@ -12,6 +12,6 @@ export default {
 };
 
 export const userRequest = axios.create({
-      baseURL: 'https://apindoe.loginsmart-cd.com',
-      header: { token: `Bearer ${TOKEN}` },
+  baseURL: 'https://apindoe.loginsmart-cd.com',
+  header: { token: `Bearer ${TOKEN}` },
 });

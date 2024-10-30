@@ -380,7 +380,6 @@ const filteredData = getProduit?.filter((item) =>
                             />
                         </div>
                         <div className="product-bottom-right">
-
                         </div>
                     </div>
                     <BarReturn/>

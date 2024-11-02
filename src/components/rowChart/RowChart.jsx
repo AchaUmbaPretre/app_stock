@@ -44,7 +44,6 @@ ChartJS.register(
     },
   };
 
-  const labels = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre','Octobre','Novembre','Decembre'];
 
 const RowChart = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;

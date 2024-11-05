@@ -278,7 +278,8 @@ const ListeVariante = () => {
     const filteredData = data?.filter((item) =>
       item.nom_categorie?.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.nom_marque?.toLowerCase().includes(searchValue.toLowerCase()) || 
-      item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase())
+      item.nom_produit?.toLowerCase().includes(searchValue.toLowerCase()) || 
+      item.code_variant?.toLowerCase().includes(searchValue.toLowerCase())
     );
 
 

@@ -30,10 +30,10 @@ const PageCommandeVente = () => {
         if (event.target.checked) {
             const updatedSelected = [...selected, { id, id_commande, id_detail_commande, id_detail_livraison, qte_livre, prix, id_taille, id_client }];
             setSelected(updatedSelected);
-            const totalPrice = updatedSelected.reduce((acc, item) => acc + item.prix, 0);
+            const totalPrice = updatedSelected?.reduce((acc, item) => acc + item.prix, 0);
             setTotalPrice(totalPrice);
         } else {
-            setSelected(selected.filter((row) => row.id !== id));
+            setSelected(selected?.filter((row) => row.id !== id));
         }
     };
 
@@ -45,7 +45,7 @@ const PageCommandeVente = () => {
             render: (text, record) => (
                 <div>
                     <Checkbox
-                        checked={selected.some((item) => item.id_detail_livraison === record.id_detail_livraison)}
+                        checked={selected?.some((item) => item.id_detail_livraison === record.id_detail_livraison)}
                         onChange={(event) =>
                             handleSelectionChange(event, record.id_varianteProduit, record.id_commande, record.id_detail_commande, record.id_detail_livraison, record.qte_livre, record.prix, record.id_taille, record.id_client, record.img, record.pointure)
                         }

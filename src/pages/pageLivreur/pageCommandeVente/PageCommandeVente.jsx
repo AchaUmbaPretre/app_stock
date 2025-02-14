@@ -161,7 +161,7 @@ const PageCommandeVente = () => {
             setIsLoading(true);
 
             await Promise.all(
-                selected.map(async (dd) => {
+                selected?.map(async (dd) => {
                     await axios.post(`${DOMAIN}/api/vente`, {
                         id_client: dd.id_client,
                         id_livreur: userId,

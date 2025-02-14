@@ -66,8 +66,8 @@ const PageCommandeVente = () => {
         },
         {
             title: 'Pointure',
-            dataIndex: 'pointure',
-            key: 'pointure',
+            dataIndex: 'taille',
+            key: 'taille',
             render: (text) => (
                 <Space>
                     <Tag color="green">{text}</Tag>

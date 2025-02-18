@@ -29,7 +29,6 @@ const Options = ({data}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState('');
-  const [options, setOptions] = useState([]);
   const userId = useSelector((state) => state.user?.currentUser.id);
   const isSidebarOpen = useSelector((state) => state.user?.isSidebarOpen);
 

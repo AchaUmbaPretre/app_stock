@@ -33,6 +33,10 @@ const Ventes = () => {
     const [ticket, setTicket] = useState(false);
     const [idTicket, setIdTicket] = useState(false);
     const [recent, setRecent] = useState([]);
+    const [pagination, setPagination] = useState({
+          current: 1,
+          pageSize: 10,
+        });
 
     const user = useSelector((state) => state.user?.currentUser);
 
@@ -305,7 +309,15 @@ const Ventes = () => {
                           dataSource={filteredData} 
                           loading={loading} 
                           scroll={scroll}
-                          pagination={{ pageSize: 10}}
+                          pagination={{
+                              current: pagination.current,
+                              pageSize: pagination.pageSize,
+                              showSizeChanger: true,
+                              pageSizeOptions: ['10', '20', '50', '100', '200', '300', '400', '500'],
+                              onChange: (page, pageSize) => {
+                                setPagination({ ...pagination, current: page, pageSize });
+                              },
+                            }}
                           bordered 
                           size="middle"
                         />

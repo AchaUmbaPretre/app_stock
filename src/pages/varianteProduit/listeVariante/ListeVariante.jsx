@@ -335,7 +335,21 @@ const ListeVariante = () => {
                         }}
                         onChange={handleTableChange}
                       /> */}
-                      <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                      <Table columns={columns}
+                          dataSource={filteredData}
+                          loading={loading}
+                          scroll={scroll}
+                          bordered
+                          pagination={{
+                              current: pagination.current,
+                              pageSize: pagination.pageSize,
+                              showSizeChanger: true,
+                              pageSizeOptions: ['10', '20', '50', '100', '200', '300', '400', '500', '600'],
+                              onChange: (page, pageSize) => {
+                                setPagination({ ...pagination, current: page, pageSize });
+                              },
+                            }}
+                        />
                     </div>
                 </div>
             </div>

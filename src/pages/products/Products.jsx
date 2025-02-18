@@ -451,7 +451,7 @@ const filteredData = getProduit?.filter((item) =>
                         loading={loading} 
                         scroll={scroll} 
                         bordered
-                        size="middle" 
+                        size="small"
                         pagination={{
                           current: currentPage,
                           pageSize: pageSize,

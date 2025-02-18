@@ -1,4 +1,4 @@
-import { SearchOutlined, CloseOutlined,CalendarOutlined, SisternodeOutlined,EyeOutlined,UserOutlined,DollarOutlined} from '@ant-design/icons';
+import { CloseOutlined,CalendarOutlined, SisternodeOutlined,EyeOutlined,UserOutlined,DollarOutlined} from '@ant-design/icons';
 import { Button, Space, Table, Popover,Tag, Tabs, Modal, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -198,6 +198,8 @@ useEffect(() => {
                             dataSource={filteredData}
                             loading={loading} 
                             scroll={scroll} 
+                            bordered
+                            size="small"
                             pagination={{
                               current: pagination.current,
                               pageSize: pagination.pageSize,

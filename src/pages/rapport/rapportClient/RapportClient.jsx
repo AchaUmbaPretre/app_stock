@@ -22,6 +22,10 @@ const RapportClient = () => {
     const [idClient, setIdClient] = useState({});
     const [start_date, setStart_date] = useState('');
     const [end_date, setEnd_date ] = useState('');
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 10,
+    });
 
 
     const HandClient = (e) => {
@@ -190,7 +194,21 @@ useEffect(() => {
                     {open &&
                       <RapportClientSelect getProduits={setGetRapport}  setStart_date={setStart_date} setEnd_date={setEnd_date} start_date={start_date} end_date={end_date}/> }
                       <div className="rowChart-row-table">
-                          <Table columns={columns} dataSource={filteredData} loading={loading} scroll={scroll} pagination={{ pageSize: 15}} />
+                          <Table columns={columns}
+                            dataSource={filteredData}
+                            loading={loading} 
+                            scroll={scroll} 
+                            pagination={{
+                              current: pagination.current,
+                              pageSize: pagination.pageSize,
+                              showSizeChanger: true,
+                              pageSizeOptions: ['10', '20', '50', '100', '200', '300', '400', '500'],
+                              onChange: (page, pageSize) => {
+                                setPagination({ ...pagination, current: page, pageSize });
+                              },
+                            }}
+
+                            />
                       </div>
                       
                       <Modal

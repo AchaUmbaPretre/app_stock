@@ -456,6 +456,7 @@ const filteredData = getProduit?.filter((item) =>
                           current: currentPage,
                           pageSize: pageSize,
                           total: totalItems,
+                          pageSizeOptions: ['10', '20', '50', '100', '200', '300', '400', '500','600','800'],
                           onChange: handleTableChange
                         }}
                         onChange={handleTableChange}

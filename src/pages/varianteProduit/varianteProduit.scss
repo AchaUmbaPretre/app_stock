@@ -1,125 +1,202 @@
 @import '../../style.scss';
 
-.varianteProduit{
-    .varianteProduit-wrapper{
-        .varianteProduit-container-top{
+$primary-color: rgb(1, 35, 138);
+$secondary-color: #6d6c6c;
+$bg-card: #fff;
+$bg-hover: #f5fbfd;
+$shadow-card: 0px 4px 15px rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+
+.varianteProduit {
+  .varianteProduit-wrapper {
+    .varianteProduit-container-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      background: $bg-card;
+      box-shadow: $shadow-card;
+      padding: 20px;
+      border-radius: $border-radius;
+      transition: all 0.3s ease;
+
+      @include mobileXR {
+        padding: 10px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .varianteProduit-left {
+        .varianteProduit-h2 {
+          font-size: 1.2rem;
+          color: $primary-color;
+          font-weight: 600;
+
+          @include mobileXR {
+            font-size: 1rem;
+          }
+        }
+
+        span {
+          font-size: 0.85rem;
+          color: $secondary-color;
+
+          @include mobileXR {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+
+    .variant-container-bottom {
+      width: 100%;
+      background: $bg-card;
+      box-shadow: $shadow-card;
+      padding: 20px;
+      border-radius: $border-radius;
+      transition: all 0.3s ease;
+
+      .variant_top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 15px;
+        flex-wrap: wrap;
+
+        @include mobileXR {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+
+        .variant-top-left {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          flex: 1;
+
+          .variant-top-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            background: #fff;
-            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-            padding: 20px;
-            border-radius: 5px;
-            @include mobileXR{
-                padding: 10px;
+            gap: 5px;
+
+            .variant-icon {
+              font-size: 0.85rem;
+              color: $secondary-color;
+              transition: color 0.3s;
+
+              &:hover {
+                color: $primary-color;
+              }
+
+              @include mobileXR {
+                font-size: 0.75rem;
+              }
             }
-            .varianteProduit-left{
-                
-                .varianteProduit-h2{
-                    font-size: 1rem;
-                    color: rgb(1, 35, 138);
-                    @include mobileXR{
-                        font-size: .8rem;
-                    }
-                }
-                span{
-                    font-size: .8rem;
-                    color: #6d6c6c;
-                    @include mobileXR{
-                        font-size: .7rem;
-                    }
-                }
+
+            span {
+              font-size: 0.9rem;
+              color: $secondary-color;
+              font-weight: 400;
+
+              @include mobileXR {
+                font-size: 0.75rem;
+              }
             }
+          }
+
+          .variant-select {
+            width: 120px;
+            z-index: 900;
+            transition: all 0.3s ease;
+
+            @include mobileXR {
+              width: 100%;
+            }
+          }
         }
-        .variant-container-bottom{
-            width: 100%;
-            background: #fff;
-            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-            padding: 20px;
-            border-radius: 5px;
-            .variant_top{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                @include mobileXR{
-                    display: grid;
-                    grid-template-columns: repeat(2,1fr);
-                }
-                .variant-top-left{
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    .variant-top-row{
-                        display: flex;
-                        align-items: center;
-                        gap: 3px;
-                        .variant-icon{
-                            font-size: .7rem;
-                            color: #6d6c6c;
-                            @include mobileXR{
-                                font-size: .6rem;
-                            }
-                            
-                        }
-                        span{
-                            font-size: .8rem;
-                            color: #6d6c6c;
-                            font-weight: 300;
-                            @include mobileXR{
-                                font-size: .7rem;
-                            }
-                        }
-                    }
-                    .variant-select{
-                        width: 110px;
-                        z-index: 888;
-                        @include mobileXR{
-                            width: 100px;
-                        }
-                    }
-                }
+      }
+
+      .variant_bottom {
+        width: 100%;
+        margin-top: 40px;
+
+        .variante-top-rows {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 15px;
+          justify-content: space-between;
+          padding: 10px;
+
+          .variante-top-row {
+            flex: 1 1 280px;
+            position: relative;
+            height: 300px;
+            background: $bg-hover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: $border-radius;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+              transform: translateY(-5px) scale(1.02);
+              box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
             }
-            .variant_bottom{
-                width: 100%;
-                margin-top: 40px;
-                .variante-top-rows{
-                    padding: 20px;
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-between;
-                    .variante-top-row{
-                        flex: 1;
-                        position: relative;
-                        margin: 5px;
-                        min-width: 280px;
-                        height: 300px;
-                        background: #f5fbfd;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                        .cercle{
-                            height: 200px;
-                            width: 200px;
-                            border-radius: 50%;
-                            background: #fff;
-                            position: absolute;
-                        }
-                        .variante-img{
-                            height: 75%;
-                            z-index: 2;
-                            object-fit: cover;
-                            &:hover{
-                                transform: scale(1.1);
-                            }
-                        }
-                    }
-                }
+
+            .cercle {
+              position: absolute;
+              width: 200px;
+              height: 200px;
+              border-radius: 50%;
+              background: $bg-card;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              z-index: 1;
             }
+
+            .variante-img {
+              height: 75%;
+              z-index: 2;
+              object-fit: cover;
+              transition: transform 0.3s ease;
+
+              &:hover {
+                transform: scale(1.1);
+              }
+            }
+          }
         }
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        gap: 5px;
+        list-style: none;
+
+        li {
+          padding: 8px 12px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          color: $secondary-color;
+
+          &.active {
+            background-color: $primary-color;
+            color: #fff;
+            font-weight: 600;
+          }
+
+          &:hover {
+            background-color: rgba($primary-color, 0.1);
+          }
+        }
+      }
     }
+  }
 }

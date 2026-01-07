@@ -9,23 +9,17 @@ import config from '../../config';
 import ReactPaginate from 'react-paginate';
 import { Modal, Skeleton } from 'antd'
 import PageDetails from '../PageDetails/PageDetails'
+import { useVarianteProduit } from './hooks/useVarianteProduit';
 
 const VarianteProduit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [data, setData] = useState([]);
-    const [getFamille,setGetFamille] = useState([]);
-    const [getMarque,setGetMarque] = useState([]);
-    const [getCible,setGetCible] = useState([]);
-    const [getTaille,setGetTaille] = useState([]);
-    const [getCouleur,setGetCouleur] = useState([]);
-    const [getMatiere,setGetMatiere] = useState([]);
     const [matiere,setMatiere] = useState(null);
     const [couleur, setCouleur] = useState(null);
     const [famille, setFamille] = useState(null);
     const [marque, setMarque] = useState(null);
     const [cible, setCible] = useState(null);
     const [taille, setTaille] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const { getMarque, getCible, getTaille, getMatiere, getFamille, getCouleur, data, loading } = useVarianteProduit({famille, marque, cible, taille, couleur, matiere})
     const [currentPage, setCurrentPage] = useState(0);
     const groupedData = Object.values(
       data.reduce((acc, item) => {
@@ -50,103 +44,10 @@ const VarianteProduit = () => {
       setCurrentPage(selectedPage.selected);
     };
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const { data } = await axios.get(`${DOMAIN}/api/produit/marque`);
-          setGetMarque(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, [DOMAIN]);
-
     const showModalPhone = (e) => {
       setOpens(true);
       setvariant(e)
     };
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const { data } = await axios.get(`${DOMAIN}/api/produit/cible`);
-          setGetCible(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, [DOMAIN]);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
-          setGetTaille(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, [DOMAIN]);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const { data } = await axios.get(`${DOMAIN}/api/produit/matiere`);
-          setGetMatiere(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-    }, [DOMAIN]);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
-            setGetFamille(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
-            setGetCouleur(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, [DOMAIN]);
-      
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&id_couleur=${couleur}&id_matiere=${matiere}`;
-      
-            const { data } = await axios.get(url);
-            setData(data);
-            setLoading(false);
-
-            if (data.length === 0) {
-
-              window.location.reload();
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        };
-      
-        fetchData();
-      }, [DOMAIN, famille, marque, cible, taille, couleur, matiere]);
 
   return (
     <>

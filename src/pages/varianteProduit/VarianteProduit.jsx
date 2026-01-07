@@ -278,8 +278,6 @@ const VarianteProduit = () => {
                         currentData?.map((dd)=>(
                         <div className="variante-top-row" key={dd.id} onClick={()=>showModalPhone(dd.id_varianteProduit)}>
                           <div className="cercle"></div>
-{/*                               <Link to={`/pageDetailEdit/${dd.id_varianteProduit}`}>
-                              </Link> */}
                           <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
                         </div>
                         ))}

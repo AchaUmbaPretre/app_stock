@@ -12,7 +12,7 @@ export const useVarianteProduit = ({famille, marque, cible, taille, couleur, mat
     const [getMatiere,setGetMatiere] = useState([]);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -35,9 +35,9 @@ export const useVarianteProduit = ({famille, marque, cible, taille, couleur, mat
             }
           };
           fetchData();
-        }, [DOMAIN]);
+    }, [DOMAIN]);
 
-      useEffect(() => {
+    useEffect(() => {
           const fetchData = async () => {
             try {
               const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
@@ -47,74 +47,76 @@ export const useVarianteProduit = ({famille, marque, cible, taille, couleur, mat
             }
           };
           fetchData();
-        }, [DOMAIN]);
+    }, [DOMAIN]);
 
-        useEffect(() => {
-          const fetchData = async () => {
-            try {
-              const { data } = await axios.get(`${DOMAIN}/api/produit/matiere`);
-              setGetMatiere(data);
-            } catch (error) {
-                  console.log(error);
-                }
-            };
-              fetchData();
-        }, [DOMAIN]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/matiere`);
+          setGetMatiere(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
 
-              useEffect(() => {
-                const fetchData = async () => {
-                  try {
-                    const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
-                    setGetFamille(data);
-                  } catch (error) {
-                    console.log(error);
-                  }
-                };
-                fetchData();
-              }, [DOMAIN]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/famille`);
+          setGetFamille(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
 
-              useEffect(() => {
-                const fetchData = async () => {
-                  try {
-                    const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
-                    setGetCouleur(data);
-                  } catch (error) {
-                    console.log(error);
-                  }
-                };
-                fetchData();
-              }, [DOMAIN]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axios.get(`${DOMAIN}/api/produit/couleur`);
+          setGetCouleur(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, [DOMAIN]);
 
-                    useEffect(() => {
-                      const fetchData = async () => {
-                        try {
-                          const url = `${DOMAIN}/api/produit/varianteFiltre?id_famille=${famille}&id_marque=${marque}&id_cible=${cible}&id_taille=${taille}&id_couleur=${couleur}&id_matiere=${matiere}`;
-                    
-                          const { data } = await axios.get(url);
-                          setData(data);
-                          setLoading(false);
-              
-                          if (data.length === 0) {
-              
-                            window.location.reload();
-                          }
-                        } catch (error) {
-                          console.log(error);
-                        }
-                      };
-                    
-                      fetchData();
-                    }, [DOMAIN, famille, marque, cible, taille, couleur, matiere]);
-              
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // Construire les paramètres de manière sécurisée
+          const params = {};
+          
+          if (famille && famille.length > 0) params.id_famille = famille.join(',');
+          if (marque && marque.length > 0) params.id_marque = marque.join(',');
+          if (cible && cible.length > 0) params.id_cible = cible.join(',');
+          if (taille && taille.length > 0) params.id_taille = taille.join(',');
+          if (couleur && couleur.length > 0) params.id_couleur = couleur.join(',');
+          if (matiere && matiere.length > 0) params.id_matiere = matiere.join(',');
+          
+          const { data } = await axios.get(`${DOMAIN}/api/produit/varianteFiltre`, { params });
+          setData(data);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
+      };              
+      fetchData();
+    }, [DOMAIN, famille, marque, cible, taille, couleur, matiere]);
 
     return {
-        getMarque,
-        getCible,
-        getTaille,
-        getMatiere,
-        getFamille,
-        getCouleur,
-        data, 
-        loading
+      getMarque,
+      getCible,
+      getTaille,
+      getMatiere,
+      getFamille,
+      getCouleur,
+      data, 
+      loading
     }
 }

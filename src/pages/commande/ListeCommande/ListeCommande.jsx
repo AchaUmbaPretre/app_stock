@@ -1,4 +1,4 @@
-import { PlusOutlined, SearchOutlined,RedoOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined,DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined,ClockCircleOutlined,ShoppingCartOutlined, RedoOutlined, EyeOutlined,CalendarOutlined,UserOutlined,CloseOutlined, SisternodeOutlined,PlusCircleOutlined,DeleteOutlined,  ExclamationCircleOutlined, CheckCircleOutlined} from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button,Space,Input, Table, Popover,Popconfirm, Tag, Modal, Tabs} from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -425,7 +425,15 @@ const handClick = () => {
                     </Popover>
                 </div>
                 <Tabs>
-                  <Tabs.TabPane tab='Commandes' key={0}>
+                  <Tabs.TabPane
+                    key={0}
+                    tab={
+                      <span>
+                        <ShoppingCartOutlined />
+                        Commandes
+                      </span>
+                    }
+                  >
                     <div className="product-bottom">
                       <div className="product-bottom-top">
                           <div className="product-bottom-left">
@@ -500,11 +508,28 @@ const handClick = () => {
                       </div>
                     </div>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Commandes du jour' key={1}>
-                    <ListeCommandeJour/>
+                  <Tabs.TabPane
+                    key={1}
+                    tab={
+                      <span>
+                        <CalendarOutlined />
+                        Commandes du jour
+                      </span>
+                    }
+                  >
+                    <ListeCommandeJour />
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab='Commandes des 7 derniers jours' key={2}>
-                    <ListeCommande7jrs/>
+
+                  <Tabs.TabPane
+                    key={2}
+                    tab={
+                      <span>
+                        <ClockCircleOutlined />
+                        Commandes des 7 derniers jours
+                      </span>
+                    }
+                  >
+                    <ListeCommande7jrs />
                   </Tabs.TabPane>
                 </Tabs>
             </div>

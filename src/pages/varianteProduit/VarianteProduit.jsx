@@ -1,225 +1,331 @@
-import { useState } from 'react'
-import Select from 'react-select';
-import './varianteProduit.scss'
-import {FilterOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { useState, useMemo, useCallback } from 'react';
+import './varianteProduit.scss';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import config from '../../config';
 import ReactPaginate from 'react-paginate';
-import { Modal, Skeleton } from 'antd'
-import PageDetails from '../PageDetails/PageDetails'
+import { Modal, Skeleton } from 'antd';
+import PageDetails from '../PageDetails/PageDetails';
 import { useVarianteProduit } from './hooks/useVarianteProduit';
+import FilterSelect from './composant/filterSelect/FilterSelect';
+
+const ITEMS_PER_PAGE = 12;
 
 const VarianteProduit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [matiere,setMatiere] = useState(null);
-  const [couleur, setCouleur] = useState(null);
-  const [famille, setFamille] = useState(null);
-  const [marque, setMarque] = useState(null);
-  const [cible, setCible] = useState(null);
-  const [taille, setTaille] = useState(null);
-  const { getMarque, getCible, getTaille, getMatiere, getFamille, getCouleur, data, loading } = useVarianteProduit({famille, marque, cible, taille, couleur, matiere})
+  
+  const [filters, setFilters] = useState({
+    matiere: [],
+    couleur: [],
+    famille: [],
+    marque: [],
+    cible: [],
+    taille: [],
+  });
+
   const [currentPage, setCurrentPage] = useState(0);
-  const groupedData = Object.values(
-      data.reduce((acc, item) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVariantId, setSelectedVariantId] = useState(null);
+
+  const { 
+    getMarque: marques, 
+    getCible: cibles, 
+    getTaille: tailles, 
+    getMatiere: matieres, 
+    getFamille: familles, 
+    getCouleur: couleurs, 
+    data: rawData, 
+    loading 
+  } = useVarianteProduit(filters);
+
+  // Regroupement et pagination des données
+  const { paginatedData, totalPages } = useMemo(() => {
+    // Regroupement par code_variant
+    const grouped = Object.values(
+      rawData.reduce((acc, item) => {
         const { code_variant, ...rest } = item;
-        if (acc[code_variant]) {
-          Object.assign(acc[code_variant], { data: [...acc[code_variant].data, rest] });
-        } else {
-          acc[code_variant] = { code_variant, data: [rest] };
+        if (!acc[code_variant]) {
+          acc[code_variant] = { code_variant, data: [] };
         }
+        acc[code_variant].data.push(rest);
         return acc;
       }, {})
     );
-    const itemsPerPage = 12;
-    const totalPages = Math.ceil(groupedData.length / itemsPerPage);
-    const startIndex = currentPage * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const firstDataArray = groupedData.map(obj => obj.data[0]);
-    const currentData = firstDataArray?.slice(startIndex, endIndex);
-    const [opens, setOpens] = useState(false);
-    const [idVariant, setvariant] = useState({});
-    const handlePageChange = (selectedPage) => {
-      setCurrentPage(selectedPage.selected);
-    };
 
-    const showModalPhone = (e) => {
-      setOpens(true);
-      setvariant(e)
+    // Pagination
+    const startIndex = currentPage * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const firstItems = grouped.map(group => group.data[0]);
+    const paginated = firstItems.slice(startIndex, endIndex);
+    const pages = Math.ceil(grouped.length / ITEMS_PER_PAGE);
+
+    return {
+      groupedData: grouped,
+      paginatedData: paginated,
+      totalPages: pages,
     };
+  }, [rawData, currentPage]);
+
+  // Gestionnaires d'événements
+  const handleFilterChange = useCallback((filterName) => (selectedOptions) => {
+    const values = selectedOptions?.map(option => option.value) || [];
+    setFilters(prev => ({
+      ...prev,
+      [filterName]: values,
+    }));
+    setCurrentPage(0); // Reset à la première page lors du filtrage
+  }, []);
+
+  const handlePageChange = useCallback(({ selected }) => {
+    setCurrentPage(selected);
+  }, []);
+
+  const handleVariantClick = useCallback((variantId) => {
+    setSelectedVariantId(variantId);
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+    setSelectedVariantId(null);
+  }, []);
+
+  const clearAllFilters = useCallback(() => {
+    setFilters({
+      matiere: [],
+      couleur: [],
+      famille: [],
+      marque: [],
+      cible: [],
+      taille: [],
+    });
+    setCurrentPage(0);
+  }, []);
+
+  // Options pour les filtres Select
+  const filterOptions = useMemo(() => ({
+    famille: familles?.map(({ id_famille, nom }) => ({ 
+      value: id_famille, 
+      label: nom 
+    })),
+    marque: marques?.map(({ id_marque, nom }) => ({ 
+      value: id_marque, 
+      label: nom 
+    })),
+    cible: cibles?.map(({ id_cible, nom_cible }) => ({ 
+      value: id_cible, 
+      label: nom_cible 
+    })),
+    taille: tailles
+      ?.sort((a, b) => a.id_taille - b.id_taille)
+      .map(({ id_taille, taille }) => ({ 
+        value: id_taille, 
+        label: taille 
+      })),
+    couleur: couleurs?.map(({ id_couleur, description }) => ({ 
+      value: id_couleur, 
+      label: description 
+    })),
+    matiere: matieres?.map(({ id_matiere, nom_matiere }) => ({ 
+      value: id_matiere, 
+      label: nom_matiere 
+    })),
+  }), [familles, marques, cibles, tailles, couleurs, matieres]);
+
+  // Valeurs actuelles des filtres
+  const filterValues = useMemo(() => ({
+    famille: filterOptions.famille?.filter(opt => 
+      filters.famille.includes(opt.value)
+    ) || [],
+    marque: filterOptions.marque?.filter(opt => 
+      filters.marque.includes(opt.value)
+    ) || [],
+    cible: filterOptions.cible?.filter(opt => 
+      filters.cible.includes(opt.value)
+    ) || [],
+    taille: filterOptions.taille?.filter(opt => 
+      filters.taille.includes(opt.value)
+    ) || [],
+    couleur: filterOptions.couleur?.filter(opt => 
+      filters.couleur.includes(opt.value)
+    ) || [],
+    matiere: filterOptions.matiere?.filter(opt => 
+      filters.matiere.includes(opt.value)
+    ) || [],
+  }), [filters, filterOptions]);
+
+  // Configuration des filtres
+  const filterConfigs = [
+    { 
+      key: 'famille', 
+      label: 'Catégorie', 
+      options: filterOptions.famille,
+      value: filterValues.famille,
+    },
+    { 
+      key: 'marque', 
+      label: 'Marque', 
+      options: filterOptions.marque,
+      value: filterValues.marque,
+    },
+    { 
+      key: 'cible', 
+      label: 'Cible', 
+      options: filterOptions.cible,
+      value: filterValues.cible,
+    },
+    { 
+      key: 'taille', 
+      label: 'Pointure', 
+      options: filterOptions.taille,
+      value: filterValues.taille,
+    },
+    { 
+      key: 'couleur', 
+      label: 'Couleur', 
+      options: filterOptions.couleur,
+      value: filterValues.couleur,
+    },
+    { 
+      key: 'matiere', 
+      label: 'Matière', 
+      options: filterOptions.matiere,
+      value: filterValues.matiere,
+    },
+  ];
+
+  // Rendu des squelettes de chargement
+  const renderSkeletons = () => (
+    <div className="skeleton-container">
+      {[...Array(4)].map((_, rowIndex) => (
+        <div key={`skeleton-row-${rowIndex}`} className="skeleton-group">
+          {[...Array(3)].map((_, colIndex) => (
+            <div key={`skeleton-${rowIndex}-${colIndex}`} className="skeleton-item">
+              <Skeleton.Image 
+                active 
+                style={{ width: 350, height: 350 }} 
+              />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+
+  // Rendu des produits
+  const renderProducts = () => {
+    if (paginatedData.length === 0) {
+      return (
+        <div className="no-results">
+          <p>Aucun produit trouvé avec les filtres sélectionnés.</p>
+          <button 
+            type="button" 
+            className="clear-filters-btn"
+            onClick={clearAllFilters}
+          >
+            Effacer tous les filtres
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="variante-top-rows">
+        {paginatedData.map((product) => (
+          <div
+            key={product.id_varianteProduit}
+            className="variante-top-row"
+            onClick={() => handleVariantClick(product.id_varianteProduit)}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                handleVariantClick(product.id_varianteProduit);
+              }
+            }}
+          >
+            <div className="cercle" />
+            <img
+              src={`${DOMAIN}${product.img}`}
+              alt={product.nom_produit || 'Produit'}
+              className="variante-img"
+              loading="lazy"
+              onError={(e) => {
+                e.target.src = '/placeholder-image.jpg';
+                e.target.alt = 'Image non disponible';
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <>
-      <div className="varianteProduit">
-          <div className="varianteProduit-wrapper">
-            <div className="varianteProduit-container-top">
-              <div className="varianteProduit-left">
-                <h2 className="varianteProduit-h2">Notre catalogue</h2>
-              </div>
-            </div>
-            <div className="variant-container-bottom">
-              <div className="variant_top">
-                <div className="variant-top-left">
-                  <div className="variant-top-row">
-                    <FilterOutlined className='variant-icon'/>
-                    <span>Categorie</span>
-                  </div>
-                  <Select
-                    name='id_famille'
-                    className='variant-select'
-                    options={getFamille?.map(item => ({ value: item.id_famille, label: item.nom }))}
-                    isMulti
-                    value={famille}
-                    onChange={(selectedOptions) => {
-                      const values = selectedOptions ? selectedOptions.map(opt => opt.value) : [];
-                      setFamille(values);
-                    }}
-                />
-                </div>
-
-                <div className="variant-top-left">
-                  <div className="variant-top-row">
-                    <FilterOutlined className='variant-icon'/>
-                    <span>Marque</span>
-                  </div>
-                  <Select
-                    name='id_marque'
-                    className='variant-select'
-                    isMulti
-                    options={getMarque?.map(item => ({ value: item.id_marque, label: item.nom }))}
-                    onChange={(selectedOption) =>{
-                      const selectedValues = selectedOption.map(option => option.value)
-                      setMarque(selectedValues)
-                    }}
-                  />
-                </div>
-
-                <div className="variant-top-left">
-                  <div className="variant-top-row">
-                    <FilterOutlined className='variant-icon'/>
-                    <span>Cible</span>
-                  </div>
-                  <Select
-                    name='id_cible'
-                    className='variant-select'
-                    isMulti
-                    options={getCible?.map(item => ({ value: item.id_cible, label: item.nom_cible }))}
-                    onChange={(selectedOption) => {
-                      const selectedValue = selectedOption.map(option => option.value)
-                      setCible(selectedValue)}
-                    }
-                  />
-                </div>
-
-                <div className="variant-top-left">
-                  <div className="variant-top-row">
-                    <FilterOutlined className='variant-icon'/>
-                    <span>Pointure</span>
-                  </div>
-                  <Select
-                    name='id_taille'
-                    className='variant-select'
-                    options={getTaille
-                      ?.sort((a, b) => a.id_taille - b.id_taille) // Tri par ordre croissant des tailles
-                      .map(item => ({ value: item.id_taille, label: item.taille }))
-                    }
-                    isMulti
-                    onChange={(selectedOption) => {
-                      const selectedValue = selectedOption.map(option => option.value);
-                      setTaille(selectedValue);
-                    }}
-                  />
-                </div>
-
-                <div className="variant-top-left">
-                  <div className="variant-top-row">
-                    <FilterOutlined className='variant-icon'/>
-                    <span>Couleur</span>
-                  </div>
-                  <Select
-                    name='id_couleur'
-                    className='variant-select'
-                    options={getCouleur?.map(item => ({ value: item.id_couleur, label: item.description }))}
-                    isMulti
-                    onChange={(selectedOption) => {
-                      const selectedValue = selectedOption.map(option => option.value)
-                      setCouleur(selectedValue)}
-                    }
-                  />
-                </div>
-
-                <div className="variant-top-left">
-                  <div className="variant-top-row">
-                    <FilterOutlined className='variant-icon'/>
-                    <span>Matiere</span>
-                  </div>
-
-                  <Select
-                    name='id_matiere'
-                    className='variant-select'
-                    options={getMatiere?.map(item => ({ value: item.id_matiere, label: item.nom_matiere }))}
-                    isMulti
-                    onChange={(selectedOption) => {
-                      const selectedValue = selectedOption.map(option => option.value)
-                      setMatiere(selectedValue)}
-                    }
-                  />
-                </div>
-              </div>
-
-              <div className="variant_bottom">
-                { loading ? (
-                <div className="skeleton-container">
-                  {[...Array(4)].map((_, index) => (
-                  <div key={index} className="skeleton-group">
-                    {[...Array(3)].map((_, innerIndex) => (
-                  <div key={innerIndex} className="skeleton-item">
-                  <Skeleton.Image style={{ width: 350, height: 350 }} />
-                </div>
-                ))}
-              </div>
-              ))}
-
-              </div>
-                ) : (
-                <div className="variante-top-rows">
-                  {
-                  currentData?.map((dd)=>(
-                  <div className="variante-top-row" key={dd.id} onClick={()=>showModalPhone(dd.id_varianteProduit)}>
-                    <div className="cercle"></div>
-                    <img src={`${DOMAIN}${dd.img}`} alt="" className="variante-img" />
-                  </div>
-                  ))}
-                </div>        
-                )}
-                      
-                <Modal
-                  title=""
-                  centered
-                  open={opens}
-                  onCancel={() => setOpens(false)}
-                  width={1100}
-                  footer={[]}
-                >
-                  <PageDetails id={idVariant}/>
-                </Modal>
-                  {!loading && (
-                  <ReactPaginate
-                    pageCount={totalPages}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageChange}
-                    previousLabel={<LeftOutlined />}
-                    nextLabel={<RightOutlined />}
-                    containerClassName={'pagination'}
-                    activeClassName={'active'}
-                    itemClass={'pointer-cursor'}
-                  />
-                  )}
-              </div>
-            </div>
+    <div className="varianteProduit">
+      <div className="varianteProduit-wrapper">
+        <header className="varianteProduit-container-top">
+          <div className="varianteProduit-left">
+            <h1 className="varianteProduit-h2">Notre catalogue</h1>
           </div>
-      </div>
-    </>
-  )
-}
+        </header>
 
-export default VarianteProduit
+        <div className="variant-container-bottom">
+          {/* Section des filtres */}
+          <section className="variant_top" aria-label="Filtres de produits">
+            {filterConfigs.map((config) => (
+              <FilterSelect
+                key={config.key}
+                filterKey={config.key}
+                label={config.label}
+                options={config.options}
+                value={config.value}
+                onChange={handleFilterChange(config.key)}
+                placeholder={`Sélectionner...`}
+              />
+            ))}
+          </section>
+
+          {/* Section des produits */}
+          <section className="variant_bottom">
+            {loading ? renderSkeletons() : renderProducts()}
+
+            {/* Pagination */}
+            {!loading && totalPages > 1 && (
+              <ReactPaginate
+                pageCount={totalPages}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageChange}
+                previousLabel={<LeftOutlined aria-label="Page précédente" />}
+                nextLabel={<RightOutlined aria-label="Page suivante" />}
+                containerClassName="pagination"
+                activeClassName="active"
+                pageClassName="pagination-page"
+                breakClassName="pagination-break"
+                previousClassName="pagination-previous"
+                nextClassName="pagination-next"
+                disabledClassName="pagination-disabled"
+                forcePage={currentPage}
+              />
+            )}
+
+            {/* Modal des détails */}
+            <Modal
+              title="Détails du produit"
+              centered
+              open={isModalOpen}
+              onCancel={closeModal}
+              width={1100}
+              footer={null}
+              destroyOnClose
+            >
+              {selectedVariantId && <PageDetails id={selectedVariantId} />}
+            </Modal>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default VarianteProduit;

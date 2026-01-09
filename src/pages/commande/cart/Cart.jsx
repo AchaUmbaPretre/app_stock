@@ -1,12 +1,9 @@
-import React from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
 import './cart.scss'
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
-import logo from './../../../assets/logo doe.jpg'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { useSelector } from 'react-redux'
@@ -15,13 +12,6 @@ import { Rate } from 'antd'
 
 const Cart = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-    const [data, setData] = useState([]);
-    const navigate = useNavigate();
-    const {pathname} = useLocation();
-    const id = pathname.split('/')[2];
-    const [famille, setFamille] = useState(null);
-    const [marque, setMarque] = useState(null);
-    const [cible, setCible] = useState(null);
     const [loading, setLoading] = useState(false);
     const cart = useSelector((state) => state?.cart);
     const [getClient, setGetClient] = useState([]);

@@ -1,7 +1,6 @@
 import FilterSelect from '../../varianteProduit/composant/filterSelect/FilterSelect';
 
 export const FilterSection = ({ filterConfigs, onFilterChange, onClearFilters, filters }) => {
-    const hasActiveFilters = Object.values(filters).some(arr => arr.length > 0);
 
     return (
         <section className="variant_top" aria-label="Filtres de produits">
@@ -16,15 +15,6 @@ export const FilterSection = ({ filterConfigs, onFilterChange, onClearFilters, f
                     placeholder="Sélectionner..."
                 />
             ))}
-            {hasActiveFilters && (
-                <button
-                    type="button"
-                    className="clear-filters-button"
-                    onClick={onClearFilters}
-                >
-                    Effacer les filtres
-                </button>
-            )}
         </section>
     );
 };

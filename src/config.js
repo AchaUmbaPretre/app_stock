@@ -8,7 +8,6 @@ const TOKEN = currentUser?.accessToken;
 
 export default {
   REACT_APP_SERVER_DOMAIN : 'http://localhost:8080'
-  // eslint-disable-next-line
 };
 
 export const userRequest = axios.create({

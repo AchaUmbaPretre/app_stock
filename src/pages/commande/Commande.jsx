@@ -29,7 +29,7 @@ const Commande = () => {
     } = useFiltersData(filters);
     
     const { paginatedData, totalPages } = usePaginationData(rawData, currentPage, ITEMS_PER_PAGE);
-    const { open, idVariante, tailleDetail, handleVariantClick, closeModal } = useModal();
+    const { open, idVariante, tailleDetail, setTailleDetail, handleVariantClick, closeModal } = useModal();
 
     // Configuration des filtres
     const filterConfigs = [
@@ -70,7 +70,7 @@ const Commande = () => {
                         idVariante={idVariante}
                         commandId={id}
                         tailleDetail={tailleDetail}
-                        setTailleDetail={tailleDetail.set}
+                        setTailleDetail={setTailleDetail}
                     />
                 </div>
             </div>

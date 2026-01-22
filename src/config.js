@@ -7,7 +7,7 @@ const TOKEN = currentUser?.accessToken;
 /* REACT_APP_SERVER_DOMAIN : 'https://apindoe.loginsmart-cd.com' */
 
 export default {
-  REACT_APP_SERVER_DOMAIN : 'http://localhost:8080'
+  REACT_APP_SERVER_DOMAIN : 'https://ndoe.vps116834.serveur-vps.net'
 };
 
 export const userRequest = axios.create({

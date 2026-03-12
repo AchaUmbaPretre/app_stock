@@ -153,7 +153,6 @@ const VarianteProduit = () => {
     ) || [],
   }), [filters, filterOptions]);
 
-  // Configuration des filtres
   const filterConfigs = [
     { 
       key: 'famille', 
@@ -211,7 +210,6 @@ const VarianteProduit = () => {
     </div>
   );
 
-  // Rendu des produits
   const renderProducts = () => {
     if (paginatedData.length === 0) {
       return (
@@ -309,9 +307,8 @@ const VarianteProduit = () => {
               />
             )}
 
-            {/* Modal des détails */}
             <Modal
-              title="Détails du produit"
+              title=""
               centered
               open={isModalOpen}
               onCancel={closeModal}

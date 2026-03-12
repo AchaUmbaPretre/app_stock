@@ -88,7 +88,6 @@ export const useVarianteProduit = ({famille, marque, cible, taille, couleur, mat
     useEffect(() => {
       const fetchData = async () => {
         try {
-          // Construire les paramètres de manière sécurisée
           const params = {};
           
           if (famille && famille.length > 0) params.id_famille = famille.join(',');

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Input, Space, Table, Tag, Checkbox, Image, Button, Popover, Popconfirm } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';

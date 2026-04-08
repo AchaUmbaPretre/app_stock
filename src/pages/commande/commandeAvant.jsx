@@ -119,10 +119,10 @@ const Commande = () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/produit/tailleAll`);
             setGetTaille(data);
-          } catch (error) {
+          } catch (error) {   
             console.log(error);
           }
-        };
+        };   
         fetchData();
       }, [DOMAIN]);
 

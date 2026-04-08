@@ -1,4 +1,3 @@
-// src/pages/commande/hooks/useFiltersData.js
 import { useMemo } from 'react';
 import { useVarianteProduit } from '../../varianteProduit/hooks/useVarianteProduit';
 

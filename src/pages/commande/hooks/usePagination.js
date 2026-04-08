@@ -1,4 +1,3 @@
-// src/pages/commande/hooks/usePagination.js
 import { useState, useCallback } from 'react';
 
 export const usePagination = (initialPage = 0) => {

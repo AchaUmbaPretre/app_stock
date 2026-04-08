@@ -1,4 +1,3 @@
-// src/pages/commande/hooks/usePaginationData.js
 import { useMemo } from 'react';
 
 export const usePaginationData = (rawData, currentPage, itemsPerPage) => {

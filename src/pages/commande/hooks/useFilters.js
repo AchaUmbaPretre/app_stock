@@ -1,4 +1,3 @@
-// src/pages/commande/hooks/useFilters.js
 import { useState, useCallback } from 'react';
 
 const initialFilters = {

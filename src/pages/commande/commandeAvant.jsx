@@ -1,4 +1,3 @@
-import React from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'

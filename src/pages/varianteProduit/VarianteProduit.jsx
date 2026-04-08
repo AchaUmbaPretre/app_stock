@@ -12,7 +12,6 @@ const ITEMS_PER_PAGE = 12;
 
 const VarianteProduit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  
   const [filters, setFilters] = useState({
     matiere: [],
     couleur: [],
@@ -38,6 +37,7 @@ const VarianteProduit = () => {
   } = useVarianteProduit(filters);
 
   const { paginatedData, totalPages } = useMemo(() => {
+    // Regroupement par code_variant
     const grouped = Object.values(
       rawData.reduce((acc, item) => {
         const { code_variant, ...rest } = item;

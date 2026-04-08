@@ -37,7 +37,6 @@ const VarianteProduit = () => {
   } = useVarianteProduit(filters);
 
   const { paginatedData, totalPages } = useMemo(() => {
-    // Regroupement par code_variant
     const grouped = Object.values(
       rawData.reduce((acc, item) => {
         const { code_variant, ...rest } = item;
@@ -70,7 +69,7 @@ const VarianteProduit = () => {
       ...prev,
       [filterName]: values,
     }));
-    setCurrentPage(0); // Reset à la première page lors du filtrage
+    setCurrentPage(0);
   }, []);
 
   const handlePageChange = useCallback(({ selected }) => {

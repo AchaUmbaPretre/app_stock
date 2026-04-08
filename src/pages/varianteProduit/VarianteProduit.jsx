@@ -37,9 +37,7 @@ const VarianteProduit = () => {
     loading 
   } = useVarianteProduit(filters);
 
-  // Regroupement et pagination des données
   const { paginatedData, totalPages } = useMemo(() => {
-    // Regroupement par code_variant
     const grouped = Object.values(
       rawData.reduce((acc, item) => {
         const { code_variant, ...rest } = item;

@@ -267,7 +267,7 @@ const DepensesAll = () => {
                           footer={[
                           ]}
                       >
-                        <Depenses dateId = {dateData}/>
+                        <Depenses dateId = {dateData} fetchDatas={fetchData} />
                       </Modal>
 
                       <Table 

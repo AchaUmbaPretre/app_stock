@@ -1,6 +1,6 @@
 import './../products/products.scss'
 import { DollarOutlined, PlusOutlined,UserOutlined,CalendarOutlined, DeleteOutlined} from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Space, Table, Popover,Popconfirm, Tag, Modal, Input} from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import FormDepenses from './FormDepenses';
 import config from '../../config';
 import moment from 'moment';
 
-const Depenses = ({dateId}) => {
+const Depenses = ({dateId, fetchDatas}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -131,6 +131,7 @@ const Depenses = ({dateId}) => {
         try {
           await axios.delete(`${DOMAIN}/api/depenses/${id}`);
             fetchData();
+            fetchDatas();
         } catch (err) {
           console.log(err);
         }

@@ -16,16 +16,6 @@ const Depenses = ({dateId}) => {
     const scroll = { x: 400 };
     const [open, setOpen] = useState(false);
     const user = useSelector((state) => state.user?.currentUser);
-
-
-      const handleDelete = async (id) => {
-      try {
-          await axios.delete(`${DOMAIN}/api/depenses/${id}`);
-            window.location.reload();
-        } catch (err) {
-          console.log(err);
-        }
-      };
     
       const columns = [
         { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1, width:"3%"},
@@ -122,8 +112,8 @@ const Depenses = ({dateId}) => {
           },
       ];
 
-      useEffect(() => {
-        const fetchData = async () => {
+
+      const fetchData = async () => {
           try {
             const { data } = await axios.get(`${DOMAIN}/api/depenses/depenseOne?dateId=${dateId}`);
             setData(data);
@@ -131,9 +121,20 @@ const Depenses = ({dateId}) => {
           } catch (error) {
             console.log(error);
           }
-        };
+      };
+
+      useEffect(() => {
         fetchData();
       }, [DOMAIN, dateId]);
+
+      const handleDelete = async (id) => {
+        try {
+          await axios.delete(`${DOMAIN}/api/depenses/${id}`);
+            fetchData();
+        } catch (err) {
+          console.log(err);
+        }
+      };
 
 
     const handleOk = async (e) => {
